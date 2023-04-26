@@ -59,12 +59,12 @@
     padding: 1%;}
   
   header {
-    background-color: var(--worldDeepBlue);
+    background-color: black;
     padding-left: 1.5%;
     padding-right: 1%;
     padding-bottom: 1px;
     display: block;
-    color: var(--worldLightBlue);
+    color: white;
     font-family: var(--normalText);
     font-size: normal;
 }
@@ -85,7 +85,7 @@
     padding: 1%;}
   
   nav {
-    background-color: var(--worldLightBlueClear);
+    /* background-color: var(--worldLightBlueClear); */
     text-align: center;
     display: flex;
     flex-wrap: wrap;
@@ -94,12 +94,12 @@
 }
 
   nav a {
-    background-color: var(--worldMedBlueClear);
-    color: var(--worldDeepBlue);
+    background-color: var(--worldDeepBlue);
+    color: var(--worldLightBlue);
     border: 0ch;
     padding-left: 1%;
     padding-right: 1%;
-    font-size: x-large;
+    font-size: normal;
     font-weight: normal;
     text-decoration: none;
     display:flex;
@@ -107,7 +107,6 @@
     flex-grow: 1;
     line-height: 1.75;
     margin: 0%;
-    
 }
 
   nav a:hover {       
@@ -140,6 +139,7 @@
     margin-top: auto;
     margin-bottom: 0;
     margin-left: 1%;
+    padding-top: 1%;
     color: var(--worldDeepBlue);
 }
   h3 {font-size: 140%; font-weight: bold;}
@@ -149,7 +149,10 @@
 
 .headerP {
     margin-top: -2%;
+    margin-bottom: 0;
     padding-top: 0px;
+    font-family: var(--jpFont);
+    font-size: 200%;
 }
 
   /* Stuff down here also copy/pasted from CS290 */
