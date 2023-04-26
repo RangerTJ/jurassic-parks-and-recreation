@@ -1,0 +1,160 @@
+/* Starter template adopted from CS290 Final Project Submission, style changed considerably */
+
+/*   ----- Imports  -----  */
+  /* Add fonts from the app's server 
+    @font-face {                
+      font-family: 'FontName';
+      src: url('FontName.woff2') format('woff2');
+    } 
+    ...or hosted services like Google Fonts 
+    @import url(//fonts.googleapis.com/css?family=Font+Name);
+  */
+
+@font-face {
+    font-family: 'Jurassic Park', cursive;
+    src: url(/jurassic-parks-and-recreation/fonts/JurassicPark-BL48.ttf);
+}
+
+  /* ^--- Could use above approach to get legit JP font for the final product */
+
+@import url('https://fonts.googleapis.com/css2?family=Alumni+Sans+Inline+One&family=Bungee&family=Bungee+Hairline&family=Bungee+Inline&family=Bungee+Outline&family=Libre+Barcode+39+Text&family=Overpass+Mono&family=Tourney&family=Zen+Dots&display=swap');  
+
+/*  Color Scheme  */
+:root {
+    /* Colors */
+    --concreteDark: #A2ABA4;
+    --concreteLight: #D7DFD9;
+    --parkYellow: #F9FF4E;
+    --parkRed: #FC1F1F;
+    --worldLightBlue: #AFE9EE;
+    --worldLightBlueClear: #afe9ee47;
+    --worldMedBlue: #61b4fc;
+    --worldMedBlueClear: #61b4fc9a;
+    --worldDeepBlue: #0F284F;
+    --worldDeepBlueClear: #0f284f94;
+    --feralGreen: #3c663e;
+
+    /* Fonts */
+    --jpFont: 'Jurassic Park', cursive;
+    --titleFont: 'Bungee', cursive;
+    --titleFontInline: 'Bungee Inline', cursive;
+    --titleFontOutline: 'Bungee Outline', cursive;
+    --titleFontHairline: 'Bungee Hairline', cursive;
+    --titleFontAltInline: 'Alumni Sans Inline One', cursive;
+    --titleFontAltOutline: 'Tourney', cursive;
+    --barcodeStyleFont: 'Libre Barcode 39 Text', cursive;
+    --roadSignFont: 'Overpass Mono', monospace;
+    --techStyleFont: 'Zen Dots', cursive; 
+    --normalText: 'Overpass Mono', monospace;}
+
+  body {
+    background-size:cover;
+    background-color: var(--concreteLight);
+    background-attachment: fixed;
+    background-image:url(images/jurassic_world_san_diego.jpg);
+    color: var(--worldDeepBlue);
+    font-family: var(--normalText);
+    max-width: 80%;
+    margin: auto;
+    padding: 1%;}
+  
+  header {
+    background-color: var(--worldDeepBlue);
+    padding-left: 1.5%;
+    padding-right: 1%;
+    padding-bottom: 1px;
+    display: block;
+    color: var(--worldLightBlue);
+    font-family: var(--normalText);
+    font-size: normal;
+}
+
+  main {
+    background-color: var(--worldMedBlueClear);
+    padding-bottom: 1%;}
+
+  article {
+    margin-left: 2%;
+    margin-right: 2%;
+    overflow: auto;}
+
+  footer {
+    background-color: var(--worldDeepBlue);
+    color: var(--worldLightBlue);
+    font-family: var(--normalText);
+    padding: 1%;}
+  
+  nav {
+    background-color: var(--worldLightBlueClear);
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0%;
+}
+
+  nav a {
+    background-color: var(--worldMedBlueClear);
+    color: var(--worldDeepBlue);
+    border: 0ch;
+    padding-left: 1%;
+    padding-right: 1%;
+    font-size: x-large;
+    font-weight: normal;
+    text-decoration: none;
+    display:flex;
+    justify-content: center;
+    flex-grow: 1;
+    line-height: 1.75;
+    margin: 0%;
+    
+}
+
+  nav a:hover {       
+    background-color: var(--worldMedBlue);
+    color: var(--worldLightBlue);
+    border: 0ch;
+    font-weight: bolder;
+    text-decoration: none;
+    text-shadow: 1px 1px 4px black;
+}
+    
+
+  nav a:focus {
+    background-color: var(--worldMedBlue);
+    outline: none;}
+  
+  p {
+    overflow-wrap: break-word;
+  }
+  
+  h1 {
+    font-size: 100px;
+    display: inline;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+    font-family: var(--jpFont);
+    font-weight: normal;
+  }
+  h2 {
+    /* margin-top: auto;
+    margin-bottom: 0; */
+    color: var(--worldDeepBlue);
+}
+  h3 {font-size: 140%; font-weight: bold;}
+  h4 {}
+  h5 {}
+  h6 {}
+
+.headerP {
+    margin-top: -2%;
+    padding-top: 0px;
+}
+
+  /* Stuff down here also copy/pasted from CS290 */
+  
+  /*   ===== TABLET  media query overrides mobile styles ===== */
+  @media all and (min-width: 600px) {}
+  
+  /*   ===== DESKTOP  media query overrides mobile and tablet styles ===== */
+  @media all and (min-width: 1080px) {}
