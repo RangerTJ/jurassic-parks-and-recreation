@@ -65,8 +65,6 @@
     padding-bottom: 1px;
     display: block;
     color: white;
-    font-family: var(--normalText);
-    font-size: normal;
 }
 
   main {
@@ -128,7 +126,7 @@
   }
   
   h1 {
-    font-size: 100px;
+    font-size: 85px;
     display: inline;
     margin-bottom: 0px;
     padding-bottom: 0px;
