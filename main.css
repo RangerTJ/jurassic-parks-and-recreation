@@ -137,8 +137,9 @@
     font-weight: normal;
   }
   h2 {
-    /* margin-top: auto;
-    margin-bottom: 0; */
+    margin-top: auto;
+    margin-bottom: 0;
+    margin-left: 1%;
     color: var(--worldDeepBlue);
 }
   h3 {font-size: 140%; font-weight: bold;}
