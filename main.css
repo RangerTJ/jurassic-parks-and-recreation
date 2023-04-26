@@ -139,8 +139,14 @@
     margin-left: 1%;
     padding-top: 1%;
     color: var(--worldDeepBlue);
+    font-family: var(--jpFont);
+    font-size: 60px;
+    font-weight: normal;
 }
-  h3 {font-size: 140%; font-weight: bold;}
+  h3 {
+    font-size: 140%; 
+    font-weight: bold;
+}
   h4 {}
   h5 {}
   h6 {}
