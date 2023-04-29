@@ -29,7 +29,7 @@
 --              I think it works in current cascade implementation: Deleting a worker or task will cascade to delete the "EmployeeTask" so there's no anomalies.
 
 
--- 11x SELECTS HERE
+-- 11x SELECTS HERE (remember to convert id FK fields to something actually usable)
 
 -- 11x INSERTS HERE
 
