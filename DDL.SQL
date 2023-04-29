@@ -7,6 +7,11 @@
 -- MySQL Workbench Forward Engineering
 -- Edits: Updated FK cascading and changed to CREATE OR REPLACE TABLE / unnecessary tags / restructured unique / Indentation Formatting
 
+-- Disable key checks per suggestions from assignment page:
+-- URL: https://canvas.oregonstate.edu/courses/1914747/assignments/9180999?module_item_id=23040579
+SET FOREIGN_KEY_CHECKS=0;
+SET AUTOCOMMIT = 0;
+
 -- -----------------------------------------------------
 -- Table `Parks`
 -- -----------------------------------------------------
@@ -309,3 +314,9 @@ VALUES();
 
 INSERT INTO `Diets`                 ()
 VALUES();
+
+
+-- Re-enabling checks/commit per suggestions from assignment page:
+-- URL: https://canvas.oregonstate.edu/courses/1914747/assignments/9180999?module_item_id=23040579
+SET FOREIGN_KEY_CHECKS=1;
+COMMIT;
