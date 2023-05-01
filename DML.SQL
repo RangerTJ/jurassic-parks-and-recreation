@@ -94,7 +94,6 @@ FROM TasksAssigned
 JOIN Facilities ON TasksAssigned.idFacility = Facilities.idFacility
 JOIN BiologicalAssets ON TasksAssigned.idBiologicalAsset = BiologicalAssets.idBiologicalAsset
 JOIN Species ON BiologicalAssets.idSpecies = Species.idSpecies
--- COMMENT: DO we need to add group by to this?
 ORDER BY TasksAssigned.idTaskAssigned ASC;
 
 
@@ -117,13 +116,23 @@ ORDER BY EmployeeTasks.idEmployeeTask ASC;
 -- ----------------
 
 -- NULLable example - Re-open a "completed" task by removing its end date + task is complete flag
-
+-- idTaskAssigned will be clear to the user who created a given task, as it will be provided to them upon entry of their
+-- task by the database website UI.
+UPDATE TasksAssigned
+SET taskEnd = NULL, taskIsComplete = 0
+WHERE idTaskAssigned = 1
 
 -- ----------------
 -- 1x DELETE (suggest delete task, as it's the most realistic/real-world thing - ie. someone created a task then decided to cancel it)
--- NOTE: Need to make the task key on EmployeeTasks nullable if we want to still keep a record of costs spent, even if the task was canceled
---       (could go into a report of costs spent on cancelled things where taskid = NULL or something)
+-- NOTE: The site UI will notify the administrator of a tasks's ID number when the task is generated. As there can potentially be thousands of tasks,
+--       identifying a specific task by the ID is the only realistic way to enforce it without making naming tasks incredibly tedious.
+--       The EmployeeTask entity is allowed to exist if its related task or employee is deleted so that we still have a record of overhead costs spent.
 -- ----------------
+
+-- Delete TaskAssigned #4 (should be a specific task to repair a leak in a tank)
+DELETE
+FROM TasksAssigned
+WHERE idTaskAssigned = 4;
 
 
 -- ----------------

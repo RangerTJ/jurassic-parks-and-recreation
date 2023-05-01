@@ -194,8 +194,8 @@ CREATE OR REPLACE TABLE `TasksAssigned` (
 -- -----------------------------------------------------
 CREATE OR REPLACE TABLE `EmployeeTasks` (
   `idEmployeeTask`      INT NOT NULL AUTO_INCREMENT,
-  `idTaskAssigned`      INT NOT NULL,
-  `idEmployee`          INT NOT NULL,
+  `idTaskAssigned`      INT NULL,
+  `idEmployee`          INT NULL,
   `taskHoursWorked`     INT NOT NULL,
   `empTaskCost`         DECIMAL(10,2) NOT NULL,
   `empTaskStart`        DATETIME NULL,
@@ -204,12 +204,12 @@ CREATE OR REPLACE TABLE `EmployeeTasks` (
   CONSTRAINT `fk_TasksAssigned_has_Employees_TasksAssigned1`
     FOREIGN KEY (`idTaskAssigned`)
     REFERENCES `TasksAssigned` (`idTaskAssigned`)
-    ON DELETE CASCADE
+    ON DELETE SET NULL
     ON UPDATE CASCADE,
   CONSTRAINT `fk_TasksAssigned_has_Employees_Employees1`
     FOREIGN KEY (`idEmployee`)
     REFERENCES `Employees` (`idEmployee`)
-    ON DELETE CASCADE
+    ON DELETE SET NULL
     ON UPDATE CASCADE);
 
 
