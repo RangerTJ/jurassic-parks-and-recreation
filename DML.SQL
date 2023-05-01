@@ -116,6 +116,8 @@ ORDER BY EmployeeTasks.idEmployeeTask ASC;
 -- 1x UPDATE (NULLable - suggest do this for a dino related to task or facility to habitat since they can already be null)
 -- ----------------
 
+-- NULLable example - Re-open a "completed" task by removing its end date + task is complete flag
+
 
 -- ----------------
 -- 1x DELETE (suggest delete task, as it's the most realistic/real-world thing - ie. someone created a task then decided to cancel it)

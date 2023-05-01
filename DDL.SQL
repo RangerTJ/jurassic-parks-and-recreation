@@ -57,7 +57,7 @@ CREATE OR REPLACE TABLE `Facilities` (
   `facilityLocation`    VARCHAR(45) NOT NULL,
   `isEnclosure`         TINYINT(1) NOT NULL,
   `securityRating`      TINYINT(10) NOT NULL,
-  `facilityPhoto`       BLOB NULL,
+  `facilityPhoto`       VARCHAR(255) NULL,
   `facilityNote`        VARCHAR(8000) NULL,
   PRIMARY KEY (`idFacility`),
   CONSTRAINT `fk_Facilities_Parks1`
@@ -84,7 +84,7 @@ CREATE OR REPLACE TABLE `Diets` (
   `idDiet`              INT NOT NULL AUTO_INCREMENT,
   `dietName`            VARCHAR(255) NOT NULL UNIQUE,
   `dietDescription`     VARCHAR(8000) NOT NULL,
-  `dietIcon`            BLOB NULL,
+  `dietIcon`            VARCHAR(255) NULL,
   PRIMARY KEY (`idDiet`));
 
 
@@ -98,7 +98,7 @@ CREATE OR REPLACE TABLE `Species` (
   `speciesName`         VARCHAR(255) NOT NULL UNIQUE,
   `speciesDescription`  VARCHAR(8000) NOT NULL,
   `threatLevel`         TINYINT(10) NOT NULL,
-  `speciesPhoto`        BLOB NULL,
+  `speciesPhoto`        VARCHAR(255) NULL,
   PRIMARY KEY (`idSpecies`),
   CONSTRAINT `fk_Species_Diets1`
     FOREIGN KEY (`idDiet`)
@@ -156,7 +156,7 @@ CREATE OR REPLACE TABLE `Employees` (
   `employeeEmail`       VARCHAR(255) NOT NULL,
   `employeeRadio`       VARCHAR(45) NULL,
   `employeeNote`        VARCHAR(8000) NULL,
-  `employeePhoto`       BLOB NULL,
+  `employeePhoto`       VARCHAR(255) NULL,
   PRIMARY KEY (`idEmployee`),
   CONSTRAINT `fk_Employees_JobClassifications1`
     FOREIGN KEY (`idJobClassification`)
@@ -175,7 +175,7 @@ CREATE OR REPLACE TABLE `TasksAssigned` (
   `taskDescription`     VARCHAR(8000) NOT NULL,
   `taskStart`           DATETIME NOT NULL,
   `taskEnd`             DATETIME NULL,
-  `taskIsComplete`      TINYINT(1) NULL,
+  `taskIsComplete`      TINYINT(1) NOT NULL,
   PRIMARY KEY (`idTaskAssigned`),
   CONSTRAINT `fk_Tasks_Facilities1`
     FOREIGN KEY (`idFacility`)
@@ -236,17 +236,14 @@ VALUES
 'All of Sorna outside of the docks and laboratories.', 1, 10, NULL, "The island's natural terrain makes an impassible barrier for most assets to escape, 
 and heavy-duty fencing/containment covers the gaps and protects other site facilities."),
 
--- NULL image until further investigation on uploading to database
 (1, 1, NULL, 'Visitor Center', 'Primary Visitor Center for Jurassic World and general hub for visitor experiences.', 
 'Central Isla Nublar, near ferry monorail drop-off.', 0, 8, NULL, "Can double as a shelter location in the event that an asset escapes containment. 
 Doors and walls able to withstand most assets, but in the event of a category 9 or higher escape, visitors should be guided to the max security shelters."),
 
--- NULL image until further investigation on uploading to database
 (3, 2, 2, 'Jurassic Stadium', 'Stadium viewing area for special biological asset exhibitions.', 
-'Center of Jurassic Park San Diego.', 1, 10, NULL, "Both a large-scale visitor viewing area and a 
+'Center of Jurassic Park San Diego.', 1, 10, 'images/arena_test.png', "Both a large-scale visitor viewing area and a 
 specialized enclosure for short-term viewing of a showcase asset."),
 
--- NULL image until further investigation on uploading to database
 (3, 2, 2, 'Mosasaur Lagoon', 'Salt-water tank for the largest aquatic biological assets at Jurassic World.', 
 'Adjacent to main street, down main path from the Visitor Center.', 1, 10, NULL, "Largest and most secure salt-water viewing tank in Jurassic World. 
 Viewing facilities are adjacent.");
@@ -258,7 +255,7 @@ VALUES
 (4, 'Robert', 'Muldoon', 35.00, '+1-202-555-0144', 'rmuldoon@jw.org', '200', 'Firearm certified.', NULL),
 (3, 'Dennis', 'Nedry', 60.00, '+1-202-555-8073', 'dnedry@jw.org', NULL, 'Debt issues. Monitor behavior.', NULL),
 (2, 'Ralph', 'Wiggum', 0.00, '+1-202-555-1989', 'mefailenglish@hotmail.com', '325', `Unpaid student intern. "I'm in danger!"`, NULL),
-(1, 'Gerry', 'Harding', 40.00, '+1-202-555-1993', 'gharding@jw.org', '501', 'Medical certified.', NULL);
+(1, 'Gerry', 'Harding', 40.00, '+1-202-555-1993', 'gharding@jw.org', '501', 'Medical certified.', 'images/staff_test.png');
 
 
 -- Note: Transport tasks are generated for the facility where the transport operation begins.
