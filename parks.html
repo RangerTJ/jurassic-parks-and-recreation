@@ -34,13 +34,46 @@
         <section>
             <h2 id="article1">Parks</h2>
             <article>
-                <h3>Add Park</h3>
+                <h3>Add New Parks</h3>
                 <p>
                     If you would like to add a new Park entity to the database, enter values for its attributes below
                     and click the "Add Park" button.
                 </p>
                 <form>
-                    <table>
+                    <fieldset>
+                        <legend>Stuff</legend>
+                        
+                        <p>
+                            <div><label for="parkName" class="required">Name</label></div>
+                            <input type="text"
+                                    name="parkName" 
+                                    id ="parkName" 
+                                    required 
+                                    autofocus
+                                    placeholder="Ex. Jurasic Park">
+                        </p>
+                        <p>
+                            <div><label for="parkDescription" class="required">Description</label></div>
+                            <input type="text"
+                                        name="parkLocation" 
+                                        id ="parkLocation" 
+                                        required 
+                                        placeholder="Ex. Isla Nublar, Costa Rica">
+                        </p>
+                        
+                        <p>
+                            <div><label for="parkLocation" class="required">Location</label></div>
+                            <textarea
+                                    name="parkDescription"
+                                    id ="parkDescription"
+                                    required
+                                    cols="40" rows="5" 
+                                    min="5" max="255"
+                                    placeholder="Ex. The original prehistoric zoological theme park and preserve. Permanently closed."></textarea>
+                        </p>
+                        
+                    </fieldset>
+                    <!-- <table>
                         <tr>
                             <th>
                                 <label for="parkName" class="required">Name</label>
@@ -78,7 +111,7 @@
                                 placeholder="Ex. The original prehistoric zoological theme park and preserve. Permanently closed."></textarea>
                             </td>
                         </tr>
-                    </table>
+                    </table> -->
                 </form>
                 <div>
                     <p><button>Add Park</button></p>
@@ -110,6 +143,20 @@
                         <td><button>Delete</button></td>
                     </tr>
                 </table>
+            </article>
+            <article>
+                <h3>Alternative Design Proposal Musings</h3>
+                <p>
+                    Alternate Solution: Input field for delete based on target criteria (like ID or unique attribute).
+                    Add ID field to add new parks, and branch logic so that if it's NULL, a new one is added, and if it's not
+                    NULL, then create a new one? Having delete be a lookup saves needing deletes for each row. Alternate
+                    update would be update lookup too, but then need new update page for each entity for updating instead of adding.
+                    Would then be add/delete page and a different modify page. Add/delete could be the main page with the report/summary
+                    table of the general entity query. Alternately, could make that a lookup too, instead. Launcher page could be a welcome
+                    and have buttons/inputs/drop-downs that launch the "popular" custom queries. Might be a good idea to use drop downs in place
+                    of inputs when it's by an ID, so the drop-down could display the ID + an additional attribute to clarify what each ID is
+                    (for dinos/tasks and things that don't have unique non-id identifiers).
+                </p>
             </article>
         </section>
     </main>

@@ -186,16 +186,33 @@
     border-radius: 5px;
   }
 
+  label {
+    font-weight: bold;
+  }
+
+  fieldset {
+    border-color: #0F284F;
+  }
+
+  legend {
+    font-weight: bold;
+    font-size: large;
+  }
+
+  form {
+    /* flex:content; */
+  }
+
   input {
     background-color: var(--worldLightBlue);
     color: var(--worldDeepBlue);
-    width: 90%;
+    /* width: 90%; */
   }
 
   textarea {
     background-color: var(--worldLightBlue);
     color: var(--worldDeepBlue);
-    width: 90%;
+    /* width: 90%; */
   }
 
 
