@@ -1,0 +1,118 @@
+<!-- Citation: Template/head based on starter code from CS290 Projects 1-3 -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Jurassic Parks and Recreation | Home</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <meta name='robots' content='noindex,noarchive,nofollow'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+</head>
+
+<body>
+    <header>
+        <h1>DINO</h1>
+        <p class="headerP">Digital Information Nexus for Operations</p>
+    </header>
+    <nav>
+        <a href="test_template.html" >Home</a>
+        <a href="test_template.html" >Parks</a>
+        <a href="test_template.html" >Facilities</a>
+        <a href="test_template.html" >Biological Assets</a>
+        <a href="test_template.html" >Employees</a>
+        <a href="test_template.html" >Tasks Assigned</a>
+        <a href="test_template.html" >Employee Tasks</a>
+        <a href="test_template.html" >Species</a>
+        <a href="test_template.html" >Diets</a>
+        <a href="test_template.html" >Habitats</a>
+        <a href="test_template.html" >Facility Types</a>
+        <a href="test_template.html" >Job Classifications</a>
+    </nav>
+    <main>
+        <section>
+            <h2 id="article1">Parks</h2>
+            <article>
+                <h3>Add Park</h3>
+                <p>
+                    If you would like to add a new Park entity to the database, enter values for its attributes below
+                    and click the "Add Park" button.
+                </p>
+                <form>
+                    <table>
+                        <tr>
+                            <th>
+                                <label for="parkName" class="required">Name</label>
+                            </th>
+                            <th>
+                                <label for="parkDescription" class="required">Description</label>
+                            </th>
+                            <th>
+                                <label for="parkLocation" class="required">Location</label>
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="text"
+                                name="parkName" 
+                                id ="parkName" 
+                                required 
+                                autofocus
+                                placeholder="Ex. Jurasic Park">
+                            </td>
+                            <td>
+                                <input type="text"
+                                name="parkLocation" 
+                                id ="parkLocation" 
+                                required 
+                                placeholder="Ex. Isla Nublar, Costa Rica">
+                            </td>
+                            <td>
+                                <textarea
+                                name="parkDescription"
+                                id ="parkDescription"
+                                required
+                                cols="24" rows="5" 
+                                min="5" max="255"
+                                placeholder="Ex. The original prehistoric zoological theme park and preserve. Permanently closed."></textarea>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+                <div>
+                    <p><button>Add Park</button></p>
+                </div>
+            </article>
+            <article>
+                <h3>Existing Park Data</h3>
+                <p>
+                    The table below shows existing information for Park entities and includes
+                    buttons to update or delete them.
+                </p>
+                <table>
+                    <tr>
+                        <th>Park ID</th>
+                        <th>Name</th>
+                        <th>Location</th>
+                        <th>Description</th>
+                        <th>Update</th>
+                        <th>Delete</th>
+                    </tr>
+                    <tr>
+                        <td>Ex. 1</td>
+                        <td>Ex. Jurassic World</td>
+                        <td>Ex. Isla Nublar, Costa Rica</td>
+                        <td>
+                            Ex. World-class prehistoric zoological theme park and preserve.
+                        </td>
+                        <td><button>Update</button></td>
+                        <td><button>Delete</button></td>
+                    </tr>
+                </table>
+            </article>
+        </section>
+    </main>
+    <footer>&copy;2023 Taylor Jordan and Nicholas Schmidt (Team: Jurassic Parks and Recreation)</footer>
+</body>
+</html>

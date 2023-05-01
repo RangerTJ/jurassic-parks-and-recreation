@@ -47,6 +47,7 @@
     --techStyleFont: 'Zen Dots', cursive; 
     --normalText: 'Overpass Mono', monospace;}
 
+  /* Basics */
   body {
     background-size:cover;
     background-color: var(--concreteLight);
@@ -82,8 +83,9 @@
     font-family: var(--normalText);
     padding: 1%;}
   
+
+  /* Nav Elements */
   nav {
-    /* background-color: var(--worldLightBlueClear); */
     text-align: center;
     display: flex;
     flex-wrap: wrap;
@@ -116,11 +118,12 @@
     text-shadow: 1px 1px 4px black;
 }
     
-
   nav a:focus {
     background-color: var(--worldMedBlue);
     outline: none;}
   
+  
+  /* Paragraphs and Headers */
   p {
     overflow-wrap: break-word;
   }
@@ -151,6 +154,52 @@
   h5 {}
   h6 {}
 
+  /* Tables */
+  table {
+    background-color: var(--worldDeepBlueClear);
+    color: var(--worldLightBlue);
+    width: 100%;
+    text-align: center;
+    border: 2px solid var(--worldDeepBlue);
+    border-collapse: collapse;
+  }
+
+  th {
+    border: 2px solid var(--worldDeepBlue);
+    background-color: var(--worldMedBlueClear);
+    font-weight: bold;
+  }
+
+  tr {
+
+  }
+
+  td {
+    border: 2px solid var(--worldDeepBlue);
+    padding: 10px;
+  }
+
+  /* Buttons and Forms */
+  button {
+    color: var(--worldLightBlue);
+    background-color: var(--worldDeepBlue);
+    border-radius: 5px;
+  }
+
+  input {
+    background-color: var(--worldLightBlue);
+    color: var(--worldDeepBlue);
+    width: 90%;
+  }
+
+  textarea {
+    background-color: var(--worldLightBlue);
+    color: var(--worldDeepBlue);
+    width: 90%;
+  }
+
+
+/* Custom Elements */
 .headerP {
     margin-top: -2%;
     margin-bottom: 0;
