@@ -81,8 +81,7 @@
     background-color: var(--worldDeepBlue);
     color: var(--worldLightBlue);
     font-family: var(--normalText);
-    padding: 1%;}
-  
+    padding: 1%;}  
 
   /* Nav Elements */
   nav {
@@ -184,6 +183,18 @@
     color: var(--worldLightBlue);
     background-color: var(--worldDeepBlue);
     border-radius: 5px;
+  }
+
+  button:hover {
+    background-color: var(--worldMedBlue);
+    font-weight: bold;
+    border-color: var(--worldMedBlueClear);
+  }
+
+  button:focus {
+    background-color: var(--worldMedBlue);
+    font-weight: bold;
+    border-color: var(--worldLightBlue);
   }
 
   label {
