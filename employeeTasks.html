@@ -1,0 +1,156 @@
+<!-- Citation: Template/head based on starter code from CS290 Projects 1-3 -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Jurassic Parks and Recreation | Home</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <meta name='robots' content='noindex,noarchive,nofollow'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+</head>
+
+<body>
+    <header>
+        <h1>DINO</h1>
+        <p class="headerP">Digital Information Nexus for Operations</p>
+    </header>
+    <nav>
+        <a href="test_template.html" >Home</a>
+        <a href="parks.html" >Parks</a>
+        <a href="facilities.html" >Facilities</a>
+        <a href="test_template.html" >Biological Assets</a>
+        <a href="employees.html" >Employees</a>
+        <a href="tasksAssigned.html" >Tasks Assigned</a>
+        <a href="employeeTasks.html" >Employee Tasks</a>
+        <a href="test_template.html" >Species</a>
+        <a href="test_template.html" >Diets</a>
+        <a href="test_template.html" >Habitats</a>
+        <a href="facilityTypes.html" >Facility Types</a>
+        <a href="jobClassifications.html" >Job Classifications</a>
+    </nav>
+    <main>
+        <section>
+            <h2 id="article1">Employee Tasks</h2>
+            <article>
+                <h3>Add New Employee Task</h3>
+                <p>
+                    If you would like to add a new Employee Task to the database. Enter values for its attributes below
+                    and click the "Add Task" button. Employee tasks are entities that handle the many-to-many relationship between
+                    a given Employee and an open Task Assignment. Each entity represents a chunk of work contributed by a specific
+                    employee towards the completion of the matching task. Many employees can contribute to the same task, and a single
+                    employee can contribute to the same task multiple times (for different hourly contributions at different time intervals).
+                </p>
+                <form>
+                    <fieldset>
+                        <legend>Information</legend>
+                        <p>
+                            <div><label for="taskAssigned" class="required">Task</label></div>
+                            <input type="text"
+                                        name="taskAssigned" 
+                                        id ="taskAssigned" 
+                                        required 
+                                        placeholder="#Task ID - Description">
+                        </p>
+                        <p>
+                            <div><label for="employee" class="required">Employee</label></div>
+                            <input type="text"
+                                        name="employee"
+                                        id ="employee"
+                                        required 
+                                        placeholder="#ID - Firstname Lastname">
+                        </p>
+                        <p>
+                            <div><label for="workHours" class="required">Hours Worked</label></div>
+                            <input type="text"
+                                        name="workHours" 
+                                        id ="workHours" 
+                                        required
+                                        placeholder="Ex. 40">
+                        </p>
+                        <p>
+                            <div><label for="workCost" class="required">Cost</label></div>
+                            <input type="text"
+                                        name="workCost"
+                                        id ="workCost" 
+                                        required 
+                                        placeholder="Ex. 5000.00">
+                        </p>
+                        <p>
+                            <div><label for="workStart" class="required">Start</label></div>
+                            <input type="text"
+                                        name="workStart"
+                                        id ="workStart" 
+                                        required 
+                                        placeholder="Ex. 4/6/2023">
+                        </p>
+                        <p>
+                            <div><label for="workEnd" class="required">End</label></div>
+                            <input type="text"
+                                        name="workEnd"
+                                        id ="workEnd" 
+                                        required 
+                                        placeholder="Ex. 4/7/2023">
+                        </p>
+                    </fieldset>
+                </form>
+                <div>
+                    <p><button>Add Task</button></p>
+                </div>
+            </article>
+
+            <article>
+                <h3>Existing Data</h3>
+                <p>
+                    The table below shows existing information for Employee Task entities and includes
+                    buttons to update or delete them.
+                </p>
+                <table>
+                    <tr>
+                        <th>ID</th>
+                        <!-- Composite of TaskID + Description? -->
+                        <th>Task Assigned</th>
+                        <!-- Composite of EmpID + Full Name? -->
+                        <th>Employee</th>  
+                        <th>Hours Worked</th>
+                        <th>Total Cost</th>
+                        <th>Start</th>
+                        <th>End</th>
+
+                        <th>Update</th>
+                        <th>Delete</th>
+                    </tr>
+                    <tr>
+                        <td>Ex. 1</td>
+                        <td>Ex. #1 - Fix Doors to Visitor Center</td>
+                        <td>Ex. #3 - Ralph Wiggum</td>
+                        <td>Ex. 5</td>
+                        <td>Ex. 200.00</td>
+                        <td>Ex. 3/1/2023</td>
+                        <td>Ex. 3/1/2023</td>
+
+                        <td><button>Update</button></td>
+                        <td><button>Delete</button></td>
+                    </tr>
+                </table>
+            </article>
+            <article>
+                <h3>Alternative Design Proposal Musings</h3>
+                <p>
+                    Alternate Solution: Input field for delete based on target criteria (like ID or unique attribute).
+                    Add ID field to add new parks, and branch logic so that if it's NULL, a new one is added, and if it's not
+                    NULL, then create a new one? Having delete be a lookup saves needing deletes for each row. Alternate
+                    update would be update lookup too, but then need new update page for each entity for updating instead of adding.
+                    Would then be add/delete page and a different modify page. Add/delete could be the main page with the report/summary
+                    table of the general entity query. Alternately, could make that a lookup too, instead. Launcher page could be a welcome
+                    and have buttons/inputs/drop-downs that launch the "popular" custom queries. Might be a good idea to use drop downs in place
+                    of inputs when it's by an ID, so the drop-down could display the ID + an additional attribute to clarify what each ID is
+                    (for dinos/tasks and things that don't have unique non-id identifiers).
+                </p>
+            </article>
+        </section>
+    </main>
+    <footer>&copy;2023 Taylor Jordan and Nicholas Schmidt (Team: Jurassic Parks and Recreation)</footer>
+</body>
+</html>
