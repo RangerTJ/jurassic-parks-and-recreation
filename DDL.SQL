@@ -40,7 +40,7 @@ CREATE OR REPLACE TABLE `Habitats` (
   `idHabitat`           INT NOT NULL UNIQUE AUTO_INCREMENT,
   `habitatName`         VARCHAR(255) NOT NULL UNIQUE,
   `habitatDescription`  VARCHAR(8000) NOT NULL,
-  `habitateSize`        TINYINT(3) NOT NULL,
+  `habitatSize`        TINYINT(3) NOT NULL,
   PRIMARY KEY (`idHabitat`));
 
 
@@ -240,7 +240,7 @@ and heavy-duty fencing/containment covers the gaps and protects other site facil
 'Central Isla Nublar, near ferry monorail drop-off.', 0, 8, NULL, "Can double as a shelter location in the event that an asset escapes containment. 
 Doors and walls able to withstand most assets, but in the event of a category 9 or higher escape, visitors should be guided to the max security shelters."),
 
-(3, 2, 2, 'Jurassic Stadium', 'Stadium viewing area for special biological asset exhibitions.', 
+(3, 2, 3, 'Jurassic Stadium', 'Stadium viewing area for special biological asset exhibitions.', 
 'Center of Jurassic Park San Diego.', 1, 10, 'images/arena_test.png', "Both a large-scale visitor viewing area and a 
 specialized enclosure for short-term viewing of a showcase asset."),
 
@@ -296,22 +296,63 @@ VALUES
 ('Undeveloped Area', 'Undeveloped area that is treated as a facility for organizational and reporting purposes.');
 
 
+INSERT INTO `Habitats`              (habitatName, habitatDescription, habitatSize)
+VALUES
+  ('Prehistoric Jungle - Large', 'Prehistoric jungles were dense, lush environments teeming with plant and animal life. These habitats supported a variety of herbivorous and carnivorous dinosaur species, including smaller predators, long-necked sauropods, and armored herbivores. Many plants were ferns, horsetails, and primitive conifers.', 3),
+  ('Cretaceous Coastline - Medium', 'Cretaceous coastlines were shallow marine environments that supported a diverse array of aquatic life, including marine reptiles like ichthyosaurs and plesiosaurs, as well as various fish and invertebrates. These habitats also provided nesting areas for shore-dwelling dinosaurs and resources for other dinosaur species.', 2),
+  ('Prehistoric Savannah - Large', 'Prehistoric savannahs were open, grassy landscapes with scattered trees and shrubs, providing ample food and resources for grazing and browsing dinosaur species. These habitats supported herds of herbivorous dinosaurs, like hadrosaurs and ceratopsians, as well as carnivorous predators that hunted them.', 3),
+  ('Ancient Redwood Forest - Medium', 'Ancient redwood forests were home to towering trees, providing a unique ecosystem for a variety of dinosaur species. These habitats were particularly suitable for tree-dwelling and gliding dinosaur species, such as small theropods and early birds, who could navigate the forest canopy with ease.', 2),
+  ('Jurassic Swamp - Small', 'Jurassic swamps were wetland habitats characterized by an abundance of water and lush vegetation, supporting a diverse range of dinosaur species. These habitats provided ideal conditions for semi-aquatic dinosaurs, like Spinosaurus, and attracted other dinosaur species who relied on the water and resources found in swamps.', 1);
+
+
 -- TO DO: Additional Table Inserts --
-INSERT INTO `Habitats`              ()
-VALUES();
+INSERT INTO `BiologicalAssets`      (idSpecies, idFacility, nickname)
+VALUES
+(1, 1, 'Alpha'),
+(1, 4, 'Beta'),
+(2, 3, 'Gamma'),
+(2, 1, 'Delta'),
+(2, 1, 'Epsilon'),
+(4, 2, 'Zeta'),
+(1, 3, 'Eta'),
+(2, 4, 'Theta'),
+(2, 3, 'Iota'),
+(4, 2, 'Kappa'),
+(4, 2, 'Lambda'),
+(2, 4, 'Mu'),
+(1, 4, 'Nu'),
+(4, 3, 'Xi'),
+(1, 2, 'Omicron');
 
 
-INSERT INTO `BiologicalAssets`      ()
-VALUES();
+INSERT INTO `Species`               (idDiet, idHabitat, speciesName, speciesDescription, threatLevel, speciesPhoto)
+VALUES
+(1, 1, 'Tyrannosaurus Rex', 'A large carnivorous dinosaur with powerful jaws and sharp teeth.', 10, NULL),
+(1, 4, 'Velociraptor', 'A small, agile carnivorous dinosaur with sharp claws.', 9, NULL),
+(2, 3, 'Triceratops', 'A large herbivorous dinosaur with three horns and a bony frill.', 4, NULL),
+(2, 1, 'Brachiosaurus', 'A massive herbivorous dinosaur with a long neck and small head.', 3, NULL),
+(2, 1, 'Stegosaurus', 'A large herbivorous dinosaur with plates along its back and a spiked tail.', 5, NULL),
+(4, 2, 'Spinosaurus', 'A large, primarily piscivorous dinosaur with a distinctive sail on its back.', 8, NULL),
+(1, 3, 'Allosaurus', 'A large carnivorous dinosaur with sharp teeth and strong arms.', 9, NULL),
+(2, 4, 'Ankylosaurus', 'A heavily-armored herbivorous dinosaur with a club-like tail.', 6, NULL),
+(2, 3, 'Parasaurolophus', 'A herbivorous dinosaur with a distinctive crest on its head.', 2, NULL),
+(4, 2, 'Mosasaurus', 'A large marine reptile; it was an apex predator, feeding primarily on fish, seabirds, and other marine creatures.', 10, NULL),
+(4, 2, 'Hesperornis', 'A large flightless aquatic bird, characterized by its powerful legs adapted for swimming and diving. It fed primarily on fish.', 3, NULL),
+(2, 4, 'Thescelosaurus', 'A small, bipedal herbivore characterized by its long legs, suggesting it was a fast runner.', 2, NULL),
+(1, 5, 'Diplocaulus', 'A prehistoric amphibian with a distinctive boomerang-shaped skull. Likely a carnivorous ambush predator.', 4, NULL),
+(4, 5, 'Metriorhynchus', 'A marine crocodile-like reptile, fed primarily on fish and other small marine creatures.', 5, NULL),
+(1, 5, 'Eustreptospondylus', 'A medium-sized theropod dinosaur, it was carnivorous, bipedal, and had a stiffened tail.', 7, NULL);
 
 
-INSERT INTO `Species`               ()
-VALUES();
 
 
-INSERT INTO `Diets`                 ()
-VALUES();
 
+INSERT INTO `Diets`                 (dietName, dietDescription, dietIcon)
+VALUES
+('Carnivore', 'A diet consisting primarily of meat from other animals. Includes hunters and scavengers.', NULL),
+('Herbivore', 'A diet consisting primarily of plant material. Includes grazers and browsers.', NULL),
+('Omnivore', 'A diet consisting of a mix of plant and animal materials. Opportunistic eaters.', NULL),
+('Piscivore', 'A diet consisting primarily of fish and other aquatic organisms.', NULL);
 
 -- Re-enabling checks/commit per suggestions from assignment page:
 -- URL: https://canvas.oregonstate.edu/courses/1914747/assignments/9180999?module_item_id=23040579
