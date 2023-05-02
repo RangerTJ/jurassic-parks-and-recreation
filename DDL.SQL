@@ -16,7 +16,7 @@ SET AUTOCOMMIT = 0;
 -- Table `Parks`
 -- -----------------------------------------------------
 CREATE OR REPLACE TABLE `Parks` (
-  `idPark`              INT NOT NULL AUTO_INCREMENT,
+  `idPark`              INT NOT NULL UNIQUE AUTO_INCREMENT,
   `parkName`            VARCHAR(255) NOT NULL UNIQUE,
   `parkDescription`     VARCHAR(8000) NOT NULL,
   `parkLocation`        VARCHAR(255) NOT NULL,
@@ -27,7 +27,7 @@ CREATE OR REPLACE TABLE `Parks` (
 -- Table `FacilityTypes`
 -- -----------------------------------------------------
 CREATE OR REPLACE TABLE `FacilityTypes` (
-  `idFacilityType`      INT NOT NULL,
+  `idFacilityType`      INT NOT NULL UNIQUE AUTO_INCREMENT,
   `facTypeName`         VARCHAR(255) NOT NULL UNIQUE,
   `facTypeDescription`  VARCHAR(8000) NOT NULL,
   PRIMARY KEY (`idFacilityType`));
@@ -37,7 +37,7 @@ CREATE OR REPLACE TABLE `FacilityTypes` (
 -- Table `Habitats`
 -- -----------------------------------------------------
 CREATE OR REPLACE TABLE `Habitats` (
-  `idHabitat`           INT NOT NULL,
+  `idHabitat`           INT NOT NULL UNIQUE AUTO_INCREMENT,
   `habitatName`         VARCHAR(255) NOT NULL UNIQUE,
   `habitatDescription`  VARCHAR(8000) NOT NULL,
   `habitateSize`        TINYINT(3) NOT NULL,
@@ -48,13 +48,13 @@ CREATE OR REPLACE TABLE `Habitats` (
 -- Table `Facilities`
 -- -----------------------------------------------------
 CREATE OR REPLACE TABLE `Facilities` (
-  `idFacility`          INT NOT NULL AUTO_INCREMENT,
+  `idFacility`          INT NOT NULL UNIQUE AUTO_INCREMENT,
   `idPark`              INT NOT NULL,
   `idFacilityType`      INT NOT NULL,
   `idHabitat`           INT NULL,
-  `facilityName`        VARCHAR(45) NOT NULL UNIQUE,
-  `facilityDescription` VARCHAR(45) NOT NULL,
-  `facilityLocation`    VARCHAR(45) NOT NULL,
+  `facilityName`        VARCHAR(255) NOT NULL UNIQUE,
+  `facilityDescription` VARCHAR(2000) NOT NULL,
+  `facilityLocation`    VARCHAR(255) NOT NULL,
   `isEnclosure`         TINYINT(1) NOT NULL,
   `securityRating`      TINYINT(10) NOT NULL,
   `facilityPhoto`       VARCHAR(255) NULL,
@@ -81,7 +81,7 @@ CREATE OR REPLACE TABLE `Facilities` (
 -- Table `Diets`
 -- -----------------------------------------------------
 CREATE OR REPLACE TABLE `Diets` (
-  `idDiet`              INT NOT NULL AUTO_INCREMENT,
+  `idDiet`              INT NOT NULL UNIQUE AUTO_INCREMENT,
   `dietName`            VARCHAR(255) NOT NULL UNIQUE,
   `dietDescription`     VARCHAR(8000) NOT NULL,
   `dietIcon`            VARCHAR(255) NULL,
@@ -92,7 +92,7 @@ CREATE OR REPLACE TABLE `Diets` (
 -- Table `Species`
 -- -----------------------------------------------------
 CREATE OR REPLACE TABLE `Species` (
-  `idSpecies`           INT NOT NULL AUTO_INCREMENT,
+  `idSpecies`           INT NOT NULL UNIQUE AUTO_INCREMENT,
   `idDiet`              INT NOT NULL,
   `idHabitat`           INT NOT NULL,
   `speciesName`         VARCHAR(255) NOT NULL UNIQUE,
@@ -116,7 +116,7 @@ CREATE OR REPLACE TABLE `Species` (
 -- Table `BiologicalAssets`
 -- -----------------------------------------------------
 CREATE OR REPLACE TABLE `BiologicalAssets` (
-  `idBiologicalAsset`   INT NOT NULL AUTO_INCREMENT,
+  `idBiologicalAsset`   INT NOT NULL UNIQUE AUTO_INCREMENT,
   `idSpecies`           INT NOT NULL,
   `idFacility`          INT NOT NULL,
   `nickname`            VARCHAR(255) NULL UNIQUE,
@@ -137,7 +137,7 @@ CREATE OR REPLACE TABLE `BiologicalAssets` (
 -- Table `JobClassifications`
 -- -----------------------------------------------------
 CREATE OR REPLACE TABLE `JobClassifications` (
-  `idJobClassification` INT NOT NULL AUTO_INCREMENT,
+  `idJobClassification` INT NOT NULL UNIQUE AUTO_INCREMENT,
   `jobTitle`            VARCHAR(255) NOT NULL UNIQUE,
   `jobDescription`      VARCHAR(8000) NOT NULL,
   PRIMARY KEY (`idJobClassification`));
@@ -147,14 +147,14 @@ CREATE OR REPLACE TABLE `JobClassifications` (
 -- Table `Employees`
 -- -----------------------------------------------------
 CREATE OR REPLACE TABLE `Employees` (
-  `idEmployee`          INT NOT NULL AUTO_INCREMENT,
+  `idEmployee`          INT NOT NULL UNIQUE AUTO_INCREMENT,
   `idJobClassification` INT NOT NULL,
-  `firstName`           VARCHAR(45) NOT NULL,
-  `lastName`            VARCHAR(45) NOT NULL,
+  `firstName`           VARCHAR(255) NOT NULL,
+  `lastName`            VARCHAR(255) NOT NULL,
   `hourlyWage`          DECIMAL(10,2) NOT NULL,
-  `employeePhone`       VARCHAR(45) NOT NULL,
+  `employeePhone`       VARCHAR(255) NOT NULL,
   `employeeEmail`       VARCHAR(255) NOT NULL,
-  `employeeRadio`       VARCHAR(45) NULL,
+  `employeeRadio`       VARCHAR(255) NULL,
   `employeeNote`        VARCHAR(8000) NULL,
   `employeePhoto`       VARCHAR(255) NULL,
   PRIMARY KEY (`idEmployee`),
@@ -169,7 +169,7 @@ CREATE OR REPLACE TABLE `Employees` (
 -- Table `TasksAssigned`
 -- -----------------------------------------------------
 CREATE OR REPLACE TABLE `TasksAssigned` (
-  `idTaskAssigned`      INT NOT NULL AUTO_INCREMENT,
+  `idTaskAssigned`      INT NOT NULL UNIQUE AUTO_INCREMENT,
   `idFacility`          INT NOT NULL,
   `idBiologicalAsset`   INT NULL,
   `taskDescription`     VARCHAR(8000) NOT NULL,
@@ -193,7 +193,7 @@ CREATE OR REPLACE TABLE `TasksAssigned` (
 -- Table `EmployeeTasks`
 -- -----------------------------------------------------
 CREATE OR REPLACE TABLE `EmployeeTasks` (
-  `idEmployeeTask`      INT NOT NULL AUTO_INCREMENT,
+  `idEmployeeTask`      INT NOT NULL UNIQUE AUTO_INCREMENT,
   `idTaskAssigned`      INT NULL,
   `idEmployee`          INT NULL,
   `taskHoursWorked`     INT NOT NULL,
@@ -254,7 +254,7 @@ INSERT INTO `Employees`             (idJobClassification, firstName, lastName, h
 VALUES
 (4, 'Robert', 'Muldoon', 35.00, '+1-202-555-0144', 'rmuldoon@jw.org', '200', 'Firearm certified.', NULL),
 (3, 'Dennis', 'Nedry', 60.00, '+1-202-555-8073', 'dnedry@jw.org', NULL, 'Debt issues. Monitor behavior.', NULL),
-(2, 'Ralph', 'Wiggum', 0.00, '+1-202-555-1989', 'mefailenglish@hotmail.com', '325', `Unpaid student intern. "I'm in danger!"`, NULL),
+(2, 'Ralph', 'Wiggum', 0.00, '+1-202-555-1989', 'mefailenglish@hotmail.com', '325', 'Unpaid student intern. "I''m in danger!"', NULL),
 (1, 'Gerry', 'Harding', 40.00, '+1-202-555-1993', 'gharding@jw.org', '501', 'Medical certified.', 'images/staff_test.png');
 
 
@@ -264,9 +264,9 @@ VALUES
 INSERT INTO `TasksAssigned`         (idFacility, idBiologicalAsset, taskDescription, taskStart, taskEnd, taskIsComplete)
 VALUES
 (1, 1, 'Sedate and transport asset to its new enclosure.', '2023-03-27', '2023-04-28', 1),
-(2, NULL, 'FY2023 - Daily Visitor Center Cleaning', '2022-10-01', NULL, NULL),
+(2, NULL, 'FY2023 - Daily Visitor Center Cleaning', '2022-10-01', NULL, 0),
 (3, 2, 'Remove broken tooth from showcase asset at Jurassic Stadium.', '2023-03-01', '2023-03-30', 1),
-(4, NULL, 'Repair leak in tank.', '2023-04-28', NULL, NULL);
+(4, NULL, 'Repair leak in tank.', '2023-04-28', NULL, 0);
 
 
 INSERT INTO `EmployeeTasks`         (idTaskAssigned, idEmployee, taskHoursWorked, empTaskCost, empTaskStart, empTaskEnd)
