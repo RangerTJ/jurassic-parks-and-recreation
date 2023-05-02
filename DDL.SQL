@@ -93,7 +93,7 @@ CREATE OR REPLACE TABLE `Diets` (
 -- -----------------------------------------------------
 CREATE OR REPLACE TABLE `Species` (
   `idSpecies`           INT NOT NULL AUTO_INCREMENT,
-  `idDiet`              TINYINT(1) NOT NULL,
+  `idDiet`              INT NOT NULL,
   `idHabitat`           INT NOT NULL,
   `speciesName`         VARCHAR(255) NOT NULL UNIQUE,
   `speciesDescription`  VARCHAR(8000) NOT NULL,
