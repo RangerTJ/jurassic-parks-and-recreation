@@ -296,7 +296,7 @@ VALUES
 ('Undeveloped Area', 'Undeveloped area that is treated as a facility for organizational and reporting purposes.');
 
 
--- TO DO: Additional Table Inserts
+-- TO DO: Additional Table Inserts --
 INSERT INTO `Habitats`              ()
 VALUES();
 
