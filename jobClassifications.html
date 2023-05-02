@@ -32,71 +32,60 @@
     </nav>
     <main>
         <section>
-            <h2 id="article1">Parks</h2>
+            <h2 id="article1">Job Classifications</h2>
             <article>
-                <h3>Add New Parks</h3>
+                <h3>Add New Job Classifications</h3>
                 <p>
-                    If you would like to add a new Park entity to the database, enter values for its attributes below
-                    and click the "Add Park" button.
+                    If you would like to add a new Job Classification to the database, enter values for its attributes below
+                    and click the "Add Job" button.
                 </p>
                 <form>
                     <fieldset>
                         <legend>Information</legend>
                         <p>
-                            <div><label for="parkName" class="required">Name</label></div>
+                            <div><label for="jobTitle" class="required">Title</label></div>
                             <input type="text"
-                                    name="parkName" 
-                                    id ="parkName" 
+                                    name="jobTitle" 
+                                    id ="jobTitle" 
                                     required 
                                     autofocus
-                                    placeholder="Ex. Jurassic Park">
+                                    placeholder="Ex. Ranger">
                         </p>
                         <p>
-                            <div><label for="parkLocation" class="required">Location</label></div>
-                            <input type="text"
-                                        name="parkLocation" 
-                                        id ="parkLocation" 
-                                        required 
-                                        placeholder="Ex. Isla Nublar, Costa Rica">
-                        </p>
-                        <p>
-                            <div><label for="parkDescription" class="required">Description</label></div>
+                            <div><label for="facTypeDescription" class="required">Description</label></div>
                             <textarea
-                                    name="parkDescription"
-                                    id ="parkDescription"
+                                    name="facTypeDescription"
+                                    id ="facTypeDescription"
                                     required
                                     cols="40" rows="5" 
                                     min="5" max="255"
-                                    placeholder="Ex. The original prehistoric zoological theme park and preserve. Permanently closed."></textarea>
+                                    placeholder="Ex. Patrols park, assists visitors, and manages wildlife."></textarea>
                         </p>
                     </fieldset>
                 </form>
                 <div>
-                    <p><button>Add Park</button></p>
+                    <p><button>Add Job</button></p>
                 </div>
             </article>
             <article>
                 <h3>Existing Park Data</h3>
                 <p>
-                    The table below shows existing information for Park entities and includes
+                    The table below shows existing information for Job Classification entities and includes
                     buttons to update or delete them.
                 </p>
                 <table>
                     <tr>
                         <th>ID</th>
-                        <th>Name</th>
-                        <th>Location</th>
+                        <th>Title</th>
                         <th>Description</th>
+
                         <th>Update</th>
                         <th>Delete</th>
                     </tr>
                     <tr>
                         <td>Ex. 1</td>
-                        <td>Ex. Jurassic World</td>
-                        <td>Ex. Isla Nublar, Costa Rica</td>
-                        <td>
-                            Ex. World-class prehistoric zoological theme park and preserve.
-                        </td>
+                        <td>Ex. Ranger</td>
+                        <td>Ex. Patrols park, assists visitors, and manages wildlife.</td>
                         <td><button>Update</button></td>
                         <td><button>Delete</button></td>
                     </tr>

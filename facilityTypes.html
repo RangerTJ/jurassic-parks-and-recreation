@@ -32,71 +32,60 @@
     </nav>
     <main>
         <section>
-            <h2 id="article1">Parks</h2>
+            <h2 id="article1">Facility Types</h2>
             <article>
-                <h3>Add New Parks</h3>
+                <h3>Add New Facility Types</h3>
                 <p>
-                    If you would like to add a new Park entity to the database, enter values for its attributes below
-                    and click the "Add Park" button.
+                    If you would like to add a new Facility Type to the database, enter values for its attributes below
+                    and click the "Add Type" button.
                 </p>
                 <form>
                     <fieldset>
                         <legend>Information</legend>
                         <p>
-                            <div><label for="parkName" class="required">Name</label></div>
+                            <div><label for="facTypeName" class="required">Name</label></div>
                             <input type="text"
-                                    name="parkName" 
-                                    id ="parkName" 
+                                    name="facTypeName" 
+                                    id ="facTypeName" 
                                     required 
                                     autofocus
-                                    placeholder="Ex. Jurassic Park">
+                                    placeholder="Ex. Aquatic Enclosure">
                         </p>
                         <p>
-                            <div><label for="parkLocation" class="required">Location</label></div>
-                            <input type="text"
-                                        name="parkLocation" 
-                                        id ="parkLocation" 
-                                        required 
-                                        placeholder="Ex. Isla Nublar, Costa Rica">
-                        </p>
-                        <p>
-                            <div><label for="parkDescription" class="required">Description</label></div>
+                            <div><label for="facTypeDescription" class="required">Description</label></div>
                             <textarea
-                                    name="parkDescription"
-                                    id ="parkDescription"
+                                    name="facTypeDescription"
+                                    id ="facTypeDescription"
                                     required
                                     cols="40" rows="5" 
                                     min="5" max="255"
-                                    placeholder="Ex. The original prehistoric zoological theme park and preserve. Permanently closed."></textarea>
+                                    placeholder="Ex. Enclosure for aquatic marine reptiles."></textarea>
                         </p>
                     </fieldset>
                 </form>
                 <div>
-                    <p><button>Add Park</button></p>
+                    <p><button>Add Type</button></p>
                 </div>
             </article>
             <article>
                 <h3>Existing Park Data</h3>
                 <p>
-                    The table below shows existing information for Park entities and includes
+                    The table below shows existing information for Facility Type entities and includes
                     buttons to update or delete them.
                 </p>
                 <table>
                     <tr>
                         <th>ID</th>
                         <th>Name</th>
-                        <th>Location</th>
                         <th>Description</th>
+
                         <th>Update</th>
                         <th>Delete</th>
                     </tr>
                     <tr>
                         <td>Ex. 1</td>
-                        <td>Ex. Jurassic World</td>
-                        <td>Ex. Isla Nublar, Costa Rica</td>
-                        <td>
-                            Ex. World-class prehistoric zoological theme park and preserve.
-                        </td>
+                        <td>Ex. General Structure</td>
+                        <td>Ex. General facility intended for a variety of human uses.</td>
                         <td><button>Update</button></td>
                         <td><button>Delete</button></td>
                     </tr>
