@@ -246,7 +246,17 @@ specialized enclosure for short-term viewing of a showcase asset."),
 
 (3, 2, 2, 'Mosasaur Lagoon', 'Salt-water tank for the largest aquatic biological assets at Jurassic World.', 
 'Adjacent to main street, down main path from the Visitor Center.', 1, 10, NULL, "Largest and most secure salt-water viewing tank in Jurassic World. 
-Viewing facilities are adjacent.");
+Viewing facilities are adjacent."),
+
+(1, 2, 4, 'Redwood Retreat', 'A facility designed to showcase the biodiversity and beauty of ancient redwood forests.',
+'North end of the park, surrounded by existing redwood forest.', 1, 10, NULL, "Redwood trees are delicate and should not be disturbed.
+The facility is designed in a way to minimize the impact on the existing ecosystem. Visitors must stay on designated paths to prevent
+damage to the forest floor."),
+
+(1, 2, 5, 'Swamp Explorer', 'A facility designed to showcase the unique ecosystems and biodiversity of Jurassic swamps.',
+'Southern end of the park, adjacent to a large body of water.', 1, 10, NULL, "Swamps can be dangerous and difficult to navigate.
+Visitors must stay on designated paths to prevent injury or getting lost. The facility is designed to withstand potential flooding and
+other natural hazards commonly found in swamp environments.");
 
 
 INSERT INTO `Employees`             (idJobClassification, firstName, lastName, hourlyWage, employeePhone, employeeEmail,
@@ -305,7 +315,6 @@ VALUES
   ('Jurassic Swamp - Small', 'Jurassic swamps were wetland habitats characterized by an abundance of water and lush vegetation, supporting a diverse range of dinosaur species. These habitats provided ideal conditions for semi-aquatic dinosaurs, like Spinosaurus, and attracted other dinosaur species who relied on the water and resources found in swamps.', 1);
 
 
--- TO DO: Additional Table Inserts --
 INSERT INTO `BiologicalAssets`      (idSpecies, idFacility, nickname)
 VALUES
 (1, 1, 'Alpha'),
@@ -320,9 +329,9 @@ VALUES
 (4, 2, 'Kappa'),
 (4, 2, 'Lambda'),
 (2, 4, 'Mu'),
-(1, 4, 'Nu'),
-(4, 3, 'Xi'),
-(1, 2, 'Omicron');
+(1, 5, 'Nu'),
+(4, 5, 'Xi'),
+(1, 5, 'Omicron');
 
 
 INSERT INTO `Species`               (idDiet, idHabitat, speciesName, speciesDescription, threatLevel, speciesPhoto)
@@ -342,9 +351,6 @@ VALUES
 (1, 5, 'Diplocaulus', 'A prehistoric amphibian with a distinctive boomerang-shaped skull. Likely a carnivorous ambush predator.', 4, NULL),
 (4, 5, 'Metriorhynchus', 'A marine crocodile-like reptile, fed primarily on fish and other small marine creatures.', 5, NULL),
 (1, 5, 'Eustreptospondylus', 'A medium-sized theropod dinosaur, it was carnivorous, bipedal, and had a stiffened tail.', 7, NULL);
-
-
-
 
 
 INSERT INTO `Diets`                 (dietName, dietDescription, dietIcon)
