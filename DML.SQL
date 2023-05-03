@@ -88,7 +88,7 @@ ORDER BY idEmployee ASC;
 
 -- SELECT TasksAssigned (Bio Asset ID'd by displaying actual asset ID# and Species, since may not have a nickname)
 SELECT  TasksAssigned.idTaskAssigned, Facilities.facilityName, BiologicalAssets.idBiologicalAsset, Species.speciesName,
-        TasksAssigned.taskDescription, TasksAssigned.taskStart, TasksAssigned.taskEnd, TasksAssigned.taskIsComplete
+        TasksAssigned.taskDescription, TasksAssigned.taskStart, TasksAssigned.taskEnd
 FROM TasksAssigned
 -- Need to join TasksAssigned -> Facility -> Bio Asset -> Species
 JOIN Facilities ON TasksAssigned.idFacility = Facilities.idFacility
@@ -119,7 +119,7 @@ ORDER BY EmployeeTasks.idEmployeeTask ASC;
 -- idTaskAssigned will be clear to the user who created a given task, as it will be provided to them upon entry of their
 -- task by the database website UI.
 UPDATE TasksAssigned
-SET taskEnd = NULL, taskIsComplete = 0
+SET taskEnd = NULL
 WHERE idTaskAssigned = 1
 
 -- ----------------
