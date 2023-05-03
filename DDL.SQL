@@ -175,7 +175,6 @@ CREATE OR REPLACE TABLE `TasksAssigned` (
   `taskDescription`     VARCHAR(8000) NOT NULL,
   `taskStart`           DATETIME NOT NULL,
   `taskEnd`             DATETIME NULL,
-  `taskIsComplete`      TINYINT(1) NOT NULL,
   PRIMARY KEY (`idTaskAssigned`),
   CONSTRAINT `fk_Tasks_Facilities1`
     FOREIGN KEY (`idFacility`)
@@ -273,12 +272,12 @@ VALUES
 -- Note: Transport tasks are generated for the facility where the transport operation begins.
 -- Datetime Format: 'YYYY-MM-DD HH:MI:SS.FFFFFFF' / Date is: YYYYMMDD
 -- May want to switch datetime to date for maintainability
-INSERT INTO `TasksAssigned`         (idFacility, idBiologicalAsset, taskDescription, taskStart, taskEnd, taskIsComplete)
+INSERT INTO `TasksAssigned`         (idFacility, idBiologicalAsset, taskDescription, taskStart, taskEnd)
 VALUES
-(1, 1, 'Sedate and transport asset to its new enclosure.', '2023-03-27', '2023-04-28', 1),
-(2, NULL, 'FY2023 - Daily Visitor Center Cleaning', '2022-10-01', NULL, 0),
-(3, 2, 'Remove broken tooth from showcase asset at Jurassic Stadium.', '2023-03-01', '2023-03-30', 1),
-(4, NULL, 'Repair leak in tank.', '2023-04-28', NULL, 0);
+(1, 1, 'Sedate and transport asset to its new enclosure.', '2023-03-27', '2023-04-28'),
+(2, NULL, 'FY2023 - Daily Visitor Center Cleaning', '2022-10-01', NULL),
+(3, 2, 'Remove broken tooth from showcase asset at Jurassic Stadium.', '2023-03-01', '2023-03-30'),
+(4, NULL, 'Repair leak in tank.', '2023-04-28', NULL);
 
 
 INSERT INTO `EmployeeTasks`         (idTaskAssigned, idEmployee, taskHoursWorked, empTaskCost, empTaskStart, empTaskEnd)
