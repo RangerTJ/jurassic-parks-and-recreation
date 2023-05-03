@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 02, 2023 at 04:32 PM
+-- Generation Time: May 03, 2023 at 01:55 PM
 -- Server version: 10.6.12-MariaDB-log
 -- PHP Version: 8.2.4
 
@@ -40,20 +40,21 @@ CREATE TABLE `BiologicalAssets` (
 
 INSERT INTO `BiologicalAssets` (`idBiologicalAsset`, `idSpecies`, `idFacility`, `nickname`) VALUES
 (1, 1, 1, 'Alpha'),
-(2, 1, 4, 'Beta'),
-(3, 2, 3, 'Gamma'),
-(4, 2, 1, 'Delta'),
-(5, 2, 1, 'Epsilon'),
-(6, 4, 2, 'Zeta'),
-(7, 1, 3, 'Eta'),
-(8, 2, 4, 'Theta'),
-(9, 2, 3, 'Iota'),
-(10, 4, 2, 'Kappa'),
-(11, 4, 2, 'Lambda'),
-(12, 2, 4, 'Mu'),
-(13, 1, 4, 'Nu'),
-(14, 4, 3, 'Xi'),
-(15, 1, 2, 'Omicron');
+(2, 2, 4, 'Beta'),
+(3, 3, 3, 'Gamma'),
+(4, 4, 1, 'Delta'),
+(5, 5, 1, 'Epsilon'),
+(6, 6, 2, 'Zeta'),
+(7, 7, 3, 'Eta'),
+(8, 8, 4, 'Theta'),
+(9, 9, 3, 'Iota'),
+(10, 10, 2, 'Kappa'),
+(11, 11, 2, 'Lambda'),
+(12, 12, 4, 'Mu'),
+(13, 13, 5, 'Nu'),
+(14, 14, 5, 'Xi'),
+(15, 15, 5, 'Omicron'),
+(16, 1, 1, 'Omega');
 
 -- --------------------------------------------------------
 
@@ -105,7 +106,8 @@ INSERT INTO `Employees` (`idEmployee`, `idJobClassification`, `firstName`, `last
 (1, 4, 'Robert', 'Muldoon', 35.00, '+1-202-555-0144', 'rmuldoon@jw.org', '200', 'Firearm certified.', NULL),
 (2, 3, 'Dennis', 'Nedry', 60.00, '+1-202-555-8073', 'dnedry@jw.org', NULL, 'Debt issues. Monitor behavior.', NULL),
 (3, 2, 'Ralph', 'Wiggum', 0.00, '+1-202-555-1989', 'mefailenglish@hotmail.com', '325', 'Unpaid student intern. \"I\'m in danger!\"', NULL),
-(4, 1, 'Gerry', 'Harding', 40.00, '+1-202-555-1993', 'gharding@jw.org', '501', 'Medical certified.', 'images/staff_test.png');
+(4, 1, 'Gerry', 'Harding', 40.00, '+1-202-555-1993', 'gharding@jw.org', '501', 'Medical certified.', 'images/staff_test.png'),
+(5, 3, 'Michael', 'Backes', 100.00, '+1-202-555-1221', 'mbackes@jw.org', '800', 'Head Honcho.', NULL);
 
 -- --------------------------------------------------------
 
@@ -160,8 +162,10 @@ CREATE TABLE `Facilities` (
 INSERT INTO `Facilities` (`idFacility`, `idPark`, `idFacilityType`, `idHabitat`, `facilityName`, `facilityDescription`, `facilityLocation`, `isEnclosure`, `securityRating`, `facilityPhoto`, `facilityNote`) VALUES
 (1, 2, 5, 1, 'Wild Zone', 'Undeveloped area of Site B where assets can roam free until they need to be collected for transfer to a different facility.', 'All of Sorna outside of the docks and laboratories.', 1, 10, NULL, 'The island\'s natural terrain makes an impassible barrier for most assets to escape, \r\nand heavy-duty fencing/containment covers the gaps and protects other site facilities.'),
 (2, 1, 1, NULL, 'Visitor Center', 'Primary Visitor Center for Jurassic World and general hub for visitor experiences.', 'Central Isla Nublar, near ferry monorail drop-off.', 0, 8, NULL, 'Can double as a shelter location in the event that an asset escapes containment. \r\nDoors and walls able to withstand most assets, but in the event of a category 9 or higher escape, visitors should be guided to the max security shelters.'),
-(3, 3, 2, 2, 'Jurassic Stadium', 'Stadium viewing area for special biological asset exhibitions.', 'Center of Jurassic Park San Diego.', 1, 10, 'images/arena_test.png', 'Both a large-scale visitor viewing area and a \r\nspecialized enclosure for short-term viewing of a showcase asset.'),
-(4, 3, 2, 2, 'Mosasaur Lagoon', 'Salt-water tank for the largest aquatic biological assets at Jurassic World.', 'Adjacent to main street, down main path from the Visitor Center.', 1, 10, NULL, 'Largest and most secure salt-water viewing tank in Jurassic World. \r\nViewing facilities are adjacent.');
+(3, 3, 2, 3, 'Jurassic Stadium', 'Stadium viewing area for special biological asset exhibitions.', 'Center of Jurassic Park San Diego.', 1, 10, 'images/arena_test.png', 'Both a large-scale visitor viewing area and a \r\nspecialized enclosure for short-term viewing of a showcase asset.'),
+(4, 3, 3, 2, 'Mosasaur Lagoon', 'Salt-water tank for the largest aquatic biological assets at Jurassic World.', 'Adjacent to main street, down main path from the Visitor Center.', 1, 10, NULL, 'Largest and most secure salt-water viewing tank in Jurassic World. \r\nViewing facilities are adjacent.'),
+(5, 1, 2, 4, 'Redwood Retreat', 'A facility designed to showcase the biodiversity and beauty of ancient redwood forests.', 'North end of the park, surrounded by existing redwood forest.', 1, 10, NULL, 'Redwood trees are delicate and should not be disturbed.\r\nThe facility is designed in a way to minimize the impact on the existing ecosystem. Visitors must stay on designated paths to prevent\r\ndamage to the forest floor.'),
+(6, 1, 2, 5, 'Swamp Explorer', 'A facility designed to showcase the unique ecosystems and biodiversity of Jurassic swamps.', 'Southern end of the park, adjacent to a large body of water.', 1, 10, NULL, 'Swamps can be dangerous and difficult to navigate.\r\nVisitors must stay on designated paths to prevent injury or getting lost. The facility is designed to withstand potential flooding and\r\nother natural hazards commonly found in swamp environments.');
 
 -- --------------------------------------------------------
 
@@ -289,7 +293,7 @@ INSERT INTO `Species` (`idSpecies`, `idDiet`, `idHabitat`, `speciesName`, `speci
 (12, 2, 4, 'Thescelosaurus', 'A small, bipedal herbivore characterized by its long legs, suggesting it was a fast runner.', 2, NULL),
 (13, 1, 5, 'Diplocaulus', 'A prehistoric amphibian with a distinctive boomerang-shaped skull. Likely a carnivorous ambush predator.', 4, NULL),
 (14, 4, 5, 'Metriorhynchus', 'A marine crocodile-like reptile, fed primarily on fish and other small marine creatures.', 5, NULL),
-(15, 1, 5, 'Eustreptospondylus', 'A medium-sized theropod dinosaur, it was carnivorous, bipedal, and had a stiffened tail.', 6, NULL);
+(15, 1, 5, 'Eustreptospondylus', 'A medium-sized theropod dinosaur, it was carnivorous, bipedal, and had a stiffened tail.', 7, NULL);
 
 -- --------------------------------------------------------
 
@@ -426,7 +430,7 @@ ALTER TABLE `TasksAssigned`
 -- AUTO_INCREMENT for table `BiologicalAssets`
 --
 ALTER TABLE `BiologicalAssets`
-  MODIFY `idBiologicalAsset` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `idBiologicalAsset` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `Diets`
@@ -438,7 +442,7 @@ ALTER TABLE `Diets`
 -- AUTO_INCREMENT for table `Employees`
 --
 ALTER TABLE `Employees`
-  MODIFY `idEmployee` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idEmployee` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `EmployeeTasks`
@@ -450,7 +454,7 @@ ALTER TABLE `EmployeeTasks`
 -- AUTO_INCREMENT for table `Facilities`
 --
 ALTER TABLE `Facilities`
-  MODIFY `idFacility` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idFacility` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `FacilityTypes`

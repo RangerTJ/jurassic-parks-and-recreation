@@ -217,6 +217,7 @@ CREATE OR REPLACE TABLE `EmployeeTasks` (
 -- INSERT INTO table_name (column1, column2, column3, ...)
 -- VALUES (value1, value2, value3, ...);
 -- Note: Turn off FK restrictions before inserting/running script, then turn back on after done
+--
 
 
 INSERT INTO `Parks`                 (parkName, parkDescription, parkLocation)
@@ -244,7 +245,7 @@ Doors and walls able to withstand most assets, but in the event of a category 9 
 'Center of Jurassic Park San Diego.', 1, 10, 'images/arena_test.png', "Both a large-scale visitor viewing area and a 
 specialized enclosure for short-term viewing of a showcase asset."),
 
-(3, 2, 2, 'Mosasaur Lagoon', 'Salt-water tank for the largest aquatic biological assets at Jurassic World.', 
+(3, 3, 2, 'Mosasaur Lagoon', 'Salt-water tank for the largest aquatic biological assets at Jurassic World.', 
 'Adjacent to main street, down main path from the Visitor Center.', 1, 10, NULL, "Largest and most secure salt-water viewing tank in Jurassic World. 
 Viewing facilities are adjacent."),
 
@@ -265,7 +266,8 @@ VALUES
 (4, 'Robert', 'Muldoon', 35.00, '+1-202-555-0144', 'rmuldoon@jw.org', '200', 'Firearm certified.', NULL),
 (3, 'Dennis', 'Nedry', 60.00, '+1-202-555-8073', 'dnedry@jw.org', NULL, 'Debt issues. Monitor behavior.', NULL),
 (2, 'Ralph', 'Wiggum', 0.00, '+1-202-555-1989', 'mefailenglish@hotmail.com', '325', 'Unpaid student intern. "I''m in danger!"', NULL),
-(1, 'Gerry', 'Harding', 40.00, '+1-202-555-1993', 'gharding@jw.org', '501', 'Medical certified.', 'images/staff_test.png');
+(1, 'Gerry', 'Harding', 40.00, '+1-202-555-1993', 'gharding@jw.org', '501', 'Medical certified.', 'images/staff_test.png'),
+(3, 'Michael', 'Backes', 100.00, '+1-202-555-1221', 'mbackes@jw.org', '800', 'Head Honcho.', NULL);
 
 
 -- Note: Transport tasks are generated for the facility where the transport operation begins.
@@ -318,20 +320,21 @@ VALUES
 INSERT INTO `BiologicalAssets`      (idSpecies, idFacility, nickname)
 VALUES
 (1, 1, 'Alpha'),
-(1, 4, 'Beta'),
-(2, 3, 'Gamma'),
-(2, 1, 'Delta'),
-(2, 1, 'Epsilon'),
-(4, 2, 'Zeta'),
-(1, 3, 'Eta'),
-(2, 4, 'Theta'),
-(2, 3, 'Iota'),
-(4, 2, 'Kappa'),
-(4, 2, 'Lambda'),
-(2, 4, 'Mu'),
-(1, 5, 'Nu'),
-(4, 5, 'Xi'),
-(1, 5, 'Omicron');
+(2, 4, 'Beta'),
+(3, 3, 'Gamma'),
+(4, 1, 'Delta'),
+(5, 1, 'Epsilon'),
+(6, 2, 'Zeta'),
+(7, 3, 'Eta'),
+(8, 4, 'Theta'),
+(9, 3, 'Iota'),
+(10, 2, 'Kappa'),
+(11, 2, 'Lambda'),
+(12, 4, 'Mu'),
+(13, 5, 'Nu'),
+(14, 5, 'Xi'),
+(15, 5, 'Omicron'),
+(1, 1, 'Omega');
 
 
 INSERT INTO `Species`               (idDiet, idHabitat, speciesName, speciesDescription, threatLevel, speciesPhoto)
