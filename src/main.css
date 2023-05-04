@@ -31,7 +31,8 @@
     --worldMedBlue: #61b4fc;
     --worldMedBlueClear: #61b4fc9a;
     --worldDeepBlue: #0F284F;
-    --worldDeepBlueClear: #0f284f94;
+    --worldDeepBlueClear: #0f284fec;
+    --worldDeepBlueClearLight: #0f284faf;
     --feralGreen: #3c663e;
 
     /* Fonts */
@@ -110,7 +111,7 @@
 
   nav a:hover {       
     background-color: var(--worldMedBlue);
-    color: var(--worldLightBlue);
+    color: white;
     border: 0ch;
     font-weight: bolder;
     text-decoration: none;
@@ -155,7 +156,7 @@
 
   /* Tables */
   table {
-    background-color: var(--worldDeepBlueClear);
+    background-color: var(--worldDeepBlueClearLight);
     color: var(--worldLightBlue);
     width: 100%;
     text-align: center;
@@ -183,21 +184,20 @@
     color: var(--worldLightBlue);
     background-color: var(--worldDeepBlue);
     border-radius: 5px;
-    /* font-weight: bold; */
     font-family: var(--jpFont);
     font-size:xx-large;
   }
 
   button:hover {
-    background-color: var(--worldMedBlue);
-    /* font-weight: bold; */
-    border-color: var(--worldMedBlueClear);
+    background-color: black;
+    color: white;
+    border-color: yellow;
   }
 
   button:focus {
-    background-color: var(--worldMedBlue);
-    /* font-weight: bold; */
-    border-color: var(--worldLightBlue);
+    background-color: black;
+    color: white;
+    border-color: yellow;
   }
 
   label {
