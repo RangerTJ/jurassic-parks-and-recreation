@@ -1,5 +1,3 @@
-<!-- Citation: Template/head based on starter code from CS290 Projects 1-3 -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,84 +35,35 @@
                 <h3>Add New Biological Assets</h3>
                 <p>
                     If you would like to add a new Biological Assets entity to the database, enter values for its attributes below
-                    and click the "Add Asset" button.
+                    and click the "Add Asset" button. To put it more simply, this is how you create an entry for a dinosaur - or any other 
+                    tracked and managed creature found in one of our parks.
                 </p>
                 <form>
                     <fieldset>
                         <legend>Information</legend>
                         <p>
-                            <div><label for="lastName" class="required">Last Name</label></div>
+                            <div><label for="assetSpecies" class="required">Species</label></div>
                             <input type="text"
-                                        name="lastName" 
-                                        id ="lastName" 
+                                        name="assetSpecies" 
+                                        id ="assetSpecies" 
                                         autofocus
                                         required 
-                                        placeholder="Last Name">
+                                        placeholder="Ex. Apatosauros">
                         </p>
                         <p>
-                            <div><label for="firstName" class="required">First Name</label></div>
+                            <div><label for="assetNickname" class="required">Nickname</label></div>
                             <input type="text"
-                                    name="firstName" 
-                                    id ="firstName" 
+                                        name="assetNickname" 
+                                        id ="assetNickname" 
+                                        placeholder="Ex. Meadow Stomper">
+                        </p>
+                        <p>
+                            <div><label for="assetFacility" class="required">Home Facility</label></div>
+                            <input type="text"
+                                    name="assetFacility" 
+                                    id ="assetFacility" 
                                     required 
-                                    placeholder="First Name">
-                        </p>
-                        <p>
-                            <div><label for="job" class="required">Job</label></div>
-                            <input type="text"
-                                        name="job" 
-                                        id ="job" 
-                                        required 
-                                        placeholder="Ex. Ranger">
-                        </p>
-                        <p>
-                            <div><label for="hourlyWage" class="required">Wage</label></div>
-                            <input type="text"
-                                        name="hourlyWage" 
-                                        id ="hourlyWage" 
-                                        required 
-                                        placeholder="Ex. $30.00">
-                        </p>
-                        <p>
-                            <div><label for="employeePhone" class="required">Phone</label></div>
-                            <input type="text"
-                                        name="employeePhone"
-                                        id ="employeePhone"
-                                        required 
-                                        placeholder="Ex. +1-202-555-5555">
-                        </p>
-                        <p>
-                            <div><label for="employeeEmail" class="required">Email</label></div>
-                            <input type="text"
-                                        name="employeeEmail" 
-                                        id ="employeeEmail" 
-                                        required
-                                        placeholder="Ex. email@address.com">
-                        </p>
-                        <p>
-                            <div><label for="employeeRadio" class="required">Radio</label></div>
-                            <input type="text"
-                                        name="employeeRadio"
-                                        id ="employeeRadio" 
-                                        required 
-                                        placeholder="Ex. 407">
-                        </p>
-                        <!-- Workflow will be upload photo to server first, then select from available here entering filename at creation/update, possibly w/ drop-down menu -->
-                        <p>
-                            <div><label for="employeePhoto" class="required">Photo</label></div>
-                            <input type="text"
-                                        name="employeePhoto"
-                                        id ="employeePhoto"
-                                        placeholder="Ex. images/photo.png">
-                        </p>
-                        <p>
-                            <div><label for="employeeNote" class="required">Notes</label></div>
-                            <textarea
-                                    name="employeeNote"
-                                    id ="employeeNote"
-                                    cols="40" rows="5" 
-                                    min="5" max="255"
-                                    placeholder="Ex. Currently on PIP due performance issues."></textarea>
+                                    placeholder="Ex. Sauropod Pen">
                         </p>
                     </fieldset>
                 </form>
@@ -134,49 +83,24 @@
                 <table>
                     <tr>
                         <th>ID</th>
-                        <th>Last Name</th>
-                        <th>First Name</th>
-                        <th>Job</th>
-                        <th>Wage</th>
-                        <th>Phone</th>
-                        <th>Email</th>
-                        <th>Radio</th>
-                        <th>Photo</th>
-                        <th>Notes</th>
+                        <th>Species</th>
+                        <th>Nickname</th>
+                        <th>Home Facility</th>
 
                         <th>Update</th>
                         <th>Delete</th>
                     </tr>
                     <tr>
                         <td>Ex. 1</td>
-                        <td>Ex. Harding</td>
-                        <td>Ex. Gerry</td>
-                        <td>Ex. Ranger</td>
-                        <td>Ex. 40.00</td>
-                        <td>Ex. +1-555-5554</td>
-                        <td>Ex. gharding@jw.org</td>
-                        <td>Ex. 501</td>
-                        <td><img src="images/staff_test.png"></td>
-                        <td>Ex. Exemplary performance. Due for promotion.</td>
+                        <td>Ex. Tyranosaurus Rex</td>
+                        <td>Ex. Roberta</td>
+                        <td>Ex. Paddock 09</td>
+
 
                         <td><button>Update</button></td>
                         <td><button>Delete</button></td>
                     </tr>
                 </table>
-            </article>
-            <article>
-                <h3>Alternative Design Proposal Musings</h3>
-                <p>
-                    Alternate Solution: Input field for delete based on target criteria (like ID or unique attribute).
-                    Add ID field to add new parks, and branch logic so that if it's NULL, a new one is added, and if it's not
-                    NULL, then create a new one? Having delete be a lookup saves needing deletes for each row. Alternate
-                    update would be update lookup too, but then need new update page for each entity for updating instead of adding.
-                    Would then be add/delete page and a different modify page. Add/delete could be the main page with the report/summary
-                    table of the general entity query. Alternately, could make that a lookup too, instead. Launcher page could be a welcome
-                    and have buttons/inputs/drop-downs that launch the "popular" custom queries. Might be a good idea to use drop downs in place
-                    of inputs when it's by an ID, so the drop-down could display the ID + an additional attribute to clarify what each ID is
-                    (for dinos/tasks and things that don't have unique non-id identifiers).
-                </p>
             </article>
         </section>
     </main>

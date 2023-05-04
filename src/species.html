@@ -1,5 +1,3 @@
-<!-- Citation: Template/head based on starter code from CS290 Projects 1-3 -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -43,31 +41,57 @@
                     <fieldset>
                         <legend>Information</legend>
                         <p>
-                            <div><label for="parkName" class="required">Name</label></div>
+                            <div><label for="speciesName" class="required">Name</label></div>
                             <input type="text"
-                                    name="parkName" 
-                                    id ="parkName" 
+                                    name="speciesName" 
+                                    id ="speciesName" 
                                     required 
                                     autofocus
-                                    placeholder="Ex. Jurassic Park">
+                                    placeholder="Ex. Apatasaurus">
                         </p>
                         <p>
-                            <div><label for="parkLocation" class="required">Location</label></div>
+                            <div><label for="speciesDiet" class="required">Diet</label></div>
                             <input type="text"
-                                        name="parkLocation" 
-                                        id ="parkLocation" 
+                                        name="speciesDiet" 
+                                        id ="speciesDiet" 
                                         required 
-                                        placeholder="Ex. Isla Nublar, Costa Rica">
+                                        placeholder="Ex. Herbivore">
+                        </p>
+
+                        <p>
+                            <div><label for="speciesHabitat" class="required">Habitat</label></div>
+                            <input type="text"
+                                        name="speciesHabitat" 
+                                        id ="speciesHabitat" 
+                                        required 
+                                        placeholder="Ex. Jurassic Swamp - Small">
                         </p>
                         <p>
-                            <div><label for="parkDescription" class="required">Description</label></div>
+                            <div><label for="speciesThreatLevel" class="required">Threat Level</label></div>
+                            <input type="text"
+                                        name="speciesThreatLevel" 
+                                        id ="speciesThreatLevel" 
+                                        required 
+                                        placeholder="Scale of 1 - 10">
+                        </p>
+                        <p>
+                            <div><label for="speciesPhoto" class="required">Photo</label></div>
+                            <input type="text"
+                                        name="speciesPhoto" 
+                                        id ="speciesPhoto" 
+                                        required 
+                                        placeholder="Ex. images/test_photo.png">
+                        </p>
+
+                        <p>
+                            <div><label for="speciesDescription" class="required">Description</label></div>
                             <textarea
-                                    name="parkDescription"
-                                    id ="parkDescription"
+                                    name="speciesDescription"
+                                    id ="speciesDescription"
                                     required
                                     cols="40" rows="5" 
                                     min="5" max="255"
-                                    placeholder="Ex. The original prehistoric zoological theme park and preserve. Permanently closed."></textarea>
+                                    placeholder="Ex. Iconic long-necked sauropod."></textarea>
                         </p>
                     </fieldset>
                 </form>
@@ -85,36 +109,29 @@
                     <tr>
                         <th>ID</th>
                         <th>Name</th>
-                        <th>Location</th>
+                        <th>Diet</th>
+                        <th>Habitat</th>
+                        <th>Threat Level</th>
+                        <th>Photo</th>
                         <th>Description</th>
+
                         <th>Update</th>
                         <th>Delete</th>
                     </tr>
                     <tr>
-                        <td>Ex. 1</td>
-                        <td>Ex. Jurassic World</td>
-                        <td>Ex. Isla Nublar, Costa Rica</td>
-                        <td>
-                            Ex. World-class prehistoric zoological theme park and preserve.
-                        </td>
+                        <td>1</td>
+                        <td>Tyranosaurus Rex</td>
+                        <td>Carnivore</td>
+                        <td>Prehistoric Jungle - Large</td>
+                        <td>10</td>
+                        <td><img src="images/rex_test.png" alt="Staff photo example." style="max-width: 100%"></td>
+                        <td>A large carnivorous dinosaur with powerful jaws and sharp teeth.</td>
+                        
+
                         <td><button>Update</button></td>
                         <td><button>Delete</button></td>
                     </tr>
                 </table>
-            </article>
-            <article>
-                <h3>Alternative Design Proposal Musings</h3>
-                <p>
-                    Alternate Solution: Input field for delete based on target criteria (like ID or unique attribute).
-                    Add ID field to add new parks, and branch logic so that if it's NULL, a new one is added, and if it's not
-                    NULL, then create a new one? Having delete be a lookup saves needing deletes for each row. Alternate
-                    update would be update lookup too, but then need new update page for each entity for updating instead of adding.
-                    Would then be add/delete page and a different modify page. Add/delete could be the main page with the report/summary
-                    table of the general entity query. Alternately, could make that a lookup too, instead. Launcher page could be a welcome
-                    and have buttons/inputs/drop-downs that launch the "popular" custom queries. Might be a good idea to use drop downs in place
-                    of inputs when it's by an ID, so the drop-down could display the ID + an additional attribute to clarify what each ID is
-                    (for dinos/tasks and things that don't have unique non-id identifiers).
-                </p>
             </article>
         </section>
     </main>
