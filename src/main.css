@@ -183,18 +183,20 @@
     color: var(--worldLightBlue);
     background-color: var(--worldDeepBlue);
     border-radius: 5px;
-    font-weight: bold;
+    /* font-weight: bold; */
+    font-family: var(--jpFont);
+    font-size:xx-large;
   }
 
   button:hover {
     background-color: var(--worldMedBlue);
-    font-weight: bold;
+    /* font-weight: bold; */
     border-color: var(--worldMedBlueClear);
   }
 
   button:focus {
     background-color: var(--worldMedBlue);
-    font-weight: bold;
+    /* font-weight: bold; */
     border-color: var(--worldLightBlue);
   }
 
