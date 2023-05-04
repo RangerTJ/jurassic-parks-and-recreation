@@ -37,15 +37,8 @@
 
     /* Fonts */
     --jpFont: 'Jurassic Park', cursive;
-    --titleFont: 'Bungee', cursive;
-    --titleFontInline: 'Bungee Inline', cursive;
-    --titleFontOutline: 'Bungee Outline', cursive;
-    --titleFontHairline: 'Bungee Hairline', cursive;
-    --titleFontAltInline: 'Alumni Sans Inline One', cursive;
-    --titleFontAltOutline: 'Tourney', cursive;
     --barcodeStyleFont: 'Libre Barcode 39 Text', cursive;
-    --roadSignFont: 'Overpass Mono', monospace;
-    --techStyleFont: 'Zen Dots', cursive; 
+    --techStyleFont: 'Zen Dots', cursive;
     --normalText: 'Overpass Mono', monospace;}
 
   /* Basics */
@@ -96,31 +89,33 @@
   nav a {
     background-color: var(--worldDeepBlue);
     color: var(--worldLightBlue);
-    border: 0ch;
+    border: solid var(--worldDeepBlue);
     padding-left: 1%;
     padding-right: 1%;
-    font-size: normal;
+    font-size: 35px;
     font-weight: normal;
     text-decoration: none;
     display:flex;
     justify-content: center;
     flex-grow: 1;
-    line-height: 1.75;
+    line-height: 1.00;
+    font-family: var(--jpFont);
     margin: 0%;
 }
 
   nav a:hover {       
-    background-color: var(--worldMedBlue);
+    background-color: black;
     color: white;
-    border: 0ch;
-    font-weight: bolder;
+    border: solid yellow;
     text-decoration: none;
-    text-shadow: 1px 1px 4px black;
 }
     
   nav a:focus {
-    background-color: var(--worldMedBlue);
-    outline: none;}
+    background-color: black;
+    color: white;
+    border: solid yellow;
+    outline: none;
+  }
   
   
   /* Paragraphs and Headers */
@@ -233,10 +228,10 @@
 /* Custom Elements */
 .headerP {
     margin-top: -2%;
-    margin-bottom: 0;
+    margin-bottom: 5px;
     padding-top: 0px;
-    font-family: var(--jpFont);
-    font-size: 200%;
+    font-family: var(--normalText);
+    font-size: 180%;
 }
 
   /* Stuff down here also copy/pasted from CS290 */
