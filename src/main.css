@@ -183,6 +183,7 @@
     color: var(--worldLightBlue);
     background-color: var(--worldDeepBlue);
     border-radius: 5px;
+    font-weight: bold;
   }
 
   button:hover {
