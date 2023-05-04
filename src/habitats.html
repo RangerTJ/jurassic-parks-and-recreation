@@ -32,104 +32,71 @@
     </nav>
     <main>
         <section>
-            <h2>Employee Tasks</h2>
+            <h2>Habitats</h2>
             <article>
-                <h3>Add New Employee Task</h3>
+                <h3>Add New Habitats</h3>
                 <p>
-                    If you would like to add a new Employee Task to the database. Enter values for its attributes below
-                    and click the "Add Task" button. Employee tasks are entities that handle the many-to-many relationship between
-                    a given Employee and an open Task Assignment. Each entity represents a chunk of work contributed by a specific
-                    employee towards the completion of the matching task. Many employees can contribute to the same task, and a single
-                    employee can contribute to the same task multiple times (for different hourly contributions at different time intervals).
+                    If you would like to add a new Habitats entity to the database, enter values for its attributes below
+                    and click the "Add Habitat" button.
                 </p>
                 <form>
                     <fieldset>
                         <legend>Information</legend>
                         <p>
-                            <div><label for="taskAssigned" class="required">Task</label></div>
+                            <div><label for="parkName" class="required">Name</label></div>
                             <input type="text"
-                                        name="taskAssigned" 
-                                        id ="taskAssigned" 
-                                        required 
-                                        placeholder="#Task ID - Description">
+                                    name="parkName" 
+                                    id ="parkName" 
+                                    required 
+                                    autofocus
+                                    placeholder="Ex. Jurassic Park">
                         </p>
                         <p>
-                            <div><label for="employee" class="required">Employee</label></div>
+                            <div><label for="parkLocation" class="required">Location</label></div>
                             <input type="text"
-                                        name="employee"
-                                        id ="employee"
+                                        name="parkLocation" 
+                                        id ="parkLocation" 
                                         required 
-                                        placeholder="#ID - Firstname Lastname">
+                                        placeholder="Ex. Isla Nublar, Costa Rica">
                         </p>
                         <p>
-                            <div><label for="workHours" class="required">Hours Worked</label></div>
-                            <input type="text"
-                                        name="workHours" 
-                                        id ="workHours" 
-                                        required
-                                        placeholder="Ex. 40">
-                        </p>
-                        <p>
-                            <div><label for="workCost" class="required">Cost</label></div>
-                            <input type="text"
-                                        name="workCost"
-                                        id ="workCost" 
-                                        required 
-                                        placeholder="Ex. 5000.00">
-                        </p>
-                        <p>
-                            <div><label for="workStart" class="required">Start</label></div>
-                            <input type="text"
-                                        name="workStart"
-                                        id ="workStart" 
-                                        required 
-                                        placeholder="Ex. 4/6/2023">
-                        </p>
-                        <p>
-                            <div><label for="workEnd" class="required">End</label></div>
-                            <input type="text"
-                                        name="workEnd"
-                                        id ="workEnd" 
-                                        required 
-                                        placeholder="Ex. 4/7/2023">
+                            <div><label for="parkDescription" class="required">Description</label></div>
+                            <textarea
+                                    name="parkDescription"
+                                    id ="parkDescription"
+                                    required
+                                    cols="40" rows="5" 
+                                    min="5" max="255"
+                                    placeholder="Ex. The original prehistoric zoological theme park and preserve. Permanently closed."></textarea>
                         </p>
                     </fieldset>
                 </form>
                 <div>
-                    <p><button>Add Task</button></p>
+                    <p><button>Add Habitat</button></p>
                 </div>
             </article>
-
             <article>
                 <h3>Existing Data</h3>
                 <p>
-                    The table below shows existing information for Employee Task entities and includes
+                    The table below shows existing information for Habitat entities and includes
                     buttons to update or delete them.
                 </p>
                 <table>
                     <tr>
                         <th>ID</th>
-                        <!-- Composite of TaskID + Description? -->
-                        <th>Task Assigned</th>
-                        <!-- Composite of EmpID + Full Name? -->
-                        <th>Employee</th>  
-                        <th>Hours Worked</th>
-                        <th>Total Cost</th>
-                        <th>Start</th>
-                        <th>End</th>
-
+                        <th>Name</th>
+                        <th>Location</th>
+                        <th>Description</th>
                         <th>Update</th>
                         <th>Delete</th>
                     </tr>
                     <tr>
                         <td>Ex. 1</td>
-                        <td>Ex. #1 - Fix Doors to Visitor Center</td>
-                        <td>Ex. #3 - Ralph Wiggum</td>
-                        <td>Ex. 5</td>
-                        <td>Ex. 200.00</td>
-                        <td>Ex. 3/1/2023</td>
-                        <td>Ex. 3/1/2023</td>
-
+                        <td>Ex. Jurassic World</td>
+                        <td>Ex. Isla Nublar, Costa Rica</td>
+                        <td>
+                            Ex. World-class prehistoric zoological theme park and preserve.
+                        </td>
                         <td><button>Update</button></td>
                         <td><button>Delete</button></td>
                     </tr>
