@@ -29,7 +29,8 @@
     --worldLightBlue: #AFE9EE;
     --worldLightBlueClear: #afe9ee47;
     --worldMedBlue: #61b4fc;
-    --worldMedBlueClear: #61b4fc9a;
+    --worldMedBlueClear: #61b4fcc0;
+    --worldMedBlueClearBackup: #61b4fc9a;
     --worldDeepBlue: #0F284F;
     --worldDeepBlueClear: #0f284fec;
     --worldDeepBlueClearLight: #0f284faf;
@@ -49,9 +50,10 @@
     background-image:url(images/jurassic_world_san_diego.jpg);
     color: var(--worldDeepBlue);
     font-family: var(--normalText);
-    max-width: 80%;
+    max-width: 85%;
     margin: auto;
-    padding: 1%;}
+    padding: 1%;
+  }
   
   header {
     background-color: black;
@@ -64,7 +66,8 @@
 
   main {
     background-color: var(--worldMedBlueClear);
-    padding-bottom: 1%;}
+    padding-bottom: 1%;
+  }
 
   article {
     margin-left: 2%;
@@ -106,14 +109,14 @@
   nav a:hover {       
     background-color: black;
     color: white;
-    border: solid yellow;
+    border: solid gold;
     text-decoration: none;
 }
     
   nav a:focus {
     background-color: black;
     color: white;
-    border: solid yellow;
+    border: solid gold;
     outline: none;
   }
   
@@ -186,13 +189,13 @@
   button:hover {
     background-color: black;
     color: white;
-    border-color: yellow;
+    border-color: gold;
   }
 
   button:focus {
     background-color: black;
     color: white;
-    border-color: yellow;
+    border-color: gold;
   }
 
   label {

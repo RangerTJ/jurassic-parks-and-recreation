@@ -213,6 +213,7 @@ INSERT INTO Habitats ()
 VALUES ();
 
 
+-- Nickname unique, or make species/nickname combo unique, then lookup by species/nickname? How to code that?
 INSERT INTO BiologicalAssets ()
 VALUES ();
 
