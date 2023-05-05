@@ -81,7 +81,7 @@ ORDER BY lastName ASC;
 -- the relevant task ID's, vs. a drop down (because these are gonna get unweildingly large pretty fast)
 
 -- -----------------
--- 11x SUMMARY SELECTS TO POPULATE DISPLAY TABLES
+-- 11x SUMMARY QUERIES TO POPULATE PAGE TABLES
 -- -----------------
 
 -- Select Parks
@@ -160,17 +160,20 @@ ORDER BY EmployeeTasks.idEmployeeTask ASC;
 
 
 -- ----------------
--- 11x INSERTS HERE - ADD NEW BUTTON SQL SCRIPTS
+-- 11x "ADD NEW" SQL SCRIPTS
 -- ----------------
 
 -- TO DO
 -- Ex. from ED: -- add a new character
 -- INSERT INTO bsg_people (fname, lname, homeworld, age) VALUES (:fnameInput, :lnameInput, :homeworld_id_from_dropdown_Input, :ageInput)
 
+-- QUESTION: Can we populate each option of drop-down with SQL query, but use only the "ID" value from the query as the input value sent on?
+
 INSERT INTO Parks (parkName, parkDescription, parkLocation)
 VALUES (:parkName_input, :parkDescription_input, :parkLocation_input);
 
 
+-- PLACEHOLDER CODE - NEEDS SUBQUERIES INSERTED TO GET ID's FROM INPUTS (drop-down selections of unique values connected to FK)
 INSERT INTO Facilities              (idPark, idFacilityType, idHabitat, facilityName, facilityDescription, 
                                     facilityLocation, securityRating, facilityPhoto, facilityNote)
 VALUES  (SELECT(QUERY FOR PARK ID FROM inputParkName), SELECT(QUERY FOR FACILITY TYPE ID FROM inputTypeName), SELECT(QUERY FOR Habitat ID FROM inputHabName),
@@ -178,24 +181,32 @@ VALUES  (SELECT(QUERY FOR PARK ID FROM inputParkName), SELECT(QUERY FOR FACILITY
         :facilityDescription_input);
 
 
-INSERT INTO FacilityTypes ()
-VALUES ();
+INSERT INTO FacilityTypes           (facTypeName, facTypeDescription)
+VALUES  (:facTypeName_input, :facTypeDescription_input);
 
 
-INSERT INTO TasksAssigned ()
-VALUES ();
+-- PLACEHOLDER CODE - NEEDS SUBQUERIES INSERTED TO GET ID's FROM INPUTS (drop-down selections of unique values connected to FK)
+-- Nickname as "informal" selector for now... unsure of better solution. Combo of species + ID? Not sure how to SQL code that.
+-- OR just use actual asset ID instead and have an asset lookup to refer to, to determine which asset yo want to pick?
+-- Or drop down menu shows all this info, but only selects the related ID somehow (I can't remember if dropdown can send different data from what's selected)?
+INSERT INTO TasksAssigned           (idFacility, idBiologicalAsset, taskDescription, taskStart, taskEnd)
+VALUES  (SELECT(QUERY FOR FACILITY ID FROM NAME INPUT), SELECT(QUERY FOR BIOASSET ID FROM BIONICKNAME INPUT), 
+        :taskDescription_input, :taskStart_input, :taskEnd_input);
 
 
 INSERT INTO EmployeeTasks ()
 VALUES ();
 
 
-INSERT INTO Employees ()
-VALUES ();
+-- PLACEHOLDER CODE - NEEDS SUBQUERIES INSERTED TO GET ID's FROM INPUTS (drop-down selections of unique values connected to FK)
+INSERT INTO Employees               (idJobClassification, firstName, lastName, hourlyWage, employeePhone, employeeEmail,
+                                    employeeRadio, employeeNote, employeePhoto)
+VALUES  (SELECT(QUERY FOR JOB ID FROM JOBNAME INPUT), :firstName_input, :lastName_input, :hourlyWage_input, :employeePhone_input,
+        :employeeEmail_input, :employeeRadio_input, :employeeNote_input, :employeePhoto_input);
 
 
-INSERT INTO JobClassifications ()
-VALUES ();
+INSERT INTO JobClassifications      (jobTitle, jobDescription)
+VALUES  (:jobTitle_input, :jobDescription_input);
 
 
 INSERT INTO Habitats ()
@@ -206,12 +217,14 @@ INSERT INTO BiologicalAssets ()
 VALUES ();
 
 
-INSERT INTO Species ()
-VALUES ();
+-- PLACEHOLDER CODE - NEEDS SUBQUERIES INSERTED TO GET ID's FROM INPUTS (drop-down selections of unique values connected to FK)
+INSERT INTO Species                 (idDiet, idHabitat, speciesName, speciesDescription, threatLevel, speciesPhoto)
+VALUES  (SELECT(QUERY FOR DIET ID FROM inputDietName), SELECT(QUERY FOR HABITAT ID FROM inputHabitatName), 
+        :speciesName_input, :speciesDescription_input, :threatLevel_input, :speciesPhoto_input);
 
 
-INSERT INTO Diets ()
-VALUES ();
+INSERT INTO Diets                   (dietName, dietDescription, dietIcon)
+VALUES  (:dietName_input, :dietDescription_input, :dietIcon_input);
 
 -- ----------------
 -- 1x UPDATE (NULLable - suggest do this for a dino related to task or facility to habitat since they can already be null)
@@ -244,6 +257,12 @@ WHERE idTaskAssigned = :taskAssigned_input;
 -- Probably want a query to update other stuff too, or maybe just turn the above into an update anything query?
 -- Ex. from ED -- update a character's data based on submission of the Update Character form 
 -- UPDATE bsg_people SET fname = :fnameInput, lname= :lnameInput, homeworld = :homeworld_id_from_dropdown_Input, age= :ageInput WHERE id= :character_ID_from_the_update_form
+
+-- Example from exploration: https://canvas.oregonstate.edu/courses/1914747/pages/exploration-database-application-design?module_item_id=23040585
+-- UPDATE bsg_people 
+--    SET fname = :fnameInput, lname= :lnameInput, 
+--        homeworld = :homeworld_id_from_dropdown_Input, age= :ageInput 
+--    WHERE id= :character_ID_from_the_update_form
 
 
 -- ----------------
