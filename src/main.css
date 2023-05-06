@@ -221,15 +221,19 @@
   }
 
   input {
-    background-color: var(--worldLightBlue);
-    color: var(--worldDeepBlue);
+    color: var(--worldLightBlue);
+    background-color: var(--worldDeepBlue);
     /* width: 90%; */
   }
 
   textarea {
-    background-color: var(--worldLightBlue);
-    color: var(--worldDeepBlue);
+    color: var(--worldLightBlue);
+    background-color: var(--worldDeepBlue);
     /* width: 90%; */
+  }
+
+  ::placeholder {
+    color: var(--worldMedBlueClear);
   }
 
 
