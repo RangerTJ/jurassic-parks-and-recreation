@@ -27,6 +27,14 @@
 --  5 SELECTs, 5 INSERTs, 1 UPDATE (1 NULLable relationship), 1 DELETE (M:M), and 1 Dynamic drop-down/Search for a total of 14 functions.
 
 
+-- TODO: 
+--      Menu Selectors: Done (may need to revise when we see them in action / depending on how the queries work with JS/React)
+--      Select:         Species, BioAssets
+--      Add:            Habitat, BioAssets
+--      Update:         Everything except Parks
+--      Delete:         Everything except TasksAssigned
+--      Custom:         EmployeeTasks lookup for an employee, TaskAssigned Lookup for a facility sorted by date
+
 -- -----------------
 -- Functional Queries to Populate Drop-downs, etc.
 -- -----------------
@@ -79,6 +87,50 @@ ORDER BY lastName ASC;
 
 -- Question/Note: It may make more sense to do TasksAssigned and EmployeeTasks as direct inputs where we assume staff responsible have knowledge of
 -- the relevant task ID's, vs. a drop down (because these are gonna get unweildingly large pretty fast)
+
+-- ----------------
+-- Required Subqueries - For Easy Copy/Pasting as needed in larger queries
+-- ID from name is needed for inputs to add or update entities.
+-- Name from ID is used to populate update-form values and summary tables.
+-- ----------------
+
+
+-- Get ParkID from name and vice versa
+(SELECT idPark FROM Parks WHERE parkName = :parkName_input)
+(SELECT parkName FROM Parks WHERE idPark = :idPark_input)
+
+-- FacilityTypes id from name and vice versa
+(SELECT idFacilityType FROM FacilityTypes WHERE facTypeName = :facTypeName_input)
+(SELECT facTypeName FROM FacilityTypes WHERE idFacilityType = :idFacilityType_input)
+
+-- Facility ID from name and vice versa
+(SELECT idFacility FROM Facilities WHERE facilityName = :facilityName_input)
+(SELECT facilityName FROM Facilities WHERE idFacility = :idFacility_input)
+
+-- Bio Assets ID from nickname and vice versa (possibly temp. - unless we want to think of a different way to select them that's unique?)
+(SELECT idBiologicalAsset FROM BiologicalAssets WHERE nickname = :nickname_input)
+(SELECT nickname FROM BiologicalAssets WHERE idBiologicalAsset = :idBiologicalAsset_input)
+
+-- Get HabitatID from name and vice versa
+(SELECT idHabitat FROM Habitat WHERE habitatName = :habitatName_input)
+(SELECT habitatName FROM Habitat WHERE idHabitat = :idHabitat_input)
+
+-- Get DietID from diet name and vice versa
+(SELECT idDiet FROM Diets WHERE dietName = :dietName_input)
+(SELECT dietName FROM Diets WHERE idDiet = :idDiet_input)
+
+-- Get SpeciesID from species name and vice versa
+(SELECT idSpecies from Species WHERE speciesName = :speciesName_input)
+(SELECT idSpecies from Species WHERE speciesName = :speciesName_input)
+
+-- Get employeeID from username and vice versa
+(SELECT idEmployee FROM Employees WHERE employeeUsername = :employeeUsername_input)
+(SELECT employeeUsername FROM Employees WHERE idEmployee = :idEmployee_input)
+
+-- Get jobID from title and vice versa
+(SELECT idJobClassification FROM JobClassifications WHERE jobTitle = :jobTitle_input)
+(SELECT jobTitle FROM JobClassifications WHERE idJobClassification = :idJobClassification_input)
+
 
 -- -----------------
 -- 11x SUMMARY QUERIES TO POPULATE PAGE TABLES
@@ -160,76 +212,112 @@ ORDER BY EmployeeTasks.idEmployeeTask ASC;
 
 
 -- ----------------
--- 11x "ADD NEW" SQL SCRIPTS
+-- 11x "ADD NEW" SQL SCRIPTS - Use :browser_inputs to get data for insert queries
+-- Open Question: Is it possible to display multiple fields in drop-down while only sending the input from one?
+-- (i.e. show ID + name, but only send ID to SQL) - would eliminate most subqueries if so
 -- ----------------
 
--- TO DO
--- Ex. from ED: -- add a new character
--- INSERT INTO bsg_people (fname, lname, homeworld, age) VALUES (:fnameInput, :lnameInput, :homeworld_id_from_dropdown_Input, :ageInput)
 
--- QUESTION: Can we populate each option of drop-down with SQL query, but use only the "ID" value from the query as the input value sent on?
-
-INSERT INTO Parks (parkName, parkDescription, parkLocation)
-VALUES (:parkName_input, :parkDescription_input, :parkLocation_input);
+-- Add new Park to the system
+INSERT INTO Par                 (parkName, parkDescription, parkLocation)
+VALUES  (
+                :parkName_input, :parkDescription_input, :parkLocation_input
+        );
 
 
--- PLACEHOLDER CODE - NEEDS SUBQUERIES INSERTED TO GET ID's FROM INPUTS (drop-down selections of unique values connected to FK)
+-- Add a new facility using populated dropdowns of easier to ID unique names for input values
 INSERT INTO Facilities              (idPark, idFacilityType, idHabitat, facilityName, facilityDescription, 
                                     facilityLocation, securityRating, facilityPhoto, facilityNote)
-VALUES  (SELECT(QUERY FOR PARK ID FROM inputParkName), SELECT(QUERY FOR FACILITY TYPE ID FROM inputTypeName), SELECT(QUERY FOR Habitat ID FROM inputHabName),
-        :facilityName_input, :facilityDescription_input, :facilityLocation_input, :securityRating_input, :facilityPhoto_input, 
-        :facilityDescription_input);
+VALUES  (       
+                (SELECT idPark FROM Parks WHERE parkName = :parkName_input), 
+                (SELECT idFacilityType FROM FacilityTypes WHERE facTypeName = :facTypeName_input), 
+                (SELECT idHabitat FROM Habitat WHERE habitatName = :habitatName_input), 
+                :facilityName_input, :facilityDescription_input, :facilityLocation_input, 
+                :securityRating_input, :facilityPhoto_input, :facilityDescription_input
+        );
 
 
-INSERT INTO FacilityTypes           (facTypeName, facTypeDescription)
+-- Add a new facility type
+INSERT INTO FacilityTypes       (facTypeName, facTypeDescription)
 VALUES  (:facTypeName_input, :facTypeDescription_input);
 
 
--- PLACEHOLDER CODE - NEEDS SUBQUERIES INSERTED TO GET ID's FROM INPUTS (drop-down selections of unique values connected to FK)
--- Nickname as "informal" selector for now... unsure of better solution. Combo of species + ID? Not sure how to SQL code that.
--- OR just use actual asset ID instead and have an asset lookup to refer to, to determine which asset yo want to pick?
--- Or drop down menu shows all this info, but only selects the related ID somehow (I can't remember if dropdown can send different data from what's selected)?
-INSERT INTO TasksAssigned           (idFacility, idBiologicalAsset, taskDescription, taskStart, taskEnd)
-VALUES  (SELECT(QUERY FOR FACILITY ID FROM NAME INPUT), SELECT(QUERY FOR BIOASSET ID FROM BIONICKNAME INPUT), 
-        :taskDescription_input, :taskStart_input, :taskEnd_input);
+-- User adds a TaskAssigned, optionally selecting a bio asset based on nickname (may look into alternate selectors for asset)
+-- Maybe use asset ID directly for INSERT and have the drop-down display other info to visually ID target critter, but only send the related ID... (I think this is possible?)
+INSERT INTO TasksAssigned       (idFacility, idBiologicalAsset, taskDescription, taskStart, taskEnd)
+VALUES  (       
+                (SELECT idFacility FROM Facilities WHERE facilityName = :facilityName_input),
+                (SELECT idBiologicalAsset FROM BiologicalAssets WHERE nickname = :nickname_input), 
+                :taskDescription_input, :taskStart_input, :taskEnd_input
+        );
 
 
-INSERT INTO EmployeeTasks ()
+-- Creates record of employee's work on a task by referencing the issued task# and the employee's unique username
+-- In the event that the task needs to be looked up, a query can lookup tasks and their descriptions for a specific facility
+-- to help find which task they meant to contribute towards (using facility/dates and optionally tasks the employee has worked on before to find the #) 
+-- Otherwise, we'll need to add a unique non-ID identifier for TasksAssigned, maybe give it a "short name" and come up with a naming policy to avoid issues 
+-- with stuff. Maybe auto-generate it in the web UI as a combo of Facility and datetime or something?
+INSERT INTO EmployeeTasks       (idTaskAssigned, idEmployee, taskHoursWorked, empTaskCost, empTaskStart, empTaskEnd)
+VALUES  (
+                :idTaskAssigned_input,
+                (SELECT idEmployee FROM Employees WHERE employeeUsername = :employeeUsername_input),
+                :taskHoursWorked_input, :empTaskCost_input, :empTaskStart_input, :empTaskEnd_input
+        );
+
+
+-- User selects job name from drop-down and a subquery gets the jobID from it so that the insert can be done properly
+INSERT INTO Employees           (idJobClassification, firstName, lastName, hourlyWage, employeePhone, employeeEmail,
+                                employeeRadio, employeeNote, employeePhoto)
+VALUES  (
+                (SELECT idJobClassification FROM JobClassifications WHERE jobTitle = :jobTitle_input), 
+                :firstName_input, :lastName_input, :hourlyWage_input, :employeePhone_input,
+                :employeeEmail_input, :employeeRadio_input, :employeeNote_input, :employeePhoto_input
+        );
+
+
+-- Add a new job
+INSERT INTO JobClassifications  (jobTitle, jobDescription)
+VALUES  (
+                :jobTitle_input, :jobDescription_input
+        );
+
+
+-- Add a new habitat
+INSERT INTO Habitats            ()
 VALUES ();
 
 
--- PLACEHOLDER CODE - NEEDS SUBQUERIES INSERTED TO GET ID's FROM INPUTS (drop-down selections of unique values connected to FK)
-INSERT INTO Employees               (idJobClassification, firstName, lastName, hourlyWage, employeePhone, employeeEmail,
-                                    employeeRadio, employeeNote, employeePhoto)
-VALUES  (SELECT(QUERY FOR JOB ID FROM JOBNAME INPUT), :firstName_input, :lastName_input, :hourlyWage_input, :employeePhone_input,
-        :employeeEmail_input, :employeeRadio_input, :employeeNote_input, :employeePhoto_input);
-
-
-INSERT INTO JobClassifications      (jobTitle, jobDescription)
-VALUES  (:jobTitle_input, :jobDescription_input);
-
-
-INSERT INTO Habitats ()
+-- Add a new biological asset
+INSERT INTO BiologicalAssets    ()
 VALUES ();
 
 
--- Nickname unique, or make species/nickname combo unique, then lookup by species/nickname? How to code that?
-INSERT INTO BiologicalAssets ()
-VALUES ();
+-- Add a new species, using informal name selects to get ID's for the diet and habitat
+INSERT INTO Species             (idDiet, idHabitat, speciesName, speciesDescription, threatLevel, speciesPhoto)
+VALUES  (
+                (SELECT idDiet FROM Diets WHERE dietName = :dietName_input), 
+                (SELECT idHabitat FROM Habitat WHERE habitatName = :habitatName_input), 
+                :speciesName_input, :speciesDescription_input, :threatLevel_input, :speciesPhoto_input
+        );
 
 
--- PLACEHOLDER CODE - NEEDS SUBQUERIES INSERTED TO GET ID's FROM INPUTS (drop-down selections of unique values connected to FK)
-INSERT INTO Species                 (idDiet, idHabitat, speciesName, speciesDescription, threatLevel, speciesPhoto)
-VALUES  (SELECT(QUERY FOR DIET ID FROM inputDietName), SELECT(QUERY FOR HABITAT ID FROM inputHabitatName), 
-        :speciesName_input, :speciesDescription_input, :threatLevel_input, :speciesPhoto_input);
-
-
-INSERT INTO Diets                   (dietName, dietDescription, dietIcon)
-VALUES  (:dietName_input, :dietDescription_input, :dietIcon_input);
+-- Add a new diet
+INSERT INTO Diets               (dietName, dietDescription, dietIcon)
+VALUES  (
+                :dietName_input, :dietDescription_input, :dietIcon_input
+        );
 
 -- ----------------
 -- 1x UPDATE (NULLable - suggest do this for a dino related to task or facility to habitat since they can already be null)
+-- NOTE: EmployeeTasks may change if parents are deleted, but otherwise should NOT be editable as they are a transactional record as well as a M:M interface.
+-- ... or should we not enforce that so a DB admin can fix work logs processed in error?
 -- ----------------
+
+-- Template/Model for updating all attributes based on the primary ID field returned from the browser
+UPDATE Parks
+SET parkName = :parkName_input, parkLocation = :parkLocation_input, parkDescription = :parkDescription_input
+WHERE idPark = :idPark_input;
+
 
 --FOR LOOKUP - Use a subquery to get id based on another unique attribute or attribute combo
 --Park: Name
@@ -254,6 +342,8 @@ VALUES  (:dietName_input, :dietDescription_input, :dietIcon_input);
 UPDATE TasksAssigned
 SET taskEnd = NULL
 WHERE idTaskAssigned = :taskAssigned_input;
+-- SCRUB THIS - not something we'd actually have as a web interface command, we'd just let people update the whole thing
+
 
 -- Probably want a query to update other stuff too, or maybe just turn the above into an update anything query?
 -- Ex. from ED -- update a character's data based on submission of the Update Character form 
@@ -271,6 +361,7 @@ WHERE idTaskAssigned = :taskAssigned_input;
 -- NOTE: The site UI will notify the administrator of a tasks's ID number when the task is generated. As there can potentially be thousands of tasks,
 --       identifying a specific task by the ID is the only realistic way to enforce it without making naming tasks incredibly tedious.
 --       The EmployeeTask entity is allowed to exist if its related task or employee is deleted so that we still have a record of overhead costs spent.
+--      Probably just make a delete for everything so the DB admin has the option, probably the easiest thing to code since it just uses the ID directly.
 -- ----------------
 
 -- Delete TaskAssigned
