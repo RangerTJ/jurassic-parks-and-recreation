@@ -49,20 +49,20 @@
                         <legend>Information</legend>
                         <p>
                             <div><label for="parkName" class="required">Name</label></div>
-                            <input type="text"
-                                    name="parkName" 
-                                    id ="parkName" 
-                                    required 
-                                    autofocus
-                                    placeholder="Ex. Jurassic Park">
-                        </p>
+                            <select id="parkName" name="parkName" required autofocus>
+                                <option value="1">Jurassic Park</option>
+                                <option value="2">Jurassic Park: San Diego</option>
+                                <option value="3">Jurassic World</option>
+                                <option value="4">Site B</option>
+                            </select>
                         <p>
                             <div><label for="parkLocation" class="required">Location</label></div>
-                            <input type="text"
-                                        name="parkLocation" 
-                                        id ="parkLocation" 
-                                        required 
-                                        placeholder="Ex. Isla Nublar, Costa Rica">
+                            <select name="parkLocation" id ="parkLocation" required>
+                                <option value="1">Isla Nublar, Costa Rica</option>
+                                <option value="2">San Diego, CA, USA</option>
+                                <option value="3">Isla Nublar, Costa Rica</option>
+                                <option value="3">Isla Sorna, Costa Rica</option>
+                            </select>
                         </p>
                         <p>
                             <div><label for="parkDescription" class="required">Description</label></div>

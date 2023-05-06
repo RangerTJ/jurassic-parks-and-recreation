@@ -198,6 +198,11 @@
     border-color: gold;
   }
 
+  select {
+    background-color: var(--worldDeepBlue);
+    color: var(--worldLightBlue)
+  }
+
   label {
     font-weight: bold;
   }
