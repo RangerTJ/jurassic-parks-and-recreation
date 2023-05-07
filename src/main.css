@@ -58,6 +58,7 @@
     color: var(--worldDeepBlue);
     /* color: black; */
     /* color: greenyellow; */
+    /* color: yellow; */
     font-family: var(--normalText);
     max-width: 85%;
     margin: auto;
@@ -80,8 +81,8 @@
   main {
     background-color: var(--worldMedBlueClear);
     /* background-color: var(--dominionAmberMedClear); */
-    /* background-color: var(--feralGreenClear);
-    color: greenyellow; */
+    /* background-color: var(--feralGreenClear); */
+
     padding-bottom: 1%;
   }
 
@@ -114,9 +115,9 @@
     /* background-color: var(--dominionAmberDark);
     color: black;
     border: solid var(--dominionAmberDark); */
-    /* background-color: yellow;
-    color: black;
-    border: solid yellow; */
+    /* background-color: var(--feralGreen);
+    color: yellow;
+    border: solid var(--feralGreen); */
     padding-left: 1%;
     padding-right: 1%;
     font-size: 35px;
