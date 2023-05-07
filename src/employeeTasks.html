@@ -34,11 +34,14 @@
             <article>
                 <h3>Add New Employee Task</h3>
                 <p>
-                    If you would like to add a new Employee Task to the database. Enter values for its attributes below
-                    and click the "Add Employee Task" button. Employee tasks are entities that handle the many-to-many relationship between
-                    a given Employee and an open Task Assignment. Each entity represents a chunk of work contributed by a specific
-                    employee towards the completion of the matching task. Many employees can contribute to the same task, and a single
-                    employee can contribute to the same task multiple times (for different hourly contributions at different time intervals).
+                    Employee Tasks manage Employee interactions
+                    with Assigned Tasks by documenting their work contributions towards the task. 
+                    They are necessary to handle the many-to-many
+                    relationship between Employees and Assigned Tasks, in addition to providing a way to track labor and costs in the process.
+                    
+                </p>
+                <p>
+                    Click the "Create" button below to add a new Employee Task to the DINO database.
                 </p>
                 <!-- <form>
                     <fieldset>
@@ -97,7 +100,7 @@
                     </fieldset>
                 </form> -->
                 <div>
-                    <p><button onclick="location.href='forms/employeeTasksAdd.html'">Add Employee Task</button></p>
+                    <p><button onclick="location.href='forms/employeeTasksAdd.html'">Create</button></p>
                 </div>
             </article>
 
