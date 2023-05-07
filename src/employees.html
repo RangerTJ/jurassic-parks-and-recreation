@@ -37,7 +37,7 @@
                     If you would like to add a new Employee entity to the database, enter values for its attributes below
                     and click the "Add Employee" button.
                 </p>
-                <form>
+                <!-- <form>
                     <fieldset>
                         <legend>Information</legend>
                         <p>
@@ -57,9 +57,9 @@
                                     required 
                                     placeholder="First Name">
                         </p>
-                        <p>
+                        <p> -->
                             <!-- Populated by SQL query -->
-                            <div><label for="jobTitle" class="required">Job</label></div>
+                            <!-- <div><label for="jobTitle" class="required">Job</label></div>
                             <select name="jobTitle" id="jobTitle" required>
                                 <option value="1">Ranger</option>
                                 <option value="2">Scientist</option>
@@ -98,9 +98,9 @@
                                         id ="employeeRadio" 
                                         required 
                                         placeholder="Ex. 407">
-                        </p>
+                        </p> -->
                         <!-- Workflow will be upload photo to server first, then select from available here entering filename at creation/update, possibly w/ drop-down menu -->
-                        <p>
+                        <!-- <p>
                             <div><label for="employeePhoto" class="required">Photo</label></div>
                             <input type="text"
                                         name="employeePhoto"
@@ -117,9 +117,9 @@
                                     placeholder="Ex. Currently on PIP due performance issues."></textarea>
                         </p>
                     </fieldset>
-                </form>
+                </form> -->
                 <div>
-                    <p><button>Add Employee</button></p>
+                    <p><button onclick="location.href='forms/employeesAdd.html'">Add Employee</button></p>
                 </div>
             </article>
 
@@ -159,7 +159,7 @@
                         <td><img src="images/staff_test.png" alt="Staff photo example." style="max-width: 100%"></td>
                         <td>Ex. Exemplary performance. Due for promotion.</td>
 
-                        <td><button>Update</button></td>
+                        <td><button onclick="location.href='forms/employeesUpdate.html'">Update</button></td>
                         <td><button>Delete</button></td>
                     </tr>
                 </table>
