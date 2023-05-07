@@ -32,12 +32,12 @@
         <section>
             <h2>Facility Types</h2>
             <article>
-                <h3>Add New Facility Types</h3>
+                <h3>Add Facility Type</h3>
                 <p>
                     If you would like to add a new Facility Type to the database, enter values for its attributes below
                     and click the "Add Type" button.
                 </p>
-                <form>
+                <!-- <form>
                     <fieldset>
                         <legend>Information</legend>
                         <p>
@@ -60,13 +60,13 @@
                                     placeholder="Ex. Enclosure for aquatic marine reptiles."></textarea>
                         </p>
                     </fieldset>
-                </form>
+                </form> -->
                 <div>
-                    <p><button>Add Type</button></p>
+                    <p><button onclick="location.href='forms/facilityTypesAdd.html'">Add Type</button></p>
                 </div>
             </article>
             <article>
-                <h3>Existing Data</h3>
+                <h3>View Facility Types</h3>
                 <p>
                     The table below shows existing information for Facility Type entities and includes
                     buttons to update or delete them.
@@ -84,7 +84,7 @@
                         <td>Ex. 1</td>
                         <td>Ex. General Structure</td>
                         <td>Ex. General facility intended for a variety of human uses.</td>
-                        <td><button>Update</button></td>
+                        <td><button onclick="location.href='forms/facilityTypesUpdate.html'">Update</button></td>
                         <td><button>Delete</button></td>
                     </tr>
                 </table>

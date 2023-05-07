@@ -37,7 +37,7 @@
                     If you would like to add a new Species entity to the database, enter values for its attributes below
                     and click the "Add Species" button.
                 </p>
-                <form>
+                <!-- <form>
                     <fieldset>
                         <legend>Information</legend>
                         <p>
@@ -48,9 +48,9 @@
                                     autofocus
                                     placeholder="Ex. Apatosaurus">
                         </p>
-                        <p>
+                        <p> -->
                             <!-- Populate with SQL query -->
-                            <div><label for="speciesDiet" class="required">Diet</label></div>
+                            <!-- <div><label for="speciesDiet" class="required">Diet</label></div>
                             <select name="speciesDiet" id="speciesDiet" required>
                                 <option value="1">Herbivore</option>
                                 <option value="2">Carnivore</option>
@@ -59,18 +59,18 @@
                                 <option value="5">Insectivore</option>
                             </select>
                         </p>
-                        <p>
+                        <p> -->
                             <!-- Populated by SQL Query -->
-                            <div><label for="habitat" class="required">Habitat</label></div>
+                            <!-- <div><label for="habitat" class="required">Habitat</label></div>
                             <select name="habitat" id="habitat" required>
                                 <option value="1">Tropical Jungle - Large</option>
                                 <option value="2">Cretaceous Coastline - Medium</option>
                                 <option value="3">Jurassic Swamp - Small</option>
                             </select>
                         </p>
-                        <p>
+                        <p> -->
                             <!-- Hard coded from 1-10 -->
-                            <div><label for="threatLevel" class="required">Threat Level</label></div>
+                            <!-- <div><label for="threatLevel" class="required">Threat Level</label></div>
                             <select name="threatLevel" id ="threatLevel" required>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
@@ -103,13 +103,13 @@
                                     placeholder="Ex. Iconic long-necked sauropod."></textarea>
                         </p>
                     </fieldset>
-                </form>
+                </form> -->
                 <div>
-                    <p><button>Add Species</button></p>
+                    <p><button onclick="location.href='forms/speciesAdd.html'">Add Species</button></p>
                 </div>
             </article>
             <article>
-                <h3>Existing Data</h3>
+                <h3>View Species</h3>
                 <p>
                     The table below shows existing information for Species entities and includes
                     buttons to update or delete them.
@@ -136,7 +136,7 @@
                         <td><img src="images/rex_test.png" alt="Staff photo example." style="max-width: 100%"></td>
                         <td>A large carnivorous dinosaur with powerful jaws and sharp teeth.</td>
 
-                        <td><button>Update</button></td>
+                        <td><button onclick="location.href='forms/speciesUpdate.html'">Update</button></td>
                         <td><button>Delete</button></td>
                     </tr>
                 </table>

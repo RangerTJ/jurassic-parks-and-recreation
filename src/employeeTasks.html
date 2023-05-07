@@ -35,26 +35,26 @@
                 <h3>Add New Employee Task</h3>
                 <p>
                     If you would like to add a new Employee Task to the database. Enter values for its attributes below
-                    and click the "Add Task" button. Employee tasks are entities that handle the many-to-many relationship between
+                    and click the "Add Employee Task" button. Employee tasks are entities that handle the many-to-many relationship between
                     a given Employee and an open Task Assignment. Each entity represents a chunk of work contributed by a specific
                     employee towards the completion of the matching task. Many employees can contribute to the same task, and a single
                     employee can contribute to the same task multiple times (for different hourly contributions at different time intervals).
                 </p>
-                <form>
+                <!-- <form>
                     <fieldset>
                         <legend>Information</legend>
-                        <p>
+                        <p> -->
                             <!-- Manual input due to sheer number of them, unless a better solution to ID them can be thought of -->
-                            <div><label for="taskAssigned" class="required">Task</label></div>
+                            <!-- <div><label for="taskAssigned" class="required">Task</label></div>
                             <input type="text"
                                         name="taskAssigned" 
                                         id ="taskAssigned" 
                                         required 
                                         placeholder="#Task ID - Description">
                         </p>
-                        <p>
+                        <p> -->
                             <!-- Options by SQL query of unique usernames / possibly show first/last name too, but just use userid for values -->
-                            <div><label for="employeeUsername" class="required">Employee User ID</label></div>
+                            <!-- <div><label for="employeeUsername" class="required">Employee User ID</label></div>
                             <select name="employeeUsername" id="employeeUsername" required>
                                 <option value="1">gharding</option>
                                 <option value="2">dnedry</option>
@@ -95,14 +95,14 @@
                                         placeholder="Ex. 4/7/2023">
                         </p>
                     </fieldset>
-                </form>
+                </form> -->
                 <div>
-                    <p><button>Add Task</button></p>
+                    <p><button onclick="location.href='forms/employeeTasksAdd.html'">Add Employee Task</button></p>
                 </div>
             </article>
 
             <article>
-                <h3>Existing Data</h3>
+                <h3>View Employee Tasks</h3>
                 <p>
                     The table below shows existing information for Employee Task entities and includes
                     buttons to update or delete them.
@@ -131,7 +131,7 @@
                         <td>Ex. 3/1/2023</td>
                         <td>Ex. 3/1/2023</td>
 
-                        <td><button>Update</button></td>
+                        <td><button onclick="location.href='forms/employeeTasksUpdate.html'">Update</button></td>
                         <td><button>Delete</button></td>
                     </tr>
                 </table>
