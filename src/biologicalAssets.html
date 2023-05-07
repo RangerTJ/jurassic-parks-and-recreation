@@ -32,60 +32,84 @@
     </nav>
     <main>
         <section>
-            <h2>Job Classifications</h2>
+            <h2>Biological Assets</h2>
             <article>
-                <h3>Add New Job Classifications</h3>
+                <h3>Add New Biological Asset</h3>
                 <p>
-                    If you would like to add a new Job Classification to the database, enter values for its attributes below
-                    and click the "Add Job" button.
+                    If you would like to add a new Biological Asset to the database, enter values for its attributes below
+                    and click the "Add Biological Asset" button.
                 </p>
                 <form>
                     <fieldset>
                         <legend>Information</legend>
                         <p>
-                            <div><label for="jobTitle" class="required">Title</label></div>
-                            <input type="text"
-                                    name="jobTitle" 
-                                    id ="jobTitle" 
-                                    required 
-                                    autofocus
-                                    placeholder="Ex. Ranger">
+                            <div><label for="species" class="required">Species:</label></div>
+                            <select id="species" name="species" required>
+                                <option value="">Choose an option</option>
+                                <option value="1">Tyrannosaurus Rex</option>
+                                <option value="2">Velociraptor</option>
+                                <option value="3">Triceratops</option>
+                                <option value="4">Brachiosaurus</option>
+                                <option value="5">Stegosaurus</option>
+                                <option value="6">Spinosaurus</option>
+                                <option value="7">Allosaurus</option>
+                                <option value="8">Ankylosaurus</option>
+                                <option value="9">Parasaurolophus</option>
+                                <option value="10">Mosasaurus</option>
+                                <option value="11">Hesperornis</option>
+                                <option value="12">Thescelosaurus</option>
+                                <option value="13">Diplocaulus</option>
+                                <option value="14">Metriorhynchus</option>
+                                <option value="15">Eustreptospondylus</option>
+                            </select>
                         </p>
                         <p>
-                            <div><label for="facTypeDescription" class="required">Description</label></div>
-                            <textarea
-                                    name="facTypeDescription"
-                                    id ="facTypeDescription"
-                                    required
-                                    cols="40" rows="5" 
-                                    min="5" max="255"
-                                    placeholder="Ex. Patrols park, assists visitors, and manages wildlife."></textarea>
+                            <div><label for="facility" class="required">Facility:</label></div>
+                            <select id="facility" name="facility" required>
+                                <option value="">Choose an option</option>
+                                <option value="1">Wild Zone</option>
+                                <option value="2">Visitor Center</option>
+                                <option value="3">Jurassic Stadium</option>
+                                <option value="4">Mosasaur Lagoon</option>
+                                <option value="5">Redwood Retreat</option>
+                                <option value="6">Swamp Explorer</option>
+                            </select>
+                        </p>
+                        <p>
+                            <div><label for="nickname" class="required">Asset Nickname:</label></div>
+                            <input type="text"
+                                    name="nickname" 
+                                    id ="nickname" 
+                                    required 
+                                    autofocus
+                                    placeholder="Ex. Blue">
                         </p>
                     </fieldset>
                 </form>
                 <div>
-                    <p><button>Add Job</button></p>
+                    <p><button>Add Biological Asset</button></p>
                 </div>
             </article>
             <article>
                 <h3>Existing Data</h3>
                 <p>
-                    The table below shows existing information for Job Classification entities and includes
+                    The table below shows existing information for owned Biological Assets and includes
                     buttons to update or delete them.
                 </p>
                 <table>
                     <tr>
                         <th>ID</th>
-                        <th>Title</th>
-                        <th>Description</th>
-
+                        <th>Species</th>
+                        <th>Facility</th>
+                        <th>Nickname</th>
                         <th>Update</th>
                         <th>Delete</th>
                     </tr>
                     <tr>
                         <td>Ex. 1</td>
-                        <td>Ex. Ranger</td>
-                        <td>Ex. Patrols park, assists visitors, and manages wildlife.</td>
+                        <td>Ex. 2</td>
+                        <td>Ex. 4</td>
+                        <td>Ex. Blue</td>
                         <td><button>Update</button></td>
                         <td><button>Delete</button></td>
                     </tr>

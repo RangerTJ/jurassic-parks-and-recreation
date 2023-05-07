@@ -17,16 +17,16 @@
         <p class="headerP">Digital Information Nexus for Operations</p>
     </header>
     <nav>
-        <a href="test_template.html" >Home</a>
+        <a href="index.html" >Home</a>
         <a href="parks.html" >Parks</a>
         <a href="facilities.html" >Facilities</a>
-        <a href="test_template.html" >Biological Assets</a>
+        <a href="biologicalAssets.html" >Biological Assets</a>
         <a href="employees.html" >Employees</a>
         <a href="tasksAssigned.html" >Tasks Assigned</a>
         <a href="employeeTasks.html" >Employee Tasks</a>
-        <a href="test_template.html" >Species</a>
-        <a href="test_template.html" >Diets</a>
-        <a href="test_template.html" >Habitats</a>
+        <a href="species.html" >Species</a>
+        <a href="diets.html" >Diets</a>
+        <a href="habitats.html" >Habitats</a>
         <a href="facilityTypes.html" >Facility Types</a>
         <a href="jobClassifications.html" >Job Classifications</a>
     </nav>
@@ -101,23 +101,31 @@
                                         required>
                         </p>
                         <p>
-                            <div><label for="securityRating" class="required">Security Rating</label></div>
-                            <input type="text"
-                                        name="securityRating"
-                                        id ="securityRating" 
-                                        required 
-                                        placeholder="Number from 0 to 10">
+                            <div><label for="securityLevel" class="required">Security Level: (1-10, 10 Most Secure)</label></div>
+                            <select id="securityLevel" name="securityLevel" required>
+                                <option value="">Choose an option</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                            </select>
                         </p>
                         <!-- Workflow will be upload photo to server first, then select from available here entering filename at creation/update, possibly w/ drop-down menu -->
                         <p>
-                            <div><label for="facilityPhoto" class="required">Photo Path</label></div>
+                            <div><label for="facilityPhoto">Photo Path</label></div>
                             <input type="text"
                                         name="facilityPhoto"
                                         id ="facilityPhoto"
                                         placeholder="Ex. images/photo.png">
                         </p>
                         <p>
-                            <div><label for="facilityNote" class="required">Notes</label></div>
+                            <div><label for="facilityNote">Notes</label></div>
                             <textarea
                                     name="facilityNote"
                                     id ="facilityNote"

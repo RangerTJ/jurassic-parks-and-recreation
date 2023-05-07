@@ -32,104 +32,79 @@
     </nav>
     <main>
         <section>
-            <h2>Employee Tasks</h2>
+            <h2>Habitats</h2>
             <article>
-                <h3>Add New Employee Task</h3>
+                <h3>Add New Habitat</h3>
                 <p>
-                    If you would like to add a new Employee Task to the database. Enter values for its attributes below
-                    and click the "Add Task" button. Employee tasks are entities that handle the many-to-many relationship between
-                    a given Employee and an open Task Assignment. Each entity represents a chunk of work contributed by a specific
-                    employee towards the completion of the matching task. Many employees can contribute to the same task, and a single
-                    employee can contribute to the same task multiple times (for different hourly contributions at different time intervals).
+                    If you would like to add a new Habitat to the database, enter values for its attributes below
+                    and click the "Add Habitat" button.
                 </p>
                 <form>
                     <fieldset>
                         <legend>Information</legend>
                         <p>
-                            <div><label for="taskAssigned" class="required">Task</label></div>
+                            <div><label for="habitat" class="required">Title</label></div>
                             <input type="text"
-                                        name="taskAssigned" 
-                                        id ="taskAssigned" 
-                                        required 
-                                        placeholder="#Task ID - Description">
+                                    name="habitat" 
+                                    id ="habitat" 
+                                    required 
+                                    autofocus
+                                    placeholder="Ex. Prehistoric Jungle - Large">
                         </p>
                         <p>
-                            <div><label for="employee" class="required">Employee</label></div>
-                            <input type="text"
-                                        name="employee"
-                                        id ="employee"
-                                        required 
-                                        placeholder="#ID - Firstname Lastname">
+                            <div><label for="habitatDescription" class="required">Description</label></div>
+                            <textarea
+                                    name="habitatDescription"
+                                    id ="habitatDescription"
+                                    required
+                                    cols="40" rows="5" 
+                                    min="5" max="255"
+                                    placeholder="Ex. Prehistoric jungles were dense, lush environments teeming with plant and animal life..."></textarea>
                         </p>
                         <p>
-                            <div><label for="workHours" class="required">Hours Worked</label></div>
-                            <input type="text"
-                                        name="workHours" 
-                                        id ="workHours" 
-                                        required
-                                        placeholder="Ex. 40">
+                            <div><label for="habitatSize" class="required">Habitat Size:</label></div>
+                            <select id="habitatSize" name="habitatSize" required>
+                                <option value="">Choose an option</option>
+                                <option value="1">Small</option>
+                                <option value="2">Medium</option>
+                                <option value="3">Large</option>
+                            </select>
                         </p>
                         <p>
-                            <div><label for="workCost" class="required">Cost</label></div>
+                            <div><label for="habitatPhoto">Photo Path</label></div>
                             <input type="text"
-                                        name="workCost"
-                                        id ="workCost" 
-                                        required 
-                                        placeholder="Ex. 5000.00">
-                        </p>
-                        <p>
-                            <div><label for="workStart" class="required">Start</label></div>
-                            <input type="text"
-                                        name="workStart"
-                                        id ="workStart" 
-                                        required 
-                                        placeholder="Ex. 4/6/2023">
-                        </p>
-                        <p>
-                            <div><label for="workEnd" class="required">End</label></div>
-                            <input type="text"
-                                        name="workEnd"
-                                        id ="workEnd" 
-                                        required 
-                                        placeholder="Ex. 4/7/2023">
+                                        name="habitatPhoto"
+                                        id ="habitatPhoto"
+                                        placeholder="Ex. images/photo.png">
                         </p>
                     </fieldset>
                 </form>
                 <div>
-                    <p><button>Add Task</button></p>
+                    <p><button>Add Habitat</button></p>
                 </div>
             </article>
-
             <article>
                 <h3>Existing Data</h3>
                 <p>
-                    The table below shows existing information for Employee Task entities and includes
+                    The table below shows existing information for Habitat entities and includes
                     buttons to update or delete them.
                 </p>
                 <table>
                     <tr>
                         <th>ID</th>
-                        <!-- Composite of TaskID + Description? -->
-                        <th>Task Assigned</th>
-                        <!-- Composite of EmpID + Full Name? -->
-                        <th>Employee</th>  
-                        <th>Hours Worked</th>
-                        <th>Total Cost</th>
-                        <th>Start</th>
-                        <th>End</th>
-
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Size</th>
+                        <th>Photo</th>
                         <th>Update</th>
                         <th>Delete</th>
                     </tr>
                     <tr>
                         <td>Ex. 1</td>
-                        <td>Ex. #1 - Fix Doors to Visitor Center</td>
-                        <td>Ex. #3 - Ralph Wiggum</td>
-                        <td>Ex. 5</td>
-                        <td>Ex. 200.00</td>
-                        <td>Ex. 3/1/2023</td>
-                        <td>Ex. 3/1/2023</td>
-
+                        <td>Ex. Prehistoric Jungle - Large</td>
+                        <td>Ex. Prehistoric jungles were dense, lush environments teeming with plant and animal life...</td>
+                        <td>3</td>
+                        <td><img src="./images/jungle.jpg" alt="Jungle" width="200" height="150"></td>
                         <td><button>Update</button></td>
                         <td><button>Delete</button></td>
                     </tr>

@@ -29,7 +29,7 @@
     --worldLightBlue: #AFE9EE;
     --worldLightBlueClear: #afe9ee47;
     --worldMedBlue: #61b4fc;
-    --worldMedBlueClear: #61b4fc9a;
+    --worldMedBlueClear: #61b4fce6;
     --worldDeepBlue: #0F284F;
     --worldDeepBlueClear: #0f284f94;
     --feralGreen: #3c663e;
@@ -224,6 +224,11 @@
     background-color: var(--worldLightBlue);
     color: var(--worldDeepBlue);
     /* width: 90%; */
+  }
+
+  select {
+    background-color: var(--worldLightBlue);
+    color: var(--worldDeepBlue);
   }
 
 
