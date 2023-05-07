@@ -42,6 +42,7 @@
     --dominionAmberDarkClear: rgba(135, 81, 0, 0.691);
     --dominionEarth: rgb(69, 41, 0);;
     --feralGreen: #3c663e;
+    --feralGreenClear: #3c663eb9;
 
     /* Fonts */
     --jpFont: 'Jurassic Park', cursive;
@@ -77,7 +78,9 @@
 
   main {
     background-color: var(--worldMedBlueClear);
+    /* color: greenyellow; */
     /* background-color: var(--dominionAmberMedClear); */
+    /* background-color: var(--feralGreenClear); */
     padding-bottom: 1%;
   }
 
@@ -157,6 +160,7 @@
     margin-left: 1%;
     padding-top: 1%;
     color: var(--worldDeepBlue);
+    /* color: greenyellow */
     /* color: black; */
     font-family: var(--jpFont);
     font-size: 60px;
