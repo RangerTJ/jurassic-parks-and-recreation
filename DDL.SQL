@@ -55,7 +55,6 @@ CREATE OR REPLACE TABLE `Facilities` (
   `facilityName`        VARCHAR(255) NOT NULL UNIQUE,
   `facilityDescription` VARCHAR(2000) NOT NULL,
   `facilityLocation`    VARCHAR(255) NOT NULL,
-  `isEnclosure`         TINYINT(1) NOT NULL,
   `securityRating`      TINYINT(10) NOT NULL,
   `facilityPhoto`       VARCHAR(255) NULL,
   `facilityNote`        VARCHAR(8000) NULL,
@@ -119,7 +118,7 @@ CREATE OR REPLACE TABLE `BiologicalAssets` (
   `idBiologicalAsset`   INT NOT NULL UNIQUE AUTO_INCREMENT,
   `idSpecies`           INT NOT NULL,
   `idFacility`          INT NOT NULL,
-  `nickname`            VARCHAR(255) NULL UNIQUE,
+  `nickname`            VARCHAR(255) NOT NULL UNIQUE,
   PRIMARY KEY (`idBiologicalAsset`),
   CONSTRAINT `fk_BiologicalAssets_Facilities1`
     FOREIGN KEY (`idFacility`)
@@ -151,6 +150,7 @@ CREATE OR REPLACE TABLE `Employees` (
   `idJobClassification` INT NOT NULL,
   `firstName`           VARCHAR(255) NOT NULL,
   `lastName`            VARCHAR(255) NOT NULL,
+  `employeeUsername`    VARCHAR(45) NOT NULL UNIQUE,
   `hourlyWage`          DECIMAL(10,2) NOT NULL,
   `employeePhone`       VARCHAR(255) NOT NULL,
   `employeeEmail`       VARCHAR(255) NOT NULL,
@@ -246,34 +246,33 @@ VALUES
 
 
 INSERT INTO `Facilities`            (idPark, idFacilityType, idHabitat, facilityName, facilityDescription, 
-                                    facilityLocation, isEnclosure, securityRating, facilityPhoto, facilityNote)
+                                    facilityLocation, securityRating, facilityPhoto, facilityNote)
 VALUES
 
 -- Note: Inserted habitat values are for assumed appropriate habitats, since that table has not been populated yet
--- For isEnclosure, an int value of 1 is true and a value of 0 is false - Not currently required but may need to change this.
 (2, 5, 1, 'Wild Zone', 'Undeveloped area of Site B where assets can roam free until they need to be collected for transfer to a different facility.', 
-'All of Sorna outside of the docks and laboratories.', 1, 10, NULL, "The island's natural terrain makes an impassible barrier for most assets to escape, 
+'All of Sorna outside of the docks and laboratories.', 10, NULL, "The island's natural terrain makes an impassible barrier for most assets to escape, 
 and heavy-duty fencing/containment covers the gaps and protects other site facilities."),
 
 (1, 1, NULL, 'Visitor Center', 'Primary Visitor Center for Jurassic World and general hub for visitor experiences.', 
-'Central Isla Nublar, near ferry monorail drop-off.', 0, 8, NULL, "Can double as a shelter location in the event that an asset escapes containment. 
+'Central Isla Nublar, near ferry monorail drop-off.', 8, NULL, "Can double as a shelter location in the event that an asset escapes containment. 
 Doors and walls able to withstand most assets, but in the event of a category 9 or higher escape, visitors should be guided to the max security shelters."),
 
 (3, 2, 3, 'Jurassic Stadium', 'Stadium viewing area for special biological asset exhibitions.', 
-'Center of Jurassic Park San Diego.', 1, 10, 'images/arena_test.png', "Both a large-scale visitor viewing area and a 
+'Center of Jurassic Park San Diego.', 10, 'images/arena_test.png', "Both a large-scale visitor viewing area and a 
 specialized enclosure for short-term viewing of a showcase asset."),
 
 (3, 3, 2, 'Mosasaur Lagoon', 'Salt-water tank for the largest aquatic biological assets at Jurassic World.', 
-'Adjacent to main street, down main path from the Visitor Center.', 1, 10, NULL, "Largest and most secure salt-water viewing tank in Jurassic World. 
+'Adjacent to main street, down main path from the Visitor Center.', 10, NULL, "Largest and most secure salt-water viewing tank in Jurassic World. 
 Viewing facilities are adjacent."),
 
 (1, 2, 4, 'Redwood Retreat', 'A facility designed to showcase the biodiversity and beauty of ancient redwood forests.',
-'North end of the park, surrounded by existing redwood forest.', 1, 10, NULL, "Redwood trees are delicate and should not be disturbed.
+'North end of the park, surrounded by existing redwood forest.', 10, NULL, "Redwood trees are delicate and should not be disturbed.
 The facility is designed in a way to minimize the impact on the existing ecosystem. Visitors must stay on designated paths to prevent
 damage to the forest floor."),
 
 (1, 2, 5, 'Swamp Explorer', 'A facility designed to showcase the unique ecosystems and biodiversity of Jurassic swamps.',
-'Southern end of the park, adjacent to a large body of water.', 1, 10, NULL, "Swamps can be dangerous and difficult to navigate.
+'Southern end of the park, adjacent to a large body of water.', 10, NULL, "Swamps can be dangerous and difficult to navigate.
 Visitors must stay on designated paths to prevent injury or getting lost. The facility is designed to withstand potential flooding and
 other natural hazards commonly found in swamp environments.");
 

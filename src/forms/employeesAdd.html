@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Jurassic Parks and Recreation | Home</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <meta name='robots' content='noindex,noarchive,nofollow'>
+    <link rel='stylesheet' type='text/css' media='screen' href='../main.css'>
+</head>
+
+<body>
+    <header>
+        <h1>Jurassic Parks and Recreation *</h1>
+        <p class="headerP">D.I.N.O.</p>
+    </header>
+    <nav>
+        <a href="../index.html" >Home</a>
+        <a href="../parks.html" >Parks</a>
+        <a href="../facilities.html" >Facilities</a>
+        <a href="../biologicalAssets.html" >Biological Assets</a>
+        <a href="../employees.html" >Employees</a>
+        <a href="../tasksAssigned.html" >Tasks Assigned</a>
+        <a href="../employeeTasks.html" >Employee Tasks</a>
+        <a href="../species.html" >Species</a>
+        <a href="../diets.html" >Diets</a>
+        <a href="../habitats.html" >Habitats</a>
+        <a href="../facilityTypes.html" >Facility Types</a>
+        <a href="../jobClassifications.html" >Job Classifications</a>
+    </nav>
+    <main>
+        <section>
+            <h2>Add Employee</h2>
+            <article>
+                <p>
+                    To add a new Employee entity to the database, enter values for its attributes below
+                    and click the "Add Employee" button.
+                </p>
+                <form>
+                    <fieldset>
+                        <legend>Information</legend>
+                        <p>
+                            <div><label for="lastName" class="required">Last Name</label></div>
+                            <input type="text"
+                                        name="lastName" 
+                                        id ="lastName" 
+                                        autofocus
+                                        required 
+                                        placeholder="Last Name">
+                        </p>
+                        <p>
+                            <div><label for="firstName" class="required">First Name</label></div>
+                            <input type="text"
+                                    name="firstName" 
+                                    id ="firstName" 
+                                    required 
+                                    placeholder="First Name">
+                        </p>
+                        <p>
+                            <!-- Populated by SQL query -->
+                            <div><label for="jobTitle" class="required">Job</label></div>
+                            <select name="jobTitle" id="jobTitle" required>
+                                <option value="1">Ranger</option>
+                                <option value="2">Scientist</option>
+                                <option value="3">ACU Specialist</option>
+                                <option value="4">Concessions Manager</option>
+                            </select>
+                        </p>
+                        <p>
+                            <div><label for="hourlyWage" class="required">Wage</label></div>
+                            <input type="text"
+                                        name="hourlyWage" 
+                                        id ="hourlyWage" 
+                                        required 
+                                        placeholder="Ex. 30.00">
+                        </p>
+                        <p>
+                            <div><label for="employeePhone" class="required">Phone</label></div>
+                            <input type="text"
+                                        name="employeePhone"
+                                        id ="employeePhone"
+                                        required 
+                                        placeholder="Ex. +1-202-555-5555">
+                        </p>
+                        <p>
+                            <div><label for="employeeEmail" class="required">Email</label></div>
+                            <input type="text"
+                                        name="employeeEmail" 
+                                        id ="employeeEmail" 
+                                        required
+                                        placeholder="Ex. email@address.com">
+                        </p>
+                        <p>
+                            <div><label for="employeeRadio" class="required">Radio</label></div>
+                            <input type="text"
+                                        name="employeeRadio"
+                                        id ="employeeRadio" 
+                                        required 
+                                        placeholder="Ex. 407">
+                        </p>
+                        <!-- Workflow will be upload photo to server first, then select from available here entering filename at creation/update, possibly w/ drop-down menu -->
+                        <p>
+                            <div><label for="employeePhoto" class="required">Photo</label></div>
+                            <input type="text"
+                                        name="employeePhoto"
+                                        id ="employeePhoto"
+                                        placeholder="Ex. images/photo.png">
+                        </p>
+                        <p>
+                            <div><label for="employeeNote" class="required">Notes</label></div>
+                            <textarea
+                                    name="employeeNote"
+                                    id ="employeeNote"
+                                    cols="40" rows="5" 
+                                    min="5" max="255"
+                                    placeholder="Ex. Currently on PIP due performance issues."></textarea>
+                        </p>
+                    </fieldset>
+                </form>
+                <div>
+                    <p><button>Add Employee</button></p>
+                </div>
+            </article>
+        </section>
+    </main>
+    <footer>&copy;2023 Taylor Jordan and Nicholas Schmidt (Team: Jurassic Parks and Recreation)</footer>
+</body>
+</html>
