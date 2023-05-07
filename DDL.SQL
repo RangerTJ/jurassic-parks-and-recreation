@@ -40,7 +40,8 @@ CREATE OR REPLACE TABLE `Habitats` (
   `idHabitat`           INT NOT NULL UNIQUE AUTO_INCREMENT,
   `habitatName`         VARCHAR(255) NOT NULL UNIQUE,
   `habitatDescription`  VARCHAR(8000) NOT NULL,
-  `habitatSize`        TINYINT(3) NOT NULL,
+  `habitatSize`         TINYINT(3) NOT NULL,
+  `habitatPhoto`        VARCHAR(255),
   PRIMARY KEY (`idHabitat`));
 
 
@@ -222,7 +223,7 @@ CREATE OR REPLACE TABLE `EmployeeTasks` (
   CONSTRAINT `fk_EmployeeTasks_TaskCategories1`
     FOREIGN KEY (`idTaskCategory`)
     REFERENCES `TaskCategories` (`idTaskCategory`)
-    ON DELETE CASCADE
+    ON DELETE SET NULL
     ON UPDATE CASCADE);
 
 
