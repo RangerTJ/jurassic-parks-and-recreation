@@ -47,14 +47,15 @@
                                     id ="habitatNam" 
                                     required 
                                     autofocus
-                                    placeholder="Ex. Prehistoric Jungle - Large">
+                                    placeholder="Ex. Tropical Jungle - Large">
                         </p>
                         <p>
                             <div><label for="habitatSize" class="required">Size</label></div>
-                            <input type="text"
-                                        name="habitatSize" 
-                                        id ="habitatSize" 
-                                        placeholder="Scale of 1 - 3">
+                            <select name="habitatSize" id="habitatSize" required>
+                                <option value="1">Small</option>
+                                <option value="2">Medium</option>
+                                <option value="3">Large</option>
+                            </select>
                         </p>
                         <p>
                             <div><label for="habitatDescription" class="required">Description</label></div>
