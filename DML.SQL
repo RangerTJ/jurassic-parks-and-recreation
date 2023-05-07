@@ -29,8 +29,8 @@
 
 -- TODO: 
 --      Menu Selectors: Done (may need to revise when we see them in action / depending on how the queries work with JS/React)
---      Select:         Species, BioAssets
---      Add:            Habitat, BioAssets
+--      Select:         Species, BioAssets, TaskCategories
+--      Add:            Habitat, BioAssets, TaskCategories
 --      Update:         Everything except Parks
 --      Delete:         Everything except TasksAssigned
 --      Custom:         EmployeeTasks lookup for an employee, TaskAssigned Lookup for a facility sorted by date
@@ -89,6 +89,11 @@ SELECT idEmployee, lastName, firstName
 FROM Employees
 ORDER BY lastName ASC;
 
+-- Task Categories Selector
+SELECT idTaskCategory, categoryName
+FROM TaskCategories
+ORDER BY categoryName ASC;
+
 -- Question/Note: It may make more sense to do TasksAssigned and EmployeeTasks as direct inputs where we assume staff responsible have knowledge of
 -- the relevant task ID's, vs. a drop down (because these are gonna get unweildingly large pretty fast)
 
@@ -134,6 +139,8 @@ ORDER BY lastName ASC;
 -- Get jobID from title and vice versa
 (SELECT idJobClassification FROM JobClassifications WHERE jobTitle = :jobTitle_input)
 (SELECT jobTitle FROM JobClassifications WHERE idJobClassification = :idJobClassification_input)
+
+-- Get TASK CATEGORY NAME FROM ID AND VICE VERSA
 
 
 -- -----------------
@@ -214,6 +221,9 @@ LEFT JOIN TasksAssigned ON EmployeeTasks.idTaskAssigned = TasksAssigned.idTaskAs
 JOIN Employees ON EmployeeTasks.idEmployee = Employees.idEmployee
 ORDER BY EmployeeTasks.idEmployeeTask ASC;
 
+
+-- SELECT Task Categories
+-- TO DO
 
 -- ----------------
 -- 11x "ADD NEW" SQL SCRIPTS - Use :browser_inputs to get data for insert queries
@@ -310,6 +320,10 @@ INSERT INTO Diets               (dietName, dietDescription, dietIcon)
 VALUES  (
                 :dietName_input, :dietDescription_input, :dietIcon_input
         );
+
+
+-- Add a new Task Category
+-- TO DO
 
 -- ----------------
 -- 1x UPDATE (NULLable - suggest do this for a dino related to task or facility to habitat since they can already be null)

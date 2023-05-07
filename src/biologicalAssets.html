@@ -22,6 +22,7 @@
         <a href="employees.html" >Employees</a>
         <a href="tasksAssigned.html" >Tasks Assigned</a>
         <a href="employeeTasks.html" >Employee Tasks</a>
+        <a href="taskCategories.html" >Task Categories</a>
         <a href="species.html" >Species</a>
         <a href="diets.html" >Diets</a>
         <a href="habitats.html" >Habitats</a>
@@ -39,6 +40,42 @@
                 <!-- <form>
                     <fieldset>
                         <legend>Information</legend>
+                        
+                        Alternate List - MOVE TO FORM
+                        <p>
+                            <div><label for="species" class="required">Species:</label></div>
+                            <select id="species" name="species" required>
+                                <option value="">Choose an option</option>
+                                <option value="1">Tyrannosaurus Rex</option>
+                                <option value="2">Velociraptor</option>
+                                <option value="3">Triceratops</option>
+                                <option value="4">Brachiosaurus</option>
+                                <option value="5">Stegosaurus</option>
+                                <option value="6">Spinosaurus</option>
+                                <option value="7">Allosaurus</option>
+                                <option value="8">Ankylosaurus</option>
+                                <option value="9">Parasaurolophus</option>
+                                <option value="10">Mosasaurus</option>
+                                <option value="11">Hesperornis</option>
+                                <option value="12">Thescelosaurus</option>
+                                <option value="13">Diplocaulus</option>
+                                <option value="14">Metriorhynchus</option>
+                                <option value="15">Eustreptospondylus</option>
+                            </select>
+                        </p>
+                        <p>
+                            <div><label for="facility" class="required">Facility:</label></div>
+                            <select id="facility" name="facility" required>
+                                <option value="">Choose an option</option>
+                                <option value="1">Wild Zone</option>
+                                <option value="2">Visitor Center</option>
+                                <option value="3">Jurassic Stadium</option>
+                                <option value="4">Mosasaur Lagoon</option>
+                                <option value="5">Redwood Retreat</option>
+                                <option value="6">Swamp Explorer</option>
+                            </select>
+                        </p>
+
                         <p> -->
                             <!-- Populated by SQL query -->
                             <!-- <div><label for="assetSpecies" class="required">Species</label></div>
@@ -90,10 +127,18 @@
                     </tr>
                     <tr>
                         <td>Ex. 1</td>
-                        <td>Ex. Tyranosaurus Rex</td>
-                        <td>Ex. Roberta</td>
-                        <td>Ex. Paddock 09</td>
+                        <td>Ex. Velociraptor</td>
+                        <td>Ex. Blue</td>
+                        <td>Ex. Raptor Training Facility</td>
 
+                        <td><button onclick="location.href='forms/biologicalAssetsUpdate.html'">Update</button></td>
+                        <td><button>Delete</button></td>
+                    </tr>
+                    <tr>
+                        <td>Ex. 2</td>
+                        <td>Ex. Tyrannosaurus Rex</td>
+                        <td>Ex. Roberta</td>
+                        <td>Ex. T-Rex Kingdom</td>
 
                         <td><button onclick="location.href='forms/biologicalAssetsUpdate.html'">Update</button></td>
                         <td><button>Delete</button></td>

@@ -22,6 +22,7 @@
         <a href="../employees.html" >Employees</a>
         <a href="../tasksAssigned.html" >Tasks Assigned</a>
         <a href="../employeeTasks.html" >Employee Tasks</a>
+        <a href="../taskCategories.html" >Task Categories</a>
         <a href="../species.html" >Species</a>
         <a href="../diets.html" >Diets</a>
         <a href="../habitats.html" >Habitats</a>
@@ -56,6 +57,7 @@
                         <p>
                             <div><label for="habitatSize" class="required">Size</label></div>
                             <select name="habitatSize" id="habitatSize" required>
+                                <option value="">Choose an option</option>
                                 <option value="1">1 - Small</option>
                                 <option value="2">2 - Medium</option>
                                 <option value="3">3 - Large</option>
@@ -69,7 +71,14 @@
                                     required
                                     cols="40" rows="5" 
                                     min="5" max="255"
-                                    placeholder="Ex. Prehistoric jungles were dense, lush environments teeming with plant and animal life. These habitats supported a variety of herbivorous and carnivorous dinosaur species, including smaller predators, long-necked sauropods, and armored herbivores. Many plants were ferns, horsetails, and primitive conifers."></textarea>
+                                    placeholder="Ex. Prehistoric jungles were dense, lush environments teeming with plant and animal life..."></textarea>
+                        </p>
+                        <p>
+                            <div><label for="habitatPhoto">Photo Path</label></div>
+                            <input type="text" 
+                                    name="habitatPhoto" 
+                                    id="habitatPhoto" 
+                                    placeholder="Ex. images/photo.png">
                         </p>
                     </fieldset>
                 </form>

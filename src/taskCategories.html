@@ -31,60 +31,47 @@
     </nav>
     <main>
         <section>
-            <h2>Job Classifications</h2>
+            <h2>Task Categories</h2>
             <article>
-                <h3>Add New Job Classification</h3>
+                <h3>Add New Task Category</h3>
                 <p>
-                    Click the "Create" button below to add a new Job Classification to the DINO database.
+                    Click the "Create" button below to add a new Task Category to the DINO database.
                 </p>
                 <!-- <form>
                     <fieldset>
                         <legend>Information</legend>
                         <p>
-                            <div><label for="jobTitle" class="required">Title</label></div>
+                            <div><label for="category" class="required">Category</label></div>
                             <input type="text"
-                                    name="jobTitle" 
-                                    id ="jobTitle" 
+                                    name="category" 
+                                    id ="category" 
                                     required 
                                     autofocus
-                                    placeholder="Ex. Ranger">
-                        </p>
-                        <p>
-                            <div><label for="facTypeDescription" class="required">Description</label></div>
-                            <textarea
-                                    name="facTypeDescription"
-                                    id ="facTypeDescription"
-                                    required
-                                    cols="40" rows="5" 
-                                    min="5" max="255"
-                                    placeholder="Ex. Patrols park, assists visitors, and manages wildlife."></textarea>
+                                    placeholder="Ex. Medical">
                         </p>
                     </fieldset>
                 </form> -->
                 <div>
-                    <p><button onclick="location.href='forms/jobClassificationsAdd.html'">Create</button></p>
+                    <p><button onclick="location.href='forms/taskCategoriesAdd.html'">Create</button></p>
                 </div>
             </article>
             <article>
-                <h3>View Job Classifications</h3>
+                <h3>View Task Categories</h3>
                 <p>
-                    The table below shows existing information for Job Classification entities and includes
+                    The table below shows existing information for Task Categories and includes
                     buttons to update or delete them.
                 </p>
                 <table>
                     <tr>
                         <th>ID</th>
-                        <th>Title</th>
-                        <th>Description</th>
-
+                        <th>Name</th>
                         <th>Update</th>
                         <th>Delete</th>
                     </tr>
                     <tr>
                         <td>Ex. 1</td>
-                        <td>Ex. Ranger</td>
-                        <td>Ex. Patrols park, assists visitors, and manages wildlife.</td>
-                        <td><button onclick="location.href='forms/jobClassificationsUpdate.html'">Update</button></td>
+                        <td>Ex. Medical</td>
+                        <td><button onclick="location.href='forms/taskCategoriesUpdate.html'">Update</button></td>
                         <td><button>Delete</button></td>
                     </tr>
                 </table>

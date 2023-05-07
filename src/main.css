@@ -29,7 +29,7 @@
     --worldLightBlue: #AFE9EE;
     --worldLightBlueClear: #afe9ee47;
     --worldMedBlue: #61b4fc;
-    --worldMedBlueClear: #61b4fcc0;
+    --worldMedBlueClear: #61b4fce6;
     --worldMedBlueClearBackup: #61b4fc9a;
     --worldDeepBlue: #0F284F;
     --worldDeepBlueClear: #0f284fec;
@@ -226,8 +226,13 @@
 
   select {
     background-color: var(--worldDeepBlue);
-    color: var(--worldLightBlue)
+    color: var(--worldLightBlue);
   }
+
+    /* select {
+    background-color: var(--worldLightBlue);
+    color: var(--worldDeepBlue);
+  } */
 
   label {
     font-weight: bold;
