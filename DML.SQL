@@ -34,6 +34,7 @@
 --      Update:         Everything except Parks
 --      Delete:         Everything except TasksAssigned
 --      Custom:         EmployeeTasks lookup for an employee, TaskAssigned Lookup for a facility sorted by date
+--                      Select populators for looking up tasks that have or haven't ended?
 
 -- Change: Made Nickname for bio assets NOT null instead of nullable since this is (currently) selecting for assets in queries based on nicknames.
 --              May reverts this if we figure a way to get them without it / can make nickname non-unique in that case.
