@@ -58,12 +58,14 @@
                                     placeholder="First Name">
                         </p>
                         <p>
-                            <div><label for="job" class="required">Job</label></div>
-                            <input type="text"
-                                        name="job" 
-                                        id ="job" 
-                                        required 
-                                        placeholder="Ex. Ranger">
+                            <!-- Populated by SQL query -->
+                            <div><label for="jobTitle" class="required">Job</label></div>
+                            <select name="jobTitle" id="jobTitle" required>
+                                <option value="1">Ranger</option>
+                                <option value="2">Scientist</option>
+                                <option value="3">ACU Specialist</option>
+                                <option value="4">Concessions Manager</option>
+                            </select>
                         </p>
                         <p>
                             <div><label for="hourlyWage" class="required">Wage</label></div>
