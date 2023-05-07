@@ -52,6 +52,7 @@
     background-size:cover;
     background-color: var(--concreteLight);
     background-attachment: fixed;
+    background-position: center;
     background-image:url(images/facility-enclosure-gates-night.jpg);
     color: var(--worldDeepBlue);
     /* color: black; */
