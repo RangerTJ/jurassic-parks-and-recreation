@@ -80,6 +80,11 @@ SELECT idEmployee, lastName, firstName
 FROM Employees
 ORDER BY lastName ASC;
 
+-- Task Categories Selector
+SELECT idTaskCategory, categoryName
+FROM TaskCategories
+ORDER BY categoryName ASC;
+
 -- Question/Note: It may make more sense to do TasksAssigned and EmployeeTasks as direct inputs where we assume staff responsible have knowledge of
 -- the relevant task ID's, vs. a drop down (because these are gonna get unweildingly large pretty fast)
 

@@ -24,6 +24,7 @@
         <a href="employees.html" >Employees</a>
         <a href="tasksAssigned.html" >Tasks Assigned</a>
         <a href="employeeTasks.html" >Employee Tasks</a>
+        <a href="taskCategories.html" >Task Categories</a>
         <a href="species.html" >Species</a>
         <a href="diets.html" >Diets</a>
         <a href="habitats.html" >Habitats</a>
@@ -52,6 +53,17 @@
                                         id ="taskAssigned" 
                                         required 
                                         placeholder="#Task ID - Description">
+                        </p>
+                        <p>
+                            <div><label for="category" class="required">Category:</label></div>
+                            <select id="category" name="category" required>
+                                <option value="">Choose an option</option>
+                                <option value="1">Medical</option>
+                                <option value="2">Veterinary</option>
+                                <option value="3">Research</option>
+                                <option value="4">Maintenance</option>
+                                <option value="5">Security</option>
+                            </select>
                         </p>
                         <p>
                             <div><label for="employee" class="required">Employee</label></div>
@@ -111,6 +123,7 @@
                         <th>ID</th>
                         <!-- Composite of TaskID + Description? -->
                         <th>Task Assigned</th>
+                        <th>Category</th>
                         <!-- Composite of EmpID + Full Name? -->
                         <th>Employee</th>  
                         <th>Hours Worked</th>
@@ -123,6 +136,7 @@
                     </tr>
                     <tr>
                         <td>Ex. 1</td>
+                        <td>Ex. Maintenance</td>
                         <td>Ex. #1 - Fix Doors to Visitor Center</td>
                         <td>Ex. #3 - Ralph Wiggum</td>
                         <td>Ex. 5</td>
