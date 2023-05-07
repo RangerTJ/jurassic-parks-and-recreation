@@ -57,6 +57,7 @@
     background-image:url(images/facility-enclosure-gates-night.jpg);
     color: var(--worldDeepBlue);
     /* color: black; */
+    /* color: greenyellow; */
     font-family: var(--normalText);
     max-width: 85%;
     margin: auto;
@@ -78,9 +79,9 @@
 
   main {
     background-color: var(--worldMedBlueClear);
-    /* color: greenyellow; */
     /* background-color: var(--dominionAmberMedClear); */
-    /* background-color: var(--feralGreenClear); */
+    /* background-color: var(--feralGreenClear);
+    color: greenyellow; */
     padding-bottom: 1%;
   }
 
@@ -113,6 +114,9 @@
     /* background-color: var(--dominionAmberDark);
     color: black;
     border: solid var(--dominionAmberDark); */
+    /* background-color: yellow;
+    color: black;
+    border: solid yellow; */
     padding-left: 1%;
     padding-right: 1%;
     font-size: 35px;
@@ -159,9 +163,6 @@
     margin-bottom: 0;
     margin-left: 1%;
     padding-top: 1%;
-    color: var(--worldDeepBlue);
-    /* color: greenyellow */
-    /* color: black; */
     font-family: var(--jpFont);
     font-size: 60px;
     font-weight: normal;
