@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Jurassic Parks and Recreation | Home</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <meta name='robots' content='noindex,noarchive,nofollow'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+</head>
+
+<body>
+    <header>
+        <h1>Jurassic Parks and Recreation *</h1>
+        <p class="headerP">D.I.N.O.</p>
+    </header>
+    <nav>
+        <a href="index.html" >Home</a>
+        <a href="parks.html" >Parks</a>
+        <a href="facilities.html" >Facilities</a>
+        <a href="biologicalAssets.html" >Biological Assets</a>
+        <a href="employees.html" >Employees</a>
+        <a href="tasksAssigned.html" >Tasks Assigned</a>
+        <a href="employeeTasks.html" >Employee Tasks</a>
+        <a href="species.html" >Species</a>
+        <a href="diets.html" >Diets</a>
+        <a href="habitats.html" >Habitats</a>
+        <a href="facilityTypes.html" >Facility Types</a>
+        <a href="jobClassifications.html" >Job Classifications</a>
+    </nav>
+    <main>
+        <section>
+            <h2>Habitats</h2>
+            <article>
+                <h3>Add New Habitat</h3>
+                <p>
+                    Click the "Create" button below to add a new Habitat to the DINO database.
+                </p>
+                <!-- <form>
+                    <fieldset>
+                        <legend>Information</legend>
+                        <p>
+                            <div><label for="habitatName" class="required">Name</label></div>
+                            <input type="text"
+                                    name="habitatNam" 
+                                    id ="habitatNam" 
+                                    required 
+                                    autofocus
+                                    placeholder="Ex. Tropical Jungle - Large">
+                        </p>
+                        <p>
+                            <div><label for="habitatSize" class="required">Size</label></div>
+                            <select name="habitatSize" id="habitatSize" required>
+                                <option value="1">Small</option>
+                                <option value="2">Medium</option>
+                                <option value="3">Large</option>
+                            </select>
+                        </p>
+                        <p>
+                            <div><label for="habitatDescription" class="required">Description</label></div>
+                            <textarea
+                                    name="habitatDescription"
+                                    id ="habitatDescription"
+                                    required
+                                    cols="40" rows="5" 
+                                    min="5" max="255"
+                                    placeholder="Ex. Prehistoric jungles were dense, lush environments teeming with plant and animal life. These habitats supported a variety of herbivorous and carnivorous dinosaur species, including smaller predators, long-necked sauropods, and armored herbivores. Many plants were ferns, horsetails, and primitive conifers."></textarea>
+                        </p>
+                    </fieldset>
+                </form> -->
+                <div>
+                    <p><button onclick="location.href='forms/habitatsAdd.html'">Create</button></p>
+                </div>
+            </article>
+            <article>
+                <h3>View Habitats</h3>
+                <p>
+                    The table below shows existing information for Habitat entities and includes
+                    buttons to update or delete them.
+                </p>
+                <table>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Size</th>
+                        <th>Description</th>
+
+                        <th>Update</th>
+                        <th>Delete</th>
+                    </tr>
+                    <tr>
+                        <td>Ex. 1</td>
+                        <td>Ex. Prehistoric Jungle - Large</td>
+                        <td>Ex. 3</td>
+                        <td>
+                            Ex. Prehistoric jungles were dense, lush environments teeming with plant and animal life. 
+                            These habitats supported a variety of herbivorous and carnivorous dinosaur species, 
+                            including smaller predators, long-necked sauropods, and armored herbivores. 
+                            Many plants were ferns, horsetails, and primitive conifers.
+                        </td>
+                        <td><button onclick="location.href='forms/habitatsUpdate.html'">Update</button></td>
+                        <td><button>Delete</button></td>
+                    </tr>
+                </table>
+            </article>
+        </section>
+    </main>
+    <footer>&copy;2023 Taylor Jordan and Nicholas Schmidt (Team: Jurassic Parks and Recreation)</footer>
+</body>
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Jurassic Parks and Recreation | Home</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <meta name='robots' content='noindex,noarchive,nofollow'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+</head>
+
+<body>
+    <header>
+        <h1>Jurassic Parks and Recreation *</h1>
+        <p class="headerP">D.I.N.O.</p>
+    </header>
+    <nav>
+        <a href="index.html" >Home</a>
+        <a href="parks.html" >Parks</a>
+        <a href="facilities.html" >Facilities</a>
+        <a href="biologicalAssets.html" >Biological Assets</a>
+        <a href="employees.html" >Employees</a>
+        <a href="tasksAssigned.html" >Tasks Assigned</a>
+        <a href="employeeTasks.html" >Employee Tasks</a>
+        <a href="species.html" >Species</a>
+        <a href="diets.html" >Diets</a>
+        <a href="habitats.html" >Habitats</a>
+        <a href="facilityTypes.html" >Facility Types</a>
+        <a href="jobClassifications.html" >Job Classifications</a>
+    </nav>
+    <main>
+        <section>
+            <h2>Species</h2>
+            <article>
+                <h3>Add New Species</h3>
+                <p>
+                    Click the "Create" button below to add a new Species to the DINO database.
+                </p>
+                <!-- <form>
+                    <fieldset>
+                        <legend>Information</legend>
+                        <p>
+                            <input type="text"
+                                    name="speciesName" 
+                                    id ="speciesName" 
+                                    required 
+                                    autofocus
+                                    placeholder="Ex. Apatosaurus">
+                        </p>
+                        <p> -->
+                            <!-- Populate with SQL query -->
+                            <!-- <div><label for="speciesDiet" class="required">Diet</label></div>
+                            <select name="speciesDiet" id="speciesDiet" required>
+                                <option value="1">Herbivore</option>
+                                <option value="2">Carnivore</option>
+                                <option value="3">Omnivore</option>
+                                <option value="4">Pescivore</option>
+                                <option value="5">Insectivore</option>
+                            </select>
+                        </p>
+                        <p> -->
+                            <!-- Populated by SQL Query -->
+                            <!-- <div><label for="habitat" class="required">Habitat</label></div>
+                            <select name="habitat" id="habitat" required>
+                                <option value="1">Tropical Jungle - Large</option>
+                                <option value="2">Cretaceous Coastline - Medium</option>
+                                <option value="3">Jurassic Swamp - Small</option>
+                            </select>
+                        </p>
+                        <p> -->
+                            <!-- Hard coded from 1-10 -->
+                            <!-- <div><label for="threatLevel" class="required">Threat Level</label></div>
+                            <select name="threatLevel" id ="threatLevel" required>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                            </select>
+                        </p>
+                        <p>
+                            <div><label for="speciesPhoto" class="required">Photo</label></div>
+                            <input type="text"
+                                        name="speciesPhoto" 
+                                        id ="speciesPhoto" 
+                                        required 
+                                        placeholder="Ex. images/test_photo.png">
+                        </p>
+                        <p>
+                            <div><label for="speciesDescription" class="required">Description</label></div>
+                            <textarea
+                                    name="speciesDescription"
+                                    id ="speciesDescription"
+                                    required
+                                    cols="40" rows="5" 
+                                    min="5" max="255"
+                                    placeholder="Ex. Iconic long-necked sauropod."></textarea>
+                        </p>
+                    </fieldset>
+                </form> -->
+                <div>
+                    <p><button onclick="location.href='forms/speciesAdd.html'">Create</button></p>
+                </div>
+            </article>
+            <article>
+                <h3>View Species</h3>
+                <p>
+                    The table below shows existing information for Species entities and includes
+                    buttons to update or delete them.
+                </p>
+                <table>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Diet</th>
+                        <th>Habitat</th>
+                        <th>Threat Level</th>
+                        <th>Photo</th>
+                        <th>Description</th>
+
+                        <th>Update</th>
+                        <th>Delete</th>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>Tyranosaurus Rex</td>
+                        <td>Carnivore</td>
+                        <td>Prehistoric Jungle - Large</td>
+                        <td>10</td>
+                        <td><img src="images/species-tyranosaurus.jpg" alt="Staff photo example." style="max-width: 100%"></td>
+                        <td>A large carnivorous dinosaur with powerful jaws and sharp teeth.</td>
+
+                        <td><button onclick="location.href='forms/speciesUpdate.html'">Update</button></td>
+                        <td><button>Delete</button></td>
+                    </tr>
+                </table>
+            </article>
+        </section>
+    </main>
+    <footer>&copy;2023 Taylor Jordan and Nicholas Schmidt (Team: Jurassic Parks and Recreation)</footer>
+</body>
+</html>

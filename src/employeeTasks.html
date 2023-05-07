@@ -1,5 +1,3 @@
-<!-- Citation: Template/head based on starter code from CS290 Projects 1-3 -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,20 +11,20 @@
 
 <body>
     <header>
-        <h1>DINO</h1>
-        <p class="headerP">Digital Information Nexus for Operations</p>
+        <h1>Jurassic Parks and Recreation *</h1>
+        <p class="headerP">D.I.N.O.</p>
     </header>
     <nav>
-        <a href="test_template.html" >Home</a>
+        <a href="index.html" >Home</a>
         <a href="parks.html" >Parks</a>
         <a href="facilities.html" >Facilities</a>
-        <a href="test_template.html" >Biological Assets</a>
+        <a href="biologicalAssets.html" >Biological Assets</a>
         <a href="employees.html" >Employees</a>
         <a href="tasksAssigned.html" >Tasks Assigned</a>
         <a href="employeeTasks.html" >Employee Tasks</a>
-        <a href="test_template.html" >Species</a>
-        <a href="test_template.html" >Diets</a>
-        <a href="test_template.html" >Habitats</a>
+        <a href="species.html" >Species</a>
+        <a href="diets.html" >Diets</a>
+        <a href="habitats.html" >Habitats</a>
         <a href="facilityTypes.html" >Facility Types</a>
         <a href="jobClassifications.html" >Job Classifications</a>
     </nav>
@@ -36,30 +34,36 @@
             <article>
                 <h3>Add New Employee Task</h3>
                 <p>
-                    If you would like to add a new Employee Task to the database. Enter values for its attributes below
-                    and click the "Add Task" button. Employee tasks are entities that handle the many-to-many relationship between
-                    a given Employee and an open Task Assignment. Each entity represents a chunk of work contributed by a specific
-                    employee towards the completion of the matching task. Many employees can contribute to the same task, and a single
-                    employee can contribute to the same task multiple times (for different hourly contributions at different time intervals).
+                    Employee Tasks manage Employee interactions
+                    with Assigned Tasks by documenting their work contributions towards the task. 
+                    They are necessary to handle the many-to-many
+                    relationship between Employees and Assigned Tasks, in addition to providing a way to track labor and costs in the process.
+                    
                 </p>
-                <form>
+                <p>
+                    Click the "Create" button below to add a new Employee Task to the DINO database.
+                </p>
+                <!-- <form>
                     <fieldset>
                         <legend>Information</legend>
-                        <p>
-                            <div><label for="taskAssigned" class="required">Task</label></div>
+                        <p> -->
+                            <!-- Manual input due to sheer number of them, unless a better solution to ID them can be thought of -->
+                            <!-- <div><label for="taskAssigned" class="required">Task</label></div>
                             <input type="text"
                                         name="taskAssigned" 
                                         id ="taskAssigned" 
                                         required 
                                         placeholder="#Task ID - Description">
                         </p>
-                        <p>
-                            <div><label for="employee" class="required">Employee</label></div>
-                            <input type="text"
-                                        name="employee"
-                                        id ="employee"
-                                        required 
-                                        placeholder="#ID - Firstname Lastname">
+                        <p> -->
+                            <!-- Options by SQL query of unique usernames / possibly show first/last name too, but just use userid for values -->
+                            <!-- <div><label for="employeeUsername" class="required">Employee User ID</label></div>
+                            <select name="employeeUsername" id="employeeUsername" required>
+                                <option value="1">gharding</option>
+                                <option value="2">dnedry</option>
+                                <option value="3">rwiggum</option>
+                                <option value="4">bsamson</option>
+                            </select>
                         </p>
                         <p>
                             <div><label for="workHours" class="required">Hours Worked</label></div>
@@ -79,7 +83,7 @@
                         </p>
                         <p>
                             <div><label for="workStart" class="required">Start</label></div>
-                            <input type="text"
+                            <input type="date"
                                         name="workStart"
                                         id ="workStart" 
                                         required 
@@ -87,21 +91,21 @@
                         </p>
                         <p>
                             <div><label for="workEnd" class="required">End</label></div>
-                            <input type="text"
+                            <input type="date"
                                         name="workEnd"
                                         id ="workEnd" 
                                         required 
                                         placeholder="Ex. 4/7/2023">
                         </p>
                     </fieldset>
-                </form>
+                </form> -->
                 <div>
-                    <p><button>Add Task</button></p>
+                    <p><button onclick="location.href='forms/employeeTasksAdd.html'">Create</button></p>
                 </div>
             </article>
 
             <article>
-                <h3>Existing Data</h3>
+                <h3>View Employee Tasks</h3>
                 <p>
                     The table below shows existing information for Employee Task entities and includes
                     buttons to update or delete them.
@@ -130,24 +134,10 @@
                         <td>Ex. 3/1/2023</td>
                         <td>Ex. 3/1/2023</td>
 
-                        <td><button>Update</button></td>
+                        <td><button onclick="location.href='forms/employeeTasksUpdate.html'">Update</button></td>
                         <td><button>Delete</button></td>
                     </tr>
                 </table>
-            </article>
-            <article>
-                <h3>Alternative Design Proposal Musings</h3>
-                <p>
-                    Alternate Solution: Input field for delete based on target criteria (like ID or unique attribute).
-                    Add ID field to add new parks, and branch logic so that if it's NULL, a new one is added, and if it's not
-                    NULL, then create a new one? Having delete be a lookup saves needing deletes for each row. Alternate
-                    update would be update lookup too, but then need new update page for each entity for updating instead of adding.
-                    Would then be add/delete page and a different modify page. Add/delete could be the main page with the report/summary
-                    table of the general entity query. Alternately, could make that a lookup too, instead. Launcher page could be a welcome
-                    and have buttons/inputs/drop-downs that launch the "popular" custom queries. Might be a good idea to use drop downs in place
-                    of inputs when it's by an ID, so the drop-down could display the ID + an additional attribute to clarify what each ID is
-                    (for dinos/tasks and things that don't have unique non-id identifiers).
-                </p>
             </article>
         </section>
     </main>

@@ -29,22 +29,23 @@
     --worldLightBlue: #AFE9EE;
     --worldLightBlueClear: #afe9ee47;
     --worldMedBlue: #61b4fc;
-    --worldMedBlueClear: #61b4fc9a;
+    --worldMedBlueClear: #61b4fcc0;
+    --worldMedBlueClearBackup: #61b4fc9a;
     --worldDeepBlue: #0F284F;
-    --worldDeepBlueClear: #0f284f94;
+    --worldDeepBlueClear: #0f284fec;
+    --worldDeepBlueClearLight: #0f284faf;
+    --dominionAmberBright: rgb(251, 151, 0);
+    --dominionAmberBrightClear: rgba(251, 151, 0, 0.713);
+    --dominionAmberMed: rgb(206, 123, 0);
+    --dominionAmberMedClear: rgba(206, 124, 0, 0.707);
+    --dominionAmberDark: rgb(135, 81, 0);
+    --dominionAmberDarkClear: rgba(135, 81, 0, 0.691);
+    --dominionEarth: rgb(69, 41, 0);;
     --feralGreen: #3c663e;
+    --feralGreenClear: #3c663eb9;
 
     /* Fonts */
     --jpFont: 'Jurassic Park', cursive;
-    --titleFont: 'Bungee', cursive;
-    --titleFontInline: 'Bungee Inline', cursive;
-    --titleFontOutline: 'Bungee Outline', cursive;
-    --titleFontHairline: 'Bungee Hairline', cursive;
-    --titleFontAltInline: 'Alumni Sans Inline One', cursive;
-    --titleFontAltOutline: 'Tourney', cursive;
-    --barcodeStyleFont: 'Libre Barcode 39 Text', cursive;
-    --roadSignFont: 'Overpass Mono', monospace;
-    --techStyleFont: 'Zen Dots', cursive; 
     --normalText: 'Overpass Mono', monospace;}
 
   /* Basics */
@@ -52,25 +53,38 @@
     background-size:cover;
     background-color: var(--concreteLight);
     background-attachment: fixed;
-    background-image:url(images/jurassic_world_san_diego.jpg);
+    background-position: center;
+    background-image:url(images/facility-enclosure-gates-night.jpg);
     color: var(--worldDeepBlue);
+    /* color: black; */
+    /* color: greenyellow; */
+    /* color: yellow; */
     font-family: var(--normalText);
-    max-width: 80%;
+    max-width: 85%;
     margin: auto;
-    padding: 1%;}
+    padding: 1%;
+  }
   
   header {
     background-color: black;
+    color: white;
+    /* background-color: whitesmoke;
+    color: black; */
+    /* background-color: var(--dominionAmberBright);
+    color: black; */
     padding-left: 1.5%;
     padding-right: 1%;
     padding-bottom: 1px;
     display: block;
-    color: white;
 }
 
   main {
     background-color: var(--worldMedBlueClear);
-    padding-bottom: 1%;}
+    /* background-color: var(--dominionAmberMedClear); */
+    /* background-color: var(--feralGreenClear); */
+
+    padding-bottom: 1%;
+  }
 
   article {
     margin-left: 2%;
@@ -80,6 +94,8 @@
   footer {
     background-color: var(--worldDeepBlue);
     color: var(--worldLightBlue);
+    /* background-color: var(--dominionAmberBright);
+    color: black; */
     font-family: var(--normalText);
     padding: 1%;}  
 
@@ -95,31 +111,39 @@
   nav a {
     background-color: var(--worldDeepBlue);
     color: var(--worldLightBlue);
-    border: 0ch;
+    border: solid var(--worldDeepBlue);
+    /* background-color: var(--dominionAmberDark);
+    color: black;
+    border: solid var(--dominionAmberDark); */
+    /* background-color: var(--feralGreen);
+    color: yellow;
+    border: solid var(--feralGreen); */
     padding-left: 1%;
     padding-right: 1%;
-    font-size: normal;
+    font-size: 35px;
     font-weight: normal;
     text-decoration: none;
     display:flex;
     justify-content: center;
     flex-grow: 1;
-    line-height: 1.75;
+    line-height: 1.00;
+    font-family: var(--jpFont);
     margin: 0%;
 }
 
   nav a:hover {       
-    background-color: var(--worldMedBlue);
-    color: var(--worldLightBlue);
-    border: 0ch;
-    font-weight: bolder;
+    background-color: black;
+    color: white;
+    border: solid gold;
     text-decoration: none;
-    text-shadow: 1px 1px 4px black;
 }
     
   nav a:focus {
-    background-color: var(--worldMedBlue);
-    outline: none;}
+    background-color: black;
+    color: white;
+    border: solid gold;
+    outline: none;
+  }
   
   
   /* Paragraphs and Headers */
@@ -140,7 +164,6 @@
     margin-bottom: 0;
     margin-left: 1%;
     padding-top: 1%;
-    color: var(--worldDeepBlue);
     font-family: var(--jpFont);
     font-size: 60px;
     font-weight: normal;
@@ -148,6 +171,8 @@
   h3 {
     font-size: 140%; 
     font-weight: bold;
+    line-height: 0.10;
+    margin-bottom: 0;
 }
   h4 {}
   h5 {}
@@ -155,7 +180,7 @@
 
   /* Tables */
   table {
-    background-color: var(--worldDeepBlueClear);
+    background-color: var(--worldDeepBlueClearLight);
     color: var(--worldLightBlue);
     width: 100%;
     text-align: center;
@@ -183,18 +208,25 @@
     color: var(--worldLightBlue);
     background-color: var(--worldDeepBlue);
     border-radius: 5px;
+    font-family: var(--jpFont);
+    font-size:xx-large;
   }
 
   button:hover {
-    background-color: var(--worldMedBlue);
-    font-weight: bold;
-    border-color: var(--worldMedBlueClear);
+    background-color: black;
+    color: white;
+    border-color: gold;
   }
 
   button:focus {
-    background-color: var(--worldMedBlue);
-    font-weight: bold;
-    border-color: var(--worldLightBlue);
+    background-color: black;
+    color: white;
+    border-color: gold;
+  }
+
+  select {
+    background-color: var(--worldDeepBlue);
+    color: var(--worldLightBlue)
   }
 
   label {
@@ -215,25 +247,29 @@
   }
 
   input {
-    background-color: var(--worldLightBlue);
-    color: var(--worldDeepBlue);
+    color: var(--worldLightBlue);
+    background-color: var(--worldDeepBlue);
     /* width: 90%; */
   }
 
   textarea {
-    background-color: var(--worldLightBlue);
-    color: var(--worldDeepBlue);
+    color: var(--worldLightBlue);
+    background-color: var(--worldDeepBlue);
     /* width: 90%; */
+  }
+
+  ::placeholder {
+    color: var(--worldMedBlueClear);
   }
 
 
 /* Custom Elements */
 .headerP {
     margin-top: -2%;
-    margin-bottom: 0;
+    margin-bottom: 5px;
     padding-top: 0px;
-    font-family: var(--jpFont);
-    font-size: 200%;
+    font-family: var(--normalText);
+    font-size: 180%;
 }
 
   /* Stuff down here also copy/pasted from CS290 */
