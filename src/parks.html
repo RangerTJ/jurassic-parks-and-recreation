@@ -32,13 +32,12 @@
         <section>
             <h2>Parks</h2>
             <article>
-                <h3>Add New Parks</h3>
+                <h3>Create New Park</h3>
                 <p>
-                    If you would like to add a new Park entity to the database, enter values for its attributes below
-                    and click the "Add Park" button.
+                    Click the "Create Park" button below to add a new park to the DINO database."
                 </p>
-                <form>
-                    <fieldset>
+                <!-- <form>
+                    <fieldset> -->
                         <!-- Long-term potential goal: One update and one page for the whole project that uses the populating SQL
                         query to logically build and structure the form... possibly based on if statements that handle what format
                         to give to a form element based on the element name.
@@ -46,7 +45,7 @@
                         names and what their associated form format is.
                         This would let us have only one add/update page each - we just need to make sure that on-update button click
                         sends the correct query -->
-                        <legend>Information</legend>
+                        <!-- <legend>Information</legend>
                         <p>
                             <div><label for="parkName" class="required">Name</label></div>
                             <input type="text"
@@ -75,13 +74,13 @@
                                     placeholder="Ex. The original prehistoric zoological theme park and preserve. Permanently closed."></textarea>
                         </p>
                     </fieldset>
-                </form>
+                </form> -->
                 <div>
-                    <p><button>Add Park</button></p>
+                    <p><button onclick="location.href='tableAdd/parksAdd.html'">Create Park</button></p>
                 </div>
             </article>
             <article>
-                <h3>Existing Data</h3>
+                <h3>View Parks</h3>
                 <p>
                     The table below shows existing information for Park entities and includes
                     buttons to update or delete them.
@@ -102,7 +101,7 @@
                         <td>
                             Ex. World-class prehistoric zoological theme park and preserve.
                         </td>
-                        <td><button>Update</button></td>
+                        <td><button onclick="location.href='tableUpdate/parksUpdate.html'">Update</button></td>
                         <td><button>Delete</button></td>
                     </tr>
                 </table>
