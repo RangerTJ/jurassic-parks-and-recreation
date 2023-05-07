@@ -118,7 +118,7 @@ CREATE OR REPLACE TABLE `BiologicalAssets` (
   `idBiologicalAsset`   INT NOT NULL UNIQUE AUTO_INCREMENT,
   `idSpecies`           INT NOT NULL,
   `idFacility`          INT NOT NULL,
-  `nickname`            VARCHAR(255) NULL UNIQUE,
+  `nickname`            VARCHAR(255) NOT NULL UNIQUE,
   PRIMARY KEY (`idBiologicalAsset`),
   CONSTRAINT `fk_BiologicalAssets_Facilities1`
     FOREIGN KEY (`idFacility`)
