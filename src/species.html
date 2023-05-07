@@ -41,32 +41,35 @@
                     <fieldset>
                         <legend>Information</legend>
                         <p>
-                            <div><label for="speciesName" class="required">Name</label></div>
                             <input type="text"
                                     name="speciesName" 
                                     id ="speciesName" 
                                     required 
                                     autofocus
-                                    placeholder="Ex. Apatasaurus">
+                                    placeholder="Ex. Apatosaurus">
                         </p>
                         <p>
+                            <!-- Populate with SQL query -->
                             <div><label for="speciesDiet" class="required">Diet</label></div>
-                            <input type="text"
-                                        name="speciesDiet" 
-                                        id ="speciesDiet" 
-                                        required 
-                                        placeholder="Ex. Herbivore">
-                        </p>
-
-                        <p>
-                            <div><label for="speciesHabitat" class="required">Habitat</label></div>
-                            <input type="text"
-                                        name="speciesHabitat" 
-                                        id ="speciesHabitat" 
-                                        required 
-                                        placeholder="Ex. Jurassic Swamp - Small">
+                            <select name="speciesDiet" id="speciesDiet" required>
+                                <option value="1">Herbivore</option>
+                                <option value="2">Carnivore</option>
+                                <option value="3">Omnivore</option>
+                                <option value="4">Pescivore</option>
+                                <option value="5">Insectivore</option>
+                            </select>
                         </p>
                         <p>
+                            <!-- Populated by SQL Query -->
+                            <div><label for="habitat" class="required">Habitat</label></div>
+                            <select name="habitat" id="habitat" required>
+                                <option value="1">Tropical Jungle - Large</option>
+                                <option value="2">Cretaceous Coastline - Medium</option>
+                                <option value="3">Jurassic Swamp - Small</option>
+                            </select>
+                        </p>
+                        <p>
+                            <!-- Hard coded from 1-10 -->
                             <div><label for="speciesThreatLevel" class="required">Threat Level</label></div>
                             <input type="text"
                                         name="speciesThreatLevel" 
@@ -82,7 +85,6 @@
                                         required 
                                         placeholder="Ex. images/test_photo.png">
                         </p>
-
                         <p>
                             <div><label for="speciesDescription" class="required">Description</label></div>
                             <textarea
@@ -126,7 +128,6 @@
                         <td>10</td>
                         <td><img src="images/rex_test.png" alt="Staff photo example." style="max-width: 100%"></td>
                         <td>A large carnivorous dinosaur with powerful jaws and sharp teeth.</td>
-                        
 
                         <td><button>Update</button></td>
                         <td><button>Delete</button></td>
