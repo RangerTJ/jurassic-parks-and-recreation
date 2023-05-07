@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Jurassic Parks and Recreation | Home</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <meta name='robots' content='noindex,noarchive,nofollow'>
+    <link rel='stylesheet' type='text/css' media='screen' href='../main.css'>
+</head>
+
+<body>
+    <header>
+        <h1>Jurassic Parks and Recreation *</h1>
+        <p class="headerP">D.I.N.O.</p>
+    </header>
+    <nav>
+        <a href="../index.html" >Home</a>
+        <a href="../parks.html" >Parks</a>
+        <a href="../facilities.html" >Facilities</a>
+        <a href="../biologicalAssets.html" >Biological Assets</a>
+        <a href="../employees.html" >Employees</a>
+        <a href="../tasksAssigned.html" >Tasks Assigned</a>
+        <a href="../employeeTasks.html" >Employee Tasks</a>
+        <a href="../species.html" >Species</a>
+        <a href="../diets.html" >Diets</a>
+        <a href="../habitats.html" >Habitats</a>
+        <a href="../facilityTypes.html" >Facility Types</a>
+        <a href="../jobClassifications.html" >Job Classifications</a>
+    </nav>
+    <main>
+        <section>
+            <h2>Add New Park</h2>
+            <article>
+                <p>
+                    If you would like to add a new Park entity to the database, enter values for its attributes below
+                    and click the "Add Park" button.
+                </p>
+                <form>
+                    <fieldset>
+                        <!-- Long-term potential goal: One update and one page for the whole project that uses the populating SQL
+                        query to logically build and structure the form... possibly based on if statements that handle what format
+                        to give to a form element based on the element name.
+                        To do this, need to define a list of element formats and their attributes and a list of all possible column
+                        names and what their associated form format is.
+                        This would let us have only one add/update page each - we just need to make sure that on-update button click
+                        sends the correct query -->
+                        <legend>Information</legend>
+                        <p>
+                            <div><label for="parkName" class="required">Name</label></div>
+                            <input type="text"
+                                    name="parkName" 
+                                    id ="parkName" 
+                                    required 
+                                    autofocus
+                                    placeholder="Ex. Jurassic Park">
+                        </p>
+                        <p>
+                            <div><label for="parkLocation" class="required">Location</label></div>
+                            <input type="text"
+                                        name="parkLocation" 
+                                        id ="parkLocation" 
+                                        required 
+                                        placeholder="Ex. Isla Nublar, Costa Rica">
+                        </p>
+                        <p>
+                            <div><label for="parkDescription" class="required">Description</label></div>
+                            <textarea
+                                    name="parkDescription"
+                                    id ="parkDescription"
+                                    required
+                                    cols="40" rows="5" 
+                                    min="5" max="255"
+                                    placeholder="Ex. The original prehistoric zoological theme park and preserve. Permanently closed."></textarea>
+                        </p>
+                    </fieldset>
+                </form>
+                <div>
+                    <p><button>Add Park</button></p>
+                </div>
+            </article>
+        </section>
+    </main>
+    <footer>&copy;2023 Taylor Jordan and Nicholas Schmidt (Team: Jurassic Parks and Recreation)</footer>
+</body>
+</html>

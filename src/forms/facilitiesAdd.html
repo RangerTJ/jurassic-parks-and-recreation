@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Jurassic Parks and Recreation | Home</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <meta name='robots' content='noindex,noarchive,nofollow'>
+    <link rel='stylesheet' type='text/css' media='screen' href='../main.css'>
+</head>
+
+<body>
+    <header>
+        <h1>Jurassic Parks and Recreation *</h1>
+        <p class="headerP">D.I.N.O.</p>
+    </header>
+    <nav>
+        <a href="../index.html" >Home</a>
+        <a href="../parks.html" >Parks</a>
+        <a href="../facilities.html" >Facilities</a>
+        <a href="../biologicalAssets.html" >Biological Assets</a>
+        <a href="../employees.html" >Employees</a>
+        <a href="../tasksAssigned.html" >Tasks Assigned</a>
+        <a href="../employeeTasks.html" >Employee Tasks</a>
+        <a href="../species.html" >Species</a>
+        <a href="../diets.html" >Diets</a>
+        <a href="../habitats.html" >Habitats</a>
+        <a href="../facilityTypes.html" >Facility Types</a>
+        <a href="../jobClassifications.html" >Job Classifications</a>
+    </nav>
+    <main>
+        <section>
+            <h2>Add New Facility</h2>
+            <article>
+                <p>
+                    If you would like to add a new Facility entity to the database, enter values for its attributes below
+                    and click the "Add Facility" button.
+                </p>
+                <form>
+                    <fieldset>
+                        <legend>Information</legend>
+                        <p>
+                            <div><label for="facilityName" class="required">Name</label></div>
+                            <input type="text"
+                                        name="facilityName" 
+                                        id ="facilityName" 
+                                        required
+                                        autofocus 
+                                        placeholder="Ex. Nublar Visitor Center">
+                        </p>
+                        <p>
+                            <!-- Populated by SQL Query -->
+                            <div><label for="parkName" class="required">Park</label></div>
+                            <select name ="parkName" id ="parkName" required>
+                                <option value="1">Jurassic Park</option>
+                                <option value="2">Jurassic Park: San Diego</option>
+                                <option value="3">Jurassic World</option>
+                                <option value="4">Site B</option>
+                            </select>
+                        </p>
+                        <p>
+                            <!-- Populated by SQL Query -->
+                            <div><label for="facilityType" class="required">Type</label></div>
+                            <select name="facilityType" id="facilityType" required>
+                                <option value="1">General Structure</option>
+                                <option value="2">Ground Enclosure</option>
+                                <option value="3">Aquatic Enclosure</option>
+                                <option value="4">Aviary Enclosure</option>
+                                <option value="5">Undeveloped Area</option>
+                            </select>
+                        </p>
+                        <p>
+                            <div><label for="facilityDescription" class="required">Description</label></div>
+                            <textarea
+                                    name="facilityDescription"
+                                    id ="facilityDescription"
+                                    required
+                                    cols="40" rows="5" 
+                                    min="5" max="255"
+                                    placeholder="Ex. The original prehistoric zoological theme park and preserve. Permanently closed."></textarea>
+                        </p>
+                        <p>
+                            <!-- Populated by SQL Query -->
+                            <div><label for="habitat" class="required">Habitat</label></div>
+                            <select name="habitat" id="habitat" required>
+                                <option value="1">Tropical Jungle - Large</option>
+                                <option value="2">Cretaceous Coastline - Medium</option>
+                                <option value="3">Jurassic Swamp - Small</option>
+                            </select>
+                        </p>
+                        <p>
+                            <!-- May not be a bad idea to add "Locations" with a name, description, and park FK as a stretch goal entity -->
+                            <div><label for="facilityLocation" class="required">Location</label></div>
+                            <input type="text"
+                                        name="facilityLocation"
+                                        id ="facilityLocation"
+                                        required 
+                                        placeholder="Ex. South Docks">
+                        </p>
+                        <p>
+                            <!-- Hard-coded scale of 0 to 10 -->
+                            <div><label for="securityRating" class="required">Security Rating</label></div>
+                            <select name="securityRating" id="securityRating" required>
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                            </select>
+                        </p>
+                        <!-- Workflow will be upload photo to server first, then select from available here entering filename at creation/update, possibly w/ drop-down menu -->
+                        <p>
+                            <div><label for="facilityPhoto" class="required">Photo Path</label></div>
+                            <input type="text"
+                                        name="facilityPhoto"
+                                        id ="facilityPhoto"
+                                        placeholder="Ex. images/photo.png">
+                        </p>
+                        <p>
+                            <div><label for="facilityNote" class="required">Notes</label></div>
+                            <textarea
+                                    name="facilityNote"
+                                    id ="facilityNote"
+                                    cols="40" rows="5" 
+                                    min="5" max="255"
+                                    placeholder="Ex. The original prehistoric zoological theme park and preserve. Permanently closed."></textarea>
+                        </p>
+                    </fieldset>
+                </form>
+                <div>
+                    <p><button>Add Facility</button></p>
+                </div>
+            </article>
+        </section>
+    </main>
+    <footer>&copy;2023 Taylor Jordan and Nicholas Schmidt (Team: Jurassic Parks and Recreation)</footer>
+</body>
+</html>
