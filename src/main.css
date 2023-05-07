@@ -34,12 +34,17 @@
     --worldDeepBlue: #0F284F;
     --worldDeepBlueClear: #0f284fec;
     --worldDeepBlueClearLight: #0f284faf;
+    --dominionAmberBright: rgb(251, 151, 0);
+    --dominionAmberBrightClear: rgba(251, 151, 0, 0.713);
+    --dominionAmberMed: rgb(206, 123, 0);
+    --dominionAmberMedClear: rgba(206, 124, 0, 0.707);
+    --dominionAmberDark: rgb(135, 81, 0);
+    --dominionAmberDarkClear: rgba(135, 81, 0, 0.691);
+    --dominionEarth: rgb(69, 41, 0);;
     --feralGreen: #3c663e;
 
     /* Fonts */
     --jpFont: 'Jurassic Park', cursive;
-    --barcodeStyleFont: 'Libre Barcode 39 Text', cursive;
-    --techStyleFont: 'Zen Dots', cursive;
     --normalText: 'Overpass Mono', monospace;}
 
   /* Basics */
@@ -49,6 +54,7 @@
     background-attachment: fixed;
     background-image:url(images/jurassic_world_san_diego.jpg);
     color: var(--worldDeepBlue);
+    /* color: black; */
     font-family: var(--normalText);
     max-width: 85%;
     margin: auto;
@@ -57,15 +63,18 @@
   
   header {
     background-color: black;
+    color: white;
+    /* background-color: var(--dominionAmberBright);
+    color: black; */
     padding-left: 1.5%;
     padding-right: 1%;
     padding-bottom: 1px;
     display: block;
-    color: white;
 }
 
   main {
     background-color: var(--worldMedBlueClear);
+    /* background-color: var(--dominionAmberMedClear); */
     padding-bottom: 1%;
   }
 
@@ -77,6 +86,8 @@
   footer {
     background-color: var(--worldDeepBlue);
     color: var(--worldLightBlue);
+    /* background-color: var(--dominionAmberBright);
+    color: black; */
     font-family: var(--normalText);
     padding: 1%;}  
 
@@ -93,6 +104,9 @@
     background-color: var(--worldDeepBlue);
     color: var(--worldLightBlue);
     border: solid var(--worldDeepBlue);
+    /* background-color: var(--dominionAmberDark);
+    color: black;
+    border: solid var(--dominionAmberDark); */
     padding-left: 1%;
     padding-right: 1%;
     font-size: 35px;
@@ -140,6 +154,7 @@
     margin-left: 1%;
     padding-top: 1%;
     color: var(--worldDeepBlue);
+    /* color: black; */
     font-family: var(--jpFont);
     font-size: 60px;
     font-weight: normal;
