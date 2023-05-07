@@ -38,12 +38,12 @@
                     and click the "Add Asset" button. To put it more simply, this is how you create an entry for a dinosaur - or any other 
                     tracked and managed creature found in one of our parks.
                 </p>
-                <form>
+                <!-- <form>
                     <fieldset>
                         <legend>Information</legend>
-                        <p>
+                        <p> -->
                             <!-- Populated by SQL query -->
-                            <div><label for="assetSpecies" class="required">Species</label></div>
+                            <!-- <div><label for="assetSpecies" class="required">Species</label></div>
                             <select name="assetSpecies" id ="assetSpecies" autofocus required>
                                 <option value="1">Tyranosaurus Rex</option>
                                 <option value="2">Mosasaurus</option>
@@ -59,9 +59,9 @@
                                         required 
                                         placeholder="Ex. Meadow Stomper">
                         </p>
-                        <p>
+                        <p> -->
                             <!-- Populated by SQL query -->
-                            <div><label for="facilityName" class="required">Home Facility</label></div>
+                            <!-- <div><label for="facilityName" class="required">Home Facility</label></div>
                             <select name="facilityName" id="facilityName" required>
                                 <option value="1">Sauropod Savannah</option>
                                 <option value="2">Mosasaur Lagoon</option>
@@ -69,13 +69,13 @@
                             </select>
                         </p>
                     </fieldset>
-                </form>
+                </form> -->
                 <div>
-                    <p><button>Add Asset</button></p>
+                    <p><button onclick="location.href='forms/biologicalAssetsAdd.html'">Add Asset</button></p>
                 </div>
             </article>
             <article>
-                <h3>Existing Data</h3>
+                <h3>View Biological Assets</h3>
                 <p>
                     The table below shows existing information for Biological Assets entities and includes
                     buttons to update or delete them.
@@ -97,7 +97,7 @@
                         <td>Ex. Paddock 09</td>
 
 
-                        <td><button>Update</button></td>
+                        <td><button onclick="location.href='forms/biologicalAssetsUpdate.html'">Update</button></td>
                         <td><button>Delete</button></td>
                     </tr>
                 </table>

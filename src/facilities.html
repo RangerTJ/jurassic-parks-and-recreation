@@ -37,7 +37,7 @@
                     If you would like to add a new Facility entity to the database, enter values for its attributes below
                     and click the "Add Facility" button.
                 </p>
-                <form>
+                <!-- <form>
                     <fieldset>
                         <legend>Information</legend>
                         <p>
@@ -49,9 +49,9 @@
                                         autofocus 
                                         placeholder="Ex. Nublar Visitor Center">
                         </p>
-                        <p>
+                        <p> -->
                             <!-- Populated by SQL Query -->
-                            <div><label for="parkName" class="required">Park</label></div>
+                            <!-- <div><label for="parkName" class="required">Park</label></div>
                             <select name ="parkName" id ="parkName" required>
                                 <option value="1">Jurassic Park</option>
                                 <option value="2">Jurassic Park: San Diego</option>
@@ -59,9 +59,9 @@
                                 <option value="4">Site B</option>
                             </select>
                         </p>
-                        <p>
+                        <p> -->
                             <!-- Populated by SQL Query -->
-                            <div><label for="facilityType" class="required">Type</label></div>
+                            <!-- <div><label for="facilityType" class="required">Type</label></div>
                             <select name="facilityType" id="facilityType" required>
                                 <option value="1">General Structure</option>
                                 <option value="2">Ground Enclosure</option>
@@ -80,27 +80,27 @@
                                     min="5" max="255"
                                     placeholder="Ex. The original prehistoric zoological theme park and preserve. Permanently closed."></textarea>
                         </p>
-                        <p>
+                        <p> -->
                             <!-- Populated by SQL Query -->
-                            <div><label for="habitat" class="required">Habitat</label></div>
+                            <!-- <div><label for="habitat" class="required">Habitat</label></div>
                             <select name="habitat" id="habitat" required>
                                 <option value="1">Tropical Jungle - Large</option>
                                 <option value="2">Cretaceous Coastline - Medium</option>
                                 <option value="3">Jurassic Swamp - Small</option>
                             </select>
                         </p>
-                        <p>
+                        <p> -->
                             <!-- May not be a bad idea to add "Locations" with a name, description, and park FK as a stretch goal entity -->
-                            <div><label for="facilityLocation" class="required">Location</label></div>
+                            <!-- <div><label for="facilityLocation" class="required">Location</label></div>
                             <input type="text"
                                         name="facilityLocation"
                                         id ="facilityLocation"
                                         required 
                                         placeholder="Ex. South Docks">
                         </p>
-                        <p>
+                        <p> -->
                             <!-- Hard-coded scale of 0 to 10 -->
-                            <div><label for="securityRating" class="required">Security Rating</label></div>
+                            <!-- <div><label for="securityRating" class="required">Security Rating</label></div>
                             <select name="securityRating" id="securityRating" required>
                                 <option value="0">0</option>
                                 <option value="1">1</option>
@@ -114,9 +114,9 @@
                                 <option value="9">9</option>
                                 <option value="10">10</option>
                             </select>
-                        </p>
+                        </p> -->
                         <!-- Workflow will be upload photo to server first, then select from available here entering filename at creation/update, possibly w/ drop-down menu -->
-                        <p>
+                        <!-- <p>
                             <div><label for="facilityPhoto" class="required">Photo Path</label></div>
                             <input type="text"
                                         name="facilityPhoto"
@@ -133,13 +133,13 @@
                                     placeholder="Ex. The original prehistoric zoological theme park and preserve. Permanently closed."></textarea>
                         </p>
                     </fieldset>
-                </form>
+                </form> -->
                 <div>
-                    <p><button>Add Facility</button></p>
+                    <p><button onclick="location.href='forms/facilitiesAdd.html'">Add Facility</button></p>
                 </div>
             </article>
             <article>
-                <h3>Existing Data</h3>
+                <h3>View Facilities</h3>
                 <p>
                     The table below shows existing information for Facilities entities and includes
                     buttons to update or delete them.
@@ -172,7 +172,7 @@
                         <td>Ex. World-class prehistoric zoological theme park and preserve.</td>
                         <td>Ex. Profits currently trending upwards.</td>
 
-                        <td><button>Update</button></td>
+                        <td><button onclick="location.href='forms/facilitiesUpdate.html'">Update</button></td>
                         <td><button>Delete</button></td>
                     </tr>
                 </table>
