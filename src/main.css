@@ -321,6 +321,10 @@
     color: var(--dominionAmberMed);
   }
 
+  img {
+    border: solid 2px var(--feralGreen);
+  }
+
 
 /* Custom Elements */
 .headerP {
