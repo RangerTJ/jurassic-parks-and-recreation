@@ -314,6 +314,7 @@
 
 
 /* Custom Elements */
+
 .headerP {
     margin-top: -20px;
     margin-bottom: 5px;
@@ -321,11 +322,3 @@
     font-family: var(--normalText);
     font-size: 180%;
 }
-
-  /* Stuff down here also copy/pasted from CS290 */
-  
-  /*   ===== TABLET  media query overrides mobile styles ===== */
-  @media all and (min-width: 600px) {}
-  
-  /*   ===== DESKTOP  media query overrides mobile and tablet styles ===== */
-  @media all and (min-width: 1080px) {}
