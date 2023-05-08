@@ -1,5 +1,7 @@
 -- Taylor Jordan and Nick Schmidt (Team 100: Jurassic Parks and Recreation)
--- : colon prefix used (for now) to denote variables that will be involved with back end data. 
+-- : colon prefix used (for now) to denote variables that will be involved with back end data.
+-- WARNING: This script contains subqueries for copy/pasting. It is NOT recomended to run the entire SQL file.
+--              If copy/pasting all the code, please remove the subqueries section first, or it'll break the script. 
 
 -- Requirements Info from Project Outline:
 -- ---------------------------------------
@@ -84,6 +86,7 @@ ORDER BY categoryName ASC;
 -- ID from name is needed for inputs to add or update entities.
 -- Name from ID is used to populate update-form values and summary tables
 -- (so they can use/show unique names instead of gibberish ID numbers).
+-- THESE ARE SUBQUERIES ONLY - DO NOT RUN THESE IN A BATCH WITH THE REST OF THIS SCRIPT
 -- ----------------
 
 
@@ -346,9 +349,13 @@ SET facTypeName = :facTypeName_input, facTypeDescription = :facTypeDescription_i
 WHERE idFacilityType = :idFacilityType_input;
 
 -- Facilities
-UPDATE
-SET
-WHERE
+UPDATE Facilities
+SET     idPark =                (SELECT idPark FROM Parks WHERE parkName = :parkName_input),
+        idFacilityType =        (SELECT idFacilityType FROM FacilityTypes WHERE facTypeName = :facTypeName_input),
+        idHabitat =             (SELECT idHabitat FROM Habitat WHERE habitatName = :habitatName_input),
+        facilityName = :facilityName_input, facilityDescription = :facilityDescription_input, facilityLocation = :facilityLocation_input, 
+        securityRating = :securityRating_input, facilityPhoto = :facilityPhoto_input, facilityNote = :facilityNote_input
+WHERE idFacility = :idFacility_input;
 
 -- Update an Assigned Task (NULLable example - idBiologicalAsset can be set to NULL)
 UPDATE TasksAssigned
