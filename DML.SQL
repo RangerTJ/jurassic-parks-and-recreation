@@ -319,13 +319,19 @@ VALUES  (
 
 
 -- Add a new habitat
-INSERT INTO Habitats            ()
-VALUES ();
+INSERT INTO Habitats            (habitatName, habitatDescription, habitatSize, habitatPhoto)
+VALUES (
+                :habitatName_input, :habitatDescription_input, :habitatSize_input, :habitatPhoto_input
+        );
 
 
 -- Add a new biological asset
-INSERT INTO BiologicalAssets    ()
-VALUES ();
+INSERT INTO BiologicalAssets    (idSpecies, idFacility, bioAssetName)
+VALUES (
+                (SELECT idSpecies FROM Species WHERE speciesName = :speciesName_input),
+                (SELECT idFacility FROM Facilites WHERE facilityName = :facilityName_input),
+                :bioAssetName_input
+        );
 
 
 -- Add a new species, using informal name selects to get ID's for the diet and habitat
@@ -345,6 +351,11 @@ VALUES  (
 
 
 -- Add a new Task Category
+INSERT INTO TaskCategories      (categoryName)
+VALUES  (
+                :categoryName_input
+        );
+
 -- TO DO
 
 -- ----------------
