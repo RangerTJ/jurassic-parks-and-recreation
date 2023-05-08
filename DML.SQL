@@ -133,7 +133,7 @@ ORDER BY categoryName ASC;
 
 
 -- -----------------
--- 12x SUMMARY QUERIES TO POPULATE PAGE TABLES
+-- READS: SUMMARY QUERIES TO POPULATE PAGE TABLES
 -- -----------------
 
 -- SELECT Parks
@@ -228,7 +228,7 @@ ORDER BY idTaskCategory ASC;
 
 -- TO DO
 -- ----------------
--- 12x "ADD NEW" SQL SCRIPTS - Use :browser_inputs to get data for insert queries
+-- CREATES: "ADD NEW" SQL SCRIPTS - Use :browser_inputs to get data for insert queries
 -- Open Question: Is it possible to display multiple fields in drop-down while only sending the input from one?
 -- (i.e. show ID + name, but only send ID to SQL) - would eliminate most subqueries if so
 -- ----------------
@@ -258,8 +258,7 @@ INSERT INTO FacilityTypes       (facTypeName, facTypeDescription)
 VALUES  (:facTypeName_input, :facTypeDescription_input);
 
 
--- User adds a TaskAssigned, optionally selecting a bio asset based on bioAssetName (may look into alternate selectors for asset)
--- Maybe use asset ID directly for INSERT and have the drop-down display other info to visually ID target critter, but only send the related ID... (I think this is possible?)
+-- User adds a TaskAssigned (BiologicalAsset optional)
 INSERT INTO TasksAssigned       (idFacility, idBiologicalAsset, taskDescription, taskStart, taskEnd)
 VALUES  (       
                 (SELECT idFacility FROM Facilities WHERE facilityName = :facilityName_input),
@@ -269,10 +268,6 @@ VALUES  (
 
 
 -- Creates record of employee's work on a task by referencing the issued task# and the employee's unique username
--- In the event that the task needs to be looked up, a query can lookup tasks and their descriptions for a specific facility
--- to help find which task they meant to contribute towards (using facility/dates and optionally tasks the employee has worked on before to find the #) 
--- Otherwise, we'll need to add a unique non-ID identifier for TasksAssigned, maybe give it a "short name" and come up with a naming policy to avoid issues 
--- with stuff. Maybe auto-generate it in the web UI as a combo of Facility and datetime or something?
 INSERT INTO EmployeeTasks       (idTaskAssigned, idEmployee, taskHoursWorked, empTaskCost, empTaskStart, empTaskEnd)
 VALUES  (
                 :idTaskAssigned_input,
@@ -350,14 +345,24 @@ UPDATE FacilityTypes
 SET facTypeName = :facTypeName_input, facTypeDescription = :facTypeDescription_input
 WHERE idFacilityType = :idFacilityType_input;
 
--- Biological Asset
+-- Facilities
 
--- Update an Assigned Task
+-- Update an Assigned Task (NULLable example - idBiologicalAsset can be set to NULL)
 UPDATE TasksAssigned
 SET     idFacility =            (SELECT idFacility FROM Facilities WHERE facilityName = :facilityName_input), 
         idBiologicalAsset =     (SELECT idBiologicalAsset FROM BiologicalAssets WHERE bioAssetName = :bioAssetName_input), 
         taskDescription = :taskDescription_input, taskStart = :taskStart_input, taskEnd = :taskEnd_input
 WHERE idTaskAssigned = :idTaskAssigned;
+
+-- Employee
+
+-- Update an Employee Task (if needed to re-assign orphaned FK's if/when parents are deleted)
+
+-- Job
+
+-- Task Category
+
+-- Biological Asset
 
 -- Habitat
 
@@ -365,56 +370,8 @@ WHERE idTaskAssigned = :idTaskAssigned;
 
 -- Species
 
--- Employee
-
--- Job
-
--- Task Category
-
-
---FOR LOOKUP - Use a subquery to get id based on another unique attribute or attribute combo
---Park: Name
---Employee: ???? new, unique username attribute?
---Facility: Facility Name (make policy to prefix facility name with 2-3 letter initial for park site... maybe put that in Parks table for reference?)
---BioAssets: Nickname? (park prefix? Ex. JP Rexy, vs. SB Buck, vs. JW: 'Verizon Presents the Indominus Rex')
---Diets: Name
---FacilityTypes: Name
---
-
--- NULLable example - Re-open a "completed" task by removing its end date + task is complete flag
--- idTaskAssigned will be clear to the user who created a given task, as it will be provided to them upon entry of their
--- task by the database website UI.
-
--- Update TaskAssignment by removing a bio asset form it counts as nullable example too
--- Same goes for removing a habitat from a facility / (may be able to remove isEnclosure for redundancy as a result?)
-
--- Probably need/want an accompanying query to get the task info for an update task form (to pre-populate the form with existing stuff)
--- ex. from ED: SELECT character_id, fname, lname, homeworld, age FROM bsg_people WHERE character_id = :character_ID_selected_from_browse_character_page
-
--- Simple query to re-open a closed task (and change nothing else about it)
-UPDATE TasksAssigned
-SET taskEnd = NULL
-WHERE idTaskAssigned = :taskAssigned_input;
--- SCRUB THIS - not something we'd actually have as a web interface command, we'd just let people update the whole thing
-
-
--- Probably want a query to update other stuff too, or maybe just turn the above into an update anything query?
--- Ex. from ED -- update a character's data based on submission of the Update Character form 
--- UPDATE bsg_people SET fname = :fnameInput, lname= :lnameInput, homeworld = :homeworld_id_from_dropdown_Input, age= :ageInput WHERE id= :character_ID_from_the_update_form
-
--- Example from exploration: https://canvas.oregonstate.edu/courses/1914747/pages/exploration-database-application-design?module_item_id=23040585
--- UPDATE bsg_people 
---    SET fname = :fnameInput, lname= :lnameInput, 
---        homeworld = :homeworld_id_from_dropdown_Input, age= :ageInput 
---    WHERE id= :character_ID_from_the_update_form
-
-
 -- ----------------
--- 1x DELETE (suggest delete task, as it's the most realistic/real-world thing - ie. someone created a task then decided to cancel it)
--- NOTE: The site UI will notify the administrator of a tasks's ID number when the task is generated. As there can potentially be thousands of tasks,
---       identifying a specific task by the ID is the only realistic way to enforce it without making naming tasks incredibly tedious.
---       The EmployeeTask entity is allowed to exist if its related task or employee is deleted so that we still have a record of overhead costs spent.
---      Probably just make a delete for everything so the DB admin has the option, probably the easiest thing to code since it just uses the ID directly.
+-- DELETES
 -- ----------------
 
 -- Delete TaskAssigned
