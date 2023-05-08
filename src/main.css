@@ -24,8 +24,9 @@
     /* Colors */
     --concreteDark: #A2ABA4;
     --concreteLight: #D7DFD9;
-    --parkYellow: #F9FF4E;
-    --parkRed: #FC1F1F;
+    --parkYellow: rgb(255, 208, 0);
+    --parkYellowGreenPale: rgba(236, 255, 172, 0.907);
+    --parkRed:  rgb(135, 8, 8);
     --worldLightBlue: #AFE9EE;
     --worldLightBlueClear: #afe9ee47;
     --worldMedBlue: #61b4fc;
@@ -41,8 +42,8 @@
     --dominionAmberDark: rgb(135, 81, 0);
     --dominionAmberDarkClear: rgba(135, 81, 0, 0.691);
     --dominionEarth: rgb(69, 41, 0);;
-    --feralGreen: #3c663e;
-    --feralGreenClear: #3c663eb9;
+    --feralGreen: #2a4a2b;
+    --feralGreenClear: #3c663edf;
 
     /* Fonts */
     --jpFont: 'Jurassic Park', cursive;
@@ -58,7 +59,7 @@
     color: var(--worldDeepBlue);
     /* color: black; */
     /* color: greenyellow; */
-    /* color: yellow; */
+    color: rgb(255, 208, 0);
     font-family: var(--normalText);
     max-width: 85%;
     margin: auto;
@@ -81,7 +82,7 @@
   main {
     background-color: var(--worldMedBlueClear);
     /* background-color: var(--dominionAmberMedClear); */
-    /* background-color: var(--feralGreenClear); */
+    background-color: var(--feralGreenClear);
 
     padding-bottom: 1%;
   }
@@ -92,10 +93,13 @@
     overflow: auto;}
 
   footer {
-    background-color: var(--worldDeepBlue);
-    color: var(--worldLightBlue);
+    /* background-color: var(--worldDeepBlue);
+    color: var(--worldLightBlue); */
+    background-color: var(--parkRed);
+    color: var(--parkYellow);
     /* background-color: var(--dominionAmberBright);
     color: black; */
+
     font-family: var(--normalText);
     padding: 1%;}  
 
@@ -115,9 +119,9 @@
     /* background-color: var(--dominionAmberDark);
     color: black;
     border: solid var(--dominionAmberDark); */
-    /* background-color: var(--feralGreen);
-    color: yellow;
-    border: solid var(--feralGreen); */
+    background-color: rgb(135, 8, 8);
+    color: var(--parkYellow);
+    border: solid rgb(135, 8, 8);
     padding-left: 1%;
     padding-right: 1%;
     font-size: 35px;
@@ -180,17 +184,24 @@
 
   /* Tables */
   table {
-    background-color: var(--worldDeepBlueClearLight);
+    /* background-color: var(--worldDeepBlueClearLight);
     color: var(--worldLightBlue);
+    border: 2px solid var(--worldDeepBlue); */
+    background-color: rgba(0, 0, 0, 0.678);
+    color: var(--parkYellow);
+    border: 2px solid var(--parkYellow);
+    border-collapse: collapse;
     width: 100%;
     text-align: center;
-    border: 2px solid var(--worldDeepBlue);
-    border-collapse: collapse;
   }
 
+    
+
   th {
-    border: 2px solid var(--worldDeepBlue);
-    background-color: var(--worldMedBlueClear);
+    /* border: 2px solid var(--worldDeepBlue);
+    background-color: var(--worldMedBlueClear); */
+    /* border: 2px solid var(--parkYellow); */
+    background-color: var(--parkRed);
     font-weight: bold;
   }
 
@@ -199,14 +210,18 @@
   }
 
   td {
-    border: 2px solid var(--worldDeepBlue);
+    /* border: 2px solid var(--worldDeepBlue); */
+    border: 2px solid var(--parkYellow);
     padding: 10px;
   }
 
   /* Buttons and Forms */
   button {
-    color: var(--worldLightBlue);
-    background-color: var(--worldDeepBlue);
+    /* color: var(--worldLightBlue);
+    background-color: var(--worldDeepBlue); */
+    color: var(--parkYellow);
+    background-color: var(--parkRed);
+    border-color: var(--feralGreen);
     border-radius: 5px;
     font-family: var(--jpFont);
     font-size:xx-large;
@@ -221,25 +236,15 @@
   button:focus {
     background-color: black;
     color: white;
-    border-color: gold;
+    border: solid gold;
   }
-
-  select {
-    background-color: var(--worldDeepBlue);
-    color: var(--worldLightBlue);
-  }
-
-    /* select {
-    background-color: var(--worldLightBlue);
-    color: var(--worldDeepBlue);
-  } */
 
   label {
     font-weight: bold;
   }
 
   fieldset {
-    border-color: #0F284F;
+    border-color: var(--parkYellow);
   }
 
   legend {
@@ -252,19 +257,28 @@
   }
 
   input {
-    color: var(--worldLightBlue);
-    background-color: var(--worldDeepBlue);
+    color: var(--feralGreen);
+    background-color: var(--parkYellowGreenPale);
     /* width: 90%; */
   }
 
   textarea {
-    color: var(--worldLightBlue);
-    background-color: var(--worldDeepBlue);
+    /* color: var(--worldLightBlue);
+    background-color: var(--worldDeepBlue); */
+    color: var(--feralGreen);
+    background-color: var(--parkYellowGreenPale);
     /* width: 90%; */
   }
 
+  select {
+    /* background-color: var(--worldLightBlue);
+    color: var(--worldDeepBlue); */
+    color: var(--feralGreen);
+    background-color: var(--parkYellowGreenPale);
+  }
+
   ::placeholder {
-    color: var(--worldMedBlueClear);
+    color: var(--dominionAmberMed);
   }
 
 
