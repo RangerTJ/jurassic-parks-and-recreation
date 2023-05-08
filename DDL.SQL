@@ -126,7 +126,7 @@ CREATE TABLE `BiologicalAssets` (
   `idBiologicalAsset`   INT NOT NULL UNIQUE AUTO_INCREMENT,
   `idSpecies`           INT NOT NULL,
   `idFacility`          INT NOT NULL,
-  `nickname`            VARCHAR(255) NOT NULL UNIQUE,
+  `bioAssetName`            VARCHAR(255) NOT NULL UNIQUE,
   PRIMARY KEY (`idBiologicalAsset`),
   CONSTRAINT `fk_BiologicalAssets_Facilities1`
     FOREIGN KEY (`idFacility`)
@@ -183,6 +183,7 @@ CREATE TABLE `TasksAssigned` (
   `idTaskAssigned`      INT NOT NULL UNIQUE AUTO_INCREMENT,
   `idFacility`          INT NOT NULL,
   `idBiologicalAsset`   INT NULL,
+  `taskName`            VARCHAR(255) NOT NULL UNIQUE,
   `taskDescription`     VARCHAR(8000) NOT NULL,
   `taskStart`           DATETIME NOT NULL,
   `taskEnd`             DATETIME NULL,
@@ -355,7 +356,7 @@ VALUES
   ('Jurassic Swamp - Small', 'Jurassic swamps were wetland habitats characterized by an abundance of water and lush vegetation, supporting a diverse range of dinosaur species. These habitats provided ideal conditions for semi-aquatic dinosaurs, like Spinosaurus, and attracted other dinosaur species who relied on the water and resources found in swamps.', 1);
 
 
-INSERT INTO `BiologicalAssets`      (idSpecies, idFacility, nickname)
+INSERT INTO `BiologicalAssets`      (idSpecies, idFacility, bioAssetName)
 VALUES
 (1, 1, 'Alpha'),
 (2, 4, 'Beta'),
