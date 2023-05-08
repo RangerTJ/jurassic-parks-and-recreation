@@ -304,7 +304,7 @@ VALUES (
 INSERT INTO BiologicalAssets    (idSpecies, idFacility, bioAssetName)
 VALUES (
                 (SELECT idSpecies FROM Species WHERE speciesName = :speciesName_input),
-                (SELECT idFacility FROM Facilites WHERE facilityName = :facilityName_input),
+                (SELECT idFacility FROM Facilities WHERE facilityName = :facilityName_input),
                 :bioAssetName_input
         );
 
@@ -346,6 +346,9 @@ SET facTypeName = :facTypeName_input, facTypeDescription = :facTypeDescription_i
 WHERE idFacilityType = :idFacilityType_input;
 
 -- Facilities
+UPDATE
+SET
+WHERE
 
 -- Update an Assigned Task (NULLable example - idBiologicalAsset can be set to NULL)
 UPDATE TasksAssigned
@@ -355,34 +358,122 @@ SET     idFacility =            (SELECT idFacility FROM Facilities WHERE facilit
 WHERE idTaskAssigned = :idTaskAssigned;
 
 -- Employee
+UPDATE
+SET
+WHERE
 
 -- Update an Employee Task (if needed to re-assign orphaned FK's if/when parents are deleted)
+UPDATE
+SET
+WHERE
 
 -- Job
+UPDATE
+SET
+WHERE
 
 -- Task Category
+UPDATE
+SET
+WHERE
 
 -- Biological Asset
+UPDATE
+SET
+WHERE
 
 -- Habitat
+UPDATE
+SET
+WHERE
 
 -- Diet
+UPDATE
+SET
+WHERE
 
 -- Species
+UPDATE
+SET
+WHERE
 
 -- ----------------
 -- DELETES
 -- ----------------
 
+-- Parks
+DELETE
+FROM Parks
+WHERE idPark = :idPark_input;
+
+-- Facility Types
+DELETE
+FROM FacilityTypes
+WHERE idFacilityType = :idFacilityType_input;
+
+-- Facilities
+DELETE
+FROM Facilities
+WHERE idFacility = :idFacility_input;
+
 -- Delete TaskAssigned
 DELETE
 FROM TasksAssigned
-WHERE idTaskAssigned = :taskAssigned_input;
+WHERE idTaskAssigned = :idTaskAssigned_input;
+
+-- Employee
+DELETE
+FROM Employees
+WHERE idEmployee = :idEmployee_input;
+
+-- Employee Task
+DELETE
+FROM EmployeeTasks
+WHERE idEmployeeTask = :idEmployeeTask_input;
+
+-- Job
+DELETE
+FROM JobClassifications
+WHERE idJobClassification = :idJobClassification_input;
+
+-- Task Category
+DELETE
+FROM TaskCategories
+WHERE idTaskCategory = :idTaskCategory_input;
+
+-- Biological Asset
+DELETE
+FROM BiologicalAssets
+WHERE idBiologicalAsset = :idBiologicalAsset_input;
+
+-- Habitat
+DELETE
+FROM Habitats
+WHERE idHabitat = :idHabitat_input
+
+-- Diet
+DELETE
+FROM Diets
+WHERE idDiet = :idDiet_input
+
+-- Species
+DELETE
+FROM Species
+WHERE idSpecies = :idSpecies_input
 
 
 -- ----------------
--- 1x CUSTOM Search/Drop-down (this may be a web-page thing to generate a custom query, not something we put in here)
+-- CUSTOM Reports (this may be a web-page thing to generate a custom query, not something we put in here)
 -- ----------------
+
+-- Cost Analysis: List Employee Tasks Costs by Category and Park for Employee Tasks
+-- Need to JOIN Category -> EmployeeTasks -> TasksAssigned -> Facilities -> Park
+-- Need to SUM cost column from EmployeeTasks and GROUP BY Category and Park (both?)
+-- Sort by costs in DESC
+
+-- Cost Analysis Report by Biological Asset: TO DO
+-- Cost Analysis Report by Employee: TO DO
+
 
 -- CUSTOM REPORT IDEAS
 -- Search for all tasks associated with an employee?
