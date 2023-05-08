@@ -1,23 +1,10 @@
-/* Starter template adopted from CS290 Final Project Submission, style changed considerably */
-
-/*   ----- Imports  -----  */
-  /* Add fonts from the app's server 
-    @font-face {                
-      font-family: 'FontName';
-      src: url('FontName.woff2') format('woff2');
-    } 
-    ...or hosted services like Google Fonts 
-    @import url(//fonts.googleapis.com/css?family=Font+Name);
-  */
-
+/* Fonts */
 @font-face {
-    font-family: 'Jurassic Park', cursive;
-    src: url(/jurassic-parks-and-recreation/fonts/JurassicPark-BL48.ttf);
+    font-family: 'Jurassic Park';
+    src: url('fonts/JurassicPark-BL48.ttf') format('truetype');
 }
 
-  /* ^--- Could use above approach to get legit JP font for the final product */
-
-@import url('https://fonts.googleapis.com/css2?family=Alumni+Sans+Inline+One&family=Bungee&family=Bungee+Hairline&family=Bungee+Inline&family=Bungee+Outline&family=Libre+Barcode+39+Text&family=Overpass+Mono&family=Tourney&family=Zen+Dots&display=swap');  
+@import url('https://fonts.googleapis.com/css2?family=Alumni+Sans+Inline+One&family=Bungee&family=Bungee+Hairline&family=Bungee+Inline&family=Bungee+Outline&family=Libre+Barcode+39+Text&family=Overpass+Mono&family=Tourney&family=Zen+Dots&display=swap');
 
 /*  Color Scheme  */
 :root {
