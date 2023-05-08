@@ -317,12 +317,12 @@ VALUES  (
 
 -- Update Park
 UPDATE Parks
-SET parkName = :parkName_input, parkLocation = :parkLocation_input, parkDescription = :parkDescription_input
+SET     parkName = :parkName_input, parkLocation = :parkLocation_input, parkDescription = :parkDescription_input
 WHERE idPark = :idPark_input;
 
 -- Update Facility Type
 UPDATE FacilityTypes
-SET facTypeName = :facTypeName_input, facTypeDescription = :facTypeDescription_input
+SET     facTypeName = :facTypeName_input, facTypeDescription = :facTypeDescription_input
 WHERE idFacilityType = :idFacilityType_input;
 
 -- Facilities
@@ -343,8 +343,11 @@ WHERE idTaskAssigned = :idTaskAssigned;
 
 -- Employee
 UPDATE Employees
-SET
-WHERE
+SET     idJobClassification =   (SELECT idJobClassification FROM JobClassifications WHERE jobTitle = :jobTitle_input),
+        firstName = , lastName = , hourlyWage = ,
+        employeePhone = , employeeEmail = , employeeRadio = , 
+        employeeNote = , employeePhoto = 
+WHERE idEmployee = :idEmployee_input;
 
 -- Update an Employee Task (if needed to re-assign orphaned FK's if/when parents are deleted)
 UPDATE EmployeeTasks
