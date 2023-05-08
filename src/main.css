@@ -63,7 +63,8 @@
     padding-left: 1.5%;
     padding-right: 1%;
     padding-bottom: 1px;
-    display: block;
+    display:flexbox;
+    flex-basis: 50%;
 }
 
   main {
@@ -144,7 +145,6 @@
   
   h1 {
     font-size: 85px;
-    display: inline;
     margin-bottom: 0px;
     padding-bottom: 0px;
     font-family: var(--jpFont);
@@ -315,7 +315,7 @@
 
 /* Custom Elements */
 .headerP {
-    margin-top: -2%;
+    margin-top: -20px;
     margin-bottom: 5px;
     padding-top: 0px;
     font-family: var(--normalText);
