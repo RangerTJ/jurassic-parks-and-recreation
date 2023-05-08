@@ -188,7 +188,7 @@ SELECT * FROM JobClassifications
 ORDER BY idJobClassification ASC;
 
 -- SELECT Employees
-SELECT  Employees.idEmployee, JobClassifications.jobTitle, Employees.firstName, Employees.lastName, Employees.hourlyWage,
+SELECT  Employees.idEmployee, JobClassifications.jobTitle, Employees.firstName, Employees.lastName, Employees.employeeUsername ,Employees.hourlyWage,
         Employees.employeePhone, Employees.employeeEmail, Employees.employeeRadio, Employees.employeeNote, Employees.employeePhoto
 FROM Employees
 -- Need to join Employees -> JobClassifications
@@ -196,7 +196,7 @@ JOIN JobClassifications ON Employees.idJobClassification = JobClassifications.id
 ORDER BY idEmployee ASC;
 
 -- SELECT TasksAssigned (Bio Asset ID'd by displaying actual asset ID# and Species, since may not have a bioAssetName)
-SELECT  TasksAssigned.idTaskAssigned, Facilities.facilityName, BiologicalAssets.idBiologicalAsset, Species.speciesName,
+SELECT  TasksAssigned.idTaskAssigned, TasksAssigned.taskName, Facilities.facilityName, BiologicalAssets.idBiologicalAsset, Species.speciesName,
         TasksAssigned.taskDescription, TasksAssigned.taskStart, TasksAssigned.taskEnd
 FROM TasksAssigned
 -- Need to join TasksAssigned -> Facility -> Bio Asset -> Species
@@ -351,12 +351,16 @@ WHERE idEmployee = :idEmployee_input;
 
 -- Update an Employee Task (if needed to re-assign orphaned FK's if/when parents are deleted)
 UPDATE EmployeeTasks
-SET
-WHERE
+SET     taskDescription =       ()
+
+WHERE idEmployeeTask = :idEmployeeTask_input;
+
+TasksAssigned.taskDescription, Employees.firstName, Employees.lastName AS contributingEmployee,
+        EmployeeTasks.taskHoursWorked, EmployeeTasks.empTaskCost, EmployeeTasks.empTaskStart, EmployeeTasks.empTaskEnd
 
 -- Job Classifications
 UPDATE JobClassifications
-SET
+SET     
 WHERE
 
 -- Task Category
