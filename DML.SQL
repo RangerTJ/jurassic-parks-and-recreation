@@ -143,16 +143,13 @@ ORDER BY categoryName ASC;
 SELECT * FROM Parks
 ORDER BY idPark ASC;
 
-
 -- SELECT Facility Types
 SELECT * FROM FacilityTypes
 ORDER BY idFacilityType ASC;
 
-
 -- SELECT Habitats
 SELECT * FROM Habitats
 ORDER BY idHabitat ASC;
-
 
 -- SELECT Facilities
 SELECT  Facilities.idFacility, Parks.parkName, FacilityTypes.facTypeName, Habitats.habitatName,
@@ -165,11 +162,9 @@ JOIN FacilityTypes ON Facilities.idFacilityType = FacilityTypes.idFacilityType
 JOIN Habitats ON Facilities.idHabitat = Habitats.idHabitat
 ORDER BY idFacility ASC;
 
-
 -- SELECT Diets
 SELECT * FROM Diets
 ORDER BY idDiet ASC;
-
 
 -- SELECT Species
 SELECT Species.idSpecies, Diets.dietName, Habitats.habitatName, Species.speciesName, Species.speciesDescription,
@@ -180,7 +175,6 @@ JOIN Diets ON Species.idDiet = Diets.idDiet
 JOIN Habitats ON Species.idHabitat = Habitats.idHabitat
 ORDER BY idSpecies ASC; 
 
-
 -- SELECT BiologicalAssets
 SELECT BiologicalAssets.idBiologicalAsset, Species.speciesName, Facilities.facilityName, BiologicalAssets.bioAssetName
 FROM BiologicalAssets
@@ -189,11 +183,9 @@ JOIN Species ON BiologicalAssets.idSpecies = Species.idSpecies
 JOIN Facilities ON BiologicalAssets.idFacility = Facilities.idFacility
 ORDER BY idBiologicalAsset ASC;
 
-
 -- SELECT JobClassifications
 SELECT * FROM JobClassifications
 ORDER BY idJobClassification ASC;
-
 
 -- SELECT Employees
 SELECT  Employees.idEmployee, JobClassifications.jobTitle, Employees.firstName, Employees.lastName, Employees.hourlyWage,
@@ -202,7 +194,6 @@ FROM Employees
 -- Need to join Employees -> JobClassifications
 JOIN JobClassifications ON Employees.idJobClassification = JobClassifications.idJobClassification
 ORDER BY idEmployee ASC;
-
 
 -- SELECT TasksAssigned (Bio Asset ID'd by displaying actual asset ID# and Species, since may not have a bioAssetName)
 SELECT  TasksAssigned.idTaskAssigned, Facilities.facilityName, BiologicalAssets.idBiologicalAsset, Species.speciesName,
@@ -214,7 +205,6 @@ LEFT JOIN BiologicalAssets ON TasksAssigned.idBiologicalAsset = BiologicalAssets
 LEFT JOIN Species ON BiologicalAssets.idSpecies = Species.idSpecies
 ORDER BY TasksAssigned.idTaskAssigned ASC;
 
-
 -- SELECT EmployeeTasks
 SELECT  EmployeeTasks.idEmployeeTask, TasksAssigned.taskDescription, Employees.firstName, Employees.lastName AS contributingEmployee,
         EmployeeTasks.taskHoursWorked, EmployeeTasks.empTaskCost, EmployeeTasks.empTaskStart, EmployeeTasks.empTaskEnd
@@ -224,25 +214,22 @@ LEFT JOIN TasksAssigned ON EmployeeTasks.idTaskAssigned = TasksAssigned.idTaskAs
 JOIN Employees ON EmployeeTasks.idEmployee = Employees.idEmployee
 ORDER BY EmployeeTasks.idEmployeeTask ASC;
 
-
 -- SELECT Task Categories
 SELECT * from TaskCategories
 ORDER BY idTaskCategory ASC;
 
--- TO DO
+
 -- ----------------
 -- CREATES: "ADD NEW" SQL SCRIPTS - Use :browser_inputs to get data for insert queries
 -- Open Question: Is it possible to display multiple fields in drop-down while only sending the input from one?
 -- (i.e. show ID + name, but only send ID to SQL) - would eliminate most subqueries if so
 -- ----------------
 
-
 -- Add new Park to the system
 INSERT INTO Parks                 (parkName, parkDescription, parkLocation)
 VALUES  (
                 :parkName_input, :parkDescription_input, :parkLocation_input
         );
-
 
 -- Add a new facility using populated dropdowns of easier to ID unique names for input values
 INSERT INTO Facilities              (idPark, idFacilityType, idHabitat, facilityName, facilityDescription, 
@@ -255,11 +242,9 @@ VALUES  (
                 :securityRating_input, :facilityPhoto_input, :facilityDescription_input
         );
 
-
 -- Add a new facility type
 INSERT INTO FacilityTypes       (facTypeName, facTypeDescription)
 VALUES  (:facTypeName_input, :facTypeDescription_input);
-
 
 -- User adds a TaskAssigned (BiologicalAsset optional)
 INSERT INTO TasksAssigned       (idFacility, idBiologicalAsset, taskDescription, taskStart, taskEnd)
@@ -269,7 +254,6 @@ VALUES  (
                 :taskDescription_input, :taskStart_input, :taskEnd_input
         );
 
-
 -- Creates record of employee's work on a task by referencing the issued task# and the employee's unique username
 INSERT INTO EmployeeTasks       (idTaskAssigned, idEmployee, taskHoursWorked, empTaskCost, empTaskStart, empTaskEnd)
 VALUES  (
@@ -277,7 +261,6 @@ VALUES  (
                 (SELECT idEmployee FROM Employees WHERE employeeUsername = :employeeUsername_input),
                 :taskHoursWorked_input, :empTaskCost_input, :empTaskStart_input, :empTaskEnd_input
         );
-
 
 -- User selects job name from drop-down and a subquery gets the jobID from it so that the insert can be done properly
 INSERT INTO Employees           (idJobClassification, firstName, lastName, hourlyWage, employeePhone, employeeEmail,
@@ -288,20 +271,17 @@ VALUES  (
                 :employeeEmail_input, :employeeRadio_input, :employeeNote_input, :employeePhoto_input
         );
 
-
 -- Add a new job
 INSERT INTO JobClassifications  (jobTitle, jobDescription)
 VALUES  (
                 :jobTitle_input, :jobDescription_input
         );
 
-
 -- Add a new habitat
 INSERT INTO Habitats            (habitatName, habitatDescription, habitatSize, habitatPhoto)
 VALUES (
                 :habitatName_input, :habitatDescription_input, :habitatSize_input, :habitatPhoto_input
         );
-
 
 -- Add a new biological asset
 INSERT INTO BiologicalAssets    (idSpecies, idFacility, bioAssetName)
@@ -311,7 +291,6 @@ VALUES (
                 :bioAssetName_input
         );
 
-
 -- Add a new species, using informal name selects to get ID's for the diet and habitat
 INSERT INTO Species             (idDiet, idHabitat, speciesName, speciesDescription, threatLevel, speciesPhoto)
 VALUES  (
@@ -320,13 +299,11 @@ VALUES  (
                 :speciesName_input, :speciesDescription_input, :threatLevel_input, :speciesPhoto_input
         );
 
-
 -- Add a new diet
 INSERT INTO Diets               (dietName, dietDescription, dietIcon)
 VALUES  (
                 :dietName_input, :dietDescription_input, :dietIcon_input
         );
-
 
 -- Add a new Task Category
 INSERT INTO TaskCategories      (categoryName)
@@ -365,44 +342,45 @@ SET     idFacility =            (SELECT idFacility FROM Facilities WHERE facilit
 WHERE idTaskAssigned = :idTaskAssigned;
 
 -- Employee
-UPDATE
+UPDATE Employees
 SET
 WHERE
 
 -- Update an Employee Task (if needed to re-assign orphaned FK's if/when parents are deleted)
-UPDATE
+UPDATE EmployeeTasks
 SET
 WHERE
 
--- Job
-UPDATE
+-- Job Classifications
+UPDATE JobClassifications
 SET
 WHERE
 
 -- Task Category
-UPDATE
+UPDATE TaskCategories
 SET
 WHERE
 
 -- Biological Asset
-UPDATE
+UPDATE BiologicalAssets
 SET
 WHERE
 
 -- Habitat
-UPDATE
+UPDATE Habitats
 SET
 WHERE
 
 -- Diet
-UPDATE
+UPDATE Diets
 SET
 WHERE
 
 -- Species
-UPDATE
+UPDATE Species
 SET
 WHERE
+
 
 -- ----------------
 -- DELETES
