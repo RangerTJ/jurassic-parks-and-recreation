@@ -82,7 +82,8 @@ ORDER BY categoryName ASC;
 -- ----------------
 -- Required Subqueries - For Easy Copy/Pasting as needed in larger queries
 -- ID from name is needed for inputs to add or update entities.
--- Name from ID is used to populate update-form values and summary tables.
+-- Name from ID is used to populate update-form values and summary tables
+-- (so they can use/show unique names instead of gibberish ID numbers).
 -- ----------------
 
 
@@ -104,7 +105,7 @@ ORDER BY categoryName ASC;
 
 -- Get TaskAssignedID from task name and vice versa
 (SELECT idTaskAssigned FROM TasksAssigned WHERE taskName = :taskName_input)
-(SELECT taskName FROM TasksAssigned WHERE idTask = :idTask_input)
+(SELECT taskName FROM TasksAssigned WHERE idTaskAssigned = :idTask_input)
 
 -- Get HabitatID from name and vice versa
 (SELECT idHabitat FROM Habitat WHERE habitatName = :habitatName_input)
@@ -132,7 +133,7 @@ ORDER BY categoryName ASC;
 
 
 -- -----------------
--- 11x SUMMARY QUERIES TO POPULATE PAGE TABLES
+-- 12x SUMMARY QUERIES TO POPULATE PAGE TABLES
 -- -----------------
 
 -- SELECT Parks
@@ -227,7 +228,7 @@ ORDER BY idTaskCategory ASC;
 
 -- TO DO
 -- ----------------
--- 11x "ADD NEW" SQL SCRIPTS - Use :browser_inputs to get data for insert queries
+-- 12x "ADD NEW" SQL SCRIPTS - Use :browser_inputs to get data for insert queries
 -- Open Question: Is it possible to display multiple fields in drop-down while only sending the input from one?
 -- (i.e. show ID + name, but only send ID to SQL) - would eliminate most subqueries if so
 -- ----------------
@@ -335,18 +336,40 @@ VALUES  (
                 :categoryName_input
         );
 
--- TO DO
-
 -- ----------------
--- 1x UPDATE (NULLable - suggest do this for a dino related to task or facility to habitat since they can already be null)
--- NOTE: EmployeeTasks may change if parents are deleted, but otherwise should NOT be editable as they are a transactional record as well as a M:M interface.
--- ... or should we not enforce that so a DB admin can fix work logs processed in error?
+-- Updates: ID values should be retrievable from the select used to populate the update form for the WHERE value.
 -- ----------------
 
--- Template/Model for updating all attributes based on the primary ID field returned from the browser
+-- Update Park
 UPDATE Parks
 SET parkName = :parkName_input, parkLocation = :parkLocation_input, parkDescription = :parkDescription_input
 WHERE idPark = :idPark_input;
+
+-- Update Facility Type
+UPDATE FacilityTypes
+SET facTypeName = :facTypeName_input, facTypeDescription = :facTypeDescription_input
+WHERE idFacilityType = :idFacilityType_input;
+
+-- Biological Asset
+
+-- Update an Assigned Task
+UPDATE TasksAssigned
+SET     idFacility =            (SELECT idFacility FROM Facilities WHERE facilityName = :facilityName_input), 
+        idBiologicalAsset =     (SELECT idBiologicalAsset FROM BiologicalAssets WHERE bioAssetName = :bioAssetName_input), 
+        taskDescription = :taskDescription_input, taskStart = :taskStart_input, taskEnd = :taskEnd_input
+WHERE idTaskAssigned = :idTaskAssigned;
+
+-- Habitat
+
+-- Diet
+
+-- Species
+
+-- Employee
+
+-- Job
+
+-- Task Category
 
 
 --FOR LOOKUP - Use a subquery to get id based on another unique attribute or attribute combo
