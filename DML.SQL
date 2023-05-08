@@ -401,17 +401,17 @@ WHERE
 -- DELETES
 -- ----------------
 
--- Parks
+-- Delete Park
 DELETE
 FROM Parks
 WHERE idPark = :idPark_input;
 
--- Facility Types
+-- Delete Facility Type
 DELETE
 FROM FacilityTypes
 WHERE idFacilityType = :idFacilityType_input;
 
--- Facilities
+-- Delete Facility
 DELETE
 FROM Facilities
 WHERE idFacility = :idFacility_input;
@@ -421,49 +421,49 @@ DELETE
 FROM TasksAssigned
 WHERE idTaskAssigned = :idTaskAssigned_input;
 
--- Employee
+-- Delete Employee
 DELETE
 FROM Employees
 WHERE idEmployee = :idEmployee_input;
 
--- Employee Task
+-- Delete Employee Task
 DELETE
 FROM EmployeeTasks
 WHERE idEmployeeTask = :idEmployeeTask_input;
 
--- Job
+-- Delete Job Classification
 DELETE
 FROM JobClassifications
 WHERE idJobClassification = :idJobClassification_input;
 
--- Task Category
+-- Delete Task Category
 DELETE
 FROM TaskCategories
 WHERE idTaskCategory = :idTaskCategory_input;
 
--- Biological Asset
+-- Delete Biological Asset
 DELETE
 FROM BiologicalAssets
 WHERE idBiologicalAsset = :idBiologicalAsset_input;
 
--- Habitat
+-- Delete Habitat
 DELETE
 FROM Habitats
 WHERE idHabitat = :idHabitat_input
 
--- Diet
+-- Delete Diet
 DELETE
 FROM Diets
 WHERE idDiet = :idDiet_input
 
--- Species
+-- Delete Species
 DELETE
 FROM Species
 WHERE idSpecies = :idSpecies_input
 
 
 -- ----------------
--- CUSTOM Reports (this may be a web-page thing to generate a custom query, not something we put in here)
+-- TODO - CUSTOM Reports (this may be a web-page thing to generate a custom query, not something we put in here)
 -- ----------------
 
 -- Cost Analysis: List Employee Tasks Costs by Category and Park for Employee Tasks
