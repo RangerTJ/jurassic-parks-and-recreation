@@ -15,7 +15,8 @@ SET AUTOCOMMIT = 0;
 -- -----------------------------------------------------
 -- Table `Parks`
 -- -----------------------------------------------------
-CREATE OR REPLACE TABLE `Parks` (
+DROP TABLE IF EXISTS `Parks`;
+CREATE TABLE `Parks` (
   `idPark`              INT NOT NULL UNIQUE AUTO_INCREMENT,
   `parkName`            VARCHAR(255) NOT NULL UNIQUE,
   `parkDescription`     VARCHAR(8000) NOT NULL,
@@ -26,7 +27,8 @@ CREATE OR REPLACE TABLE `Parks` (
 -- -----------------------------------------------------
 -- Table `FacilityTypes`
 -- -----------------------------------------------------
-CREATE OR REPLACE TABLE `FacilityTypes` (
+DROP TABLE IF EXISTS `FacilityTypes`;
+CREATE TABLE `FacilityTypes` (
   `idFacilityType`      INT NOT NULL UNIQUE AUTO_INCREMENT,
   `facTypeName`         VARCHAR(255) NOT NULL UNIQUE,
   `facTypeDescription`  VARCHAR(8000) NOT NULL,
@@ -36,7 +38,8 @@ CREATE OR REPLACE TABLE `FacilityTypes` (
 -- -----------------------------------------------------
 -- Table `Habitats`
 -- -----------------------------------------------------
-CREATE OR REPLACE TABLE `Habitats` (
+DROP TABLE IF EXISTS `Habitats`;
+CREATE TABLE `Habitats` (
   `idHabitat`           INT NOT NULL UNIQUE AUTO_INCREMENT,
   `habitatName`         VARCHAR(255) NOT NULL UNIQUE,
   `habitatDescription`  VARCHAR(8000) NOT NULL,
@@ -48,7 +51,8 @@ CREATE OR REPLACE TABLE `Habitats` (
 -- -----------------------------------------------------
 -- Table `Facilities`
 -- -----------------------------------------------------
-CREATE OR REPLACE TABLE `Facilities` (
+DROP TABLE IF EXISTS `Facilities`;
+CREATE TABLE `Facilities` (
   `idFacility`          INT NOT NULL UNIQUE AUTO_INCREMENT,
   `idPark`              INT NOT NULL,
   `idFacilityType`      INT NOT NULL,
@@ -80,7 +84,8 @@ CREATE OR REPLACE TABLE `Facilities` (
 -- -----------------------------------------------------
 -- Table `Diets`
 -- -----------------------------------------------------
-CREATE OR REPLACE TABLE `Diets` (
+DROP TABLE IF EXISTS `Diets`;
+CREATE TABLE `Diets` (
   `idDiet`              INT NOT NULL UNIQUE AUTO_INCREMENT,
   `dietName`            VARCHAR(255) NOT NULL UNIQUE,
   `dietDescription`     VARCHAR(8000) NOT NULL,
@@ -91,7 +96,8 @@ CREATE OR REPLACE TABLE `Diets` (
 -- -----------------------------------------------------
 -- Table `Species`
 -- -----------------------------------------------------
-CREATE OR REPLACE TABLE `Species` (
+DROP TABLE IF EXISTS `Species`;
+CREATE TABLE `Species` (
   `idSpecies`           INT NOT NULL UNIQUE AUTO_INCREMENT,
   `idDiet`              INT NOT NULL,
   `idHabitat`           INT NOT NULL,
@@ -115,7 +121,8 @@ CREATE OR REPLACE TABLE `Species` (
 -- -----------------------------------------------------
 -- Table `BiologicalAssets`
 -- -----------------------------------------------------
-CREATE OR REPLACE TABLE `BiologicalAssets` (
+DROP TABLE IF EXISTS `BiologicalAssets`;
+CREATE TABLE `BiologicalAssets` (
   `idBiologicalAsset`   INT NOT NULL UNIQUE AUTO_INCREMENT,
   `idSpecies`           INT NOT NULL,
   `idFacility`          INT NOT NULL,
@@ -136,7 +143,8 @@ CREATE OR REPLACE TABLE `BiologicalAssets` (
 -- -----------------------------------------------------
 -- Table `JobClassifications`
 -- -----------------------------------------------------
-CREATE OR REPLACE TABLE `JobClassifications` (
+DROP TABLE IF EXISTS `JobClassifications`;
+CREATE TABLE `JobClassifications` (
   `idJobClassification` INT NOT NULL UNIQUE AUTO_INCREMENT,
   `jobTitle`            VARCHAR(255) NOT NULL UNIQUE,
   `jobDescription`      VARCHAR(8000) NOT NULL,
@@ -146,7 +154,8 @@ CREATE OR REPLACE TABLE `JobClassifications` (
 -- -----------------------------------------------------
 -- Table `Employees`
 -- -----------------------------------------------------
-CREATE OR REPLACE TABLE `Employees` (
+DROP TABLE IF EXISTS `Employees`;
+CREATE TABLE `Employees` (
   `idEmployee`          INT NOT NULL UNIQUE AUTO_INCREMENT,
   `idJobClassification` INT NOT NULL,
   `firstName`           VARCHAR(255) NOT NULL,
@@ -169,7 +178,8 @@ CREATE OR REPLACE TABLE `Employees` (
 -- -----------------------------------------------------
 -- Table `TasksAssigned`
 -- -----------------------------------------------------
-CREATE OR REPLACE TABLE `TasksAssigned` (
+DROP TABLE IF EXISTS `TasksAssigned`;
+CREATE TABLE `TasksAssigned` (
   `idTaskAssigned`      INT NOT NULL UNIQUE AUTO_INCREMENT,
   `idFacility`          INT NOT NULL,
   `idBiologicalAsset`   INT NULL,
@@ -191,7 +201,8 @@ CREATE OR REPLACE TABLE `TasksAssigned` (
 -- ---------------------------------------------------
 -- Table `TaskCategories`
 -- ---------------------------------------------------
-CREATE OR REPLACE TABLE `TaskCategories` (
+DROP TABLE IF EXISTS `TaskCategories`;
+CREATE TABLE `TaskCategories` (
   `idTaskCategory`    INT NOT NULL UNIQUE AUTO_INCREMENT,
   `categoryName`      VARCHAR(255) NOT NULL UNIQUE,
   PRIMARY KEY (`idTaskCategory`));
@@ -200,11 +211,12 @@ CREATE OR REPLACE TABLE `TaskCategories` (
 -- -----------------------------------------------------
 -- Table `EmployeeTasks`
 -- -----------------------------------------------------
-CREATE OR REPLACE TABLE `EmployeeTasks` (
+DROP TABLE IF EXISTS `EmployeeTasks`;
+CREATE TABLE `EmployeeTasks` (
   `idEmployeeTask`      INT NOT NULL UNIQUE AUTO_INCREMENT,
   `idTaskAssigned`      INT NULL,
   `idEmployee`          INT NULL,
-  `idTaskCategory`      INT NOT NULL,
+  `idTaskCategory`      INT NULL,
   `taskHoursWorked`     INT NOT NULL,
   `empTaskCost`         DECIMAL(10,2) NOT NULL,
   `empTaskStart`        DATETIME NULL,
@@ -278,14 +290,14 @@ Visitors must stay on designated paths to prevent injury or getting lost. The fa
 other natural hazards commonly found in swamp environments.");
 
 
-INSERT INTO `Employees`             (idJobClassification, firstName, lastName, hourlyWage, employeePhone, employeeEmail,
+INSERT INTO `Employees`             (idJobClassification, employeeUsername, firstName, lastName, hourlyWage, employeePhone, employeeEmail,
                                     employeeRadio, employeeNote, employeePhoto)
 VALUES
-(4, 'Robert', 'Muldoon', 35.00, '+1-202-555-0144', 'rmuldoon@jw.org', '200', 'Firearm certified.', NULL),
-(3, 'Dennis', 'Nedry', 60.00, '+1-202-555-8073', 'dnedry@jw.org', NULL, 'Debt issues. Monitor behavior.', NULL),
-(2, 'Ralph', 'Wiggum', 0.00, '+1-202-555-1989', 'mefailenglish@hotmail.com', '325', 'Unpaid student intern. "I''m in danger!"', NULL),
-(1, 'Gerry', 'Harding', 40.00, '+1-202-555-1993', 'gharding@jw.org', '501', 'Medical certified.', 'images/staff_test.png'),
-(3, 'Michael', 'Backes', 100.00, '+1-202-555-1221', 'mbackes@jw.org', '800', 'Head Honcho.', NULL);
+(4, 'rmuldoon', 'Robert', 'Muldoon', 35.00, '+1-202-555-0144', 'rmuldoon@jw.org', '200', 'Firearm certified.', NULL),
+(3, 'dnedry', 'Dennis', 'Nedry', 60.00, '+1-202-555-8073', 'dnedry@jw.org', NULL, 'Debt issues. Monitor behavior.', NULL),
+(2, 'rwiggum', 'Ralph', 'Wiggum', 0.00, '+1-202-555-1989', 'mefailenglish@hotmail.com', '325', 'Unpaid student intern. "I''m in danger!"', NULL),
+(1, 'gharding', 'Gerry', 'Harding', 40.00, '+1-202-555-1993', 'gharding@jw.org', '501', 'Medical certified.', 'images/staff_test.png'),
+(3, 'mbackes', 'Michael', 'Backes', 100.00, '+1-202-555-1221', 'mbackes@jw.org', '800', 'Head Honcho.', NULL);
 
 
 -- Note: Transport tasks are generated for the facility where the transport operation begins.
