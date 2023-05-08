@@ -344,9 +344,9 @@ WHERE idTaskAssigned = :idTaskAssigned;
 -- Employee
 UPDATE Employees
 SET     idJobClassification =   (SELECT idJobClassification FROM JobClassifications WHERE jobTitle = :jobTitle_input),
-        firstName = , lastName = , hourlyWage = ,
-        employeePhone = , employeeEmail = , employeeRadio = , 
-        employeeNote = , employeePhoto = 
+        firstName = :firstName_input, lastName = :lastName_input, hourlyWage = :hourlyWage_input,
+        employeePhone = :employeePhone_input, employeeEmail = :employeeEmail_input, employeeRadio = :employeeRadio_input, 
+        employeeNote = :employeeNote_input, employeePhoto = :employeePhoto_input
 WHERE idEmployee = :idEmployee_input;
 
 -- Update an Employee Task (if needed to re-assign orphaned FK's if/when parents are deleted)
