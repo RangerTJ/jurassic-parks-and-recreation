@@ -3,41 +3,18 @@
 
 -- Requirements Info from Project Outline:
 -- ---------------------------------------
--- **It should be possible to INSERT entries into every table individually.
+-- **REQ's DONE: 1, 2, 4, 5, 6
 
--- **Every table should be used in at least one SELECT query. 
---  For the SELECT queries, it is fine to just display the content of the tables. 
---  It is generally not appropriate to have only a single query that joins all tables and displays them.
-
--- **You need to include one DELETE and one UPDATE function in your website, for any one of the entities. 
+-- **REQ 3: You need to include one DELETE and one UPDATE function in your website, for any one of the entities. 
 --  In addition, it should be possible to add and remove things from at least one many-to-many relationship and it should be possible to add things to all relationships. 
 --  This means you need SELECT & INSERT functionalities for all relationships as well as entities. 
 --  And DELETE & UPDATE for least one m:m relationship.
 
--- **Note that it's not acceptable to require the user to enter IDs for foreign keys.** ... We're gonna have to do something stupid like use a unique name to ID a task, aren't we?
-
---  Instead your website needs to use a dynamically populated drop-down list or have the ability to search using text instead of entering in the ID. 
---  This Dynamic drop-down/Search functionality should be present for at least one entity. 
-
--- **In one relationship, you should be able to set the foreign key value to NULL using UPDATE, that removes the relationship. 
---  In case none of the one-to-many relationships in your database has optional participation, you would need to change that to make sure one can have NULL values. 
---  For example, in the table Orders, there may be two FKs: the employeeID and the customerID which create relations to the Employees and Customers tables. 
---  It may not be sensible for the Customer to be optional. But the Employees could be optional. 
---  Thus, we would expect that in the Orders INSERT and UPDATE pages it is possible to set the employeeID to a value or else to NULL. 
-
--- **You should be able to DELETE a record from a M:M relationship without creating a data anomaly in the related tables. 
---  For example, DELETEing a Customer should handle any Orders that were made by the Customer. 
---  This can be done by either by setting the CustomerID to NULL, or else by DELETEing any Order(s) associated with that Customer. 
---  More on how this can be done in Week 5 when we cover MySQL CASCADE.
-
--- **To continue the example from above, if you have 5 tables in your schema, then at a minimum, we expect you to implement:
+-- **SUMMARY: To continue the example from above, if you have 5 tables in your schema, then at a minimum, we expect you to implement:
 --  5 SELECTs, 5 INSERTs, 1 UPDATE (1 NULLable relationship), 1 DELETE (M:M), and 1 Dynamic drop-down/Search for a total of 14 functions.
 
 
 -- TODO: 
---      Menu Selectors: Done (may need to revise when we see them in action / depending on how the queries work with JS/React)
---      Select:         (should be done) Species, BioAssets, TaskCategories
---      Add:            (should be done) Habitat, BioAssets, TaskCategories
 --      Update:         Everything except Parks
 --      Delete:         Everything except TasksAssigned
 --      Custom:         EmployeeTasks lookup for an employee, TaskAssigned Lookup for a facility sorted by date
@@ -48,6 +25,7 @@
 
 -- -----------------
 -- Functional Queries to Populate Drop-downs, etc.
+-- WARNING: May need to revisit if multi-column selects are too hard to use in drop-downs when we're using column1 only as the input
 -- -----------------
 
 -- Park Selector
@@ -101,9 +79,6 @@ SELECT idTaskCategory, categoryName
 FROM TaskCategories
 ORDER BY categoryName ASC;
 
--- Question/Note: It may make more sense to do TasksAssigned and EmployeeTasks as direct inputs where we assume staff responsible have knowledge of
--- the relevant task ID's, vs. a drop down (because these are gonna get unweildingly large pretty fast)
-
 -- ----------------
 -- Required Subqueries - For Easy Copy/Pasting as needed in larger queries
 -- ID from name is needed for inputs to add or update entities.
@@ -115,17 +90,21 @@ ORDER BY categoryName ASC;
 (SELECT idPark FROM Parks WHERE parkName = :parkName_input)
 (SELECT parkName FROM Parks WHERE idPark = :idPark_input)
 
--- FacilityTypes id from name and vice versa
+-- Get FacilityTypes id from name and vice versa
 (SELECT idFacilityType FROM FacilityTypes WHERE facTypeName = :facTypeName_input)
 (SELECT facTypeName FROM FacilityTypes WHERE idFacilityType = :idFacilityType_input)
 
--- Facility ID from name and vice versa
+-- Get Facility ID from name and vice versa
 (SELECT idFacility FROM Facilities WHERE facilityName = :facilityName_input)
 (SELECT facilityName FROM Facilities WHERE idFacility = :idFacility_input)
 
--- Bio Assets ID from bioAssetName and vice versa (possibly temp. - unless we want to think of a different way to select them that's unique?)
+-- Get Bio Assets ID from bioAssetName and vice versa
 (SELECT idBiologicalAsset FROM BiologicalAssets WHERE bioAssetName = :bioAssetName_input)
 (SELECT bioAssetName FROM BiologicalAssets WHERE idBiologicalAsset = :idBiologicalAsset_input)
+
+-- Get TaskAssignedID from task name and vice versa
+(SELECT idTaskAssigned FROM TasksAssigned WHERE taskName = :taskName_input)
+(SELECT taskName FROM TasksAssigned WHERE idTask = :idTask_input)
 
 -- Get HabitatID from name and vice versa
 (SELECT idHabitat FROM Habitat WHERE habitatName = :habitatName_input)
@@ -147,7 +126,7 @@ ORDER BY categoryName ASC;
 (SELECT idJobClassification FROM JobClassifications WHERE jobTitle = :jobTitle_input)
 (SELECT jobTitle FROM JobClassifications WHERE idJobClassification = :idJobClassification_input)
 
--- Get TASK CATEGORY NAME FROM ID AND VICE VERSA
+-- Get Task Category from name from ID and vice versa
 (SELECT idTaskCategory FROM TaskCategories WHERE categoryName = :categoryName_input)
 (SELECT categoryName FROM TaskCategories WHERE idTaskCategory = :idTaskCategory_input)
 
@@ -156,22 +135,22 @@ ORDER BY categoryName ASC;
 -- 11x SUMMARY QUERIES TO POPULATE PAGE TABLES
 -- -----------------
 
--- Select Parks
+-- SELECT Parks
 SELECT * FROM Parks
 ORDER BY idPark ASC;
 
 
--- Select Facility Types
+-- SELECT Facility Types
 SELECT * FROM FacilityTypes
 ORDER BY idFacilityType ASC;
 
 
--- Select Habitats
+-- SELECT Habitats
 SELECT * FROM Habitats
 ORDER BY idHabitat ASC;
 
 
--- Select Facilities
+-- SELECT Facilities
 SELECT  Facilities.idFacility, Parks.parkName, FacilityTypes.facTypeName, Habitats.habitatName,
         Facilities.facilityName, Facilities.facilityDescription, Facilities.facilityLocation, 
         Facilities.securityRating, Facilities.facilityPhoto, Facilities.facilityNote
@@ -183,36 +162,36 @@ JOIN Habitats ON Facilities.idHabitat = Habitats.idHabitat
 ORDER BY idFacility ASC;
 
 
--- Select Diets
+-- SELECT Diets
 SELECT * FROM Diets
 ORDER BY idDiet ASC;
 
 
--- Select Species
--- TODO -- TBD (complex/FK's - Join/display name of FK ID's instead of ID)
+-- SELECT Species
 SELECT Species.idSpecies, Diets.dietName, Habitats.habitatName, Species.speciesName, Species.speciesDescription,
        Species.threatLevel, Species.speciesPhoto
 FROM Species
+-- Need to join Species -> Diets -> Habitats
 JOIN Diets ON Species.idDiet = Diets.idDiet
 JOIN Habitats ON Species.idHabitat = Habitats.idHabitat
 ORDER BY idSpecies ASC; 
 
 
--- BiologicalAssets
--- TO DO - -- TBD (complex/FK's - Join/display name of FK ID's instead of ID)
+-- SELECT BiologicalAssets
 SELECT BiologicalAssets.idBiologicalAsset, Species.speciesName, Facilities.facilityName, BiologicalAssets.bioAssetName
 FROM BiologicalAssets
+-- Need to join Species -> BiologicalAssets -> Facilities
 JOIN Species ON BiologicalAssets.idSpecies = Species.idSpecies
 JOIN Facilities ON BiologicalAssets.idFacility = Facilities.idFacility
 ORDER BY idBiologicalAsset ASC;
 
 
--- Select JobClassifications
+-- SELECT JobClassifications
 SELECT * FROM JobClassifications
 ORDER BY idJobClassification ASC;
 
 
--- Select Employees
+-- SELECT Employees
 SELECT  Employees.idEmployee, JobClassifications.jobTitle, Employees.firstName, Employees.lastName, Employees.hourlyWage,
         Employees.employeePhone, Employees.employeeEmail, Employees.employeeRadio, Employees.employeeNote, Employees.employeePhoto
 FROM Employees
