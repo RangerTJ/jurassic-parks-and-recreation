@@ -25,6 +25,7 @@
 
 -- -----------------
 -- Functional Queries to Populate Drop-downs, etc.
+-- WARNING: May need to revisit if multi-column selects are too hard to use in drop-downs when we're using column1 only as the input
 -- -----------------
 
 -- Park Selector

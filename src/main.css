@@ -48,9 +48,8 @@
     /* color: greenyellow; */
     color: rgb(255, 208, 0);
     font-family: var(--normalText);
-    max-width: 85%;
+    max-width: 90%;
     margin: auto;
-    padding: 1%;
   }
   
   header {
@@ -60,12 +59,24 @@
     color: black; */
     /* background-color: var(--dominionAmberBright);
     color: black; */
-    padding-left: 1.5%;
-    padding-right: 1%;
+    padding-left: 10px;
+    padding-right: 10px;
     padding-bottom: 1px;
-    display:flexbox;
-    flex-basis: 50%;
 }
+
+
+  footer {
+    /* background-color: var(--worldDeepBlue);
+    color: var(--worldLightBlue); */
+    background-color: var(--parkRed);
+    color: var(--parkYellow);
+    /* background-color: var(--dominionAmberBright);
+    color: black; */
+    font-family: var(--normalText);
+    padding: 10px;
+    margin-bottom: 50px;
+  }  
+
 
   main {
     background-color: var(--worldMedBlueClear);
@@ -79,17 +90,6 @@
     margin-left: 2%;
     margin-right: 2%;
     overflow: auto;}
-
-  footer {
-    /* background-color: var(--worldDeepBlue);
-    color: var(--worldLightBlue); */
-    background-color: var(--parkRed);
-    color: var(--parkYellow);
-    /* background-color: var(--dominionAmberBright);
-    color: black; */
-
-    font-family: var(--normalText);
-    padding: 1%;}  
 
   /* Nav Elements */
   nav {
