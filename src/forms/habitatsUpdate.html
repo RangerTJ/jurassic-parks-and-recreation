@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Jurassic Parks and Recreation | Home</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <meta name='robots' content='noindex,noarchive,nofollow'>
-    <link rel='stylesheet' type='text/css' media='screen' href='../main.css'>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex,noarchive,nofollow">
+    <link rel="stylesheet" type="text/css" media="screen" href="../main.css">
 </head>
 
 <body>
@@ -52,6 +52,7 @@
                                     id ="habitatNam" 
                                     required 
                                     autofocus
+                                    value="Tropical Jungle - Large"
                                     placeholder="Ex. Tropical Jungle - Large">
                         </p>
                         <p>
@@ -60,7 +61,7 @@
                                 <option value="">Choose an option</option>
                                 <option value="1">1 - Small</option>
                                 <option value="2">2 - Medium</option>
-                                <option value="3">3 - Large</option>
+                                <option value="3" selected>3 - Large</option>
                             </select>
                         </p>
                         <p>
@@ -71,14 +72,15 @@
                                     required
                                     cols="40" rows="5" 
                                     min="5" max="255"
-                                    placeholder="Ex. Prehistoric jungles were dense, lush environments teeming with plant and animal life..."></textarea>
+                                    placeholder="Ex. Prehistoric jungles were dense, lush environments teeming with plant and animal life...">Ex. Prehistoric jungles were dense, lush environments teeming with plant and animal life...</textarea>
                         </p>
                         <p>
                             <div><label for="habitatPhoto">Photo Path</label></div>
                             <input type="text" 
                                     name="habitatPhoto" 
                                     id="habitatPhoto" 
-                                    placeholder="Ex. images/photo.png">
+                                    placeholder="Ex. images/photo.png"
+                                    value="Ex. images/photo.png">
                         </p>
                     </fieldset>
                 </form>

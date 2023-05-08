@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Jurassic Parks and Recreation | Home</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <meta name='robots' content='noindex,noarchive,nofollow'>
-    <link rel='stylesheet' type='text/css' media='screen' href='../main.css'>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex,noarchive,nofollow">
+    <link rel="stylesheet" type="text/css" media="screen" href="../main.css">
 </head>
 
 <body>
@@ -52,7 +52,8 @@
                                         id ="facilityName" 
                                         required
                                         autofocus 
-                                        placeholder="Ex. Nublar Visitor Center">
+                                        placeholder="Ex. Nublar Visitor Center"
+                                        value="Ex. Nublar Visitor Center">
                         </p>
                         <p>
                             <!-- Populated by SQL Query -->
@@ -61,7 +62,7 @@
                                 <option value="">Choose an option</option>
                                 <option value="1">Jurassic Park</option>
                                 <option value="2">Jurassic Park: San Diego</option>
-                                <option value="3">Jurassic World</option>
+                                <option value="3" selected>Jurassic World</option>
                                 <option value="4">Site B</option>
                             </select>
                         </p>
@@ -70,7 +71,7 @@
                             <div><label for="facilityType" class="required">Type</label></div>
                             <select name="facilityType" id="facilityType" required>
                                 <option value="">Choose an option</option>
-                                <option value="1">General Structure</option>
+                                <option value="1" selected>General Structure</option>
                                 <option value="2">Ground Enclosure</option>
                                 <option value="3">Aquatic Enclosure</option>
                                 <option value="4">Aviary Enclosure</option>
@@ -85,13 +86,13 @@
                                     required
                                     cols="40" rows="5" 
                                     min="5" max="255"
-                                    placeholder="Ex. The original prehistoric zoological theme park and preserve. Permanently closed."></textarea>
+                                    placeholder="Ex. The original prehistoric zoological theme park and preserve. Permanently closed.">Ex. The original prehistoric zoological theme park and preserve. Permanently closed.</textarea>
                         </p>
                         <p>
                             <!-- Populated by SQL Query -->
-                            <div><label for="habitat" class="required">Habitat</label></div>
-                            <select name="habitat" id="habitat" required>
-                                <option value="">Choose an option</option>
+                            <div><label for="habitat">Habitat</label></div>
+                            <select name="habitat" id="habitat">
+                                <option value="">None (Default)</option>
                                 <option value="1">Tropical Jungle - Large</option>
                                 <option value="2">Cretaceous Coastline - Medium</option>
                                 <option value="3">Jurassic Swamp - Small</option>
@@ -104,7 +105,8 @@
                                         name="facilityLocation"
                                         id ="facilityLocation"
                                         required 
-                                        placeholder="Ex. South Docks">
+                                        placeholder="Ex. South Docks"
+                                        value="Ex. South Docks">
                         </p>
                         <p>
                             <!-- Hard-coded scale of 0 to 10 -->
@@ -119,7 +121,7 @@
                                 <option value="5">5</option>
                                 <option value="6">6</option>
                                 <option value="7">7</option>
-                                <option value="8">8</option>
+                                <option value="8" selected>8</option>
                                 <option value="9">9</option>
                                 <option value="10">10</option>
                             </select>
@@ -130,7 +132,8 @@
                             <input type="text"
                                         name="facilityPhoto"
                                         id ="facilityPhoto"
-                                        placeholder="Ex. images/photo.png">
+                                        placeholder="Ex. images/photo.png"
+                                        value="Ex. images/photo.png">
                         </p>
                         <p>
                             <div><label for="facilityNote" class="required">Notes</label></div>
@@ -139,7 +142,7 @@
                                     id ="facilityNote"
                                     cols="40" rows="5" 
                                     min="5" max="255"
-                                    placeholder="Ex. The original prehistoric zoological theme park and preserve. Permanently closed."></textarea>
+                                    placeholder="Ex. The original prehistoric zoological theme park and preserve. Permanently closed.">Ex. The original prehistoric zoological theme park and preserve. Permanently closed.</textarea>
                         </p>
                     </fieldset>
                 </form>

@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Jurassic Parks and Recreation | Home</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <meta name='robots' content='noindex,noarchive,nofollow'>
-    <link rel='stylesheet' type='text/css' media='screen' href='../main.css'>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex,noarchive,nofollow">
+    <link rel="stylesheet" type="text/css" media="screen" href="../main.css">
 </head>
 
 <body>
@@ -51,17 +51,18 @@
                                     id ="speciesName" 
                                     required 
                                     autofocus
-                                    placeholder="Ex. Apatosaurus">
+                                    placeholder="Ex. Apatosaurus"
+                                    value="Ex. Apatosaurus">
                         </p>
                         <p>
                             <!-- Populate with SQL query -->
                             <div><label for="speciesDiet" class="required">Diet</label></div>
                             <select name="speciesDiet" id="speciesDiet" required>
                                 <option value="">Choose an option</option>
-                                <option value="1">Herbivore</option>
+                                <option value="1" selected>Herbivore</option>
                                 <option value="2">Carnivore</option>
                                 <option value="3">Omnivore</option>
-                                <option value="4">Pescivore</option>
+                                <option value="4">Piscivore</option>
                                 <option value="5">Insectivore</option>
                             </select>
                         </p>
@@ -70,7 +71,7 @@
                             <div><label for="habitat" class="required">Habitat</label></div>
                             <select name="habitat" id="habitat" required>
                                 <option value="">Choose an option</option>
-                                <option value="1">Tropical Jungle - Large</option>
+                                <option value="1" selected>Tropical Jungle - Large</option>
                                 <option value="2">Cretaceous Coastline - Medium</option>
                                 <option value="3">Jurassic Swamp - Small</option>
                             </select>
@@ -84,7 +85,7 @@
                                 <option value="2">2</option>
                                 <option value="3">3</option>
                                 <option value="4">4</option>
-                                <option value="5">5</option>
+                                <option value="5" selected>5</option>
                                 <option value="6">6</option>
                                 <option value="7">7</option>
                                 <option value="8">8</option>
@@ -93,12 +94,12 @@
                             </select>
                         </p>
                         <p>
-                            <div><label for="speciesPhoto" class="required">Photo</label></div>
+                            <div><label for="speciesPhoto">Photo</label></div>
                             <input type="text"
                                         name="speciesPhoto" 
                                         id ="speciesPhoto" 
-                                        required 
-                                        placeholder="Ex. images/test_photo.png">
+                                        placeholder="Ex. images/test_photo.png"
+                                        value="Ex. images/test_photo.png">
                         </p>
                         <p>
                             <div><label for="speciesDescription" class="required">Description</label></div>
@@ -108,7 +109,7 @@
                                     required
                                     cols="40" rows="5" 
                                     min="5" max="255"
-                                    placeholder="Ex. Iconic long-necked sauropod."></textarea>
+                                    placeholder="Ex. Iconic long-necked sauropod.">Ex. Iconic long-necked sauropod.</textarea>
                         </p>
                     </fieldset>
                 </form>

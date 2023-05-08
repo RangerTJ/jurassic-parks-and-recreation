@@ -232,11 +232,12 @@
     color: white;
     border-color: gold;
   }
-
+  
   button:focus {
     background-color: black;
     color: white;
     border: solid gold;
+    outline: none;
   }
 
   label {
@@ -259,26 +260,69 @@
   input {
     color: var(--feralGreen);
     background-color: var(--parkYellowGreenPale);
+    margin-top: 5px;
     /* width: 90%; */
+  }
+
+  input:invalid {
+    outline: solid var(--parkRed);
+  }
+
+  input:valid {
+    outline: solid var(--feralGreen);
+  }
+
+  input:focus {
+    outline: solid var(--parkYellow);
   }
 
   textarea {
     /* color: var(--worldLightBlue);
     background-color: var(--worldDeepBlue); */
+    margin-top: 5px;
     color: var(--feralGreen);
     background-color: var(--parkYellowGreenPale);
     /* width: 90%; */
   }
 
+  textarea:invalid {
+    outline: solid var(--parkRed);
+  }
+
+  textarea:valid {
+    outline: solid var(--feralGreen);
+  }
+
+  textarea:focus {
+    outline: solid var(--parkYellow);
+  }
+
   select {
     /* background-color: var(--worldLightBlue);
     color: var(--worldDeepBlue); */
+    margin-top: 5px;
     color: var(--feralGreen);
     background-color: var(--parkYellowGreenPale);
   }
 
+  select:invalid {
+    outline: solid var(--parkRed);
+  }
+
+  select:valid {
+    outline: solid var(--feralGreen);
+  }
+
+  select:focus {
+    outline: solid var(--parkYellow);
+  }
+
   ::placeholder {
     color: var(--dominionAmberMed);
+  }
+
+  img {
+    border: solid 2px var(--feralGreen);
   }
 
 

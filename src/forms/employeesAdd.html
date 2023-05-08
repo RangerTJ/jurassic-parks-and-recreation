@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Jurassic Parks and Recreation | Home</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <meta name='robots' content='noindex,noarchive,nofollow'>
-    <link rel='stylesheet' type='text/css' media='screen' href='../main.css'>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex,noarchive,nofollow">
+    <link rel="stylesheet" type="text/css" media="screen" href="../main.css">
 </head>
 
 <body>
@@ -58,6 +58,14 @@
                                     placeholder="First Name">
                         </p>
                         <p>
+                            <div><label for="employeeUsername" class="required">Username</label></div>
+                            <input type="text"
+                                        name="employeeUsername" 
+                                        id ="employeeUsername" 
+                                        required
+                                        placeholder="Ex. flastname">
+                        </p>
+                        <p>
                             <!-- Populated by SQL query -->
                             <div><label for="jobTitle" class="required">Job</label></div>
                             <select name="jobTitle" id="jobTitle" required>
@@ -93,11 +101,10 @@
                                         placeholder="Ex. email@address.com">
                         </p>
                         <p>
-                            <div><label for="employeeRadio" class="required">Radio</label></div>
+                            <div><label for="employeeRadio">Radio</label></div>
                             <input type="text"
                                         name="employeeRadio"
                                         id ="employeeRadio" 
-                                        required 
                                         placeholder="Ex. 407">
                         </p>
                         <!-- Workflow will be upload photo to server first, then select from available here entering filename at creation/update, possibly w/ drop-down menu -->
@@ -109,7 +116,7 @@
                                         placeholder="Ex. images/photo.png">
                         </p>
                         <p>
-                            <div><label for="employeeNote" class="required">Notes</label></div>
+                            <div><label for="employeeNote">Notes</label></div>
                             <textarea
                                     name="employeeNote"
                                     id ="employeeNote"
