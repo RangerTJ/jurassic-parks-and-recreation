@@ -81,7 +81,7 @@ FROM Species
 ORDER BY speciesName ASC;
 
 -- Biological Assets Selector (Bio Asset -> Species JOIN needed)
-SELECT idBiologicalAsset, speciesName, nickname
+SELECT idBiologicalAsset, speciesName, bioAssetName
 FROM BiologicalAssets
 JOIN Species ON BiologicalAssets.idSpecies = Species.idSpecies
 ORDER BY speciesName;
@@ -123,9 +123,9 @@ ORDER BY categoryName ASC;
 (SELECT idFacility FROM Facilities WHERE facilityName = :facilityName_input)
 (SELECT facilityName FROM Facilities WHERE idFacility = :idFacility_input)
 
--- Bio Assets ID from nickname and vice versa (possibly temp. - unless we want to think of a different way to select them that's unique?)
-(SELECT idBiologicalAsset FROM BiologicalAssets WHERE nickname = :nickname_input)
-(SELECT nickname FROM BiologicalAssets WHERE idBiologicalAsset = :idBiologicalAsset_input)
+-- Bio Assets ID from bioAssetName and vice versa (possibly temp. - unless we want to think of a different way to select them that's unique?)
+(SELECT idBiologicalAsset FROM BiologicalAssets WHERE bioAssetName = :bioAssetName_input)
+(SELECT bioAssetName FROM BiologicalAssets WHERE idBiologicalAsset = :idBiologicalAsset_input)
 
 -- Get HabitatID from name and vice versa
 (SELECT idHabitat FROM Habitat WHERE habitatName = :habitatName_input)
@@ -148,6 +148,8 @@ ORDER BY categoryName ASC;
 (SELECT jobTitle FROM JobClassifications WHERE idJobClassification = :idJobClassification_input)
 
 -- Get TASK CATEGORY NAME FROM ID AND VICE VERSA
+(SELECT idTaskCategory FROM TaskCategories WHERE categoryName = :categoryName_input)
+(SELECT categoryName FROM TaskCategories WHERE idTaskCategory = :idTaskCategory_input)
 
 
 -- -----------------
@@ -188,10 +190,21 @@ ORDER BY idDiet ASC;
 
 -- Select Species
 -- TODO -- TBD (complex/FK's - Join/display name of FK ID's instead of ID)
+SELECT Species.idSpecies, Diets.dietName, Habitats.habitatName, Species.speciesName, Species.speciesDescription,
+       Species.threatLevel, Species.speciesPhoto
+FROM Species
+JOIN Diets ON Species.idDiet = Diets.idDiet
+JOIN Habitats ON Species.idHabitat = Habitats.idHabitat
+ORDER BY idSpecies ASC; 
 
 
 -- BiologicalAssets
 -- TO DO - -- TBD (complex/FK's - Join/display name of FK ID's instead of ID)
+SELECT BiologicalAssets.idBiologicalAsset, Species.speciesName, Facilities.facilityName, BiologicalAssets.bioAssetName
+FROM BiologicalAssets
+JOIN Species ON BiologicalAssets.idSpecies = Species.idSpecies
+JOIN Facilities ON BiologicalAssets.idFacility = Facilities.idFacility
+ORDER BY idBiologicalAsset ASC;
 
 
 -- Select JobClassifications
@@ -208,7 +221,7 @@ JOIN JobClassifications ON Employees.idJobClassification = JobClassifications.id
 ORDER BY idEmployee ASC;
 
 
--- SELECT TasksAssigned (Bio Asset ID'd by displaying actual asset ID# and Species, since may not have a nickname)
+-- SELECT TasksAssigned (Bio Asset ID'd by displaying actual asset ID# and Species, since may not have a bioAssetName)
 SELECT  TasksAssigned.idTaskAssigned, Facilities.facilityName, BiologicalAssets.idBiologicalAsset, Species.speciesName,
         TasksAssigned.taskDescription, TasksAssigned.taskStart, TasksAssigned.taskEnd
 FROM TasksAssigned
@@ -230,8 +243,10 @@ ORDER BY EmployeeTasks.idEmployeeTask ASC;
 
 
 -- SELECT Task Categories
--- TO DO
+SELECT * from TaskCategories
+ORDER BY idTaskCategory ASC;
 
+-- TO DO
 -- ----------------
 -- 11x "ADD NEW" SQL SCRIPTS - Use :browser_inputs to get data for insert queries
 -- Open Question: Is it possible to display multiple fields in drop-down while only sending the input from one?
@@ -240,7 +255,7 @@ ORDER BY EmployeeTasks.idEmployeeTask ASC;
 
 
 -- Add new Park to the system
-INSERT INTO Par                 (parkName, parkDescription, parkLocation)
+INSERT INTO Parks                 (parkName, parkDescription, parkLocation)
 VALUES  (
                 :parkName_input, :parkDescription_input, :parkLocation_input
         );
@@ -263,12 +278,12 @@ INSERT INTO FacilityTypes       (facTypeName, facTypeDescription)
 VALUES  (:facTypeName_input, :facTypeDescription_input);
 
 
--- User adds a TaskAssigned, optionally selecting a bio asset based on nickname (may look into alternate selectors for asset)
+-- User adds a TaskAssigned, optionally selecting a bio asset based on bioAssetName (may look into alternate selectors for asset)
 -- Maybe use asset ID directly for INSERT and have the drop-down display other info to visually ID target critter, but only send the related ID... (I think this is possible?)
 INSERT INTO TasksAssigned       (idFacility, idBiologicalAsset, taskDescription, taskStart, taskEnd)
 VALUES  (       
                 (SELECT idFacility FROM Facilities WHERE facilityName = :facilityName_input),
-                (SELECT idBiologicalAsset FROM BiologicalAssets WHERE nickname = :nickname_input), 
+                (SELECT idBiologicalAsset FROM BiologicalAssets WHERE bioAssetName = :bioAssetName_input), 
                 :taskDescription_input, :taskStart_input, :taskEnd_input
         );
 
