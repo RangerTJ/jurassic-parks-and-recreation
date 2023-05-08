@@ -1,4 +1,7 @@
 /* Fonts */
+
+/* Font-face code style/syntax based on "How to use @font-face in CSS" by Chris Coyler's
+URL: https://css-tricks.com/snippets/css/using-font-face-in-css/ */
 @font-face {
     font-family: 'Jurassic Park';
     src: url('fonts/JurassicPark-BL48.ttf') format('truetype');
