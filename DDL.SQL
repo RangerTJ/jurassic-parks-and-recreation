@@ -304,12 +304,12 @@ VALUES
 -- Note: Transport tasks are generated for the facility where the transport operation begins.
 -- Datetime Format: 'YYYY-MM-DD HH:MI:SS.FFFFFFF' / Date is: YYYYMMDD
 -- May want to switch datetime to date for maintainability
-INSERT INTO `TasksAssigned`         (idFacility, idBiologicalAsset, taskDescription, taskStart, taskEnd)
+INSERT INTO `TasksAssigned`         (idFacility, idBiologicalAsset, taskName, taskDescription, taskStart, taskEnd)
 VALUES
-(1, 1, 'Sedate and transport asset to its new enclosure.', '2023-03-27', '2023-04-28'),
-(2, NULL, 'FY2023 - Daily Visitor Center Cleaning', '2022-10-01', NULL),
-(3, 2, 'Remove broken tooth from showcase asset at Jurassic Stadium.', '2023-03-01', '2023-03-30'),
-(4, NULL, 'Repair leak in tank.', '2023-04-28', NULL);
+(1, 1, 'Asset Delivery','Sedate and transport asset to its new enclosure.', '2023-03-27', '2023-04-28'),
+(2, NULL, 'Clean VC 2023','FY2023 - Daily Visitor Center Cleaning', '2022-10-01', NULL),
+(3, 2, 'Stadium Dental Exam', 'Remove broken tooth from showcase asset at Jurassic Stadium.', '2023-03-01', '2023-03-30'),
+(4, NULL, 'Lagoon Repair', 'Repair leak in tank.', '2023-04-28', NULL);
 
 
 INSERT INTO `EmployeeTasks`         (idTaskAssigned, idEmployee, taskHoursWorked, empTaskCost, empTaskStart, empTaskEnd)
