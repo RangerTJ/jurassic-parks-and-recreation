@@ -36,8 +36,8 @@
 
 -- TODO: 
 --      Menu Selectors: Done (may need to revise when we see them in action / depending on how the queries work with JS/React)
---      Select:         Species, BioAssets, TaskCategories
---      Add:            Habitat, BioAssets, TaskCategories
+--      Select:         (should be done) Species, BioAssets, TaskCategories
+--      Add:            (should be done) Habitat, BioAssets, TaskCategories
 --      Update:         Everything except Parks
 --      Delete:         Everything except TasksAssigned
 --      Custom:         EmployeeTasks lookup for an employee, TaskAssigned Lookup for a facility sorted by date
@@ -84,7 +84,7 @@ ORDER BY speciesName ASC;
 SELECT idBiologicalAsset, speciesName, bioAssetName
 FROM BiologicalAssets
 JOIN Species ON BiologicalAssets.idSpecies = Species.idSpecies
-ORDER BY speciesName;
+ORDER BY speciesName ASC;
 
 -- Job Classifications Selector
 SELECT idJobClassification, jobTitle
