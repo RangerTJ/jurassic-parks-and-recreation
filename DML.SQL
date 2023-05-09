@@ -191,9 +191,8 @@ LEFT JOIN BiologicalAssets ON TasksAssigned.idBiologicalAsset = BiologicalAssets
 LEFT JOIN Species ON BiologicalAssets.idSpecies = Species.idSpecies
 ORDER BY TasksAssigned.idTaskAssigned ASC;
 
--- ** NEED TO TEST JOIN WITH TASK CATEGORY **
 -- SELECT EmployeeTasks
-SELECT  EmployeeTasks.idEmployeeTask, TasksAssigned.taskName, Employees.firstName, Employees.lastName AS contributingEmployee,
+SELECT  EmployeeTasks.idEmployeeTask, TasksAssigned.taskName, (SELECT CONCAT(Employees.firstName, ' ', Employees.lastName)) AS contributingEmployee,
         TaskCategories.categoryName, EmployeeTasks.taskHoursWorked, EmployeeTasks.empTaskCost, EmployeeTasks.empTaskStart, EmployeeTasks.empTaskEnd
 FROM EmployeeTasks
 -- Need to JOIN EmployeeTasks -> TasksAssigned -> Employees -> Task Category
