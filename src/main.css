@@ -290,6 +290,14 @@ URL: https://css-tricks.com/snippets/css/using-font-face-in-css/ */
     font-size: 30px;
 }
 
+.scrollableTable {
+  overflow: auto;
+}
+
+.tableDescription {
+  text-align: left;
+}
+
 /* Small Screen Settings */
 @media (max-device-width: 820px) {
 
