@@ -1,27 +1,12 @@
 -- Taylor Jordan and Nick Schmidt (Team 100: Jurassic Parks and Recreation)
--- : colon prefix used (for now) to denote variables that will be involved with back end data. 
+-- : colon prefix used (for now) to denote variables that will be involved with back end data.
 
--- Requirements Info from Project Outline:
--- ---------------------------------------
--- **REQ's DONE: 1, 2, 4, 5, 6
-
--- **REQ 3: You need to include one DELETE and one UPDATE function in your website, for any one of the entities. 
---  In addition, it should be possible to add and remove things from at least one many-to-many relationship and it should be possible to add things to all relationships. 
---  This means you need SELECT & INSERT functionalities for all relationships as well as entities. 
---  And DELETE & UPDATE for least one m:m relationship.
-
--- **SUMMARY: To continue the example from above, if you have 5 tables in your schema, then at a minimum, we expect you to implement:
---  5 SELECTs, 5 INSERTs, 1 UPDATE (1 NULLable relationship), 1 DELETE (M:M), and 1 Dynamic drop-down/Search for a total of 14 functions.
-
+-- WARNING: This script contains subqueries for copy/pasting. It is NOT recomended to run the entire SQL file.
+--              If copy/pasting all the code, please remove the subqueries section first, or it'll break the script. 
 
 -- TODO: 
---      Update:         Everything except Parks
---      Delete:         Everything except TasksAssigned
---      Custom:         EmployeeTasks lookup for an employee, TaskAssigned Lookup for a facility sorted by date
---                      Select populators for looking up tasks that have or haven't ended?
-
--- Change: Made Nickname for bio assets NOT null instead of nullable since this is (currently) selecting for assets in queries based on nicknames.
---              May reverts this if we figure a way to get them without it / can make nickname non-unique in that case.
+--      Update: Task Category + All Dino Stuff
+--      Custom: Optional / Later / Stretch Goal
 
 -- -----------------
 -- Functional Queries to Populate Drop-downs, etc.
@@ -29,60 +14,65 @@
 -- -----------------
 
 -- Park Selector
-SELECT idPark, parkName
+SELECT parkName
 FROM Parks
 ORDER BY parkName ASC;
 
 -- Facility Type Selector
-SELECT idFacilityType, facTypeName
+SELECT facTypeName
 FROM FacilityTypes
 ORDER BY idFacilityType ASC;
 
 -- Habitat Selector
-SELECT idHabitat, habitatName
+SELECT habitatName
 FROM Habitats
 ORDER BY habitatName ASC;
 
 -- Facilities Selector
-SELECT idFacility, facilityName
+SELECT facilityName
 FROM Facilities
 ORDER BY facilityName ASC;
 
 -- Diets Selector
-SELECT idDiet, dietName
+SELECT dietName
 FROM Diets
 ORDER BY dietName ASC;
 
 -- Species Selector
-SELECT idSpecies, speciesName
+SELECT speciesName
 FROM Species
 ORDER BY speciesName ASC;
 
 -- Biological Assets Selector (Bio Asset -> Species JOIN needed)
-SELECT idBiologicalAsset, speciesName, bioAssetName
+SELECT speciesName, bioAssetName
 FROM BiologicalAssets
 JOIN Species ON BiologicalAssets.idSpecies = Species.idSpecies
 ORDER BY speciesName ASC;
 
 -- Job Classifications Selector
-SELECT idJobClassification, jobTitle
+SELECT jobTitle
 FROM JobClassifications
 ORDER BY jobTitle ASC;
 
 -- Employees Selector
-SELECT idEmployee, lastName, firstName
+SELECT lastName, firstName, employeeUsername
 FROM Employees
 ORDER BY lastName ASC;
 
 -- Task Categories Selector
-SELECT idTaskCategory, categoryName
+SELECT categoryName
 FROM TaskCategories
 ORDER BY categoryName ASC;
 
 -- ----------------
 -- Required Subqueries - For Easy Copy/Pasting as needed in larger queries
+
 -- ID from name is needed for inputs to add or update entities.
--- Name from ID is used to populate update-form values and summary tables.
+
+-- Name from ID is used to populate update-form values and summary tables
+-- (so they can use/show unique names instead of gibberish ID numbers).
+
+-- THESE ARE SUBQUERIES ONLY - DO NOT RUN THESE IN A BATCH WITH THE REST OF THIS SCRIPT
 -- ----------------
 
 
@@ -104,7 +94,7 @@ ORDER BY categoryName ASC;
 
 -- Get TaskAssignedID from task name and vice versa
 (SELECT idTaskAssigned FROM TasksAssigned WHERE taskName = :taskName_input)
-(SELECT taskName FROM TasksAssigned WHERE idTask = :idTask_input)
+(SELECT taskName FROM TasksAssigned WHERE idTaskAssigned = :idTask_input)
 
 -- Get HabitatID from name and vice versa
 (SELECT idHabitat FROM Habitat WHERE habitatName = :habitatName_input)
@@ -132,23 +122,20 @@ ORDER BY categoryName ASC;
 
 
 -- -----------------
--- 11x SUMMARY QUERIES TO POPULATE PAGE TABLES
+-- READS: SUMMARY QUERIES TO POPULATE PAGE TABLES
 -- -----------------
 
 -- SELECT Parks
 SELECT * FROM Parks
 ORDER BY idPark ASC;
 
-
 -- SELECT Facility Types
 SELECT * FROM FacilityTypes
 ORDER BY idFacilityType ASC;
 
-
 -- SELECT Habitats
 SELECT * FROM Habitats
 ORDER BY idHabitat ASC;
-
 
 -- SELECT Facilities
 SELECT  Facilities.idFacility, Parks.parkName, FacilityTypes.facTypeName, Habitats.habitatName,
@@ -161,14 +148,12 @@ JOIN FacilityTypes ON Facilities.idFacilityType = FacilityTypes.idFacilityType
 JOIN Habitats ON Facilities.idHabitat = Habitats.idHabitat
 ORDER BY idFacility ASC;
 
-
 -- SELECT Diets
 SELECT * FROM Diets
 ORDER BY idDiet ASC;
 
-
 -- SELECT Species
-SELECT Species.idSpecies, Diets.dietName, Habitats.habitatName, Species.speciesName, Species.speciesDescription,
+SELECT Species.idSpecies, Species.speciesName, Diets.dietName, Habitats.habitatName, Species.speciesDescription,
        Species.threatLevel, Species.speciesPhoto
 FROM Species
 -- Need to join Species -> Diets -> Habitats
@@ -176,32 +161,28 @@ JOIN Diets ON Species.idDiet = Diets.idDiet
 JOIN Habitats ON Species.idHabitat = Habitats.idHabitat
 ORDER BY idSpecies ASC; 
 
-
 -- SELECT BiologicalAssets
-SELECT BiologicalAssets.idBiologicalAsset, Species.speciesName, Facilities.facilityName, BiologicalAssets.bioAssetName
+SELECT BiologicalAssets.idBiologicalAsset, BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName 
 FROM BiologicalAssets
 -- Need to join Species -> BiologicalAssets -> Facilities
 JOIN Species ON BiologicalAssets.idSpecies = Species.idSpecies
 JOIN Facilities ON BiologicalAssets.idFacility = Facilities.idFacility
 ORDER BY idBiologicalAsset ASC;
 
-
 -- SELECT JobClassifications
 SELECT * FROM JobClassifications
 ORDER BY idJobClassification ASC;
 
-
 -- SELECT Employees
-SELECT  Employees.idEmployee, JobClassifications.jobTitle, Employees.firstName, Employees.lastName, Employees.hourlyWage,
+SELECT  Employees.idEmployee, Employees.lastName, Employees.firstName, Employees.employeeUsername, JobClassifications.jobTitle, Employees.hourlyWage,
         Employees.employeePhone, Employees.employeeEmail, Employees.employeeRadio, Employees.employeeNote, Employees.employeePhoto
 FROM Employees
 -- Need to join Employees -> JobClassifications
 JOIN JobClassifications ON Employees.idJobClassification = JobClassifications.idJobClassification
 ORDER BY idEmployee ASC;
 
-
 -- SELECT TasksAssigned (Bio Asset ID'd by displaying actual asset ID# and Species, since may not have a bioAssetName)
-SELECT  TasksAssigned.idTaskAssigned, Facilities.facilityName, BiologicalAssets.idBiologicalAsset, Species.speciesName,
+SELECT  TasksAssigned.idTaskAssigned, TasksAssigned.taskName, Facilities.facilityName, BiologicalAssets.idBiologicalAsset, Species.speciesName,
         TasksAssigned.taskDescription, TasksAssigned.taskStart, TasksAssigned.taskEnd
 FROM TasksAssigned
 -- Need to join TasksAssigned -> Facility -> Bio Asset -> Species
@@ -210,35 +191,32 @@ LEFT JOIN BiologicalAssets ON TasksAssigned.idBiologicalAsset = BiologicalAssets
 LEFT JOIN Species ON BiologicalAssets.idSpecies = Species.idSpecies
 ORDER BY TasksAssigned.idTaskAssigned ASC;
 
-
 -- SELECT EmployeeTasks
-SELECT  EmployeeTasks.idEmployeeTask, TasksAssigned.taskDescription, Employees.firstName, Employees.lastName AS contributingEmployee,
-        EmployeeTasks.taskHoursWorked, EmployeeTasks.empTaskCost, EmployeeTasks.empTaskStart, EmployeeTasks.empTaskEnd
+SELECT  EmployeeTasks.idEmployeeTask, TasksAssigned.taskName, (SELECT CONCAT(Employees.firstName, ' ', Employees.lastName)) AS contributingEmployee,
+        TaskCategories.categoryName, EmployeeTasks.taskHoursWorked, EmployeeTasks.empTaskCost, EmployeeTasks.empTaskStart, EmployeeTasks.empTaskEnd
 FROM EmployeeTasks
--- Need to JOIN EmployeeTasks -> TasksAssigned -> Employees
+-- Need to JOIN EmployeeTasks -> TasksAssigned -> Employees -> Task Category
 LEFT JOIN TasksAssigned ON EmployeeTasks.idTaskAssigned = TasksAssigned.idTaskAssigned
+LEFT JOIN TaskCategories ON EmployeeTasks.idTaskCategory = TaskCategories.idTaskCategory
 JOIN Employees ON EmployeeTasks.idEmployee = Employees.idEmployee
 ORDER BY EmployeeTasks.idEmployeeTask ASC;
-
 
 -- SELECT Task Categories
 SELECT * from TaskCategories
 ORDER BY idTaskCategory ASC;
 
--- TO DO
+
 -- ----------------
--- 11x "ADD NEW" SQL SCRIPTS - Use :browser_inputs to get data for insert queries
+-- CREATES: "ADD NEW" SQL SCRIPTS - Use :browser_inputs to get data for insert queries
 -- Open Question: Is it possible to display multiple fields in drop-down while only sending the input from one?
 -- (i.e. show ID + name, but only send ID to SQL) - would eliminate most subqueries if so
 -- ----------------
-
 
 -- Add new Park to the system
 INSERT INTO Parks                 (parkName, parkDescription, parkLocation)
 VALUES  (
                 :parkName_input, :parkDescription_input, :parkLocation_input
         );
-
 
 -- Add a new facility using populated dropdowns of easier to ID unique names for input values
 INSERT INTO Facilities              (idPark, idFacilityType, idHabitat, facilityName, facilityDescription, 
@@ -251,34 +229,25 @@ VALUES  (
                 :securityRating_input, :facilityPhoto_input, :facilityDescription_input
         );
 
-
 -- Add a new facility type
 INSERT INTO FacilityTypes       (facTypeName, facTypeDescription)
 VALUES  (:facTypeName_input, :facTypeDescription_input);
 
-
--- User adds a TaskAssigned, optionally selecting a bio asset based on bioAssetName (may look into alternate selectors for asset)
--- Maybe use asset ID directly for INSERT and have the drop-down display other info to visually ID target critter, but only send the related ID... (I think this is possible?)
-INSERT INTO TasksAssigned       (idFacility, idBiologicalAsset, taskDescription, taskStart, taskEnd)
+-- User adds a TaskAssigned (BiologicalAsset optional)
+INSERT INTO TasksAssigned       (idFacility, idBiologicalAsset, taskName, taskDescription, taskStart, taskEnd)
 VALUES  (       
                 (SELECT idFacility FROM Facilities WHERE facilityName = :facilityName_input),
                 (SELECT idBiologicalAsset FROM BiologicalAssets WHERE bioAssetName = :bioAssetName_input), 
-                :taskDescription_input, :taskStart_input, :taskEnd_input
+                :taskName_input, :taskDescription_input, :taskStart_input, :taskEnd_input
         );
 
-
 -- Creates record of employee's work on a task by referencing the issued task# and the employee's unique username
--- In the event that the task needs to be looked up, a query can lookup tasks and their descriptions for a specific facility
--- to help find which task they meant to contribute towards (using facility/dates and optionally tasks the employee has worked on before to find the #) 
--- Otherwise, we'll need to add a unique non-ID identifier for TasksAssigned, maybe give it a "short name" and come up with a naming policy to avoid issues 
--- with stuff. Maybe auto-generate it in the web UI as a combo of Facility and datetime or something?
 INSERT INTO EmployeeTasks       (idTaskAssigned, idEmployee, taskHoursWorked, empTaskCost, empTaskStart, empTaskEnd)
 VALUES  (
                 :idTaskAssigned_input,
                 (SELECT idEmployee FROM Employees WHERE employeeUsername = :employeeUsername_input),
                 :taskHoursWorked_input, :empTaskCost_input, :empTaskStart_input, :empTaskEnd_input
         );
-
 
 -- User selects job name from drop-down and a subquery gets the jobID from it so that the insert can be done properly
 INSERT INTO Employees           (idJobClassification, firstName, lastName, hourlyWage, employeePhone, employeeEmail,
@@ -289,13 +258,11 @@ VALUES  (
                 :employeeEmail_input, :employeeRadio_input, :employeeNote_input, :employeePhoto_input
         );
 
-
 -- Add a new job
 INSERT INTO JobClassifications  (jobTitle, jobDescription)
 VALUES  (
                 :jobTitle_input, :jobDescription_input
         );
-
 
 -- Add a new habitat
 INSERT INTO Habitats            (habitatName, habitatDescription, habitatSize, habitatPhoto)
@@ -303,15 +270,13 @@ VALUES (
                 :habitatName_input, :habitatDescription_input, :habitatSize_input, :habitatPhoto_input
         );
 
-
 -- Add a new biological asset
 INSERT INTO BiologicalAssets    (idSpecies, idFacility, bioAssetName)
 VALUES (
                 (SELECT idSpecies FROM Species WHERE speciesName = :speciesName_input),
-                (SELECT idFacility FROM Facilites WHERE facilityName = :facilityName_input),
+                (SELECT idFacility FROM Facilities WHERE facilityName = :facilityName_input),
                 :bioAssetName_input
         );
-
 
 -- Add a new species, using informal name selects to get ID's for the diet and habitat
 INSERT INTO Species             (idDiet, idHabitat, speciesName, speciesDescription, threatLevel, speciesPhoto)
@@ -321,13 +286,11 @@ VALUES  (
                 :speciesName_input, :speciesDescription_input, :threatLevel_input, :speciesPhoto_input
         );
 
-
 -- Add a new diet
 INSERT INTO Diets               (dietName, dietDescription, dietIcon)
 VALUES  (
                 :dietName_input, :dietDescription_input, :dietIcon_input
         );
-
 
 -- Add a new Task Category
 INSERT INTO TaskCategories      (categoryName)
@@ -335,74 +298,164 @@ VALUES  (
                 :categoryName_input
         );
 
--- TO DO
-
 -- ----------------
--- 1x UPDATE (NULLable - suggest do this for a dino related to task or facility to habitat since they can already be null)
--- NOTE: EmployeeTasks may change if parents are deleted, but otherwise should NOT be editable as they are a transactional record as well as a M:M interface.
--- ... or should we not enforce that so a DB admin can fix work logs processed in error?
+-- Updates: ID values should be retrievable from the select used to populate the update form for the WHERE value.
 -- ----------------
 
--- Template/Model for updating all attributes based on the primary ID field returned from the browser
+-- Update Park
 UPDATE Parks
-SET parkName = :parkName_input, parkLocation = :parkLocation_input, parkDescription = :parkDescription_input
+SET     parkName = :parkName_input, parkLocation = :parkLocation_input, parkDescription = :parkDescription_input
 WHERE idPark = :idPark_input;
 
+-- Update Facility Type
+UPDATE FacilityTypes
+SET     facTypeName = :facTypeName_input, facTypeDescription = :facTypeDescription_input
+WHERE idFacilityType = :idFacilityType_input;
 
---FOR LOOKUP - Use a subquery to get id based on another unique attribute or attribute combo
---Park: Name
---Employee: ???? new, unique username attribute?
---Facility: Facility Name (make policy to prefix facility name with 2-3 letter initial for park site... maybe put that in Parks table for reference?)
---BioAssets: Nickname? (park prefix? Ex. JP Rexy, vs. SB Buck, vs. JW: 'Verizon Presents the Indominus Rex')
---Diets: Name
---FacilityTypes: Name
---
+-- Facilities
+UPDATE Facilities
+SET     idPark =                (SELECT idPark FROM Parks WHERE parkName = :parkName_input),
+        idFacilityType =        (SELECT idFacilityType FROM FacilityTypes WHERE facTypeName = :facTypeName_input),
+        idHabitat =             (SELECT idHabitat FROM Habitat WHERE habitatName = :habitatName_input),
+        facilityName = :facilityName_input, facilityDescription = :facilityDescription_input, facilityLocation = :facilityLocation_input, 
+        securityRating = :securityRating_input, facilityPhoto = :facilityPhoto_input, facilityNote = :facilityNote_input
+WHERE idFacility = :idFacility_input;
 
--- NULLable example - Re-open a "completed" task by removing its end date + task is complete flag
--- idTaskAssigned will be clear to the user who created a given task, as it will be provided to them upon entry of their
--- task by the database website UI.
-
--- Update TaskAssignment by removing a bio asset form it counts as nullable example too
--- Same goes for removing a habitat from a facility / (may be able to remove isEnclosure for redundancy as a result?)
-
--- Probably need/want an accompanying query to get the task info for an update task form (to pre-populate the form with existing stuff)
--- ex. from ED: SELECT character_id, fname, lname, homeworld, age FROM bsg_people WHERE character_id = :character_ID_selected_from_browse_character_page
-
--- Simple query to re-open a closed task (and change nothing else about it)
+-- Update an Assigned Task (NULLable example - idBiologicalAsset can be set to NULL)
 UPDATE TasksAssigned
-SET taskEnd = NULL
-WHERE idTaskAssigned = :taskAssigned_input;
--- SCRUB THIS - not something we'd actually have as a web interface command, we'd just let people update the whole thing
+SET     idFacility =            (SELECT idFacility FROM Facilities WHERE facilityName = :facilityName_input), 
+        idBiologicalAsset =     (SELECT idBiologicalAsset FROM BiologicalAssets WHERE bioAssetName = :bioAssetName_input), 
+        taskDescription = :taskDescription_input, taskStart = :taskStart_input, taskEnd = :taskEnd_input
+WHERE idTaskAssigned = :idTaskAssigned;
+
+-- Employee
+UPDATE Employees
+SET     idJobClassification =   (SELECT idJobClassification FROM JobClassifications WHERE jobTitle = :jobTitle_input),
+        firstName = :firstName_input, lastName = :lastName_input, hourlyWage = :hourlyWage_input,
+        employeePhone = :employeePhone_input, employeeEmail = :employeeEmail_input, employeeRadio = :employeeRadio_input, 
+        employeeNote = :employeeNote_input, employeePhoto = :employeePhoto_input
+WHERE idEmployee = :idEmployee_input;
+
+-- Update an Employee Task (if needed to re-assign orphaned FK's if/when parents are deleted)
+UPDATE EmployeeTasks
+SET     idEmployee =            (SELECT idEmployee FROM Employees WHERE employeeUsername = :employeeUsername_input),
+        idTaskCategory =        (SELECT idTaskCategory FROM TaskCategories WHERE categoryName = :categoryName_input),
+        idTaskAssigned =        (SELECT idTaskAssigned FROM TasksAssigned WHERE taskName = :taskName_input),
+        taskHoursWorked = :taskHoursWorked_input, empTaskCost = :empTaskCost_input, 
+        empTaskStart = :empTaskStart_input, empTaskEnd = :empTaskEnd_input
+WHERE idEmployeeTask = :idEmployeeTask_input;
 
 
--- Probably want a query to update other stuff too, or maybe just turn the above into an update anything query?
--- Ex. from ED -- update a character's data based on submission of the Update Character form 
--- UPDATE bsg_people SET fname = :fnameInput, lname= :lnameInput, homeworld = :homeworld_id_from_dropdown_Input, age= :ageInput WHERE id= :character_ID_from_the_update_form
+        EmployeeTasks.taskHoursWorked, EmployeeTasks.empTaskCost, EmployeeTasks.empTaskStart, EmployeeTasks.empTaskEnd
 
--- Example from exploration: https://canvas.oregonstate.edu/courses/1914747/pages/exploration-database-application-design?module_item_id=23040585
--- UPDATE bsg_people 
---    SET fname = :fnameInput, lname= :lnameInput, 
---        homeworld = :homeworld_id_from_dropdown_Input, age= :ageInput 
---    WHERE id= :character_ID_from_the_update_form
+-- Job Classifications
+UPDATE JobClassifications
+SET     jobTitle = :jobTitle_input, jobDescription = :jobDescription_input
+WHERE idJobClassification = :idJobClassification_input;
+
+-- Task Category
+UPDATE TaskCategories
+SET     categoryName = :categoryName_input
+WHERE idTaskCategory = :idTaskCategory_input;
+
+-- Biological Asset
+UPDATE BiologicalAssets
+SET
+WHERE
+
+-- Habitat
+UPDATE Habitats
+SET
+WHERE
+
+-- Diet
+UPDATE Diets
+SET     dietName = :dietName_input, dietDescription = :dietDescription_input, dietIcon = :dietIcon_input
+WHERE idDiet = :idDiet_input;
+
+-- Species
+UPDATE Species
+SET
+WHERE
 
 
 -- ----------------
--- 1x DELETE (suggest delete task, as it's the most realistic/real-world thing - ie. someone created a task then decided to cancel it)
--- NOTE: The site UI will notify the administrator of a tasks's ID number when the task is generated. As there can potentially be thousands of tasks,
---       identifying a specific task by the ID is the only realistic way to enforce it without making naming tasks incredibly tedious.
---       The EmployeeTask entity is allowed to exist if its related task or employee is deleted so that we still have a record of overhead costs spent.
---      Probably just make a delete for everything so the DB admin has the option, probably the easiest thing to code since it just uses the ID directly.
+-- DELETES
 -- ----------------
+
+-- Delete Park
+DELETE
+FROM Parks
+WHERE idPark = :idPark_input;
+
+-- Delete Facility Type
+DELETE
+FROM FacilityTypes
+WHERE idFacilityType = :idFacilityType_input;
+
+-- Delete Facility
+DELETE
+FROM Facilities
+WHERE idFacility = :idFacility_input;
 
 -- Delete TaskAssigned
 DELETE
 FROM TasksAssigned
-WHERE idTaskAssigned = :taskAssigned_input;
+WHERE idTaskAssigned = :idTaskAssigned_input;
+
+-- Delete Employee
+DELETE
+FROM Employees
+WHERE idEmployee = :idEmployee_input;
+
+-- Delete Employee Task
+DELETE
+FROM EmployeeTasks
+WHERE idEmployeeTask = :idEmployeeTask_input;
+
+-- Delete Job Classification
+DELETE
+FROM JobClassifications
+WHERE idJobClassification = :idJobClassification_input;
+
+-- Delete Task Category
+DELETE
+FROM TaskCategories
+WHERE idTaskCategory = :idTaskCategory_input;
+
+-- Delete Biological Asset
+DELETE
+FROM BiologicalAssets
+WHERE idBiologicalAsset = :idBiologicalAsset_input;
+
+-- Delete Habitat
+DELETE
+FROM Habitats
+WHERE idHabitat = :idHabitat_input
+
+-- Delete Diet
+DELETE
+FROM Diets
+WHERE idDiet = :idDiet_input
+
+-- Delete Species
+DELETE
+FROM Species
+WHERE idSpecies = :idSpecies_input
 
 
 -- ----------------
--- 1x CUSTOM Search/Drop-down (this may be a web-page thing to generate a custom query, not something we put in here)
+-- TODO - CUSTOM Reports (this may be a web-page thing to generate a custom query, not something we put in here)
 -- ----------------
+
+-- Cost Analysis: List Employee Tasks Costs by Category and Park for Employee Tasks
+-- Need to JOIN Category -> EmployeeTasks -> TasksAssigned -> Facilities -> Park
+-- Need to SUM cost column from EmployeeTasks and GROUP BY Category and Park (both?)
+-- Sort by costs in DESC
+
+-- Cost Analysis Report by Biological Asset: TO DO
+-- Cost Analysis Report by Employee: TO DO
+
 
 -- CUSTOM REPORT IDEAS
 -- Search for all tasks associated with an employee?

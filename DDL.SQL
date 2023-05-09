@@ -312,12 +312,12 @@ VALUES
 (4, NULL, 'Lagoon Repair', 'Repair leak in tank.', '2023-04-28', NULL);
 
 
-INSERT INTO `EmployeeTasks`         (idTaskAssigned, idEmployee, taskHoursWorked, empTaskCost, empTaskStart, empTaskEnd)
+INSERT INTO `EmployeeTasks`         (idTaskAssigned, idEmployee, taskHoursWorked, empTaskCost, empTaskStart, empTaskEnd, idTaskCategory)
 VALUES
-(1, 1, 40, 10000.00, '2023-04-04', '2023-04-25'),
-(1, 4, 10, 5000.00, '2023-04-26', '2023-04-28'),
-(2, 3, 160, 0.00, '2022-10-01', '2022-10-31'),
-(3, 4, 10, 2000.00, '2023-03-30', '2023-03-30');
+(1, 1, 40, 10000.00, '2023-04-04', '2023-04-25', 5),
+(1, 4, 10, 5000.00, '2023-04-26', '2023-04-28', 2),
+(2, 3, 160, 0.00, '2022-10-01', '2022-10-31', 4),
+(3, 4, 10, 2000.00, '2023-03-30', '2023-03-30', 2);
 
 INSERT INTO `TaskCategories`        (categoryName)
 VALUES
