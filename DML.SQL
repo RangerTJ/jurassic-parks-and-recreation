@@ -355,9 +355,6 @@ SET     idEmployee =            (SELECT idEmployee FROM Employees WHERE employee
         empTaskStart = :empTaskStart_input, empTaskEnd = :empTaskEnd_input
 WHERE idEmployeeTask = :idEmployeeTask_input;
 
-
-        EmployeeTasks.taskHoursWorked, EmployeeTasks.empTaskCost, EmployeeTasks.empTaskStart, EmployeeTasks.empTaskEnd
-
 -- Job Classifications
 UPDATE JobClassifications
 SET     jobTitle = :jobTitle_input, jobDescription = :jobDescription_input
