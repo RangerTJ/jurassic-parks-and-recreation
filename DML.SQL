@@ -153,7 +153,7 @@ SELECT * FROM Diets
 ORDER BY idDiet ASC;
 
 -- SELECT Species
-SELECT Species.idSpecies, Diets.dietName, Habitats.habitatName, Species.speciesName, Species.speciesDescription,
+SELECT Species.idSpecies, Species.speciesName, Diets.dietName, Habitats.habitatName, Species.speciesDescription,
        Species.threatLevel, Species.speciesPhoto
 FROM Species
 -- Need to join Species -> Diets -> Habitats
@@ -162,7 +162,7 @@ JOIN Habitats ON Species.idHabitat = Habitats.idHabitat
 ORDER BY idSpecies ASC; 
 
 -- SELECT BiologicalAssets
-SELECT BiologicalAssets.idBiologicalAsset, Species.speciesName, Facilities.facilityName, BiologicalAssets.bioAssetName
+SELECT BiologicalAssets.idBiologicalAsset, BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName 
 FROM BiologicalAssets
 -- Need to join Species -> BiologicalAssets -> Facilities
 JOIN Species ON BiologicalAssets.idSpecies = Species.idSpecies
@@ -174,7 +174,7 @@ SELECT * FROM JobClassifications
 ORDER BY idJobClassification ASC;
 
 -- SELECT Employees
-SELECT  Employees.idEmployee, JobClassifications.jobTitle, Employees.firstName, Employees.lastName, Employees.employeeUsername ,Employees.hourlyWage,
+SELECT  Employees.idEmployee, Employees.lastName, Employees.firstName, Employees.employeeUsername, JobClassifications.jobTitle, Employees.hourlyWage,
         Employees.employeePhone, Employees.employeeEmail, Employees.employeeRadio, Employees.employeeNote, Employees.employeePhoto
 FROM Employees
 -- Need to join Employees -> JobClassifications
@@ -198,8 +198,8 @@ SELECT  EmployeeTasks.idEmployeeTask, TasksAssigned.taskName, Employees.firstNam
 FROM EmployeeTasks
 -- Need to JOIN EmployeeTasks -> TasksAssigned -> Employees -> Task Category
 LEFT JOIN TasksAssigned ON EmployeeTasks.idTaskAssigned = TasksAssigned.idTaskAssigned
+LEFT JOIN TaskCategories ON EmployeeTasks.idTaskCategory = TaskCategories.idTaskCategory
 JOIN Employees ON EmployeeTasks.idEmployee = Employees.idEmployee
-JOIN TaskCategories ON EmployeeTasks.idTaskCategory = TaskCategories.idTaskCategory
 ORDER BY EmployeeTasks.idEmployeeTask ASC;
 
 -- SELECT Task Categories
