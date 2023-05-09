@@ -371,8 +371,8 @@ WHERE
 
 -- Diet
 UPDATE Diets
-SET
-WHERE
+SET     dietName = :dietName_input, dietDescription = :dietDescription_input, dietIcon = :dietIcon_input
+WHERE idDiet = :idDiet_input;
 
 -- Species
 UPDATE Species
