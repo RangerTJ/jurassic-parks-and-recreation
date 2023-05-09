@@ -205,13 +205,15 @@ LEFT JOIN BiologicalAssets ON TasksAssigned.idBiologicalAsset = BiologicalAssets
 LEFT JOIN Species ON BiologicalAssets.idSpecies = Species.idSpecies
 ORDER BY TasksAssigned.idTaskAssigned ASC;
 
+-- ** NEED TO TEST JOIN WITH TASK CATEGORY **
 -- SELECT EmployeeTasks
-SELECT  EmployeeTasks.idEmployeeTask, TasksAssigned.taskDescription, Employees.firstName, Employees.lastName AS contributingEmployee,
-        EmployeeTasks.taskHoursWorked, EmployeeTasks.empTaskCost, EmployeeTasks.empTaskStart, EmployeeTasks.empTaskEnd
+SELECT  EmployeeTasks.idEmployeeTask, TasksAssigned.taskName, Employees.firstName, Employees.lastName AS contributingEmployee,
+        TaskCategories.categoryName, EmployeeTasks.taskHoursWorked, EmployeeTasks.empTaskCost, EmployeeTasks.empTaskStart, EmployeeTasks.empTaskEnd
 FROM EmployeeTasks
--- Need to JOIN EmployeeTasks -> TasksAssigned -> Employees
+-- Need to JOIN EmployeeTasks -> TasksAssigned -> Employees -> Task Category
 LEFT JOIN TasksAssigned ON EmployeeTasks.idTaskAssigned = TasksAssigned.idTaskAssigned
 JOIN Employees ON EmployeeTasks.idEmployee = Employees.idEmployee
+JOIN TaskCategories ON EmployeeTasks.idTaskCategory = TaskCategories.idTaskCategory
 ORDER BY EmployeeTasks.idEmployeeTask ASC;
 
 -- SELECT Task Categories
@@ -247,11 +249,11 @@ INSERT INTO FacilityTypes       (facTypeName, facTypeDescription)
 VALUES  (:facTypeName_input, :facTypeDescription_input);
 
 -- User adds a TaskAssigned (BiologicalAsset optional)
-INSERT INTO TasksAssigned       (idFacility, idBiologicalAsset, taskDescription, taskStart, taskEnd)
+INSERT INTO TasksAssigned       (idFacility, idBiologicalAsset, taskName, taskDescription, taskStart, taskEnd)
 VALUES  (       
                 (SELECT idFacility FROM Facilities WHERE facilityName = :facilityName_input),
                 (SELECT idBiologicalAsset FROM BiologicalAssets WHERE bioAssetName = :bioAssetName_input), 
-                :taskDescription_input, :taskStart_input, :taskEnd_input
+                :taskName_input, :taskDescription_input, :taskStart_input, :taskEnd_input
         );
 
 -- Creates record of employee's work on a task by referencing the issued task# and the employee's unique username
@@ -351,11 +353,14 @@ WHERE idEmployee = :idEmployee_input;
 
 -- Update an Employee Task (if needed to re-assign orphaned FK's if/when parents are deleted)
 UPDATE EmployeeTasks
-SET     taskDescription =       ()
-
+SET     idEmployee =            (SELECT idEmployee FROM Employees WHERE employeeUsername = :employeeUsername_input),
+        idTaskCategory =        (SELECT idTaskCategory FROM TaskCategories WHERE categoryName = :categoryName_input),
+        idTaskAssigned =        (SELECT idTaskAssigned FROM TasksAssigned WHERE taskName = :taskName_input),
+        taskHoursWorked = :taskHoursWorked_input, empTaskCost = :empTaskCost_input, 
+        empTaskStart = :empTaskStart_input, empTaskEnd = :empTaskEnd_input
 WHERE idEmployeeTask = :idEmployeeTask_input;
 
-TasksAssigned.taskDescription, Employees.firstName, Employees.lastName AS contributingEmployee,
+
         EmployeeTasks.taskHoursWorked, EmployeeTasks.empTaskCost, EmployeeTasks.empTaskStart, EmployeeTasks.empTaskEnd
 
 -- Job Classifications
