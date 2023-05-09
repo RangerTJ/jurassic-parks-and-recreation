@@ -15,6 +15,7 @@ URL: https://css-tricks.com/snippets/css/using-font-face-in-css/ */
     --concreteDark: #A2ABA4;
     --concreteLight: #D7DFD9;
     --parkYellow: rgb(255, 208, 0);
+    --parkYellowDim: rgb(182, 119, 25);
     --parkYellowGreenPale: rgba(236, 255, 172, 0.907);
     --parkRed:  rgb(135, 8, 8);
     --worldLightBlue: #AFE9EE;
@@ -34,6 +35,8 @@ URL: https://css-tricks.com/snippets/css/using-font-face-in-css/ */
     --dominionEarth: rgb(69, 41, 0);;
     --feralGreen: #2a4a2b;
     --feralGreenClear: #3c663edf;
+    --windows95: #ffffff00;
+
 
     /* Fonts */
     --jpFont: 'Jurassic Park', sans-serif;
@@ -111,7 +114,7 @@ URL: https://css-tricks.com/snippets/css/using-font-face-in-css/ */
     line-height: 1.00;
     font-family: var(--jpFont);
     margin: 0;
-    text-shadow: 1px 1px 1px var(--feralGreen);
+    text-shadow: px 1px 1px var(--feralGreen);
 }
 
   nav a:hover {       
@@ -172,8 +175,6 @@ URL: https://css-tricks.com/snippets/css/using-font-face-in-css/ */
     font-weight: bold;
   }
 
-  tr {}
-
   td {
     border: 2px solid var(--parkYellow);
     padding: 10px;
@@ -182,17 +183,21 @@ URL: https://css-tricks.com/snippets/css/using-font-face-in-css/ */
   /* Buttons and Forms */
   button {
     color: var(--parkYellow);
+    border: outset var(--dominionAmberMedClear);
     background-color: var(--parkRed);
-    border-color: var(--feralGreen);
-    border-radius: 5px;
+    border-radius: 20px;
     font-family: var(--jpFont);
     font-size:xx-large;
+    outline: none;
+    box-shadow: 1px 1px 5px black; 
   }
 
   button:hover {
-    background-color: black;
-    color: white;
-    border-color: gold;
+    outline: none;
+    box-shadow: 0px 0px 15px var(--dominionAmberBright);
+    background-color: var(--dominionAmberBright);
+    border: solid var(--dominionAmberDarkClear);
+    color: black;
   }
   
   button:focus {
@@ -214,8 +219,6 @@ URL: https://css-tricks.com/snippets/css/using-font-face-in-css/ */
     font-weight: bold;
     font-size: large;
   }
-
-  form {}
 
   input {
     color: var(--feralGreen);
@@ -299,7 +302,7 @@ URL: https://css-tricks.com/snippets/css/using-font-face-in-css/ */
 }
 
 /* Small Screen Settings */
-@media (max-device-width: 820px) {
+@media (max-device-width: 780px) {
 
   h1 {
     font-size: 40px;
@@ -329,9 +332,23 @@ URL: https://css-tricks.com/snippets/css/using-font-face-in-css/ */
   }
 
   nav a {
-    font-size: 26px;
+    font-size: 24px;
     padding-left: 1px;
     padding-right: 1px;
-    border: groove var(--feralGreenClear) 2px;
+    border: outset var(--parkYellowDim) 2px;
+  }
+
+  nav a:hover {       
+    background-color: black;
+    color: white;
+    border: ridge gold 2px;
+    text-decoration: none;
+  }
+    
+  nav a:focus {
+    background-color: black;
+    color: white;
+    border: solid gold 2px;
+    outline: none;
   }
 }
