@@ -12,7 +12,7 @@
 <body>
     <header>
         <h1>Jurassic Parks and Recreation *</h1>
-        <p class="headerP">D.I.N.O.</p>
+        <p class="headerP">D.I.N.O<a class="whte_rbt_obj" href="https://markhjorth.github.io/nedry/">.</a></p>
     </header>
     <nav>
         <a href="index.html" >Home</a>
@@ -49,33 +49,35 @@
                     buttons to update or delete them. Information includes the facility affiliated with the task and affiliated biological asset
                     (if the task has been assigned for one).
                 </p>
-                <table>
-                    <tr>
-                        <th>ID</th>
-                        <th>Task Name</th>
-                        <th>Facility</th>
-                        <!-- Show a composite of asset ID + species + nickname for bio asset data entry -->
-                        <th>Bio. Asset</th>  
-                        <th>Start</th>
-                        <th>End</th>
-                        <th>Description</th>
+                <div class="scrollableTable">
+                    <table>
+                        <tr>
+                            <th>ID</th>
+                            <th>Task Name</th>
+                            <th>Facility</th>
+                            <!-- Show a composite of asset ID + species + nickname for bio asset data entry -->
+                            <th>Bio. Asset</th>  
+                            <th>Start</th>
+                            <th>End</th>
+                            <th>Description</th>
 
-                        <th>Update</th>
-                        <th>Delete</th>
-                    </tr>
-                    <tr>
-                        <td>Ex. 1</td>
-                        <td>Repair VC Doors</td>
-                        <td>Ex. Nublar Visitor Center</td>
-                        <td>Ex. NULL</td>
-                        <td>Ex. 4/5/2023</td>
-                        <td>Ex. NULL</td>
-                        <td>Ex. Repair damage to doorways.</td>
+                            <th>Update</th>
+                            <th>Delete</th>
+                        </tr>
+                        <tr>
+                            <td>Ex. 1</td>
+                            <td>Repair VC Doors</td>
+                            <td>Ex. Nublar Visitor Center</td>
+                            <td>Ex. NULL</td>
+                            <td>Ex. 4/5/2023</td>
+                            <td>Ex. NULL</td>
+                            <td class="tableDescription">Ex. Repair damage to doorways.</td>
 
-                        <td><button onclick="location.href='forms/tasksAssignedUpdate.html'">Update</button></td>
-                        <td><button>Delete</button></td>
-                    </tr>
-                </table>
+                            <td><button onclick="location.href='forms/tasksAssignedUpdate.html'">Update</button></td>
+                            <td><button>Delete</button></td>
+                        </tr>
+                    </table>
+                </div>
             </article>
         </section>
     </main>

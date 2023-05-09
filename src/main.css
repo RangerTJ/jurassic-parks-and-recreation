@@ -1,6 +1,6 @@
 /* Fonts */
 
-/* Font-face code style/syntax based on "How to use @font-face in CSS" by Chris Coyler's
+/* Font-face code style/syntax based on "How to use @font-face in CSS" by Chris Coyler
 URL: https://css-tricks.com/snippets/css/using-font-face-in-css/ */
 @font-face {
     font-family: 'Jurassic Park';
@@ -15,6 +15,7 @@ URL: https://css-tricks.com/snippets/css/using-font-face-in-css/ */
     --concreteDark: #A2ABA4;
     --concreteLight: #D7DFD9;
     --parkYellow: rgb(255, 208, 0);
+    --parkYellowDim: rgb(182, 119, 25);
     --parkYellowGreenPale: rgba(236, 255, 172, 0.907);
     --parkRed:  rgb(135, 8, 8);
     --worldLightBlue: #AFE9EE;
@@ -34,6 +35,8 @@ URL: https://css-tricks.com/snippets/css/using-font-face-in-css/ */
     --dominionEarth: rgb(69, 41, 0);;
     --feralGreen: #2a4a2b;
     --feralGreenClear: #3c663edf;
+    --windows95: #ffffff00;
+
 
     /* Fonts */
     --jpFont: 'Jurassic Park', sans-serif;
@@ -42,14 +45,12 @@ URL: https://css-tricks.com/snippets/css/using-font-face-in-css/ */
   /* Basics */
   body {
     background-size:cover;
-    background-color: var(--concreteLight);
+    background-color: var(--feralGreen);
     background-attachment: fixed;
     background-position: center;
     background-image:url(images/facility-enclosure-gates-night.jpg);
     color: var(--worldDeepBlue);
-    /* color: black; */
-    /* color: greenyellow; */
-    color: rgb(255, 208, 0);
+    color: var(--parkYellow);
     font-family: var(--normalText);
     max-width: 90%;
     margin: auto;
@@ -58,10 +59,6 @@ URL: https://css-tricks.com/snippets/css/using-font-face-in-css/ */
   header {
     background-color: black;
     color: white;
-    /* background-color: whitesmoke;
-    color: black; */
-    /* background-color: var(--dominionAmberBright);
-    color: black; */
     padding-left: 10px;
     padding-right: 10px;
     padding-bottom: 1px;
@@ -69,12 +66,8 @@ URL: https://css-tricks.com/snippets/css/using-font-face-in-css/ */
 
 
   footer {
-    /* background-color: var(--worldDeepBlue);
-    color: var(--worldLightBlue); */
     background-color: var(--parkRed);
     color: var(--parkYellow);
-    /* background-color: var(--dominionAmberBright);
-    color: black; */
     font-family: var(--normalText);
     padding: 10px;
     margin-bottom: 50px;
@@ -82,17 +75,20 @@ URL: https://css-tricks.com/snippets/css/using-font-face-in-css/ */
 
 
   main {
-    background-color: var(--worldMedBlueClear);
-    /* background-color: var(--dominionAmberMedClear); */
     background-color: var(--feralGreenClear);
+    padding-bottom: 20px;
+  }
 
-    padding-bottom: 1%;
+  section {
+    margin-left: 10px;
+    margin-right: 10px;
+    overflow: auto;
   }
 
   article {
-    margin-left: 2%;
-    margin-right: 2%;
-    overflow: auto;}
+    margin-left: 15px;
+    margin-right: 15px;
+  }
 
   /* Nav Elements */
   nav {
@@ -100,21 +96,15 @@ URL: https://css-tricks.com/snippets/css/using-font-face-in-css/ */
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    margin: 0%;
+    margin: 0;
 }
 
   nav a {
-    background-color: var(--worldDeepBlue);
-    color: var(--worldLightBlue);
-    border: solid var(--worldDeepBlue);
-    /* background-color: var(--dominionAmberDark);
-    color: black;
-    border: solid var(--dominionAmberDark); */
-    background-color: rgb(135, 8, 8);
+    background-color: var(--parkRed);
     color: var(--parkYellow);
-    border: solid rgb(135, 8, 8);
-    padding-left: 1%;
-    padding-right: 1%;
+    border: solid var(--parkRed);
+    padding-left: 5px;
+    padding-right: 5px;
     font-size: 35px;
     font-weight: normal;
     text-decoration: none;
@@ -123,13 +113,14 @@ URL: https://css-tricks.com/snippets/css/using-font-face-in-css/ */
     flex-grow: 1;
     line-height: 1.00;
     font-family: var(--jpFont);
-    margin: 0%;
+    margin: 0;
+    text-shadow: px 1px 1px var(--feralGreen);
 }
 
   nav a:hover {       
     background-color: black;
     color: white;
-    border: solid gold;
+    border: ridge gold;
     text-decoration: none;
 }
     
@@ -156,27 +147,21 @@ URL: https://css-tricks.com/snippets/css/using-font-face-in-css/ */
   h2 {
     margin-top: auto;
     margin-bottom: 0;
-    margin-left: 1%;
-    padding-top: 1%;
+    margin-left: 10px;
+    padding-top: 10px;
     font-family: var(--jpFont);
     font-size: 60px;
     font-weight: normal;
 }
   h3 {
-    font-size: 140%; 
+    font-size: 24px; 
     font-weight: bold;
-    line-height: 0.10;
+    margin-top: 15px;
     margin-bottom: 0;
-}
-  h4 {}
-  h5 {}
-  h6 {}
+  }
 
   /* Tables */
   table {
-    /* background-color: var(--worldDeepBlueClearLight);
-    color: var(--worldLightBlue);
-    border: 2px solid var(--worldDeepBlue); */
     background-color: rgba(0, 0, 0, 0.678);
     color: var(--parkYellow);
     border: 2px solid var(--parkYellow);
@@ -185,42 +170,37 @@ URL: https://css-tricks.com/snippets/css/using-font-face-in-css/ */
     text-align: center;
   }
 
-    
-
   th {
-    /* border: 2px solid var(--worldDeepBlue);
-    background-color: var(--worldMedBlueClear); */
-    /* border: 2px solid var(--parkYellow); */
     background-color: var(--parkRed);
     font-weight: bold;
   }
 
-  tr {
-
-  }
-
   td {
-    /* border: 2px solid var(--worldDeepBlue); */
     border: 2px solid var(--parkYellow);
     padding: 10px;
   }
 
   /* Buttons and Forms */
   button {
-    /* color: var(--worldLightBlue);
-    background-color: var(--worldDeepBlue); */
     color: var(--parkYellow);
+    border: outset var(--dominionAmberMedClear);
     background-color: var(--parkRed);
-    border-color: var(--feralGreen);
-    border-radius: 5px;
+    border-radius: 20px;
     font-family: var(--jpFont);
     font-size:xx-large;
+    outline: none;
+    box-shadow: 1px 1px 5px black;
+    text-shadow: 1px 1px 5px var(--dominionAmberBright);
   }
 
   button:hover {
-    background-color: black;
-    color: white;
-    border-color: gold;
+    outline: none;
+    box-shadow: 0px 0px 15px var(--dominionAmberBright);
+    text-shadow: 1px 1px 1px var(--dominionAmberDark);
+    font-style: in;
+    background-color: var(--dominionAmberBright);
+    border: outset var(--dominionAmberDarkClear);
+    color: black;
   }
   
   button:focus {
@@ -243,15 +223,10 @@ URL: https://css-tricks.com/snippets/css/using-font-face-in-css/ */
     font-size: large;
   }
 
-  form {
-    /* flex:content; */
-  }
-
   input {
     color: var(--feralGreen);
     background-color: var(--parkYellowGreenPale);
     margin-top: 5px;
-    /* width: 90%; */
   }
 
   input:invalid {
@@ -267,12 +242,9 @@ URL: https://css-tricks.com/snippets/css/using-font-face-in-css/ */
   }
 
   textarea {
-    /* color: var(--worldLightBlue);
-    background-color: var(--worldDeepBlue); */
     margin-top: 5px;
     color: var(--feralGreen);
     background-color: var(--parkYellowGreenPale);
-    /* width: 90%; */
   }
 
   textarea:invalid {
@@ -288,8 +260,6 @@ URL: https://css-tricks.com/snippets/css/using-font-face-in-css/ */
   }
 
   select {
-    /* background-color: var(--worldLightBlue);
-    color: var(--worldDeepBlue); */
     margin-top: 5px;
     color: var(--feralGreen);
     background-color: var(--parkYellowGreenPale);
@@ -323,5 +293,71 @@ URL: https://css-tricks.com/snippets/css/using-font-face-in-css/ */
     margin-bottom: 5px;
     padding-top: 0px;
     font-family: var(--normalText);
-    font-size: 180%;
+    font-size: 30px;
+}
+
+.scrollableTable {
+  overflow: auto;
+}
+
+.tableDescription {
+  text-align: left;
+}
+
+/* Happy Eater Egg Hunting! */
+.whte_rbt_obj {
+  text-decoration: none;
+  color: white;
+}
+
+/* Small Screen Settings */
+@media (max-device-width: 780px) {
+
+  h1 {
+    font-size: 40px;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+    font-family: var(--jpFont);
+    font-weight: normal;
+  }
+
+  .headerP {
+    margin-top: -10px;
+    font-size: 25px;
+  }
+
+  h2 {
+    font-size: 50px;
+  }
+
+  h3 {
+    font-size: 18px; 
+    font-weight: bold;
+    margin-bottom: 0;
+  }
+
+  p {
+    font-size: 14px; 
+  }
+
+  nav a {
+    font-size: 24px;
+    padding-left: 1px;
+    padding-right: 1px;
+    border: outset var(--parkYellowDim) 2px;
+  }
+
+  nav a:hover {       
+    background-color: black;
+    color: white;
+    border: ridge gold 2px;
+    text-decoration: none;
+  }
+    
+  nav a:focus {
+    background-color: black;
+    color: white;
+    border: solid gold 2px;
+    outline: none;
+  }
 }

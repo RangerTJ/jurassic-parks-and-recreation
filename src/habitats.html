@@ -12,7 +12,7 @@
 <body>
     <header>
         <h1>Jurassic Parks and Recreation *</h1>
-        <p class="headerP">D.I.N.O.</p>
+        <p class="headerP">D.I.N.O<a class="whte_rbt_obj" href="https://markhjorth.github.io/nedry/">.</a></p>
     </header>
     <nav>
         <a href="index.html" >Home</a>
@@ -47,33 +47,35 @@
                     The table below shows existing information for Habitat entities and includes
                     buttons to update or delete them.
                 </p>
-                <table>
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <th>Size</th>
-                        <th>Photo</th>
+                <div class="scrollableTable">
+                    <table>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Size</th>
+                            <th>Photo</th>
 
-                        <th>Update</th>
-                        <th>Delete</th>
-                    </tr>
-                    <tr>
-                        <td>Ex. 1</td>
-                        <td>Ex. Prehistoric Jungle - Large</td>
-                        <td>
-                            Ex. Prehistoric jungles were dense, lush environments teeming with plant and animal life. 
-                            These habitats supported a variety of herbivorous and carnivorous dinosaur species, 
-                            including smaller predators, long-necked sauropods, and armored herbivores. 
-                            Many plants were ferns, horsetails, and primitive conifers.
-                        </td>
-                        <td>3</td>
-                        <td><img src="./images/jungle.jpg" alt="Jungle" width="200" height="150"></td>
-                        
-                        <td><button onclick="location.href='forms/habitatsUpdate.html'">Update</button></td>
-                        <td><button>Delete</button></td>
-                    </tr>
-                </table>
+                            <th>Update</th>
+                            <th>Delete</th>
+                        </tr>
+                        <tr>
+                            <td>Ex. 1</td>
+                            <td>Ex. Prehistoric Jungle - Large</td>
+                            <td class="tableDescription">
+                                Ex. Prehistoric jungles were dense, lush environments teeming with plant and animal life. 
+                                These habitats supported a variety of herbivorous and carnivorous dinosaur species, 
+                                including smaller predators, long-necked sauropods, and armored herbivores. 
+                                Many plants were ferns, horsetails, and primitive conifers.
+                            </td>
+                            <td>3</td>
+                            <td><a href="./images/jungle.jpg"><img src="./images/jungle.jpg" alt="Jungle" width="200" height="150"></a></td>
+                            
+                            <td><button onclick="location.href='forms/habitatsUpdate.html'">Update</button></td>
+                            <td><button>Delete</button></td>
+                        </tr>
+                    </table>
+                </div>
             </article>
         </section>
     </main>

@@ -12,7 +12,7 @@
 <body>
     <header>
         <h1>Jurassic Parks and Recreation *</h1>
-        <p class="headerP">D.I.N.O.</p>
+        <p class="headerP">D.I.N.O<a class="whte_rbt_obj" href="https://markhjorth.github.io/nedry/">.</a></p>
     </header>
     <nav>
         <a href="index.html" >Home</a>
@@ -47,32 +47,34 @@
                     The table below shows existing information for Species entities and includes
                     buttons to update or delete them.
                 </p>
-                <table>
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Diet</th>
-                        <th>Habitat</th>
-                        <th>Threat Level</th>
-                        <th>Photo</th>
-                        <th>Description</th>
+                <div class="scrollableTable">
+                    <table>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Diet</th>
+                            <th>Habitat</th>
+                            <th>Threat Level</th>
+                            <th>Photo</th>
+                            <th>Description</th>
 
-                        <th>Update</th>
-                        <th>Delete</th>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>Tyranosaurus Rex</td>
-                        <td>Carnivore</td>
-                        <td>Prehistoric Jungle - Large</td>
-                        <td>10</td>
-                        <td><img src="images/species-tyranosaurus.jpg" alt="T-Rex standing." width="200px"></td>
-                        <td>A large carnivorous dinosaur with powerful jaws and sharp teeth.</td>
+                            <th>Update</th>
+                            <th>Delete</th>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>Tyranosaurus Rex</td>
+                            <td>Carnivore</td>
+                            <td>Prehistoric Jungle - Large</td>
+                            <td>10</td>
+                            <td><a href="images/species-tyranosaurus.jpg"><img src="images/species-tyranosaurus.jpg" alt="T-Rex standing." width="200px"></a></td>
+                            <td class="tableDescription">A large carnivorous dinosaur with powerful jaws and sharp teeth.</td>
 
-                        <td><button onclick="location.href='forms/speciesUpdate.html'">Update</button></td>
-                        <td><button>Delete</button></td>
-                    </tr>
-                </table>
+                            <td><button onclick="location.href='forms/speciesUpdate.html'">Update</button></td>
+                            <td><button>Delete</button></td>
+                        </tr>
+                    </table>
+                </div>
             </article>
         </section>
     </main>
