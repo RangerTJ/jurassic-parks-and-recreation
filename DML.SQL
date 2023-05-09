@@ -191,8 +191,18 @@ LEFT JOIN BiologicalAssets ON TasksAssigned.idBiologicalAsset = BiologicalAssets
 LEFT JOIN Species ON BiologicalAssets.idSpecies = Species.idSpecies
 ORDER BY TasksAssigned.idTaskAssigned ASC;
 
--- SELECT EmployeeTasks
+-- SELECT EmployeeTasks -- SUMMARY TABLE VERSION
 SELECT  EmployeeTasks.idEmployeeTask, TasksAssigned.taskName, (SELECT CONCAT(Employees.firstName, ' ', Employees.lastName)) AS contributingEmployee,
+        TaskCategories.categoryName, EmployeeTasks.taskHoursWorked, EmployeeTasks.empTaskCost, EmployeeTasks.empTaskStart, EmployeeTasks.empTaskEnd
+FROM EmployeeTasks
+-- Need to JOIN EmployeeTasks -> TasksAssigned -> Employees -> Task Category
+LEFT JOIN TasksAssigned ON EmployeeTasks.idTaskAssigned = TasksAssigned.idTaskAssigned
+LEFT JOIN TaskCategories ON EmployeeTasks.idTaskCategory = TaskCategories.idTaskCategory
+JOIN Employees ON EmployeeTasks.idEmployee = Employees.idEmployee
+ORDER BY EmployeeTasks.idEmployeeTask ASC;
+
+-- SELECT EmployeeTasks -- POPULATE UPDATE FORM VERSION
+SELECT  EmployeeTasks.idEmployeeTask, TasksAssigned.taskName, Employees.employeeUsername,
         TaskCategories.categoryName, EmployeeTasks.taskHoursWorked, EmployeeTasks.empTaskCost, EmployeeTasks.empTaskStart, EmployeeTasks.empTaskEnd
 FROM EmployeeTasks
 -- Need to JOIN EmployeeTasks -> TasksAssigned -> Employees -> Task Category
@@ -316,7 +326,7 @@ WHERE idFacilityType = :idFacilityType_input;
 UPDATE Facilities
 SET     idPark =                (SELECT idPark FROM Parks WHERE parkName = :parkName_input),
         idFacilityType =        (SELECT idFacilityType FROM FacilityTypes WHERE facTypeName = :facTypeName_input),
-        idHabitat =             (SELECT idHabitat FROM Habitat WHERE habitatName = :habitatName_input),
+        idHabitat =             (SELECT idHabitat FROM Habitats WHERE habitatName = :habitatName_input),
         facilityName = :facilityName_input, facilityDescription = :facilityDescription_input, facilityLocation = :facilityLocation_input, 
         securityRating = :securityRating_input, facilityPhoto = :facilityPhoto_input, facilityNote = :facilityNote_input
 WHERE idFacility = :idFacility_input;
