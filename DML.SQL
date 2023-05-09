@@ -14,53 +14,53 @@
 -- -----------------
 
 -- Park Selector
-SELECT idPark, parkName
+SELECT parkName
 FROM Parks
 ORDER BY parkName ASC;
 
 -- Facility Type Selector
-SELECT idFacilityType, facTypeName
+SELECT facTypeName
 FROM FacilityTypes
 ORDER BY idFacilityType ASC;
 
 -- Habitat Selector
-SELECT idHabitat, habitatName
+SELECT habitatName
 FROM Habitats
 ORDER BY habitatName ASC;
 
 -- Facilities Selector
-SELECT idFacility, facilityName
+SELECT facilityName
 FROM Facilities
 ORDER BY facilityName ASC;
 
 -- Diets Selector
-SELECT idDiet, dietName
+SELECT dietName
 FROM Diets
 ORDER BY dietName ASC;
 
 -- Species Selector
-SELECT idSpecies, speciesName
+SELECT speciesName
 FROM Species
 ORDER BY speciesName ASC;
 
 -- Biological Assets Selector (Bio Asset -> Species JOIN needed)
-SELECT idBiologicalAsset, speciesName, bioAssetName
+SELECT speciesName, bioAssetName
 FROM BiologicalAssets
 JOIN Species ON BiologicalAssets.idSpecies = Species.idSpecies
 ORDER BY speciesName ASC;
 
 -- Job Classifications Selector
-SELECT idJobClassification, jobTitle
+SELECT jobTitle
 FROM JobClassifications
 ORDER BY jobTitle ASC;
 
 -- Employees Selector
-SELECT idEmployee, lastName, firstName
+SELECT lastName, firstName, employeeUsername
 FROM Employees
 ORDER BY lastName ASC;
 
 -- Task Categories Selector
-SELECT idTaskCategory, categoryName
+SELECT categoryName
 FROM TaskCategories
 ORDER BY categoryName ASC;
 
