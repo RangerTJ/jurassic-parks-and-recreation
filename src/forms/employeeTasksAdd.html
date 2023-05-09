@@ -41,14 +41,15 @@
                     <fieldset>
                         <legend>Information</legend>
                         <p>
-                            <!-- Manual input due to sheer number of them that could potentially exist. Reporting party responsible for knowing name. -->
+                            <!-- Options by SQL query. -->
                             <div><label for="taskName" class="required">Task Name</label></div>
-                            <input type="text"
-                                        name="taskName" 
-                                        id ="taskName" 
-                                        required 
-                                        placeholder="Ex. Clean VC">
-                        </p>
+                            <select name="taskName" id="taskName" required>
+                                <option value="" hidden>Choose an option</option>
+                                <option value="1">Transport Asset</option>
+                                <option value="2">Dino Dental Exam for Rexy</option>
+                                <option value="3">FY23 VC Cleaning</option>
+                                <option value="4">Repair Leak</option>
+                            </select>
                         <p>
                             <!-- Options by SQL query of unique usernames / possibly show first/last name too, but just use userid for values -->
                             <div><label for="employeeUsername" class="required">Employee User ID</label></div>
