@@ -356,8 +356,8 @@ WHERE idJobClassification = :idJobClassification_input;
 
 -- Task Category
 UPDATE TaskCategories
-SET
-WHERE
+SET     categoryName = :categoryName_input
+WHERE idTaskCategory = :idTaskCategory_input;
 
 -- Biological Asset
 UPDATE BiologicalAssets
