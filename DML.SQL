@@ -1,29 +1,12 @@
 -- Taylor Jordan and Nick Schmidt (Team 100: Jurassic Parks and Recreation)
 -- : colon prefix used (for now) to denote variables that will be involved with back end data.
+
 -- WARNING: This script contains subqueries for copy/pasting. It is NOT recomended to run the entire SQL file.
 --              If copy/pasting all the code, please remove the subqueries section first, or it'll break the script. 
 
--- Requirements Info from Project Outline:
--- ---------------------------------------
--- **REQ's DONE: 1, 2, 4, 5, 6
-
--- **REQ 3: You need to include one DELETE and one UPDATE function in your website, for any one of the entities. 
---  In addition, it should be possible to add and remove things from at least one many-to-many relationship and it should be possible to add things to all relationships. 
---  This means you need SELECT & INSERT functionalities for all relationships as well as entities. 
---  And DELETE & UPDATE for least one m:m relationship.
-
--- **SUMMARY: To continue the example from above, if you have 5 tables in your schema, then at a minimum, we expect you to implement:
---  5 SELECTs, 5 INSERTs, 1 UPDATE (1 NULLable relationship), 1 DELETE (M:M), and 1 Dynamic drop-down/Search for a total of 14 functions.
-
-
 -- TODO: 
---      Update:         Everything except Parks
---      Delete:         Everything except TasksAssigned
---      Custom:         EmployeeTasks lookup for an employee, TaskAssigned Lookup for a facility sorted by date
---                      Select populators for looking up tasks that have or haven't ended?
-
--- Change: Made Nickname for bio assets NOT null instead of nullable since this is (currently) selecting for assets in queries based on nicknames.
---              May reverts this if we figure a way to get them without it / can make nickname non-unique in that case.
+--      Update: Task Category + All Dino Stuff
+--      Custom: Optional / Later / Stretch Goal
 
 -- -----------------
 -- Functional Queries to Populate Drop-downs, etc.
@@ -83,9 +66,12 @@ ORDER BY categoryName ASC;
 
 -- ----------------
 -- Required Subqueries - For Easy Copy/Pasting as needed in larger queries
+
 -- ID from name is needed for inputs to add or update entities.
+
 -- Name from ID is used to populate update-form values and summary tables
 -- (so they can use/show unique names instead of gibberish ID numbers).
+
 -- THESE ARE SUBQUERIES ONLY - DO NOT RUN THESE IN A BATCH WITH THE REST OF THIS SCRIPT
 -- ----------------
 
@@ -365,8 +351,8 @@ WHERE idEmployeeTask = :idEmployeeTask_input;
 
 -- Job Classifications
 UPDATE JobClassifications
-SET     
-WHERE
+SET     jobTitle = :jobTitle_input, jobDescription = :jobDescription_input
+WHERE idJobClassification = :idJobClassification_input;
 
 -- Task Category
 UPDATE TaskCategories
