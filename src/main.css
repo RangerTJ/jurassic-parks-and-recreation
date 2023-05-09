@@ -47,9 +47,7 @@ URL: https://css-tricks.com/snippets/css/using-font-face-in-css/ */
     background-position: center;
     background-image:url(images/facility-enclosure-gates-night.jpg);
     color: var(--worldDeepBlue);
-    /* color: black; */
-    /* color: greenyellow; */
-    color: rgb(255, 208, 0);
+    color: var(--parkYellow);
     font-family: var(--normalText);
     max-width: 90%;
     margin: auto;
@@ -58,10 +56,6 @@ URL: https://css-tricks.com/snippets/css/using-font-face-in-css/ */
   header {
     background-color: black;
     color: white;
-    /* background-color: whitesmoke;
-    color: black; */
-    /* background-color: var(--dominionAmberBright);
-    color: black; */
     padding-left: 10px;
     padding-right: 10px;
     padding-bottom: 1px;
@@ -69,12 +63,8 @@ URL: https://css-tricks.com/snippets/css/using-font-face-in-css/ */
 
 
   footer {
-    /* background-color: var(--worldDeepBlue);
-    color: var(--worldLightBlue); */
     background-color: var(--parkRed);
     color: var(--parkYellow);
-    /* background-color: var(--dominionAmberBright);
-    color: black; */
     font-family: var(--normalText);
     padding: 10px;
     margin-bottom: 50px;
@@ -82,8 +72,6 @@ URL: https://css-tricks.com/snippets/css/using-font-face-in-css/ */
 
 
   main {
-    /* background-color: var(--worldMedBlueClear); */
-    /* background-color: var(--dominionAmberMedClear); */
     background-color: var(--feralGreenClear);
     padding-bottom: 20px;
   }
@@ -109,15 +97,9 @@ URL: https://css-tricks.com/snippets/css/using-font-face-in-css/ */
 }
 
   nav a {
-    /* background-color: var(--worldDeepBlue);
-    color: var(--worldLightBlue);
-    border: solid var(--worldDeepBlue); */
-    /* background-color: var(--dominionAmberDark);
-    color: black;
-    border: solid var(--dominionAmberDark); */
-    background-color: rgb(135, 8, 8);
+    background-color: var(--parkRed);
     color: var(--parkYellow);
-    border: solid rgb(135, 8, 8);
+    border: solid var(--parkRed);
     padding-left: 5px;
     padding-right: 5px;
     font-size: 35px;
@@ -176,9 +158,6 @@ URL: https://css-tricks.com/snippets/css/using-font-face-in-css/ */
 
   /* Tables */
   table {
-    /* background-color: var(--worldDeepBlueClearLight);
-    color: var(--worldLightBlue);
-    border: 2px solid var(--worldDeepBlue); */
     background-color: rgba(0, 0, 0, 0.678);
     color: var(--parkYellow);
     border: 2px solid var(--parkYellow);
@@ -190,27 +169,19 @@ URL: https://css-tricks.com/snippets/css/using-font-face-in-css/ */
     
 
   th {
-    /* border: 2px solid var(--worldDeepBlue);
-    background-color: var(--worldMedBlueClear); */
-    /* border: 2px solid var(--parkYellow); */
     background-color: var(--parkRed);
     font-weight: bold;
   }
 
-  tr {
-
-  }
+  tr {}
 
   td {
-    /* border: 2px solid var(--worldDeepBlue); */
     border: 2px solid var(--parkYellow);
     padding: 10px;
   }
 
   /* Buttons and Forms */
   button {
-    /* color: var(--worldLightBlue);
-    background-color: var(--worldDeepBlue); */
     color: var(--parkYellow);
     background-color: var(--parkRed);
     border-color: var(--feralGreen);
@@ -245,15 +216,12 @@ URL: https://css-tricks.com/snippets/css/using-font-face-in-css/ */
     font-size: large;
   }
 
-  form {
-    /* flex:content; */
-  }
+  form {}
 
   input {
     color: var(--feralGreen);
     background-color: var(--parkYellowGreenPale);
     margin-top: 5px;
-    /* width: 90%; */
   }
 
   input:invalid {
@@ -269,8 +237,6 @@ URL: https://css-tricks.com/snippets/css/using-font-face-in-css/ */
   }
 
   textarea {
-    /* color: var(--worldLightBlue);
-    background-color: var(--worldDeepBlue); */
     margin-top: 5px;
     color: var(--feralGreen);
     background-color: var(--parkYellowGreenPale);
@@ -289,8 +255,6 @@ URL: https://css-tricks.com/snippets/css/using-font-face-in-css/ */
   }
 
   select {
-    /* background-color: var(--worldLightBlue);
-    color: var(--worldDeepBlue); */
     margin-top: 5px;
     color: var(--feralGreen);
     background-color: var(--parkYellowGreenPale);
@@ -327,9 +291,7 @@ URL: https://css-tricks.com/snippets/css/using-font-face-in-css/ */
     font-size: 30px;
 }
 
-
-/* Testing for now, based on article code here:
-https://www.smashingmagazine.com/2010/07/how-to-use-css3-media-queries-to-create-a-mobile-version-of-your-website/ */
+/* Small Screen Settings */
 @media (max-device-width: 820px) {
 
   h1 {
