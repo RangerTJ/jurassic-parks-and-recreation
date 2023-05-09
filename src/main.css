@@ -304,6 +304,15 @@ URL: https://css-tricks.com/snippets/css/using-font-face-in-css/ */
   text-align: left;
 }
 
+/* Happy Eater Egg Hunting! */
+.whte_rbt_obj {
+  /* color: var(--windows95);
+  display: inline; */
+  /* font-size: 1px; */
+  text-decoration: none;
+  color: white;
+}
+
 /* Small Screen Settings */
 @media (max-device-width: 780px) {
 
