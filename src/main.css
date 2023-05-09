@@ -42,7 +42,7 @@ URL: https://css-tricks.com/snippets/css/using-font-face-in-css/ */
   /* Basics */
   body {
     background-size:cover;
-    background-color: var(--concreteLight);
+    background-color: var(--feralGreen);
     background-attachment: fixed;
     background-position: center;
     background-image:url(images/facility-enclosure-gates-night.jpg);
@@ -111,12 +111,13 @@ URL: https://css-tricks.com/snippets/css/using-font-face-in-css/ */
     line-height: 1.00;
     font-family: var(--jpFont);
     margin: 0;
+    text-shadow: 1px 1px 1px var(--feralGreen);
 }
 
   nav a:hover {       
     background-color: black;
     color: white;
-    border: solid gold;
+    border: ridge gold;
     text-decoration: none;
 }
     
@@ -165,8 +166,6 @@ URL: https://css-tricks.com/snippets/css/using-font-face-in-css/ */
     width: 100%;
     text-align: center;
   }
-
-    
 
   th {
     background-color: var(--parkRed);
@@ -322,7 +321,9 @@ URL: https://css-tricks.com/snippets/css/using-font-face-in-css/ */
   }
 
   nav a {
-    font-size: 20px;
+    font-size: 26px;
+    padding-left: 1px;
+    padding-right: 1px;
+    border: groove var(--feralGreenClear) 2px;
   }
-
 }
