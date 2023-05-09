@@ -1,4 +1,7 @@
 /* Fonts */
+
+/* Font-face code style/syntax based on "How to use @font-face in CSS" by Chris Coyler's
+URL: https://css-tricks.com/snippets/css/using-font-face-in-css/ */
 @font-face {
     font-family: 'Jurassic Park';
     src: url('fonts/JurassicPark-BL48.ttf') format('truetype');
@@ -33,7 +36,7 @@
     --feralGreenClear: #3c663edf;
 
     /* Fonts */
-    --jpFont: 'Jurassic Park', cursive;
+    --jpFont: 'Jurassic Park', sans-serif;
     --normalText: 'Overpass Mono', monospace;}
 
   /* Basics */
@@ -314,6 +317,7 @@
 
 
 /* Custom Elements */
+
 .headerP {
     margin-top: -20px;
     margin-bottom: 5px;
@@ -321,11 +325,3 @@
     font-family: var(--normalText);
     font-size: 180%;
 }
-
-  /* Stuff down here also copy/pasted from CS290 */
-  
-  /*   ===== TABLET  media query overrides mobile styles ===== */
-  @media all and (min-width: 600px) {}
-  
-  /*   ===== DESKTOP  media query overrides mobile and tablet styles ===== */
-  @media all and (min-width: 1080px) {}
