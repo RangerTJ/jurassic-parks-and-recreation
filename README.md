@@ -12,6 +12,7 @@ Digital Information Nexus for Operations (DINO) is a database program used to si
 * Habitats
 * Facility Types
 * Job Classifications  
+* Task Categories
 
 The Jurassic Park font is used non-commercially for educational project purposes under a freeware, non-commercial license courtesy of the font created by Jens R. Ziehn (https://www.fontspace.com/jurassic-park-font-f3555).  
 
