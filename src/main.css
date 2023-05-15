@@ -160,6 +160,11 @@ URL: https://css-tricks.com/snippets/css/using-font-face-in-css/ */
     margin-bottom: 0;
   }
 
+  h4 {
+    font-weight: bold;
+    font-size: 20px;
+  }
+
   /* Tables */
   table {
     background-color: rgba(0, 0, 0, 0.678);

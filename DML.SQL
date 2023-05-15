@@ -493,6 +493,9 @@ GROUP BY TaskCategories.categoryName
 ORDER BY TaskTypeCost DESC;
 
 -- SEARCH / Select Query - List Facilities with Compatible Habitat for Input Biological Asset
+-- Option for Add/Update Facility for Biological Asset Select Interface (for Update)
+-- Possibly modify to only be based on species, and have a script run to reset/populate the selection
+-- in the facilities select UI every time a species is chosen? Would then work for update or add both.
 SELECT Facilities.facilityName
 FROM Facilities
 -- Need to JOIN Facilities -> Habitats -> Species -> BiologicalAssets
