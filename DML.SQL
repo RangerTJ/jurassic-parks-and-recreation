@@ -487,34 +487,28 @@ FROM TaskCategories
 LEFT JOIN EmployeeTasks ON TaskCategories.idTaskCategory = EmployeeTasks.idTaskCategory
 LEFT JOIN TasksAssigned ON EmployeeTasks.idTaskAssigned = TasksAssigned.idTaskAssigned
 LEFT JOIN Facilities ON TasksAssigned.idFacility = Facilities.idFacility
-LEFT JOIN Parks ON Facilities.idPark = Parks.idPark AND Parks.idPark = (SELECT idPark FROM Parks WHERE parkName = :parkName_input)
+LEFT JOIN Parks ON Facilities.idPark = Parks.idPark 
+AND Parks.idPark = (SELECT idPark FROM Parks WHERE parkName = :parkName_input)
 GROUP BY TaskCategories.categoryName
 ORDER BY TaskTypeCost DESC;
 
+-- SEARCH / Select Query - List Facilities with Compatible Habitat for Input Biological Asset
+SELECT Facilities.facilityName
+FROM Facilities
+-- Need to JOIN Facilities -> Habitats -> Species -> BiologicalAssets
+JOIN Habitats ON Facilities.idHabitat = Habitats.idHabitat
+JOIN Species ON Habitats.idHabitat = Species.idHabitat
+JOIN BiologicalAssets ON Species.idSpecies = BiologicalAssets.idSpecies 
+AND BiologicalAssets.idBiologicalAsset = (SELECT idBiologicalAsset FROM BiologicalAssets WHERE bioAssetName = :bioAssetName_input)
+WHERE Facilities.idHabitat = Species.idHabitat
+ORDER BY Facilities.facilityName ASC;
 
--- Cost Analysis Report by Biological Asset: TO DO
--- Cost Analysis Report by Employee: TO DO
 
-
--- CUSTOM REPORT IDEAS
--- Search for all tasks associated with an employee?
--- Search for all task contributions (EmployeeTasks) associated with an employee?
--- Same Idea, but for facilities?
+-- MORE CUSTOM REPORT IDEAS
+-- Cost Analysis Report by Biological Asset
+-- Cost Analysis Report by Employee
+-- Search for all tasks associated with an employee
+-- Search for all task contributions (EmployeeTasks) associated with an employee
+-- Same Idea, but for facilities
 -- All employees that contributed to a task (search by task ID)
 -- All EmployeeTasks that contributed to a specific assignedTask (search by task ID)
--- Park-specific costs (drop-down menu that loads costs to park, possibly w/ breakdown by facility or personnel or tasks if we want)
--- Find suitable facilities to house a specific asset (search/drop-down)
--- Find facility with compatible wildlife (herbivore or same species if not herbivore) for a target species... optionally add habitat to this for a "where can I put this without it dying or eating its friends" query
--- Account cost report (if accounts added back/hooked up to EmployeeTasks)
-
-
--- Sub-selects to be inserted into queries to retrieve ID's
-
--- ADD Unique username attribute for employees? (so we don't need to lookup first/last name combos, which may not be unique)
-
--- Person Forgot info queries (so there's a way to look up task#'s, etc. if they're forgotten):
--- ex.  list all usernames by person they're assigned to
---      list all tasks by ID/Asset/Facility/Description/StartDate/EndDate (... or just use normal task query for this one)
---              or maybe multiple subqueries, like all facilities for a task, all tasks on a facility / same for dino
---      list all EmployeeTasks by ID/Person/Description/EndDate - sort by person, then date, then id (DESC)? Or something like that
---      list all tasks an employee has contributed to (if they need to lookup something they've done?)
