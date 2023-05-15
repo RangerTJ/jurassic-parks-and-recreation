@@ -458,13 +458,39 @@ WHERE idSpecies = :idSpecies_input
 
 
 -- ----------------
--- TODO - CUSTOM Reports (this may be a web-page thing to generate a custom query, not something we put in here)
+-- CUSTOM Reports (this may be a web-page thing to generate a custom query, not something we put in here)
 -- ----------------
 
--- Cost Analysis: List Employee Tasks Costs by Category and Park for Employee Tasks
--- Need to JOIN Category -> EmployeeTasks -> TasksAssigned -> Facilities -> Park
--- Need to SUM cost column from EmployeeTasks and GROUP BY Category and Park (both?)
--- Sort by costs in DESC
+-- SELECT - Cost Analysis Report by Task Category
+SELECT  TaskCategories.categoryName, SUM(EmployeeTasks.empTaskCost) AS TaskTypeCost
+FROM TaskCategories
+-- Need to JOIN TaskCategories -> EmployeeTasks
+LEFT JOIN EmployeeTasks ON TaskCategories.idTaskCategory = EmployeeTasks.idTaskCategory
+GROUP BY TaskCategories.categoryName
+ORDER BY TaskTypeCost DESC;
+
+-- SELECT - Cost Analysis Report by Park
+SELECT  Parks.parkName, SUM(EmployeeTasks.empTaskCost) AS ParkCost
+FROM TaskCategories
+-- Need to JOIN TaskCategories -> EmployeeTasks -> TasksAssigned -> Facilities -> Parks
+LEFT JOIN EmployeeTasks ON TaskCategories.idTaskCategory = EmployeeTasks.idTaskCategory
+LEFT JOIN TasksAssigned ON EmployeeTasks.idTaskAssigned = TasksAssigned.idTaskAssigned
+JOIN Facilities ON TasksAssigned.idFacility = Facilities.idFacility
+JOIN Parks ON Facilities.idPark = Parks.idPark
+GROUP BY Parks.parkName
+ORDER BY ParkCost DESC;
+
+-- SEARCH / Select Query - Cost Analysis for a Specific Input Park
+SELECT  TaskCategories.categoryName, SUM(EmployeeTasks.empTaskCost) AS TaskTypeCost
+FROM TaskCategories
+-- Need to JOIN TaskCategories -> EmployeeTasks -> TasksAssigned -> Facilities -> Parks
+LEFT JOIN EmployeeTasks ON TaskCategories.idTaskCategory = EmployeeTasks.idTaskCategory
+LEFT JOIN TasksAssigned ON EmployeeTasks.idTaskAssigned = TasksAssigned.idTaskAssigned
+LEFT JOIN Facilities ON TasksAssigned.idFacility = Facilities.idFacility
+LEFT JOIN Parks ON Facilities.idPark = Parks.idPark AND Parks.idPark = (SELECT idPark FROM Parks WHERE parkName = :parkName_input)
+GROUP BY TaskCategories.categoryName
+ORDER BY TaskTypeCost DESC;
+
 
 -- Cost Analysis Report by Biological Asset: TO DO
 -- Cost Analysis Report by Employee: TO DO
