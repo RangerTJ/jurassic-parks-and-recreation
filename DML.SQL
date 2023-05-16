@@ -492,20 +492,6 @@ AND Parks.idPark = (SELECT idPark FROM Parks WHERE parkName = :parkName_input)
 GROUP BY TaskCategories.categoryName
 ORDER BY TaskTypeCost DESC;
 
--- SELECT a matching enclosure for an input species
--- Can use this with JS to populate the facility select drop-down after a species is selected, if we want
--- Alternatively, if we want to "soft" enforce it, we could populate a table of "ideal" options once species is selected
--- (or maybe when using a "view matching enclosures button" is pushed if we don't want it to be automatic)
--- That way there's a reference table to inform choices, but an asset can still be placed in an inappropriate enclosure temporarily
-SELECT Facilities.facilityName
-FROM Facilities
--- Need to JOIN Facilities -> Habitats -> Species -> BiologicalAssets
-JOIN Habitats ON Facilities.idHabitat = Habitats.idHabitat
-JOIN Species ON Habitats.idHabitat = Species.idHabitat
-AND Species.idSpecies = (SELECT idSpecies FROM Species WHERE speciesName = :speciesName_input)
-WHERE Facilities.idHabitat = Species.idHabitat
-ORDER BY Facilities.facilityName ASC;
-
 -- SELECT biological assets in a non-ideal habitat (for use in summary report to quickly flag down inappropriate assignments)
 SELECT BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName AS currentWrongHome, currentHab.habitatName AS currentHabitat, speciesHab.habitatName AS needsHabitat
 FROM BiologicalAssets
@@ -516,6 +502,21 @@ JOIN Habitats currentHab ON Facilities.idHabitat = currentHab.idHabitat
 JOIN Habitats speciesHab ON Species.idHabitat = speciesHab.idHabitat
 WHERE Species.idHabitat != Facilities.idHabitat
 ORDER BY facilityName, speciesName, bioAssetName;
+
+-- OPTIONAL
+-- SELECT a matching enclosure for an input species
+-- Can use this with JS to populate the facility select drop-down after a species is selected, if we want
+-- Alternatively, if we want to "soft" enforce it, we could generate a table of "suggested" options on the add/update pages once a species is selected
+-- (or maybe when using a "view matching enclosures button" is pushed if we don't want it to be automatic)
+-- That way there's a reference table to inform choices, but an asset can still be placed in an inappropriate enclosure temporarily
+SELECT Facilities.facilityName
+FROM Facilities
+-- Need to JOIN Facilities -> Habitats -> Species -> BiologicalAssets
+JOIN Habitats ON Facilities.idHabitat = Habitats.idHabitat
+JOIN Species ON Habitats.idHabitat = Species.idHabitat
+AND Species.idSpecies = (SELECT idSpecies FROM Species WHERE speciesName = :speciesName_input)
+WHERE Facilities.idHabitat = Species.idHabitat
+ORDER BY Facilities.facilityName ASC;
 
 -- [Old] Select a matching enclosure for a specific biological asset (likely superseded by the species one, but keeping in case we find a use for it)
 SELECT Facilities.facilityName
