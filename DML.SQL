@@ -498,13 +498,20 @@ FROM BiologicalAssets
 -- Need to JOIN BioAssets -> Species -> Facilities
 JOIN Species ON BiologicalAssets.idSpecies = Species.idSpecies
 JOIN Facilities ON BiologicalAssets.idFacility = Facilities.idFacility
-JOIN Habitats currentHab ON Facilities.idHabitat = currentHab.idHabitat
+LEFT JOIN Habitats currentHab ON Facilities.idHabitat = currentHab.idHabitat
 JOIN Habitats speciesHab ON Species.idHabitat = speciesHab.idHabitat
-WHERE Species.idHabitat != Facilities.idHabitat
+WHERE Species.idHabitat != Facilities.idHabitat OR Facilities.idHabitat IS NULL
 ORDER BY facilityName, speciesName, bioAssetName;
 
 
--- SELECT (same as above, but for security risks)
+-- SELECT biological assets that are not adequately secured (and indicates how bad it is with a severity rating from 1-9)
+SELECT BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName, Facilities.securityRating, Species.threatLevel - Facilities.securityRating AS severity
+FROM BiologicalAssets
+-- Need to JOIN BioAssets -> Species -> Facilities
+JOIN Species on BiologicalAssets.idSpecies = Species.idSpecies
+JOIN Facilities on BiologicalAssets.idFacility = Facilities.idFacility
+WHERE Facilities.securityRating < Species.threatLevel
+ORDER BY severity, facilities.facilityName, BiologicalAssets.bioAssetName;
 
 
 -- OPTIONAL
