@@ -493,6 +493,7 @@ GROUP BY TaskCategories.categoryName
 ORDER BY TaskTypeCost DESC;
 
 -- SELECT a matching enclosure for an input species
+-- Can use this with JS to populate the facility select drop-down after a species is selected
 SELECT Facilities.facilityName
 FROM Facilities
 -- Need to JOIN Facilities -> Habitats -> Species -> BiologicalAssets
