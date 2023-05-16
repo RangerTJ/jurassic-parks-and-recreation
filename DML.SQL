@@ -503,6 +503,10 @@ JOIN Habitats speciesHab ON Species.idHabitat = speciesHab.idHabitat
 WHERE Species.idHabitat != Facilities.idHabitat
 ORDER BY facilityName, speciesName, bioAssetName;
 
+
+-- SELECT (same as above, but for security risks)
+
+
 -- OPTIONAL
 -- SELECT a matching enclosure for an input species
 -- Can use this with JS to populate the facility select drop-down after a species is selected, if we want
