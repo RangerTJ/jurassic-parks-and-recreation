@@ -517,11 +517,6 @@ JOIN Habitats speciesHab ON Species.idHabitat = speciesHab.idHabitat
 WHERE Species.idHabitat != Facilities.idHabitat
 ORDER BY facilityName, speciesName, bioAssetName;
 
-
-
-
-
-
 -- [Old] Select a matching enclosure for a specific biological asset (likely superseded by the species one, but keeping in case we find a use for it)
 SELECT Facilities.facilityName
 FROM Facilities
