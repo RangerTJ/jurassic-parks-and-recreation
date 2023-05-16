@@ -201,7 +201,7 @@ URL: https://css-tricks.com/snippets/css/using-font-face-in-css/ */
   button:hover {
     outline: none;
     box-shadow: 0px 0px 15px var(--dominionAmberBright);
-    text-shadow: 1px 1px 1px var(--dominionAmberDark);
+    text-shadow: 1px 1px 7px rgb(242, 255, 0);
     font-style: in;
     background-color: var(--dominionAmberBright);
     border: outset var(--dominionAmberDarkClear);
