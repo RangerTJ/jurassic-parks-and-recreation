@@ -1,12 +1,6 @@
 -- Taylor Jordan and Nick Schmidt (Team 100: Jurassic Parks and Recreation)
 -- : colon prefix used (for now) to denote variables that will be involved with back end data.
 
--- WARNING: This script contains subqueries for copy/pasting. It is NOT recomended to run the entire SQL file.
---              If copy/pasting all the code, please remove the subqueries section first, or it'll break the script. 
-
--- TODO: 
---      Update: Task Category + All Dino Stuff
---      Custom: Optional / Later / Stretch Goal
 
 -- -----------------
 -- Functional Queries to Populate Drop-downs, etc.
@@ -64,61 +58,7 @@ SELECT categoryName
 FROM TaskCategories
 ORDER BY categoryName ASC;
 
--- ----------------
--- Required Subqueries - For Easy Copy/Pasting as needed in larger queries
-
--- ID from name is needed for inputs to add or update entities.
-
--- Name from ID is used to populate update-form values and summary tables
--- (so they can use/show unique names instead of gibberish ID numbers).
-
--- THESE ARE SUBQUERIES ONLY - DO NOT RUN THESE IN A BATCH WITH THE REST OF THIS SCRIPT
--- ----------------
-
-
--- Get ParkID from name and vice versa
-(SELECT idPark FROM Parks WHERE parkName = :parkName_input)
-(SELECT parkName FROM Parks WHERE idPark = :idPark_input)
-
--- Get FacilityTypes id from name and vice versa
-(SELECT idFacilityType FROM FacilityTypes WHERE facTypeName = :facTypeName_input)
-(SELECT facTypeName FROM FacilityTypes WHERE idFacilityType = :idFacilityType_input)
-
--- Get Facility ID from name and vice versa
-(SELECT idFacility FROM Facilities WHERE facilityName = :facilityName_input)
-(SELECT facilityName FROM Facilities WHERE idFacility = :idFacility_input)
-
--- Get Bio Assets ID from bioAssetName and vice versa
-(SELECT idBiologicalAsset FROM BiologicalAssets WHERE bioAssetName = :bioAssetName_input)
-(SELECT bioAssetName FROM BiologicalAssets WHERE idBiologicalAsset = :idBiologicalAsset_input)
-
--- Get TaskAssignedID from task name and vice versa
-(SELECT idTaskAssigned FROM TasksAssigned WHERE taskName = :taskName_input)
-(SELECT taskName FROM TasksAssigned WHERE idTaskAssigned = :idTask_input)
-
--- Get HabitatID from name and vice versa
-(SELECT idHabitat FROM Habitat WHERE habitatName = :habitatName_input)
-(SELECT habitatName FROM Habitat WHERE idHabitat = :idHabitat_input)
-
--- Get DietID from diet name and vice versa
-(SELECT idDiet FROM Diets WHERE dietName = :dietName_input)
-(SELECT dietName FROM Diets WHERE idDiet = :idDiet_input)
-
--- Get SpeciesID from species name and vice versa
-(SELECT idSpecies from Species WHERE speciesName = :speciesName_input)
-(SELECT idSpecies from Species WHERE speciesName = :speciesName_input)
-
--- Get employeeID from username and vice versa
-(SELECT idEmployee FROM Employees WHERE employeeUsername = :employeeUsername_input)
-(SELECT employeeUsername FROM Employees WHERE idEmployee = :idEmployee_input)
-
--- Get jobID from title and vice versa
-(SELECT idJobClassification FROM JobClassifications WHERE jobTitle = :jobTitle_input)
-(SELECT jobTitle FROM JobClassifications WHERE idJobClassification = :idJobClassification_input)
-
--- Get Task Category from name from ID and vice versa
-(SELECT idTaskCategory FROM TaskCategories WHERE categoryName = :categoryName_input)
-(SELECT categoryName FROM TaskCategories WHERE idTaskCategory = :idTaskCategory_input)
+-- Image Selector will be populated by a JS script based on images available on the server, ideally.
 
 
 -- -----------------
@@ -308,6 +248,7 @@ VALUES  (
                 :categoryName_input
         );
 
+
 -- ----------------
 -- Updates: ID values should be retrievable from the select used to populate the update form for the WHERE value.
 -- ----------------
@@ -458,7 +399,7 @@ WHERE idSpecies = :idSpecies_input
 
 
 -- ----------------
--- CUSTOM Reports (this may be a web-page thing to generate a custom query, not something we put in here)
+-- CUSTOM Reports
 -- ----------------
 
 -- SELECT - Cost Analysis Report by Task Category
@@ -480,18 +421,6 @@ JOIN Parks ON Facilities.idPark = Parks.idPark
 GROUP BY Parks.parkName
 ORDER BY ParkCost DESC;
 
--- SEARCH / Select Query - Cost Analysis for a Specific Input Park
-SELECT  TaskCategories.categoryName, SUM(EmployeeTasks.empTaskCost) AS TaskTypeCost
-FROM TaskCategories
--- Need to JOIN TaskCategories -> EmployeeTasks -> TasksAssigned -> Facilities -> Parks
-LEFT JOIN EmployeeTasks ON TaskCategories.idTaskCategory = EmployeeTasks.idTaskCategory
-LEFT JOIN TasksAssigned ON EmployeeTasks.idTaskAssigned = TasksAssigned.idTaskAssigned
-LEFT JOIN Facilities ON TasksAssigned.idFacility = Facilities.idFacility
-LEFT JOIN Parks ON Facilities.idPark = Parks.idPark 
-AND Parks.idPark = (SELECT idPark FROM Parks WHERE parkName = :parkName_input)
-GROUP BY TaskCategories.categoryName
-ORDER BY TaskTypeCost DESC;
-
 -- SELECT biological assets in a non-ideal habitat (for use in summary report to quickly flag down inappropriate assignments)
 SELECT BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName AS currentWrongHome, currentHab.habitatName AS currentHabitat, speciesHab.habitatName AS needsHabitat
 FROM BiologicalAssets
@@ -503,7 +432,6 @@ JOIN Habitats speciesHab ON Species.idHabitat = speciesHab.idHabitat
 WHERE Species.idHabitat != Facilities.idHabitat OR Facilities.idHabitat IS NULL
 ORDER BY facilityName, speciesName, bioAssetName;
 
-
 -- SELECT biological assets that are not adequately secured (and indicates how bad it is with a severity rating from 1-9)
 SELECT BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName, Facilities.securityRating, Species.threatLevel - Facilities.securityRating AS severity
 FROM BiologicalAssets
@@ -514,20 +442,31 @@ WHERE Facilities.securityRating < Species.threatLevel
 ORDER BY severity, facilities.facilityName, BiologicalAssets.bioAssetName;
 
 
--- OPTIONAL
--- SELECT a matching enclosure for an input species
--- Can use this with JS to populate the facility select drop-down after a species is selected, if we want
--- Alternatively, if we want to "soft" enforce it, we could generate a table of "suggested" options on the add/update pages once a species is selected
--- (or maybe when using a "view matching enclosures button" is pushed if we don't want it to be automatic)
--- That way there's a reference table to inform choices, but an asset can still be placed in an inappropriate enclosure temporarily
+-- -------------
+-- OPTIONAL Queries (May or may not be needed)
+-- -------------
+
+-- SELECT a matching enclosure for an input species (possibly to populate select element or populate a table of appropriate habitats)
 SELECT Facilities.facilityName
 FROM Facilities
 -- Need to JOIN Facilities -> Habitats -> Species -> BiologicalAssets
 JOIN Habitats ON Facilities.idHabitat = Habitats.idHabitat
 JOIN Species ON Habitats.idHabitat = Species.idHabitat
 AND Species.idSpecies = (SELECT idSpecies FROM Species WHERE speciesName = :speciesName_input)
-WHERE Facilities.idHabitat = Species.idHabitat
+WHERE Facilities.idHabitat = Species.idHabitat AND Facilities.securityRating >= Species.threatLevel
 ORDER BY Facilities.facilityName ASC;
+
+-- SEARCH / Select Query - Cost Analysis for a Specific Input Park
+SELECT  TaskCategories.categoryName, SUM(EmployeeTasks.empTaskCost) AS TaskTypeCost
+FROM TaskCategories
+-- Need to JOIN TaskCategories -> EmployeeTasks -> TasksAssigned -> Facilities -> Parks
+LEFT JOIN EmployeeTasks ON TaskCategories.idTaskCategory = EmployeeTasks.idTaskCategory
+LEFT JOIN TasksAssigned ON EmployeeTasks.idTaskAssigned = TasksAssigned.idTaskAssigned
+LEFT JOIN Facilities ON TasksAssigned.idFacility = Facilities.idFacility
+LEFT JOIN Parks ON Facilities.idPark = Parks.idPark 
+AND Parks.idPark = (SELECT idPark FROM Parks WHERE parkName = :parkName_input)
+GROUP BY TaskCategories.categoryName
+ORDER BY TaskTypeCost DESC;
 
 -- [Old] Select a matching enclosure for a specific biological asset (likely superseded by the species one, but keeping in case we find a use for it)
 SELECT Facilities.facilityName
@@ -549,3 +488,59 @@ ORDER BY Facilities.facilityName ASC;
 -- Same Idea, but for facilities
 -- All employees that contributed to a task (search by task ID)
 -- All EmployeeTasks that contributed to a specific assignedTask (search by task ID)
+
+
+-- ----------------
+-- Required Subqueries - For Easy Copy/Pasting as needed in larger queries
+
+-- ID from name is needed for inputs to add or update entities.
+
+-- Name from ID is used to populate update-form values and summary tables
+-- (so they can use/show unique names instead of gibberish ID numbers).
+
+-- THESE ARE SUBQUERIES ONLY - DO NOT RUN THESE IN A BATCH WITH THE REST OF THIS SCRIPT
+-- ----------------
+
+-- Get ParkID from name and vice versa
+(SELECT idPark FROM Parks WHERE parkName = :parkName_input)
+(SELECT parkName FROM Parks WHERE idPark = :idPark_input)
+
+-- Get FacilityTypes id from name and vice versa
+(SELECT idFacilityType FROM FacilityTypes WHERE facTypeName = :facTypeName_input)
+(SELECT facTypeName FROM FacilityTypes WHERE idFacilityType = :idFacilityType_input)
+
+-- Get Facility ID from name and vice versa
+(SELECT idFacility FROM Facilities WHERE facilityName = :facilityName_input)
+(SELECT facilityName FROM Facilities WHERE idFacility = :idFacility_input)
+
+-- Get Bio Assets ID from bioAssetName and vice versa
+(SELECT idBiologicalAsset FROM BiologicalAssets WHERE bioAssetName = :bioAssetName_input)
+(SELECT bioAssetName FROM BiologicalAssets WHERE idBiologicalAsset = :idBiologicalAsset_input)
+
+-- Get TaskAssignedID from task name and vice versa
+(SELECT idTaskAssigned FROM TasksAssigned WHERE taskName = :taskName_input)
+(SELECT taskName FROM TasksAssigned WHERE idTaskAssigned = :idTask_input)
+
+-- Get HabitatID from name and vice versa
+(SELECT idHabitat FROM Habitat WHERE habitatName = :habitatName_input)
+(SELECT habitatName FROM Habitat WHERE idHabitat = :idHabitat_input)
+
+-- Get DietID from diet name and vice versa
+(SELECT idDiet FROM Diets WHERE dietName = :dietName_input)
+(SELECT dietName FROM Diets WHERE idDiet = :idDiet_input)
+
+-- Get SpeciesID from species name and vice versa
+(SELECT idSpecies from Species WHERE speciesName = :speciesName_input)
+(SELECT idSpecies from Species WHERE speciesName = :speciesName_input)
+
+-- Get employeeID from username and vice versa
+(SELECT idEmployee FROM Employees WHERE employeeUsername = :employeeUsername_input)
+(SELECT employeeUsername FROM Employees WHERE idEmployee = :idEmployee_input)
+
+-- Get jobID from title and vice versa
+(SELECT idJobClassification FROM JobClassifications WHERE jobTitle = :jobTitle_input)
+(SELECT jobTitle FROM JobClassifications WHERE idJobClassification = :idJobClassification_input)
+
+-- Get Task Category from name from ID and vice versa
+(SELECT idTaskCategory FROM TaskCategories WHERE categoryName = :categoryName_input)
+(SELECT categoryName FROM TaskCategories WHERE idTaskCategory = :idTaskCategory_input)
