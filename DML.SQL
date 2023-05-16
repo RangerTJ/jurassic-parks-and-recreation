@@ -446,7 +446,7 @@ ORDER BY severity, facilities.facilityName, BiologicalAssets.bioAssetName;
 -- OPTIONAL Queries (May or may not be needed)
 -- -------------
 
--- SELECT a matching enclosure for an input species (possibly to populate select element or populate a table of appropriate habitats)
+-- SEARCH / Select Query - Lists facilities that have an an appropriate habitat and security rating for a given species (i.e. adequate enclosures)
 SELECT Facilities.facilityName
 FROM Facilities
 -- Need to JOIN Facilities -> Habitats -> Species -> BiologicalAssets
@@ -468,7 +468,7 @@ AND Parks.idPark = (SELECT idPark FROM Parks WHERE parkName = :parkName_input)
 GROUP BY TaskCategories.categoryName
 ORDER BY TaskTypeCost DESC;
 
--- [Old] Select a matching enclosure for a specific biological asset (likely superseded by the species one, but keeping in case we find a use for it)
+-- [Potentially Deprecated] SEARCH / Select Query - List facilities suitable for a specific biological asset (habitat and security wise)
 SELECT Facilities.facilityName
 FROM Facilities
 -- Need to JOIN Facilities -> Habitats -> Species -> BiologicalAssets
@@ -476,7 +476,7 @@ JOIN Habitats ON Facilities.idHabitat = Habitats.idHabitat
 JOIN Species ON Habitats.idHabitat = Species.idHabitat
 JOIN BiologicalAssets ON Species.idSpecies = BiologicalAssets.idSpecies 
 AND BiologicalAssets.idBiologicalAsset = (SELECT idBiologicalAsset FROM BiologicalAssets WHERE bioAssetName = :bioAssetName_input)
-WHERE Facilities.idHabitat = Species.idHabitat
+WHERE Facilities.idHabitat = Species.idHabitat AND Facilities.securityRating >= Species.threatLevel
 ORDER BY Facilities.facilityName ASC;
 
 
