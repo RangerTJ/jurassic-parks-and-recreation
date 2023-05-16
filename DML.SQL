@@ -492,10 +492,17 @@ AND Parks.idPark = (SELECT idPark FROM Parks WHERE parkName = :parkName_input)
 GROUP BY TaskCategories.categoryName
 ORDER BY TaskTypeCost DESC;
 
--- SEARCH / Select Query - List Facilities with Compatible Habitat for Input Biological Asset
--- Option for Add/Update Facility for Biological Asset Select Interface (for Update)
--- Possibly modify to only be based on species, and have a script run to reset/populate the selection
--- in the facilities select UI every time a species is chosen? Would then work for update or add both.
+-- SELECT a matching enclosure for an input species
+SELECT Facilities.facilityName
+FROM Facilities
+-- Need to JOIN Facilities -> Habitats -> Species -> BiologicalAssets
+JOIN Habitats ON Facilities.idHabitat = Habitats.idHabitat
+JOIN Species ON Habitats.idHabitat = Species.idHabitat
+AND Species.idSpecies = (SELECT idSpecies FROM Species WHERE speciesName = :speciesName_input)
+WHERE Facilities.idHabitat = Species.idHabitat
+ORDER BY Facilities.facilityName ASC;
+
+-- [Old] Select a matching enclosure for a specific biological asset (likely superseded by the species one, but keeping in case we find a use for it)
 SELECT Facilities.facilityName
 FROM Facilities
 -- Need to JOIN Facilities -> Habitats -> Species -> BiologicalAssets
