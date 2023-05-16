@@ -23,9 +23,9 @@ FROM Habitats
 ORDER BY habitatName ASC;
 
 -- Facilities Selector
-SELECT facilityName
+SELECT facilityName, securityRating
 FROM Facilities
-ORDER BY facilityName ASC;
+ORDER BY facilityName, securityRating ASC;
 
 -- Diets Selector
 SELECT dietName
@@ -33,15 +33,15 @@ FROM Diets
 ORDER BY dietName ASC;
 
 -- Species Selector
-SELECT speciesName
+SELECT speciesName, threatLevel
 FROM Species
 ORDER BY speciesName ASC;
 
 -- Biological Assets Selector (Bio Asset -> Species JOIN needed)
-SELECT speciesName, bioAssetName
+SELECT bioAssetName, speciesName
 FROM BiologicalAssets
 JOIN Species ON BiologicalAssets.idSpecies = Species.idSpecies
-ORDER BY speciesName ASC;
+ORDER BY speciesName, bioAssetName ASC;
 
 -- Job Classifications Selector
 SELECT jobTitle
@@ -51,7 +51,7 @@ ORDER BY jobTitle ASC;
 -- Employees Selector
 SELECT lastName, firstName, employeeUsername
 FROM Employees
-ORDER BY lastName ASC;
+ORDER BY lastName, firstName, employeeUsername ASC;
 
 -- Task Categories Selector
 SELECT categoryName
