@@ -122,6 +122,7 @@ URL: https://css-tricks.com/snippets/css/using-font-face-in-css/ */
     color: white;
     border: ridge gold;
     text-decoration: none;
+    text-shadow: 1px 1px 5px var(--parkYellow);
 }
     
   nav a:focus {
@@ -160,6 +161,11 @@ URL: https://css-tricks.com/snippets/css/using-font-face-in-css/ */
     margin-bottom: 0;
   }
 
+  h4 {
+    font-weight: bold;
+    font-size: 20px;
+  }
+
   /* Tables */
   table {
     background-color: rgba(0, 0, 0, 0.678);
@@ -196,7 +202,7 @@ URL: https://css-tricks.com/snippets/css/using-font-face-in-css/ */
   button:hover {
     outline: none;
     box-shadow: 0px 0px 15px var(--dominionAmberBright);
-    text-shadow: 1px 1px 1px var(--dominionAmberDark);
+    text-shadow: 1px 1px 7px rgb(242, 255, 0);
     font-style: in;
     background-color: var(--dominionAmberBright);
     border: outset var(--dominionAmberDarkClear);
