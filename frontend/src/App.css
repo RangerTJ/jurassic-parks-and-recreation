@@ -1,0 +1,369 @@
+/* Fonts */
+
+/* Font-face code style/syntax based on "How to use @font-face in CSS" by Chris Coyler
+URL: https://css-tricks.com/snippets/css/using-font-face-in-css/ */
+@font-face {
+  font-family: 'Jurassic Park';
+  src: url('fonts/JurassicPark-BL48.ttf') format('truetype');
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Alumni+Sans+Inline+One&family=Bungee&family=Bungee+Hairline&family=Bungee+Inline&family=Bungee+Outline&family=Libre+Barcode+39+Text&family=Overpass+Mono&family=Tourney&family=Zen+Dots&display=swap');
+
+/*  Color Scheme  */
+:root {
+  /* Colors */
+  --concreteDark: #A2ABA4;
+  --concreteLight: #D7DFD9;
+  --parkYellow: rgb(255, 208, 0);
+  --parkYellowDim: rgb(182, 119, 25);
+  --parkYellowGreenPale: rgba(236, 255, 172, 0.907);
+  --parkRed:  rgb(135, 8, 8);
+  --worldLightBlue: #AFE9EE;
+  --worldLightBlueClear: #afe9ee47;
+  --worldMedBlue: #61b4fc;
+  --worldMedBlueClear: #61b4fce6;
+  --worldMedBlueClearBackup: #61b4fc9a;
+  --worldDeepBlue: #0F284F;
+  --worldDeepBlueClear: #0f284fec;
+  --worldDeepBlueClearLight: #0f284faf;
+  --dominionAmberBright: rgb(251, 151, 0);
+  --dominionAmberBrightClear: rgba(251, 151, 0, 0.713);
+  --dominionAmberMed: rgb(206, 123, 0);
+  --dominionAmberMedClear: rgba(206, 124, 0, 0.707);
+  --dominionAmberDark: rgb(135, 81, 0);
+  --dominionAmberDarkClear: rgba(135, 81, 0, 0.691);
+  --dominionEarth: rgb(69, 41, 0);;
+  --feralGreen: #2a4a2b;
+  --feralGreenClear: #3c663edf;
+  --windows95: #ffffff00;
+
+
+  /* Fonts */
+  --jpFont: 'Jurassic Park', sans-serif;
+  --normalText: 'Overpass Mono', monospace;}
+
+/* Basics */
+body {
+  background-size:cover;
+  background-color: var(--feralGreen);
+  background-attachment: fixed;
+  background-position: center;
+  background-image:url(images/facility-enclosure-gates-night.jpg);
+  color: var(--worldDeepBlue);
+  color: var(--parkYellow);
+  font-family: var(--normalText);
+  max-width: 90%;
+  margin: auto;
+}
+
+header {
+  background-color: black;
+  color: white;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 1px;
+}
+
+
+footer {
+  background-color: var(--parkRed);
+  color: var(--parkYellow);
+  font-family: var(--normalText);
+  padding: 10px;
+  margin-bottom: 50px;
+}  
+
+
+main {
+  background-color: var(--feralGreenClear);
+  padding-bottom: 20px;
+}
+
+section {
+  margin-left: 10px;
+  margin-right: 10px;
+  overflow: auto;
+}
+
+article {
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+/* Nav Elements */
+nav {
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 0;
+}
+
+nav a {
+  background-color: var(--parkRed);
+  color: var(--parkYellow);
+  border: solid var(--parkRed);
+  padding-left: 5px;
+  padding-right: 5px;
+  font-size: 35px;
+  font-weight: normal;
+  text-decoration: none;
+  display:flex;
+  justify-content: center;
+  flex-grow: 1;
+  line-height: 1.00;
+  font-family: var(--jpFont);
+  margin: 0;
+  text-shadow: px 1px 1px var(--feralGreen);
+}
+
+nav a:hover {       
+  background-color: black;
+  color: white;
+  border: ridge gold;
+  text-decoration: none;
+  text-shadow: 1px 1px 5px var(--parkYellow);
+}
+  
+nav a:focus {
+  background-color: black;
+  color: white;
+  border: solid gold;
+  outline: none;
+}
+
+
+/* Paragraphs and Headers */
+p {
+  overflow-wrap: break-word;
+}
+
+h1 {
+  font-size: 85px;
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+  font-family: var(--jpFont);
+  font-weight: normal;
+}
+h2 {
+  margin-top: auto;
+  margin-bottom: 0;
+  margin-left: 10px;
+  padding-top: 10px;
+  font-family: var(--jpFont);
+  font-size: 60px;
+  font-weight: normal;
+}
+h3 {
+  font-size: 24px; 
+  font-weight: bold;
+  margin-top: 15px;
+  margin-bottom: 0;
+}
+
+h4 {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+/* Tables */
+table {
+  background-color: rgba(0, 0, 0, 0.678);
+  color: var(--parkYellow);
+  border: 2px solid var(--parkYellow);
+  border-collapse: collapse;
+  width: 100%;
+  text-align: center;
+}
+
+th {
+  background-color: var(--parkRed);
+  font-weight: bold;
+}
+
+td {
+  border: 2px solid var(--parkYellow);
+  padding: 10px;
+}
+
+/* Buttons and Forms */
+button {
+  color: var(--parkYellow);
+  border: outset var(--dominionAmberMedClear);
+  background-color: var(--parkRed);
+  border-radius: 20px;
+  font-family: var(--jpFont);
+  font-size:xx-large;
+  outline: none;
+  box-shadow: 1px 1px 5px black;
+  text-shadow: 1px 1px 5px var(--dominionAmberBright);
+}
+
+button:hover {
+  outline: none;
+  box-shadow: 0px 0px 15px var(--dominionAmberBright);
+  text-shadow: 1px 1px 7px rgb(242, 255, 0);
+  font-style: in;
+  background-color: var(--dominionAmberBright);
+  border: outset var(--dominionAmberDarkClear);
+  color: black;
+}
+
+button:focus {
+  background-color: black;
+  color: white;
+  border: solid gold;
+  outline: none;
+}
+
+label {
+  font-weight: bold;
+}
+
+fieldset {
+  border-color: var(--parkYellow);
+}
+
+legend {
+  font-weight: bold;
+  font-size: large;
+}
+
+input {
+  color: var(--feralGreen);
+  background-color: var(--parkYellowGreenPale);
+  margin-top: 5px;
+}
+
+input:invalid {
+  outline: solid var(--parkRed);
+}
+
+input:valid {
+  outline: solid var(--feralGreen);
+}
+
+input:focus {
+  outline: solid var(--parkYellow);
+}
+
+textarea {
+  margin-top: 5px;
+  color: var(--feralGreen);
+  background-color: var(--parkYellowGreenPale);
+}
+
+textarea:invalid {
+  outline: solid var(--parkRed);
+}
+
+textarea:valid {
+  outline: solid var(--feralGreen);
+}
+
+textarea:focus {
+  outline: solid var(--parkYellow);
+}
+
+select {
+  margin-top: 5px;
+  color: var(--feralGreen);
+  background-color: var(--parkYellowGreenPale);
+}
+
+select:invalid {
+  outline: solid var(--parkRed);
+}
+
+select:valid {
+  outline: solid var(--feralGreen);
+}
+
+select:focus {
+  outline: solid var(--parkYellow);
+}
+
+::placeholder {
+  color: var(--dominionAmberMed);
+}
+
+img {
+  border: solid 2px var(--feralGreen);
+}
+
+
+/* Custom Elements */
+
+.headerP {
+  margin-top: -20px;
+  margin-bottom: 5px;
+  padding-top: 0px;
+  font-family: var(--normalText);
+  font-size: 30px;
+}
+
+.scrollableTable {
+overflow: auto;
+}
+
+.tableDescription {
+text-align: left;
+}
+
+/* Happy Eater Egg Hunting! */
+.whte_rbt_obj {
+text-decoration: none;
+color: white;
+}
+
+/* Small Screen Settings */
+@media (max-device-width: 780px) {
+
+h1 {
+  font-size: 40px;
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+  font-family: var(--jpFont);
+  font-weight: normal;
+}
+
+.headerP {
+  margin-top: -10px;
+  font-size: 25px;
+}
+
+h2 {
+  font-size: 50px;
+}
+
+h3 {
+  font-size: 18px; 
+  font-weight: bold;
+  margin-bottom: 0;
+}
+
+p {
+  font-size: 14px; 
+}
+
+nav a {
+  font-size: 24px;
+  padding-left: 1px;
+  padding-right: 1px;
+  border: outset var(--parkYellowDim) 2px;
+}
+
+nav a:hover {       
+  background-color: black;
+  color: white;
+  border: ridge gold 2px;
+  text-decoration: none;
+}
+  
+nav a:focus {
+  background-color: black;
+  color: white;
+  border: solid gold 2px;
+  outline: none;
+}
+}
