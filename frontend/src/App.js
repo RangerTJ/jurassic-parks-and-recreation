@@ -44,6 +44,21 @@ function App() {
   };
 
   // UPDATE - WILL NOT SELF REFRESH EVER FOR SOME REASON
+  // Maybe try await fetch/response instead of .then?
+  // See example of how I handled deletes in 290
+      // Delete one character sheet
+    //   const deleteCharacter = async _id => {
+    //     const response = await fetch(`/log/${_id}`, {method: 'DELETE'});
+    //     if (response.status === 204) {
+    //         const response = await fetch('/log');
+    //         const chars = await response.json();
+    //         setCharacters(chars)
+    //     } else {
+    //         console.error(`Status Code ${response.status}: Character ID #${_id} could not be found, so their character sheet was not deleted.`)
+    //     };
+    // };
+
+
   const updateTaskCategory = (idTaskCategory) => {
     Axios.put(`http://localhost:3001/api/update`, {
       idTaskCategory: idTaskCategory,
