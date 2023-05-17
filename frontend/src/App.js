@@ -60,6 +60,9 @@ function App() {
 
     // Or maybe related to the element calling the table re-rendinger being an element within the table itself?
 
+    // This seems close
+    // https://stackoverflow.com/questions/65761762/then-promise-not-working-within-axios-delete-request-in-react-application
+
 
   const updateTaskCategory = (idTaskCategory) => {
     Axios.put(`http://localhost:3001/api/update`, {
