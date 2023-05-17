@@ -32,12 +32,15 @@ function App() {
   // so it can execute immediately, while the other two rely on variable returns first. So maybe we need to make them async to make it work;
   // they might be updating the table before they get stuff from the server (when it's the same). But .then should handle that so.... Ugh.
 
+  // For some reason trying to clear text with .then(()=> {setCategoryName("")}); results in an error about reading data in my tries
+  // Or maybe something like this? https://stackoverflow.com/questions/14837466/clearing-a-text-field-on-button-click
+
   // CREATE
   const submitNewTaskCategory = () => {
     Axios.post('http://localhost:3001/api/insert', {
         categoryName: categoryName
     }).then(() => {Axios.get('http://localhost:3001/api/get')
-      .then((response)=> {setTaskCategoryList(response.data);
+      .then((response)=> {setTaskCategoryList(response.data)
         console.log(response.data);
       });
     });
