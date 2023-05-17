@@ -24,28 +24,42 @@ function App() {
     })
   }, [])
   
-  // CREATE - CURRENTLY DOES NOT UPDATE ID'S/NON-MANUAL VALUES UNTIL PAGE REFRESH - HOW TO FIX???
+  // CREATE
   const submitNewTaskCategory = () => {
     Axios.post('http://localhost:3001/api/insert', {
         categoryName: categoryName
-    }).then(() => 
-    {
-        setTaskCategoryList([...taskCategoryList, {categoryName: categoryName}])
+    }).then(() => {
+        Axios.get('http://localhost:3001/api/get')
+        .then((response) => {
+        setTaskCategoryList(response.data);
+        });
     });
   };
 
-  // UPDATE - MAY NEED TO FIGURE OUT HOW TO GET ID IN HERE
+  // UPDATE - WILL NOT SELF REFRESH EVER FOR SOME REASON
   const updateTaskCategory = (idTaskCategory, categoryName) => {
     Axios.put(`http://localhost:3001/api/update`, {
-        idTaskCategory: idTaskCategory,
-        categoryName: newTaskCategory,
+      idTaskCategory: idTaskCategory,
+      categoryName: newTaskCategory,
+    }).then(() => {
+      setNewTaskCategory(""); // Reset to empty string after done
+      Axios.get(`http://localhost:3001/api/get`)
+        .then((response) => {
+          setTaskCategoryList(response.data);
+          console.log(response.data);
+        });
     });
-    setNewTaskCategory("")  // Reset to empty string after done
   };
 
   // DELETE - CURRENTLY REQUIRES PAGE REFRESH TO SHOW DELETE HAPPENED
   const delTaskCategory = (delCategory) => {
-    Axios.delete(`http://localhost:3001/api/delete/${delCategory}`);
+    Axios.delete(`http://localhost:3001/api/delete/${delCategory}`)
+    .then(() => {
+        Axios.get('http://localhost:3001/api/get')
+        .then((response) => {
+        setTaskCategoryList(response.data);
+        });
+    });
   };
 
   return (
