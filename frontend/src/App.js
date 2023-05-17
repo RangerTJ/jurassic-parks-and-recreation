@@ -10,22 +10,42 @@ function App() {
   const [categoryName, setCategoryName] = useState('')
   const [taskCategoryList, setTaskCategoryList] = useState([])
 
-  // Examples from tutorial that sends post request to back end from form
+  const [newTaskCategory, setNewTaskCategory] = useState('')
+  
+
+  // Examples modeled from tutorial that sends post request to back end from form
   // Alert not currently working for some reason
 
+  // READ
   useEffect(()=> {
     Axios.get('http://localhost:3001/api/get').then((response)=> {
         setTaskCategoryList(response.data)
         console.log(response.data)
     })
   }, [])
-
+  
+  // CREATE - CURRENTLY DOES NOT UPDATE ID'S/NON-MANUAL VALUES UNTIL PAGE REFRESH - HOW TO FIX???
   const submitNewTaskCategory = () => {
     Axios.post('http://localhost:3001/api/insert', {
         categoryName: categoryName
     }).then(() => 
-        {alert("Successful insert! Probably.");
+    {
+        setTaskCategoryList([...taskCategoryList, {categoryName: categoryName}])
     });
+  };
+
+  // UPDATE - MAY NEED TO FIGURE OUT HOW TO GET ID IN HERE
+  const updateTaskCategory = (idTaskCategory, categoryName) => {
+    Axios.put(`http://localhost:3001/api/update`, {
+        idTaskCategory: idTaskCategory,
+        categoryName: newTaskCategory,
+    });
+    setNewTaskCategory("")  // Reset to empty string after done
+  };
+
+  // DELETE - CURRENTLY REQUIRES PAGE REFRESH TO SHOW DELETE HAPPENED
+  const delTaskCategory = (delCategory) => {
+    Axios.delete(`http://localhost:3001/api/delete/${delCategory}`);
   };
 
   return (
@@ -59,7 +79,7 @@ function App() {
                     <input type="text" name="inputName" onChange={(e) => {
                         setCategoryName(e.target.value)
                     }}/>
-                    <div><button onClick={submitNewTaskCategory}>Test Insert Task Category</button></div>
+                    <p><button onClick={submitNewTaskCategory}>Test Insert Task Category</button></p>
 
                     {/* Dynamic Table Alpha Version Test*/}
                     <div className="scrollableTable">
@@ -67,12 +87,19 @@ function App() {
                             <tr>
                                 <th>ID</th>
                                 <th>Category</th>
+                                <th>Update</th>
+                                <th>Delete</th>
                             </tr>
                             {taskCategoryList.map((val)=> {
                             return (
                                 <tr>
                                     <td>{val.idTaskCategory}</td>
                                     <td>{val.categoryName}</td>
+                                    <td width="100px">
+                                        <input type="text" onChange={(e)=> {setNewTaskCategory(e.target.value)}}></input>
+                                        <button onClick={()=> {updateTaskCategory(val.idTaskCategory, val.categoryName)}}>Update</button>
+                                    </td>
+                                    <td width="100px"><button onClick={()=> {delTaskCategory(val.idTaskCategory)}}>Delete</button></td>
                                 </tr>)
                         })}
                         </table>

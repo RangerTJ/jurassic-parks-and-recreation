@@ -43,8 +43,30 @@ app.get('/api/get', (req, res) =>{
 });
 
 // UPDATE
+app.put('/api/update', (req, res) =>{
+    const idTaskCategory = req.body.idTaskCategory
+    const categoryName = req.body.categoryName
+    console.log(categoryName);
+    const sqlTaskCategoryUpdate = `
+    UPDATE TaskCategories
+    SET     categoryName = ?
+    WHERE idTaskCategory = ?;`;
+    db.query(sqlTaskCategoryUpdate, [categoryName, idTaskCategory], (err, result)=> {
+        if (err) console.log(err); else console.log(result);
+    });
+});
 
 // DELETE
+app.delete('/api/delete/:idTaskCategory', (req, res) =>{
+    const idTaskCategory = req.params.idTaskCategory
+    const sqlTaskCategoryDelete = `
+    DELETE
+    FROM TaskCategories
+    WHERE idTaskCategory = ?`;
+    db.query(sqlTaskCategoryDelete, idTaskCategory, (err, result)=> {
+        if (err) console.log(err);
+    });
+});
 
 // DELETE FROM FINAL DRAFT - 
 // Test Connection to the MySQL server
