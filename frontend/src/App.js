@@ -76,6 +76,7 @@ function App() {
   // DELETE - CURRENTLY REQUIRES PAGE REFRESH TO SHOW DELETE HAPPENED
   const delTaskCategory = (delCategory) => {
     Axios.delete(`http://localhost:3001/api/delete/${delCategory}`)
+    // Deleting everything below this point seems to make no difference... so possibly issue with the promise or what precedes it?
       .then(() => {Axios.get('http://localhost:3001/api/get')
       .then((response) => {setTaskCategoryList(response.data);
         console.log(response.data);
