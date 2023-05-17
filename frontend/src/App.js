@@ -24,7 +24,7 @@ function App() {
   // Examples modeled from tutorial that sends post request to back end from form
   // Alert not currently working for some reason
 
-  // READ
+  // READ Task Categories
   useEffect(()=> {
     Axios.get(getTaskCategoryURL).then((response)=> {
         setTaskCategoryList(response.data)
