@@ -58,6 +58,8 @@ function App() {
     //     };
     // };
 
+    // Or maybe related to the element calling the table re-rendinger being an element within the table itself?
+
 
   const updateTaskCategory = (idTaskCategory) => {
     Axios.put(`http://localhost:3001/api/update`, {
