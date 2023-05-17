@@ -43,43 +43,22 @@ function App() {
     });
   };
 
-  // UPDATE - WILL NOT SELF REFRESH EVER FOR SOME REASON
-  // Maybe try await fetch/response instead of .then?
-  // See example of how I handled deletes in 290
-      // Delete one character sheet
-    //   const deleteCharacter = async _id => {
-    //     const response = await fetch(`/log/${_id}`, {method: 'DELETE'});
-    //     if (response.status === 204) {
-    //         const response = await fetch('/log');
-    //         const chars = await response.json();
-    //         setCharacters(chars)
-    //     } else {
-    //         console.error(`Status Code ${response.status}: Character ID #${_id} could not be found, so their character sheet was not deleted.`)
-    //     };
-    // };
+  // UPDATE - Apparently needed to RETURN the Axios get for it to work for some reason
+    const updateTaskCategory = (idTaskCategory) => {
+      Axios.put(`http://localhost:3001/api/update`, {
+        idTaskCategory: idTaskCategory,
+        categoryName: newTaskCategory
+      })
+          .then(() => {return Axios.get(`http://localhost:3001/api/get`);})
+          .then((response) => {
+            setTaskCategoryList(response.data);
+            console.log(response.data);
+        }
+    )};
 
-    // Or maybe related to the element calling the table re-rendinger being an element within the table itself?
-
-    // This seems close
-    // https://stackoverflow.com/questions/65761762/then-promise-not-working-within-axios-delete-request-in-react-application
-
-
-  const updateTaskCategory = (idTaskCategory) => {
-    Axios.put(`http://localhost:3001/api/update`, {
-      idTaskCategory: idTaskCategory,
-      categoryName: newTaskCategory
-      // Deleting everything below this point seems to make no difference... so possibly issue with the promise or what precedes it?
-    }).then(()=> {setNewTaskCategory("")})
-      .then(()=> {Axios.get(`http://localhost:3001/api/get`)})
-      .then((response)=> {setTaskCategoryList(response.data);
-        console.log(response.data);
-    });
-  };
-
-  // DELETE - CURRENTLY REQUIRES PAGE REFRESH TO SHOW DELETE HAPPENED
+  // DELETE - Apparently sending a response from server fixed it so it refreshes automatically
   const delTaskCategory = (delCategory) => {
     Axios.delete(`http://localhost:3001/api/delete/${delCategory}`)
-    // Deleting everything below this point seems to make no difference... so possibly issue with the promise or what precedes it?
       .then(() => {Axios.get('http://localhost:3001/api/get')
       .then((response) => {setTaskCategoryList(response.data);
         console.log(response.data);

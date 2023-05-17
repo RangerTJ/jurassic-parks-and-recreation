@@ -53,6 +53,7 @@ app.put('/api/update', (req, res) =>{
     WHERE idTaskCategory = ?;`;
     db.query(sqlTaskCategoryUpdate, [categoryName, idTaskCategory], (err, result)=> {
         if (err) console.log(err); else console.log(result);
+        res.send(result);
     });
 });
 
@@ -65,6 +66,7 @@ app.delete('/api/delete/:idTaskCategory', (req, res) =>{
     WHERE idTaskCategory = ?`;
     db.query(sqlTaskCategoryDelete, idTaskCategory, (err, result)=> {
         if (err) console.log(err);
+        res.send(result);
     });
 });
 
