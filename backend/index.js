@@ -79,6 +79,6 @@ db.connect((err) => {
 
 
 
-app.listen(3001, () => {
-    console.log('running on port 3001');
+app.listen(process.env.PORT, () => {
+    console.log(`running on port ${process.env.PORT}`);
 });
