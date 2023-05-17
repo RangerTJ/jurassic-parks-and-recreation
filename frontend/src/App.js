@@ -34,6 +34,7 @@ function App() {
 
   // For some reason trying to clear text with .then(()=> {setCategoryName("")}); results in an error about reading data in my tries
   // Or maybe something like this? https://stackoverflow.com/questions/14837466/clearing-a-text-field-on-button-click
+  // https://www.freecodecamp.org/news/how-to-clear-input-values-of-dynamic-form-in-react/ TO READ
 
   // CREATE
   const submitNewTaskCategory = () => {
