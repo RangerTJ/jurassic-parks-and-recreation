@@ -6,11 +6,19 @@ import React, { useEffect, useState } from "react";
 import './App.css';
 import Axios from 'axios';
 
+// Sampling of Dynamic Host/Server Paths for Easy Edits
+const hostURL = 'http://localhost:3001';
+const getTaskCategoryURL = hostURL + '/api/get';
+const createTaskCategoryURL = hostURL + '/api/insert';
+const updateTaskCategoryURL = hostURL + '/api/update';
+const deleteTaskCategoryURL = hostURL + '/api/delete/';
+
 function App() {
+  // Task Category useStates
   const [categoryName, setCategoryName] = useState('')
+  const [newTaskCategory, setNewTaskCategory] = useState('')
   const [taskCategoryList, setTaskCategoryList] = useState([])
 
-  const [newTaskCategory, setNewTaskCategory] = useState('')
   
 
   // Examples modeled from tutorial that sends post request to back end from form
@@ -18,7 +26,7 @@ function App() {
 
   // READ
   useEffect(()=> {
-    Axios.get('http://localhost:3001/api/get').then((response)=> {
+    Axios.get(getTaskCategoryURL).then((response)=> {
         setTaskCategoryList(response.data)
         console.log(response.data)
     })
@@ -38,9 +46,9 @@ function App() {
 
   // CREATE
   const submitNewTaskCategory = () => {
-    Axios.post('http://localhost:3001/api/insert', {
+    Axios.post(createTaskCategoryURL, {
         categoryName: categoryName
-    }).then(() => {Axios.get('http://localhost:3001/api/get')
+    }).then(() => {Axios.get(getTaskCategoryURL)
       .then((response)=> {setTaskCategoryList(response.data)
         console.log(response.data);
       });
@@ -49,11 +57,11 @@ function App() {
 
   // UPDATE - Apparently needed to RETURN the Axios get for it to work for some reason
     const updateTaskCategory = (idTaskCategory) => {
-      Axios.put(`http://localhost:3001/api/update`, {
+      Axios.put(updateTaskCategoryURL, {
         idTaskCategory: idTaskCategory,
         categoryName: newTaskCategory
       })
-          .then(() => {return Axios.get(`http://localhost:3001/api/get`);})
+          .then(() => {return Axios.get(getTaskCategoryURL);})
           .then((response) => {
             setTaskCategoryList(response.data);
             console.log(response.data);
@@ -62,8 +70,8 @@ function App() {
 
   // DELETE - Apparently sending a response from server fixed it so it refreshes automatically
   const delTaskCategory = (delCategory) => {
-    Axios.delete(`http://localhost:3001/api/delete/${delCategory}`)
-      .then(() => {Axios.get('http://localhost:3001/api/get')
+    Axios.delete(deleteTaskCategoryURL + delCategory)
+      .then(() => {Axios.get(getTaskCategoryURL)
       .then((response) => {setTaskCategoryList(response.data);
         console.log(response.data);
         });
