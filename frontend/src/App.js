@@ -24,6 +24,11 @@ function App() {
     })
   }, [])
   
+  // ... if we have separate pages forms for UPDATE/ADD we can not even bother, since a page refresh will happen anyways.
+  // Which still leaves trying to figure out why delete doesn't work.
+  // Possibly UI idea to avoid multiple pages: Use cards, and have editable fields beneath each entry, and update inputs new values
+  // Might have to do with the return in the body... may only do once at page load... how to redo it? Why does it seem to load again for INSERT?
+
   // CREATE
   const submitNewTaskCategory = () => {
     Axios.post('http://localhost:3001/api/insert', {
@@ -37,7 +42,7 @@ function App() {
   };
 
   // UPDATE - WILL NOT SELF REFRESH EVER FOR SOME REASON
-  const updateTaskCategory = (idTaskCategory, categoryName) => {
+  const updateTaskCategory = (idTaskCategory) => {
     Axios.put(`http://localhost:3001/api/update`, {
       idTaskCategory: idTaskCategory,
       categoryName: newTaskCategory,
@@ -90,7 +95,7 @@ function App() {
             <article>
                 <h3>INSERT Test + READ from Task Categories</h3>
                     {/* Example From Tutorial */}
-                    <input type="text" name="inputName" onChange={(e) => {
+                    <input type="text" name="inputCategory" onChange={(e) => {
                         setCategoryName(e.target.value)
                     }}/>
                     <p><button onClick={submitNewTaskCategory}>Test Insert Task Category</button></p>
