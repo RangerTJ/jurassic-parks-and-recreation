@@ -64,7 +64,8 @@ function App() {
   const updateTaskCategory = (idTaskCategory) => {
     Axios.put(`http://localhost:3001/api/update`, {
       idTaskCategory: idTaskCategory,
-      categoryName: newTaskCategory,
+      categoryName: newTaskCategory
+      // Deleting everything below this point seems to make no difference... so possibly issue with the promise or what precedes it?
     }).then(()=> {setNewTaskCategory("")})
       .then(()=> {Axios.get(`http://localhost:3001/api/get`)})
       .then((response)=> {setTaskCategoryList(response.data);
