@@ -36,11 +36,10 @@ function App() {
   const submitNewTaskCategory = () => {
     Axios.post('http://localhost:3001/api/insert', {
         categoryName: categoryName
-    }).then(() => {
-        Axios.get('http://localhost:3001/api/get')
-        .then((response) => {
-        setTaskCategoryList(response.data);
-        });
+    }).then(() => {Axios.get('http://localhost:3001/api/get')
+      .then((response)=> {setTaskCategoryList(response.data);
+        console.log(response.data);
+      });
     });
   };
 
@@ -49,23 +48,19 @@ function App() {
     Axios.put(`http://localhost:3001/api/update`, {
       idTaskCategory: idTaskCategory,
       categoryName: newTaskCategory,
-    }).then(() => {
-      setNewTaskCategory(""); // Reset to empty string after done
-      Axios.get(`http://localhost:3001/api/get`)
-        .then((response) => {
-          setTaskCategoryList(response.data);
-          console.log(response.data);
-        });
+    }).then(()=> {setNewTaskCategory("")})
+      .then(()=> {Axios.get(`http://localhost:3001/api/get`)})
+      .then((response)=> {setTaskCategoryList(response.data);
+        console.log(response.data);
     });
   };
 
   // DELETE - CURRENTLY REQUIRES PAGE REFRESH TO SHOW DELETE HAPPENED
   const delTaskCategory = (delCategory) => {
     Axios.delete(`http://localhost:3001/api/delete/${delCategory}`)
-    .then(() => {
-        Axios.get('http://localhost:3001/api/get')
-        .then((response) => {
-        setTaskCategoryList(response.data);
+      .then(() => {Axios.get('http://localhost:3001/api/get')
+      .then((response) => {setTaskCategoryList(response.data);
+        console.log(response.data);
         });
     });
   };
