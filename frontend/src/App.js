@@ -28,6 +28,9 @@ function App() {
   // Which still leaves trying to figure out why delete doesn't work.
   // Possibly UI idea to avoid multiple pages: Use cards, and have editable fields beneath each entry, and update inputs new values
   // Might have to do with the return in the body... may only do once at page load... how to redo it? Why does it seem to load again for INSERT?
+  // Troubleshooting with chatGPT (which seems kinda clueless on this). It *might* have to do with the fact that create doesn't call any variables,
+  // so it can execute immediately, while the other two rely on variable returns first. So maybe we need to make them async to make it work;
+  // they might be updating the table before they get stuff from the server (when it's the same). But .then should handle that so.... Ugh.
 
   // CREATE
   const submitNewTaskCategory = () => {
