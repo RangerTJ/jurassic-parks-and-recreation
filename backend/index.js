@@ -29,7 +29,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 // READ PARK COSTS - Select
 app.get('/api/getParkCost', (req, res) =>{
-    const sqlTaskCategoryRead = `
+    const sqlRead = `
     SELECT  Parks.parkName, SUM(EmployeeTasks.empTaskCost) AS parkCost
     FROM TaskCategories
     LEFT JOIN EmployeeTasks ON TaskCategories.idTaskCategory = EmployeeTasks.idTaskCategory
@@ -39,7 +39,7 @@ app.get('/api/getParkCost', (req, res) =>{
     GROUP BY Parks.parkName
     ORDER BY ParkCost DESC;
     `;
-    db.query(sqlTaskCategoryRead, (err, result)=> {
+    db.query(sqlRead, (err, result)=> {
         console.log(result);
         res.send(result);
     });
@@ -47,14 +47,14 @@ app.get('/api/getParkCost', (req, res) =>{
 
 // READ CATEGORY COSTS - Select
 app.get('/api/getCategoryCost', (req, res) =>{
-    const sqlTaskCategoryRead = `
+    const sqlRead = `
     SELECT  TaskCategories.categoryName, SUM(EmployeeTasks.empTaskCost) AS taskTypeCost
     FROM TaskCategories
     LEFT JOIN EmployeeTasks ON TaskCategories.idTaskCategory = EmployeeTasks.idTaskCategory
     GROUP BY TaskCategories.categoryName
     ORDER BY TaskTypeCost DESC;
     `;
-    db.query(sqlTaskCategoryRead, (err, result)=> {
+    db.query(sqlRead, (err, result)=> {
         console.log(result);
         res.send(result);
     });
@@ -66,14 +66,14 @@ app.get('/api/getCategoryCost', (req, res) =>{
 
 // READ List All Assets
 app.get('/api/getBiologicalAssets', (req, res) =>{
-    const sqlTaskCategoryRead = `
+    const sqlRead = `
     SELECT BiologicalAssets.idBiologicalAsset, BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName 
     FROM BiologicalAssets
     JOIN Species ON BiologicalAssets.idSpecies = Species.idSpecies
     JOIN Facilities ON BiologicalAssets.idFacility = Facilities.idFacility
     ORDER BY idBiologicalAsset ASC;
     `;
-    db.query(sqlTaskCategoryRead, (err, result)=> {
+    db.query(sqlRead, (err, result)=> {
         console.log(result);
         res.send(result);
     });
@@ -81,7 +81,7 @@ app.get('/api/getBiologicalAssets', (req, res) =>{
 
 // READ Habitat Alert
 app.get('/api/checkBiologicalAssetsHabitats', (req, res) =>{
-    const sqlTaskCategoryRead = `
+    const sqlRead = `
     SELECT BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName AS currentWrongHome, currentHab.habitatName AS currentHabitat, speciesHab.habitatName AS needsHabitat
     FROM BiologicalAssets
     JOIN Species ON BiologicalAssets.idSpecies = Species.idSpecies
@@ -91,7 +91,7 @@ app.get('/api/checkBiologicalAssetsHabitats', (req, res) =>{
     WHERE Species.idHabitat != Facilities.idHabitat OR Facilities.idHabitat IS NULL
     ORDER BY facilityName, speciesName, bioAssetName;
     `;
-    db.query(sqlTaskCategoryRead, (err, result)=> {
+    db.query(sqlRead, (err, result)=> {
         console.log(result);
         res.send(result);
     });
@@ -99,7 +99,7 @@ app.get('/api/checkBiologicalAssetsHabitats', (req, res) =>{
 
 // READ Security Alert
 app.get('/api/checkBiologicalAssetsSecurity', (req, res) =>{
-    const sqlTaskCategoryRead = `
+    const sqlRead = `
     SELECT BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName, Facilities.securityRating, Species.threatLevel, Species.threatLevel - Facilities.securityRating AS severity
     FROM BiologicalAssets
     JOIN Species on BiologicalAssets.idSpecies = Species.idSpecies
@@ -107,20 +107,39 @@ app.get('/api/checkBiologicalAssetsSecurity', (req, res) =>{
     WHERE Facilities.securityRating < Species.threatLevel
     ORDER BY severity, facilities.facilityName, BiologicalAssets.bioAssetName;
     `;
-    db.query(sqlTaskCategoryRead, (err, result)=> {
+    db.query(sqlRead, (err, result)=> {
         console.log(result);
         res.send(result);
     });
 });
 
+// CREATE Biological Asset
+app.post('/api/insertBiologicalAssets', (req, res) =>{
+    const speciesName = req.body.speciesName
+    const facilityName = req.body.facilityName
+    const bioAssetName = req.body.bioAssetName
+    const sqlInsert = `
+    INSERT INTO BiologicalAssets    (idSpecies, idFacility, bioAssetName)
+    VALUES (
+                    (SELECT idSpecies FROM Species WHERE speciesName = ?),
+                    (SELECT idFacility FROM Facilities WHERE facilityName = ?),
+                    ?
+            );
+    `;
+    db.query(sqlInsert, [speciesName, facilityName, bioAssetName], (err, result)=> {
+        console.log(result);
+        res.send(result);
+    })
+})
+
 // DELETE Biological Asset
 app.delete('/api/deleteBiologicalAssets/:idBiologicalAsset', (req, res) =>{
     const idBiologicalAsset = req.params.idBiologicalAsset
-    const sqlBiologicalAssetDelete = `
+    const sqlDelete = `
     DELETE
     FROM BiologicalAssets
     WHERE idBiologicalAsset = ?`;
-    db.query(sqlBiologicalAssetDelete, idBiologicalAsset, (err, result)=> {
+    db.query(sqlDelete, idBiologicalAsset, (err, result)=> {
         if (err) console.log(err);
         res.send(result);
     });
@@ -134,8 +153,8 @@ app.delete('/api/deleteBiologicalAssets/:idBiologicalAsset', (req, res) =>{
 // CREATE TASK CATEGORIES - Post message to browser after doing a test insert (based on tutorial example)
 app.post('/api/insertTaskCategories', (req, res) =>{
     const categoryName = req.body.categoryName
-    const sqlTaskCategoryInsert = "INSERT INTO `TaskCategories` (categoryName) VALUES (?);";
-    db.query(sqlTaskCategoryInsert, [categoryName], (err, result)=> {
+    const sqlInsert = "INSERT INTO `TaskCategories` (categoryName) VALUES (?);";
+    db.query(sqlInsert, [categoryName], (err, result)=> {
         console.log(result);
         res.send(result);
     })
@@ -143,8 +162,8 @@ app.post('/api/insertTaskCategories', (req, res) =>{
 
 // READ TASK CATEGORIES - Select
 app.get('/api/getTaskCategories', (req, res) =>{
-    const sqlTaskCategoryRead = "SELECT * FROM `TaskCategories`;";
-    db.query(sqlTaskCategoryRead, (err, result)=> {
+    const sqlRead = "SELECT * FROM `TaskCategories`;";
+    db.query(sqlRead, (err, result)=> {
         console.log(result);
         res.send(result);
     });
@@ -155,11 +174,11 @@ app.put('/api/updateTaskCategories', (req, res) =>{
     const idTaskCategory = req.body.idTaskCategory
     const categoryName = req.body.categoryName
     console.log(categoryName);
-    const sqlTaskCategoryUpdate = `
+    const sqlUpdate = `
     UPDATE TaskCategories
     SET     categoryName = ?
     WHERE idTaskCategory = ?;`;
-    db.query(sqlTaskCategoryUpdate, [categoryName, idTaskCategory], (err, result)=> {
+    db.query(sqlUpdate, [categoryName, idTaskCategory], (err, result)=> {
         if (err) console.log(err); else console.log(result);
         res.send(result);
     });
@@ -168,11 +187,11 @@ app.put('/api/updateTaskCategories', (req, res) =>{
 // DELETE TASK CATEGORIES
 app.delete('/api/deleteTaskCategories/:idTaskCategory', (req, res) =>{
     const idTaskCategory = req.params.idTaskCategory
-    const sqlTaskCategoryDelete = `
+    const sqlDelete = `
     DELETE
     FROM TaskCategories
     WHERE idTaskCategory = ?`;
-    db.query(sqlTaskCategoryDelete, idTaskCategory, (err, result)=> {
+    db.query(sqlDelete, idTaskCategory, (err, result)=> {
         if (err) console.log(err);
         res.send(result);
     });
