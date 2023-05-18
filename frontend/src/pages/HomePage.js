@@ -61,10 +61,12 @@ function HomePage() {
                             <th>Cost</th>
                         </tr>
                         {categoryCostList.map((val)=> {
+                            // Convert cost to USD or set to 0 USD if there is a null entry
+                            const usdCategoryCost = val.taskTypeCost ? val.taskTypeCost.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) : '$0.00';
                             return (
                                 <tr>
                                     <td>{val.categoryName}</td>
-                                    <td>{val.taskTypeCost}</td>
+                                    <td>{usdCategoryCost}</td>
                                 </tr>
                             )
                         })}
@@ -78,10 +80,12 @@ function HomePage() {
                             <th>Cost</th>
                         </tr>
                         {parkCostList.map((val)=> {
+                            // Convert cost to USD or set to 0 USD if there is a null entry
+                            const usdParkCost = val.parkCost ? val.parkCost.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) : '$0.00';
                             return (
                                 <tr>
                                     <td>{val.parkName}</td>
-                                    <td>{val.parkCost}</td>
+                                    <td>{usdParkCost}</td>
                                 </tr>
                             )
                         })}
