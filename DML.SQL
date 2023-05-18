@@ -403,7 +403,7 @@ WHERE idSpecies = :idSpecies_input
 -- ----------------
 
 -- SELECT - Cost Analysis Report by Task Category
-SELECT  TaskCategories.categoryName, SUM(EmployeeTasks.empTaskCost) AS TaskTypeCost
+SELECT  TaskCategories.categoryName, SUM(EmployeeTasks.empTaskCost) AS taskTypeCost
 FROM TaskCategories
 -- Need to JOIN TaskCategories -> EmployeeTasks
 LEFT JOIN EmployeeTasks ON TaskCategories.idTaskCategory = EmployeeTasks.idTaskCategory
@@ -411,7 +411,7 @@ GROUP BY TaskCategories.categoryName
 ORDER BY TaskTypeCost DESC;
 
 -- SELECT - Cost Analysis Report by Park
-SELECT  Parks.parkName, SUM(EmployeeTasks.empTaskCost) AS ParkCost
+SELECT  Parks.parkName, SUM(EmployeeTasks.empTaskCost) AS parkCost
 FROM TaskCategories
 -- Need to JOIN TaskCategories -> EmployeeTasks -> TasksAssigned -> Facilities -> Parks
 LEFT JOIN EmployeeTasks ON TaskCategories.idTaskCategory = EmployeeTasks.idTaskCategory
@@ -433,13 +433,22 @@ WHERE Species.idHabitat != Facilities.idHabitat OR Facilities.idHabitat IS NULL
 ORDER BY facilityName, speciesName, bioAssetName;
 
 -- SELECT biological assets that are not adequately secured (and indicates how bad it is with a severity rating from 1-9)
-SELECT BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName, Facilities.securityRating, Species.threatLevel - Facilities.securityRating AS severity
+SELECT BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName, Facilities.securityRating, Species.threatLevel, Species.threatLevel - Facilities.securityRating AS severity
 FROM BiologicalAssets
 -- Need to JOIN BioAssets -> Species -> Facilities
 JOIN Species on BiologicalAssets.idSpecies = Species.idSpecies
 JOIN Facilities on BiologicalAssets.idFacility = Facilities.idFacility
 WHERE Facilities.securityRating < Species.threatLevel
 ORDER BY severity, facilities.facilityName, BiologicalAssets.bioAssetName;
+
+-- SELECT BiologicalAssets / FILTER for Species
+SELECT BiologicalAssets.idBiologicalAsset, BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName 
+FROM BiologicalAssets
+-- Need to join Species -> BiologicalAssets -> Facilities
+JOIN Species ON BiologicalAssets.idSpecies = Species.idSpecies
+JOIN Facilities ON BiologicalAssets.idFacility = Facilities.idFacility
+WHERE Species.speciesName = :speciesName_input
+ORDER BY idBiologicalAsset ASC;
 
 
 -- -------------
@@ -457,7 +466,7 @@ WHERE Facilities.idHabitat = Species.idHabitat AND Facilities.securityRating >= 
 ORDER BY Facilities.facilityName ASC;
 
 -- SEARCH / Select Query - Cost Analysis for a Specific Input Park
-SELECT  TaskCategories.categoryName, SUM(EmployeeTasks.empTaskCost) AS TaskTypeCost
+SELECT  TaskCategories.categoryName, SUM(EmployeeTasks.empTaskCost) AS taskTypeCost
 FROM TaskCategories
 -- Need to JOIN TaskCategories -> EmployeeTasks -> TasksAssigned -> Facilities -> Parks
 LEFT JOIN EmployeeTasks ON TaskCategories.idTaskCategory = EmployeeTasks.idTaskCategory
