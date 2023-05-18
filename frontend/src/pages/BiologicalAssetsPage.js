@@ -33,7 +33,6 @@ function BiologicalAssetsPage ({hostURL}) {
             })
         }, [])
 
-
     // READ Asset Habitat Alerts
     useEffect(()=> {
     Axios.get(checkBiologicalAssetsHabitatsURL).then((response)=> {
