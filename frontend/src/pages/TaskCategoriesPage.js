@@ -2,14 +2,15 @@ import React, { useEffect, useState } from "react";
 import { Link } from 'react-router-dom'; // May not need?
 import Axios from 'axios';
 
-// TaskCategories SQL Endpoints
-const hostURL = 'http://localhost:3001';  // Apparently I need to pass this as a prop or something?
-const getTaskCategoriesURL = hostURL + '/api/getTaskCategories';
-const createTaskCategoriesURL = hostURL + '/api/insertTaskCategories';
-const updateTaskCategoriesURL = hostURL + '/api/updateTaskCategories';
-const deleteTaskCategoriesURL = hostURL + '/api/deleteTaskCategories/';
 
-function TaskCategoryPage() {
+// HostURL Passed from App.js
+function TaskCategoryPage({hostURL}) {
+
+    // TaskCategories SQL Endpoints
+    const getTaskCategoriesURL = hostURL + '/api/getTaskCategories';
+    const createTaskCategoriesURL = hostURL + '/api/insertTaskCategories';
+    const updateTaskCategoriesURL = hostURL + '/api/updateTaskCategories';
+    const deleteTaskCategoriesURL = hostURL + '/api/deleteTaskCategories/';
 
     // Task Category useStates
     const [categoryName, setCategoryName] = useState('')
