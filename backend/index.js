@@ -113,6 +113,19 @@ app.get('/api/checkBiologicalAssetsSecurity', (req, res) =>{
     });
 });
 
+// DELETE Biological Asset
+app.delete('/api/deleteBiologicalAssets/:idBiologicalAsset', (req, res) =>{
+    const idBiologicalAsset = req.params.idBiologicalAsset
+    const sqlBiologicalAssetDelete = `
+    DELETE
+    FROM BiologicalAssets
+    WHERE idBiologicalAsset = ?`;
+    db.query(sqlBiologicalAssetDelete, idBiologicalAsset, (err, result)=> {
+        if (err) console.log(err);
+        res.send(result);
+    });
+});
+
 
 ///////////////////////////
 // TASK CATEGORY QUERIES //
