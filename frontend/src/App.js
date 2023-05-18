@@ -3,8 +3,14 @@
 // Video does this too
 
 import React, { useEffect, useState } from "react";
-import './App.css';
 import Axios from 'axios';
+import './App.css';
+
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import nav from "./components/nav";
+
+// import dinoHome from "./pages/home"; ... needs router dom stuff?
+
 
 // Sampling of Dynamic Host/Server Paths for Easy Edits
 const hostURL = 'http://localhost:3001';
@@ -82,7 +88,7 @@ const updateJobClassificationsURL = hostURL + '/api/updateJobClassifications';
 const JobClassificationsURL = hostURL + '/api/deleteJobClassifications/';
 
 
-// Primary Application Function
+// React Application
 
 function App() {
   // Task Category useStates
@@ -90,10 +96,7 @@ function App() {
   const [newTaskCategory, setNewTaskCategory] = useState('')
   const [taskCategoryList, setTaskCategoryList] = useState([])
 
-  
-
-  // Examples modeled from tutorial that sends post request to back end from form
-  // Alert not currently working for some reason
+  // CRUD operations modled off tutorial - CITE IN DETAIL LATER
 
   // READ Task Categories
   useEffect(()=> {
@@ -149,6 +152,7 @@ function App() {
     });
   };
 
+  // HTML Rendering Structure
   return (
     <div className="App">
 
