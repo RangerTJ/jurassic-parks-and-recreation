@@ -1,6 +1,5 @@
-// Importing react with use state
-// https://stackoverflow.com/questions/63705317/usestate-is-not-defined-no-undef-react
-// Video does this too
+// Basic CRUD operations and React implementation was heavily based on the CRUD React tutorial series created by PedroTech
+// URLs - Part1: https://www.youtube.com/watch?v=T8mqZZ0r-RA, Part2: https://www.youtube.com/watch?v=3YrOOia3-mo, Part3: https://www.youtube.com/watch?v=_S2GKnFpdtE
 
 import React, { useEffect, useState } from "react";
 import Axios from 'axios';

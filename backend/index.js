@@ -1,5 +1,5 @@
-// Starter code for express app from tutorial at following url:
-// https://www.youtube.com/embed/T8mqZZ0r-RA?start_radio=1&t=97s&list=RDCMUC8S4rDRZn6Z_StJ-hh7ph8g
+// Basic CRUD operations and React implementation was heavily based on the CRUD React tutorial series created by PedroTech
+// URLs - Part1: https://www.youtube.com/watch?v=T8mqZZ0r-RA, Part2: https://www.youtube.com/watch?v=3YrOOia3-mo, Part3: https://www.youtube.com/watch?v=_S2GKnFpdtE
 
 // .env set up following:
 // https://www.freecodecamp.org/news/how-to-use-node-environment-variables-with-a-dotenv-file-for-node-js-and-npm/
