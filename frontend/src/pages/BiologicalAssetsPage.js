@@ -20,7 +20,6 @@ function BiologicalAssetsPage ({hostURL}) {
 
 
     // Bio Asset Table Functions
-    // CRUD operations modeled off tutorial - CITE IN DETAIL LATER (or top of each page?)
     const [biologicalAssetList, setBiologicalAssetList] = useState([])
     const [assetHabMismatchList, setAssetHabMismatchList] = useState([])
     const [assetSecMismatchList, setAssetSecMismatchList] = useState([])

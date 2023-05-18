@@ -13,8 +13,14 @@ function BiologicalAssetsAddForm ({hostURL}) {
     const createBiologicalAssetsURL = hostURL + '/api/insertBiologicalAssets';
     const navTo = useNavigate();
 
+    // Bio Asset States for the Form (2x arrays for select menus + 3x values to submit)
+    const [speciesList, setspeciesList] = useState([])
+    const [facilityList, setfacilityList] = useState([])
+    const [species, setSpecies] = useState('')
+    const [name, setName] = useState('')
+    const [facility, setFacility] = useState('')
+
     // TO DO: useEffect to get species and facility lists and save them to useState
-    // Use states for everything
     // Map these arrays to respective select boxes (then figure out how to pre-select one and pre-populate for update)
     // Insert function for onClick / mod onClick to insert, then navigate back to bio assets... possible success alert?
 
