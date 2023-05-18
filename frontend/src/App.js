@@ -7,7 +7,8 @@ import Axios from 'axios';
 import './App.css';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import nav from "./components/nav";
+import Nav from "./components/nav";
+import HomePage from "./pages/HomePage";
 
 // import dinoHome from "./pages/home"; ... needs router dom stuff?
 
@@ -152,32 +153,23 @@ function App() {
     });
   };
 
+  // **************************
   // HTML Rendering Structure
   return (
     <div className="App">
-
+      <BrowserRouter>
       <header>
         <h1>Jurassic Parks and Recreation *</h1>
         <p className="headerP">D.I.N.O<a className="whte_rbt_obj" href="https://markhjorth.github.io/nedry/">.</a></p>
       </header>
-      <nav>
-        <a href="index.html" >Home</a>
-        <a href="parks.html" >Parks</a>
-        <a href="facilities.html" >Facilities</a>
-        <a href="biologicalAssets.html" >Biological Assets</a>
-        <a href="employees.html" >Employees</a>
-        <a href="tasksAssigned.html" >Tasks Assigned</a>
-        <a href="employeeTasks.html" >Employee Tasks</a>
-        <a href="taskCategories.html" >Task Categories</a>
-        <a href="species.html" >Species</a>
-        <a href="diets.html" >Diets</a>
-        <a href="habitats.html" >Habitats</a>
-        <a href="facilityTypes.html" >Facility Types</a>
-        <a href="jobClassifications.html" >Job Classifications</a>
-      </nav>
+      <Nav />
       <main>
         <section>
-            <h2>Home</h2>
+            {/* Load different page content here depending on route below */}
+            <Routes>
+                <Route path="/" element={<HomePage />} />
+            </Routes>
+            <h2>CRUD Tester</h2>
             <article>
                 <h3>INSERT Test + READ from Task Categories</h3>
                     {/* Example From Tutorial */}
@@ -210,77 +202,9 @@ function App() {
                         </table>
                     </div>
             </article>
-            <article>
-                <h3>Financial Reports</h3>
-                <p>
-                    The summary tables below provide high-level overviews of current costs associated with aspects of
-                    managing our system of parks and zoological attractions.
-                </p>
-                <h4>Cost Summary by Sector</h4>
-                <div className="scrollableTable">
-                    <table>
-                        <tr>
-                            <th>Sector</th>
-                            <th>Cost</th>
-                        </tr>
-                        <tr>
-                            <td>Administration</td>
-                            <td>$200,000.00</td>
-                        </tr>
-                        <tr>
-                            <td>Maintenance</td>
-                            <td>$1,000,000.00</td>
-                        </tr>
-                        <tr>
-                            <td>Medical</td>
-                            <td>$100,000.00</td>
-                        </tr>
-                        <tr>
-                            <td>Research</td>
-                            <td>$3,000,000.00</td>
-                        </tr>
-                        <tr>
-                            <td>Security</td>
-                            <td>$2,000,000.00</td>
-                        </tr>
-                        <tr>
-                            <td>Veterinary</td>
-                            <td>$1,500,000.00</td>
-                        </tr>
-                    </table>
-                </div>
-                <h4>Cost Summary by Park</h4>
-                <div className="scrollableTable">
-                    <table>
-                        <tr>
-                            <th>Park</th>
-                            <th>Cost</th>
-                        </tr>
-                        <tr>
-                            <td>Jurassic Park</td>
-                            <td>$40,000,000.00</td>
-                        </tr>
-                        <tr>
-                            <td>Jurassic Park: San Diego</td>
-                            <td>$200,000,000.00</td>
-                        </tr>
-                        <tr>
-                            <td>Jurassic World</td>
-                            <td>$1,000,000,000.00</td>
-                        </tr>
-                        <tr>
-                            <td>Lockwood Manor Research Facility</td>
-                            <td>$100,000,000.00</td>
-                        </tr>
-                        <tr>
-                            <td>Site B</td>
-                            <td>$50,000,000.00</td>
-                        </tr>
-                    </table>
-                </div>
-            </article>
         </section>
     </main>
+    </BrowserRouter>
     </div>
   );
 }

@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link } from 'react-router-dom'; // May not need?
-import './App.css';
 import Axios from 'axios';
 
-function dinoHome() {
+function HomePage() {
     return(
         <>
         <h2>Home</h2>
@@ -112,4 +111,4 @@ function dinoHome() {
     )
 };
 
-export default dinoHome;
+export default HomePage;
