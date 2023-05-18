@@ -2,7 +2,34 @@ import React, { useEffect, useState } from "react";
 import { Link } from 'react-router-dom'; // May not need?
 import Axios from 'axios';
 
+// Index Table SQL Endpoints
+const hostURL = 'http://localhost:3001';  // Apparently I need to pass this as a prop or something?
+const getParkCostURL = hostURL + '/api/getParkCost';
+const getCategoryCostURL = hostURL + '/api/getCategoryCost';
+
 function HomePage() {
+  // Index Table Functions
+  // CRUD operations modeled off tutorial - CITE IN DETAIL LATER (or top of each page?)
+  const [parkCostList, setParkCostList] = useState([])
+  const [categoryCostList, setCategoryCostList] = useState([])
+
+  // READ Park Costs Table
+  useEffect(()=> {
+  Axios.get(getParkCostURL).then((response)=> {
+    setParkCostList(response.data)
+    console.log(response.data)
+    })
+  }, [])
+
+  // READ Category Costs Table
+  useEffect(()=> {
+    Axios.get(getCategoryCostURL).then((response)=> {
+      setCategoryCostList(response.data)
+      console.log(response.data)
+      })
+    }, [])
+
+    // Render the Home Page
     return(
         <>
         <h2>Home</h2>
@@ -18,77 +45,46 @@ function HomePage() {
                     All pages display the existing data and have menu options to add new entries, update a specified, existing entry, and 
                     delete a specific entry.
                 </p>
-                <p>
-                    Additional specialized, common reports may be generated from this page in the future.
-                </p>
             </article>
+
             <article>
                 <h3>Financial Reports</h3>
-                {/* <!-- These tables will be populated by SQL queries --> */}
                 <p>
                     The summary tables below provide high-level overviews of current costs associated with aspects of
                     managing our system of parks and zoological attractions.
                 </p>
                 <h4>Cost Summary by Sector</h4>
-                <div class="scrollableTable">
+                <div className="scrollableTable">
                     <table>
                         <tr>
                             <th>Sector</th>
                             <th>Cost</th>
                         </tr>
-                        <tr>
-                            <td>Administration</td>
-                            <td>$200,000.00</td>
-                        </tr>
-                        <tr>
-                            <td>Maintenance</td>
-                            <td>$1,000,000.00</td>
-                        </tr>
-                        <tr>
-                            <td>Medical</td>
-                            <td>$100,000.00</td>
-                        </tr>
-                        <tr>
-                            <td>Research</td>
-                            <td>$3,000,000.00</td>
-                        </tr>
-                        <tr>
-                            <td>Security</td>
-                            <td>$2,000,000.00</td>
-                        </tr>
-                        <tr>
-                            <td>Veterinary</td>
-                            <td>$1,500,000.00</td>
-                        </tr>
+                        {categoryCostList.map((val)=> {
+                            return (
+                                <tr>
+                                    <td>{val.categoryName}</td>
+                                    <td>{val.taskTypeCost}</td>
+                                </tr>
+                            )
+                        })}
                     </table>
                 </div>
                 <h4>Cost Summary by Park</h4>
-                <div class="scrollableTable">
+                <div className="scrollableTable">
                     <table>
                         <tr>
                             <th>Park</th>
                             <th>Cost</th>
                         </tr>
-                        <tr>
-                            <td>Jurassic Park</td>
-                            <td>$40,000,000.00</td>
-                        </tr>
-                        <tr>
-                            <td>Jurassic Park: San Diego</td>
-                            <td>$200,000,000.00</td>
-                        </tr>
-                        <tr>
-                            <td>Jurassic World</td>
-                            <td>$1,000,000,000.00</td>
-                        </tr>
-                        <tr>
-                            <td>Lockwood Manor Research Facility</td>
-                            <td>$100,000,000.00</td>
-                        </tr>
-                        <tr>
-                            <td>Site B</td>
-                            <td>$50,000,000.00</td>
-                        </tr>
+                        {parkCostList.map((val)=> {
+                            return (
+                                <tr>
+                                    <td>{val.parkName}</td>
+                                    <td>{val.parkCost}</td>
+                                </tr>
+                            )
+                        })}
                     </table>
                 </div>
             </article>

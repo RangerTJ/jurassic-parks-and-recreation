@@ -403,7 +403,7 @@ WHERE idSpecies = :idSpecies_input
 -- ----------------
 
 -- SELECT - Cost Analysis Report by Task Category
-SELECT  TaskCategories.categoryName, SUM(EmployeeTasks.empTaskCost) AS TaskTypeCost
+SELECT  TaskCategories.categoryName, SUM(EmployeeTasks.empTaskCost) AS taskTypeCost
 FROM TaskCategories
 -- Need to JOIN TaskCategories -> EmployeeTasks
 LEFT JOIN EmployeeTasks ON TaskCategories.idTaskCategory = EmployeeTasks.idTaskCategory
@@ -411,7 +411,7 @@ GROUP BY TaskCategories.categoryName
 ORDER BY TaskTypeCost DESC;
 
 -- SELECT - Cost Analysis Report by Park
-SELECT  Parks.parkName, SUM(EmployeeTasks.empTaskCost) AS ParkCost
+SELECT  Parks.parkName, SUM(EmployeeTasks.empTaskCost) AS parkCost
 FROM TaskCategories
 -- Need to JOIN TaskCategories -> EmployeeTasks -> TasksAssigned -> Facilities -> Parks
 LEFT JOIN EmployeeTasks ON TaskCategories.idTaskCategory = EmployeeTasks.idTaskCategory
@@ -457,7 +457,7 @@ WHERE Facilities.idHabitat = Species.idHabitat AND Facilities.securityRating >= 
 ORDER BY Facilities.facilityName ASC;
 
 -- SEARCH / Select Query - Cost Analysis for a Specific Input Park
-SELECT  TaskCategories.categoryName, SUM(EmployeeTasks.empTaskCost) AS TaskTypeCost
+SELECT  TaskCategories.categoryName, SUM(EmployeeTasks.empTaskCost) AS taskTypeCost
 FROM TaskCategories
 -- Need to JOIN TaskCategories -> EmployeeTasks -> TasksAssigned -> Facilities -> Parks
 LEFT JOIN EmployeeTasks ON TaskCategories.idTaskCategory = EmployeeTasks.idTaskCategory

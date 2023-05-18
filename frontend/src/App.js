@@ -9,8 +9,7 @@ import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Nav from "./components/nav";
 import HomePage from "./pages/HomePage";
-
-// import dinoHome from "./pages/home"; ... needs router dom stuff?
+import TaskCategoryPage from "./pages/TaskCategoriesPage";
 
 
 // Sampling of Dynamic Host/Server Paths for Easy Edits
@@ -52,12 +51,6 @@ const createEmployeeTasksURL = hostURL + '/api/insertEmployeeTasks';
 const updateEmployeeTasksURL = hostURL + '/api/updateEmployeeTasks';
 const deleteEmployeeTasksURL = hostURL + '/api/deleteEmployeeTasks/';
 
-// TaskCategories SQL Endpoints
-const getTaskCategoriesURL = hostURL + '/api/getTaskCategories';
-const createTaskCategoriesURL = hostURL + '/api/insertTaskCategories';
-const updateTaskCategoriesURL = hostURL + '/api/updateTaskCategories';
-const deleteTaskCategoriesURL = hostURL + '/api/deleteTaskCategories/';
-
 // Species SQL Endpoints
 const getSpeciesURL = hostURL + '/api/getSpecies';
 const createSpeciesURL = hostURL + '/api/insertSpecies';
@@ -89,69 +82,13 @@ const updateJobClassificationsURL = hostURL + '/api/updateJobClassifications';
 const JobClassificationsURL = hostURL + '/api/deleteJobClassifications/';
 
 
+
+
 // React Application
 
 function App() {
-  // Task Category useStates
-  const [categoryName, setCategoryName] = useState('')
-  const [newTaskCategory, setNewTaskCategory] = useState('')
-  const [taskCategoryList, setTaskCategoryList] = useState([])
-
-  // CRUD operations modled off tutorial - CITE IN DETAIL LATER
-
-  // READ Task Categories
-  useEffect(()=> {
-    Axios.get(getTaskCategoriesURL).then((response)=> {
-        setTaskCategoryList(response.data)
-        console.log(response.data)
-    })
-  }, [])
   
-  // ... if we have separate pages forms for UPDATE/ADD we can not even bother, since a page refresh will happen anyways.
-  // Which still leaves trying to figure out why delete doesn't work.
-  // Possibly UI idea to avoid multiple pages: Use cards, and have editable fields beneath each entry, and update inputs new values
-  // Might have to do with the return in the body... may only do once at page load... how to redo it? Why does it seem to load again for INSERT?
-  // Troubleshooting with chatGPT (which seems kinda clueless on this). It *might* have to do with the fact that create doesn't call any variables,
-  // so it can execute immediately, while the other two rely on variable returns first. So maybe we need to make them async to make it work;
-  // they might be updating the table before they get stuff from the server (when it's the same). But .then should handle that so.... Ugh.
-
-  // For some reason trying to clear text with .then(()=> {setCategoryName("")}); results in an error about reading data in my tries
-  // Or maybe something like this? https://stackoverflow.com/questions/14837466/clearing-a-text-field-on-button-click
-  // https://www.freecodecamp.org/news/how-to-clear-input-values-of-dynamic-form-in-react/ TO READ
-
-  // CREATE
-  const submitNewTaskCategory = () => {
-    Axios.post(createTaskCategoriesURL, {
-        categoryName: categoryName
-    }).then(() => {Axios.get(getTaskCategoriesURL)
-      .then((response)=> {setTaskCategoryList(response.data)
-        console.log(response.data);
-      });
-    });
-  };
-
-  // UPDATE - Apparently needed to RETURN the Axios get for it to work for some reason
-    const updateTaskCategory = (idTaskCategory) => {
-      Axios.put(updateTaskCategoriesURL, {
-        idTaskCategory: idTaskCategory,
-        categoryName: newTaskCategory
-      })
-          .then(() => {return Axios.get(getTaskCategoriesURL);})
-          .then((response) => {
-            setTaskCategoryList(response.data);
-            console.log(response.data);
-        }
-    )};
-
-  // DELETE - Apparently sending a response from server fixed it so it refreshes automatically
-  const delTaskCategory = (delCategory) => {
-    Axios.delete(deleteTaskCategoriesURL + delCategory)
-      .then(() => {Axios.get(getTaskCategoriesURL)
-      .then((response) => {setTaskCategoryList(response.data);
-        console.log(response.data);
-        });
-    });
-  };
+  
 
   // **************************
   // HTML Rendering Structure
@@ -168,43 +105,12 @@ function App() {
             {/* Load different page content here depending on route below */}
             <Routes>
                 <Route path="/" element={<HomePage />} />
+                <Route path="/TaskCategories" element={<TaskCategoryPage />} />
             </Routes>
-            <h2>CRUD Tester</h2>
-            <article>
-                <h3>INSERT Test + READ from Task Categories</h3>
-                    {/* Example From Tutorial */}
-                    <input type="text" name="inputCategory" onChange={(e) => {
-                        setCategoryName(e.target.value)
-                    }}/>
-                    <p><button onClick={submitNewTaskCategory}>Test Insert Task Category</button></p>
-
-                    {/* Dynamic Table Alpha Version Test*/}
-                    <div className="scrollableTable">
-                        <table>
-                            <tr>
-                                <th>ID</th>
-                                <th>Category</th>
-                                <th>Update</th>
-                                <th>Delete</th>
-                            </tr>
-                            {taskCategoryList.map((val)=> {
-                            return (
-                                <tr>
-                                    <td>{val.idTaskCategory}</td>
-                                    <td>{val.categoryName}</td>
-                                    <td width="100px">
-                                        <input type="text" onChange={(e)=> {setNewTaskCategory(e.target.value)}}></input>
-                                        <button onClick={()=> {updateTaskCategory(val.idTaskCategory, val.categoryName)}}>Update</button>
-                                    </td>
-                                    <td width="100px"><button onClick={()=> {delTaskCategory(val.idTaskCategory)}}>Delete</button></td>
-                                </tr>)
-                        })}
-                        </table>
-                    </div>
-            </article>
         </section>
-    </main>
-    </BrowserRouter>
+      </main>
+      <footer>&copy;2023 Taylor Jordan and Nicholas Schmidt (Team: Jurassic Parks and Recreation)</footer>
+      </BrowserRouter>
     </div>
   );
 }
