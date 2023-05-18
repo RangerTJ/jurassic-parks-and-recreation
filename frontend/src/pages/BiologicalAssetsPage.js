@@ -51,14 +51,20 @@ function BiologicalAssetsPage ({hostURL}) {
     }, []);
     
     // DELETE - Apparently sending a response from server fixed it so it refreshes automatically
-    // NEED TO MODIFY TO REFRESH ALL 3x TABLES, ONLY REFRESHES MAIN ALL ASSET TABLE RIGHT NOW
     const delBiologicalAsset = (delID) => {
         Axios.delete(deleteBiologicalAssetsURL + delID)
         .then(() => {Axios.get(getBiologicalAssetsURL)
         .then((response) => {setbiologicalAssetList(response.data);
-            console.log(response.data);
-            });
+            console.log(response.data)})
+        .then(() => {Axios.get(checkBiologicalAssetsHabitatsURL)
+        .then((response) => {setAssetHabMismatchList(response.data);
+            console.log(response.data)})
+        .then(() => {Axios.get(checkBiologicalAssetsSecurityURL)
+        .then((response) => {setAssetSecMismatchList(response.data);
+            console.log(response.data)});
+          });
         });
+      });
     };
 
     return (
