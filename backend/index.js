@@ -132,6 +132,25 @@ app.post('/api/insertBiologicalAssets', (req, res) =>{
     })
 })
 
+// UPDATE Biological Asset
+app.put('/api/updateBiologicalAssets', (req, res) =>{
+    const speciesName = req.body.speciesName
+    const facilityName = req.body.facilityName
+    const bioAssetName = req.body.bioAssetName
+    const idBiologicalAsset = req.body.idBiologicalAsset
+    const sqlUpdate = `
+    UPDATE BiologicalAssets
+    SET     idSpecies =             (SELECT idSpecies FROM Species WHERE speciesName = :speciesName_input),
+    SET     idFacility =            (SELECT idFacility FROM Facilities WHERE facilityName = :facilityName_input),
+    SET     bioAssetName = :bioAssetName_input
+    WHERE   idBiologicalAsset = :idBiologicalAsset_input;
+    `;
+    db.query(sqlUpdate, [speciesName, facilityName, bioAssetName, idBiologicalAsset], (err, result)=> {
+        if (err) console.log(err); else console.log(result);
+        res.send(result);
+    });
+});
+
 // DELETE Biological Asset
 app.delete('/api/deleteBiologicalAssets/:idBiologicalAsset', (req, res) =>{
     const idBiologicalAsset = req.params.idBiologicalAsset
@@ -173,7 +192,6 @@ app.get('/api/getTaskCategories', (req, res) =>{
 app.put('/api/updateTaskCategories', (req, res) =>{
     const idTaskCategory = req.body.idTaskCategory
     const categoryName = req.body.categoryName
-    console.log(categoryName);
     const sqlUpdate = `
     UPDATE TaskCategories
     SET     categoryName = ?
