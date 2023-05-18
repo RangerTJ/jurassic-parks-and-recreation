@@ -64,6 +64,21 @@ app.get('/api/getCategoryCost', (req, res) =>{
 // Biological Asset Queries //
 //////////////////////////////
 
+// READ List All Assets
+app.get('/api/getBiologicalAssets', (req, res) =>{
+    const sqlTaskCategoryRead = `
+    SELECT BiologicalAssets.idBiologicalAsset, BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName 
+    FROM BiologicalAssets
+    JOIN Species ON BiologicalAssets.idSpecies = Species.idSpecies
+    JOIN Facilities ON BiologicalAssets.idFacility = Facilities.idFacility
+    ORDER BY idBiologicalAsset ASC;
+    `;
+    db.query(sqlTaskCategoryRead, (err, result)=> {
+        console.log(result);
+        res.send(result);
+    });
+});
+
 // READ Habitat Alert
 app.get('/api/checkBiologicalAssetsHabitats', (req, res) =>{
     const sqlTaskCategoryRead = `

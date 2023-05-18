@@ -2,26 +2,37 @@
 // URLs - Part1: https://www.youtube.com/watch?v=T8mqZZ0r-RA, Part2: https://www.youtube.com/watch?v=3YrOOia3-mo, Part3: https://www.youtube.com/watch?v=_S2GKnFpdtE
 
 import React, { useEffect, useState } from "react";
-import { Link } from 'react-router-dom'; // May not need?
+import { Link, useNavigate } from 'react-router-dom';
 import Axios from 'axios';
 
 
 // HostURL Passed from App.js
 function BiologicalAssetsPage ({hostURL}) {
 
+    // Navigation Function
+    const navTo = useNavigate();
+
     // BiologicalAssets SQL Endpoints
-    const getBiologicalAssetsURL = hostURL + '/api/getBiologicalAssets';
-    const createBiologicalAssetsURL = hostURL + '/api/insertBiologicalAssets';
-    const updateBiologicalAssetsURL = hostURL + '/api/updateBiologicalAssets';
-    const deleteBiologicalAssetsURL = hostURL + '/api/deleteBiologicalAssets/';
+    const getBiologicalAssetsURL = hostURL + '/api/getBiologicalAssets';  // TO DO - CREATE USE EFFECT AND USE STATE
+    const deleteBiologicalAssetsURL = hostURL + '/api/deleteBiologicalAssets/';  // TO DO - NEED TO ADD USE STATES AND CRUD FUNCTIONS FOR THIS; INSERT/UPDATE GO ON RESPECTIVE FORM PAGES
     const checkBiologicalAssetsHabitatsURL = hostURL + '/api/checkBiologicalAssetsHabitats';  // Habitat report for welcome screen
     const checkBiologicalAssetsSecurityURL = hostURL + '/api/checkBiologicalAssetsSecurity';  // Security report for welcome screen
 
 
     // Bio Asset Table Functions
     // CRUD operations modeled off tutorial - CITE IN DETAIL LATER (or top of each page?)
+    const [biologicalAssetList, setbiologicalAssetList] = useState([])
     const [assetHabMismatchList, setAssetHabMismatchList] = useState([])
     const [assetSecMismatchList, setAssetSecMismatchList] = useState([])
+
+    // READ Populate Biological Asset Table
+    useEffect(()=> {
+        Axios.get(getBiologicalAssetsURL).then((response)=> {
+            setbiologicalAssetList(response.data)
+            console.log(response.data)
+            })
+        }, [])
+
 
     // READ Asset Habitat Alerts
     useEffect(()=> {
@@ -99,13 +110,15 @@ function BiologicalAssetsPage ({hostURL}) {
                             <th>Needed Habitat</th>
                         </tr>
                         {assetHabMismatchList.map((val)=> {
-                            // Convert cost to USD or set to 0 USD if there is a null entry
+                            
+                            // Set off the alarm bells for null habitats, because it means fun times in the park
+                            const filteredHab = val.currentHabitat ? val.currentHabitat : "WARNING: NOT AN ENCLOSURE";
                             return (
                                 <tr>
                                     <td>{val.bioAssetName}</td>
                                     <td>{val.speciesName}</td>
                                     <td>{val.currentWrongHome}</td>
-                                    <td>{val.currentHabitat}</td>
+                                    <td>{filteredHab}</td>
                                     <td>{val.needsHabitat}</td>
                                 </tr>
                             )
@@ -119,7 +132,7 @@ function BiologicalAssetsPage ({hostURL}) {
                     Click the "Create" button below to add a new Biological Asset to the DINO database.
                 </p>
                 <div>
-                    <p><button onclick="location.href='forms/biologicalAssetsAdd.html'">Create</button></p>
+                    <p><button onClick={() => navTo("/BiologicalAssetsAdd")}>Create</button></p>
                 </div>
             </article>
             <article>
@@ -139,24 +152,20 @@ function BiologicalAssetsPage ({hostURL}) {
                             <th>Update</th>
                             <th>Delete</th>
                         </tr>
-                        <tr>
-                            <td>Ex. 1</td>
-                            <td>Ex. Velociraptor</td>
-                            <td>Ex. Blue</td>
-                            <td>Ex. Raptor Training Facility</td>
 
-                            <td><button onclick="location.href='forms/biologicalAssetsUpdate.html'">Update</button></td>
-                            <td><button>Delete</button></td>
-                        </tr>
-                        <tr>
-                            <td>Ex. 2</td>
-                            <td>Ex. Tyrannosaurus Rex</td>
-                            <td>Ex. Roberta</td>
-                            <td>Ex. T-Rex Kingdom</td>
-
-                            <td><button onclick="location.href='forms/biologicalAssetsUpdate.html'">Update</button></td>
-                            <td><button>Delete</button></td>
-                        </tr>
+                        {biologicalAssetList.map((val)=> {
+                            return (
+                                <tr>
+                                    <td>{val.idBiologicalAsset}</td>
+                                    <td>{val.bioAssetName}</td>
+                                    <td>{val.speciesName}</td>
+                                    <td>{val.facilityName}</td>
+                                    <td><button onClick={() => navTo("/BiologicalAssetsUpdate")}>Update</button></td>
+                                    {/* TODO: ADD DELETE FUNCTIONALITY ON CLICK */}
+                                    <td><button>Delete</button></td>
+                                </tr>
+                            )
+                        })}
                     </table>
                 </div>
             </article>

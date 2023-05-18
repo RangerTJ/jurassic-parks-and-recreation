@@ -2,9 +2,11 @@
 // URLs - Part1: https://www.youtube.com/watch?v=T8mqZZ0r-RA, Part2: https://www.youtube.com/watch?v=3YrOOia3-mo, Part3: https://www.youtube.com/watch?v=_S2GKnFpdtE
 
 import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from 'react-router-dom';
 import Axios from 'axios';
 import './App.css';
 
+// Main Page Imports
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Nav from "./components/nav";
 import HomePage from "./pages/HomePage";
@@ -21,11 +23,16 @@ import HabitatsPage from "./pages/HabitatsPage";
 import FacilityTypesPage from "./pages/FacilitiesPage";
 import JobClassificationsPage from "./pages/JobClassificationsPage";
 
-// Establish common variable for host for easy edits
-const hostURL = 'http://localhost:3001';
+// Form Page Imports
+import BiologicalAssetsAddForm from "./forms/BiologicalAssetsAddForm";
+import BiologicalAssetsUpdateForm from "./forms/BiologicalAssetsUpdateForm";
+
+// Establish common variables for host for easy edits
+
 
 // React Application
 function App() {
+    const hostURL = 'http://localhost:3001';
   
   // HTML Rendering Structure
   return (
@@ -40,6 +47,7 @@ function App() {
         <section>
             {/* Load different page content here depending on route below */}
             <Routes>
+                {/* Primary Page Routes */}
                 <Route path="/" element={<HomePage hostURL={hostURL} />} />
                 <Route path="/Parks" element={<ParksPage hostURL={hostURL} />} />
                 <Route path="/Facilities" element={<FacilitiesPage hostURL={hostURL} />} />
@@ -53,6 +61,10 @@ function App() {
                 <Route path="/Habitats" element={<HabitatsPage hostURL={hostURL} />} />
                 <Route path="/FacilityTypes" element={<FacilityTypesPage hostURL={hostURL} />} />
                 <Route path="/JobClassifications" element={<JobClassificationsPage hostURL={hostURL} />} />
+
+                {/* Form Page Routes */}
+                <Route path="/BiologicalAssetsAdd" element={<BiologicalAssetsAddForm hostURL={hostURL} />} />
+                <Route path="/BiologicalAssetsUpdate" element={<BiologicalAssetsUpdateForm hostURL={hostURL} />} />
             </Routes>
         </section>
       </main>
