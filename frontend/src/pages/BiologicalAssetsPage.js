@@ -1,0 +1,164 @@
+import React, { useEffect, useState } from "react";
+import { Link } from 'react-router-dom'; // May not need?
+import Axios from 'axios';
+
+
+// HostURL Passed from App.js
+function BiologicalAssetsPage ({hostURL}) {
+
+    // BiologicalAssets SQL Endpoints
+    const getBiologicalAssetsURL = hostURL + '/api/getBiologicalAssets';
+    const createBiologicalAssetsURL = hostURL + '/api/insertBiologicalAssets';
+    const updateBiologicalAssetsURL = hostURL + '/api/updateBiologicalAssets';
+    const deleteBiologicalAssetsURL = hostURL + '/api/deleteBiologicalAssets/';
+    const checkBiologicalAssetsHabitatsURL = hostURL + '/api/checkBiologicalAssetsHabitats';  // Habitat report for welcome screen
+    const checkBiologicalAssetsSecurityURL = hostURL + '/api/checkBiologicalAssetsSecurity';  // Security report for welcome screen
+
+
+    // Bio Asset Table Functions
+    // CRUD operations modeled off tutorial - CITE IN DETAIL LATER (or top of each page?)
+    const [assetHabMismatchList, setAssetHabMismatchList] = useState([])
+    const [assetSecMismatchList, setAssetSecMismatchList] = useState([])
+
+    // READ Asset Habitat Alerts
+    useEffect(()=> {
+    Axios.get(checkBiologicalAssetsHabitatsURL).then((response)=> {
+        setAssetHabMismatchList(response.data)
+        console.log(response.data)
+        })
+    }, [])
+
+    // READ Asset Security Alerts
+    useEffect(()=> {
+        Axios.get(checkBiologicalAssetsSecurityURL).then((response)=> {
+        setAssetSecMismatchList(response.data)
+        console.log(response.data)
+        })
+    }, []);
+    
+    return (
+        <>
+            <h2>Biological Assets</h2>
+            <article>
+                <h3>Security Risks</h3>
+                <p>
+                    The table below shows detected security risks where an asset's current threat level is greater than its current facility's security rating.
+                    These risks should be mitigated as soon as possible by transferring an at-risk asset to an appropriate enclosure at the soonest opportunity. 
+                    Both facility security and threat potential of an asset are rated on a scale of 1-10. If a facility security is equal to an asset threat level, 
+                    that means that the asset is fully contained with a 99.9% confidence index that the asset cannot escape or harm guests/staff. 
+                    The severity deferential between an asset and its current containment strength is rated on a scale of 1-9. More severe security misalignment 
+                    should be heavily prioritized over less severe misalignments. For example, a severity of 1 implies that under worst-case conditions, an asset could 
+                    escape containment. A severity of 9 indicates that the asset could break out of containment at any time, and that they are incredibly likely to do so.
+                </p>
+                <div class="scrollableTable">
+                    <table>
+                        <tr>
+                            <th>Name</th>
+                            <th>Species</th>
+                            <th>Facility</th>
+                            <th>Facility Security</th>
+                            <th>Asset Threat</th>
+                            <th>Severity</th>
+                        </tr>
+                        {assetSecMismatchList.map((val)=> {
+                            return (
+                                <tr>
+                                    <td>{val.bioAssetName}</td>
+                                    <td>{val.speciesName}</td>
+                                    <td>{val.facilityName}</td>
+                                    <td>{val.securityRating}</td>
+                                    <td>{val.threatLevel}</td>
+                                    <td>{val.severity}</td>
+                                </tr>
+                            )
+                        })}
+                    </table>
+                </div>
+            </article>
+            <article>
+                <h3>Habitat Misalignment</h3>
+                <p>
+                    The following table summarizes any known mismatch between the habitat that a specific Biological Asset needs, and the
+                    habitat found in its current enclosure facility. Once a misalignment has been resolved by moving an asset to an appropriate
+                    facility, the "update" button next to the BiologicalAsset record can be used to update the database. These misalignments should
+                    be resolved as soon as possible to minimize stress on assets (and thus trickle-down impacts like behavioral issues and escape attempts).
+                    While not as critical as a security mismatch, it is still important that assets are assigned to appropriate habitats to ensure that they
+                    are happy and healthy.
+                </p>
+                {/* <!-- Table generated by SQL query on page load --> */}
+                <div class="scrollableTable">
+                    <table>
+                        <tr>
+                            <th>Name</th>
+                            <th>Species</th>
+                            <th>Facility</th>
+                            <th>Current Habitat</th>
+                            <th>Needed Habitat</th>
+                        </tr>
+                        {assetHabMismatchList.map((val)=> {
+                            // Convert cost to USD or set to 0 USD if there is a null entry
+                            return (
+                                <tr>
+                                    <td>{val.bioAssetName}</td>
+                                    <td>{val.speciesName}</td>
+                                    <td>{val.currentWrongHome}</td>
+                                    <td>{val.currentHabitat}</td>
+                                    <td>{val.needsHabitat}</td>
+                                </tr>
+                            )
+                        })}
+                    </table>
+                </div>
+            </article>
+            <article>
+                <h3>Add New Biological Asset</h3>
+                <p>
+                    Click the "Create" button below to add a new Biological Asset to the DINO database.
+                </p>
+                <div>
+                    <p><button onclick="location.href='forms/biologicalAssetsAdd.html'">Create</button></p>
+                </div>
+            </article>
+            <article>
+                <h3>View Biological Assets</h3>
+                <p>
+                    The table below shows existing information for Biological Assets entities and includes
+                    buttons to update or delete them.
+                </p>
+                <div class="scrollableTable">
+                    <table>
+                        <tr>
+                            <th>ID</th>
+                            <th>Species</th>
+                            <th>Name</th>
+                            <th>Home Facility</th>
+
+                            <th>Update</th>
+                            <th>Delete</th>
+                        </tr>
+                        <tr>
+                            <td>Ex. 1</td>
+                            <td>Ex. Velociraptor</td>
+                            <td>Ex. Blue</td>
+                            <td>Ex. Raptor Training Facility</td>
+
+                            <td><button onclick="location.href='forms/biologicalAssetsUpdate.html'">Update</button></td>
+                            <td><button>Delete</button></td>
+                        </tr>
+                        <tr>
+                            <td>Ex. 2</td>
+                            <td>Ex. Tyrannosaurus Rex</td>
+                            <td>Ex. Roberta</td>
+                            <td>Ex. T-Rex Kingdom</td>
+
+                            <td><button onclick="location.href='forms/biologicalAssetsUpdate.html'">Update</button></td>
+                            <td><button>Delete</button></td>
+                        </tr>
+                    </table>
+                </div>
+            </article>
+        </>
+    );
+}
+
+export default BiologicalAssetsPage;
