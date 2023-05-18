@@ -48,7 +48,7 @@ body {
   background-color: var(--feralGreen);
   background-attachment: fixed;
   background-position: center;
-  background-image:url(images/facility-enclosure-gates-night.jpg);
+  background-image:url(images/background.jpg);
   color: var(--worldDeepBlue);
   color: var(--parkYellow);
   font-family: var(--normalText);

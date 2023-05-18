@@ -4,6 +4,13 @@
 import React, { useEffect, useState } from "react";
 import { Link } from 'react-router-dom'; // May not need?
 import Axios from 'axios';
+import ImageList from "../components/imageSelectorSpecies";
+import ImageSelectorSpecies from "../components/imageSelectorSpecies";
+import ImageSelectorDiets from "../components/imageSelectorDiets";
+import ImageSelectorFacilities from "../components/imageSelectorFacilities";
+import ImageSelectorHabitats from "../components/imageSelectorHabitats";
+import ImageSelectorParks from "../components/imageSelectorParks";
+import ImageSelectorStaff from "../components/imageSelectorStaff";
 
 
 // HostURL Passed from App.js
@@ -14,10 +21,20 @@ function SpeciesPage ({hostURL}) {
     const createSpeciesURL = hostURL + '/api/insertSpecies';
     const updateSpeciesURL = hostURL + '/api/updateSpecies';
     const deleteSpeciesURL = hostURL + '/api/deleteSpecies/';
-
+    
+    // ImageList isn't supposed to be here, it goes on the create/update pages, this was just to put it somewhere
+    // while I tested the ImageSelector thingie.
     return (
         <>
-        
+            <h2>Test Image Selectors</h2>
+            <article>
+                <ImageSelectorSpecies />
+                <ImageSelectorDiets />
+                <ImageSelectorFacilities />
+                <ImageSelectorHabitats />
+                <ImageSelectorParks />
+                <ImageSelectorStaff />
+            </article>
         </>
     );
 }
