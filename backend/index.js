@@ -215,6 +215,36 @@ app.delete('/api/deleteTaskCategories/:idTaskCategory', (req, res) =>{
     });
 });
 
+////////////////////////
+// SELECT LIST ROUTES //
+////////////////////////
+
+// Biological Asset Selector
+app.get('/api/getSpeciesList', (req, res) =>{
+    const sqlRead = `
+    SELECT speciesName, threatLevel
+    FROM Species
+    ORDER BY speciesName ASC;
+    `;
+    db.query(sqlRead, (err, result)=> {
+        console.log(result);
+        res.send(result);
+    });
+});
+
+// Facility Selector
+app.get('/api/getFacilitiesList', (req, res) =>{
+    const sqlRead = `
+    SELECT facilityName, securityRating
+    FROM Facilities
+    ORDER BY facilityName, securityRating ASC;
+    `;
+    db.query(sqlRead, (err, result)=> {
+        console.log(result);
+        res.send(result);
+    });
+});
+
 
 /////////////////////////////////////////
 // Test Connection to the MySQL server //
