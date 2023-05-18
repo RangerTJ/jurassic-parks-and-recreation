@@ -433,7 +433,7 @@ WHERE Species.idHabitat != Facilities.idHabitat OR Facilities.idHabitat IS NULL
 ORDER BY facilityName, speciesName, bioAssetName;
 
 -- SELECT biological assets that are not adequately secured (and indicates how bad it is with a severity rating from 1-9)
-SELECT BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName, Facilities.securityRating, Species.threatLevel - Facilities.securityRating AS severity
+SELECT BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName, Facilities.securityRating, Species.threatLevel, Species.threatLevel - Facilities.securityRating AS severity
 FROM BiologicalAssets
 -- Need to JOIN BioAssets -> Species -> Facilities
 JOIN Species on BiologicalAssets.idSpecies = Species.idSpecies

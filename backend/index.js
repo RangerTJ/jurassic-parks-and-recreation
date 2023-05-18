@@ -60,6 +60,44 @@ app.get('/api/getCategoryCost', (req, res) =>{
     });
 });
 
+//////////////////////////////
+// Biological Asset Queries //
+//////////////////////////////
+
+// READ Habitat Alert
+app.get('/api/checkBiologicalAssetsHabitats', (req, res) =>{
+    const sqlTaskCategoryRead = `
+    SELECT BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName AS currentWrongHome, currentHab.habitatName AS currentHabitat, speciesHab.habitatName AS needsHabitat
+    FROM BiologicalAssets
+    JOIN Species ON BiologicalAssets.idSpecies = Species.idSpecies
+    JOIN Facilities ON BiologicalAssets.idFacility = Facilities.idFacility
+    LEFT JOIN Habitats currentHab ON Facilities.idHabitat = currentHab.idHabitat
+    JOIN Habitats speciesHab ON Species.idHabitat = speciesHab.idHabitat
+    WHERE Species.idHabitat != Facilities.idHabitat OR Facilities.idHabitat IS NULL
+    ORDER BY facilityName, speciesName, bioAssetName;
+    `;
+    db.query(sqlTaskCategoryRead, (err, result)=> {
+        console.log(result);
+        res.send(result);
+    });
+});
+
+// READ Security Alert
+app.get('/api/checkBiologicalAssetsSecurity', (req, res) =>{
+    const sqlTaskCategoryRead = `
+    SELECT BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName, Facilities.securityRating, Species.threatLevel, Species.threatLevel - Facilities.securityRating AS severity
+    FROM BiologicalAssets
+    JOIN Species on BiologicalAssets.idSpecies = Species.idSpecies
+    JOIN Facilities on BiologicalAssets.idFacility = Facilities.idFacility
+    WHERE Facilities.securityRating < Species.threatLevel
+    ORDER BY severity, facilities.facilityName, BiologicalAssets.bioAssetName;
+    `;
+    db.query(sqlTaskCategoryRead, (err, result)=> {
+        console.log(result);
+        res.send(result);
+    });
+});
+
 
 ///////////////////////////
 // TASK CATEGORY QUERIES //
