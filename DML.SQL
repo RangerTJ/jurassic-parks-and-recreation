@@ -441,6 +441,15 @@ JOIN Facilities on BiologicalAssets.idFacility = Facilities.idFacility
 WHERE Facilities.securityRating < Species.threatLevel
 ORDER BY severity, facilities.facilityName, BiologicalAssets.bioAssetName;
 
+-- SELECT BiologicalAssets / FILTER for Species
+SELECT BiologicalAssets.idBiologicalAsset, BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName 
+FROM BiologicalAssets
+-- Need to join Species -> BiologicalAssets -> Facilities
+JOIN Species ON BiologicalAssets.idSpecies = Species.idSpecies
+JOIN Facilities ON BiologicalAssets.idFacility = Facilities.idFacility
+WHERE Species.speciesName = :speciesName_input
+ORDER BY idBiologicalAsset ASC;
+
 
 -- -------------
 -- OPTIONAL Queries (May or may not be needed)

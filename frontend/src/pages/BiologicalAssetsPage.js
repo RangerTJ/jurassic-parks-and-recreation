@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import Axios from 'axios';
 
+// TODO: Add Species Filter FOR MAIN TABLE (using dynamic drop-down array) / Needs states and functions and stuff
 
 // HostURL Passed from App.js
 function BiologicalAssetsPage ({hostURL}) {
