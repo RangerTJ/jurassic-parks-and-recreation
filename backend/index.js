@@ -24,7 +24,7 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 // CREATE - Post message to browser after doing a test insert (based on tutorial example)
-app.post('/api/insert', (req, res) =>{
+app.post('/api/insertTaskCategories', (req, res) =>{
     const categoryName = req.body.categoryName
     const sqlTaskCategoryInsert = "INSERT INTO `TaskCategories` (categoryName) VALUES (?);";
     db.query(sqlTaskCategoryInsert, [categoryName], (err, result)=> {
@@ -34,7 +34,7 @@ app.post('/api/insert', (req, res) =>{
 })
 
 // READ - Select
-app.get('/api/get', (req, res) =>{
+app.get('/api/getTaskCategories', (req, res) =>{
     const sqlTaskCategoryRead = "SELECT * FROM `TaskCategories`;";
     db.query(sqlTaskCategoryRead, (err, result)=> {
         console.log(result);
@@ -43,7 +43,7 @@ app.get('/api/get', (req, res) =>{
 });
 
 // UPDATE
-app.put('/api/update', (req, res) =>{
+app.put('/api/updateTaskCategories', (req, res) =>{
     const idTaskCategory = req.body.idTaskCategory
     const categoryName = req.body.categoryName
     console.log(categoryName);
@@ -58,7 +58,7 @@ app.put('/api/update', (req, res) =>{
 });
 
 // DELETE
-app.delete('/api/delete/:idTaskCategory', (req, res) =>{
+app.delete('/api/deleteTaskCategories/:idTaskCategory', (req, res) =>{
     const idTaskCategory = req.params.idTaskCategory
     const sqlTaskCategoryDelete = `
     DELETE

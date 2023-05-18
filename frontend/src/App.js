@@ -8,10 +8,81 @@ import Axios from 'axios';
 
 // Sampling of Dynamic Host/Server Paths for Easy Edits
 const hostURL = 'http://localhost:3001';
-const getTaskCategoryURL = hostURL + '/api/get';
-const createTaskCategoryURL = hostURL + '/api/insert';
-const updateTaskCategoryURL = hostURL + '/api/update';
-const deleteTaskCategoryURL = hostURL + '/api/delete/';
+
+// Park SQL Endpoints
+const getParksURL = hostURL + '/api/getParks';
+const createParksURL = hostURL + '/api/insertParks';
+const updateParksURL = hostURL + '/api/updateParks';
+const deleteParksURL = hostURL + '/api/deleteParks/';
+
+// Facilities SQL Endpoints
+const getFacilitiesURL = hostURL + '/api/getFacilities';
+const createFacilitiesURL = hostURL + '/api/insertFacilities';
+const updateFacilitiesURL = hostURL + '/api/updateFacilities';
+const deleteFacilitiesURL = hostURL + '/api/deleteFacilities/';
+
+// BiologicalAssets SQL Endpoints
+const getBiologicalAssetsURL = hostURL + '/api/getBiologicalAssets';
+const createBiologicalAssetsURL = hostURL + '/api/insertBiologicalAssets';
+const updateBiologicalAssetsURL = hostURL + '/api/updateBiologicalAssets';
+const deleteBiologicalAssetsURL = hostURL + '/api/deleteBiologicalAssets/';
+
+// Employees SQL Endpoints
+const getEmployeesURL = hostURL + '/api/getEmployees';
+const createEmployeesURL = hostURL + '/api/insertEmployees';
+const updateEmployeesURL = hostURL + '/api/updateEmployees';
+const deleteEmployeesURL = hostURL + '/api/deleteEmployees/';
+
+// TasksAssigned SQL Endpoints
+const getTasksAssignedURL = hostURL + '/api/getTasksAssigned';
+const createTasksAssignedURL = hostURL + '/api/insertTasksAssigned';
+const updateTasksAssignedURL = hostURL + '/api/updateTasksAssigned';
+const deleteTasksAssignedURL = hostURL + '/api/deleteTasksAssigned/';
+
+// EmployeeTasks SQL Endpoints
+const getEmployeeTasksURL = hostURL + '/api/getEmployeeTasks';
+const createEmployeeTasksURL = hostURL + '/api/insertEmployeeTasks';
+const updateEmployeeTasksURL = hostURL + '/api/updateEmployeeTasks';
+const deleteEmployeeTasksURL = hostURL + '/api/deleteEmployeeTasks/';
+
+// TaskCategories SQL Endpoints
+const getTaskCategoriesURL = hostURL + '/api/getTaskCategories';
+const createTaskCategoriesURL = hostURL + '/api/insertTaskCategories';
+const updateTaskCategoriesURL = hostURL + '/api/updateTaskCategories';
+const deleteTaskCategoriesURL = hostURL + '/api/deleteTaskCategories/';
+
+// Species SQL Endpoints
+const getSpeciesURL = hostURL + '/api/getSpecies';
+const createSpeciesURL = hostURL + '/api/insertSpecies';
+const updateSpeciesURL = hostURL + '/api/updateSpecies';
+const deleteSpeciesURL = hostURL + '/api/deleteSpecies/';
+
+// Diets SQL Endpoints
+const getDietsURL = hostURL + '/api/getDiets';
+const createDietsURL = hostURL + '/api/insertDiets';
+const updateDietsURL = hostURL + '/api/updateDiets';
+const deleteDietsURL = hostURL + '/api/deleteDiets/';
+
+// Habitats SQL Endpoints
+const getHabitatsURL = hostURL + '/api/getHabitats';
+const createHabitatsURL = hostURL + '/api/insertHabitats';
+const updateHabitatsURL = hostURL + '/api/updateHabitats';
+const deleteHabitatsURL = hostURL + '/api/deleteHabitats/';
+
+// FacilityTypes SQL Endpoints
+const getFacilityTypesURL = hostURL + '/api/getFacilityTypes';
+const createFacilityTypesURL = hostURL + '/api/insertFacilityTypes';
+const updateFacilityTypesURL = hostURL + '/api/updateFacilityTypes';
+const deleteFacilityTypesURL = hostURL + '/api/deleteFacilityTypes/';
+
+// JobClassifications SQL Endpoints
+const getJobClassificationsURL = hostURL + '/api/getJobClassifications';
+const createJobClassificationsURL = hostURL + '/api/insertJobClassifications';
+const updateJobClassificationsURL = hostURL + '/api/updateJobClassifications';
+const JobClassificationsURL = hostURL + '/api/deleteJobClassifications/';
+
+
+// Primary Application Function
 
 function App() {
   // Task Category useStates
@@ -26,7 +97,7 @@ function App() {
 
   // READ Task Categories
   useEffect(()=> {
-    Axios.get(getTaskCategoryURL).then((response)=> {
+    Axios.get(getTaskCategoriesURL).then((response)=> {
         setTaskCategoryList(response.data)
         console.log(response.data)
     })
@@ -46,9 +117,9 @@ function App() {
 
   // CREATE
   const submitNewTaskCategory = () => {
-    Axios.post(createTaskCategoryURL, {
+    Axios.post(createTaskCategoriesURL, {
         categoryName: categoryName
-    }).then(() => {Axios.get(getTaskCategoryURL)
+    }).then(() => {Axios.get(getTaskCategoriesURL)
       .then((response)=> {setTaskCategoryList(response.data)
         console.log(response.data);
       });
@@ -57,11 +128,11 @@ function App() {
 
   // UPDATE - Apparently needed to RETURN the Axios get for it to work for some reason
     const updateTaskCategory = (idTaskCategory) => {
-      Axios.put(updateTaskCategoryURL, {
+      Axios.put(updateTaskCategoriesURL, {
         idTaskCategory: idTaskCategory,
         categoryName: newTaskCategory
       })
-          .then(() => {return Axios.get(getTaskCategoryURL);})
+          .then(() => {return Axios.get(getTaskCategoriesURL);})
           .then((response) => {
             setTaskCategoryList(response.data);
             console.log(response.data);
@@ -70,8 +141,8 @@ function App() {
 
   // DELETE - Apparently sending a response from server fixed it so it refreshes automatically
   const delTaskCategory = (delCategory) => {
-    Axios.delete(deleteTaskCategoryURL + delCategory)
-      .then(() => {Axios.get(getTaskCategoryURL)
+    Axios.delete(deleteTaskCategoriesURL + delCategory)
+      .then(() => {Axios.get(getTaskCategoriesURL)
       .then((response) => {setTaskCategoryList(response.data);
         console.log(response.data);
         });
