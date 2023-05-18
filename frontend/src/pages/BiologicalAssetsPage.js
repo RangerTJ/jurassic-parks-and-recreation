@@ -21,14 +21,14 @@ function BiologicalAssetsPage ({hostURL}) {
 
     // Bio Asset Table Functions
     // CRUD operations modeled off tutorial - CITE IN DETAIL LATER (or top of each page?)
-    const [biologicalAssetList, setbiologicalAssetList] = useState([])
+    const [biologicalAssetList, setBiologicalAssetList] = useState([])
     const [assetHabMismatchList, setAssetHabMismatchList] = useState([])
     const [assetSecMismatchList, setAssetSecMismatchList] = useState([])
 
     // READ Populate Biological Asset Table
     useEffect(()=> {
         Axios.get(getBiologicalAssetsURL).then((response)=> {
-            setbiologicalAssetList(response.data)
+            setBiologicalAssetList(response.data)
             console.log(response.data)
             })
         }, [])
@@ -50,11 +50,11 @@ function BiologicalAssetsPage ({hostURL}) {
         })
     }, []);
     
-    // DELETE - Apparently sending a response from server fixed it so it refreshes automatically
+    // DELETE - Deletes target bio asset and refreshes all 3 tables
     const delBiologicalAsset = (delID) => {
         Axios.delete(deleteBiologicalAssetsURL + delID)
         .then(() => {Axios.get(getBiologicalAssetsURL)
-        .then((response) => {setbiologicalAssetList(response.data);
+        .then((response) => {setBiologicalAssetList(response.data);
             console.log(response.data)})
         .then(() => {Axios.get(checkBiologicalAssetsHabitatsURL)
         .then((response) => {setAssetHabMismatchList(response.data);
