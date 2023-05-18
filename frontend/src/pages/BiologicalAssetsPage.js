@@ -157,12 +157,34 @@ function BiologicalAssetsPage ({hostURL}) {
                     The table below shows existing information for Biological Assets entities and includes
                     buttons to update or delete them.
                 </p>
+                <p>
+                    {/* <!-- Populated by Dynamic SQL Call --> */}
+                    <div><label for="assetSpecies" class="required">Filter by Species</label></div>
+                    <select name="assetSpecies" id="assetSpecies">
+                        <option value="" hidden>Choose an option</option>
+                        <option value="1">Tyrannosaurus Rex</option>
+                        <option value="2">Velociraptor</option>
+                        <option value="3">Triceratops</option>
+                        <option value="4">Brachiosaurus</option>
+                        <option value="5">Stegosaurus</option>
+                        <option value="6">Spinosaurus</option>
+                        <option value="7">Allosaurus</option>
+                        <option value="8">Ankylosaurus</option>
+                        <option value="9">Parasaurolophus</option>
+                        <option value="10">Mosasaurus</option>
+                        <option value="11">Hesperornis</option>
+                        <option value="12">Thescelosaurus</option>
+                        <option value="13">Diplocaulus</option>
+                        <option value="14">Metriorhynchus</option>
+                        <option value="15">Eustreptospondylus</option>
+                    </select>
+                </p>
                 <div class="scrollableTable">
                     <table>
                         <tr>
                             <th>ID</th>
-                            <th>Species</th>
                             <th>Name</th>
+                            <th>Species</th>
                             <th>Home Facility</th>
 
                             <th>Update</th>
