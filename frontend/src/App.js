@@ -27,9 +27,6 @@ import JobClassificationsPage from "./pages/JobClassificationsPage";
 import BiologicalAssetsAddForm from "./forms/BiologicalAssetsAddForm";
 import BiologicalAssetsUpdateForm from "./forms/BiologicalAssetsUpdateForm";
 
-// Establish common variables for host for easy edits
-
-
 // React Application
 function App() {
     const hostURL = 'http://localhost:3001';
