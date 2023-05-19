@@ -97,7 +97,7 @@ app.get('/api/getBiologicalAssets', (req, res) =>{
 // READ Habitat Alert
 app.get('/api/checkBiologicalAssetsHabitats', (req, res) =>{
     const sqlRead = `
-    SELECT BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName AS currentWrongHome, currentHab.habitatName AS currentHabitat, speciesHab.habitatName AS needsHabitat
+    SELECT BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName, currentHab.habitatName AS currentHabitat, speciesHab.habitatName AS needsHabitat
     FROM BiologicalAssets
     JOIN Species ON BiologicalAssets.idSpecies = Species.idSpecies
     JOIN Facilities ON BiologicalAssets.idFacility = Facilities.idFacility

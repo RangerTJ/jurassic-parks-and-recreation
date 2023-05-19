@@ -1,6 +1,10 @@
 // Basic CRUD operations and React implementation was heavily based on the CRUD React tutorial series created by PedroTech
 // URLs - Part1: https://www.youtube.com/watch?v=T8mqZZ0r-RA, Part2: https://www.youtube.com/watch?v=3YrOOia3-mo, Part3: https://www.youtube.com/watch?v=_S2GKnFpdtE
 
+// useRef info + Blur to clear button focus after clicks
+// https://www.w3schools.com/react/react_useref.asp
+// https://www.w3schools.com/jsref/met_html_blur.asp
+
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import Axios from 'axios';
@@ -123,6 +127,10 @@ function BiologicalAssetsPage ({hostURL}) {
                     should be heavily prioritized over less severe misalignments. For example, a severity of 1 implies that under worst-case conditions, an asset could 
                     escape containment. A severity of 9 indicates that the asset could break out of containment at any time, and that they are incredibly likely to do so.
                 </p>
+                <p>
+                    Click the T-Rex fossil button (* in some browsers) in the corresponding row to "fix" (update) the corresponding Biological Asset record, 
+                    once the placement issue is resolved.
+                </p>
                 <div class="scrollableTable">
                     <table>
                         <tr>
@@ -132,6 +140,7 @@ function BiologicalAssetsPage ({hostURL}) {
                             <th>Facility Security</th>
                             <th>Asset Threat</th>
                             <th>Severity</th>
+                            <th>Fix</th> 
                         </tr>
                         {assetSecMismatchList.map((val)=> {
                             return (
@@ -142,6 +151,7 @@ function BiologicalAssetsPage ({hostURL}) {
                                     <td>{val.securityRating}</td>
                                     <td>{val.threatLevel}</td>
                                     <td>{val.severity}</td>
+                                    <td><button onClick={()=> {navToUpdate(val)}}>*</button></td>
                                 </tr>
                             )
                         })}
@@ -158,6 +168,10 @@ function BiologicalAssetsPage ({hostURL}) {
                     While not as critical as a security mismatch, it is still important that assets are assigned to appropriate habitats to ensure that they
                     are happy and healthy.
                 </p>
+                <p>
+                    Click the T-Rex fossil button (* in some browsers) in the corresponding row to "fix" (update) the corresponding Biological Asset record, 
+                    once the placement issue is resolved.
+                </p>
                 <div class="scrollableTable">
                     <table>
                         <tr>
@@ -166,6 +180,7 @@ function BiologicalAssetsPage ({hostURL}) {
                             <th>Facility</th>
                             <th>Current Habitat</th>
                             <th>Needed Habitat</th>
+                            <th>Fix</th>
                         </tr>
                         {assetHabMismatchList.map((val)=> {
                             // Set off the alarm bells for null habitats, because it means fun times in the park
@@ -179,7 +194,11 @@ function BiologicalAssetsPage ({hostURL}) {
                                     <td>{val.currentWrongHome}</td>
                                     <td>{filteredHab}</td>
                                     <td>{val.needsHabitat}</td>
+                                    <td><button onClick={()=> {navToUpdate(val)}}>*</button></td>
                                 </tr>
+                                // Want to add fix button but facility isn't pre-loading into update form? Works on security
+                                // Need ref to facilityName?
+                                // ... probably b/c of currentWrongHome name; just need to change it to facilityName in query
                             )
                         })}
                     </table>

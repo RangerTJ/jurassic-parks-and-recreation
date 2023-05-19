@@ -422,7 +422,7 @@ GROUP BY Parks.parkName
 ORDER BY ParkCost DESC;
 
 -- SELECT biological assets in a non-ideal habitat (for use in summary report to quickly flag down inappropriate assignments)
-SELECT BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName AS currentWrongHome, currentHab.habitatName AS currentHabitat, speciesHab.habitatName AS needsHabitat
+SELECT BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName, currentHab.habitatName AS currentHabitat, speciesHab.habitatName AS needsHabitat
 FROM BiologicalAssets
 -- Need to JOIN BioAssets -> Species -> Facilities
 JOIN Species ON BiologicalAssets.idSpecies = Species.idSpecies
