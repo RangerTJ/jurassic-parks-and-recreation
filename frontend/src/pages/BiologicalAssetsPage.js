@@ -52,6 +52,7 @@ function BiologicalAssetsPage ({hostURL}) {
 
     // DELETE - Deletes target bio asset and refreshes all 3 tables
     const delBiologicalAsset = (delID) => {
+        if (window.confirm(`Are you sure you want to remove Asset #${delID}?`)) {
         Axios.delete(deleteBiologicalAssetsURL + delID)
         .then(() => {Axios.get(getBiologicalAssetsURL)
         .then((response) => {setBiologicalAssetList(response.data);
@@ -61,11 +62,15 @@ function BiologicalAssetsPage ({hostURL}) {
             console.log(response.data)})
         .then(() => {Axios.get(checkBiologicalAssetsSecurityURL)
         .then((response) => {setAssetSecMismatchList(response.data);
-            console.log(response.data)});
+            console.log(response.data)})
+        .then(alert(`Biological Asset #${delID} has been removed from the database.`)
+            );
           });
         });
       });
+     }; 
     };
+    // Lol at all the parenthesis. No idea how to clean that up or make it look consistent. Just stack 'em?
 
     // READ Apply Species Filter to Bio Asset Table
     const speciesFilter = () => {
