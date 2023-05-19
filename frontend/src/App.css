@@ -189,14 +189,14 @@ td {
 /* Buttons and Forms */
 button {
   color: var(--parkYellow);
-  border: outset var(--dominionAmberMedClear);
-  background-color: var(--parkRed);
+  border: outset var(--dominionAmberDarkClear);
+  background-color: var(--dominionEarth);
   border-radius: 20px;
   font-family: var(--jpFont);
   font-size:xx-large;
   outline: none;
-  box-shadow: 1px 1px 5px black;
-  text-shadow: 1px 1px 5px var(--dominionAmberBright);
+  box-shadow: 1px 1px 15px black;
+  text-shadow: 1px 1px 5px black;
 }
 
 button:hover {

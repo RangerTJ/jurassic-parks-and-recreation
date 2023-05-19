@@ -490,6 +490,7 @@ ORDER BY Facilities.facilityName ASC;
 
 
 -- MORE CUSTOM REPORT IDEAS
+-- View Enclosure Inhabitants (for a specific enclosure)
 -- Cost Analysis Report by Biological Asset
 -- Cost Analysis Report by Employee
 -- Search for all tasks associated with an employee

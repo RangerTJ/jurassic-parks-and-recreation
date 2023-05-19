@@ -105,6 +105,15 @@ function BiologicalAssetsPage ({hostURL}) {
         <>
             <h2>Biological Assets</h2>
             <article>
+                <h3>Add New Biological Asset</h3>
+                <p>
+                    Click the "Create" button below to add a new Biological Asset to the DINO database.
+                </p>
+                <div>
+                    <p><button onClick={() => navTo("/BiologicalAssetsAdd")}>Create</button></p>
+                </div>
+            </article>
+            <article>
                 <h3>Security Risks</h3>
                 <p>
                     The table below shows detected security risks where an asset's current threat level is greater than its current facility's security rating.
@@ -175,15 +184,6 @@ function BiologicalAssetsPage ({hostURL}) {
                             )
                         })}
                     </table>
-                </div>
-            </article>
-            <article>
-                <h3>Add New Biological Asset</h3>
-                <p>
-                    Click the "Create" button below to add a new Biological Asset to the DINO database.
-                </p>
-                <div>
-                    <p><button onClick={() => navTo("/BiologicalAssetsAdd")}>Create</button></p>
                 </div>
             </article>
             <article>
