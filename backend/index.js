@@ -151,6 +151,23 @@ app.put('/api/updateBiologicalAssets', (req, res) =>{
     });
 });
 
+// READ Assets Filtered by Species
+app.post('/api/filterBioAssetsBySpecies', (req, res) =>{
+    const speciesName = req.body.speciesName
+    const sqlRead = `
+    SELECT BiologicalAssets.idBiologicalAsset, BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName 
+    FROM BiologicalAssets
+    JOIN Species ON BiologicalAssets.idSpecies = Species.idSpecies
+    JOIN Facilities ON BiologicalAssets.idFacility = Facilities.idFacility
+    WHERE Species.speciesName = ?
+    ORDER BY idBiologicalAsset ASC;
+    `;
+    db.query(sqlRead, speciesName, (err, result)=> {
+        console.log(result);
+        res.send(result);
+    });
+});
+
 // DELETE Biological Asset
 app.delete('/api/deleteBiologicalAssets/:idBiologicalAsset', (req, res) =>{
     const idBiologicalAsset = req.params.idBiologicalAsset

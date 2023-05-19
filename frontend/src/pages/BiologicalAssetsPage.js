@@ -20,20 +20,19 @@ function BiologicalAssetsPage ({hostURL}) {
     const deleteBiologicalAssetsURL = hostURL + '/api/deleteBiologicalAssets/';  // TO DO - NEED TO ADD USE STATES AND CRUD FUNCTIONS FOR THIS; INSERT/UPDATE GO ON RESPECTIVE FORM PAGES
     const checkBiologicalAssetsHabitatsURL = hostURL + '/api/checkBiologicalAssetsHabitats';  // Habitat report for welcome screen
     const checkBiologicalAssetsSecurityURL = hostURL + '/api/checkBiologicalAssetsSecurity';  // Security report for welcome screen
+    const filterBioAssetsBySpeciesURL = hostURL + '/api/filterBioAssetsBySpecies';  // Security report for welcome screen
 
 
     // Bio Asset Table Functions
     const [biologicalAssetList, setBiologicalAssetList] = useState([])
     const [assetHabMismatchList, setAssetHabMismatchList] = useState([])
     const [assetSecMismatchList, setAssetSecMismatchList] = useState([])
+    const [species, setSpecies] = useState('')
 
     // READ Populate Biological Asset Table
     useEffect(()=> {
-        Axios.get(getBiologicalAssetsURL).then((response)=> {
-            setBiologicalAssetList(response.data)
-            console.log(response.data)
-            })
-        }, [])
+        getAllBioAssets();
+    }, [])
 
     // READ Asset Habitat Alerts
     useEffect(()=> {
@@ -67,6 +66,24 @@ function BiologicalAssetsPage ({hostURL}) {
         });
       });
     };
+
+    // READ Apply Species Filter to Bio Asset Table
+    const speciesFilter = () => {
+        Axios.post(filterBioAssetsBySpeciesURL, {speciesName: species})
+        .then((response)=> {setBiologicalAssetList(response.data)})
+    }
+
+    const getAllBioAssets = ()=> {
+        Axios.get(getBiologicalAssetsURL)
+        .then((response)=> {setBiologicalAssetList(response.data)})
+    }
+
+    // useEffect(()=> {
+    //     Axios.get(filterBioAssetsBySpeciesURL).then((response)=> {
+    //         setBiologicalAssetList(response.data)
+    //         console.log(response.data)
+    //         })
+    //     }, [setSpecies])
 
     // UPDATE Primer: Navigate set things to change and navigate to update page
     // https://reactrouter.com/en/main/hooks/use-navigate (passing states to next page)
@@ -175,8 +192,10 @@ function BiologicalAssetsPage ({hostURL}) {
                     buttons to update or delete them.
                 </p>
                 <p>
-                    <SelectorSpecies hostURL={hostURL}/>
+                    <SelectorSpecies hostURL={hostURL} setSpecies={setSpecies} species={species}/>
+                    <div><button onClick={speciesFilter}>Apply Filter</button><button onClick={getAllBioAssets}>Reset</button></div>
                     {/* TODO: LOGIC FOR THIS PAGE TO MAKE SPECIES SELECTOR SELECTION DO FILTER QUERY */}
+                    {/* Reset filter button / need a flag to monitor for useEFfect and then to reset flag when it's reset */}
                 </p>
                 <div class="scrollableTable">
                     <table>
