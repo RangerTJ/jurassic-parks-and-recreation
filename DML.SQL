@@ -309,8 +309,8 @@ WHERE idTaskCategory = :idTaskCategory_input;
 -- Biological Asset
 UPDATE BiologicalAssets
 SET     idSpecies =             (SELECT idSpecies FROM Species WHERE speciesName = :speciesName_input),
-SET     idFacility =            (SELECT idFacility FROM Facilities WHERE facilityName = :facilityName_input),
-SET     bioAssetName = :bioAssetName_input
+        idFacility =            (SELECT idFacility FROM Facilities WHERE facilityName = :facilityName_input),
+        bioAssetName = :bioAssetName_input
 WHERE   idBiologicalAsset = :idBiologicalAsset_input;
 
 -- Habitat
@@ -327,8 +327,8 @@ WHERE idDiet = :idDiet_input;
 -- Species
 UPDATE Species
 SET     idDiet =                (SELECT idDiet FROM Diets WHERE dietName = :dietName_input),
-SET     idHabitat =             (SELECT idHabitat FROM Habitats WHERE habitatName = :habitatName_input),
-SET     speciesName = :speciesName_input, speciesDescription = :speciesDescription_input, 
+        idHabitat =             (SELECT idHabitat FROM Habitats WHERE habitatName = :habitatName_input),
+        speciesName = :speciesName_input, speciesDescription = :speciesDescription_input, 
         threatLevel = :threatLevel_input, speciesPhoto = :speciesPhoto_input
 WHERE   idSpecies = :idSpecies_input;
 

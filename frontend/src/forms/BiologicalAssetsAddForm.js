@@ -8,9 +8,6 @@ import SelectorSpecies from "../components/selectorSpecies";
 import SelectorFacilities from "../components/selectorFacilities";
 
 
-// TO DO NOTE TO SELF: NEED TO PASS setSpecies/Facility States to children then list up again
-
-
 // HostURL Passed from App.js
 function BiologicalAssetsAddForm ({hostURL}) {
 
@@ -35,7 +32,7 @@ function BiologicalAssetsAddForm ({hostURL}) {
             bioAssetName: name,
             facilityName: facility,
         });
-        // navTo BioAssets page after this
+        navTo('/BiologicalAssets');
     };
 
     return (

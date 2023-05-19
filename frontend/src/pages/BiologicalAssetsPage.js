@@ -4,8 +4,10 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import Axios from 'axios';
+import SelectorSpecies from "../components/selectorSpecies";
 
 // TODO: Add Species Filter FOR MAIN TABLE (using dynamic drop-down array) / Needs states and functions and stuff
+// set bioAssetList to the results of the filtered query endpoint
 
 // HostURL Passed from App.js
 function BiologicalAssetsPage ({hostURL}) {
@@ -48,7 +50,7 @@ function BiologicalAssetsPage ({hostURL}) {
         console.log(response.data)
         })
     }, []);
-    
+
     // DELETE - Deletes target bio asset and refreshes all 3 tables
     const delBiologicalAsset = (delID) => {
         Axios.delete(deleteBiologicalAssetsURL + delID)
@@ -65,6 +67,21 @@ function BiologicalAssetsPage ({hostURL}) {
         });
       });
     };
+
+    // UPDATE Primer: Navigate set things to change and navigate to update page
+    // https://reactrouter.com/en/main/hooks/use-navigate (passing states to next page)
+    const navToUpdate = (updateVal) => {
+        const state = {
+        oldName: updateVal.bioAssetName,
+        oldSpecies: updateVal.speciesName,
+        oldFacility: updateVal.facilityName,
+        id: updateVal.idBiologicalAsset
+    };
+        navTo("/BiologicalAssetsUpdate", {state});
+    }
+
+    // Use location to get the state ex. this.props.router.push
+    // May not be needed? Try just setting old, then having those as passed-in vars
 
     return (
         <>
@@ -158,26 +175,8 @@ function BiologicalAssetsPage ({hostURL}) {
                     buttons to update or delete them.
                 </p>
                 <p>
-                    {/* <!-- Populated by Dynamic SQL Call --> */}
-                    <div><label for="assetSpecies" class="required">Filter by Species</label></div>
-                    <select name="assetSpecies" id="assetSpecies">
-                        <option value="" hidden>Choose an option</option>
-                        <option value="1">Tyrannosaurus Rex</option>
-                        <option value="2">Velociraptor</option>
-                        <option value="3">Triceratops</option>
-                        <option value="4">Brachiosaurus</option>
-                        <option value="5">Stegosaurus</option>
-                        <option value="6">Spinosaurus</option>
-                        <option value="7">Allosaurus</option>
-                        <option value="8">Ankylosaurus</option>
-                        <option value="9">Parasaurolophus</option>
-                        <option value="10">Mosasaurus</option>
-                        <option value="11">Hesperornis</option>
-                        <option value="12">Thescelosaurus</option>
-                        <option value="13">Diplocaulus</option>
-                        <option value="14">Metriorhynchus</option>
-                        <option value="15">Eustreptospondylus</option>
-                    </select>
+                    <SelectorSpecies hostURL={hostURL}/>
+                    {/* TODO: LOGIC FOR THIS PAGE TO MAKE SPECIES SELECTOR SELECTION DO FILTER QUERY */}
                 </p>
                 <div class="scrollableTable">
                     <table>
@@ -199,8 +198,7 @@ function BiologicalAssetsPage ({hostURL}) {
                                     <td>{val.bioAssetName}</td>
                                     <td>{val.speciesName}</td>
                                     <td>{val.facilityName}</td>
-                                    <td><button onClick={() => navTo("/BiologicalAssetsUpdate")}>Update</button></td>
-                                    {/* TODO: ADD DELETE FUNCTIONALITY ON CLICK */}
+                                    <td><button onClick={()=> {navToUpdate(val)}}>Update</button></td>
                                     <td><button onClick={()=> {delBiologicalAsset(val.idBiologicalAsset)}}>Delete</button></td>
                                 </tr>
                             )

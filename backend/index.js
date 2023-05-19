@@ -140,10 +140,10 @@ app.put('/api/updateBiologicalAssets', (req, res) =>{
     const idBiologicalAsset = req.body.idBiologicalAsset
     const sqlUpdate = `
     UPDATE BiologicalAssets
-    SET     idSpecies =             (SELECT idSpecies FROM Species WHERE speciesName = :speciesName_input),
-    SET     idFacility =            (SELECT idFacility FROM Facilities WHERE facilityName = :facilityName_input),
-    SET     bioAssetName = :bioAssetName_input
-    WHERE   idBiologicalAsset = :idBiologicalAsset_input;
+    SET     idSpecies =             (SELECT idSpecies FROM Species WHERE speciesName = ?),
+            idFacility =            (SELECT idFacility FROM Facilities WHERE facilityName = ?),
+            bioAssetName = ?
+    WHERE   idBiologicalAsset = ?;
     `;
     db.query(sqlUpdate, [speciesName, facilityName, bioAssetName, idBiologicalAsset], (err, result)=> {
         if (err) console.log(err); else console.log(result);
