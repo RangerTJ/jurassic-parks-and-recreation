@@ -24,11 +24,19 @@ function BiologicalAssetsUpdateForm ({hostURL}) {
     const [name, setName] = useState(oldName)
     const [facility, setFacility] = useState('')
 
+    useEffect(()=> {
+        setSpecies(oldSpecies);
+        setFacility(oldFacility);
+        setName(oldName);
+    }, [])
+
     // TO DO: useEffect to get species and facility lists and save them to useState
     // Map these arrays to respective select boxes (then figure out how to pre-select one and pre-populate for update)
     // Insert function for onClick / mod onClick to insert, then navigate back to bio assets... possible success alert?
 
     // **NEED TO PASS ID FROM TABLE TOO**
+
+    // SET SPECIES AND FACILITY TO INITIAL VALUE FROM QUERY
 
     // CREATE - Insert New Bio Asset
     const updateBioAsset = () => {
@@ -56,6 +64,7 @@ function BiologicalAssetsUpdateForm ({hostURL}) {
                             {/* Ex. preSelected={"Spinosaurus"} as a prop */}
                             <p>Asset ID# {id}</p>
                             <p>Old Info: {oldFacility}, {oldSpecies}, {oldName}</p>
+                            <p>{species} H!</p>
                             <SelectorSpecies  hostURL={hostURL} species={species} setSpecies={setSpecies} preSelected={oldSpecies}/>
                             <div><label htmlFor="bioAssetName">Name</label></div>
                             <input 

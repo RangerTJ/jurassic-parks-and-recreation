@@ -9,15 +9,9 @@ import Axios from 'axios';
 // https://stackoverflow.com/questions/69111477/how-to-iterate-through-public-assets-images-so-i-can-get-all-images-filename-in
 
 
-
-// Need to add a logic fork for whether it's required or not (for bio assets ONLY, all other selects mandatory in all cases)
+// Self-Reminder: Need to add a logic fork for whether it's required or not (for bio assets selector ONLY, all other selects mandatory in all cases)
 // Render a different element depending on which one it is
 
-// *******
-// UPDATE ISSUE: STARTS AS NULL VALUE EVEN THOUGH VISIBLE FILLED... HOW TO MAKE IT DEFAULT TO VALUE FOR EDIT?
-// If we can figure this out, we'll have update working too!
-// ISSUE IS PROBABLY THAT SET SPECIES ONLY UPDATES ON CHANGE
-// *******
 
 // I *think* this will work so that if no species is passed, it defaults to null, and otherwise defaults it to the selection
 const SelectorSpecies = ({preSelected, isRequired, hostURL, species, setSpecies}) => {
@@ -33,12 +27,9 @@ const SelectorSpecies = ({preSelected, isRequired, hostURL, species, setSpecies}
     setSpecies(event.target.value)
   };
   
-
   // Update the field to the preset option any time it's null
   useEffect(()=> {
     if (preSelected !== null) {setSelected(preSelected);}}, [preSelected])
-
-  // useEffect(()=> {selectionHandler({ target: { value: selected } })})
 
   // BiologicalAssets SQL Endpoints
   const getListURL = hostURL + '/api/getSpeciesList';

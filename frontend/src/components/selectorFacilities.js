@@ -9,15 +9,6 @@ import Axios from 'axios';
 // https://stackoverflow.com/questions/69111477/how-to-iterate-through-public-assets-images-so-i-can-get-all-images-filename-in
 
 
-// Idea pass in variable to designate folder
-// Make folder selectable... from drop down somehow?
-// ... or just a component for each image select type and hard code in the folders
-
-
-// Need to add a logic fork for whether it's required or not (for bio assets ONLY, all other selects mandatory in all cases)
-// Render a different element depending on which one it is
-
-
 // I *think* this will work so that if no species is passed, it defaults to null, and otherwise defaults it to the selection
 const SelectorFacilities = ({preSelected, isRequired, hostURL, facility, setFacility}) => {
 
