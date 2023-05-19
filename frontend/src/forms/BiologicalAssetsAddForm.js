@@ -8,6 +8,9 @@ import SelectorSpecies from "../components/selectorSpecies";
 import SelectorFacilities from "../components/selectorFacilities";
 
 
+// TO DO NOTE TO SELF: NEED TO PASS setSpecies/Facility States to children then list up again
+
+
 // HostURL Passed from App.js
 function BiologicalAssetsAddForm ({hostURL}) {
 
@@ -24,6 +27,17 @@ function BiologicalAssetsAddForm ({hostURL}) {
     // Map these arrays to respective select boxes (then figure out how to pre-select one and pre-populate for update)
     // Insert function for onClick / mod onClick to insert, then navigate back to bio assets... possible success alert?
 
+
+    // CREATE - Insert New Bio Asset
+    const submitBioAsset = () => {
+        Axios.post(createBiologicalAssetsURL, {
+            speciesName: species,
+            bioAssetName: name,
+            facilityName: facility,
+        });
+        // navTo BioAssets page after this
+    };
+
     return (
         <>
             <h2>Add Biological Asset</h2>
@@ -36,13 +50,10 @@ function BiologicalAssetsAddForm ({hostURL}) {
                 <form>
                     <fieldset>
                         <legend>Information</legend>
-                        <p>
                             {/* {How to define autofocus here?} */}
                             {/* Can pass a preSelected string that matches a name on the list to auto-select it */}
                             {/* Ex. preSelected={"Spinosaurus"} as a prop */}
-                            <SelectorSpecies  hostURL={hostURL}/>
-                        </p>
-                        <p>
+                            <SelectorSpecies  hostURL={hostURL} species={species} setSpecies={setSpecies}/>
                             <div><label htmlFor="bioAssetName">Name</label></div>
                             <input 
                                 type="text" 
@@ -51,20 +62,11 @@ function BiologicalAssetsAddForm ({hostURL}) {
                                 required 
                                 onChange={(e) => {setName(e.target.value)}
                                 }/>
-                            {/* <input type="text"
-                                        name="bioAssetName" 
-                                        id ="bioAssetName"
-                                        required 
-                                        placeholder="Ex. Meadow Stomper"></input> */}
-                        </p>
-                        <p>
-                            <SelectorFacilities preSelected={"Jurassic Stadium"} hostURL={hostURL}/>
-                        </p>
+                            <SelectorFacilities hostURL={hostURL} facility={facility} setFacility={setFacility}/>
                     </fieldset>
                 </form>
                 <div>
-                    {/* Also need to make it actually do the insert SQL here somehow */}
-                    <p><button onClick={() => navTo("/BiologicalAssets")}>Add Asset</button></p>
+                    <p><button onClick={submitBioAsset}>Add Asset</button></p>
                 </div>
             </article>
         </>
