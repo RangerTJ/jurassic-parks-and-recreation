@@ -84,12 +84,6 @@ function BiologicalAssetsPage ({hostURL}) {
         .then((response)=> {setBiologicalAssetList(response.data)})
     }
 
-    // useEffect(()=> {
-    //     Axios.get(filterBioAssetsBySpeciesURL).then((response)=> {
-    //         setBiologicalAssetList(response.data)
-    //         console.log(response.data)
-    //         })
-    //     }, [setSpecies])
 
     // UPDATE Primer: Navigate set things to change and navigate to update page
     // https://reactrouter.com/en/main/hooks/use-navigate (passing states to next page)

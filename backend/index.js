@@ -60,6 +60,21 @@ app.get('/api/getCategoryCost', (req, res) =>{
     });
 });
 
+
+///////////////////////////
+// Employee Task Queries //
+///////////////////////////
+
+// READ
+
+// CREATE
+
+// UPDATE
+
+// DELETE
+
+
+
 //////////////////////////////
 // Biological Asset Queries //
 //////////////////////////////

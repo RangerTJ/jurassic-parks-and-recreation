@@ -2,13 +2,21 @@ import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
 
 
+////////////////
+// TO DO: ALL //
+////////////////
+
 // Blend of below citation and ChatGPT syntax recomendation for mapping to a select menu
 // Current code copied directly from here by user Savior from Stackoverflow; will adapt as needed
 // https://stackoverflow.com/questions/69111477/how-to-iterate-through-public-assets-images-so-i-can-get-all-images-filename-in
 
 
+// Self-Reminder: Need to add a logic fork for whether it's required or not (for bio assets selector ONLY, all other selects mandatory in all cases)
+// Render a different element depending on which one it is
+
+
 // I *think* this will work so that if no species is passed, it defaults to null, and otherwise defaults it to the selection
-const SelectorFacilities = ({preSelected, isRequired, autofocus, hostURL, facility, setFacility}) => {
+const SelectorSpecies = ({preSelected, isRequired, autofocus, hostURL, species, setSpecies}) => {
 
   // Create useState for the selection and list
   // For update, just update pre-selected image to match an input variable first
@@ -18,14 +26,15 @@ const SelectorFacilities = ({preSelected, isRequired, autofocus, hostURL, facili
   // Selection event handler to pass on selection data to DB
   const selectionHandler = (event) => {
     setSelected(event.target.value)
-    setFacility(event.target.value)
+    setSpecies(event.target.value)
   };
-
-  // Update pre-selected
-  useEffect(()=> {setSelected(preSelected)}, []);
   
-  // Facilities SQL Endpoints
-  const getListURL = hostURL + '/api/getFacilitiesList';
+  // Update the field to the preset option any time it's null
+  useEffect(()=> {
+    if (preSelected !== null) {setSelected(preSelected);}}, [preSelected])
+
+  // BiologicalAssets SQL Endpoints
+  const getListURL = hostURL + '/api/getSpeciesList';
 
   // Populate list
   useEffect(()=> {
@@ -38,12 +47,12 @@ const SelectorFacilities = ({preSelected, isRequired, autofocus, hostURL, facili
   // Autofocus and isRequired elements passed in can tailor it to use on different pages
   return (
     <>
-      <div><label htmlFor="facilitiesSelector">Facility</label></div>
-      <select id="facilitiesSelector" value={selected} onChange={selectionHandler} autofocus={autofocus ? true : false} required={isRequired ? true : false}>
+      <div><label htmlFor="speciesSelector">Species</label></div>
+      <select id="speciesSelector" value={selected} onChange={selectionHandler} autofocus={autofocus ? true : false} required={isRequired ? true : false}>
         {/* Set default option then map query results to populate the select menu */}
-        <option value="">None (Select a Facility)</option>
+        <option value="">None (Select a Species)</option>
         {list.map((val, index) => {
-          return <option key={index} value={val.facilityName}>{val.facilityName} (Security: {val.securityRating})</option>;
+          return <option key={index} value={val.speciesName}>{val.speciesName} (Threat: {val.threatLevel})</option>;
         })}
       </select>
       {/* <p>{preSelected},{selected} DEBUG STUFF</p> */}
@@ -52,4 +61,4 @@ const SelectorFacilities = ({preSelected, isRequired, autofocus, hostURL, facili
 };
 
 
-export default SelectorFacilities
+export default SelectorSpecies

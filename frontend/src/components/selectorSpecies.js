@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
 
-// Add useEffect so it refreshes?
-// Add useState to save selection?
 
 // Blend of below citation and ChatGPT syntax recomendation for mapping to a select menu
 // Current code copied directly from here by user Savior from Stackoverflow; will adapt as needed
