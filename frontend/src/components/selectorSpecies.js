@@ -49,7 +49,7 @@ const SelectorSpecies = ({preSelected, isRequired, hostURL, species, setSpecies}
       <select id="speciesSelector" value={selected} onChange={selectionHandler} required>
 
         {/* Map the Options after hard-coded default */}
-        <option value="">Select a Species</option>
+        <option value="">None (Select a Species)</option>
         {list.map((val, index) => {
           return <option key={index} value={val.speciesName}>{val.speciesName} (Threat: {val.threatLevel})</option>;
         })}

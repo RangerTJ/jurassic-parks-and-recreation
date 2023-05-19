@@ -69,6 +69,7 @@ function BiologicalAssetsPage ({hostURL}) {
 
     // READ Apply Species Filter to Bio Asset Table
     const speciesFilter = () => {
+        species === "" ? getAllBioAssets() : 
         Axios.post(filterBioAssetsBySpeciesURL, {speciesName: species})
         .then((response)=> {setBiologicalAssetList(response.data)})
     }
@@ -189,13 +190,14 @@ function BiologicalAssetsPage ({hostURL}) {
                 <h3>View Biological Assets</h3>
                 <p>
                     The table below shows existing information for Biological Assets entities and includes
-                    buttons to update or delete them.
+                    buttons to update or delete them. You can use the species selector below to filter for
+                    a specific species, then hit "Apply" for the filter to take effect. Select "None" and
+                    apply it to remove the species filter and return the entire database of biological assets 
+                    once more.
                 </p>
                 <p>
                     <SelectorSpecies hostURL={hostURL} setSpecies={setSpecies} species={species}/>
-                    <div><button onClick={speciesFilter}>Apply Filter</button><button onClick={getAllBioAssets}>Reset</button></div>
-                    {/* TODO: LOGIC FOR THIS PAGE TO MAKE SPECIES SELECTOR SELECTION DO FILTER QUERY */}
-                    {/* Reset filter button / need a flag to monitor for useEFfect and then to reset flag when it's reset */}
+                    <div><button onClick={speciesFilter}>Apply</button></div>
                 </p>
                 <div class="scrollableTable">
                     <table>
