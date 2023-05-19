@@ -20,19 +20,19 @@ function BiologicalAssetsAddForm ({hostURL}) {
     const [name, setName] = useState('')
     const [facility, setFacility] = useState('')
 
-    // TO DO: useEffect to get species and facility lists and save them to useState
-    // Map these arrays to respective select boxes (then figure out how to pre-select one and pre-populate for update)
-    // Insert function for onClick / mod onClick to insert, then navigate back to bio assets... possible success alert?
-
-
-    // CREATE - Insert New Bio Asset
+    // CREATE - Insert New Bio Asset then return to asset home
     const submitBioAsset = () => {
+        if (species && name && facility) {
         Axios.post(createBiologicalAssetsURL, {
             speciesName: species,
             bioAssetName: name,
             facilityName: facility,
         });
+        alert(`${name} has been added to the database!`);
         navTo('/BiologicalAssets');
+        } else {
+            alert("Please fill out all required fields and try again.")
+        };
     };
 
     return (

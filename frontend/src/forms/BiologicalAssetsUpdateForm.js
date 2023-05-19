@@ -11,7 +11,7 @@ import SelectorFacilities from "../components/selectorFacilities";
 // HostURL Passed from App.js
 function BiologicalAssetsUpdateForm ({hostURL}) {
 
-    // NEED TO UNDERSTAND/CITE (BOILERPLATE-ISH BUT NEEDS SOURCE?)
+    // NEED TO UNDERSTAND/CITE (BOILERPLATE-ISH BUT NEEDS SOURCE? Location allows using state from parent element)
     const location = useLocation();
     const { oldName, oldSpecies, oldFacility, id} = location.state;
 
@@ -30,23 +30,20 @@ function BiologicalAssetsUpdateForm ({hostURL}) {
         setName(oldName);
     }, [])
 
-    // TO DO: useEffect to get species and facility lists and save them to useState
-    // Map these arrays to respective select boxes (then figure out how to pre-select one and pre-populate for update)
-    // Insert function for onClick / mod onClick to insert, then navigate back to bio assets... possible success alert?
-
-    // **NEED TO PASS ID FROM TABLE TOO**
-
-    // SET SPECIES AND FACILITY TO INITIAL VALUE FROM QUERY
-
-    // CREATE - Insert New Bio Asset
+    // UPDATE - Submit Changes to a Bio Asset then return to Asset home
     const updateBioAsset = () => {
+        if (species && name && facility) {
         Axios.put(createBiologicalAssetsURL, {
             speciesName: species,
             bioAssetName: name,
             facilityName: facility,
             idBiologicalAsset: id
         });
+        alert(`${name}'s database entry has been updated!`)
         navTo('/BiologicalAssets');
+        } else {
+            alert("Please fill out all required fields and try again.")
+        };
     };
 
     return (
