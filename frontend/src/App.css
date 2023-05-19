@@ -310,13 +310,21 @@ overflow: auto;
 text-align: left;
 }
 
+/* Made so that the divs for select components have more standard spacing */
+.selectorComponent {
+
+}
+
 /* Happy Eater Egg Hunting! */
 .whte_rbt_obj {
 text-decoration: none;
 color: white;
 }
 
+
+/* ---------------------- */
 /* Small Screen Settings */
+/* -------------------- */
 @media (max-device-width: 780px) {
 
 h1 {

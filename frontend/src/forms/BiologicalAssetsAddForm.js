@@ -47,19 +47,22 @@ function BiologicalAssetsAddForm ({hostURL}) {
                 <form>
                     <fieldset>
                         <legend>Information</legend>
-                            {/* {How to define autofocus here?} */}
-                            {/* Can pass a preSelected string that matches a name on the list to auto-select it */}
-                            {/* Ex. preSelected={"Spinosaurus"} as a prop */}
-                            <SelectorSpecies  hostURL={hostURL} species={species} setSpecies={setSpecies}/>
-                            <div><label htmlFor="bioAssetName">Name</label></div>
-                            <input 
-                                type="text" 
-                                name="bioAssetName"
-                                placeholder="Ex. Meadow Stomper" 
-                                required 
-                                onChange={(e) => {setName(e.target.value)}
-                                }/>
-                            <SelectorFacilities hostURL={hostURL} facility={facility} setFacility={setFacility}/>
+                            <p>
+                                <SelectorSpecies  hostURL={hostURL} species={species} setSpecies={setSpecies} isRequired={true} autofocus={true}/>
+                            </p>
+                            <p>
+                                <div><label htmlFor="bioAssetName">Name</label></div>
+                                <input 
+                                    type="text" 
+                                    name="bioAssetName"
+                                    placeholder="Ex. Meadow Stomper" 
+                                    required 
+                                    onChange={(e) => {setName(e.target.value)}
+                                    }/>
+                            </p>
+                            <p>
+                                <SelectorFacilities hostURL={hostURL} facility={facility} setFacility={setFacility} isRequired={true}/>
+                            </p>
                     </fieldset>
                 </form>
                 <div>

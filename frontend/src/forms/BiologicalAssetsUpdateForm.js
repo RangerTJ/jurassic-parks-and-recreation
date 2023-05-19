@@ -59,13 +59,10 @@ function BiologicalAssetsUpdateForm ({hostURL}) {
                 <form>
                     <fieldset>
                         <legend>Information</legend>
-                            {/* {How to define autofocus here?} */}
-                            {/* Can pass a preSelected string that matches a name on the list to auto-select it */}
-                            {/* Ex. preSelected={"Spinosaurus"} as a prop */}
                             <p>Asset ID# {id}</p>
                             <p>Old Info: {oldFacility}, {oldSpecies}, {oldName}</p>
                             <p>{species} H!</p>
-                            <SelectorSpecies  hostURL={hostURL} species={species} setSpecies={setSpecies} preSelected={oldSpecies}/>
+                            <SelectorSpecies  hostURL={hostURL} species={species} setSpecies={setSpecies} preSelected={oldSpecies} isRequired={true} autofocus={true}/>
                             <div><label htmlFor="bioAssetName">Name</label></div>
                             <input 
                                 type="text" 
@@ -75,7 +72,7 @@ function BiologicalAssetsUpdateForm ({hostURL}) {
                                 value={name}
                                 onChange={(e) => {setName(e.target.value)}
                                 }/>
-                            <SelectorFacilities hostURL={hostURL} facility={facility} setFacility={setFacility} preSelected={oldFacility}/>
+                            <SelectorFacilities hostURL={hostURL} facility={facility} setFacility={setFacility} preSelected={oldFacility} isRequired={true}/>
                     </fieldset>
                 </form>
                 <div>

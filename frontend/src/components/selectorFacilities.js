@@ -10,7 +10,7 @@ import Axios from 'axios';
 
 
 // I *think* this will work so that if no species is passed, it defaults to null, and otherwise defaults it to the selection
-const SelectorFacilities = ({preSelected, isRequired, hostURL, facility, setFacility}) => {
+const SelectorFacilities = ({preSelected, isRequired, autofocus, hostURL, facility, setFacility}) => {
 
   // Create useState for the selection and list
   // For update, just update pre-selected image to match an input variable first
@@ -37,20 +37,18 @@ const SelectorFacilities = ({preSelected, isRequired, hostURL, facility, setFaci
     })
   }, []);
 
-  // Website Manipulation
+  // Autofocus and isRequired elements passed in can tailor it to use on different pages
   return (
     <>
-    
       <div><label htmlFor="facilitiesSelector">Facility</label></div>
-      <select id="facilitiesSelector" value={selected} onChange={selectionHandler} required>
-
-        {/* Map the Options after hard-coded default */}
-        <option value="">Select a Facility</option>
+      <select id="facilitiesSelector" value={selected} onChange={selectionHandler} autofocus={autofocus ? true : false} required={isRequired ? true : false}>
+        {/* Set default option then map query results to populate the select menu */}
+        <option value="">None (Select a Facility)</option>
         {list.map((val, index) => {
           return <option key={index} value={val.facilityName}>{val.facilityName} (Security: {val.securityRating})</option>;
         })}
       </select>
-      <p>{preSelected},{selected} DEBUG STUFF</p>
+      {/* <p>{preSelected},{selected} DEBUG STUFF</p> */}
     </>
   );
 };
