@@ -4,8 +4,9 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import Axios from 'axios';
-import SelectorSpecies from "../components/selectorSpecies";
-import SelectorFacilities from "../components/selectorFacilities";
+import SelectorTasksAssigned from "../components/selectorTasksAssigned";
+import SelectorEmployees from "../components/selectorEmployees";
+import SelectorTaskCategories from "../components/selectorTaskCategories";
 
 
 ////////////////
@@ -17,33 +18,45 @@ function EmployeeTasksUpdateForm ({hostURL}) {
 
     // NEED TO UNDERSTAND/CITE (BOILERPLATE-ISH BUT NEEDS SOURCE? Location allows using state from parent element)
     const location = useLocation();
-    const { oldName, oldSpecies, oldFacility, id} = location.state;
+    const { id, oldTask, oldEmployee, oldCategory, oldHours, oldCost, oldStart, oldEnd} = location.state;
 
     // BiologicalAssets SQL Endpoints
     const updateEmployeeTasksURL = hostURL + '/api/updateEmployeeTasks';
     const navTo = useNavigate();
 
-    // Bio Asset States for the Form (2x arrays for select menus + 3x values to submit)
-    const [species, setSpecies] = useState('')
-    const [name, setName] = useState(oldName)
-    const [facility, setFacility] = useState('')
+    // Emp Task States for the Form
+    const [taskName, setTaskName] = useState('')
+    const [employeeUsername, setEmployeeUsername] = useState('')
+    const [categoryName, setCategoryName] = useState('')
+    const [taskHoursWorked, setTaskHoursWorked] = useState('')
+    const [empTaskCost, setEmpTaskCost] = useState('')
+    const [empTaskStart, setEmpTaskStart] = useState('')
+    const [empTaskEnd, setEmpTaskEnd] = useState('')
 
+    // Pre-sets all the old values into the fields
     useEffect(()=> {
-        setSpecies(oldSpecies);
-        setFacility(oldFacility);
-        setName(oldName);
+        setTaskName(oldTask);
+        setEmployeeUsername(oldEmployee);
+        setCategoryName(oldCategory);
+        setTaskHoursWorked(oldHours);
+        setEmpTaskCost(oldCost);
+        setEmpTaskStart(oldStart);
+        setEmpTaskEnd(oldEnd);
     }, [])
 
     // UPDATE - Submit Changes to a Bio Asset then return to Asset home
     const update = () => {
-        if (species && name && facility) {
+        if (taskName && employeeUsername && categoryName && taskHoursWorked && empTaskCost && empTaskStart && empTaskEnd) {
         Axios.put(updateEmployeeTasksURL, {
-            speciesName: species,
-            bioAssetName: name,
-            facilityName: facility,
-            idBiologicalAsset: id
+            taskName: taskName,
+            employeeUsername: employeeUsername,
+            categoryName: categoryName,
+            taskHoursWorked: taskHoursWorked,
+            empTaskCost: empTaskCost,
+            empTaskStart: empTaskStart,
+            empTaskEnd: empTaskEnd,
         });
-        alert(`${name}'s database entry has been updated!`)
+        alert(`A task report for ${employeeUsername}'s ${categoryName} work on ${taskName} has been updated!`);
         navTo('/BiologicalAssets');
         } else {
             alert("Please fill out all required fields and try again.")
@@ -52,28 +65,73 @@ function EmployeeTasksUpdateForm ({hostURL}) {
 
     return (
         <>
-            <h2>Update Employee Task</h2>
+            <h2>Update Employee Task Record</h2>
             <article>
                 <p>
-                    Make changes to this asset and click "Save" to retain them.
+                    Make changes to this Employee Task record and click "Save" to retain them.
                 </p>
                 <form>
                     <fieldset>
-                        <legend>Information</legend>
-                            <p>Asset ID# {id}</p>
-                            <p>Old Info: {oldFacility}, {oldSpecies}, {oldName}</p>
-                            <p>{species} H!</p>
-                            <SelectorSpecies  hostURL={hostURL} species={species} setSpecies={setSpecies} preSelected={oldSpecies} isRequired={true} autoFocus={true}/>
-                            <div><label htmlFor="bioAssetName">Name</label></div>
-                            <input 
-                                type="text" 
-                                name="bioAssetName"
-                                placeholder="Ex. Meadow Stomper" 
-                                required
-                                value={name}
-                                onChange={(e) => {setName(e.target.value)}
-                                }/>
-                            <SelectorFacilities hostURL={hostURL} facility={facility} setFacility={setFacility} preSelected={oldFacility} isRequired={true}/>
+                        <legend>Update Employee Task Report #{id}</legend>
+                        <p>DEBUG: {taskName} - {employeeUsername} - {categoryName}</p>
+                            <div className="selectorP">
+                                <SelectorTasksAssigned  hostURL={hostURL} taskName={taskName} setTaskName={setTaskName} isRequired={true} autoFocus={true} preSelected={oldTask}/>
+                                <div>Original: {oldTask}</div>
+                            </div>
+                            <div className="selectorP">
+                                <SelectorEmployees  hostURL={hostURL} employeeUsername={employeeUsername} setEmployeeUsername={setEmployeeUsername} isRequired={true} autoFocus={false} preSelected={oldEmployee}/>
+                                <div>Original: {oldEmployee}</div>
+                            </div>
+                            <div className="selectorP">
+                                <SelectorTaskCategories  hostURL={hostURL} categoryName={categoryName} setCategoryName={setCategoryName} isRequired={true} autoFocus={false} preSelected={oldCategory}/>
+                                <div>Original: {oldCategory}</div>
+                            </div>
+                            <div className="selectorP">
+                                <div><label htmlFor="hoursWorked">Hours Worked</label></div>
+                                <input 
+                                    type="number"
+                                    id="hoursWorked"
+                                    name="hoursWorked"
+                                    placeholder="Ex. 20" 
+                                    required 
+                                    onChange={(e) => {setTaskHoursWorked(e.target.value)}
+                                    }/>
+                                <div>Original: {oldHours}</div>
+                            </div>
+                            <div className="selectorP">
+                                <div><label htmlFor="empTaskCost">Costs</label></div>
+                                <input 
+                                    type="number"
+                                    id="empTaskCost"
+                                    name="empTaskCost"
+                                    placeholder="Ex. 2000.00" 
+                                    required 
+                                    onChange={(e) => {setEmpTaskCost(e.target.value)}
+                                    }/>
+                                <div>Original: {oldCost}</div>
+                            </div>
+                            <div className="selectorP">
+                                <div><label htmlFor="empTaskStart">Date Started</label></div>
+                                <input 
+                                    type="date"
+                                    id="empTaskStart"
+                                    name="empTaskStart"
+                                    required 
+                                    onChange={(e) => {setEmpTaskStart(e.target.value)}
+                                    }/>
+                                <div>Original: {oldStart}</div>
+                            </div>
+                            <div className="selectorP">
+                                <div><label htmlFor="empTaskStart">Date Completed</label></div>
+                                <input 
+                                    type="date"
+                                    id="empTaskEnd"
+                                    name="empTaskEnd"
+                                    required 
+                                    onChange={(e) => {setEmpTaskEnd(e.target.value)}
+                                    }/>
+                                <div>Original: {oldEnd}</div>
+                            </div>
                     </fieldset>
                 </form>
                 <div>

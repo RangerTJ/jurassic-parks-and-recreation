@@ -46,7 +46,7 @@ function EmployeeTasksAddForm ({hostURL}) {
 
     return (
         <>
-            <h2>Add Employee Task</h2>
+            <h2>Add Employee Task Record</h2>
             <article>
                 <p>
                     Please fill out this form to document an employee's work towards an assigned task within our managed park system. 

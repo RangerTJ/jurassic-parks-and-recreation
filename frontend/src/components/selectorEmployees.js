@@ -47,7 +47,7 @@ const SelectorEmployees = ({preSelected, isRequired, autofocus, hostURL, employe
   // Autofocus and isRequired elements passed in can tailor it to use on different pages
   return (
     <>
-      <div><label htmlFor="employeesSelector">Employees</label></div>
+      <div><label htmlFor="employeesSelector">Employee</label></div>
       <select id="employeesSelector" value={selected} onChange={selectionHandler} autofocus={autofocus ? true : false} required={isRequired ? true : false}>
         {/* Set default option then map query results to populate the select menu */}
         <option value="">None (Select an Employee)</option>

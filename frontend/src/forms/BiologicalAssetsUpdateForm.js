@@ -24,6 +24,7 @@ function BiologicalAssetsUpdateForm ({hostURL}) {
     const [name, setName] = useState(oldName)
     const [facility, setFacility] = useState('')
 
+    // Pre-sets all the old values into the fields
     useEffect(()=> {
         setSpecies(oldSpecies);
         setFacility(oldFacility);

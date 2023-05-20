@@ -68,12 +68,12 @@ app.get('/api/getCategoryCost', (req, res) =>{
 // READ - Select Employee Tasks
 app.get('/api/getEmployeeTasks', (req, res) =>{
     const sqlRead = `
-    SELECT  EmployeeTasks.idEmployeeTask, TasksAssigned.taskName, (SELECT CONCAT(Employees.firstName, ' ', Employees.lastName)) AS contributingEmployee,
+    SELECT  EmployeeTasks.idEmployeeTask, TasksAssigned.taskName, Employees.employeeUsername,
             TaskCategories.categoryName, EmployeeTasks.taskHoursWorked, EmployeeTasks.empTaskCost, EmployeeTasks.empTaskStart, EmployeeTasks.empTaskEnd
     FROM EmployeeTasks
     LEFT JOIN TasksAssigned ON EmployeeTasks.idTaskAssigned = TasksAssigned.idTaskAssigned
     LEFT JOIN TaskCategories ON EmployeeTasks.idTaskCategory = TaskCategories.idTaskCategory
-    LEFT JOIN Employees ON EmployeeTasks.idEmployee = Employees.idEmployee
+    JOIN Employees ON EmployeeTasks.idEmployee = Employees.idEmployee
     ORDER BY EmployeeTasks.idEmployeeTask ASC;
     `;
     db.query(sqlRead, (err, result)=> {
@@ -81,6 +81,27 @@ app.get('/api/getEmployeeTasks', (req, res) =>{
         res.send(result);
     });
 });
+
+// Read - Populate Update Stuff
+// app.get('/api/getEmployeeTasks', (req, res) =>{
+//     const sqlRead = `
+//     SELECT  EmployeeTasks.idEmployeeTask, TasksAssigned.taskName, Employees.employeeUsername,
+//             TaskCategories.categoryName, EmployeeTasks.taskHoursWorked, EmployeeTasks.empTaskCost, EmployeeTasks.empTaskStart, EmployeeTasks.empTaskEnd,
+//     FROM EmployeeTasks
+//     LEFT JOIN TasksAssigned ON EmployeeTasks.idTaskAssigned = TasksAssigned.idTaskAssigned
+//     LEFT JOIN TaskCategories ON EmployeeTasks.idTaskCategory = TaskCategories.idTaskCategory
+//     JOIN Employees ON EmployeeTasks.idEmployee = Employees.idEmployee
+//     ORDER BY EmployeeTasks.idEmployeeTask ASC;
+//     `;
+//     db.query(sqlRead, (err, result)=> {
+//         console.log(result);
+//         res.send(result);
+//     });
+// });
+
+
+
+
 
 // CREATE Employee Task Entry
 app.post('/api/insertEmployeeTasks', (req, res) =>{

@@ -51,9 +51,9 @@ function EmployeeTasksPage ({hostURL}) {
     // https://reactrouter.com/en/main/hooks/use-navigate (passing states to next page)
     const navToUpdate = (updateVal) => {
         const state = {
-        id: updateVal.taskName,
+        id: updateVal.idEmployeeTask,
         oldTask: updateVal.taskName,
-        oldEmployee: updateVal.contributingEmployee,
+        oldEmployee: updateVal.employeeUsername,
         oldCategory: updateVal.categoryName,
         oldHours: updateVal.taskHoursWorked,
         oldCost: updateVal.empTaskCost,
@@ -61,7 +61,7 @@ function EmployeeTasksPage ({hostURL}) {
         oldEnd: updateVal.empTaskEnd
         };
             navTo("/EmployeeTasksUpdate", {state});
-    }
+        };
 
     return (
         <>
@@ -112,7 +112,7 @@ function EmployeeTasksPage ({hostURL}) {
                                 <tr key={index}>
                                     <td>{val.idEmployeeTask}</td>
                                     <td>{val.taskName}</td>
-                                    <td>{val.contributingEmployee}</td>
+                                    <td>{val.employeeUsername}</td>
                                     <td>{val.categoryName}</td>
                                     <td>{val.taskHoursWorked}</td>
                                     <td>{taskCost}</td>
