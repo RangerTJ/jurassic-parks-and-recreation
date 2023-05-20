@@ -55,20 +55,28 @@ function BiologicalAssetsUpdateForm ({hostURL}) {
                 </p>
                 <form>
                     <fieldset>
-                        <legend>Information</legend>
-                            <p><strong>Asset ID# {id}</strong></p>
-                            <p>Old Info: {oldFacility}, {oldSpecies}, {oldName}</p>
-                            <SelectorSpecies  hostURL={hostURL} species={species} setSpecies={setSpecies} preSelected={oldSpecies} isRequired={true} autoFocus={true}/>
-                            <div><label htmlFor="bioAssetName">Name</label></div>
-                            <input 
-                                type="text" 
-                                name="bioAssetName"
-                                placeholder="Ex. Meadow Stomper" 
-                                required
-                                value={name}
-                                onChange={(e) => {setName(e.target.value)}
-                                }/>
-                            <SelectorFacilities hostURL={hostURL} facility={facility} setFacility={setFacility} preSelected={oldFacility} isRequired={true}/>
+                        <legend>Update Asset ID# {id}</legend>
+                            <div className="selectorP">
+                                <SelectorSpecies  hostURL={hostURL} species={species} setSpecies={setSpecies} preSelected={oldSpecies} isRequired={true} autoFocus={true}/>
+                                <div>Original: {oldSpecies}</div>
+                            </div>
+                            <div className="selectorP">
+                                <div><label htmlFor="bioAssetName">Name</label></div>
+                                <input 
+                                    type="text"
+                                    id="bioAssetName"
+                                    name="bioAssetName"
+                                    placeholder="Ex. Meadow Stomper" 
+                                    required
+                                    value={name}
+                                    onChange={(e) => {setName(e.target.value)}
+                                    }/>
+                                <div>Original: {oldName}</div>
+                            </div>
+                            <div className="selectorP">
+                                <SelectorFacilities hostURL={hostURL} facility={facility} setFacility={setFacility} preSelected={oldFacility} isRequired={true}/>
+                            </div>
+                            <div>Original: {oldFacility}</div>
                     </fieldset>
                 </form>
                 <div>

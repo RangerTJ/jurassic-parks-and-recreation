@@ -73,7 +73,7 @@ app.get('/api/getEmployeeTasks', (req, res) =>{
     FROM EmployeeTasks
     LEFT JOIN TasksAssigned ON EmployeeTasks.idTaskAssigned = TasksAssigned.idTaskAssigned
     LEFT JOIN TaskCategories ON EmployeeTasks.idTaskCategory = TaskCategories.idTaskCategory
-    JOIN Employees ON EmployeeTasks.idEmployee = Employees.idEmployee
+    LEFT JOIN Employees ON EmployeeTasks.idEmployee = Employees.idEmployee
     ORDER BY EmployeeTasks.idEmployeeTask ASC;
     `;
     db.query(sqlRead, (err, result)=> {

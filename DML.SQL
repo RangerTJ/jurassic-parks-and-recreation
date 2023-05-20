@@ -147,7 +147,7 @@ FROM EmployeeTasks
 -- Need to JOIN EmployeeTasks -> TasksAssigned -> Employees -> Task Category
 LEFT JOIN TasksAssigned ON EmployeeTasks.idTaskAssigned = TasksAssigned.idTaskAssigned
 LEFT JOIN TaskCategories ON EmployeeTasks.idTaskCategory = TaskCategories.idTaskCategory
-JOIN Employees ON EmployeeTasks.idEmployee = Employees.idEmployee
+LEFT JOIN Employees ON EmployeeTasks.idEmployee = Employees.idEmployee
 ORDER BY EmployeeTasks.idEmployeeTask ASC;
 
 -- SELECT EmployeeTasks -- POPULATE UPDATE FORM VERSION

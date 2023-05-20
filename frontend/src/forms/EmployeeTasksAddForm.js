@@ -5,6 +5,8 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import Axios from 'axios';
 import SelectorTasksAssigned from "../components/selectorTasksAssigned";
+import SelectorEmployees from "../components/selectorEmployees";
+import SelectorTaskCategories from "../components/selectorTaskCategories";
 
 
 ////////////////
@@ -54,25 +56,73 @@ function EmployeeTasksAddForm ({hostURL}) {
                     Please fill out this form to document an employee's work towards an assigned task within our managed park system. 
                     Click the "Add Report" button below when you are ready to submit.
                 </p>
+                <p>
+                    For the "Category" field, please select the overall most relevant category to the work performed for this report.
+                    If multi-disciplinary work was performed, please submit separate reports for each category of work performed by the
+                    employee on the assigned task. For example, if an employee assigned to take care of a specific asset performed veterinary work,
+                    but also had to perform security work due to unexpected asset behavior, the veterinary and security work should be documented
+                    separately in order to give the best estimate of labor and costs involved in the different aspects managing our parks.
+                </p>
+                <p>
+                    For the "Costs" field, please include all costs associated with the work performed related to this labor report.
+                    This includes cost of labor, supplies used, fuel costs, fees, or any other incidental expenses that were involved
+                    in the reported work performed for the related assigned task. This is important, as it gives JP&R a way to analyze
+                    total costs related to different sectors.
+                </p>
                 <form>
                     <fieldset>
                         <legend>Information</legend>
                             <div className="selectorP">
                                 <SelectorTasksAssigned  hostURL={hostURL} taskName={taskName} setTaskName={setTaskName} isRequired={true} autoFocus={true}/>
                             </div>
-                            {/* <div className="selectorP">
-                                <div><label htmlFor="bioAssetName">Name</label></div>
+                            <div className="selectorP">
+                                <SelectorEmployees  hostURL={hostURL} employeeUsername={employeeUsername} setEmployeeUsername={setEmployeeUsername} isRequired={true} autoFocus={false}/>
+                            </div>
+                            <div className="selectorP">
+                                <SelectorTaskCategories  hostURL={hostURL} categoryName={categoryName} setCategoryName={setCategoryName} isRequired={true} autoFocus={false}/>
+                            </div>
+                            <div className="selectorP">
+                                <div><label htmlFor="hoursWorked">Hours Worked</label></div>
                                 <input 
-                                    type="text" 
-                                    name="bioAssetName"
-                                    placeholder="Ex. Meadow Stomper" 
+                                    type="number"
+                                    id="hoursWorked"
+                                    name="hoursWorked"
+                                    placeholder="Ex. 20" 
                                     required 
-                                    onChange={(e) => {setName(e.target.value)}
+                                    onChange={(e) => {setTaskHoursWorked(e.target.value)}
                                     }/>
                             </div>
                             <div className="selectorP">
-                                <SelectorFacilities hostURL={hostURL} facility={facility} setFacility={setFacility} isRequired={true}/>
-                            </div> */}
+                                <div><label htmlFor="empTaskCost">Costs</label></div>
+                                <input 
+                                    type="number"
+                                    id="empTaskCost"
+                                    name="empTaskCost"
+                                    placeholder="Ex. 2000.00" 
+                                    required 
+                                    onChange={(e) => {setEmpTaskCost(e.target.value)}
+                                    }/>
+                            </div>
+                            <div className="selectorP">
+                                <div><label htmlFor="empTaskStart">Date Started</label></div>
+                                <input 
+                                    type="date"
+                                    id="empTaskStart"
+                                    name="empTaskStart"
+                                    required 
+                                    onChange={(e) => {setEmpTaskStart(e.target.value)}
+                                    }/>
+                            </div>
+                            <div className="selectorP">
+                                <div><label htmlFor="empTaskStart">Date Completed</label></div>
+                                <input 
+                                    type="date"
+                                    id="empTaskEnd"
+                                    name="empTaskEnd"
+                                    required 
+                                    onChange={(e) => {setEmpTaskEnd(e.target.value)}
+                                    }/>
+                            </div>
                     </fieldset>
                 </form>
                 <div>

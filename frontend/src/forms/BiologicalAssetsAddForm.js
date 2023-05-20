@@ -54,6 +54,7 @@ function BiologicalAssetsAddForm ({hostURL}) {
                                 <div><label htmlFor="bioAssetName">Name</label></div>
                                 <input 
                                     type="text" 
+                                    id="bioAssetName"
                                     name="bioAssetName"
                                     placeholder="Ex. Meadow Stomper" 
                                     required 
