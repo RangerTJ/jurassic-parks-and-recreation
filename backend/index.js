@@ -84,7 +84,7 @@ app.get('/api/getEmployeeTasks', (req, res) =>{
 
 // CREATE Employee Task Entry
 app.post('/api/insertEmployeeTasks', (req, res) =>{
-    const idTaskAssigned = req.body.idTaskAssigned
+    const taskName = req.body.taskName
     const employeeUsername = req.body.employeeUsername
     const categoryName = req.body.categoryName
     const taskHoursWorked = req.body.taskHoursWorked
@@ -95,12 +95,12 @@ app.post('/api/insertEmployeeTasks', (req, res) =>{
     INSERT INTO EmployeeTasks       (idTaskAssigned, idEmployee, idTaskCategory, taskHoursWorked, empTaskCost, empTaskStart, empTaskEnd)
     VALUES  (
                     (SELECT idTaskAssigned FROM TasksAssigned WHERE taskName = ?),
-                    (SELECT idTaskCategory FROM TaskCategories WHERE categoryName = ?),
                     (SELECT idEmployee FROM Employees WHERE employeeUsername = ?),
+                    (SELECT idTaskCategory FROM TaskCategories WHERE categoryName = ?),
                     ?, ?, ?, ?
             );
     `;
-    db.query(sqlInsert, [idTaskAssigned, employeeUsername, categoryName, taskHoursWorked, empTaskCost, empTaskStart, empTaskEnd], (err, result)=> {
+    db.query(sqlInsert, [taskName, employeeUsername, categoryName, taskHoursWorked, empTaskCost, empTaskStart, empTaskEnd], (err, result)=> {
         console.log(result);
         res.send(result);
     });

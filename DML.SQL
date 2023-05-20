@@ -204,8 +204,8 @@ VALUES  (
 INSERT INTO EmployeeTasks       (idTaskAssigned, idEmployee, idTaskCategory, taskHoursWorked, empTaskCost, empTaskStart, empTaskEnd)
 VALUES  (
                 (SELECT idTaskAssigned FROM TasksAssigned WHERE taskName = :taskName_input),
-                (SELECT idTaskCategory FROM TaskCategories WHERE categoryName = :categoryName_input),
                 (SELECT idEmployee FROM Employees WHERE employeeUsername = :employeeUsername_input),
+                (SELECT idTaskCategory FROM TaskCategories WHERE categoryName = :categoryName_input),
                 :taskHoursWorked_input, :empTaskCost_input, :empTaskStart_input, :empTaskEnd_input
         );
 

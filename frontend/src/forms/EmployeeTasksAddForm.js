@@ -9,10 +9,6 @@ import SelectorEmployees from "../components/selectorEmployees";
 import SelectorTaskCategories from "../components/selectorTaskCategories";
 
 
-////////////////
-// TO DO: ALL //
-////////////////
-
 // HostURL Passed from App.js
 function EmployeeTasksAddForm ({hostURL}) {
 
@@ -72,6 +68,7 @@ function EmployeeTasksAddForm ({hostURL}) {
                 <form>
                     <fieldset>
                         <legend>Information</legend>
+                        <p>DEBUG: {taskName} - {employeeUsername} - {categoryName}</p>
                             <div className="selectorP">
                                 <SelectorTasksAssigned  hostURL={hostURL} taskName={taskName} setTaskName={setTaskName} isRequired={true} autoFocus={true}/>
                             </div>
