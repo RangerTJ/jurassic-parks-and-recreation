@@ -7,15 +7,10 @@ import Axios from 'axios';
 // https://stackoverflow.com/questions/69111477/how-to-iterate-through-public-assets-images-so-i-can-get-all-images-filename-in
 
 
-// Self-Reminder: Need to add a logic fork for whether it's required or not (for bio assets selector ONLY, all other selects mandatory in all cases)
-// Render a different element depending on which one it is
-
-
 // I *think* this will work so that if no species is passed, it defaults to null, and otherwise defaults it to the selection
 const SelectorSpecies = ({preSelected, isRequired, autoFocus, hostURL, species, setSpecies}) => {
 
   // Create useState for the selection and list
-  // For update, just update pre-selected image to match an input variable first
   const [selected, setSelected] = useState()
   const [list, setList] = useState([])
 
@@ -25,7 +20,7 @@ const SelectorSpecies = ({preSelected, isRequired, autoFocus, hostURL, species, 
     setSpecies(event.target.value)
   };
   
-  // Update the field to the preset option any time it's null
+  // Update the field to the preset option any time it's not null
   useEffect(()=> {
     if (preSelected !== null) {setSelected(preSelected);}}, [preSelected])
 

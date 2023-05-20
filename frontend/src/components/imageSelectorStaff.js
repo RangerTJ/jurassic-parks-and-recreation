@@ -1,21 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-// Add useEffect so it refreshes?
-// Add useState to save selection?
 
 // Blend of below citation and ChatGPT syntax recomendation for mapping to a select menu
 // Current code copied directly from here by user Savior from Stackoverflow; will adapt as needed
 // https://stackoverflow.com/questions/69111477/how-to-iterate-through-public-assets-images-so-i-can-get-all-images-filename-in
 
 
-// Idea pass in variable to designate folder
-// Make folder selectable... from drop down somehow?
-// ... or just a component for each image select type and hard code in the folders
-
-const ImageSelectorStaff = () => {
-  // Use context to retrieve images - Have to hard code for each type of selector because web pack is dumb
-  // and require.context won't play nice with variable strings (so cant just pass in the folder endpoint)
-  // Redundant and probably a better way to let us pass in the folder, but whatever.
+// 
+const ImageSelectorStaff = ({preSelected, isRequired, autoFocus, hostURL, image, setImage}) => {
+  // Use context to retrieve images - Have to hard code for each type of selector because web pack is dumb (cant just pass in the folder endpoint as a variable)
   const images = require.context(`../images/staffImages`, false, /\.(png|jpg|svg)$/);
 
   // Map available images in directory
@@ -23,20 +16,25 @@ const ImageSelectorStaff = () => {
       return images.keys().map(images);
   }
 
-  // Create useState for the selection
-  const [selectedImage, setSelectedImage] = useState()
+    // Create useState for the selection and list
+    const [selected, setSelected] = useState()
 
   // Selection event handler to generate preview / pass on selection data to DB
   const selectionHandler = (event) => {
-    setSelectedImage(event.target.value)
+    setSelected(event.target.value)
+    setImage(event.target.value)
   };
+
+  // Update the field to the preset option any time it's not null
+  useEffect(()=> {
+    if (preSelected !== null) {setSelected(preSelected);}}, [preSelected])
 
   // Website Manipulation
   const filenames = mapImages(images)
   return (
     <>
       <div><label htmlFor="speciesImageSelector">Image Selection</label></div>
-      <select id="speciesImageSelector" value={selectedImage} onChange={selectionHandler}>
+      <select id="speciesImageSelector" value={selected} onChange={selectionHandler} autoFocus={autoFocus ? true : false} required={isRequired ? true : false}>
 
         {/* Map the Options after hard-coded default */}
         <option value="">Select an Image (Default - None)</option>
@@ -44,14 +42,15 @@ const ImageSelectorStaff = () => {
           return <option key={index} value={imagePath}>{imagePath}</option>;
         })}
       </select>
+      {/* <p>{preSelected},{selected} DEBUG STUFF</p> */}
 
       {/* Conditionally Render Preview Image (if not null) */}
-      {selectedImage && (
+      {selected && (
           <div>
-            <p><label htmlFor="previewImage">Image Preview</label></p>
-            <img id="previewImage" src={selectedImage} alt={selectedImage} width="200px" />
+            <div><label htmlFor="previewImage">Image Preview</label></div>
+            <img id="previewImage" src={selected} alt={selected} width="200px" />
           </div>
-        )}
+      )}
     </>
   );
 };

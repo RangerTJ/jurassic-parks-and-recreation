@@ -151,16 +151,17 @@ h1 {
   padding-bottom: 0px;
   font-family: var(--jpFont);
   font-weight: normal;
-  text-shadow:  0.5px -0.5px 0px red,
-                -0.5px 0.5px 0px red,
-                0.5px 0.5px 0px red,
-                -0.5px -0.5px 0px red;
+  text-shadow:  1px -1px 0px red,
+                -1px 1px 0px red,
+                1px 1px 0px red,
+                -1px -1px 0px red;
 }
 
 .h1NoGlow {
   text-shadow: none;
   color: black;
-  text-shadow: 1px 1px 0px white,
+  text-shadow: 
+  1px 1px 0px white,
   1px -1px 0px white,
   -1px 1px 0px white,
   -1px -1px 0px white,

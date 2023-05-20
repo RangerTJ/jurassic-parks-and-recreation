@@ -21,19 +21,50 @@ function SpeciesPage ({hostURL}) {
     const createSpeciesURL = hostURL + '/api/insertSpecies';
     const updateSpeciesURL = hostURL + '/api/updateSpecies';
     const deleteSpeciesURL = hostURL + '/api/deleteSpecies/';
+
+    // Species Table Functions
+    const [biologicalAssetList, setBiologicalAssetList] = useState([])
+    const [assetHabMismatchList, setAssetHabMismatchList] = useState([])
+    const [assetSecMismatchList, setAssetSecMismatchList] = useState([])
+    const [image, setImage] = useState('')
     
     // ImageList isn't supposed to be here, it goes on the create/update pages, this was just to put it somewhere
     // while I tested the ImageSelector thingie.
+    // NOTE: CURRENT IMPLEMENTATION USES EASY/UNIVERSAL setStates since there's only one image per any given table. If this ever changed, we'd need to give unique states for setState to work on submit.
     return (
         <>
             <h2>Test Image Selectors</h2>
             <article>
-                <ImageSelectorSpecies />
-                <ImageSelectorDiets />
-                <ImageSelectorFacilities />
-                <ImageSelectorHabitats />
-                <ImageSelectorParks />
-                <ImageSelectorStaff />
+                <ImageSelectorSpecies 
+                    hostURL={hostURL} 
+                    setImage={setImage} 
+                    image={image} 
+                    isRequired={false}/>
+                <ImageSelectorDiets 
+                    hostURL={hostURL} 
+                    setImage={setImage} 
+                    image={image} 
+                    isRequired={false}/>
+                <ImageSelectorFacilities 
+                    hostURL={hostURL} 
+                    setImage={setImage} 
+                    image={image} 
+                    isRequired={false}/>
+                <ImageSelectorHabitats 
+                    hostURL={hostURL} 
+                    setImage={setImage} 
+                    image={image} 
+                    isRequired={false}/>
+                <ImageSelectorParks 
+                    hostURL={hostURL} 
+                    setImage={setImage} 
+                    image={image} 
+                    isRequired={false}/>
+                <ImageSelectorStaff 
+                    hostURL={hostURL} 
+                    setImage={setImage} 
+                    image={image} 
+                    isRequired={false}/>
             </article>
         </>
     );
