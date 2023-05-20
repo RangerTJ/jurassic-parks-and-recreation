@@ -13,7 +13,7 @@ import SelectorFacilities from "../components/selectorFacilities";
 ////////////////
 
 // HostURL Passed from App.js
-function BiologicalAssetsAddForm ({hostURL}) {
+function EmployeeTasksAddForm ({hostURL}) {
 
     // BiologicalAssets SQL Endpoints
     const createBiologicalAssetsURL = hostURL + '/api/insertBiologicalAssets';
@@ -77,4 +77,4 @@ function BiologicalAssetsAddForm ({hostURL}) {
     );
 }
 
-export default BiologicalAssetsAddForm;
+export default EmployeeTasksAddForm;

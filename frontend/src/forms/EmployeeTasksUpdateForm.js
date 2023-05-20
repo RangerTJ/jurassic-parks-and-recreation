@@ -13,7 +13,7 @@ import SelectorFacilities from "../components/selectorFacilities";
 ////////////////
 
 // HostURL Passed from App.js
-function BiologicalAssetsUpdateForm ({hostURL}) {
+function EmployeeTasksUpdateForm ({hostURL}) {
 
     // NEED TO UNDERSTAND/CITE (BOILERPLATE-ISH BUT NEEDS SOURCE? Location allows using state from parent element)
     const location = useLocation();
@@ -84,4 +84,4 @@ function BiologicalAssetsUpdateForm ({hostURL}) {
     );
 }
 
-export default BiologicalAssetsUpdateForm;
+export default EmployeeTasksUpdateForm;

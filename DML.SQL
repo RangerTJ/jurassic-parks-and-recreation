@@ -192,9 +192,10 @@ VALUES  (
         );
 
 -- Creates record of employee's work on a task by referencing the issued task# and the employee's unique username
-INSERT INTO EmployeeTasks       (idTaskAssigned, idEmployee, taskHoursWorked, empTaskCost, empTaskStart, empTaskEnd)
+INSERT INTO EmployeeTasks       (idTaskAssigned, idEmployee, idTaskCategory, taskHoursWorked, empTaskCost, empTaskStart, empTaskEnd)
 VALUES  (
-                :idTaskAssigned_input,
+                (SELECT idTaskAssigned FROM TasksAssigned WHERE taskName = :taskName_input),
+                (SELECT idTaskCategory FROM TaskCategories WHERE categoryName = :categoryName_input),
                 (SELECT idEmployee FROM Employees WHERE employeeUsername = :employeeUsername_input),
                 :taskHoursWorked_input, :empTaskCost_input, :empTaskStart_input, :empTaskEnd_input
         );

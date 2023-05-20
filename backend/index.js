@@ -65,14 +65,87 @@ app.get('/api/getCategoryCost', (req, res) =>{
 // Employee Task Queries //
 ///////////////////////////
 
-// READ
+// READ - Select Employee Tasks
+app.get('/api/getEmployeeTasks', (req, res) =>{
+    const sqlRead = `
+    SELECT  EmployeeTasks.idEmployeeTask, TasksAssigned.taskName, (SELECT CONCAT(Employees.firstName, ' ', Employees.lastName)) AS contributingEmployee,
+            TaskCategories.categoryName, EmployeeTasks.taskHoursWorked, EmployeeTasks.empTaskCost, EmployeeTasks.empTaskStart, EmployeeTasks.empTaskEnd
+    FROM EmployeeTasks
+    LEFT JOIN TasksAssigned ON EmployeeTasks.idTaskAssigned = TasksAssigned.idTaskAssigned
+    LEFT JOIN TaskCategories ON EmployeeTasks.idTaskCategory = TaskCategories.idTaskCategory
+    JOIN Employees ON EmployeeTasks.idEmployee = Employees.idEmployee
+    ORDER BY EmployeeTasks.idEmployeeTask ASC;
+    `;
+    db.query(sqlRead, (err, result)=> {
+        console.log(result);
+        res.send(result);
+    });
+});
 
-// CREATE
+// CREATE Employee Task Entry
+app.post('/api/insertEmployeeTasks', (req, res) =>{
+    const idTaskAssigned = req.body.idTaskAssigned
+    const employeeUsername = req.body.employeeUsername
+    const categoryName = req.body.categoryName
+    const taskHoursWorked = req.body.taskHoursWorked
+    const empTaskCost = req.body.empTaskCost
+    const empTaskStart = req.body.empTaskStart
+    const empTaskEnd = req.body.empTaskEnd
+    const sqlInsert = `
+    INSERT INTO EmployeeTasks       (idTaskAssigned, idEmployee, idTaskCategory, taskHoursWorked, empTaskCost, empTaskStart, empTaskEnd)
+    VALUES  (
+                    (SELECT idTaskAssigned FROM TasksAssigned WHERE taskName = ?),
+                    (SELECT idTaskCategory FROM TaskCategories WHERE categoryName = ?),
+                    (SELECT idEmployee FROM Employees WHERE employeeUsername = ?),
+                    ?, ?, ?, ?
+            );
+    `;
+    db.query(sqlInsert, [idTaskAssigned, employeeUsername, categoryName, taskHoursWorked, empTaskCost, empTaskStart, empTaskEnd], (err, result)=> {
+        console.log(result);
+        res.send(result);
+    });
+});
 
-// UPDATE
 
-// DELETE
+// UPDATE Employee Task Entry
+app.put('/api/updateEmployeeTasks', (req, res) =>{
+    const employeeUsername = req.body.employeeUsername
+    const categoryName = req.body.categoryName
+    const taskName = req.body.taskName
+    const taskHoursWorked = req.body.taskHoursWorked
+    const empTaskCost = req.body.empTaskCost
+    const empTaskStart = req.body.empTaskStart
+    const empTaskEnd= req.body.empTaskEnd
+    const idEmployeeTask = req.body.idEmployeeTask
+    const sqlUpdate = `
+    UPDATE EmployeeTasks
+    SET     idEmployee =            (SELECT idEmployee FROM Employees WHERE employeeUsername = ?),
+            idTaskCategory =        (SELECT idTaskCategory FROM TaskCategories WHERE categoryName = ?),
+            idTaskAssigned =        (SELECT idTaskAssigned FROM TasksAssigned WHERE taskName = ?),
+            taskHoursWorked = ?, empTaskCost = ?, 
+            empTaskStart = ?, empTaskEnd = ?
+    WHERE idEmployeeTask = ?;
+    `;
+    db.query(sqlUpdate, [employeeUsername, categoryName, taskName, taskHoursWorked, empTaskCost, empTaskStart, empTaskEnd, idEmployeeTask], (err, result)=> {
+        if (err) console.log(err); else console.log(result);
+        res.send(result);
+    });
+});
 
+
+// DELETE Employee Task
+app.delete('/api/deleteEmployeeTasks/:idEmployeeTask', (req, res) =>{
+    const idEmployeeTask = req.params.idEmployeeTask
+    const sqlDelete = `
+    DELETE
+    FROM EmployeeTasks
+    WHERE idEmployeeTask = ?;
+    `;
+    db.query(sqlDelete, idEmployeeTask, (err, result)=> {
+        if (err) console.log(err);
+        res.send(result);
+    });
+});
 
 
 //////////////////////////////
@@ -144,8 +217,8 @@ app.post('/api/insertBiologicalAssets', (req, res) =>{
     db.query(sqlInsert, [speciesName, facilityName, bioAssetName], (err, result)=> {
         console.log(result);
         res.send(result);
-    })
-})
+    });
+});
 
 // UPDATE Biological Asset
 app.put('/api/updateBiologicalAssets', (req, res) =>{
@@ -204,7 +277,9 @@ app.delete('/api/deleteBiologicalAssets/:idBiologicalAsset', (req, res) =>{
 // CREATE TASK CATEGORIES - Post message to browser after doing a test insert (based on tutorial example)
 app.post('/api/insertTaskCategories', (req, res) =>{
     const categoryName = req.body.categoryName
-    const sqlInsert = "INSERT INTO `TaskCategories` (categoryName) VALUES (?);";
+    const sqlInsert = `
+    INSERT INTO TaskCategories (categoryName) VALUES (?);
+    `;
     db.query(sqlInsert, [categoryName], (err, result)=> {
         console.log(result);
         res.send(result);
@@ -213,7 +288,9 @@ app.post('/api/insertTaskCategories', (req, res) =>{
 
 // READ TASK CATEGORIES - Select
 app.get('/api/getTaskCategories', (req, res) =>{
-    const sqlRead = "SELECT * FROM `TaskCategories`;";
+    const sqlRead = `
+    SELECT * FROM TaskCategories;
+    `;
     db.query(sqlRead, (err, result)=> {
         console.log(result);
         res.send(result);
@@ -227,7 +304,8 @@ app.put('/api/updateTaskCategories', (req, res) =>{
     const sqlUpdate = `
     UPDATE TaskCategories
     SET     categoryName = ?
-    WHERE idTaskCategory = ?;`;
+    WHERE idTaskCategory = ?;
+    `;
     db.query(sqlUpdate, [categoryName, idTaskCategory], (err, result)=> {
         if (err) console.log(err); else console.log(result);
         res.send(result);
