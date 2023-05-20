@@ -144,7 +144,7 @@ h1 {
   padding-bottom: 0px;
   font-family: var(--jpFont);
   font-weight: normal;
-  text-shadow: 1px 0px 0px red;
+  text-shadow: 1px -1px 0px red;
 }
 h2 {
   margin-top: auto;
@@ -154,7 +154,7 @@ h2 {
   font-family: var(--jpFont);
   font-size: 60px;
   font-weight: normal;
-  text-shadow: 1px 0px 0px red;
+  text-shadow: 1px -1px 0px red;
 }
 h3 {
   font-size: 24px; 
