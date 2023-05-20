@@ -114,7 +114,7 @@ nav a {
   line-height: 1.00;
   font-family: var(--jpFont);
   margin: 0;
-  text-shadow: px 1px 1px var(--feralGreen);
+  text-shadow: 0px 1px 1px var(--feralGreen);
 }
 
 nav a:hover {       
@@ -122,7 +122,11 @@ nav a:hover {
   color: white;
   border: ridge gold;
   text-decoration: none;
-  text-shadow: 1px -1px 0px red;
+  text-shadow:
+  0.25px -0.25px 0px red,
+  -0.25px 0.25px 0px red,
+  0.25px 0.25px 0px red,
+  -0.25px -0.25px 0px red;
 }
   
 nav a:focus {
@@ -138,14 +142,32 @@ p {
   overflow-wrap: break-word;
 }
 
+/* Fun fact, you can apparently cast multiple shadows from text and overlap them for inline/outline effects! */
 h1 {
   font-size: 85px;
   margin-bottom: 0px;
   padding-bottom: 0px;
   font-family: var(--jpFont);
   font-weight: normal;
-  text-shadow: 1px -1px 0px red;
+  text-shadow:  0.5px -0.5px 0px red,
+                -0.5px 0.5px 0px red,
+                0.5px 0.5px 0px red,
+                -0.5px -0.5px 0px red;
 }
+
+.h1NoGlow {
+  text-shadow: none;
+  color: black;
+  text-shadow: 1px 1px 0px white,
+  1px -1px 0px white,
+  -1px 1px 0px white,
+  -1px -1px 0px white,
+  3px 3px 3px var(--parkRed),
+  3px -3px 3px var(--parkRed),
+  -3px 3px 3px var(--parkRed),
+  -3px -3px 3px var(--parkRed);
+}
+
 h2 {
   margin-top: auto;
   margin-bottom: 0;
@@ -154,7 +176,12 @@ h2 {
   font-family: var(--jpFont);
   font-size: 60px;
   font-weight: normal;
-  text-shadow: 1px -1px 0px red;
+  text-shadow:  
+                0.4px -0.4px 0px red,
+                -0.4px 0.4px 0px red,
+                0.4px 0.4px 0px red,
+                -0.4px -0.4px 0px red,
+                1px 1px 5px black;
 }
 h3 {
   font-size: 24px; 

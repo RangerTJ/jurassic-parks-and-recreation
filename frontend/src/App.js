@@ -38,7 +38,7 @@ function App() {
     <div className="App">
       <BrowserRouter>
       <header>
-        <h1>Jurassic Parks and Recreation *</h1>
+        <h1>Jurassic Parks and Recreation <span className="h1NoGlow">*</span></h1>
         <p className="headerP">D.I.N.O<a className="whte_rbt_obj" href="https://markhjorth.github.io/nedry/">.</a></p>
       </header>
       <Nav />

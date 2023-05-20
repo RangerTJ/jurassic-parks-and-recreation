@@ -10,8 +10,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import Axios from 'axios';
 import SelectorSpecies from "../components/selectorSpecies";
 
-// TODO: Add Species Filter FOR MAIN TABLE (using dynamic drop-down array) / Needs states and functions and stuff
-// set bioAssetList to the results of the filtered query endpoint
 
 // HostURL Passed from App.js
 function BiologicalAssetsPage ({hostURL}) {
