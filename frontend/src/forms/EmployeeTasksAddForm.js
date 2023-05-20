@@ -41,7 +41,7 @@ function EmployeeTasksAddForm ({hostURL}) {
 
     return (
         <>
-            <h2>Add Biological Asset</h2>
+            <h2>Add Employee Task</h2>
             <article>
                 <p>
                     If you would like to add a new Biological Assets entity to the database, enter values for its attributes below

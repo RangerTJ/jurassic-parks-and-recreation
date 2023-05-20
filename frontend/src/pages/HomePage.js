@@ -61,39 +61,43 @@ function HomePage({hostURL}) {
                 <h4>Cost Summary by Sector</h4>
                 <div className="scrollableTable">
                     <table>
+                        <tbody>
                         <tr>
                             <th>Sector</th>
                             <th>Cost</th>
                         </tr>
-                        {categoryCostList.map((val)=> {
+                        {categoryCostList.map((val, index)=> {
                             // Convert cost to USD or set to 0 USD if there is a null entry
                             const usdCategoryCost = val.taskTypeCost ? val.taskTypeCost.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) : '$0.00';
                             return (
-                                <tr>
+                                <tr key={index}>
                                     <td>{val.categoryName}</td>
                                     <td>{usdCategoryCost}</td>
                                 </tr>
                             )
                         })}
+                        </tbody>
                     </table>
                 </div>
                 <h4>Cost Summary by Park</h4>
                 <div className="scrollableTable">
                     <table>
+                        <tbody>
                         <tr>
                             <th>Park</th>
                             <th>Cost</th>
                         </tr>
-                        {parkCostList.map((val)=> {
+                        {parkCostList.map((val, index)=> {
                             // Convert cost to USD or set to 0 USD if there is a null entry
                             const usdParkCost = val.parkCost ? val.parkCost.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) : '$0.00';
                             return (
-                                <tr>
+                                <tr key={index}>
                                     <td>{val.parkName}</td>
                                     <td>{usdParkCost}</td>
                                 </tr>
                             )
                         })}
+                        </tbody>
                     </table>
                 </div>
             </article>

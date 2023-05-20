@@ -83,11 +83,11 @@ function BiologicalAssetsPage ({hostURL}) {
         .then((response)=> {setBiologicalAssetList(response.data)})
     }
 
+    // Fully Populate the Bio Asset List (without filters)
     const getAllBioAssets = ()=> {
         Axios.get(getBiologicalAssetsURL)
         .then((response)=> {setBiologicalAssetList(response.data)})
     }
-
 
     // UPDATE Primer: Navigate set things to change and navigate to update page
     // https://reactrouter.com/en/main/hooks/use-navigate (passing states to next page)
@@ -101,9 +101,7 @@ function BiologicalAssetsPage ({hostURL}) {
         navTo("/BiologicalAssetsUpdate", {state});
     }
 
-    // Use location to get the state ex. this.props.router.push
-    // May not be needed? Try just setting old, then having those as passed-in vars
-
+    // Render Webpage
     return (
         <>
             <h2>Biological Assets</h2>
@@ -131,8 +129,9 @@ function BiologicalAssetsPage ({hostURL}) {
                     Click the T-Rex fossil button (* in some browsers) in the corresponding row to "fix" (update) the corresponding Biological Asset record, 
                     once the placement issue is resolved.
                 </p>
-                <div class="scrollableTable">
+                <div className="scrollableTable">
                     <table>
+                        <tbody>
                         <tr>
                             <th>Name</th>
                             <th>Species</th>
@@ -142,9 +141,9 @@ function BiologicalAssetsPage ({hostURL}) {
                             <th>Severity</th>
                             <th>Fix</th> 
                         </tr>
-                        {assetSecMismatchList.map((val)=> {
+                        {assetSecMismatchList.map((val, index)=> {
                             return (
-                                <tr>
+                                <tr key={index}>
                                     <td>{val.bioAssetName}</td>
                                     <td>{val.speciesName}</td>
                                     <td>{val.facilityName}</td>
@@ -153,8 +152,9 @@ function BiologicalAssetsPage ({hostURL}) {
                                     <td>{val.severity}</td>
                                     <td><button onClick={()=> {navToUpdate(val)}}>*</button></td>
                                 </tr>
-                            )
-                        })}
+                            )}
+                        )}
+                        </tbody>
                     </table>
                 </div>
             </article>
@@ -172,8 +172,9 @@ function BiologicalAssetsPage ({hostURL}) {
                     Click the T-Rex fossil button (* in some browsers) in the corresponding row to "fix" (update) the corresponding Biological Asset record, 
                     once the placement issue is resolved.
                 </p>
-                <div class="scrollableTable">
+                <div className="scrollableTable">
                     <table>
+                        <tbody>
                         <tr>
                             <th>Name</th>
                             <th>Species</th>
@@ -182,13 +183,13 @@ function BiologicalAssetsPage ({hostURL}) {
                             <th>Needed Habitat</th>
                             <th>Fix</th>
                         </tr>
-                        {assetHabMismatchList.map((val)=> {
+                        {assetHabMismatchList.map((val, index)=> {
                             // Set off the alarm bells for null habitats, because it means fun times in the park
                             // May want to add an update/fix button column to quickly address problems without having to chase them down in the DB list
                             // That or add a search filter to shrink the list
                             const filteredHab = val.currentHabitat ? val.currentHabitat : "WARNING: NOT AN ENCLOSURE";
                             return (
-                                <tr>
+                                <tr key={index}>
                                     <td>{val.bioAssetName}</td>
                                     <td>{val.speciesName}</td>
                                     <td>{val.currentWrongHome}</td>
@@ -199,8 +200,9 @@ function BiologicalAssetsPage ({hostURL}) {
                                 // Want to add fix button but facility isn't pre-loading into update form? Works on security
                                 // Need ref to facilityName?
                                 // ... probably b/c of currentWrongHome name; just need to change it to facilityName in query
-                            )
-                        })}
+                            )}
+                        )}
+                        </tbody>
                     </table>
                 </div>
             </article>
@@ -215,8 +217,9 @@ function BiologicalAssetsPage ({hostURL}) {
                 <p>
                     <SelectorSpecies hostURL={hostURL} setSpecies={setSpecies} species={species} isRequired={false}/> <button onClick={speciesFilter}>Apply</button>
                 </p>
-                <div class="scrollableTable">
+                <div className="scrollableTable">
                     <table>
+                        <tbody>
                         <tr>
                             <th>ID</th>
                             <th>Name</th>
@@ -226,11 +229,11 @@ function BiologicalAssetsPage ({hostURL}) {
                             <th>Update</th>
                             <th>Delete</th>
                         </tr>
-                        {biologicalAssetList.map((val)=> {
+                        {biologicalAssetList.map((val, index)=> {
                             // May want to add an update/fix button column to quickly address problems without having to chase them down in the DB list
                             // That or add a search filter to shrink the list
                             return (
-                                <tr>
+                                <tr key={index}>
                                     <td>{val.idBiologicalAsset}</td>
                                     <td>{val.bioAssetName}</td>
                                     <td>{val.speciesName}</td>
@@ -238,9 +241,10 @@ function BiologicalAssetsPage ({hostURL}) {
                                     <td><button onClick={()=> {navToUpdate(val)}}>Update</button></td>
                                     <td><button onClick={()=> {delBiologicalAsset(val.idBiologicalAsset)}}>Delete</button></td>
                                 </tr>
-                            )
-                        })}
-                    </table>
+                            )}
+                        )}
+                        </tbody>
+                    </table>  
                 </div>
             </article>
         </>
