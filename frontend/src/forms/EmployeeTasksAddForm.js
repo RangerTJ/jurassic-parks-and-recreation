@@ -16,7 +16,7 @@ import SelectorFacilities from "../components/selectorFacilities";
 function EmployeeTasksAddForm ({hostURL}) {
 
     // BiologicalAssets SQL Endpoints
-    const createBiologicalAssetsURL = hostURL + '/api/insertBiologicalAssets';
+    const createEmployeeTasksURL = hostURL + '/api/insertEmployeeTasks';
     const navTo = useNavigate();
 
     // Bio Asset States for the Form (2x arrays for select menus + 3x values to submit)
@@ -27,7 +27,7 @@ function EmployeeTasksAddForm ({hostURL}) {
     // CREATE - Insert New Bio Asset then return to asset home
     const submitBioAsset = () => {
         if (species && name && facility) {
-        Axios.post(createBiologicalAssetsURL, {
+        Axios.post(createEmployeeTasksURL, {
             speciesName: species,
             bioAssetName: name,
             facilityName: facility,

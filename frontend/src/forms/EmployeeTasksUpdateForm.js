@@ -20,7 +20,7 @@ function EmployeeTasksUpdateForm ({hostURL}) {
     const { oldName, oldSpecies, oldFacility, id} = location.state;
 
     // BiologicalAssets SQL Endpoints
-    const createBiologicalAssetsURL = hostURL + '/api/updateBiologicalAssets';
+    const updateEmployeeTasksURL = hostURL + '/api/updateEmployeeTasks';
     const navTo = useNavigate();
 
     // Bio Asset States for the Form (2x arrays for select menus + 3x values to submit)
@@ -37,7 +37,7 @@ function EmployeeTasksUpdateForm ({hostURL}) {
     // UPDATE - Submit Changes to a Bio Asset then return to Asset home
     const updateBioAsset = () => {
         if (species && name && facility) {
-        Axios.put(createBiologicalAssetsURL, {
+        Axios.put(updateEmployeeTasksURL, {
             speciesName: species,
             bioAssetName: name,
             facilityName: facility,
@@ -52,7 +52,7 @@ function EmployeeTasksUpdateForm ({hostURL}) {
 
     return (
         <>
-            <h2>Update Biological Asset</h2>
+            <h2>Update Employee Task</h2>
             <article>
                 <p>
                     Make changes to this asset and click "Save" to retain them.

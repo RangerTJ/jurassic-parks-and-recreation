@@ -18,8 +18,6 @@ function EmployeeTasksPage ({hostURL}) {
 
     // EmployeeTasks SQL Endpoints
     const getEmployeeTasksURL = hostURL + '/api/getEmployeeTasks';
-    const createEmployeeTasksURL = hostURL + '/api/insertEmployeeTasks';
-    const updateEmployeeTasksURL = hostURL + '/api/updateEmployeeTasks';
     const deleteEmployeeTasksURL = hostURL + '/api/deleteEmployeeTasks/';
 
     // Employee Task Table Functions
@@ -61,13 +59,8 @@ function EmployeeTasksPage ({hostURL}) {
         oldCost: updateVal.empTaskCost,
         oldStart: updateVal.empTaskStart,
         oldEnd: updateVal.empTaskEnd
-        
-
-// *** CONVERT COST TO USD IN TABLE ***
-
-
-    };
-        navTo("/EmployeeTasksUpdate", {state});
+        };
+            navTo("/EmployeeTasksUpdate", {state});
     }
 
     return (
@@ -126,7 +119,7 @@ function EmployeeTasksPage ({hostURL}) {
                                     <td>{val.empTaskStart}</td>
                                     <td>{val.empTaskEnd}</td>
                                     <td><button onClick={()=> {navToUpdate(val)}}>Update</button></td>
-                                    <td><button onClick={()=> {delEmployeeTask(val.idBiologicalAsset)}}>Delete</button></td>
+                                    <td><button onClick={()=> {delEmployeeTask(val.idEmployeeTask)}}>Delete</button></td>
                                 </tr>
                             )}
                         )}
