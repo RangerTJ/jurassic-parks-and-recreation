@@ -355,6 +355,45 @@ app.get('/api/getFacilitiesList', (req, res) =>{
     });
 });
 
+// Assigned Task Selector
+app.get('/api/getTasksAssignedList', (req, res) =>{
+    const sqlRead = `
+    SELECT taskName, taskStart
+    FROM TasksAssigned
+    ORDER BY taskName ASC;
+    `;
+    db.query(sqlRead, (err, result)=> {
+        console.log(result);
+        res.send(result);
+    });
+});
+
+// Employee Selector (First/Last + Username)
+app.get('/api/getEmployeesList', (req, res) =>{
+    const sqlRead = `
+    SELECT lastName, firstName, employeeUsername
+    FROM Employees
+    ORDER BY lastName, firstName, employeeUsername ASC;
+    `;
+    db.query(sqlRead, (err, result)=> {
+        console.log(result);
+        res.send(result);
+    });
+});
+
+// Task Category Selector
+app.get('/api/getTaskCategoriesList', (req, res) =>{
+    const sqlRead = `
+    SELECT categoryName
+    FROM TaskCategories
+    ORDER BY categoryName ASC;
+    `;
+    db.query(sqlRead, (err, result)=> {
+        console.log(result);
+        res.send(result);
+    });
+});
+
 
 /////////////////////////////////////////
 // Test Connection to the MySQL server //

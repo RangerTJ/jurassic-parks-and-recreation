@@ -35,7 +35,7 @@ function EmployeeTasksUpdateForm ({hostURL}) {
     }, [])
 
     // UPDATE - Submit Changes to a Bio Asset then return to Asset home
-    const updateBioAsset = () => {
+    const update = () => {
         if (species && name && facility) {
         Axios.put(updateEmployeeTasksURL, {
             speciesName: species,
@@ -77,7 +77,7 @@ function EmployeeTasksUpdateForm ({hostURL}) {
                     </fieldset>
                 </form>
                 <div>
-                    <p><button onClick={updateBioAsset}>Save</button></p>
+                    <p><button onClick={update}>Save</button></p>
                 </div>
             </article>
         </>

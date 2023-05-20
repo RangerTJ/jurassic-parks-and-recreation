@@ -19,21 +19,29 @@ function EmployeeTasksAddForm ({hostURL}) {
     const createEmployeeTasksURL = hostURL + '/api/insertEmployeeTasks';
     const navTo = useNavigate();
 
-    // Bio Asset States for the Form (2x arrays for select menus + 3x values to submit)
-    const [species, setSpecies] = useState('')
-    const [name, setName] = useState('')
-    const [facility, setFacility] = useState('')
+    // Emp Task States for the Form
+    const [taskAssigned, setTaskAssigned] = useState('')
+    const [employeeUsername, setEmployeeUsername] = useState('')
+    const [categoryName, setCategoryName] = useState('')
+    const [taskHoursWorked, setTaskHoursWorked] = useState('')
+    const [empTaskCost, setEmpTaskCost] = useState('')
+    const [empTaskStart, setEmpTaskStart] = useState('')
+    const [empTaskEnd, setEmpTaskEnd] = useState('')
 
-    // CREATE - Insert New Bio Asset then return to asset home
-    const submitBioAsset = () => {
-        if (species && name && facility) {
+    // CREATE - Insert New Bio Asset then return to asset home (only if all state variables are not null)
+    const submit = () => {
+        if (taskAssigned && employeeUsername && categoryName && taskHoursWorked && empTaskCost && empTaskStart && empTaskEnd) {
         Axios.post(createEmployeeTasksURL, {
-            speciesName: species,
-            bioAssetName: name,
-            facilityName: facility,
+            taskName: taskAssigned,
+            employeeUsername: employeeUsername,
+            categoryName: categoryName,
+            taskHoursWorked: taskHoursWorked,
+            empTaskCost: empTaskCost,
+            empTaskStart: empTaskStart,
+            empTaskEnd: empTaskEnd,
         });
-        alert(`${name} has been added to the database!`);
-        navTo('/BiologicalAssets');
+        alert(`A task report for ${employeeUsername}'s ${categoryName} work on ${taskAssigned} has been added to the database!`);
+        navTo('/EmployeeTasks');
         } else {
             alert("Please fill out all required fields and try again.")
         };
@@ -44,11 +52,10 @@ function EmployeeTasksAddForm ({hostURL}) {
             <h2>Add Employee Task</h2>
             <article>
                 <p>
-                    If you would like to add a new Biological Assets entity to the database, enter values for its attributes below
-                    and click the "Add Asset" button. To put it more simply, this is how you create an entry for a dinosaur - or any other 
-                    tracked and managed creature found in one of our parks.
+                    Please fill out this form to document an employee's work towards an assigned task within our managed park system. 
+                    Click the "Add Report" button below when you are ready to submit.
                 </p>
-                <form>
+                {/* <form>
                     <fieldset>
                         <legend>Information</legend>
                             <div className="selectorP">
@@ -68,9 +75,9 @@ function EmployeeTasksAddForm ({hostURL}) {
                                 <SelectorFacilities hostURL={hostURL} facility={facility} setFacility={setFacility} isRequired={true}/>
                             </div>
                     </fieldset>
-                </form>
+                </form> */}
                 <div>
-                    <p><button onClick={submitBioAsset}>Add Asset</button></p>
+                    <p><button onClick={submit}>Add Report</button></p>
                 </div>
             </article>
         </>

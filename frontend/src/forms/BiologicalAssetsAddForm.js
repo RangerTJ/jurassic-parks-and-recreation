@@ -21,7 +21,7 @@ function BiologicalAssetsAddForm ({hostURL}) {
     const [facility, setFacility] = useState('')
 
     // CREATE - Insert New Bio Asset then return to asset home
-    const submitBioAsset = () => {
+    const submit = () => {
         if (species && name && facility) {
         Axios.post(createBiologicalAssetsURL, {
             speciesName: species,
@@ -66,7 +66,7 @@ function BiologicalAssetsAddForm ({hostURL}) {
                     </fieldset>
                 </form>
                 <div>
-                    <p><button onClick={submitBioAsset}>Add Asset</button></p>
+                    <p><button onClick={submit}>Add Asset</button></p>
                 </div>
             </article>
         </>
