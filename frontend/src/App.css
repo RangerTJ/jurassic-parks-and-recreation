@@ -122,7 +122,7 @@ nav a:hover {
   color: white;
   border: ridge gold;
   text-decoration: none;
-  text-shadow: 1px 1px 5px var(--parkYellow);
+  text-shadow: 1px -1px 0px red;
 }
   
 nav a:focus {
@@ -144,6 +144,7 @@ h1 {
   padding-bottom: 0px;
   font-family: var(--jpFont);
   font-weight: normal;
+  text-shadow: 1px 0px 0px red;
 }
 h2 {
   margin-top: auto;
@@ -153,6 +154,7 @@ h2 {
   font-family: var(--jpFont);
   font-size: 60px;
   font-weight: normal;
+  text-shadow: 1px 0px 0px red;
 }
 h3 {
   font-size: 24px; 
@@ -196,7 +198,7 @@ button {
   font-size:xx-large;
   outline: none;
   box-shadow: 1px 1px 15px black;
-  text-shadow: 1px 1px 5px black;
+  text-shadow: 1px 1px 5px var(--dominionAmberBright);
 }
 
 button:hover {
