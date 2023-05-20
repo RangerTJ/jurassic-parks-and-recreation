@@ -4,8 +4,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import Axios from 'axios';
-import SelectorSpecies from "../components/selectorSpecies";
-import SelectorFacilities from "../components/selectorFacilities";
+import SelectorTasksAssigned from "../components/selectorTasksAssigned";
 
 
 ////////////////
@@ -20,7 +19,7 @@ function EmployeeTasksAddForm ({hostURL}) {
     const navTo = useNavigate();
 
     // Emp Task States for the Form
-    const [taskAssigned, setTaskAssigned] = useState('')
+    const [taskName, setTaskName] = useState('')
     const [employeeUsername, setEmployeeUsername] = useState('')
     const [categoryName, setCategoryName] = useState('')
     const [taskHoursWorked, setTaskHoursWorked] = useState('')
@@ -30,9 +29,9 @@ function EmployeeTasksAddForm ({hostURL}) {
 
     // CREATE - Insert New Bio Asset then return to asset home (only if all state variables are not null)
     const submit = () => {
-        if (taskAssigned && employeeUsername && categoryName && taskHoursWorked && empTaskCost && empTaskStart && empTaskEnd) {
+        if (taskName && employeeUsername && categoryName && taskHoursWorked && empTaskCost && empTaskStart && empTaskEnd) {
         Axios.post(createEmployeeTasksURL, {
-            taskName: taskAssigned,
+            taskName: taskName,
             employeeUsername: employeeUsername,
             categoryName: categoryName,
             taskHoursWorked: taskHoursWorked,
@@ -40,7 +39,7 @@ function EmployeeTasksAddForm ({hostURL}) {
             empTaskStart: empTaskStart,
             empTaskEnd: empTaskEnd,
         });
-        alert(`A task report for ${employeeUsername}'s ${categoryName} work on ${taskAssigned} has been added to the database!`);
+        alert(`A task report for ${employeeUsername}'s ${categoryName} work on ${taskName} has been added to the database!`);
         navTo('/EmployeeTasks');
         } else {
             alert("Please fill out all required fields and try again.")
@@ -55,13 +54,13 @@ function EmployeeTasksAddForm ({hostURL}) {
                     Please fill out this form to document an employee's work towards an assigned task within our managed park system. 
                     Click the "Add Report" button below when you are ready to submit.
                 </p>
-                {/* <form>
+                <form>
                     <fieldset>
                         <legend>Information</legend>
                             <div className="selectorP">
-                                <SelectorSpecies  hostURL={hostURL} species={species} setSpecies={setSpecies} isRequired={true} autofocus={true}/>
+                                <SelectorTasksAssigned  hostURL={hostURL} taskName={taskName} setTaskName={setTaskName} isRequired={true} autoFocus={true}/>
                             </div>
-                            <div className="selectorP">
+                            {/* <div className="selectorP">
                                 <div><label htmlFor="bioAssetName">Name</label></div>
                                 <input 
                                     type="text" 
@@ -73,9 +72,9 @@ function EmployeeTasksAddForm ({hostURL}) {
                             </div>
                             <div className="selectorP">
                                 <SelectorFacilities hostURL={hostURL} facility={facility} setFacility={setFacility} isRequired={true}/>
-                            </div>
+                            </div> */}
                     </fieldset>
-                </form> */}
+                </form>
                 <div>
                     <p><button onClick={submit}>Add Report</button></p>
                 </div>

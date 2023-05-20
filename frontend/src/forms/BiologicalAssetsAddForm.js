@@ -48,7 +48,7 @@ function BiologicalAssetsAddForm ({hostURL}) {
                     <fieldset>
                         <legend>Information</legend>
                             <div className="selectorP">
-                                <SelectorSpecies  hostURL={hostURL} species={species} setSpecies={setSpecies} isRequired={true} autofocus={true}/>
+                                <SelectorSpecies  hostURL={hostURL} species={species} setSpecies={setSpecies} isRequired={true} autoFocus={true}/>
                             </div>
                             <div className="selectorP">
                                 <div><label htmlFor="bioAssetName">Name</label></div>

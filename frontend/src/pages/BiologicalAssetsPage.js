@@ -193,7 +193,7 @@ function BiologicalAssetsPage ({hostURL}) {
                                     <td>{val.idBiologicalAsset}</td>
                                     <td>{val.bioAssetName}</td>
                                     <td>{val.speciesName}</td>
-                                    <td>{val.currentWrongHome}</td>
+                                    <td>{val.facilityName}</td>
                                     <td>{filteredHab}</td>
                                     <td>{val.needsHabitat}</td>
                                     <td><button onClick={()=> {navToUpdate(val)}}>*</button></td>

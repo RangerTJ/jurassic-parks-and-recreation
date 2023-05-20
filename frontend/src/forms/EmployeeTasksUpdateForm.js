@@ -63,7 +63,7 @@ function EmployeeTasksUpdateForm ({hostURL}) {
                             <p>Asset ID# {id}</p>
                             <p>Old Info: {oldFacility}, {oldSpecies}, {oldName}</p>
                             <p>{species} H!</p>
-                            <SelectorSpecies  hostURL={hostURL} species={species} setSpecies={setSpecies} preSelected={oldSpecies} isRequired={true} autofocus={true}/>
+                            <SelectorSpecies  hostURL={hostURL} species={species} setSpecies={setSpecies} preSelected={oldSpecies} isRequired={true} autoFocus={true}/>
                             <div><label htmlFor="bioAssetName">Name</label></div>
                             <input 
                                 type="text" 

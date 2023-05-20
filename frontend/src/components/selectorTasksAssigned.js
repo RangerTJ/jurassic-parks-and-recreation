@@ -2,22 +2,14 @@ import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
 
 
-////////////////
-// TO DO: ALL //
-////////////////
-
 
 // Blend of below citation and ChatGPT syntax recomendation for mapping to a select menu
 // Current code copied directly from here by user Savior from Stackoverflow; will adapt as needed
 // https://stackoverflow.com/questions/69111477/how-to-iterate-through-public-assets-images-so-i-can-get-all-images-filename-in
 
 
-// Self-Reminder: Need to add a logic fork for whether it's required or not (for bio assets selector ONLY, all other selects mandatory in all cases)
-// Render a different element depending on which one it is
-
-
 // I *think* this will work so that if no species is passed, it defaults to null, and otherwise defaults it to the selection
-const SelectorSpecies = ({preSelected, isRequired, autoFocus, hostURL, TasksAssigned, setTasksAssigned}) => {
+const SelectorTasksAssigned = ({preSelected, isRequired, autoFocus, hostURL, taskName, setTaskName}) => {
 
   // Create useState for the selection and list
   // For update, just update pre-selected image to match an input variable first
@@ -27,7 +19,7 @@ const SelectorSpecies = ({preSelected, isRequired, autoFocus, hostURL, TasksAssi
   // Selection event handler to pass on selection data to DB
   const selectionHandler = (event) => {
     setSelected(event.target.value)
-    setTasksAssigned(event.target.value)
+    setTaskName(event.target.value)
   };
   
   // Update the field to the preset option any time it's null
@@ -35,7 +27,7 @@ const SelectorSpecies = ({preSelected, isRequired, autoFocus, hostURL, TasksAssi
     if (preSelected !== null) {setSelected(preSelected);}}, [preSelected])
 
   // BiologicalAssets SQL Endpoints
-  const getListURL = hostURL + '/api/getSpeciesList';
+  const getListURL = hostURL + '/api/getTasksAssignedList';
 
   // Populate list
   useEffect(()=> {
@@ -48,12 +40,12 @@ const SelectorSpecies = ({preSelected, isRequired, autoFocus, hostURL, TasksAssi
   // Autofocus and isRequired elements passed in can tailor it to use on different pages
   return (
     <>
-      <div><label htmlFor="speciesSelector">Species</label></div>
-      <select id="speciesSelector" value={selected} onChange={selectionHandler} autoFocus={autoFocus ? true : false} required={isRequired ? true : false}>
+      <div><label htmlFor="tasksAssignedSelector">Species</label></div>
+      <select id="tasksAssignedSelector" value={selected} onChange={selectionHandler} autoFocus={autoFocus ? true : false} required={isRequired ? true : false}>
         {/* Set default option then map query results to populate the select menu */}
-        <option value="">None (Select a Species)</option>
+        <option value="">None (Select an existing Assigned Task)</option>
         {list.map((val, index) => {
-          return <option key={index} value={val.speciesName}>{val.speciesName} (Threat: {val.threatLevel})</option>;
+          return <option key={index} value={val.taskName}>{val.taskName}</option>;
         })}
       </select>
       {/* <p>{preSelected},{selected} DEBUG STUFF</p> */}
@@ -62,4 +54,4 @@ const SelectorSpecies = ({preSelected, isRequired, autoFocus, hostURL, TasksAssi
 };
 
 
-export default SelectorSpecies
+export default SelectorTasksAssigned
