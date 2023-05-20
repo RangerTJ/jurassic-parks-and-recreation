@@ -55,6 +55,7 @@ function EmployeeTasksUpdateForm ({hostURL}) {
             empTaskCost: empTaskCost,
             empTaskStart: empTaskStart,
             empTaskEnd: empTaskEnd,
+            idEmployeeTask: id,
         });
         alert(`A task report for ${employeeUsername}'s ${categoryName} work on ${taskName} has been updated!`);
         navTo('/EmployeeTasks');

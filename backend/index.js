@@ -82,26 +82,6 @@ app.get('/api/getEmployeeTasks', (req, res) =>{
     });
 });
 
-// Read - Populate Update Stuff
-// app.get('/api/getEmployeeTasks', (req, res) =>{
-//     const sqlRead = `
-//     SELECT  EmployeeTasks.idEmployeeTask, TasksAssigned.taskName, Employees.employeeUsername,
-//             TaskCategories.categoryName, EmployeeTasks.taskHoursWorked, EmployeeTasks.empTaskCost, EmployeeTasks.empTaskStart, EmployeeTasks.empTaskEnd,
-//     FROM EmployeeTasks
-//     LEFT JOIN TasksAssigned ON EmployeeTasks.idTaskAssigned = TasksAssigned.idTaskAssigned
-//     LEFT JOIN TaskCategories ON EmployeeTasks.idTaskCategory = TaskCategories.idTaskCategory
-//     JOIN Employees ON EmployeeTasks.idEmployee = Employees.idEmployee
-//     ORDER BY EmployeeTasks.idEmployeeTask ASC;
-//     `;
-//     db.query(sqlRead, (err, result)=> {
-//         console.log(result);
-//         res.send(result);
-//     });
-// });
-
-
-
-
 
 // CREATE Employee Task Entry
 app.post('/api/insertEmployeeTasks', (req, res) =>{
@@ -130,9 +110,9 @@ app.post('/api/insertEmployeeTasks', (req, res) =>{
 
 // UPDATE Employee Task Entry
 app.put('/api/updateEmployeeTasks', (req, res) =>{
+    const taskName = req.body.taskName
     const employeeUsername = req.body.employeeUsername
     const categoryName = req.body.categoryName
-    const taskName = req.body.taskName
     const taskHoursWorked = req.body.taskHoursWorked
     const empTaskCost = req.body.empTaskCost
     const empTaskStart = req.body.empTaskStart
