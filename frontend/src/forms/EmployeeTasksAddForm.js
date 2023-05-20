@@ -68,7 +68,6 @@ function EmployeeTasksAddForm ({hostURL}) {
                 <form>
                     <fieldset>
                         <legend>Information</legend>
-                        <p>DEBUG: {taskName} - {employeeUsername} - {categoryName}</p>
                             <div className="selectorP">
                                 <SelectorTasksAssigned  hostURL={hostURL} taskName={taskName} setTaskName={setTaskName} isRequired={true} autoFocus={true}/>
                             </div>
