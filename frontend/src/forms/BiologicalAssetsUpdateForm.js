@@ -56,9 +56,8 @@ function BiologicalAssetsUpdateForm ({hostURL}) {
                 <form>
                     <fieldset>
                         <legend>Information</legend>
-                            <p>Asset ID# {id}</p>
+                            <p><strong>Asset ID# {id}</strong></p>
                             <p>Old Info: {oldFacility}, {oldSpecies}, {oldName}</p>
-                            <p>{species} H!</p>
                             <SelectorSpecies  hostURL={hostURL} species={species} setSpecies={setSpecies} preSelected={oldSpecies} isRequired={true} autofocus={true}/>
                             <div><label htmlFor="bioAssetName">Name</label></div>
                             <input 

@@ -133,6 +133,7 @@ function BiologicalAssetsPage ({hostURL}) {
                     <table>
                         <tbody>
                         <tr>
+                            <th>ID</th>
                             <th>Name</th>
                             <th>Species</th>
                             <th>Facility</th>
@@ -141,9 +142,11 @@ function BiologicalAssetsPage ({hostURL}) {
                             <th>Severity</th>
                             <th>Fix</th> 
                         </tr>
+                        {/* NEED TO UPDATE QUERY TO GET ID TO - SO UPDATE POPULATES RIGHT */}
                         {assetSecMismatchList.map((val, index)=> {
                             return (
                                 <tr key={index}>
+                                    <td>{val.idBiologicalAsset}</td>
                                     <td>{val.bioAssetName}</td>
                                     <td>{val.speciesName}</td>
                                     <td>{val.facilityName}</td>
@@ -176,6 +179,7 @@ function BiologicalAssetsPage ({hostURL}) {
                     <table>
                         <tbody>
                         <tr>
+                            <th>ID</th>
                             <th>Name</th>
                             <th>Species</th>
                             <th>Facility</th>
@@ -183,13 +187,12 @@ function BiologicalAssetsPage ({hostURL}) {
                             <th>Needed Habitat</th>
                             <th>Fix</th>
                         </tr>
+                        {/* NEED TO UPDATE QUERY TO GET ID TO - SO UPDATE POPULATES RIGHT */}
                         {assetHabMismatchList.map((val, index)=> {
-                            // Set off the alarm bells for null habitats, because it means fun times in the park
-                            // May want to add an update/fix button column to quickly address problems without having to chase them down in the DB list
-                            // That or add a search filter to shrink the list
                             const filteredHab = val.currentHabitat ? val.currentHabitat : "WARNING: NOT AN ENCLOSURE";
                             return (
                                 <tr key={index}>
+                                    <td>{val.idBiologicalAsset}</td>
                                     <td>{val.bioAssetName}</td>
                                     <td>{val.speciesName}</td>
                                     <td>{val.currentWrongHome}</td>
@@ -197,9 +200,6 @@ function BiologicalAssetsPage ({hostURL}) {
                                     <td>{val.needsHabitat}</td>
                                     <td><button onClick={()=> {navToUpdate(val)}}>*</button></td>
                                 </tr>
-                                // Want to add fix button but facility isn't pre-loading into update form? Works on security
-                                // Need ref to facilityName?
-                                // ... probably b/c of currentWrongHome name; just need to change it to facilityName in query
                             )}
                         )}
                         </tbody>
@@ -214,9 +214,9 @@ function BiologicalAssetsPage ({hostURL}) {
                     a specific species, then hit "Apply" for the filter to take effect. Select "None" and
                     apply it to remove the species filter and view the entire database of biological assets. 
                 </p>
-                <p>
+                <div className="selectorP">
                     <SelectorSpecies hostURL={hostURL} setSpecies={setSpecies} species={species} isRequired={false}/> <button onClick={speciesFilter}>Apply</button>
-                </p>
+                </div>
                 <div className="scrollableTable">
                     <table>
                         <tbody>
@@ -230,8 +230,6 @@ function BiologicalAssetsPage ({hostURL}) {
                             <th>Delete</th>
                         </tr>
                         {biologicalAssetList.map((val, index)=> {
-                            // May want to add an update/fix button column to quickly address problems without having to chase them down in the DB list
-                            // That or add a search filter to shrink the list
                             return (
                                 <tr key={index}>
                                     <td>{val.idBiologicalAsset}</td>

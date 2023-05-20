@@ -51,10 +51,10 @@ function EmployeeTasksAddForm ({hostURL}) {
                 <form>
                     <fieldset>
                         <legend>Information</legend>
-                            <p>
+                            <div className="selectorP">
                                 <SelectorSpecies  hostURL={hostURL} species={species} setSpecies={setSpecies} isRequired={true} autofocus={true}/>
-                            </p>
-                            <p>
+                            </div>
+                            <div className="selectorP">
                                 <div><label htmlFor="bioAssetName">Name</label></div>
                                 <input 
                                     type="text" 
@@ -63,10 +63,10 @@ function EmployeeTasksAddForm ({hostURL}) {
                                     required 
                                     onChange={(e) => {setName(e.target.value)}
                                     }/>
-                            </p>
-                            <p>
+                            </div>
+                            <div className="selectorP">
                                 <SelectorFacilities hostURL={hostURL} facility={facility} setFacility={setFacility} isRequired={true}/>
-                            </p>
+                            </div>
                     </fieldset>
                 </form>
                 <div>

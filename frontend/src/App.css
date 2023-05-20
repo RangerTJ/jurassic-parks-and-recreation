@@ -303,22 +303,29 @@ img {
 }
 
 .scrollableTable {
-overflow: auto;
+  overflow: auto;
 }
 
 .tableDescription {
-text-align: left;
+  text-align: left;
 }
 
-/* Made so that the divs for select components have more standard spacing */
-.selectorComponent {
-
+/* Mimic default P format for spacing selectors so HTML doesn't get angry about DIV in P elements */
+/* Information on default P settings provided by ChatGPT query on 5/19/23 */
+.selectorP {
+  display: block;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: 0;
+  padding-right: 0;
 }
 
 /* Happy Eater Egg Hunting! */
 .whte_rbt_obj {
-text-decoration: none;
-color: white;
+  text-decoration: none;
+  color: white;
 }
 
 
