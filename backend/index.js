@@ -68,7 +68,7 @@ app.get('/api/getCategoryCost', (req, res) =>{
 // READ - Select Employee Tasks
 app.get('/api/getEmployeeTasks', (req, res) =>{
     const sqlRead = `
-    SELECT  EmployeeTasks.idEmployeeTask, TasksAssigned.taskName, Employees.employeeUsername,
+    SELECT  EmployeeTasks.idEmployeeTask, TasksAssigned.taskName, Employees.employeeUsername, (SELECT CONCAT(Employees.firstName, ' ', Employees.lastName)) AS contributingEmployee,
             TaskCategories.categoryName, EmployeeTasks.taskHoursWorked, EmployeeTasks.empTaskCost, EmployeeTasks.empTaskStart, EmployeeTasks.empTaskEnd
     FROM EmployeeTasks
     LEFT JOIN TasksAssigned ON EmployeeTasks.idTaskAssigned = TasksAssigned.idTaskAssigned

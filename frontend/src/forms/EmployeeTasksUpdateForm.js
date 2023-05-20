@@ -9,16 +9,16 @@ import SelectorEmployees from "../components/selectorEmployees";
 import SelectorTaskCategories from "../components/selectorTaskCategories";
 
 
-////////////////
-// TO DO: ALL //
-////////////////
-
 // HostURL Passed from App.js
 function EmployeeTasksUpdateForm ({hostURL}) {
 
     // NEED TO UNDERSTAND/CITE (BOILERPLATE-ISH BUT NEEDS SOURCE? Location allows using state from parent element)
     const location = useLocation();
     const { id, oldTask, oldEmployee, oldCategory, oldHours, oldCost, oldStart, oldEnd} = location.state;
+    
+    // Clip off time part of dates so they can pre-populate date pickers (some data loss, but probably should have just done dates instead of datetime anyways)
+    const oldStartDateString = oldStart.substring(0, 10);
+    const oldEndDateString = oldEnd.substring(0, 10);
 
     // BiologicalAssets SQL Endpoints
     const updateEmployeeTasksURL = hostURL + '/api/updateEmployeeTasks';
@@ -40,13 +40,13 @@ function EmployeeTasksUpdateForm ({hostURL}) {
         setCategoryName(oldCategory);
         setTaskHoursWorked(oldHours);
         setEmpTaskCost(oldCost);
-        setEmpTaskStart(oldStart);
-        setEmpTaskEnd(oldEnd);
+        setEmpTaskStart(oldStartDateString);
+        setEmpTaskEnd(oldEndDateString);
     }, [])
 
-    // UPDATE - Submit Changes to a Bio Asset then return to Asset home
+    // UPDATE - Submit Changes to a Bio Asset then return to Asset home (hours/cost can be zero'd in case they need to be cleared for an entry error)
     const update = () => {
-        if (taskName && employeeUsername && categoryName && taskHoursWorked && empTaskCost && empTaskStart && empTaskEnd) {
+        if (taskName && employeeUsername && categoryName && empTaskStart && empTaskEnd) {
         Axios.put(updateEmployeeTasksURL, {
             taskName: taskName,
             employeeUsername: employeeUsername,
@@ -57,7 +57,7 @@ function EmployeeTasksUpdateForm ({hostURL}) {
             empTaskEnd: empTaskEnd,
         });
         alert(`A task report for ${employeeUsername}'s ${categoryName} work on ${taskName} has been updated!`);
-        navTo('/BiologicalAssets');
+        navTo('/EmployeeTasks');
         } else {
             alert("Please fill out all required fields and try again.")
         };
@@ -73,7 +73,7 @@ function EmployeeTasksUpdateForm ({hostURL}) {
                 <form>
                     <fieldset>
                         <legend>Update Employee Task Report #{id}</legend>
-                        <p>DEBUG: {taskName} - {employeeUsername} - {categoryName}</p>
+                        <p>DEBUG: {taskName} - {employeeUsername} - {categoryName} - {taskHoursWorked} - {empTaskCost} - {empTaskStart} - {empTaskEnd}</p>
                             <div className="selectorP">
                                 <SelectorTasksAssigned  hostURL={hostURL} taskName={taskName} setTaskName={setTaskName} isRequired={true} autoFocus={true} preSelected={oldTask}/>
                                 <div>Original: {oldTask}</div>
@@ -92,8 +92,9 @@ function EmployeeTasksUpdateForm ({hostURL}) {
                                     type="number"
                                     id="hoursWorked"
                                     name="hoursWorked"
-                                    placeholder="Ex. 20" 
-                                    required 
+                                    placeholder="Ex. 20"
+                                    required
+                                    value={taskHoursWorked}
                                     onChange={(e) => {setTaskHoursWorked(e.target.value)}
                                     }/>
                                 <div>Original: {oldHours}</div>
@@ -105,7 +106,8 @@ function EmployeeTasksUpdateForm ({hostURL}) {
                                     id="empTaskCost"
                                     name="empTaskCost"
                                     placeholder="Ex. 2000.00" 
-                                    required 
+                                    required
+                                    value={empTaskCost}
                                     onChange={(e) => {setEmpTaskCost(e.target.value)}
                                     }/>
                                 <div>Original: {oldCost}</div>
@@ -116,7 +118,8 @@ function EmployeeTasksUpdateForm ({hostURL}) {
                                     type="date"
                                     id="empTaskStart"
                                     name="empTaskStart"
-                                    required 
+                                    required
+                                    value={empTaskStart}
                                     onChange={(e) => {setEmpTaskStart(e.target.value)}
                                     }/>
                                 <div>Original: {oldStart}</div>
@@ -128,6 +131,7 @@ function EmployeeTasksUpdateForm ({hostURL}) {
                                     id="empTaskEnd"
                                     name="empTaskEnd"
                                     required 
+                                    value={empTaskEnd}
                                     onChange={(e) => {setEmpTaskEnd(e.target.value)}
                                     }/>
                                 <div>Original: {oldEnd}</div>

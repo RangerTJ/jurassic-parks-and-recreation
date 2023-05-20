@@ -112,7 +112,7 @@ function EmployeeTasksPage ({hostURL}) {
                                 <tr key={index}>
                                     <td>{val.idEmployeeTask}</td>
                                     <td>{val.taskName}</td>
-                                    <td>{val.employeeUsername}</td>
+                                    <td>{val.contributingEmployee}</td>
                                     <td>{val.categoryName}</td>
                                     <td>{val.taskHoursWorked}</td>
                                     <td>{taskCost}</td>
