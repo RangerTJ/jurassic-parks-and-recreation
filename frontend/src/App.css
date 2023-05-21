@@ -402,7 +402,10 @@ h1 {
 
 .headerLogo {
   width: 90px;
-  height: 64;
+  height: 64px;
+  padding-top: 3px;
+  padding-bottom: 0;
+  margin-bottom: -25px;
 }
 
 h2 {
