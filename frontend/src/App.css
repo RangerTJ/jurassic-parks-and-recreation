@@ -320,7 +320,9 @@ select:focus {
 }
 
 img {
-  border: solid 2px var(--feralGreen);
+  border: solid 2px var(--parkRed);
+  outline-offset: -3px;
+  outline: solid 2px var(--parkYellow);
 }
 
 
