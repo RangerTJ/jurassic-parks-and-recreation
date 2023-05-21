@@ -13,7 +13,7 @@ import Axios from 'axios';
 
 
 // I *think* this will work so that if no species is passed, it defaults to null, and otherwise defaults it to the selection
-const SelectorTaskCategories = ({preSelected, isRequired, autofocus, hostURL, categoryName, setCategoryName}) => {
+const SelectorTaskCategories = ({preSelected, isRequired, autoFocus, hostURL, categoryName, setCategoryName}) => {
 
   // Create useState for the selection and list
   // For update, just update pre-selected image to match an input variable first
@@ -45,7 +45,7 @@ const SelectorTaskCategories = ({preSelected, isRequired, autofocus, hostURL, ca
   return (
     <>
       <div><label htmlFor="taskCategorySelector">Category</label></div>
-      <select id="taskCategorySelector" value={selected} onChange={selectionHandler} autofocus={autofocus ? true : false} required={isRequired ? true : false}>
+      <select id="taskCategorySelector" value={selected} onChange={selectionHandler} autoFocus={autoFocus ? true : false} required={isRequired ? true : false}>
         {/* Set default option then map query results to populate the select menu */}
         <option value="">None (Select a Category)</option>
         {list.map((val, index) => {

@@ -151,24 +151,11 @@ h1 {
   padding-bottom: 0px;
   font-family: var(--jpFont);
   font-weight: normal;
-  text-shadow:  1px -1px 0px red,
-                -1px 1px 0px red,
-                1px 1px 0px red,
-                -1px -1px 0px red;
-}
-
-.h1NoGlow {
-  text-shadow: none;
-  color: black;
-  text-shadow: 
-  1px 1px 0px white,
-  1px -1px 0px white,
-  -1px 1px 0px white,
-  -1px -1px 0px white,
-  3px 3px 3px var(--parkRed),
-  3px -3px 3px var(--parkRed),
-  -3px 3px 3px var(--parkRed),
-  -3px -3px 3px var(--parkRed);
+  color: var(--parkRed);
+  text-shadow:  0.5px -0.5px 0px var(--parkYellow),
+                -0.5px 0.5px 0px var(--parkYellow),
+                0.5px 0.5px 0px var(--parkYellow),
+                -0.5px -0.5px 0px var(--parkYellow);
 }
 
 h2 {
@@ -186,6 +173,7 @@ h2 {
                 -0.4px -0.4px 0px red,
                 1px 1px 5px black;
 }
+
 h3 {
   font-size: 24px; 
   font-weight: bold;
@@ -334,6 +322,11 @@ img {
   padding-top: 0px;
   font-family: var(--normalText);
   font-size: 30px;
+  color: var(--parkRed);
+  text-shadow:  0.5px -0.5px 0px var(--parkYellow),
+                -0.5px 0.5px 0px var(--parkYellow),
+                0.5px 0.5px 0px var(--parkYellow),
+                -0.5px -0.5px 0px var(--parkYellow);
 }
 
 .headerBox {
@@ -378,7 +371,11 @@ img {
 /* Happy Eater Egg Hunting! */
 .whte_rbt_obj {
   text-decoration: none;
-  color: white;
+  color: var(--parkRed);
+  text-shadow:  0.5px -0.5px 0px var(--parkYellow),
+                -0.5px 0.5px 0px var(--parkYellow),
+                0.5px 0.5px 0px var(--parkYellow),
+                -0.5px -0.5px 0px var(--parkYellow);
 }
 
 
