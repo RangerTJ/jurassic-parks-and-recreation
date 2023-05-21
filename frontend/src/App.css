@@ -344,8 +344,8 @@ img {
 }
 
 .headerLogo {
-  width: 135px;
-  height: 96px;
+  width: 100px;
+  height: 100px;
   padding-top: 10px;
   padding-bottom: 0;
   margin-bottom: -15px;
@@ -401,8 +401,8 @@ h1 {
 }
 
 .headerLogo {
-  width: 90px;
-  height: 64px;
+  width: 60px;
+  height: 60px;
   padding-top: 3px;
   padding-bottom: 0;
   margin-bottom: -25px;
@@ -414,6 +414,12 @@ h2 {
 
 h3 {
   font-size: 18px; 
+  font-weight: bold;
+  margin-bottom: 0;
+}
+
+h4 {
+  font-size: 14px; 
   font-weight: bold;
   margin-bottom: 0;
 }
@@ -442,4 +448,13 @@ nav a:focus {
   border: solid gold 2px;
   outline: none;
 }
+
+table {
+  font-size: 12px;
+}
+
+td {
+  padding: 2px;
+}
+
 }
