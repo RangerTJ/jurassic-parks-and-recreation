@@ -336,6 +336,25 @@ img {
   font-size: 30px;
 }
 
+.headerBox {
+  display: flex;
+  justify-content: space-between;
+  margin-left: 0px;
+  padding-left: 0px;
+}
+
+.headerLogo {
+  width: 135px;
+  height: 96px;
+  padding-top: 10px;
+  padding-bottom: 0;
+  margin-bottom: -15px;
+  outline: none;
+  border: none;
+  flex-shrink: 0;
+  align-self: flex-start;
+}
+
 .scrollableTable {
   overflow: auto;
 }
@@ -379,6 +398,11 @@ h1 {
 .headerP {
   margin-top: -10px;
   font-size: 25px;
+}
+
+.headerLogo {
+  width: 90px;
+  height: 64;
 }
 
 h2 {

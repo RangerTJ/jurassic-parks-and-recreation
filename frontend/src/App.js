@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import Axios from 'axios';
 import './App.css';
+import logo from './images/logo.png'
 
 // Main Page Imports
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
@@ -38,8 +39,7 @@ function App() {
     <div className="App">
       <BrowserRouter>
       <header>
-        <h1>Jurassic Parks and Recreation <span className="h1NoGlow">*</span>
-        </h1>
+          <h1 className="headerBox">Jurassic Parks and Recreation <img className="headerLogo" src={logo} alt="Test"></img></h1>
         <p className="headerP">D.I.N.O<a className="whte_rbt_obj" href="https://markhjorth.github.io/nedry/">.</a></p>
       </header>
       <Nav />
