@@ -140,9 +140,6 @@ LEFT JOIN BiologicalAssets ON TasksAssigned.idBiologicalAsset = BiologicalAssets
 LEFT JOIN Species ON BiologicalAssets.idSpecies = Species.idSpecies
 ORDER BY TasksAssigned.idTaskAssigned ASC;
 
-
--- *******MERGED EMPLOYEE TASK TABLE QUERY*************
-
 -- SELECT EmployeeTasks -- SUMMARY TABLE VERSION
 SELECT  EmployeeTasks.idEmployeeTask, TasksAssigned.taskName, (SELECT CONCAT(Employees.firstName, ' ', Employees.lastName)) AS contributingEmployee,
         TaskCategories.categoryName, EmployeeTasks.taskHoursWorked, EmployeeTasks.empTaskCost, EmployeeTasks.empTaskStart, EmployeeTasks.empTaskEnd
@@ -162,16 +159,6 @@ LEFT JOIN TasksAssigned ON EmployeeTasks.idTaskAssigned = TasksAssigned.idTaskAs
 LEFT JOIN TaskCategories ON EmployeeTasks.idTaskCategory = TaskCategories.idTaskCategory
 JOIN Employees ON EmployeeTasks.idEmployee = Employees.idEmployee
 ORDER BY EmployeeTasks.idEmployeeTask ASC;
-
-
-    SELECT  EmployeeTasks.idEmployeeTask, TasksAssigned.taskName, (SELECT CONCAT(Employees.firstName, ' ', Employees.lastName)) AS contributingEmployee,
-            TaskCategories.categoryName, EmployeeTasks.taskHoursWorked, EmployeeTasks.empTaskCost, EmployeeTasks.empTaskStart, EmployeeTasks.empTaskEnd,
-            Employees.employeeUsername
-    FROM EmployeeTasks
-    LEFT JOIN TasksAssigned ON EmployeeTasks.idTaskAssigned = TasksAssigned.idTaskAssigned
-    LEFT JOIN TaskCategories ON EmployeeTasks.idTaskCategory = TaskCategories.idTaskCategory
-    LEFT JOIN Employees ON EmployeeTasks.idEmployee = Employees.idEmployee
-    ORDER BY EmployeeTasks.idEmployeeTask ASC;
 
 -- SELECT Task Categories
 SELECT * from TaskCategories
@@ -223,11 +210,11 @@ VALUES  (
         );
 
 -- User selects job name from drop-down and a subquery gets the jobID from it so that the insert can be done properly
-INSERT INTO Employees           (idJobClassification, firstName, lastName, hourlyWage, employeePhone, employeeEmail,
+INSERT INTO Employees           (idJobClassification, firstName, lastName, employeeUsername, hourlyWage, employeePhone, employeeEmail,
                                 employeeRadio, employeeNote, employeePhoto)
 VALUES  (
                 (SELECT idJobClassification FROM JobClassifications WHERE jobTitle = :jobTitle_input), 
-                :firstName_input, :lastName_input, :hourlyWage_input, :employeePhone_input,
+                :firstName_input, :lastName_input, :employeeUsername_input, :hourlyWage_input, :employeePhone_input,
                 :employeeEmail_input, :employeeRadio_input, :employeeNote_input, :employeePhoto_input
         );
 

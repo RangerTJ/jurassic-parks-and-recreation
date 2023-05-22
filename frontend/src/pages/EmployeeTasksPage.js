@@ -115,7 +115,7 @@ function EmployeeTasksPage ({hostURL}) {
                                     <td>{val.contributingEmployee}</td>
                                     <td>{val.categoryName}</td>
                                     <td>{val.taskHoursWorked}</td>
-                                    <td>{taskCost}</td>
+                                    <td className="tableDescription">{taskCost}</td>
                                     <td>{val.empTaskStart}</td>
                                     <td>{val.empTaskEnd}</td>
                                     <td><button onClick={()=> {navToUpdate(val)}}>Update</button></td>

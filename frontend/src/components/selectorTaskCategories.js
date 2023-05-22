@@ -2,11 +2,6 @@ import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
 
 
-////////////////
-// TO DO: ALL //
-////////////////
-
-
 // Blend of below citation and ChatGPT syntax recomendation for mapping to a select menu
 // Current code copied directly from here by user Savior from Stackoverflow; will adapt as needed
 // https://stackoverflow.com/questions/69111477/how-to-iterate-through-public-assets-images-so-i-can-get-all-images-filename-in

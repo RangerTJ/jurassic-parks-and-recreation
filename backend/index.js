@@ -61,6 +61,92 @@ app.get('/api/getCategoryCost', (req, res) =>{
 });
 
 
+///////////////////////
+// Employees Queries //
+///////////////////////
+
+// READ - Select Employees
+app.get('/api/getEmployees', (req, res) =>{
+    const sqlRead = `
+    SELECT  Employees.idEmployee, Employees.lastName, Employees.firstName, Employees.employeeUsername, JobClassifications.jobTitle, Employees.hourlyWage,
+    Employees.employeePhone, Employees.employeeEmail, Employees.employeeRadio, Employees.employeeNote, Employees.employeePhoto
+    FROM Employees
+    JOIN JobClassifications ON Employees.idJobClassification = JobClassifications.idJobClassification
+    ORDER BY idEmployee ASC;
+    `;
+    db.query(sqlRead, (err, result)=> {
+        console.log(result);
+        res.send(result);
+    });
+});
+
+// CREATE Employee
+app.post('/api/insertEmployees', (req, res) =>{
+    const jobTitle = req.body.jobTitle
+    const firstName = req.body.firstName
+    const lastName = req.body.lastName
+    const employeeUsername = req.body.employeeUsername
+    const hourlyWage = req.body.hourlyWage
+    const employeePhone = req.body.employeePhone
+    const employeeEmail = req.body.employeeEmail
+    const employeeRadio = req.body.employeeRadio
+    const employeeNote = req.body.employeeNote
+    const employeePhoto = req.body.employeePhoto
+    const sqlInsert = `
+    INSERT INTO Employees           (idJobClassification, firstName, lastName, employeeUsername, hourlyWage, employeePhone, employeeEmail,
+                                    employeeRadio, employeeNote, employeePhoto)
+    VALUES  (
+                                    (SELECT idJobClassification FROM JobClassifications WHERE jobTitle = ?), 
+                                    ?, ?, ?, ?, ?, ?, ?, ?, ?
+            );
+    `;
+    db.query(sqlInsert, [jobTitle, firstName, lastName, employeeUsername, hourlyWage, employeePhone, employeeEmail, employeeRadio, employeeNote, employeePhoto], (err, result)=> {
+        console.log(result);
+        res.send(result);
+    });
+});
+
+// UPDATE Employee
+app.put('/api/updateEmployees', (req, res) =>{
+    const jobTitle = req.body.jobTitle
+    const firstName = req.body.firstName
+    const lastName = req.body.lastName
+    const hourlyWage = req.body.hourlyWage
+    const employeePhone = req.body.employeePhone
+    const employeeEmail = req.body.employeeEmail
+    const employeeRadio = req.body.employeeRadio
+    const employeeNote = req.body.employeeNote
+    const employeePhoto = req.body.employeePhoto
+    const idEmployee = req.body.idEmployee
+    const sqlUpdate = `
+    UPDATE Employees
+    SET     idJobClassification =   (SELECT idJobClassification FROM JobClassifications WHERE jobTitle = ?),
+            firstName = ?, lastName = ?, hourlyWage = ?,
+            employeePhone = ?, employeeEmail = ?, employeeRadio = ?, 
+            employeeNote = ?, employeePhoto = ?
+    WHERE idEmployee = ?;
+    `;
+    db.query(sqlUpdate, [jobTitle, firstName, lastName, hourlyWage, employeePhone, employeeEmail, employeeRadio, employeeNote, employeePhoto, idEmployee], (err, result)=> {
+        if (err) console.log(err); else console.log(result);
+        res.send(result);
+    });
+});
+
+// DELETE Employee
+app.delete('/api/deleteEmployees/:idEmployeeTask', (req, res) =>{
+    const idEmployee = req.params.idEmployeeTask
+    const sqlDelete = `
+    DELETE
+    FROM Employees
+    WHERE idEmployee = ?;
+    `;
+    db.query(sqlDelete, idEmployee, (err, result)=> {
+        if (err) console.log(err);
+        res.send(result);
+    });
+});
+
+
 ///////////////////////////
 // Employee Task Queries //
 ///////////////////////////
@@ -388,6 +474,19 @@ app.get('/api/getTaskCategoriesList', (req, res) =>{
     SELECT categoryName
     FROM TaskCategories
     ORDER BY categoryName ASC;
+    `;
+    db.query(sqlRead, (err, result)=> {
+        console.log(result);
+        res.send(result);
+    });
+});
+
+// Job Selector
+app.get('/api/getJobClassificationsList', (req, res) =>{
+    const sqlRead = `
+    SELECT jobTitle
+    FROM JobClassifications
+    ORDER BY jobTitle ASC;
     `;
     db.query(sqlRead, (err, result)=> {
         console.log(result);
