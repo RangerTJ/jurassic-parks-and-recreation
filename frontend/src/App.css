@@ -1,4 +1,6 @@
 /* Fonts */
+/* SVG/Stroke Styling Inspired by "Everything about Stroke Text in CSS" by codingdudecom
+https://dev.to/codingdudecom/everything-about-stroke-text-in-css-561i */
 
 /* Font-face code style/syntax based on "How to use @font-face in CSS" by Chris Coyler
 URL: https://css-tricks.com/snippets/css/using-font-face-in-css/ */
@@ -48,7 +50,7 @@ body {
   background-color: var(--feralGreen);
   background-attachment: fixed;
   background-position: center;
-  background-image:url(images/facility-enclosure-gates-night.jpg);
+  background-image:url(images/background.jpg);
   color: var(--worldDeepBlue);
   color: var(--parkYellow);
   font-family: var(--normalText);
@@ -114,7 +116,7 @@ nav a {
   line-height: 1.00;
   font-family: var(--jpFont);
   margin: 0;
-  text-shadow: px 1px 1px var(--feralGreen);
+  text-shadow: 0px 1px 1px var(--feralGreen);
 }
 
 nav a:hover {       
@@ -122,7 +124,11 @@ nav a:hover {
   color: white;
   border: ridge gold;
   text-decoration: none;
-  text-shadow: 1px 1px 5px var(--parkYellow);
+  text-shadow:
+  0.25px -0.25px 0px red,
+  -0.25px 0.25px 0px red,
+  0.25px 0.25px 0px red,
+  -0.25px -0.25px 0px red;
 }
   
 nav a:focus {
@@ -138,13 +144,20 @@ p {
   overflow-wrap: break-word;
 }
 
+/* Fun fact, you can apparently cast multiple shadows from text and overlap them for inline/outline effects! */
 h1 {
   font-size: 85px;
   margin-bottom: 0px;
   padding-bottom: 0px;
   font-family: var(--jpFont);
   font-weight: normal;
+  color: var(--parkRed);
+  text-shadow:  0.5px -0.5px 0px var(--parkYellow),
+                -0.5px 0.5px 0px var(--parkYellow),
+                0.5px 0.5px 0px var(--parkYellow),
+                -0.5px -0.5px 0px var(--parkYellow);
 }
+
 h2 {
   margin-top: auto;
   margin-bottom: 0;
@@ -153,7 +166,14 @@ h2 {
   font-family: var(--jpFont);
   font-size: 60px;
   font-weight: normal;
+  text-shadow:  
+                0.4px -0.4px 0px red,
+                -0.4px 0.4px 0px red,
+                0.4px 0.4px 0px red,
+                -0.4px -0.4px 0px red,
+                1px 1px 5px black;
 }
+
 h3 {
   font-size: 24px; 
   font-weight: bold;
@@ -173,6 +193,8 @@ table {
   border: 2px solid var(--parkYellow);
   border-collapse: collapse;
   width: 100%;
+  /* Ideally should probably make container and alignment styles for columns and use fit content in final version */
+  /* width: fit-content; */
   text-align: center;
 }
 
@@ -182,20 +204,22 @@ th {
 }
 
 td {
-  border: 2px solid var(--parkYellow);
-  padding: 10px;
+  border: 1px solid var(--parkYellow);
+  padding: 5px;
+  font-size: 14px;
+  vertical-align: middle;
 }
 
 /* Buttons and Forms */
 button {
   color: var(--parkYellow);
-  border: outset var(--dominionAmberMedClear);
-  background-color: var(--parkRed);
+  border: outset var(--dominionAmberDarkClear);
+  background-color: var(--dominionEarth);
   border-radius: 20px;
   font-family: var(--jpFont);
   font-size:xx-large;
   outline: none;
-  box-shadow: 1px 1px 5px black;
+  box-shadow: 1px 1px 15px black;
   text-shadow: 1px 1px 5px var(--dominionAmberBright);
 }
 
@@ -288,7 +312,11 @@ select:focus {
 }
 
 img {
-  border: solid 2px var(--feralGreen);
+  border: solid 2px var(--parkRed);
+  outline-offset: -3px;
+  outline: solid 2px var(--parkYellow);
+  margin: 2px;
+  vertical-align: middle;
 }
 
 
@@ -300,23 +328,114 @@ img {
   padding-top: 0px;
   font-family: var(--normalText);
   font-size: 30px;
+  color: var(--parkRed);
+  text-shadow:  0.5px -0.5px 0px var(--parkYellow),
+                -0.5px 0.5px 0px var(--parkYellow),
+                0.5px 0.5px 0px var(--parkYellow),
+                -0.5px -0.5px 0px var(--parkYellow);
+}
+
+.headerBox {
+  display: flex;
+  justify-content: space-between;
+  margin-left: 0px;
+  padding-left: 0px;
+}
+
+.headerLogo {
+  width: 100px;
+  height: 100px;
+  padding-top: 10px;
+  padding-bottom: 0;
+  margin-bottom: -15px;
+  outline: none;
+  border: none;
+  flex-shrink: 0;
+  align-self: flex-start;
+}
+
+.summary-table {
+  
+}
+
+.st-holder {
+  max-width: fit-content;
+}
+
+.st-left {
+  text-align: left;
+}
+
+.st-right {
+  text-align: right;
+}
+
+.st-header {
+  text-align: center;
 }
 
 .scrollableTable {
-overflow: auto;
+  overflow: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .tableDescription {
-text-align: left;
+  text-align: left;
+  padding: 5px;
+}
+
+/* Mimic default P format for spacing selectors so HTML doesn't get angry about DIV in P elements */
+/* Information on default <p> settings provided by ChatGPT query on 5/19/23 */
+.selectorP {
+  display: block;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* Citation: Creating a Simple Lightbox From Scratch in React by Alexandra Radevich
+URL: https://medium.com/swlh/creating-a-simple-lightbox-from-scratch-in-react-caea84f90960
+Example code used to begin implementation and modified slightly to suit project needs.
+.lightbox is very, very close to the raw example code (modified background color), while .light-box image was 
+made from scratch to address some image scaling/positioning issues. The combined end result is a lightbox image
+popup that shows up in a fixed position in the center of the screen that scales with the width of the window.*/
+
+.lightbox {
+  z-index: 1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(7, 44, 7, 0.52);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.lightbox-image {
+  max-width: 100%;
 }
 
 /* Happy Eater Egg Hunting! */
 .whte_rbt_obj {
-text-decoration: none;
-color: white;
+  text-decoration: none;
+  color: var(--parkRed);
+  text-shadow:  0.5px -0.5px 0px var(--parkYellow),
+                -0.5px 0.5px 0px var(--parkYellow),
+                0.5px 0.5px 0px var(--parkYellow),
+                -0.5px -0.5px 0px var(--parkYellow);
 }
 
+
+/* ---------------------- */
 /* Small Screen Settings */
+/* -------------------- */
 @media (max-device-width: 780px) {
 
 h1 {
@@ -332,12 +451,26 @@ h1 {
   font-size: 25px;
 }
 
+.headerLogo {
+  width: 60px;
+  height: 60px;
+  padding-top: 3px;
+  padding-bottom: 0;
+  margin-bottom: -25px;
+}
+
 h2 {
   font-size: 50px;
 }
 
 h3 {
   font-size: 18px; 
+  font-weight: bold;
+  margin-bottom: 0;
+}
+
+h4 {
+  font-size: 14px; 
   font-weight: bold;
   margin-bottom: 0;
 }
@@ -366,4 +499,13 @@ nav a:focus {
   border: solid gold 2px;
   outline: none;
 }
+
+table {
+  font-size: 12px;
+}
+
+td {
+  padding: 2px;
+}
+
 }

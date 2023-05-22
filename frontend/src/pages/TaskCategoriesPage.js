@@ -33,6 +33,7 @@ function TaskCategoryPage({hostURL}) {
     // For some reason trying to clear text with .then(()=> {setCategoryName("")}); results in an error about reading data in my tries
     // Or maybe something like this? https://stackoverflow.com/questions/14837466/clearing-a-text-field-on-button-click
     // https://www.freecodecamp.org/news/how-to-clear-input-values-of-dynamic-form-in-react/ TO READ
+    // DISREGARD, WE'RE NOT DOING 1-PAGE INPUT ANYWAYS, SO NOT NEEDED (Unless we do custom searches?)
 
     // CREATE
     const submitNewTaskCategory = () => {
@@ -70,6 +71,7 @@ function TaskCategoryPage({hostURL}) {
 
     return(
         <>
+            <h2> * Under Construction +</h2>
             <h2>CRUD Tester</h2>
             <article>
                 <h3>INSERT Test + READ from Task Categories</h3>
@@ -82,15 +84,16 @@ function TaskCategoryPage({hostURL}) {
                     {/* Dynamic Table Alpha Version Test*/}
                     <div className="scrollableTable">
                         <table>
+                            <tbody>
                             <tr>
                                 <th>ID</th>
                                 <th>Category</th>
                                 <th>Update</th>
                                 <th>Delete</th>
                             </tr>
-                            {taskCategoryList.map((val)=> {
+                            {taskCategoryList.map((val, index)=> {
                             return (
-                                <tr>
+                                <tr key={index}>
                                     <td>{val.idTaskCategory}</td>
                                     <td>{val.categoryName}</td>
                                     <td width="100px">
@@ -99,7 +102,8 @@ function TaskCategoryPage({hostURL}) {
                                     </td>
                                     <td width="100px"><button onClick={()=> {delTaskCategory(val.idTaskCategory)}}>Delete</button></td>
                                 </tr>)
-                        })}
+                            })}
+                            </tbody>
                         </table>
                     </div>
             </article>

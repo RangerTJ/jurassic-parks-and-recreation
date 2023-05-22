@@ -4,6 +4,8 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import Axios from 'axios';
+import SelectorSpecies from "../components/selectorSpecies";
+import SelectorFacilities from "../components/selectorFacilities";
 
 
 // HostURL Passed from App.js
@@ -14,15 +16,24 @@ function BiologicalAssetsAddForm ({hostURL}) {
     const navTo = useNavigate();
 
     // Bio Asset States for the Form (2x arrays for select menus + 3x values to submit)
-    const [speciesList, setspeciesList] = useState([])
-    const [facilityList, setfacilityList] = useState([])
     const [species, setSpecies] = useState('')
     const [name, setName] = useState('')
     const [facility, setFacility] = useState('')
 
-    // TO DO: useEffect to get species and facility lists and save them to useState
-    // Map these arrays to respective select boxes (then figure out how to pre-select one and pre-populate for update)
-    // Insert function for onClick / mod onClick to insert, then navigate back to bio assets... possible success alert?
+    // CREATE - Insert New Bio Asset then return to asset home
+    const submit = () => {
+        if (species && name && facility) {
+        Axios.post(createBiologicalAssetsURL, {
+            speciesName: species,
+            bioAssetName: name,
+            facilityName: facility,
+        });
+        alert(`${name} has been added to the database!`);
+        navTo('/BiologicalAssets');
+        } else {
+            alert("Please fill out all required fields and try again.")
+        };
+    };
 
     return (
         <>
@@ -36,55 +47,27 @@ function BiologicalAssetsAddForm ({hostURL}) {
                 <form>
                     <fieldset>
                         <legend>Information</legend>
-                        <p>
-                            {/* <!-- Populated by SQL query --> */}
-                            <div><label for="assetSpecies" class="required">Species</label></div>
-                            <select name="assetSpecies" id="assetSpecies" autofocus required>
-                                <option value="" hidden>Choose an option</option>
-                                <option value="1">Tyrannosaurus Rex</option>
-                                <option value="2">Velociraptor</option>
-                                <option value="3">Triceratops</option>
-                                <option value="4">Brachiosaurus</option>
-                                <option value="5">Stegosaurus</option>
-                                <option value="6">Spinosaurus</option>
-                                <option value="7">Allosaurus</option>
-                                <option value="8">Ankylosaurus</option>
-                                <option value="9">Parasaurolophus</option>
-                                <option value="10">Mosasaurus</option>
-                                <option value="11">Hesperornis</option>
-                                <option value="12">Thescelosaurus</option>
-                                <option value="13">Diplocaulus</option>
-                                <option value="14">Metriorhynchus</option>
-                                <option value="15">Eustreptospondylus</option>
-                                <option value="16">Batman (he volunteered to be an exhibit)</option>
-                            </select>
-                        </p>
-                        <p>
-                            <div><label for="bioAssetName" class="required">Name</label></div>
-                            <input type="text"
-                                        name="bioAssetName" 
-                                        id ="bioAssetName"
-                                        required 
-                                        placeholder="Ex. Meadow Stomper"></input>
-                        </p>
-                        <p>
-                            {/* <!-- Populated by SQL query --> */}
-                            <div><label for="facilityName" class="required">Home Facility</label></div>
-                            <select name="facilityName" id="facilityName" required>
-                                <option value="" hidden>Choose an option</option>
-                                <option value="1">Wild Zone</option>
-                                <option value="2">Visitor Center</option>
-                                <option value="3">Jurassic Stadium</option>
-                                <option value="4">Mosasaur Lagoon</option>
-                                <option value="5">Redwood Retreat</option>
-                                <option value="6">Swamp Explorer</option>
-                            </select>
-                        </p>
+                            <div className="selectorP">
+                                <SelectorSpecies  hostURL={hostURL} species={species} setSpecies={setSpecies} isRequired={true} autoFocus={true}/>
+                            </div>
+                            <div className="selectorP">
+                                <div><label htmlFor="bioAssetName">Name</label></div>
+                                <input 
+                                    type="text" 
+                                    id="bioAssetName"
+                                    name="bioAssetName"
+                                    placeholder="Ex. Meadow Stomper" 
+                                    required 
+                                    onChange={(e) => {setName(e.target.value)}
+                                    }/>
+                            </div>
+                            <div className="selectorP">
+                                <SelectorFacilities hostURL={hostURL} facility={facility} setFacility={setFacility} isRequired={true}/>
+                            </div>
                     </fieldset>
                 </form>
                 <div>
-                    {/* Also need to make it actually do the insert SQL here somehow */}
-                    <p><button onClick={() => navTo("/BiologicalAssets")}>Add Asset</button></p>
+                    <p><button onClick={submit}>Add Asset</button></p>
                 </div>
             </article>
         </>

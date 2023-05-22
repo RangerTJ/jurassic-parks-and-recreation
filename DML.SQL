@@ -48,6 +48,15 @@ SELECT jobTitle
 FROM JobClassifications
 ORDER BY jobTitle ASC;
 
+-- Assigned Task Selector
+-- May expand further later to filter out "completed" tasks to reduce selector bloat
+-- Completed tasks could still be viewed on the table and be re-opened to see on drop-down again
+-- Would need to add the "completed" tinyint field back so you could add Employee Task records to a "finished"
+-- task until all records are in, then DB admin could check it closed to take it out of the filter.
+SELECT taskName, taskStart
+FROM TasksAssigned
+ORDER BY taskName ASC;
+
 -- Employees Selector
 SELECT lastName, firstName, employeeUsername
 FROM Employees
@@ -83,9 +92,9 @@ SELECT  Facilities.idFacility, Parks.parkName, FacilityTypes.facTypeName, Habita
         Facilities.securityRating, Facilities.facilityPhoto, Facilities.facilityNote
 FROM Facilities
 -- Need to join Facilities -> Parks -> FacilityTypes -> Habitats
-JOIN Parks ON Facilities.idPark = Parks.idPark
-JOIN FacilityTypes ON Facilities.idFacilityType = FacilityTypes.idFacilityType
-JOIN Habitats ON Facilities.idHabitat = Habitats.idHabitat
+LEFT JOIN Parks ON Facilities.idPark = Parks.idPark
+LEFT JOIN FacilityTypes ON Facilities.idFacilityType = FacilityTypes.idFacilityType
+LEFT JOIN Habitats ON Facilities.idHabitat = Habitats.idHabitat
 ORDER BY idFacility ASC;
 
 -- SELECT Diets
@@ -97,16 +106,16 @@ SELECT Species.idSpecies, Species.speciesName, Diets.dietName, Habitats.habitatN
        Species.threatLevel, Species.speciesPhoto
 FROM Species
 -- Need to join Species -> Diets -> Habitats
-JOIN Diets ON Species.idDiet = Diets.idDiet
-JOIN Habitats ON Species.idHabitat = Habitats.idHabitat
+LEFT JOIN Diets ON Species.idDiet = Diets.idDiet
+LEFT JOIN Habitats ON Species.idHabitat = Habitats.idHabitat
 ORDER BY idSpecies ASC; 
 
 -- SELECT BiologicalAssets
 SELECT BiologicalAssets.idBiologicalAsset, BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName 
 FROM BiologicalAssets
 -- Need to join Species -> BiologicalAssets -> Facilities
-JOIN Species ON BiologicalAssets.idSpecies = Species.idSpecies
-JOIN Facilities ON BiologicalAssets.idFacility = Facilities.idFacility
+LEFT JOIN Species ON BiologicalAssets.idSpecies = Species.idSpecies
+LEFT JOIN Facilities ON BiologicalAssets.idFacility = Facilities.idFacility
 ORDER BY idBiologicalAsset ASC;
 
 -- SELECT JobClassifications
@@ -118,7 +127,7 @@ SELECT  Employees.idEmployee, Employees.lastName, Employees.firstName, Employees
         Employees.employeePhone, Employees.employeeEmail, Employees.employeeRadio, Employees.employeeNote, Employees.employeePhoto
 FROM Employees
 -- Need to join Employees -> JobClassifications
-JOIN JobClassifications ON Employees.idJobClassification = JobClassifications.idJobClassification
+LEFT JOIN JobClassifications ON Employees.idJobClassification = JobClassifications.idJobClassification
 ORDER BY idEmployee ASC;
 
 -- SELECT TasksAssigned (Bio Asset ID'd by displaying actual asset ID# and Species, since may not have a bioAssetName)
@@ -131,16 +140,6 @@ LEFT JOIN BiologicalAssets ON TasksAssigned.idBiologicalAsset = BiologicalAssets
 LEFT JOIN Species ON BiologicalAssets.idSpecies = Species.idSpecies
 ORDER BY TasksAssigned.idTaskAssigned ASC;
 
--- SELECT EmployeeTasks -- SUMMARY TABLE VERSION
-SELECT  EmployeeTasks.idEmployeeTask, TasksAssigned.taskName, (SELECT CONCAT(Employees.firstName, ' ', Employees.lastName)) AS contributingEmployee,
-        TaskCategories.categoryName, EmployeeTasks.taskHoursWorked, EmployeeTasks.empTaskCost, EmployeeTasks.empTaskStart, EmployeeTasks.empTaskEnd
-FROM EmployeeTasks
--- Need to JOIN EmployeeTasks -> TasksAssigned -> Employees -> Task Category
-LEFT JOIN TasksAssigned ON EmployeeTasks.idTaskAssigned = TasksAssigned.idTaskAssigned
-LEFT JOIN TaskCategories ON EmployeeTasks.idTaskCategory = TaskCategories.idTaskCategory
-JOIN Employees ON EmployeeTasks.idEmployee = Employees.idEmployee
-ORDER BY EmployeeTasks.idEmployeeTask ASC;
-
 -- SELECT EmployeeTasks -- POPULATE UPDATE FORM VERSION
 SELECT  EmployeeTasks.idEmployeeTask, TasksAssigned.taskName, Employees.employeeUsername,
         TaskCategories.categoryName, EmployeeTasks.taskHoursWorked, EmployeeTasks.empTaskCost, EmployeeTasks.empTaskStart, EmployeeTasks.empTaskEnd
@@ -148,7 +147,7 @@ FROM EmployeeTasks
 -- Need to JOIN EmployeeTasks -> TasksAssigned -> Employees -> Task Category
 LEFT JOIN TasksAssigned ON EmployeeTasks.idTaskAssigned = TasksAssigned.idTaskAssigned
 LEFT JOIN TaskCategories ON EmployeeTasks.idTaskCategory = TaskCategories.idTaskCategory
-JOIN Employees ON EmployeeTasks.idEmployee = Employees.idEmployee
+LEFT JOIN Employees ON EmployeeTasks.idEmployee = Employees.idEmployee
 ORDER BY EmployeeTasks.idEmployeeTask ASC;
 
 -- SELECT Task Categories
@@ -158,8 +157,6 @@ ORDER BY idTaskCategory ASC;
 
 -- ----------------
 -- CREATES: "ADD NEW" SQL SCRIPTS - Use :browser_inputs to get data for insert queries
--- Open Question: Is it possible to display multiple fields in drop-down while only sending the input from one?
--- (i.e. show ID + name, but only send ID to SQL) - would eliminate most subqueries if so
 -- ----------------
 
 -- Add new Park to the system
@@ -192,19 +189,20 @@ VALUES  (
         );
 
 -- Creates record of employee's work on a task by referencing the issued task# and the employee's unique username
-INSERT INTO EmployeeTasks       (idTaskAssigned, idEmployee, taskHoursWorked, empTaskCost, empTaskStart, empTaskEnd)
+INSERT INTO EmployeeTasks       (idTaskAssigned, idEmployee, idTaskCategory, taskHoursWorked, empTaskCost, empTaskStart, empTaskEnd)
 VALUES  (
-                :idTaskAssigned_input,
+                (SELECT idTaskAssigned FROM TasksAssigned WHERE taskName = :taskName_input),
                 (SELECT idEmployee FROM Employees WHERE employeeUsername = :employeeUsername_input),
+                (SELECT idTaskCategory FROM TaskCategories WHERE categoryName = :categoryName_input),
                 :taskHoursWorked_input, :empTaskCost_input, :empTaskStart_input, :empTaskEnd_input
         );
 
 -- User selects job name from drop-down and a subquery gets the jobID from it so that the insert can be done properly
-INSERT INTO Employees           (idJobClassification, firstName, lastName, hourlyWage, employeePhone, employeeEmail,
+INSERT INTO Employees           (idJobClassification, firstName, lastName, employeeUsername, hourlyWage, employeePhone, employeeEmail,
                                 employeeRadio, employeeNote, employeePhoto)
 VALUES  (
                 (SELECT idJobClassification FROM JobClassifications WHERE jobTitle = :jobTitle_input), 
-                :firstName_input, :lastName_input, :hourlyWage_input, :employeePhone_input,
+                :firstName_input, :lastName_input, :employeeUsername_input, :hourlyWage_input, :employeePhone_input,
                 :employeeEmail_input, :employeeRadio_input, :employeeNote_input, :employeePhoto_input
         );
 
@@ -282,10 +280,17 @@ WHERE idTaskAssigned = :idTaskAssigned;
 -- Employee
 UPDATE Employees
 SET     idJobClassification =   (SELECT idJobClassification FROM JobClassifications WHERE jobTitle = :jobTitle_input),
-        firstName = :firstName_input, lastName = :lastName_input, hourlyWage = :hourlyWage_input,
+        firstName = :firstName_input, lastName = :lastName_input, employeeUsername = :employeeUsername_input, hourlyWage = :hourlyWage_input,
         employeePhone = :employeePhone_input, employeeEmail = :employeeEmail_input, employeeRadio = :employeeRadio_input, 
         employeeNote = :employeeNote_input, employeePhoto = :employeePhoto_input
 WHERE idEmployee = :idEmployee_input;
+
+    UPDATE Employees
+    SET     idJobClassification =   (SELECT idJobClassification FROM JobClassifications WHERE jobTitle = ?),
+            firstName = ?, lastName = ?, employeeUsername = ?, hourlyWage = ?,
+            employeePhone = ?, employeeEmail = ?, employeeRadio = ?, 
+            employeeNote = ?, employeePhoto = ?
+    WHERE idEmployee = ?;
 
 -- Update an Employee Task (if needed to re-assign orphaned FK's if/when parents are deleted)
 UPDATE EmployeeTasks
@@ -309,8 +314,8 @@ WHERE idTaskCategory = :idTaskCategory_input;
 -- Biological Asset
 UPDATE BiologicalAssets
 SET     idSpecies =             (SELECT idSpecies FROM Species WHERE speciesName = :speciesName_input),
-SET     idFacility =            (SELECT idFacility FROM Facilities WHERE facilityName = :facilityName_input),
-SET     bioAssetName = :bioAssetName_input
+        idFacility =            (SELECT idFacility FROM Facilities WHERE facilityName = :facilityName_input),
+        bioAssetName = :bioAssetName_input
 WHERE   idBiologicalAsset = :idBiologicalAsset_input;
 
 -- Habitat
@@ -327,8 +332,8 @@ WHERE idDiet = :idDiet_input;
 -- Species
 UPDATE Species
 SET     idDiet =                (SELECT idDiet FROM Diets WHERE dietName = :dietName_input),
-SET     idHabitat =             (SELECT idHabitat FROM Habitats WHERE habitatName = :habitatName_input),
-SET     speciesName = :speciesName_input, speciesDescription = :speciesDescription_input, 
+        idHabitat =             (SELECT idHabitat FROM Habitats WHERE habitatName = :habitatName_input),
+        speciesName = :speciesName_input, speciesDescription = :speciesDescription_input, 
         threatLevel = :threatLevel_input, speciesPhoto = :speciesPhoto_input
 WHERE   idSpecies = :idSpecies_input;
 
@@ -422,7 +427,7 @@ GROUP BY Parks.parkName
 ORDER BY ParkCost DESC;
 
 -- SELECT biological assets in a non-ideal habitat (for use in summary report to quickly flag down inappropriate assignments)
-SELECT BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName AS currentWrongHome, currentHab.habitatName AS currentHabitat, speciesHab.habitatName AS needsHabitat
+SELECT BiologicalAssets.idBiologicalAsset, BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName, currentHab.habitatName AS currentHabitat, speciesHab.habitatName AS needsHabitat
 FROM BiologicalAssets
 -- Need to JOIN BioAssets -> Species -> Facilities
 JOIN Species ON BiologicalAssets.idSpecies = Species.idSpecies
@@ -433,7 +438,7 @@ WHERE Species.idHabitat != Facilities.idHabitat OR Facilities.idHabitat IS NULL
 ORDER BY facilityName, speciesName, bioAssetName;
 
 -- SELECT biological assets that are not adequately secured (and indicates how bad it is with a severity rating from 1-9)
-SELECT BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName, Facilities.securityRating, Species.threatLevel, Species.threatLevel - Facilities.securityRating AS severity
+SELECT BiologicalAssets.idBiologicalAsset, BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName, Facilities.securityRating, Species.threatLevel, Species.threatLevel - Facilities.securityRating AS severity
 FROM BiologicalAssets
 -- Need to JOIN BioAssets -> Species -> Facilities
 JOIN Species on BiologicalAssets.idSpecies = Species.idSpecies
@@ -490,6 +495,7 @@ ORDER BY Facilities.facilityName ASC;
 
 
 -- MORE CUSTOM REPORT IDEAS
+-- View Enclosure Inhabitants (for a specific enclosure)
 -- Cost Analysis Report by Biological Asset
 -- Cost Analysis Report by Employee
 -- Search for all tasks associated with an employee

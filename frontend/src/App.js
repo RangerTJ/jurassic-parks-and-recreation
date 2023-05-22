@@ -5,16 +5,17 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import Axios from 'axios';
 import './App.css';
+import logo from './images/logo.png'
 
 // Main Page Imports
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Nav from "./components/nav";
+import Nav from "./components/nav";  // Done
 import HomePage from "./pages/HomePage";  // Done
 import ParksPage from "./pages/ParksPage";
 import FacilitiesPage from "./pages/FacilitiesPage";
-import BiologicalAssetsPage from "./pages/BiologicalAssetsPage";  // Needs Add/Update and Species Filter for Main Table
-import EmployeesPage from "./pages/EmployeesPage";
-import TasksAssignedPage from "./pages/TasksAssignedPage";
+import BiologicalAssetsPage from "./pages/BiologicalAssetsPage";  // Done
+import EmployeesPage from "./pages/EmployeesPage";  // Done
+import TasksAssignedPage from "./pages/TasksAssignedPage";  // Done
 import EmployeeTasksPage from "./pages/EmployeeTasksPage";
 import TaskCategoriesPage from "./pages/TaskCategoriesPage";  // Technically full CRUD, but looks horrible/no form pages yet
 import SpeciesPage from "./pages/SpeciesPage";
@@ -26,20 +27,21 @@ import JobClassificationsPage from "./pages/JobClassificationsPage";
 // Form Page Imports
 import BiologicalAssetsAddForm from "./forms/BiologicalAssetsAddForm";
 import BiologicalAssetsUpdateForm from "./forms/BiologicalAssetsUpdateForm";
-
-// Establish common variables for host for easy edits
-
+import EmployeeTasksAddForm from "./forms/EmployeeTasksAddForm";
+import EmployeeTasksUpdateForm from "./forms/EmployeeTasksUpdateForm";
+import EmployeesAddForm from "./forms/EmployeesAddForm";
+import EmployeesUpdateForm from "./forms/EmployeesUpdateForm";
 
 // React Application
 function App() {
     const hostURL = 'http://localhost:3001';
-  
+    
   // HTML Rendering Structure
   return (
     <div className="App">
       <BrowserRouter>
       <header>
-        <h1>Jurassic Parks and Recreation *</h1>
+          <h1 className="headerBox">Jurassic Parks and Recreation <img className="headerLogo" src={logo} alt="Test"></img></h1>
         <p className="headerP">D.I.N.O<a className="whte_rbt_obj" href="https://markhjorth.github.io/nedry/">.</a></p>
       </header>
       <Nav />
@@ -65,6 +67,10 @@ function App() {
                 {/* Form Page Routes */}
                 <Route path="/BiologicalAssetsAdd" element={<BiologicalAssetsAddForm hostURL={hostURL} />} />
                 <Route path="/BiologicalAssetsUpdate" element={<BiologicalAssetsUpdateForm hostURL={hostURL} />} />
+                <Route path="/EmployeeTasksAdd" element={<EmployeeTasksAddForm hostURL={hostURL} />} />
+                <Route path="/EmployeeTasksUpdate" element={<EmployeeTasksUpdateForm hostURL={hostURL} />} />
+                <Route path="/EmployeesAdd" element={<EmployeesAddForm hostURL={hostURL} />} />
+                <Route path="/EmployeesUpdate" element={<EmployeesUpdateForm hostURL={hostURL} />} />
             </Routes>
         </section>
       </main>
