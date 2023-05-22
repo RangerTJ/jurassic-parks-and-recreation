@@ -354,8 +354,31 @@ img {
   align-self: flex-start;
 }
 
+.summary-table {
+  
+}
+
+.st-holder {
+  max-width: fit-content;
+}
+
+.st-left {
+  text-align: left;
+}
+
+.st-right {
+  text-align: right;
+}
+
+.st-header {
+  text-align: center;
+}
+
 .scrollableTable {
   overflow: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .tableDescription {

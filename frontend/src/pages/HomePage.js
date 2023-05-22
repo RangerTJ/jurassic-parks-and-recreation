@@ -58,47 +58,51 @@ function HomePage({hostURL}) {
                     The summary tables below provide high-level overviews of current costs associated with aspects of
                     managing our system of parks and zoological attractions.
                 </p>
-                <h4>Cost Summary by Sector</h4>
+                <h4 className="st-header">Cost Summary by Sector</h4>
                 <div className="scrollableTable">
-                    <table>
-                        <tbody>
-                        <tr>
-                            <th>Sector</th>
-                            <th>Cost</th>
-                        </tr>
-                        {categoryCostList.map((val, index)=> {
-                            // Convert cost to USD or set to 0 USD if there is a null entry
-                            const usdCategoryCost = val.taskTypeCost ? val.taskTypeCost.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) : '$0.00';
-                            return (
-                                <tr key={index}>
-                                    <td>{val.categoryName}</td>
-                                    <td>{usdCategoryCost}</td>
-                                </tr>
-                            )
-                        })}
-                        </tbody>
-                    </table>
+                    <div className="st-holder">
+                        <table className="summary-table">
+                            <tbody>
+                            <tr >
+                                <th>Sector</th>
+                                <th>Cost</th>
+                            </tr>
+                            {categoryCostList.map((val, index)=> {
+                                // Convert cost to USD or set to 0 USD if there is a null entry
+                                const usdCategoryCost = val.taskTypeCost ? val.taskTypeCost.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) : '$0.00';
+                                return (
+                                    <tr key={index} className="st-left">
+                                        <td>{val.categoryName}</td>
+                                        <td>{usdCategoryCost}</td>
+                                    </tr>
+                                )
+                            })}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-                <h4>Cost Summary by Park</h4>
+                <h4 className="st-header">Cost Summary by Park</h4>
                 <div className="scrollableTable">
-                    <table>
-                        <tbody>
-                        <tr>
-                            <th>Park</th>
-                            <th>Cost</th>
-                        </tr>
-                        {parkCostList.map((val, index)=> {
-                            // Convert cost to USD or set to 0 USD if there is a null entry
-                            const usdParkCost = val.parkCost ? val.parkCost.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) : '$0.00';
-                            return (
-                                <tr key={index}>
-                                    <td>{val.parkName}</td>
-                                    <td>{usdParkCost}</td>
-                                </tr>
-                            )
-                        })}
-                        </tbody>
-                    </table>
+                    <div className="st-holder">
+                        <table>
+                            <tbody>
+                            <tr >
+                                <th>Park</th>
+                                <th>Cost</th>
+                            </tr>
+                            {parkCostList.map((val, index)=> {
+                                // Convert cost to USD or set to 0 USD if there is a null entry
+                                const usdParkCost = val.parkCost ? val.parkCost.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) : '$0.00';
+                                return (
+                                    <tr key={index}>
+                                        <td className="st-left">{val.parkName}</td>
+                                        <td className="st-left">{usdParkCost}</td>
+                                    </tr>
+                                )
+                            })}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </article>
             <article>
