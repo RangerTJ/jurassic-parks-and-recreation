@@ -364,7 +364,7 @@ img {
 }
 
 /* Mimic default P format for spacing selectors so HTML doesn't get angry about DIV in P elements */
-/* Information on default P settings provided by ChatGPT query on 5/19/23 */
+/* Information on default <p> settings provided by ChatGPT query on 5/19/23 */
 .selectorP {
   display: block;
   margin-top: 1em;
