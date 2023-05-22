@@ -205,8 +205,9 @@ th {
 
 td {
   border: 1px solid var(--parkYellow);
-  padding: 10px;
+  padding: 5px;
   font-size: 14px;
+  vertical-align: middle;
 }
 
 /* Buttons and Forms */
@@ -314,6 +315,8 @@ img {
   border: solid 2px var(--parkRed);
   outline-offset: -3px;
   outline: solid 2px var(--parkYellow);
+  margin: 2px;
+  vertical-align: middle;
 }
 
 
@@ -357,6 +360,7 @@ img {
 
 .tableDescription {
   text-align: left;
+  padding: 5px;
 }
 
 /* Mimic default P format for spacing selectors so HTML doesn't get angry about DIV in P elements */

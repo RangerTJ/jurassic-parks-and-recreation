@@ -81,37 +81,57 @@ function EmployeesPage ({hostURL}) {
                     <p><button onClick={() => navTo("/EmployeesAdd")}>Create</button></p>
                 </div>
             </article>
+            {/* Look into using React Modal later - allows super-imposing of zoomed image in a lightbox */}
+            {/* Alternate design proposal with concatenated fields */}
+            {/* Could potentially reuse the bio assets species filter for job titles here or do a last name search or something */}
             <article>
                 <h3>View Employees</h3>
-                {/* Experimental Barebones Card UI Test - Comment on/off to examine */}
-                {/* Has better button usability/focus on individuals, but harder for comparing data/takes up more vertical realestate. Could probably combo w/ an inside table to get a blend of both. */}
-                {/* {employeesList.map((val, index)=> {
-                            const wage = val.hourlyWage ? val.hourlyWage.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) : '$0.00';
-                            return (
-                                <>
-                                    <h2 key={index}>{val.lastName}, {val.firstName}</h2>
-                                    <div>Employee ID: #{val.idEmployee} | Username: {val.employeeUsername}</div>
-                                    <div>{val.jobTitle}</div>
-                                    <div><a href={val.employeePhoto}><img src={val.employeePhoto} alt={val.employeePhoto} width={200}/></a></div>
-                                    
-                                    <div>Hourly Wage: {wage}</div>
-                                    <div>Contact: {val.employeePhone} | {val.employeeEmail} | Callsign: {val.employeeRadio}</div>
-                                    <div>Notes: {val.employeeNote}</div>
-                                    <div>
-                                        <button onClick={()=> {navToUpdate(val)}}>Update</button>
-                                        <button onClick={()=> {delEmployee(val.idEmployee)}}>Delete</button>
-                                    </div>
-                                </>
-                            )}
-                        )} */}
-                {/* End Test */}
-
                 <p>
                     The table below shows existing information for Employee entities and includes
                     buttons to update or delete them.
                 </p>
-                {/* Could potentially reuse the bio assets species filter for job titles here or do a last name search or something */}
-                <div className="scrollableTable">
+                <table className="scrollableTable">
+                    <tbody>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Username</th>
+                        <th>Job</th>
+                        <th>Contact</th>
+                        <th>Photo</th>
+                        <th>Notes</th>
+
+                        <th>Update</th>
+                        <th>Delete</th>
+                    </tr>
+                    {employeesList.map((val, index)=> {
+                        const wage = val.hourlyWage ? val.hourlyWage.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) : '$0.00';
+                        return (
+                            <tr key={index}>
+                                <td>
+                                    {val.idEmployee}
+
+                                </td>
+                                <td>{val.lastName}, {val.firstName}</td>
+                                <td>{val.employeeUsername}</td>
+                                <td>{val.jobTitle} ({wage}/hr)</td>
+                                <td><div>{val.employeePhone}</div><div>{val.employeeEmail}</div><div>Radio Callsign: {val.employeeRadio}</div></td>
+                                <td>
+                                    {/* Look into using React Modal later - allows super-imposing of zoomed image in a lightbox */}
+                                    <a href={val.employeePhoto}>
+                                        <img src={val.employeePhoto} alt={val.employeePhoto} width={200}/>
+                                    </a>
+                                </td>
+                                <td className="tableDescription">{val.employeeNote}</td>
+                                <td><button onClick={()=> {navToUpdate(val)}}>Update</button></td>
+                                <td><button onClick={()=> {delEmployee(val.idEmployee)}}>Delete</button></td>
+                            </tr>
+                        )}
+                    )}
+                    </tbody>
+                </table>                                  
+                {/* Old Design - propose we go with the new one that's more compact/reads better */}
+                {/* <div className="scrollableTable">
                     <table>
                         <tbody>
                         <tr>
@@ -144,7 +164,7 @@ function EmployeesPage ({hostURL}) {
                                     <td>{val.employeeEmail}</td>
                                     <td>{val.employeeRadio}</td>
                                     <td>
-                                        {/* Look into using React Modal later - allows super-imposing of zoomed image in a lightbox */}
+                                        
                                         <a href={val.employeePhoto}>
                                             <img src={val.employeePhoto} alt={val.employeePhoto} width={200}/>
                                         </a>
@@ -158,7 +178,7 @@ function EmployeesPage ({hostURL}) {
                         )}
                         </tbody>
                     </table>  
-                </div>
+                </div> */}
             </article>
         </>
     );
