@@ -112,6 +112,7 @@ app.put('/api/updateEmployees', (req, res) =>{
     const firstName = req.body.firstName
     const lastName = req.body.lastName
     const hourlyWage = req.body.hourlyWage
+    const employeeUsername = req.body.employeeUsername
     const employeePhone = req.body.employeePhone
     const employeeEmail = req.body.employeeEmail
     const employeeRadio = req.body.employeeRadio
@@ -121,12 +122,12 @@ app.put('/api/updateEmployees', (req, res) =>{
     const sqlUpdate = `
     UPDATE Employees
     SET     idJobClassification =   (SELECT idJobClassification FROM JobClassifications WHERE jobTitle = ?),
-            firstName = ?, lastName = ?, hourlyWage = ?,
+            firstName = ?, lastName = ?, employeeUsername = ?, hourlyWage = ?,
             employeePhone = ?, employeeEmail = ?, employeeRadio = ?, 
             employeeNote = ?, employeePhoto = ?
     WHERE idEmployee = ?;
     `;
-    db.query(sqlUpdate, [jobTitle, firstName, lastName, hourlyWage, employeePhone, employeeEmail, employeeRadio, employeeNote, employeePhoto, idEmployee], (err, result)=> {
+    db.query(sqlUpdate, [jobTitle, firstName, lastName, employeeUsername, hourlyWage, employeePhone, employeeEmail, employeeRadio, employeeNote, employeePhoto, idEmployee], (err, result)=> {
         if (err) console.log(err); else console.log(result);
         res.send(result);
     });
