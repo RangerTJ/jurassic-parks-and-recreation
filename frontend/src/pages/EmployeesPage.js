@@ -107,10 +107,7 @@ function EmployeesPage ({hostURL}) {
                         const wage = val.hourlyWage ? val.hourlyWage.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) : '$0.00';
                         return (
                             <tr key={index}>
-                                <td>
-                                    {val.idEmployee}
-
-                                </td>
+                                <td>{val.idEmployee}</td>
                                 <td>{val.lastName}, {val.firstName}<div>({val.employeeUsername})</div></td>
                                 <td>{val.jobTitle} ({wage}/hr)</td>
                                 <td><div>{val.employeePhone}</div><div>{val.employeeEmail}</div><div>Radio Callsign: {val.employeeRadio}</div></td>
