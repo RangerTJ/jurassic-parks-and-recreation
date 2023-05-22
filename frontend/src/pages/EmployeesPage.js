@@ -95,7 +95,6 @@ function EmployeesPage ({hostURL}) {
                     <tr>
                         <th>ID</th>
                         <th>Name</th>
-                        <th>Username</th>
                         <th>Job</th>
                         <th>Contact</th>
                         <th>Photo</th>
@@ -112,8 +111,7 @@ function EmployeesPage ({hostURL}) {
                                     {val.idEmployee}
 
                                 </td>
-                                <td>{val.lastName}, {val.firstName}</td>
-                                <td>{val.employeeUsername}</td>
+                                <td>{val.lastName}, {val.firstName}<div>({val.employeeUsername})</div></td>
                                 <td>{val.jobTitle} ({wage}/hr)</td>
                                 <td><div>{val.employeePhone}</div><div>{val.employeeEmail}</div><div>Radio Callsign: {val.employeeRadio}</div></td>
                                 <td>
