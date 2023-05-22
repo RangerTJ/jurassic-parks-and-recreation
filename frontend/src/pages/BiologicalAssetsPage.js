@@ -49,6 +49,11 @@ function BiologicalAssetsPage ({hostURL}) {
         })
     }, []);
 
+    // READ Changes to Species Table
+    useEffect(() => {
+        speciesFilter();
+    }, [species]);
+
     // DELETE - Deletes target bio asset and refreshes all 3 tables
     const delBiologicalAsset = (delID) => {
         if (window.confirm(`Are you sure you want to remove Asset #${delID}?`)) {
@@ -72,16 +77,29 @@ function BiologicalAssetsPage ({hostURL}) {
     // Lol at all the parenthesis. No idea how to clean that up or make it look consistent. Just stack 'em?
 
     // READ Apply Species Filter to Bio Asset Table
-    const speciesFilter = () => {
-        species === "" ? getAllBioAssets() : 
-        Axios.post(filterBioAssetsBySpeciesURL, {speciesName: species})
-        .then((response)=> {setBiologicalAssetList(response.data)})
+    const speciesFilter = async () => {
+        if(species === "") {
+            await getAllBioAssets();
+        }
+        else {
+            try {
+                const response = await Axios.post(filterBioAssetsBySpeciesURL, {speciesName : species })
+                setBiologicalAssetList(response.data);
+                console.log(response.data);
+            } catch (error) {
+                console.error('Error!', error);
+            }
+        }
     }
 
     // Fully Populate the Bio Asset List (without filters)
-    const getAllBioAssets = ()=> {
-        Axios.get(getBiologicalAssetsURL)
-        .then((response)=> {setBiologicalAssetList(response.data)})
+    const getAllBioAssets = async ()=> {
+        try {
+            const response = await Axios.get(getBiologicalAssetsURL)
+            setBiologicalAssetList(response.data)
+        } catch (error) {
+            console.error('Error!', error);
+        }
     }
 
     // UPDATE Primer: Passes an object containing "current" (old) attributes to the useNavigate() function, navTo(), to the edit page.
