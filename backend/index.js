@@ -155,12 +155,12 @@ app.delete('/api/deleteEmployees/:idEmployeeTask', (req, res) =>{
 // READ - Select Employee Tasks
 app.get('/api/getEmployeeTasks', (req, res) =>{
     const sqlRead = `
-    SELECT  EmployeeTasks.idEmployeeTask, TasksAssigned.taskName, Employees.employeeUsername, (SELECT CONCAT(Employees.firstName, ' ', Employees.lastName)) AS contributingEmployee,
+    SELECT  EmployeeTasks.idEmployeeTask, TasksAssigned.taskName, (SELECT CONCAT(Employees.firstName, ' ', Employees.lastName)) AS contributingEmployee,
             TaskCategories.categoryName, EmployeeTasks.taskHoursWorked, EmployeeTasks.empTaskCost, EmployeeTasks.empTaskStart, EmployeeTasks.empTaskEnd
     FROM EmployeeTasks
     LEFT JOIN TasksAssigned ON EmployeeTasks.idTaskAssigned = TasksAssigned.idTaskAssigned
     LEFT JOIN TaskCategories ON EmployeeTasks.idTaskCategory = TaskCategories.idTaskCategory
-    JOIN Employees ON EmployeeTasks.idEmployee = Employees.idEmployee
+    LEFT JOIN Employees ON EmployeeTasks.idEmployee = Employees.idEmployee
     ORDER BY EmployeeTasks.idEmployeeTask ASC;
     `;
     db.query(sqlRead, (err, result)=> {
