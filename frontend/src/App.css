@@ -409,7 +409,8 @@ popup that shows up in a fixed position in the center of the screen that scales 
   z-index: 1;
   position: fixed;
   top: 0;
-  left: 0;
+  left: 0%;
+  right: 0%;
   width: 100%;
   height: 100%;
   background-color: rgba(7, 44, 7, 0.52);
@@ -419,7 +420,7 @@ popup that shows up in a fixed position in the center of the screen that scales 
 }
 
 .lightbox-image {
-  max-width: 100%;
+  width: 100%;
 }
 
 /* Happy Eater Egg Hunting! */

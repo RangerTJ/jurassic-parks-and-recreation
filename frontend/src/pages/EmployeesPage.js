@@ -5,6 +5,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import Axios from 'axios';
+import staffDefaultImg from '../images/staffImages/default_staff.png';
 
 
 // HostURL Passed from App.js
@@ -104,7 +105,8 @@ function EmployeesPage ({hostURL}) {
                 <h3>View Employees</h3>
                 <p>
                     The table below shows existing information for Employee entities and includes
-                    buttons to update or delete them.
+                    buttons to update or delete them. If you would like to view a larger version of a 
+                    non-default photo click it to see a larger version. Then click anywhere again to dismiss the view.
                 </p>
                 {/* Lightbox example code used from: Creating a Simple Lightbox From Scratch in React by Alexandra Radevich
                 URL: https://medium.com/swlh/creating-a-simple-lightbox-from-scratch-in-react-caea84f90960
@@ -147,9 +149,9 @@ function EmployeesPage ({hostURL}) {
                                         URL: https://medium.com/swlh/creating-a-simple-lightbox-from-scratch-in-react-caea84f90960
                                         Accessed 5/22/2023. No modification of code for on-click trigger.*/}
                                         {val.employeePhoto ?
-                                        <img src={val.employeePhoto} alt={altText} width={150} height={150} onClick={() => showImage(val.employeePhoto)}/>
+                                        <img src={val.employeePhoto} alt={altText} width={160} height={90} onClick={() => showImage(val.employeePhoto)}/>
                                         :
-                                        <img src="./images/staffImages/default.png" alt="Default Image" width={150} height={150} />
+                                        <img src={staffDefaultImg} alt="Default Image" width={160} height={90} />
                                         }
                                     </td>
                                     <td className="tableDescription">{val.employeeNote}</td>
