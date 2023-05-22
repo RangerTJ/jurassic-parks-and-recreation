@@ -134,7 +134,7 @@ function EmployeesPage ({hostURL}) {
                             // Citation: Used slicing method suggested by user Bumptious Q Bangwhistle on stackoverflow on 1/23/2017 to slice image paths to more useful descriptive text for alt text.
                             // URL: https://stackoverflow.com/questions/9133102/how-to-grab-substring-before-a-specified-character-in-javascript
                             // No, I didn't make that name up.
-                            const altText = val.employeePhoto.substring(14, val.employeePhoto.indexOf('.'))
+                            const altText = val.employeePhoto ? val.employeePhoto.substring(14, val.employeePhoto.indexOf('.')) : "Default"
                             
                             return (
                                 <tr key={index}>
@@ -146,7 +146,11 @@ function EmployeesPage ({hostURL}) {
                                         {/* Lightbox tutorial by Alexandra Radevich provided the code for the on-click trigger here
                                         URL: https://medium.com/swlh/creating-a-simple-lightbox-from-scratch-in-react-caea84f90960
                                         Accessed 5/22/2023. No modification of code for on-click trigger.*/}
-                                        <img src={val.employeePhoto} alt={altText} width={200} onClick={() => showImage(val.employeePhoto)}/>
+                                        {val.employeePhoto ?
+                                        <img src={val.employeePhoto} alt={altText} width={150} height={150} onClick={() => showImage(val.employeePhoto)}/>
+                                        :
+                                        <img src="./images/staffImages/default.png" alt="Default Image" width={150} height={150} />
+                                        }
                                     </td>
                                     <td className="tableDescription">{val.employeeNote}</td>
                                     <td><button onClick={()=> {navToUpdate(val)}}>Update</button></td>

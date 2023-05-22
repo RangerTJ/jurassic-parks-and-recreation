@@ -170,7 +170,6 @@ app.get('/api/getEmployeeTasks', (req, res) =>{
     });
 });
 
-
 // CREATE Employee Task Entry
 app.post('/api/insertEmployeeTasks', (req, res) =>{
     const taskName = req.body.taskName
@@ -221,7 +220,6 @@ app.put('/api/updateEmployeeTasks', (req, res) =>{
     });
 });
 
-
 // DELETE Employee Task
 app.delete('/api/deleteEmployeeTasks/:idEmployeeTask', (req, res) =>{
     const idEmployeeTask = req.params.idEmployeeTask
@@ -231,6 +229,81 @@ app.delete('/api/deleteEmployeeTasks/:idEmployeeTask', (req, res) =>{
     WHERE idEmployeeTask = ?;
     `;
     db.query(sqlDelete, idEmployeeTask, (err, result)=> {
+        if (err) console.log(err);
+        res.send(result);
+    });
+});
+
+//////////////////////////////
+//  Tasks Assigned Queries  //
+//////////////////////////////
+
+// READ - Select Assigned Tasks
+app.get('/api/getAssignedTasks', (req, res) => {
+    const sqlRead = `
+    SELECT  TasksAssigned.idTaskAssigned, TasksAssigned.taskName, Facilities.facilityName, BiologicalAssets.idBiologicalAsset, Species.speciesName,
+            TasksAssigned.taskDescription, TasksAssigned.taskStart, TasksAssigned.taskEnd
+    FROM TasksAssigned
+    LEFT JOIN Facilities ON TasksAssigned.idFacility = Facilities.idFacility
+    LEFT JOIN BiologicalAssets ON TasksAssigned.idBiologicalAsset = BiologicalAssets.idBiologicalAsset
+    LEFT JOIN Species ON BiologicalAssets.idSpecies = Species.idSpecies
+    ORDER BY TasksAssigned.idTaskAssigned ASC;
+    `;
+    db.query(sqlRead, (err, result) => {
+        console.log(result);
+        res.send(result);
+    });
+});
+
+//CREATE - Assigned Task Entry
+app.post('/api/insertAssignedTasks', (req, res) => {
+    const taskName = req.body.taskName
+    const taskDescription = req.body.taskDescription
+    const taskStart = req.body.taskStart
+    const taskEnd = req.body.taskEnd
+    const sqlInsert = `
+    INSERT INTO TasksAssigned       (idFacility, idBiologicalAsset, taskName, taskDescription, taskStart, taskEnd)
+        VALUES  (       
+                    (SELECT idFacility FROM Facilities WHERE facilityName = ?),
+                    (SELECT idBiologicalAsset FROM BiologicalAssets WHERE bioAssetName = ?), 
+                    ?, ?, ?, ?
+            );
+        `;
+    db.query(sqlInsert, [taskName, taskDescription, taskStart, taskEnd], (err, result) => {
+        console.log(result);
+        res.send(result);
+    });
+});
+
+// UPDATE Employee Task Entry
+app.put('/api/updateAssignedTasks', (req, res) =>{
+    const taskName = req.body.taskName
+    const taskDescription = req.body.taskDescription
+    const taskStart = req.body.taskStart
+    const taskEnd = req.body.taskEnd
+    const sqlUpdate = `
+    UPDATE AssignedTasks
+    SET     idFacility =            (SELECT idFacility FROM Facilities WHERE facilityName = ?),
+            idBiologicalAsset =     (SELECT idBiologicalAsset FROM BiologicalAssets WHERE bioAssetName = ?),
+            taskname = ?, taskDescription = ?,
+            taskStart = ?, taskEnd = ?
+    WHERE idAssignedTask = ?;
+    `;
+    db.query(sqlUpdate, [taskName, taskDescription, taskStart, taskEnd], (err, result)=> {
+        if (err) console.log(err); else console.log(result);
+        res.send(result);
+    });
+});
+
+// DELETE Assigned Task
+app.delete('/api/deletetAssignedTasks/:idAssignedTask', (req, res) =>{
+    const idAssignedTask = req.params.idAssignedTask
+    const sqlDelete = `
+    DELETE
+    FROM AssignedTasks
+    WHERE idAssignedTask = ?;
+    `;
+    db.query(sqlDelete, idAssignedTask, (err, result)=> {
         if (err) console.log(err);
         res.send(result);
     });
