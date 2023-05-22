@@ -33,6 +33,7 @@ function SpeciesPage ({hostURL}) {
     // NOTE: CURRENT IMPLEMENTATION USES EASY/UNIVERSAL setStates since there's only one image per any given table. If this ever changed, we'd need to give unique states for setState to work on submit.
     return (
         <>
+            <h2> * Under Construction +</h2>
             <h2>Test Image Selectors</h2>
             <article>
                 <ImageSelectorSpecies 

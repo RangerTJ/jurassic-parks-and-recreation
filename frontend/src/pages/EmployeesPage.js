@@ -114,46 +114,49 @@ function EmployeesPage ({hostURL}) {
                     <img id="lightbox-img" src={imageToShow} atl={imageToShow} className="lightbox-image"></img>
                 </div>
                 : '' }
-                <table className="scrollableTable">
-                    <tbody>
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Job</th>
-                        <th>Contact</th>
-                        <th>Photo</th>
-                        <th>Notes</th>
+                <div className="scrollableTable">
+                    <table>
+                        <tbody>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Job</th>
+                            <th>Contact</th>
+                            <th>Photo</th>
+                            <th>Notes</th>
 
-                        <th>Update</th>
-                        <th>Delete</th>
-                    </tr>
-                    {employeesList.map((val, index)=> {
-                        const wage = val.hourlyWage ? val.hourlyWage.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) : '$0.00';
-                        
-                        // Citation: Used slicing method suggested by user Bumptious Q Bangwhistle on stackoverflow on 1/23/2017 to slice image paths to more useful descriptive text for alt text.
-                        // URL: https://stackoverflow.com/questions/9133102/how-to-grab-substring-before-a-specified-character-in-javascript
-                        // No, I didn't make that name up.
-                        const altText = val.employeePhoto.substring(14, val.employeePhoto.indexOf('.'))
-                        return (
-                            <tr key={index}>
-                                <td>{val.idEmployee}</td>
-                                <td>{val.lastName}, {val.firstName}<div>({val.employeeUsername})</div></td>
-                                <td>{val.jobTitle} ({wage}/hr)</td>
-                                <td><div>{val.employeePhone}</div><div>{val.employeeEmail}</div><div>Radio Callsign: {val.employeeRadio}</div></td>
-                                <td>
-                                    {/* Lightbox tutorial by Alexandra Radevich provided the code for the on-click trigger here
-                                    URL: https://medium.com/swlh/creating-a-simple-lightbox-from-scratch-in-react-caea84f90960
-                                    Accessed 5/22/2023. No modification of code for on-click trigger.*/}
-                                    <img src={val.employeePhoto} alt={altText} width={200} onClick={() => showImage(val.employeePhoto)}/>
-                                </td>
-                                <td className="tableDescription">{val.employeeNote}</td>
-                                <td><button onClick={()=> {navToUpdate(val)}}>Update</button></td>
-                                <td><button onClick={()=> {delEmployee(val.idEmployee)}}>Delete</button></td>
-                            </tr>
+                            <th>Update</th>
+                            <th>Delete</th>
+                        </tr>
+                        {employeesList.map((val, index)=> {
+                            const wage = val.hourlyWage ? val.hourlyWage.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) : '$0.00';
+                            
+                            // Citation: Used slicing method suggested by user Bumptious Q Bangwhistle on stackoverflow on 1/23/2017 to slice image paths to more useful descriptive text for alt text.
+                            // URL: https://stackoverflow.com/questions/9133102/how-to-grab-substring-before-a-specified-character-in-javascript
+                            // No, I didn't make that name up.
+                            const altText = val.employeePhoto.substring(14, val.employeePhoto.indexOf('.'))
+                            
+                            return (
+                                <tr key={index}>
+                                    <td>{val.idEmployee}</td>
+                                    <td>{val.lastName}, {val.firstName}<div>({val.employeeUsername})</div></td>
+                                    <td>{val.jobTitle} ({wage}/hr)</td>
+                                    <td><div>{val.employeePhone}</div><div>{val.employeeEmail}</div><div>Radio Callsign: {val.employeeRadio}</div></td>
+                                    <td>
+                                        {/* Lightbox tutorial by Alexandra Radevich provided the code for the on-click trigger here
+                                        URL: https://medium.com/swlh/creating-a-simple-lightbox-from-scratch-in-react-caea84f90960
+                                        Accessed 5/22/2023. No modification of code for on-click trigger.*/}
+                                        <img src={val.employeePhoto} alt={altText} width={200} onClick={() => showImage(val.employeePhoto)}/>
+                                    </td>
+                                    <td className="tableDescription">{val.employeeNote}</td>
+                                    <td><button onClick={()=> {navToUpdate(val)}}>Update</button></td>
+                                    <td><button onClick={()=> {delEmployee(val.idEmployee)}}>Delete</button></td>
+                                </tr>
+                            )}
                         )}
-                    )}
-                    </tbody>
-                </table>                                  
+                        </tbody>
+                    </table>
+                </div>                                  
                 {/* Old Design - propose we go with the new one that's more compact/reads better */}
                 {/* <div className="scrollableTable">
                     <table>
