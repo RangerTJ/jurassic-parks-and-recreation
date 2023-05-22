@@ -157,8 +157,6 @@ ORDER BY idTaskCategory ASC;
 
 -- ----------------
 -- CREATES: "ADD NEW" SQL SCRIPTS - Use :browser_inputs to get data for insert queries
--- Open Question: Is it possible to display multiple fields in drop-down while only sending the input from one?
--- (i.e. show ID + name, but only send ID to SQL) - would eliminate most subqueries if so
 -- ----------------
 
 -- Add new Park to the system
