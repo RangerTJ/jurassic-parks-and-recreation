@@ -1,9 +1,6 @@
 // Basic CRUD operations and React implementation was heavily based on the CRUD React tutorial series created by PedroTech
 // URLs - Part1: https://www.youtube.com/watch?v=T8mqZZ0r-RA, Part2: https://www.youtube.com/watch?v=3YrOOia3-mo, Part3: https://www.youtube.com/watch?v=_S2GKnFpdtE
 
-// useRef info + Blur to clear button focus after clicks
-// https://www.w3schools.com/react/react_useref.asp
-// https://www.w3schools.com/jsref/met_html_blur.asp
 
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';
@@ -20,10 +17,29 @@ function EmployeesPage ({hostURL}) {
     const getEmployeesURL = hostURL + '/api/getEmployees';  // TO DO - CREATE USE EFFECT AND USE STATE
     const deleteEmployeesURL = hostURL + '/api/deleteEmployees/';  // TO DO - NEED TO ADD USE STATES AND CRUD FUNCTIONS FOR THIS; INSERT/UPDATE GO ON RESPECTIVE FORM PAGES
 
-
     // Bio Asset Table Functions
     const [employeesList, setEmployeesList] = useState([])
     const [employee, setEmployee] = useState('')
+
+    /* Citation: Creating a Simple Lightbox From Scratch in React by Alexandra Radevich
+    URL: https://medium.com/swlh/creating-a-simple-lightbox-from-scratch-in-react-caea84f90960
+    Example code used to begin implementation and modified slightly to suit project needs. 
+    All of the lightbox-related code on this page was directly adapted from this tutorial.
+    Accessed 5/22/2023. No modification of the following 2x declared useStates and 2x functions.*/
+    const [lightboxDisplay, setLightBoxDisplay] = useState(false)
+    const [imageToShow, setImageToShow] = useState('')
+    
+    // Displays lightbox + selected image when triggered
+    const showImage = (image) => {  
+        setImageToShow(image);
+        setLightBoxDisplay(true);
+    };
+    
+    // Hides lightbox when triggered ()
+    const hideLightBox = () => {
+        setLightBoxDisplay(false)
+     }
+    /*!!! End of lightbox-tutorial code for function portion of page (see HTML rendering for calling of Lightbox commands) !!!*/
 
     // READ Populate Biological Asset Table
     useEffect(()=> {
@@ -70,7 +86,8 @@ function EmployeesPage ({hostURL}) {
 
     // Render Webpage
     return (
-        <>
+        <>  
+            {/* End experimental copy/paste */}
             <h2>Employees</h2>
             <article>
                 <h3>Add New Employee</h3>
@@ -81,8 +98,6 @@ function EmployeesPage ({hostURL}) {
                     <p><button onClick={() => navTo("/EmployeesAdd")}>Create</button></p>
                 </div>
             </article>
-            {/* Look into using React Modal later - allows super-imposing of zoomed image in a lightbox */}
-            {/* Alternate design proposal with concatenated fields */}
             {/* Could potentially reuse the bio assets species filter for job titles here or do a last name search or something */}
             <article>
                 <h3>View Employees</h3>
@@ -90,6 +105,14 @@ function EmployeesPage ({hostURL}) {
                     The table below shows existing information for Employee entities and includes
                     buttons to update or delete them.
                 </p>
+                {/* Lightbox example code used from: Creating a Simple Lightbox From Scratch in React by Alexandra Radevich
+                URL: https://medium.com/swlh/creating-a-simple-lightbox-from-scratch-in-react-caea84f90960
+                Accessed 5/22/2023. Modified with alt text value and custom display class.*/}
+                { lightboxDisplay ?
+                <div id="lightbox"onClick={hideLightBox} className="lightbox">
+                    <img id="lightbox-img" src={imageToShow} atl={imageToShow} className="lightbox-image"></img>
+                </div>
+                : '' }
                 <table className="scrollableTable">
                     <tbody>
                     <tr>
@@ -112,10 +135,10 @@ function EmployeesPage ({hostURL}) {
                                 <td>{val.jobTitle} ({wage}/hr)</td>
                                 <td><div>{val.employeePhone}</div><div>{val.employeeEmail}</div><div>Radio Callsign: {val.employeeRadio}</div></td>
                                 <td>
-                                    {/* Look into using React Modal later - allows super-imposing of zoomed image in a lightbox */}
-                                    <a href={val.employeePhoto}>
-                                        <img src={val.employeePhoto} alt={val.employeePhoto} width={200}/>
-                                    </a>
+                                    {/* Lightbox tutorial by Alexandra Radevich provided the code for the on-click trigger here
+                                    URL: https://medium.com/swlh/creating-a-simple-lightbox-from-scratch-in-react-caea84f90960
+                                    Accessed 5/22/2023. No modification of code for on-click trigger.*/}
+                                    <img src={val.employeePhoto} alt={val.employeePhoto} width={200} onClick={() => showImage(val.employeePhoto)}/>
                                 </td>
                                 <td className="tableDescription">{val.employeeNote}</td>
                                 <td><button onClick={()=> {navToUpdate(val)}}>Update</button></td>
