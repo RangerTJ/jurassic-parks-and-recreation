@@ -92,9 +92,9 @@ SELECT  Facilities.idFacility, Parks.parkName, FacilityTypes.facTypeName, Habita
         Facilities.securityRating, Facilities.facilityPhoto, Facilities.facilityNote
 FROM Facilities
 -- Need to join Facilities -> Parks -> FacilityTypes -> Habitats
-JOIN Parks ON Facilities.idPark = Parks.idPark
-JOIN FacilityTypes ON Facilities.idFacilityType = FacilityTypes.idFacilityType
-JOIN Habitats ON Facilities.idHabitat = Habitats.idHabitat
+LEFT JOIN Parks ON Facilities.idPark = Parks.idPark
+LEFT JOIN FacilityTypes ON Facilities.idFacilityType = FacilityTypes.idFacilityType
+LEFT JOIN Habitats ON Facilities.idHabitat = Habitats.idHabitat
 ORDER BY idFacility ASC;
 
 -- SELECT Diets
@@ -106,16 +106,16 @@ SELECT Species.idSpecies, Species.speciesName, Diets.dietName, Habitats.habitatN
        Species.threatLevel, Species.speciesPhoto
 FROM Species
 -- Need to join Species -> Diets -> Habitats
-JOIN Diets ON Species.idDiet = Diets.idDiet
-JOIN Habitats ON Species.idHabitat = Habitats.idHabitat
+LEFT JOIN Diets ON Species.idDiet = Diets.idDiet
+LEFT JOIN Habitats ON Species.idHabitat = Habitats.idHabitat
 ORDER BY idSpecies ASC; 
 
 -- SELECT BiologicalAssets
 SELECT BiologicalAssets.idBiologicalAsset, BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName 
 FROM BiologicalAssets
 -- Need to join Species -> BiologicalAssets -> Facilities
-JOIN Species ON BiologicalAssets.idSpecies = Species.idSpecies
-JOIN Facilities ON BiologicalAssets.idFacility = Facilities.idFacility
+LEFT JOIN Species ON BiologicalAssets.idSpecies = Species.idSpecies
+LEFT JOIN Facilities ON BiologicalAssets.idFacility = Facilities.idFacility
 ORDER BY idBiologicalAsset ASC;
 
 -- SELECT JobClassifications
@@ -127,7 +127,7 @@ SELECT  Employees.idEmployee, Employees.lastName, Employees.firstName, Employees
         Employees.employeePhone, Employees.employeeEmail, Employees.employeeRadio, Employees.employeeNote, Employees.employeePhoto
 FROM Employees
 -- Need to join Employees -> JobClassifications
-JOIN JobClassifications ON Employees.idJobClassification = JobClassifications.idJobClassification
+LEFT JOIN JobClassifications ON Employees.idJobClassification = JobClassifications.idJobClassification
 ORDER BY idEmployee ASC;
 
 -- SELECT TasksAssigned (Bio Asset ID'd by displaying actual asset ID# and Species, since may not have a bioAssetName)
@@ -140,24 +140,14 @@ LEFT JOIN BiologicalAssets ON TasksAssigned.idBiologicalAsset = BiologicalAssets
 LEFT JOIN Species ON BiologicalAssets.idSpecies = Species.idSpecies
 ORDER BY TasksAssigned.idTaskAssigned ASC;
 
--- SELECT EmployeeTasks -- SUMMARY TABLE VERSION
-SELECT  EmployeeTasks.idEmployeeTask, TasksAssigned.taskName, (SELECT CONCAT(Employees.firstName, ' ', Employees.lastName)) AS contributingEmployee,
+-- SELECT EmployeeTasks -- POPULATE UPDATE FORM VERSION
+SELECT  EmployeeTasks.idEmployeeTask, TasksAssigned.taskName, Employees.employeeUsername,
         TaskCategories.categoryName, EmployeeTasks.taskHoursWorked, EmployeeTasks.empTaskCost, EmployeeTasks.empTaskStart, EmployeeTasks.empTaskEnd
 FROM EmployeeTasks
 -- Need to JOIN EmployeeTasks -> TasksAssigned -> Employees -> Task Category
 LEFT JOIN TasksAssigned ON EmployeeTasks.idTaskAssigned = TasksAssigned.idTaskAssigned
 LEFT JOIN TaskCategories ON EmployeeTasks.idTaskCategory = TaskCategories.idTaskCategory
 LEFT JOIN Employees ON EmployeeTasks.idEmployee = Employees.idEmployee
-ORDER BY EmployeeTasks.idEmployeeTask ASC;
-
--- SELECT EmployeeTasks -- POPULATE UPDATE FORM VERSION
-SELECT  EmployeeTasks.idEmployeeTask, TasksAssigned.taskName, Employees.employeeUsername,
-        TaskCategories.categoryName, EmployeeTasks.taskHoursWorked, EmployeeTasks.empTaskCost, EmployeeTasks.empTaskStart, EmployeeTasks.empTaskEnd,
-FROM EmployeeTasks
--- Need to JOIN EmployeeTasks -> TasksAssigned -> Employees -> Task Category
-LEFT JOIN TasksAssigned ON EmployeeTasks.idTaskAssigned = TasksAssigned.idTaskAssigned
-LEFT JOIN TaskCategories ON EmployeeTasks.idTaskCategory = TaskCategories.idTaskCategory
-JOIN Employees ON EmployeeTasks.idEmployee = Employees.idEmployee
 ORDER BY EmployeeTasks.idEmployeeTask ASC;
 
 -- SELECT Task Categories
