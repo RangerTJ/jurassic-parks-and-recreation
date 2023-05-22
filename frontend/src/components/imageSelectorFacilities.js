@@ -1,14 +1,18 @@
 import React, { useState, useEffect } from 'react';
 
 
-// Blend of below citation and ChatGPT syntax recomendation for mapping to a select menu
-// Current code copied directly from here by user Savior from Stackoverflow; will adapt as needed
-// https://stackoverflow.com/questions/69111477/how-to-iterate-through-public-assets-images-so-i-can-get-all-images-filename-in
+// Citation: Code to map images in src folders heavily based on example code from stackoverflow by user Savior on 9/9/2021.
+// URL: https://stackoverflow.com/questions/69111477/how-to-iterate-through-public-assets-images-so-i-can-get-all-images-filename-in
+
+// Citation: Code for mapping select menu heavily inspired by the following discussion (posts by ) on stackoverflow
+// URL: https://stackoverflow.com/questions/31413053/how-to-use-an-array-as-option-for-react-select-component
+
+// Citation: Code for event triggering using onChange event heavily inspired by Abdullah Ch's stackoverflow answer on 8/15/2021
+// URL: https://stackoverflow.com/questions/68790381/how-to-use-onchange-in-react-select
 
 
-// 
+// If no old value passed, defaults the old value to "null". Also adjusts autoFocus and required rendering aspects as needed.
 const ImageSelectorFacilities = ({preSelected, isRequired, autoFocus, hostURL, image, setImage}) => {
-  // Use context to retrieve images - Have to hard code for each type of selector because web pack is dumb (cant just pass in the folder endpoint as a variable)
   const images = require.context(`../images/facilityImages`, false, /\.(png|jpg|svg)$/);
 
   // Map available images in directory

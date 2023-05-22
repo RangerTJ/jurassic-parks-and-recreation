@@ -2,12 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
 
 
-// Blend of below citation and ChatGPT syntax recomendation for mapping to a select menu
-// Current code copied directly from here by user Savior from Stackoverflow; will adapt as needed
-// https://stackoverflow.com/questions/69111477/how-to-iterate-through-public-assets-images-so-i-can-get-all-images-filename-in
-
-
-// I *think* this will work so that if no species is passed, it defaults to null, and otherwise defaults it to the selection
+// If no old value passed, defaults the old value to "null". Also adjusts autoFocus and required rendering aspects as needed.
 const SelectorFacilities = ({preSelected, isRequired, autoFocus, hostURL, facility, setFacility}) => {
 
   // Create useState for the selection and list
