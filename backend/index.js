@@ -281,7 +281,7 @@ app.get('/api/checkBiologicalAssetsSecurity', (req, res) =>{
     JOIN Species on BiologicalAssets.idSpecies = Species.idSpecies
     JOIN Facilities on BiologicalAssets.idFacility = Facilities.idFacility
     WHERE Facilities.securityRating < Species.threatLevel
-    ORDER BY severity, facilities.facilityName, BiologicalAssets.bioAssetName;
+    ORDER BY severity, Facilities.facilityName, BiologicalAssets.bioAssetName;
     `;
     db.query(sqlRead, (err, result)=> {
         console.log(result);
