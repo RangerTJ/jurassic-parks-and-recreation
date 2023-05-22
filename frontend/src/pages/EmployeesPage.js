@@ -123,7 +123,7 @@ function EmployeesPage ({hostURL}) {
                                     <td>
                                         {/* Look into using React Modal later - allows super-imposing of zoomed image in a lightbox */}
                                         <a href={val.employeePhoto}>
-                                            <img src={val.employeePhoto} alt={val.employeePhoto}/>
+                                            <img src={val.employeePhoto} alt={val.employeePhoto} width={200}/>
                                         </a>
                                     </td>
                                     <td className="tableDescription">{val.employeeNote}</td>

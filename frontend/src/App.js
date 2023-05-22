@@ -29,8 +29,8 @@ import BiologicalAssetsAddForm from "./forms/BiologicalAssetsAddForm";
 import BiologicalAssetsUpdateForm from "./forms/BiologicalAssetsUpdateForm";
 import EmployeeTasksAddForm from "./forms/EmployeeTasksAddForm";
 import EmployeeTasksUpdateForm from "./forms/EmployeeTasksUpdateForm";
-import EmployeesAddForm from "./forms/EmployeesAddForm copy";
-import EmployeesUpdateForm from "./forms/EmployeesUpdateForm copy";
+import EmployeesAddForm from "./forms/EmployeesAddForm";
+import EmployeesUpdateForm from "./forms/EmployeesUpdateForm";
 
 // React Application
 function App() {
