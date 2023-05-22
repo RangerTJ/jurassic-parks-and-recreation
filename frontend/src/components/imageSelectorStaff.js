@@ -44,7 +44,6 @@ const ImageSelectorStaff = ({preSelected, isRequired, autoFocus, hostURL, image,
   return (
       
     <>
-    <p>{selected}</p>
       <div><label htmlFor="speciesImageSelector">Image Selection</label></div>
       <select id="speciesImageSelector" value={selected} onChange={selectionHandler} autoFocus={autoFocus ? true : false} required={isRequired ? true : false}>
 
