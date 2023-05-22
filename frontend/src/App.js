@@ -9,13 +9,13 @@ import logo from './images/logo.png'
 
 // Main Page Imports
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Nav from "./components/nav";
+import Nav from "./components/nav";  // Done
 import HomePage from "./pages/HomePage";  // Done
 import ParksPage from "./pages/ParksPage";
 import FacilitiesPage from "./pages/FacilitiesPage";
-import BiologicalAssetsPage from "./pages/BiologicalAssetsPage";  // Needs Add/Update and Species Filter for Main Table
-import EmployeesPage from "./pages/EmployeesPage";
-import TasksAssignedPage from "./pages/TasksAssignedPage";
+import BiologicalAssetsPage from "./pages/BiologicalAssetsPage";  // Done
+import EmployeesPage from "./pages/EmployeesPage";  // Done
+import TasksAssignedPage from "./pages/TasksAssignedPage";  // Done
 import EmployeeTasksPage from "./pages/EmployeeTasksPage";
 import TaskCategoriesPage from "./pages/TaskCategoriesPage";  // Technically full CRUD, but looks horrible/no form pages yet
 import SpeciesPage from "./pages/SpeciesPage";

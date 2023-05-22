@@ -11,7 +11,8 @@ import SelectorFacilities from "../components/selectorFacilities";
 // HostURL Passed from App.js
 function BiologicalAssetsUpdateForm ({hostURL}) {
 
-    // NEED TO UNDERSTAND/CITE (BOILERPLATE-ISH BUT NEEDS SOURCE? Location allows using state from parent element)
+    // Follows reference strategy to read state object, as suggested by stackoverflow user Abdulazeez Jimoh on 10/25/2022
+    // URL: https://stackoverflow.com/questions/68911432/how-to-pass-parameters-with-react-router-dom-version-6-usenavigate-and-typescrip
     const location = useLocation();
     const { oldName, oldSpecies, oldFacility, id} = location.state;
 

@@ -1,9 +1,6 @@
 // Basic CRUD operations and React implementation was heavily based on the CRUD React tutorial series created by PedroTech
 // URLs - Part1: https://www.youtube.com/watch?v=T8mqZZ0r-RA, Part2: https://www.youtube.com/watch?v=3YrOOia3-mo, Part3: https://www.youtube.com/watch?v=_S2GKnFpdtE
 
-// useRef info + Blur to clear button focus after clicks
-// https://www.w3schools.com/react/react_useref.asp
-// https://www.w3schools.com/jsref/met_html_blur.asp
 
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';
@@ -87,8 +84,9 @@ function BiologicalAssetsPage ({hostURL}) {
         .then((response)=> {setBiologicalAssetList(response.data)})
     }
 
-    // UPDATE Primer: Navigate set things to change and navigate to update page
-    // https://reactrouter.com/en/main/hooks/use-navigate (passing states to next page)
+    // UPDATE Primer: Passes an object containing "current" (old) attributes to the useNavigate() function, navTo().
+    // Follows general strategy suggested by stackoverflow user Abdulazeez Jimoh on 10/25/2022
+    // URL: https://stackoverflow.com/questions/68911432/how-to-pass-parameters-with-react-router-dom-version-6-usenavigate-and-typescrip
     const navToUpdate = (updateVal) => {
         const state = {
         oldName: updateVal.bioAssetName,

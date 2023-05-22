@@ -65,8 +65,9 @@ function EmployeesPage ({hostURL}) {
         .then((response)=> {setEmployeesList(response.data)})
     }
 
-    // UPDATE Primer: Navigate set things to change and navigate to update page
-    // https://reactrouter.com/en/main/hooks/use-navigate (passing states to next page)
+    // UPDATE Primer: Passes an object containing "current" (old) attributes to the useNavigate() function, navTo().
+    // Follows general strategy suggested by stackoverflow user Abdulazeez Jimoh on 10/25/2022
+    // URL: https://stackoverflow.com/questions/68911432/how-to-pass-parameters-with-react-router-dom-version-6-usenavigate-and-typescrip
     const navToUpdate = (updateVal) => {
         const state = {
         oldLastName: updateVal.lastName,
