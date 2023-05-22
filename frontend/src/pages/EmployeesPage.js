@@ -83,6 +83,29 @@ function EmployeesPage ({hostURL}) {
             </article>
             <article>
                 <h3>View Employees</h3>
+                {/* Experimental Barebones Card UI Test - Comment on/off to examine */}
+                {/* Has better button usability/focus on individuals, but harder for comparing data/takes up more vertical realestate. Could probably combo w/ an inside table to get a blend of both. */}
+                {/* {employeesList.map((val, index)=> {
+                            const wage = val.hourlyWage ? val.hourlyWage.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) : '$0.00';
+                            return (
+                                <>
+                                    <h2 key={index}>{val.lastName}, {val.firstName}</h2>
+                                    <div>Employee ID: #{val.idEmployee} | Username: {val.employeeUsername}</div>
+                                    <div>{val.jobTitle}</div>
+                                    <div><a href={val.employeePhoto}><img src={val.employeePhoto} alt={val.employeePhoto} width={200}/></a></div>
+                                    
+                                    <div>Hourly Wage: {wage}</div>
+                                    <div>Contact: {val.employeePhone} | {val.employeeEmail} | Callsign: {val.employeeRadio}</div>
+                                    <div>Notes: {val.employeeNote}</div>
+                                    <div>
+                                        <button onClick={()=> {navToUpdate(val)}}>Update</button>
+                                        <button onClick={()=> {delEmployee(val.idEmployee)}}>Delete</button>
+                                    </div>
+                                </>
+                            )}
+                        )} */}
+                {/* End Test */}
+
                 <p>
                     The table below shows existing information for Employee entities and includes
                     buttons to update or delete them.

@@ -193,6 +193,8 @@ table {
   border: 2px solid var(--parkYellow);
   border-collapse: collapse;
   width: 100%;
+  /* Ideally should probably make container and alignment styles for columns and use fit content in final version */
+  /* width: fit-content; */
   text-align: center;
 }
 
