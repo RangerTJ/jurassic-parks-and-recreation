@@ -38,7 +38,7 @@ function EmployeeTasksAddForm ({hostURL}) {
             empTaskEnd: empTaskEnd,
         });
         alert(`A task report for ${employeeUsername}'s ${categoryName} work on ${taskName} has been added to the database!`);
-        navTo('/EmployeeTasks');
+        navTo('/Employees');
         } else {
             alert("Please fill out all required fields and try again.")
         };
