@@ -35,6 +35,12 @@ const ImageSelectorHabitats = ({preSelected, isRequired, autoFocus, hostURL, ima
 
   // Website Manipulation
   const filenames = mapImages(images)
+
+  // Citation: Used slicing method suggested by user Bumptious Q Bangwhistle on stackoverflow on 1/23/2017 to slice image paths to more useful descriptive text for alt text.
+  // URL: https://stackoverflow.com/questions/9133102/how-to-grab-substring-before-a-specified-character-in-javascript
+  // No, I didn't make that name up. Ternary condition selected to prevent null-selection crash.
+  const altText = selected ? selected.substring(14, selected.indexOf('.')) : selected
+
   return (
     <>
       <div><label htmlFor="speciesImageSelector">Image Selection</label></div>
@@ -52,7 +58,7 @@ const ImageSelectorHabitats = ({preSelected, isRequired, autoFocus, hostURL, ima
       {selected && (
           <div>
             <div><label htmlFor="previewImage">Image Preview</label></div>
-            <img id="previewImage" src={selected} alt={selected} width="200px" />
+            <img id="previewImage" src={selected} alt={altText} width="200px" />
           </div>
       )}
     </>

@@ -43,7 +43,7 @@ function EmployeeTasksPage ({hostURL}) {
         .then((response)=> {setEmployeeTaskList(response.data)})
     }
 
-    // UPDATE Primer: Passes an object containing "current" (old) attributes to the useNavigate() function, navTo().
+    // UPDATE Primer: Passes an object containing "current" (old) attributes to the useNavigate() function, navTo(), to the edit page.
     // Follows general strategy suggested by stackoverflow user Abdulazeez Jimoh on 10/25/2022
     // URL: https://stackoverflow.com/questions/68911432/how-to-pass-parameters-with-react-router-dom-version-6-usenavigate-and-typescrip
     const navToUpdate = (updateVal) => {

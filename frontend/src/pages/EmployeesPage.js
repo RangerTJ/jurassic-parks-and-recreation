@@ -65,7 +65,7 @@ function EmployeesPage ({hostURL}) {
         .then((response)=> {setEmployeesList(response.data)})
     }
 
-    // UPDATE Primer: Passes an object containing "current" (old) attributes to the useNavigate() function, navTo().
+    // UPDATE Primer: Passes an object containing "current" (old) attributes to the useNavigate() function, navTo(), to the edit page.
     // Follows general strategy suggested by stackoverflow user Abdulazeez Jimoh on 10/25/2022
     // URL: https://stackoverflow.com/questions/68911432/how-to-pass-parameters-with-react-router-dom-version-6-usenavigate-and-typescrip
     const navToUpdate = (updateVal) => {
@@ -129,6 +129,11 @@ function EmployeesPage ({hostURL}) {
                     </tr>
                     {employeesList.map((val, index)=> {
                         const wage = val.hourlyWage ? val.hourlyWage.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) : '$0.00';
+                        
+                        // Citation: Used slicing method suggested by user Bumptious Q Bangwhistle on stackoverflow on 1/23/2017 to slice image paths to more useful descriptive text for alt text.
+                        // URL: https://stackoverflow.com/questions/9133102/how-to-grab-substring-before-a-specified-character-in-javascript
+                        // No, I didn't make that name up.
+                        const altText = val.employeePhoto.substring(14, val.employeePhoto.indexOf('.'))
                         return (
                             <tr key={index}>
                                 <td>{val.idEmployee}</td>
@@ -139,7 +144,7 @@ function EmployeesPage ({hostURL}) {
                                     {/* Lightbox tutorial by Alexandra Radevich provided the code for the on-click trigger here
                                     URL: https://medium.com/swlh/creating-a-simple-lightbox-from-scratch-in-react-caea84f90960
                                     Accessed 5/22/2023. No modification of code for on-click trigger.*/}
-                                    <img src={val.employeePhoto} alt={val.employeePhoto} width={200} onClick={() => showImage(val.employeePhoto)}/>
+                                    <img src={val.employeePhoto} alt={altText} width={200} onClick={() => showImage(val.employeePhoto)}/>
                                 </td>
                                 <td className="tableDescription">{val.employeeNote}</td>
                                 <td><button onClick={()=> {navToUpdate(val)}}>Update</button></td>
