@@ -43,7 +43,7 @@ function EmployeesAddForm ({hostURL}) {
             employeeNote: employeeNote,
         });
         alert(`${firstName} ${lastName} has been added to the database!`);
-        navTo('/EmployeeTasks');
+        navTo('/Employees');
         } else {
             alert("Please fill out all required fields and try again.")
         };
