@@ -202,8 +202,9 @@ th {
 }
 
 td {
-  border: 2px solid var(--parkYellow);
+  border: 1px solid var(--parkYellow);
   padding: 10px;
+  font-size: 14px;
 }
 
 /* Buttons and Forms */

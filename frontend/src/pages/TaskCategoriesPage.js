@@ -82,15 +82,16 @@ function TaskCategoryPage({hostURL}) {
                     {/* Dynamic Table Alpha Version Test*/}
                     <div className="scrollableTable">
                         <table>
+                            <tbody>
                             <tr>
                                 <th>ID</th>
                                 <th>Category</th>
                                 <th>Update</th>
                                 <th>Delete</th>
                             </tr>
-                            {taskCategoryList.map((val)=> {
+                            {taskCategoryList.map((val, index)=> {
                             return (
-                                <tr>
+                                <tr key={index}>
                                     <td>{val.idTaskCategory}</td>
                                     <td>{val.categoryName}</td>
                                     <td width="100px">
@@ -99,7 +100,8 @@ function TaskCategoryPage({hostURL}) {
                                     </td>
                                     <td width="100px"><button onClick={()=> {delTaskCategory(val.idTaskCategory)}}>Delete</button></td>
                                 </tr>)
-                        })}
+                            })}
+                            </tbody>
                         </table>
                     </div>
             </article>
