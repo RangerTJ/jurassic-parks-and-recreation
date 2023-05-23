@@ -117,7 +117,7 @@ function EmployeeTasksPage ({hostURL}) {
                                     </td>
                                     <td>
                                         <div><strong>Report #{val.idEmployeeTask}</strong></div>
-                                        <div>for {val.taskName}</div>
+                                        <div>for '{val.taskName}'</div>
                                     </td>
                                     <td>{val.contributingEmployee}</td>
                                     <td>{val.categoryName}</td>
