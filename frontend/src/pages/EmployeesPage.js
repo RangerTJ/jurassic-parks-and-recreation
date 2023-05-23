@@ -100,6 +100,14 @@ function EmployeesPage ({hostURL}) {
                     <p><button onClick={() => navTo("/EmployeesAdd")}>Create</button></p>
                 </div>
             </article>
+            <article>
+                <h3>Edit and Delete</h3>
+                <p>
+                    To edit or delete any entity within the database, simply click the "Edit" or "<span className="demoRex">*</span>"
+                    buttons on the left side of the asset's corresponding column to enter the edit menu or delete
+                    it from the database, respectively.
+                </p>
+            </article>
             {/* Could potentially reuse the bio assets species filter for job titles here or do a last name search or something */}
             <article>
                 <h3>View Employees</h3>
@@ -120,15 +128,12 @@ function EmployeesPage ({hostURL}) {
                     <table>
                         <tbody>
                         <tr>
-                            <th>ID</th>
-                            <th>Name</th>
+                            <th>Edit</th>
+                            <th>Employee</th>
                             <th>Job</th>
                             <th>Contact</th>
                             <th>Photo</th>
                             <th>Notes</th>
-
-                            <th>Update</th>
-                            <th>Delete</th>
                         </tr>
                         {employeesList.map((val, index)=> {
                             const wage = val.hourlyWage ? val.hourlyWage.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) : '$0.00';
@@ -140,8 +145,15 @@ function EmployeesPage ({hostURL}) {
                             
                             return (
                                 <tr key={index}>
-                                    <td>{val.idEmployee}</td>
-                                    <td>{val.lastName}, {val.firstName}<div>({val.employeeUsername})</div></td>
+                                    <td>
+                                        <div><button className="tableButton" onClick={()=> {navToUpdate(val)}}>Edit</button></div>
+                                        <div><button className="tableButton" onClick={()=> {delEmployee(val.idEmployee)}}>*</button></div>
+                                    </td>
+                                    <td>
+                                        <div>ID #{val.idEmployee}</div>
+                                        <div><strong>{val.lastName}, {val.firstName}</strong></div>
+                                        <div>({val.employeeUsername})</div>
+                                    </td>
                                     <td>{val.jobTitle} ({wage}/hr)</td>
                                     <td><div>{val.employeePhone}</div><div>{val.employeeEmail}</div><div>Radio Callsign: {val.employeeRadio}</div></td>
                                     <td>
@@ -155,8 +167,6 @@ function EmployeesPage ({hostURL}) {
                                         }
                                     </td>
                                     <td className="tableDescription">{val.employeeNote}</td>
-                                    <td><button onClick={()=> {navToUpdate(val)}}>Update</button></td>
-                                    <td><button onClick={()=> {delEmployee(val.idEmployee)}}>Delete</button></td>
                                 </tr>
                             )}
                         )}

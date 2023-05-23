@@ -99,6 +99,14 @@ function FacilitiesPage ({hostURL}) {
                     <p><button onClick={() => navTo("/FacilitiesAdd")}>Create</button></p>
                 </div>
             </article>
+            <article>
+                <h3>Edit and Delete</h3>
+                <p>
+                    To edit or delete any entity within the database, simply click the "Edit" or "<span className="demoRex">*</span>"
+                    buttons on the left side of the asset's corresponding column to enter the edit menu or delete
+                    it from the database, respectively.
+                </p>
+            </article>
             {/* Could potentially reuse the bio assets species filter for job titles here or do a last name search or something */}
             <article>
                 <h3>View Facilities</h3>
@@ -141,8 +149,8 @@ function FacilitiesPage ({hostURL}) {
                             return (
                                 <tr key={index}>
                                     <td>
-                                        <button className="tableButton" onClick={()=> {navToUpdate(val)}}>Update</button>
-                                        <button className="tableButton" onClick={()=> {delFacility(val.idFacility)}}>Delete</button>
+                                        <div><button className="tableButton" onClick={()=> {navToUpdate(val)}}>Edit</button></div>
+                                        <div><button className="tableButton" onClick={()=> {delFacility(val.idFacility)}}>*</button></div>
                                     </td>
                                     <td>
                                         <div>ID #{val.idFacility}</div>
