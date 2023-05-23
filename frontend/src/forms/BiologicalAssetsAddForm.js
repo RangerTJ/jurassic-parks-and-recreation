@@ -1,8 +1,8 @@
 // Basic CRUD operations and React implementation was heavily based on the CRUD React tutorial series created by PedroTech
 // URLs - Part1: https://www.youtube.com/watch?v=T8mqZZ0r-RA, Part2: https://www.youtube.com/watch?v=3YrOOia3-mo, Part3: https://www.youtube.com/watch?v=_S2GKnFpdtE
 
-import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import Axios from 'axios';
 import SelectorSpecies from "../components/selectorSpecies";
 import SelectorFacilities from "../components/selectorFacilities";
@@ -21,18 +21,22 @@ function BiologicalAssetsAddForm ({hostURL}) {
     const [facility, setFacility] = useState('')
 
     // CREATE - Insert New Bio Asset then return to asset home
-    const submit = () => {
-        if (species && name && facility) {
-        Axios.post(createBiologicalAssetsURL, {
-            speciesName: species,
-            bioAssetName: name,
-            facilityName: facility,
-        });
-        alert(`${name} has been added to the database!`);
-        navTo('/BiologicalAssets');
-        } else {
-            alert("Please fill out all required fields and try again.")
-        };
+    const submit = async () => {
+        try {
+            if (species && name && facility) {
+                await Axios.post(createBiologicalAssetsURL, {
+                    speciesName: species,
+                    bioAssetName: name,
+                    facilityName: facility,
+                });
+                alert(`${name} has been added to the database!`);
+                navTo('/BiologicalAssets');
+                } else {
+                    alert("Please fill out all required fields and try again.")
+                }
+        } catch(error) {
+                console.error('Error inserting biological asset.', error)
+        }
     };
 
     return (

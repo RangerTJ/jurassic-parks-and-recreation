@@ -2,7 +2,7 @@
 // URLs - Part1: https://www.youtube.com/watch?v=T8mqZZ0r-RA, Part2: https://www.youtube.com/watch?v=3YrOOia3-mo, Part3: https://www.youtube.com/watch?v=_S2GKnFpdtE
 
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import Axios from 'axios';
 import SelectorSpecies from "../components/selectorSpecies";
 import SelectorFacilities from "../components/selectorFacilities";
@@ -33,21 +33,25 @@ function BiologicalAssetsUpdateForm ({hostURL}) {
     }, [])
 
     // UPDATE - Submit Changes to a Bio Asset then return to Asset home
-    const updateBioAsset = () => {
-        if (species && name && facility) {
-        Axios.put(createBiologicalAssetsURL, {
-            speciesName: species,
-            bioAssetName: name,
-            facilityName: facility,
-            idBiologicalAsset: id
-        });
-        alert(`${name}'s database entry has been updated!`)
-        navTo('/BiologicalAssets');
-        } else {
-            alert("Please fill out all required fields and try again.")
+    const updateBioAsset = async () => {
+        try {
+            if (species && name && facility) {
+                await Axios.put(createBiologicalAssetsURL, {
+                    speciesName: species,
+                    bioAssetName: name,
+                    facilityName: facility,
+                    idBiologicalAsset: id
+                });
+                alert(`${name}'s database entry has been updated!`)
+                navTo('/BiologicalAssets');
+                } else {
+                    alert("Please fill out all required fields and try again.")
+                }
+        } catch (error) {
+                console.error('Error updating biological asset.', error)
         };
     };
-
+        
     return (
         <>
             <h2>Update Biological Asset</h2>
