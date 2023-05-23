@@ -46,22 +46,26 @@ function EmployeeTasksUpdateForm ({hostURL}) {
     }, [])
 
     // UPDATE - Submit Changes to a Bio Asset then return to Asset home (hours/cost can be zero'd in case they need to be cleared for an entry error)
-    const update = () => {
-        if (taskName && employeeUsername && categoryName && empTaskStart && empTaskEnd) {
-        Axios.put(updateEmployeeTasksURL, {
-            taskName: taskName,
-            employeeUsername: employeeUsername,
-            categoryName: categoryName,
-            taskHoursWorked: taskHoursWorked,
-            empTaskCost: empTaskCost,
-            empTaskStart: empTaskStart,
-            empTaskEnd: empTaskEnd,
-            idEmployeeTask: id,
-        });
-        alert(`A task report for ${employeeUsername}'s ${categoryName} work on ${taskName} has been updated!`);
-        navTo('/EmployeeTasks');
-        } else {
-            alert("Please fill out all required fields and try again.")
+    const update = async () => {
+        try {
+            if (taskName && employeeUsername && categoryName && empTaskStart && empTaskEnd) {
+                await Axios.put(updateEmployeeTasksURL, {
+                    taskName: taskName,
+                    employeeUsername: employeeUsername,
+                    categoryName: categoryName,
+                    taskHoursWorked: taskHoursWorked,
+                    empTaskCost: empTaskCost,
+                    empTaskStart: empTaskStart,
+                    empTaskEnd: empTaskEnd,
+                    idEmployeeTask: id,
+                });
+                alert(`A task report for ${employeeUsername}'s ${categoryName} work on ${taskName} has been updated!`)
+                navTo('/EmployeeTasks');
+                } else {
+                    alert("Please fill out all required fields and try again.")
+                }
+        } catch (error) {
+                console.error('Error updating Employee Task Report.', error)
         };
     };
 

@@ -47,25 +47,29 @@ function EmployeesUpdateForm ({hostURL}) {
     }, [])
 
     // UPDATE - Submit Changes to a Bio Asset then return to Asset home (hours/cost can be zero'd in case they need to be cleared for an entry error)
-    const update = () => {
-        if (jobTitle && lastName && firstName && employeeUsername && employeePhone && employeeEmail) {
-        Axios.put(updateEmployeesURL, {
-            jobTitle: jobTitle,
-            lastName: lastName,
-            firstName: firstName,
-            employeeUsername: employeeUsername,
-            hourlyWage: hourlyWage,
-            employeePhone: employeePhone,
-            employeeEmail: employeeEmail,
-            employeeRadio: employeeRadio,
-            employeePhoto: employeePhoto,
-            employeeNote: employeeNote,
-            idEmployee: id,
-        });
-        alert(`${firstName} ${lastName}'s database record has been updated!`);
-        navTo('/Employees');
-        } else {
-            alert("Please fill out all required fields and try again.")
+    const update = async () => {
+        try {
+            if (jobTitle && lastName && firstName && employeeUsername && employeePhone && employeeEmail) {
+                await Axios.put(updateEmployeesURL, {
+                    jobTitle: jobTitle,
+                    lastName: lastName,
+                    firstName: firstName,
+                    employeeUsername: employeeUsername,
+                    hourlyWage: hourlyWage,
+                    employeePhone: employeePhone,
+                    employeeEmail: employeeEmail,
+                    employeeRadio: employeeRadio,
+                    employeePhoto: employeePhoto,
+                    employeeNote: employeeNote,
+                    idEmployee: id,
+                });
+                alert(`${firstName} ${lastName}'s database record has been updated!`)
+                navTo('/Employees');
+                } else {
+                    alert("Please fill out all required fields and try again.")
+                }
+        } catch (error) {
+                console.error('Error updating employee.', error)
         };
     };
 

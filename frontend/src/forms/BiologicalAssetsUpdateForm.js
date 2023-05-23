@@ -14,10 +14,10 @@ function BiologicalAssetsUpdateForm ({hostURL}) {
     // Follows reference strategy to read state object, as suggested by stackoverflow user Abdulazeez Jimoh on 10/25/2022
     // URL: https://stackoverflow.com/questions/68911432/how-to-pass-parameters-with-react-router-dom-version-6-usenavigate-and-typescrip
     const location = useLocation();
-    const { oldName, oldSpecies, oldFacility, oldThreatLevel, id} = location.state;
+    const { oldName, oldSpecies, oldFacility, id} = location.state;
 
     // BiologicalAssets SQL Endpoints
-    const createBiologicalAssetsURL = hostURL + '/api/updateBiologicalAssets';
+    const updateBiologicalAssetsURL = hostURL + '/api/updateBiologicalAssets';
     const navTo = useNavigate();
 
     // Bio Asset States for the Form (2x arrays for select menus + 3x values to submit)
@@ -33,10 +33,10 @@ function BiologicalAssetsUpdateForm ({hostURL}) {
     }, [])
 
     // UPDATE - Submit Changes to a Bio Asset then return to Asset home
-    const updateBioAsset = async () => {
+    const update = async () => {
         try {
             if (species && name && facility) {
-                await Axios.put(createBiologicalAssetsURL, {
+                await Axios.put(updateBiologicalAssetsURL, {
                     speciesName: species,
                     bioAssetName: name,
                     facilityName: facility,
@@ -86,7 +86,7 @@ function BiologicalAssetsUpdateForm ({hostURL}) {
                     </fieldset>
                 </form>
                 <div>
-                    <p><button onClick={updateBioAsset}>Save</button></p>
+                    <p><button onClick={update}>Save</button></p>
                 </div>
             </article>
         </>

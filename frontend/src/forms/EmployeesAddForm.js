@@ -28,25 +28,29 @@ function EmployeesAddForm ({hostURL}) {
     const [employeeNote, setEmployeeNote] = useState('')
 
     // CREATE - Insert New Bio Asset then return to asset home (only if all required state variables are not null)
-    const submit = () => {
-        if (jobTitle && lastName && firstName && employeeUsername && hourlyWage && employeePhone && employeeEmail) {
-        Axios.post(createEmployeesURL, {
-            jobTitle: jobTitle,
-            lastName: lastName,
-            firstName: firstName,
-            employeeUsername: employeeUsername,
-            hourlyWage: hourlyWage,
-            employeePhone: employeePhone,
-            employeeEmail: employeeEmail,
-            employeeRadio: employeeRadio,
-            employeePhoto: employeePhoto,
-            employeeNote: employeeNote,
-        });
-        alert(`${firstName} ${lastName} has been added to the database!`);
-        navTo('/Employees');
-        } else {
-            alert("Please fill out all required fields and try again.")
-        };
+    const submit = async () => {
+        try {
+            if (jobTitle && lastName && firstName && employeeUsername && hourlyWage && employeePhone && employeeEmail) {
+                await Axios.post(createEmployeesURL, {
+                    jobTitle: jobTitle,
+                    lastName: lastName,
+                    firstName: firstName,
+                    employeeUsername: employeeUsername,
+                    hourlyWage: hourlyWage,
+                    employeePhone: employeePhone,
+                    employeeEmail: employeeEmail,
+                    employeeRadio: employeeRadio,
+                    employeePhoto: employeePhoto,
+                    employeeNote: employeeNote,
+                });
+                alert(`${firstName} ${lastName} has been added to the database!`);
+                navTo('/Employees');
+                } else {
+                    alert("Please fill out all required fields and try again.")
+                }
+        } catch(error) {
+                console.error('Error inserting employee.', error)
+        }
     };
 
     return (
