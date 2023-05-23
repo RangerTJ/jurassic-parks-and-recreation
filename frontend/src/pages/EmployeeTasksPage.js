@@ -69,8 +69,9 @@ function EmployeeTasksPage ({hostURL}) {
                     Employee Tasks manage Employee interactions
                     with Assigned Tasks by documenting their work contributions towards the task. 
                     They are necessary to handle the many-to-many
-                    relationship between Employees and Assigned Tasks, in addition to providing a way to track labor and costs in the process.
-                    
+                    relationship between Employees and Assigned Tasks, in addition to providing a way 
+                    to track labor and costs in the process. Each "Employee Task" entity represents 
+                    a report with a unique ID that shows work information performed for an existing Task.
                 </p>
                 <p>
                     Click the "Create" button below to add a new Employee Task to the DINO database.
@@ -98,7 +99,7 @@ function EmployeeTasksPage ({hostURL}) {
                         <tbody>
                         <tr>
                             <th>Edit</th>
-                            <th>Task</th>
+                            <th>Report</th>
                             <th>Employee</th>  
                             <th>Category</th>
                             <th>Hours Worked</th>
@@ -115,8 +116,8 @@ function EmployeeTasksPage ({hostURL}) {
                                         <div><button className="tableButton" onClick={()=> {delEmployeeTask(val.idEmployeeTask)}}>*</button></div>
                                     </td>
                                     <td>
-                                        <div>ID#{val.idEmployeeTask}</div>
-                                        <div><strong>{val.taskName}</strong></div>
+                                        <div><strong>Report #{val.idEmployeeTask}</strong></div>
+                                        <div>for {val.taskName}</div>
                                     </td>
                                     <td>{val.contributingEmployee}</td>
                                     <td>{val.categoryName}</td>
