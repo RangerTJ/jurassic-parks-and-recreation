@@ -115,9 +115,7 @@ function FacilitiesPage ({hostURL}) {
                     <img id="lightbox-img" src={imageToShow} atl={imageToShow} className="lightbox-image"></img>
                 </div>
                 : '' }
-
-
-<div class="scrollableTable">
+                <div class="scrollableTable">
                     <table>
                         <tbody>
                             <tr>

@@ -59,7 +59,7 @@ function HomePage({hostURL}) {
                     managing our system of parks and zoological attractions.
                 </p>
                 <h4 className="st-header">Cost Summary by Sector</h4>
-                <div className="scrollableTable">
+                <div className="scrollableST">
                     <div className="st-holder">
                         <table className="summary-table">
                             <tbody>
@@ -82,7 +82,7 @@ function HomePage({hostURL}) {
                     </div>
                 </div>
                 <h4 className="st-header">Cost Summary by Park</h4>
-                <div className="scrollableTable">
+                <div className="scrollableST">
                     <div className="st-holder">
                         <table>
                             <tbody>

@@ -374,11 +374,15 @@ img {
   text-align: center;
 }
 
-.scrollableTable {
+.scrollableST {
   overflow: auto;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.scrollableTable {
+  overflow: auto;
 }
 
 .tableDescription {

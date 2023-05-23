@@ -661,6 +661,45 @@ app.get('/api/getJobClassificationsList', (req, res) =>{
     });
 });
 
+// Parks Selector
+app.get('/api/getParksList', (req, res) =>{
+    const sqlRead = `
+    SELECT parkName
+    FROM Parks
+    ORDER BY parkName ASC;
+    `;
+    db.query(sqlRead, (err, result)=> {
+        console.log(result);
+        res.send(result);
+    });
+});
+
+// Habitats Selector
+app.get('/api/getHabitatsList', (req, res) =>{
+    const sqlRead = `
+    SELECT habitatName
+    FROM Habitats
+    ORDER BY habitatName ASC;
+    `;
+    db.query(sqlRead, (err, result)=> {
+        console.log(result);
+        res.send(result);
+    });
+});
+
+// Facility Types Selector
+app.get('/api/getFacilityTypesList', (req, res) =>{
+    const sqlRead = `
+    SELECT facTypeName
+    FROM FacilityTypes
+    ORDER BY idFacilityType ASC;
+    `;
+    db.query(sqlRead, (err, result)=> {
+        console.log(result);
+        res.send(result);
+    });
+});
+
 
 /////////////////////////////////////////
 // Test Connection to the MySQL server //

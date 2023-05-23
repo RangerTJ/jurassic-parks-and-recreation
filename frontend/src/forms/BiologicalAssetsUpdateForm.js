@@ -14,7 +14,7 @@ function BiologicalAssetsUpdateForm ({hostURL}) {
     // Follows reference strategy to read state object, as suggested by stackoverflow user Abdulazeez Jimoh on 10/25/2022
     // URL: https://stackoverflow.com/questions/68911432/how-to-pass-parameters-with-react-router-dom-version-6-usenavigate-and-typescrip
     const location = useLocation();
-    const { oldName, oldSpecies, oldFacility, id} = location.state;
+    const { oldName, oldSpecies, oldFacility, oldThreatLevel, id} = location.state;
 
     // BiologicalAssets SQL Endpoints
     const createBiologicalAssetsURL = hostURL + '/api/updateBiologicalAssets';
@@ -24,12 +24,14 @@ function BiologicalAssetsUpdateForm ({hostURL}) {
     const [species, setSpecies] = useState('')
     const [name, setName] = useState(oldName)
     const [facility, setFacility] = useState('')
+    const [threatLevel, setThreatLevel] = useState('')
 
     // Pre-sets all the old values into the fields
     useEffect(()=> {
         setSpecies(oldSpecies);
         setFacility(oldFacility);
         setName(oldName);
+        setThreatLevel(oldThreatLevel);
     }, [])
 
     // UPDATE - Submit Changes to a Bio Asset then return to Asset home
@@ -39,6 +41,7 @@ function BiologicalAssetsUpdateForm ({hostURL}) {
             speciesName: species,
             bioAssetName: name,
             facilityName: facility,
+            threatLevel: threatLevel,
             idBiologicalAsset: id
         });
         alert(`${name}'s database entry has been updated!`)
@@ -58,27 +61,45 @@ function BiologicalAssetsUpdateForm ({hostURL}) {
                 <form>
                     <fieldset>
                         <legend>Update Asset ID# {id}</legend>
-                            <div className="selectorP">
-                                <SelectorSpecies  hostURL={hostURL} species={species} setSpecies={setSpecies} preSelected={oldSpecies} isRequired={true} autoFocus={true}/>
-                            <div>Original: {oldSpecies}</div>
-                            </div>
-                            <div className="selectorP">
-                                <div><label htmlFor="bioAssetName">Name</label></div>
-                                <input 
-                                    type="text"
-                                    id="bioAssetName"
-                                    name="bioAssetName"
-                                    placeholder="Ex. Meadow Stomper" 
-                                    required
-                                    value={name}
-                                    onChange={(e) => {setName(e.target.value)}
-                                    }/>
-                                <div>Original: {oldName}</div>
-                            </div>
-                            <div className="selectorP">
-                                <SelectorFacilities hostURL={hostURL} facility={facility} setFacility={setFacility} preSelected={oldFacility} isRequired={true}/>
-                            </div>
-                            <div>Original: {oldFacility}</div>
+                        <div className="selectorP">
+                            <SelectorSpecies  hostURL={hostURL} species={species} setSpecies={setSpecies} preSelected={oldSpecies} isRequired={true} autoFocus={true}/>
+                        <div>Original: {oldSpecies}</div>
+                        </div>
+                        <div className="selectorP">
+                            <div><label htmlFor="bioAssetName">Name</label></div>
+                            <input 
+                                type="text"
+                                id="bioAssetName"
+                                name="bioAssetName"
+                                placeholder="Ex. Meadow Stomper" 
+                                required
+                                value={name}
+                                onChange={(e) => {setName(e.target.value)}
+                                }/>
+                            <div>Original: {oldName}</div>
+                        </div>
+                        <div className="selectorP">
+                            <SelectorFacilities hostURL={hostURL} facility={facility} setFacility={setFacility} preSelected={oldFacility} isRequired={true}/>
+                        </div>
+                        <div>Original: {oldFacility}</div>
+                        <div className="selectorP">
+                            <div><label for="threatLevel" class="required">Security Rating</label></div>
+                            <select name="threatLevel" id="threatLevel" value={threatLevel} onChange={(e) => {setThreatLevel(e.target.value)}} required>
+                                <option value="" hidden>Select Rating</option>
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <select id="facTypeSelector" ></select>
+                            </select>
+                        </div>
                     </fieldset>
                 </form>
                 <div>

@@ -110,6 +110,7 @@ function BiologicalAssetsPage ({hostURL}) {
         oldName: updateVal.bioAssetName,
         oldSpecies: updateVal.speciesName,
         oldFacility: updateVal.facilityName,
+        oldThreatLevel: updateVal.threatLevel,
         id: updateVal.idBiologicalAsset
     };
         navTo("/BiologicalAssetsUpdate", {state});
