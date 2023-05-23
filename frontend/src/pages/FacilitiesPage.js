@@ -122,10 +122,11 @@ function FacilitiesPage ({hostURL}) {
                                 <th>ID</th>
                                 <th>Name</th>
                                 <th>Park</th>
-                                <th>Type</th>
+                                <th>Details</th>
+                                {/* <th>Type</th>
                                 <th>Habitat</th>
                                 <th>Location</th>
-                                <th>Security</th>
+                                <th>Security</th> */}
                                 <th>Photo</th>
                                 <th>Description</th>
                                 <th>Notes</th>
@@ -146,10 +147,12 @@ function FacilitiesPage ({hostURL}) {
                                     <td>{val.idFacility}</td>
                                     <td>{val.facilityName}</td>
                                     <td>{val.parkName}</td>
-                                    <td>{val.facTypeName}</td>
-                                    <td>{habitatDesc}</td>
-                                    <td>{val.facilityLocation}</td>
-                                    <td>{val.securityRating}</td>
+                                    <td className="tableDescription">
+                                        <div>{val.facTypeName}.</div>
+                                        <div>{habitatDesc}.</div>
+                                        <div>{val.facilityLocation}</div>
+                                        <div><strong>Security: {val.securityRating}</strong></div>
+                                    </td>
                                     <td>
                                         {/* Lightbox tutorial by Alexandra Radevich provided the code for the on-click trigger here
                                         URL: https://medium.com/swlh/creating-a-simple-lightbox-from-scratch-in-react-caea84f90960
