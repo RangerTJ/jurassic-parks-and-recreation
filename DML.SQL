@@ -111,7 +111,7 @@ LEFT JOIN Habitats ON Species.idHabitat = Habitats.idHabitat
 ORDER BY idSpecies ASC; 
 
 -- SELECT BiologicalAssets
-SELECT BiologicalAssets.idBiologicalAsset, BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName, Species.threatLevel 
+SELECT BiologicalAssets.idBiologicalAsset, BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName
 FROM BiologicalAssets
 -- Need to join Species -> BiologicalAssets -> Facilities
 LEFT JOIN Species ON BiologicalAssets.idSpecies = Species.idSpecies

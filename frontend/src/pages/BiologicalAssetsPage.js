@@ -254,7 +254,6 @@ function BiologicalAssetsPage ({hostURL}) {
                             <th className="buttonHolder">Edit</th>
                             <th>Asset</th>
                             <th>Species</th>
-                            <th>Threat Level</th>
                             <th>Home Facility</th>
                         </tr>
                         {biologicalAssetList.map((val, index)=> {
@@ -269,7 +268,6 @@ function BiologicalAssetsPage ({hostURL}) {
                                         <div><strong>{val.bioAssetName}</strong></div>
                                     </td>
                                     <td>{val.speciesName}</td>
-                                    <td>{val.threatLevel}</td>
                                     <td>{val.facilityName}</td>
                                 </tr>
                             )}
