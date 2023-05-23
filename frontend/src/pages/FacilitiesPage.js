@@ -119,15 +119,10 @@ function FacilitiesPage ({hostURL}) {
                     <table>
                         <tbody>
                             <tr>
-                                <th>ID</th>
-                                <th>Controls</th>
-                                <th>Name</th>
+                                <th>Edit</th>
+                                <th>Facility</th>
                                 <th>Park</th>
                                 <th>Details</th>
-                                {/* <th>Type</th>
-                                <th>Habitat</th>
-                                <th>Location</th>
-                                <th>Security</th> */}
                                 <th>Photo</th>
                                 <th>Description</th>
                                 <th>Notes</th>
@@ -145,18 +140,22 @@ function FacilitiesPage ({hostURL}) {
                             
                             return (
                                 <tr key={index}>
-                                    <td>ID</td>
                                     <td>
                                         <button className="tableButton" onClick={()=> {navToUpdate(val)}}>Update</button>
                                         <button className="tableButton" onClick={()=> {delFacility(val.idFacility)}}>Delete</button>
                                     </td>
-                                    <td>{val.facilityName}</td>
+                                    <td>
+                                        <div>ID #{val.idFacility}</div>
+                                        <div><strong>{val.facilityName}</strong></div>
+                                    </td>
                                     <td>{val.parkName}</td>
                                     <td className="tableDescription">
-                                        <div>{val.facTypeName}.</div>
-                                        <div>{habitatDesc}.</div>
-                                        <div>{val.facilityLocation}</div>
-                                        <div><strong>Security: {val.securityRating}</strong></div>
+                                        <ul>
+                                            <li>{val.facTypeName}</li>
+                                            <li>{habitatDesc}</li>
+                                            <li>{val.facilityLocation}</li>
+                                            <li><strong>Security: {val.securityRating}</strong></li>
+                                        </ul>
                                     </td>
                                     <td>
                                         {/* Lightbox tutorial by Alexandra Radevich provided the code for the on-click trigger here
