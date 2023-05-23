@@ -24,14 +24,12 @@ function BiologicalAssetsUpdateForm ({hostURL}) {
     const [species, setSpecies] = useState('')
     const [name, setName] = useState(oldName)
     const [facility, setFacility] = useState('')
-    const [threatLevel, setThreatLevel] = useState('')
 
     // Pre-sets all the old values into the fields
     useEffect(()=> {
         setSpecies(oldSpecies);
         setFacility(oldFacility);
         setName(oldName);
-        setThreatLevel(oldThreatLevel);
     }, [])
 
     // UPDATE - Submit Changes to a Bio Asset then return to Asset home
@@ -41,7 +39,6 @@ function BiologicalAssetsUpdateForm ({hostURL}) {
             speciesName: species,
             bioAssetName: name,
             facilityName: facility,
-            threatLevel: threatLevel,
             idBiologicalAsset: id
         });
         alert(`${name}'s database entry has been updated!`)
@@ -82,26 +79,6 @@ function BiologicalAssetsUpdateForm ({hostURL}) {
                             <SelectorFacilities hostURL={hostURL} facility={facility} setFacility={setFacility} preSelected={oldFacility} isRequired={true}/>
                             <div>Original: {oldFacility}</div>
                         </div>
-                        
-                        <div className="selectorP">
-                            <div><label htmlFor="threatLevel">Security Rating</label></div>
-                            <select name="threatLevel" id="threatLevel" value={threatLevel} onChange={(e) => {setThreatLevel(e.target.value)}} required>
-                                <option value="" hidden>Select Rating</option>
-                                <option value="0">0</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
-                                <option value="8">8</option>
-                                <option value="9">9</option>
-                                <option value="10">10</option>
-                            </select>
-                            <div>Original: {oldThreatLevel}</div>
-                        </div>
-
                     </fieldset>
                 </form>
                 <div>
