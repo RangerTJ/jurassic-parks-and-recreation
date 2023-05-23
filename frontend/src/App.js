@@ -21,7 +21,7 @@ import TaskCategoriesPage from "./pages/TaskCategoriesPage";  // Technically ful
 import SpeciesPage from "./pages/SpeciesPage";
 import DietsPage from "./pages/DietsPage";
 import HabitatsPage from "./pages/HabitatsPage";
-import FacilityTypesPage from "./pages/FacilitiesPage";
+import FacilityTypesPage from "./pages/FacilityTypesPage";
 import JobClassificationsPage from "./pages/JobClassificationsPage";
 
 // Form Page Imports
