@@ -314,7 +314,7 @@ app.delete('/api/deletetAssignedTasks/:idAssignedTask', (req, res) =>{
 //  Facilities Queries  //
 //////////////////////////
 
-// READ
+// READ Facilities
 app.get('/api/getFacilities', (req, res) =>{
     const sqlRead = `
     SELECT  Facilities.idFacility, Parks.parkName, FacilityTypes.facTypeName, Habitats.habitatName,
@@ -332,7 +332,7 @@ app.get('/api/getFacilities', (req, res) =>{
     });
 });
 
-// Add
+// Add Facility
 app.post('/api/insertFacilities', (req, res) =>{
     const parkName = req.body.parkName
     const facTypeName = req.body.facTypeName
@@ -349,7 +349,7 @@ app.post('/api/insertFacilities', (req, res) =>{
     VALUES  (       
                     (SELECT idPark FROM Parks WHERE parkName = ?), 
                     (SELECT idFacilityType FROM FacilityTypes WHERE facTypeName = ?), 
-                    (SELECT idHabitat FROM Habitat WHERE habitatName = ?), 
+                    (SELECT idHabitat FROM Habitats WHERE habitatName = ?), 
                     ?, ?, ?, ?, ?, ?
             );
     `;
@@ -359,7 +359,7 @@ app.post('/api/insertFacilities', (req, res) =>{
     });
 });
 
-// Update
+// Update facility
 app.put('/api/updateFacilities', (req, res) =>{
     const parkName = req.body.parkName
     const facTypeName = req.body.facTypeName
@@ -386,7 +386,7 @@ app.put('/api/updateFacilities', (req, res) =>{
     });
 });
 
-// Delete
+// Delete Facility
 app.delete('/api/deleteFacilities/:idFacility', (req, res) =>{
     const idFacility = req.params.idFacility
     const sqlDelete = `

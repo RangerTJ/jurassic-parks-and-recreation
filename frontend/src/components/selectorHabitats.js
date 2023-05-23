@@ -2,11 +2,6 @@ import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
 
 
-//////////////
-// TODO ALL //
-//////////////
-
-
 // If no old value passed, defaults the old value to "null". Also adjusts autoFocus and required rendering aspects as needed.
 const SelectorHabitats = ({preSelected, isRequired, autoFocus, hostURL, habitatName, setHabitatName}) => {
 
@@ -25,7 +20,7 @@ const SelectorHabitats = ({preSelected, isRequired, autoFocus, hostURL, habitatN
   useEffect(()=> {
     if (preSelected !== null) {setSelected(preSelected);}}, [preSelected])
 
-  // BiologicalAssets SQL Endpoints
+  // Habitat List SQL Endpoint
   const getListURL = hostURL + '/api/getHabitatsList';
 
   // Populate list

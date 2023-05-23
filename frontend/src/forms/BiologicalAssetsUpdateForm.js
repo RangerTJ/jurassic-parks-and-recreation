@@ -80,8 +80,9 @@ function BiologicalAssetsUpdateForm ({hostURL}) {
                         </div>
                         <div className="selectorP">
                             <SelectorFacilities hostURL={hostURL} facility={facility} setFacility={setFacility} preSelected={oldFacility} isRequired={true}/>
+                            <div>Original: {oldFacility}</div>
                         </div>
-                        <div>Original: {oldFacility}</div>
+                        
                         <div className="selectorP">
                             <div><label for="threatLevel" class="required">Security Rating</label></div>
                             <select name="threatLevel" id="threatLevel" value={threatLevel} onChange={(e) => {setThreatLevel(e.target.value)}} required>
@@ -97,9 +98,10 @@ function BiologicalAssetsUpdateForm ({hostURL}) {
                                 <option value="8">8</option>
                                 <option value="9">9</option>
                                 <option value="10">10</option>
-                                <select id="facTypeSelector" ></select>
                             </select>
+                            <div>Original: {oldThreatLevel}</div>
                         </div>
+
                     </fieldset>
                 </form>
                 <div>

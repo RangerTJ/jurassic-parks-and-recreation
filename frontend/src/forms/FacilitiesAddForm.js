@@ -14,24 +14,24 @@ import SelectorFacilityTypes from "../components/selectorFacilityTypes";
 function FacilitiesAddForm ({hostURL}) {
 
     // BiologicalAssets SQL Endpoints
-    const createEmployeesURL = hostURL + '/api/insertFacilities';
+    const createFacilitiesURL = hostURL + '/api/insertFacilities';
     const navTo = useNavigate();
 
-    // Emp Task States for the Form
-    const [parkName, setParkName] = useState('')
-    const [facilityName, setFacilityName] = useState('')
-    const [facTypeName, setFacTypeName] = useState('')
-    const [habitatName, setHabitatName] = useState('')
-    const [facilityLocation, setFacilityLocation] = useState('')
-    const [securityRating, setSecurityRating] = useState('')
-    const [facilityPhoto, setFacilityPhoto] = useState('')
-    const [facilityDescription, setFacilityDescription] = useState('')
-    const [facilityNote, setFacilityNote] = useState('')
+    // Facility States for the Form
+    const [parkName, setParkName] = useState('');
+    const [facilityName, setFacilityName] = useState('');
+    const [habitatName, setHabitatName] = useState('');
+    const [facilityLocation, setFacilityLocation] = useState('');
+    const [securityRating, setSecurityRating] = useState('');
+    const [facilityPhoto, setFacilityPhoto] = useState('');
+    const [facilityDescription, setFacilityDescription] = useState('');
+    const [facilityNote, setFacilityNote] = useState('');
+    const [facTypeName, setFacTypeName] = useState('');
 
     // CREATE - Insert New Bio Asset then return to asset home (only if all required state variables are not null)
     const submit = () => {
-        if (parkName && facTypeName && facTypeName && habitatName && facilityLocation && securityRating) {
-        Axios.post(createEmployeesURL, {
+        if (parkName && facTypeName && facilityLocation && securityRating) {
+        Axios.post(createFacilitiesURL, {
             parkName: parkName,
             facilityName: facilityName,
             facTypeName: facTypeName,
@@ -57,11 +57,12 @@ function FacilitiesAddForm ({hostURL}) {
                     To add a new Facility to the database, enter values for its attributes below
                     and click the "Add Facility" button.
                 </p>
+                Debug: {facTypeName}, {parkName}, {facilityName}, {habitatName}, {facilityLocation}, {securityRating}, {facilityPhoto}, {facilityDescription}, {facilityNote}
                 <form>
                     <fieldset>
                         <legend>Information</legend>
                         <div className="selectorP">
-                            <div><label htmlFor="facilityName">First Name</label></div>
+                            <div><label htmlFor="facilityName">Facility Name</label></div>
                             <input 
                                 type="text"
                                 id="facilityName"
@@ -79,7 +80,8 @@ function FacilitiesAddForm ({hostURL}) {
                             <SelectorFacilityTypes  hostURL={hostURL} facTypeName={facTypeName} setFacTypeName={setFacTypeName} isRequired={true} autoFocus={false}/>
                         </div>
                         <div className="selectorP">
-                            <SelectorHabitats  hostURL={hostURL} habitatName={habitatName} setHabitatName={setHabitatName} isRequired={true} autoFocus={false}/>
+                            <SelectorHabitats  hostURL={hostURL} habitatName={habitatName} setHabitatName={setHabitatName} isRequired={false} autoFocus={false}/>
+                            <div>(Enclosures Only)</div>
                         </div>
                         <div className="selectorP">
                             <div><label htmlFor="facilityLocation">Location</label></div>
@@ -93,7 +95,7 @@ function FacilitiesAddForm ({hostURL}) {
                                 }/>
                         </div>
                         <div className="selectorP">
-                            <div><label for="securityRating" class="required">Security Rating</label></div>
+                            <div><label htmlFor="securityRating">Security Rating</label></div>
                             <select name="securityRating" id="securityRating" onChange={(e) => {setSecurityRating(e.target.value)}} required>
                                 <option value="" hidden>Select Rating</option>
                                 <option value="0">0</option>
@@ -107,103 +109,33 @@ function FacilitiesAddForm ({hostURL}) {
                                 <option value="8">8</option>
                                 <option value="9">9</option>
                                 <option value="10">10</option>
-                                <select id="facTypeSelector" ></select>
                             </select>
                         </div>
-                            {/* <div className="selectorP">
-                                <div><label htmlFor="lastName">Last Name</label></div>
-                                <input 
-                                    type="text"
-                                    id="lastName"
-                                    name="lastName"
-                                    placeholder="Lastname" 
-                                    required
-                                    autoFocus 
-                                    onChange={(e) => {setLastName(e.target.value)}
-                                    }/>
-                            </div>
-                            <div className="selectorP">
-                                <div><label htmlFor="firstName">First Name</label></div>
-                                <input 
-                                    type="text"
-                                    id="firstName"
-                                    name="firstName"
-                                    placeholder="Firstname" 
-                                    required 
-                                    onChange={(e) => {setFirstName(e.target.value)}
-                                    }/>
-                            </div>
-                            <div className="selectorP">
-                                <div><label htmlFor="username">Username</label></div>
-                                <input 
-                                    type="text"
-                                    id="username"
-                                    name="username"
-                                    placeholder="username" 
-                                    required 
-                                    onChange={(e) => {setEmployeeUsername(e.target.value)}
-                                    }/>
-                            </div>
-                            <div className="selectorP">
-                                <SelectorParks  hostURL={hostURL} jobTitle={jobTitle} setJobTitle={setJobTitle} isRequired={true} autoFocus={false}/>
-                            </div>
-                            <div className="selectorP">
-                                <div><label htmlFor="wage">Hourly Wage</label></div>
-                                <input 
-                                    type="number"
-                                    id="wage"
-                                    name="wage"
-                                    placeholder="Ex. 26.00" 
-                                    required 
-                                    onChange={(e) => {setHourlyWage(e.target.value)}
-                                    }/>
-                            </div>
-                            <div className="selectorP">
-                                <div><label htmlFor="phone">Phone</label></div>
-                                <input 
-                                    type="text"
-                                    id="phone"
-                                    name="phone"
-                                    placeholder="Ex. +1-555-555-5555" 
-                                    required 
-                                    onChange={(e) => {setEmployeePhone(e.target.value)}
-                                    }/>
-                            </div>
-                            <div className="selectorP">
-                                <div><label htmlFor="username">Email</label></div>
-                                <input 
-                                    type="text"
-                                    id="email"
-                                    name="email"
-                                    placeholder="Ex. employee@jw.org" 
-                                    required 
-                                    onChange={(e) => {setEmployeeEmail(e.target.value)}
-                                    }/>
-                            </div>
-                            <div className="selectorP">
-                                <div><label htmlFor="radio">Radio Number/Callsign</label></div>
-                                <input 
-                                    type="text"
-                                    id="radio"
-                                    name="radio"
-                                    placeholder="Ex. 626, Alpha-1, etc." 
-                                    onChange={(e) => {setEmployeeRadio(e.target.value)}
-                                    }/>
-                            </div>
-                            <div className="selectorP">
-                                <ImageSelectorFacilities  hostURL={hostURL} image={employeePhoto} setImage={setEmployeePhoto} isRequired={false} autoFocus={false}/>
-                            </div>
-                            <div className="selectorP">
-                                <div><label htmlFor="employeeNote">Notes</label></div>
+                        <div className="selectorP">
+                            <ImageSelectorFacilities  hostURL={hostURL} image={facilityPhoto} setImage={setFacilityPhoto} isRequired={false} autoFocus={false}/>
+                        </div>
+                        <div className="selectorP">
+                                <div><label htmlFor="facilityDescription">Description</label></div>
                                 <textarea
-                                    id ="employeeNote"
-                                    name="employeeNote"
+                                    id ="facilityDescription"
+                                    name="facilityDescription"
                                     cols="40" rows="5" 
                                     min="5" max="255"
-                                    placeholder="Ex. Currently on PIP due performance issues."
-                                    onChange={(e) => {setEmployeeNote(e.target.value)}
+                                    placeholder="Ex. Houses sauropods."
+                                    onChange={(e) => {setFacilityDescription(e.target.value)}
                                     }/>
-                            </div> */}
+                        </div>
+                        <div className="selectorP">
+                                <div><label htmlFor="facilityNote">Notes</label></div>
+                                <textarea
+                                    id ="facilityNote"
+                                    name="facilityNote"
+                                    cols="40" rows="5" 
+                                    min="5" max="255"
+                                    placeholder="Ex. Suffers from erosion. Schedule regular maintenance."
+                                    onChange={(e) => {setFacilityNote(e.target.value)}
+                                    }/>
+                        </div>
                     </fieldset>
                 </form>
                 <div>

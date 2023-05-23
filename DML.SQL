@@ -171,7 +171,7 @@ INSERT INTO Facilities              (idPark, idFacilityType, idHabitat, facility
 VALUES  (       
                 (SELECT idPark FROM Parks WHERE parkName = :parkName_input), 
                 (SELECT idFacilityType FROM FacilityTypes WHERE facTypeName = :facTypeName_input), 
-                (SELECT idHabitat FROM Habitat WHERE habitatName = :habitatName_input), 
+                (SELECT idHabitat FROM Habitats WHERE habitatName = :habitatName_input), 
                 :facilityName_input, :facilityDescription_input, :facilityLocation_input, 
                 :securityRating_input, :facilityPhoto_input, :facilityNote_input
         );
