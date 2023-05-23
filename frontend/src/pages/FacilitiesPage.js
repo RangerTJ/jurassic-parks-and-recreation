@@ -49,18 +49,18 @@ function FacilitiesPage ({hostURL}) {
 
     // DELETE - Deletes target bio asset and refreshes all 3 tables
     const delFacility = (delID) => {
-        if (window.confirm(`Are you sure you want to remove Employee #${delID}?`)) {
+        if (window.confirm(`Are you sure you want to remove Facility #${delID}?`)) {
         Axios.delete(deleteFacilitiesURL + delID)
         .then(() => {Axios.get(getFacilitiesURL)
         .then((response) => {setFacilitiesList(response.data);
             console.log(response.data)})
-        .then(alert(`Employee #${delID} has been removed from the database.`)
+        .then(alert(`Facility #${delID} has been removed from the database.`)
             );
           });
      }; 
     };
 
-    //Populate Employee List
+    //Populate Facilities List
     const getFacilities = ()=> {
         Axios.get(getFacilitiesURL)
         .then((response)=> {setFacilitiesList(response.data)})
@@ -71,17 +71,16 @@ function FacilitiesPage ({hostURL}) {
     // URL: https://stackoverflow.com/questions/68911432/how-to-pass-parameters-with-react-router-dom-version-6-usenavigate-and-typescrip
     const navToUpdate = (updateVal) => {
         const state = {
-        oldLastName: updateVal.lastName,
-        oldFirstName: updateVal.firstName,
-        oldEmployeeUsername: updateVal.employeeUsername,
-        oldJobTitle: updateVal.jobTitle,
-        oldHourlyWage: updateVal.hourlyWage,
-        oldEmployeePhone: updateVal.employeePhone,
-        oldEmployeeEmail: updateVal.employeeEmail,
-        oldEmployeeRadio: updateVal.employeeRadio,
-        oldEmployeePhoto: updateVal.employeePhoto,
-        oldEmployeeNote: updateVal.employeeNote,
-        id: updateVal.idEmployee
+        oldParkName: updateVal.parkName,
+        oldFacilityName: updateVal.facilityName,
+        oldFacTypeName: updateVal.facTypeName,
+        oldHabitatName: updateVal.habitatName,
+        oldFacilityLocation: updateVal.facilityLocation,
+        oldSecurityRating: updateVal.securityRating,
+        oldFacilityPhoto: updateVal.facilityPhoto,
+        oldFacilityDescription: updateVal.facilityDescription,
+        oldFacilityNote: updateVal.facilityNote,
+        id: updateVal.idFacility
     };
         navTo("/FacilitiesUpdate", {state});
     }
@@ -92,7 +91,7 @@ function FacilitiesPage ({hostURL}) {
             {/* End experimental copy/paste */}
             <h2>Facilities</h2>
             <article>
-                <h3>Add New Employee</h3>
+                <h3>Add New Facility</h3>
                 <p>
                     Click the "Create" button below to add a new Facility to the DINO database.
                 </p>
@@ -164,6 +163,7 @@ function FacilitiesPage ({hostURL}) {
                                         }
                                     </td>
                                     <td className="tableDescription">{val.facilityDescription}</td>
+                                    <td className="tableDescription">{val.facilityNote}</td>
                                     <td><button onClick={()=> {navToUpdate(val)}}>Update</button></td>
                                     <td><button onClick={()=> {delFacility(val.idFacility)}}>Delete</button></td>
                                 </tr>
