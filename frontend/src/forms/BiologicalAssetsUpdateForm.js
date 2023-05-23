@@ -84,7 +84,7 @@ function BiologicalAssetsUpdateForm ({hostURL}) {
                         </div>
                         
                         <div className="selectorP">
-                            <div><label for="threatLevel" class="required">Security Rating</label></div>
+                            <div><label htmlFor="threatLevel">Security Rating</label></div>
                             <select name="threatLevel" id="threatLevel" value={threatLevel} onChange={(e) => {setThreatLevel(e.target.value)}} required>
                                 <option value="" hidden>Select Rating</option>
                                 <option value="0">0</option>

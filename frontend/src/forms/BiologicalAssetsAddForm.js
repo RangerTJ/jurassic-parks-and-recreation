@@ -67,7 +67,7 @@ function BiologicalAssetsAddForm ({hostURL}) {
                             <SelectorFacilities hostURL={hostURL} facility={facility} setFacility={setFacility} isRequired={true}/>
                         </div>
                         <div className="selectorP">
-                            <div><label for="threatLevel" class="required">Security Rating</label></div>
+                            <div><label htmlFor="threatLevel">Security Rating</label></div>
                             <select name="threatLevel" id="threatLevel" onChange={(e) => {setThreatLevel(e.target.value)}} required>
                                 <option value="" hidden>Select Rating</option>
                                 <option value="0">0</option>
