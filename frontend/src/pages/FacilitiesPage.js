@@ -120,6 +120,7 @@ function FacilitiesPage ({hostURL}) {
                         <tbody>
                             <tr>
                                 <th>ID</th>
+                                <th>Controls</th>
                                 <th>Name</th>
                                 <th>Park</th>
                                 <th>Details</th>
@@ -131,8 +132,8 @@ function FacilitiesPage ({hostURL}) {
                                 <th>Description</th>
                                 <th>Notes</th>
 
-                                <th>Update</th>
-                                <th>Delete</th>
+                                {/* <th>Update</th>
+                                <th>Delete</th> */}
                             </tr>
                             {facilitiesList.map((val, index)=> {
                             
@@ -144,7 +145,11 @@ function FacilitiesPage ({hostURL}) {
                             
                             return (
                                 <tr key={index}>
-                                    <td>{val.idFacility}</td>
+                                    <td>ID</td>
+                                    <td>
+                                        <button className="tableButton" onClick={()=> {navToUpdate(val)}}>Update</button>
+                                        <button className="tableButton" onClick={()=> {delFacility(val.idFacility)}}>Delete</button>
+                                    </td>
                                     <td>{val.facilityName}</td>
                                     <td>{val.parkName}</td>
                                     <td className="tableDescription">
@@ -165,8 +170,6 @@ function FacilitiesPage ({hostURL}) {
                                     </td>
                                     <td className="tableDescription">{val.facilityDescription}</td>
                                     <td className="tableDescription">{val.facilityNote}</td>
-                                    <td><button onClick={()=> {navToUpdate(val)}}>Update</button></td>
-                                    <td><button onClick={()=> {delFacility(val.idFacility)}}>Delete</button></td>
                                 </tr>
                                 )}
                             )}

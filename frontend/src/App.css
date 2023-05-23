@@ -354,10 +354,6 @@ img {
   align-self: flex-start;
 }
 
-.summary-table {
-  
-}
-
 .st-holder {
   max-width: fit-content;
 }
@@ -388,6 +384,12 @@ img {
 .tableDescription {
   text-align: left;
   padding: 5px;
+}
+
+.tableButton {
+  margin: 5px;
+  justify-content: center;
+  vertical-align: middle;
 }
 
 /* Mimic default P format for spacing selectors so HTML doesn't get angry about DIV in P elements */
