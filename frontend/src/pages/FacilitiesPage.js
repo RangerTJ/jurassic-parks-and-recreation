@@ -48,23 +48,30 @@ function FacilitiesPage ({hostURL}) {
     }, [])
 
     // DELETE - Deletes target bio asset and refreshes all 3 tables
-    const delFacility = (delID) => {
-        if (window.confirm(`Are you sure you want to remove Facility #${delID}?`)) {
-        Axios.delete(deleteFacilitiesURL + delID)
-        .then(() => {Axios.get(getFacilitiesURL)
-        .then((response) => {setFacilitiesList(response.data);
-            console.log(response.data)})
-        .then(alert(`Facility #${delID} has been removed from the database.`)
-            );
-          });
-     }; 
+    const delFacility = async (delID) => {
+        try {
+            if (window.confirm(`Are you sure you want to remove Facility #${delID}?`)) {
+                await Axios.delete(deleteFacilitiesURL + delID);
+                
+                const mainViewResponse = await Axios.get(getFacilitiesURL);
+                setFacilitiesList(mainViewResponse.data);
+                console.log(mainViewResponse.data);
+        
+                alert(`Facility #${delID} has been removed from the database.`);
+            }} catch (error) {
+                console.error('Error deleting facility.', error);
+        }
     };
-
-    //Populate Facilities List
-    const getFacilities = ()=> {
-        Axios.get(getFacilitiesURL)
-        .then((response)=> {setFacilitiesList(response.data)})
-    }
+    
+    // Populate Facilities List
+    const getFacilities = async ()=> {
+        try {
+            const response = await Axios.get(getFacilitiesURL)
+            setFacilitiesList(response.data)
+        } catch (error) {
+            console.error('Error populating the view table.', error);
+        }
+    };
 
     // UPDATE Primer: Passes an object containing "current" (old) attributes to the useNavigate() function, navTo(), to the edit page.
     // Follows general strategy suggested by stackoverflow user Abdulazeez Jimoh on 10/25/2022

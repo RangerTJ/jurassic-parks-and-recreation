@@ -47,24 +47,28 @@ function FacilitiesUpdateForm ({hostURL}) {
     }, [])
 
     // UPDATE - Submit Changes to a Bio Asset then return to Asset home (hours/cost can be zero'd in case they need to be cleared for an entry error)
-    const update = () => {
-        if (parkName && facTypeName && facilityLocation && securityRating) {
-        Axios.put(updateFacilitiesURL, {
-            parkName: parkName,
-            facilityName: facilityName,
-            facTypeName: facTypeName,
-            habitatName: habitatName,
-            facilityLocation: facilityLocation,
-            securityRating: securityRating,
-            facilityPhoto: facilityPhoto,
-            facilityDescription: facilityDescription,
-            facilityNote: facilityNote,
-            idFacility: id,
-        });
-        alert(`${facilityName}'s database record has been updated!`);
-        navTo('/Facilities');
-        } else {
-            alert("Please fill out all required fields and try again.")
+    const update = async () => {
+        try {
+            if (parkName && facTypeName && facilityLocation && securityRating) {
+                await Axios.put(updateFacilitiesURL, {
+                    parkName: parkName,
+                    facilityName: facilityName,
+                    facTypeName: facTypeName,
+                    habitatName: habitatName,
+                    facilityLocation: facilityLocation,
+                    securityRating: securityRating,
+                    facilityPhoto: facilityPhoto,
+                    facilityDescription: facilityDescription,
+                    facilityNote: facilityNote,
+                    idFacility: id,
+                });
+                alert(`${facilityName}'s database record has been updated!`)
+                navTo('/Facilities');
+                } else {
+                    alert("Please fill out all required fields and try again.")
+                }
+        } catch (error) {
+                console.error('Error updating facility.', error)
         };
     };
 
