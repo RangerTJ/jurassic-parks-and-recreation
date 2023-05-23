@@ -25,23 +25,27 @@ function EmployeeTasksAddForm ({hostURL}) {
     const [empTaskStart, setEmpTaskStart] = useState('')
     const [empTaskEnd, setEmpTaskEnd] = useState('')
 
-    // CREATE - Insert New Bio Asset then return to asset home (only if all state variables are not null)
-    const submit = () => {
-        if (taskName && employeeUsername && categoryName && taskHoursWorked && empTaskCost && empTaskStart && empTaskEnd) {
-        Axios.post(createEmployeeTasksURL, {
-            taskName: taskName,
-            employeeUsername: employeeUsername,
-            categoryName: categoryName,
-            taskHoursWorked: taskHoursWorked,
-            empTaskCost: empTaskCost,
-            empTaskStart: empTaskStart,
-            empTaskEnd: empTaskEnd,
-        });
-        alert(`A task report for ${employeeUsername}'s ${categoryName} work on ${taskName} has been added to the database!`);
-        navTo('/EmployeeTasks');
-        } else {
-            alert("Please fill out all required fields and try again.")
-        };
+    // CREATE - Insert New Bio Asset then return to asset home
+    const submit = async () => {
+        try {
+            if (taskName && employeeUsername && categoryName && taskHoursWorked && empTaskCost && empTaskStart && empTaskEnd) {
+                await Axios.post(createEmployeeTasksURL, {
+                    taskName: taskName,
+                    employeeUsername: employeeUsername,
+                    categoryName: categoryName,
+                    taskHoursWorked: taskHoursWorked,
+                    empTaskCost: empTaskCost,
+                    empTaskStart: empTaskStart,
+                    empTaskEnd: empTaskEnd,
+                });
+                alert(`A task report for ${employeeUsername}'s ${categoryName} work on ${taskName} has been added to the database!`);
+                navTo('/EmployeeTasks');
+                } else {
+                    alert("Please fill out all required fields and try again.")
+                }
+        } catch(error) {
+                console.error('Error inserting Employee Task Report.', error)
+        }
     };
 
     return (

@@ -140,9 +140,10 @@ LEFT JOIN BiologicalAssets ON TasksAssigned.idBiologicalAsset = BiologicalAssets
 LEFT JOIN Species ON BiologicalAssets.idSpecies = Species.idSpecies
 ORDER BY TasksAssigned.idTaskAssigned ASC;
 
--- SELECT EmployeeTasks -- POPULATE UPDATE FORM VERSION
-SELECT  EmployeeTasks.idEmployeeTask, TasksAssigned.taskName, Employees.employeeUsername,
-        TaskCategories.categoryName, EmployeeTasks.taskHoursWorked, EmployeeTasks.empTaskCost, EmployeeTasks.empTaskStart, EmployeeTasks.empTaskEnd
+-- SELECT EmployeeTasks
+SELECT  EmployeeTasks.idEmployeeTask, TasksAssigned.taskName, (SELECT CONCAT(Employees.firstName, ' ', Employees.lastName)) AS contributingEmployee,
+        TaskCategories.categoryName, EmployeeTasks.taskHoursWorked, EmployeeTasks.empTaskCost, EmployeeTasks.empTaskStart, EmployeeTasks.empTaskEnd,
+        Employees.employeeUsername
 FROM EmployeeTasks
 -- Need to JOIN EmployeeTasks -> TasksAssigned -> Employees -> Task Category
 LEFT JOIN TasksAssigned ON EmployeeTasks.idTaskAssigned = TasksAssigned.idTaskAssigned

@@ -27,13 +27,13 @@ function EmployeeTasksPage ({hostURL}) {
     // DELETE - Deletes target Employee Task and Refreshes Table
     const delEmployeeTask = async (delID) => {
         try {
-          if (window.confirm(`Are you sure you want to remove Task #${delID}?`)) {
-            await Axios.delete(deleteEmployeeTasksURL + delID);
-            const response = await Axios.get(getEmployeeTasksURL);
-            setEmployeeTaskList(response.data);
-            console.log(response.data);
-            alert(`Employee Task #${delID} has been removed from the database.`);
-          }
+            if (window.confirm(`Are you sure you want to remove Task #${delID}?`)) {
+                await Axios.delete(deleteEmployeeTasksURL + delID);
+                const response = await Axios.get(getEmployeeTasksURL);
+                setEmployeeTaskList(response.data);
+                console.log(response.data);
+                alert(`Employee Task #${delID} has been removed from the database.`);
+            }
         }   catch (error) {
             console.error('Error deleting employee task.', error);
         }
@@ -125,7 +125,10 @@ function EmployeeTasksPage ({hostURL}) {
                                         <div><strong>Report #{val.idEmployeeTask}</strong></div>
                                         <div>for '{val.taskName}'</div>
                                     </td>
-                                    <td>{val.contributingEmployee}</td>
+                                    <td>
+                                        <div>{val.contributingEmployee}</div>
+                                        <div></div>({val.employeeUsername})
+                                    </td>
                                     <td>{val.categoryName}</td>
                                     <td>{val.taskHoursWorked}</td>
                                     <td className="tableDescription">{taskCost}</td>
