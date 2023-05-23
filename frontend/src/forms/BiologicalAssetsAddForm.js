@@ -19,6 +19,7 @@ function BiologicalAssetsAddForm ({hostURL}) {
     const [species, setSpecies] = useState('')
     const [name, setName] = useState('')
     const [facility, setFacility] = useState('')
+    const [threatLevel, setThreatLevel] = useState('')
 
     // CREATE - Insert New Bio Asset then return to asset home
     const submit = () => {
@@ -27,6 +28,7 @@ function BiologicalAssetsAddForm ({hostURL}) {
             speciesName: species,
             bioAssetName: name,
             facilityName: facility,
+            threatLevel: threatLevel,
         });
         alert(`${name} has been added to the database!`);
         navTo('/BiologicalAssets');
@@ -47,23 +49,40 @@ function BiologicalAssetsAddForm ({hostURL}) {
                 <form>
                     <fieldset>
                         <legend>Information</legend>
-                            <div className="selectorP">
-                                <SelectorSpecies  hostURL={hostURL} species={species} setSpecies={setSpecies} isRequired={true} autoFocus={true}/>
-                            </div>
-                            <div className="selectorP">
-                                <div><label htmlFor="bioAssetName">Name</label></div>
-                                <input 
-                                    type="text" 
-                                    id="bioAssetName"
-                                    name="bioAssetName"
-                                    placeholder="Ex. Meadow Stomper" 
-                                    required 
-                                    onChange={(e) => {setName(e.target.value)}
-                                    }/>
-                            </div>
-                            <div className="selectorP">
-                                <SelectorFacilities hostURL={hostURL} facility={facility} setFacility={setFacility} isRequired={true}/>
-                            </div>
+                        <div className="selectorP">
+                            <SelectorSpecies  hostURL={hostURL} species={species} setSpecies={setSpecies} isRequired={true} autoFocus={true}/>
+                        </div>
+                        <div className="selectorP">
+                            <div><label htmlFor="bioAssetName">Name</label></div>
+                            <input 
+                                type="text" 
+                                id="bioAssetName"
+                                name="bioAssetName"
+                                placeholder="Ex. Meadow Stomper" 
+                                required 
+                                onChange={(e) => {setName(e.target.value)}
+                                }/>
+                        </div>
+                        <div className="selectorP">
+                            <SelectorFacilities hostURL={hostURL} facility={facility} setFacility={setFacility} isRequired={true}/>
+                        </div>
+                        <div className="selectorP">
+                            <div><label htmlFor="threatLevel">Security Rating</label></div>
+                            <select name="threatLevel" id="threatLevel" onChange={(e) => {setThreatLevel(e.target.value)}} required>
+                                <option value="" hidden>Select Rating</option>
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                            </select>
+                        </div>
                     </fieldset>
                 </form>
                 <div>

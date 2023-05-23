@@ -31,6 +31,8 @@ import EmployeeTasksAddForm from "./forms/EmployeeTasksAddForm";
 import EmployeeTasksUpdateForm from "./forms/EmployeeTasksUpdateForm";
 import EmployeesAddForm from "./forms/EmployeesAddForm";
 import EmployeesUpdateForm from "./forms/EmployeesUpdateForm";
+import FacilitiesAddForm from "./forms/FacilitiesAddForm";
+import FacilitiesUpdateForm from "./forms/FacilitiesUpdateForm";
 
 // React Application
 function App() {
@@ -71,6 +73,8 @@ function App() {
                 <Route path="/EmployeeTasksUpdate" element={<EmployeeTasksUpdateForm hostURL={hostURL} />} />
                 <Route path="/EmployeesAdd" element={<EmployeesAddForm hostURL={hostURL} />} />
                 <Route path="/EmployeesUpdate" element={<EmployeesUpdateForm hostURL={hostURL} />} />
+                <Route path="/FacilitiesAdd" element={<FacilitiesAddForm hostURL={hostURL} />} />
+                <Route path="/FacilitiesUpdate" element={<FacilitiesUpdateForm hostURL={hostURL} />} />
             </Routes>
         </section>
       </main>

@@ -69,8 +69,9 @@ function EmployeeTasksPage ({hostURL}) {
                     Employee Tasks manage Employee interactions
                     with Assigned Tasks by documenting their work contributions towards the task. 
                     They are necessary to handle the many-to-many
-                    relationship between Employees and Assigned Tasks, in addition to providing a way to track labor and costs in the process.
-                    
+                    relationship between Employees and Assigned Tasks, in addition to providing a way 
+                    to track labor and costs in the process. Each "Employee Task" entity represents 
+                    a report with a unique ID that shows work information performed for an existing Task.
                 </p>
                 <p>
                     Click the "Create" button below to add a new Employee Task to the DINO database.
@@ -79,7 +80,14 @@ function EmployeeTasksPage ({hostURL}) {
                     <p><button onClick={() => navTo("/EmployeeTasksAdd")}>Create</button></p>
                 </div>
             </article>
-
+            <article>
+                <h3>Edit and Delete</h3>
+                <p>
+                    To edit or delete any entity within the database, simply click the "Edit" or "<span className="demoRex">*</span>"
+                    buttons on the left side of the asset's corresponding column to enter the edit menu or delete
+                    it from the database, respectively.
+                </p>
+            </article>
             <article>
                 <h3>View Employee Tasks</h3>
                 <p>
@@ -90,33 +98,37 @@ function EmployeeTasksPage ({hostURL}) {
                     <table>
                         <tbody>
                         <tr>
-                            <th>ID</th>
-                            <th>Task Name</th>
+                            <th>Edit</th>
+                            <th>Report</th>
                             <th>Employee</th>  
                             <th>Category</th>
                             <th>Hours Worked</th>
                             <th>Total Cost</th>
-                            <th>Start</th>
-                            <th>End</th>
-
-                            <th>Update</th>
-                            <th>Delete</th>
+                            <th>Timestamps</th>
                         </tr>
                         {employeeTaskList.map((val, index)=> {
                             // Convert cost to USD or set to 0 USD if there is a null entry
                             const taskCost = val.empTaskCost ? val.empTaskCost.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) : '$0.00';
                             return (
                                 <tr key={index}>
-                                    <td>{val.idEmployeeTask}</td>
-                                    <td>{val.taskName}</td>
+                                    <td>
+                                        <div><button className="tableButton" onClick={()=> {navToUpdate(val)}}>Edit</button></div>
+                                        <div><button className="tableButton" onClick={()=> {delEmployeeTask(val.idEmployeeTask)}}>*</button></div>
+                                    </td>
+                                    <td>
+                                        <div><strong>Report #{val.idEmployeeTask}</strong></div>
+                                        <div>for '{val.taskName}'</div>
+                                    </td>
                                     <td>{val.contributingEmployee}</td>
                                     <td>{val.categoryName}</td>
                                     <td>{val.taskHoursWorked}</td>
                                     <td className="tableDescription">{taskCost}</td>
-                                    <td>{val.empTaskStart}</td>
-                                    <td>{val.empTaskEnd}</td>
-                                    <td><button onClick={()=> {navToUpdate(val)}}>Update</button></td>
-                                    <td><button onClick={()=> {delEmployeeTask(val.idEmployeeTask)}}>Delete</button></td>
+                                    <td className="tableDescription">
+                                        <ul>
+                                            <li><strong>Start:</strong> {val.empTaskStart}</li>
+                                            <li><strong>End:</strong> {val.empTaskEnd}</li>
+                                        </ul>
+                                    </td>
                                 </tr>
                             )}
                         )}

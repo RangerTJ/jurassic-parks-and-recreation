@@ -354,10 +354,6 @@ img {
   align-self: flex-start;
 }
 
-.summary-table {
-  
-}
-
 .st-holder {
   max-width: fit-content;
 }
@@ -374,16 +370,40 @@ img {
   text-align: center;
 }
 
-.scrollableTable {
+.scrollableST {
   overflow: auto;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
+.scrollableTable {
+  overflow: auto;
+}
+
 .tableDescription {
   text-align: left;
   padding: 5px;
+}
+
+.tableButton {
+  margin: 0px 0px 0px 0px;
+  justify-content: center;
+  vertical-align: middle;
+  font-size: 22px;
+  text-shadow: none;
+  box-shadow: none;
+  margin: 0;
+}
+
+.buttonHolder {
+  flex:none;
+  width: 0px;
+}
+
+.demoRex {
+  font-family: var(--jpFont);
+  font-size: large;
 }
 
 /* Mimic default P format for spacing selectors so HTML doesn't get angry about DIV in P elements */

@@ -310,6 +310,98 @@ app.delete('/api/deletetAssignedTasks/:idAssignedTask', (req, res) =>{
 });
 
 
+//////////////////////////
+//  Facilities Queries  //
+//////////////////////////
+
+// READ Facilities
+app.get('/api/getFacilities', (req, res) =>{
+    const sqlRead = `
+    SELECT  Facilities.idFacility, Parks.parkName, FacilityTypes.facTypeName, Habitats.habitatName,
+            Facilities.facilityName, Facilities.facilityDescription, Facilities.facilityLocation, 
+            Facilities.securityRating, Facilities.facilityPhoto, Facilities.facilityNote
+    FROM Facilities
+    LEFT JOIN Parks ON Facilities.idPark = Parks.idPark
+    LEFT JOIN FacilityTypes ON Facilities.idFacilityType = FacilityTypes.idFacilityType
+    LEFT JOIN Habitats ON Facilities.idHabitat = Habitats.idHabitat
+    ORDER BY idFacility ASC;
+    `;
+    db.query(sqlRead, (err, result)=> {
+        console.log(result);
+        res.send(result);
+    });
+});
+
+// Add Facility
+app.post('/api/insertFacilities', (req, res) =>{
+    const parkName = req.body.parkName
+    const facTypeName = req.body.facTypeName
+    const habitatName = req.body.habitatName
+    const facilityName = req.body.facilityName
+    const facilityDescription = req.body.facilityDescription
+    const facilityLocation = req.body.facilityLocation
+    const securityRating = req.body.securityRating
+    const facilityPhoto = req.body.facilityPhoto
+    const facilityNote = req.body.facilityNote
+    const sqlInsert = `
+    INSERT INTO Facilities              (idPark, idFacilityType, idHabitat, facilityName, facilityDescription, 
+                                        facilityLocation, securityRating, facilityPhoto, facilityNote)
+    VALUES  (       
+                    (SELECT idPark FROM Parks WHERE parkName = ?), 
+                    (SELECT idFacilityType FROM FacilityTypes WHERE facTypeName = ?), 
+                    (SELECT idHabitat FROM Habitats WHERE habitatName = ?), 
+                    ?, ?, ?, ?, ?, ?
+            );
+    `;
+    db.query(sqlInsert, [parkName, facTypeName, habitatName, facilityName, facilityDescription, facilityLocation, securityRating, facilityPhoto, facilityNote], (err, result)=> {
+        console.log(result);
+        res.send(result);
+    });
+});
+
+// Update facility
+app.put('/api/updateFacilities', (req, res) =>{
+    const parkName = req.body.parkName
+    const facTypeName = req.body.facTypeName
+    const habitatName = req.body.habitatName
+    const facilityName = req.body.facilityName
+    const facilityDescription = req.body.facilityDescription
+    const facilityLocation = req.body.facilityLocation
+    const securityRating = req.body.securityRating
+    const facilityPhoto = req.body.facilityPhoto
+    const facilityNote = req.body.facilityNote
+    const idFacility = req.body.idFacility
+    const sqlUpdate = `
+    UPDATE Facilities
+    SET     idPark =                (SELECT idPark FROM Parks WHERE parkName = ?),
+            idFacilityType =        (SELECT idFacilityType FROM FacilityTypes WHERE facTypeName = ?),
+            idHabitat =             (SELECT idHabitat FROM Habitats WHERE habitatName = ?),
+            facilityName = ?, facilityDescription = ?, facilityLocation = ?, 
+            securityRating = ?, facilityPhoto = ?, facilityNote = ?
+    WHERE idFacility = ?;
+    `;
+    db.query(sqlUpdate, [parkName, facTypeName, habitatName, facilityName, facilityDescription, facilityLocation, securityRating, facilityPhoto, facilityNote, idFacility], (err, result)=> {
+        if (err) console.log(err); else console.log(result);
+        res.send(result);
+    });
+});
+
+// Delete Facility
+app.delete('/api/deleteFacilities/:idFacility', (req, res) =>{
+    const idFacility = req.params.idFacility
+    const sqlDelete = `
+    DELETE
+    FROM Facilities
+    WHERE idFacility = ?;
+    `;
+    db.query(sqlDelete, idFacility, (err, result)=> {
+        if (err) console.log(err);
+        res.send(result);
+    });
+});
+
+
+
 //////////////////////////////
 // Biological Asset Queries //
 //////////////////////////////
@@ -562,6 +654,45 @@ app.get('/api/getJobClassificationsList', (req, res) =>{
     SELECT jobTitle
     FROM JobClassifications
     ORDER BY jobTitle ASC;
+    `;
+    db.query(sqlRead, (err, result)=> {
+        console.log(result);
+        res.send(result);
+    });
+});
+
+// Parks Selector
+app.get('/api/getParksList', (req, res) =>{
+    const sqlRead = `
+    SELECT parkName
+    FROM Parks
+    ORDER BY parkName ASC;
+    `;
+    db.query(sqlRead, (err, result)=> {
+        console.log(result);
+        res.send(result);
+    });
+});
+
+// Habitats Selector
+app.get('/api/getHabitatsList', (req, res) =>{
+    const sqlRead = `
+    SELECT habitatName
+    FROM Habitats
+    ORDER BY habitatName ASC;
+    `;
+    db.query(sqlRead, (err, result)=> {
+        console.log(result);
+        res.send(result);
+    });
+});
+
+// Facility Types Selector
+app.get('/api/getFacilityTypesList', (req, res) =>{
+    const sqlRead = `
+    SELECT facTypeName
+    FROM FacilityTypes
+    ORDER BY idFacilityType ASC;
     `;
     db.query(sqlRead, (err, result)=> {
         console.log(result);
