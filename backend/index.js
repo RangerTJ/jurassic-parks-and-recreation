@@ -310,6 +310,98 @@ app.delete('/api/deletetAssignedTasks/:idAssignedTask', (req, res) =>{
 });
 
 
+//////////////////////////
+//  Facilities Queries  //
+//////////////////////////
+
+// READ
+app.get('/api/getFacilities', (req, res) =>{
+    const sqlRead = `
+    SELECT  Facilities.idFacility, Parks.parkName, FacilityTypes.facTypeName, Habitats.habitatName,
+            Facilities.facilityName, Facilities.facilityDescription, Facilities.facilityLocation, 
+            Facilities.securityRating, Facilities.facilityPhoto, Facilities.facilityNote
+    FROM Facilities
+    LEFT JOIN Parks ON Facilities.idPark = Parks.idPark
+    LEFT JOIN FacilityTypes ON Facilities.idFacilityType = FacilityTypes.idFacilityType
+    LEFT JOIN Habitats ON Facilities.idHabitat = Habitats.idHabitat
+    ORDER BY idFacility ASC;
+    `;
+    db.query(sqlRead, (err, result)=> {
+        console.log(result);
+        res.send(result);
+    });
+});
+
+// Add
+app.post('/api/insertFacilities', (req, res) =>{
+    const parkName = req.body.parkName
+    const facTypeName = req.body.facTypeName
+    const habitatName = req.body.habitatName
+    const facilityName = req.body.facilityName
+    const facilityDescription = req.body.facilityDescription
+    const facilityLocation = req.body.facilityLocation
+    const securityRating = req.body.securityRating
+    const facilityPhoto = req.body.facilityPhoto
+    const facilityNote = req.body.facilityNote
+    const sqlInsert = `
+    INSERT INTO Facilities              (idPark, idFacilityType, idHabitat, facilityName, facilityDescription, 
+                                        facilityLocation, securityRating, facilityPhoto, facilityNote)
+    VALUES  (       
+                    (SELECT idPark FROM Parks WHERE parkName = ?), 
+                    (SELECT idFacilityType FROM FacilityTypes WHERE facTypeName = ?), 
+                    (SELECT idHabitat FROM Habitat WHERE habitatName = ?), 
+                    ?, ?, ?, ?, ?, ?
+            );
+    `;
+    db.query(sqlInsert, [parkName, facTypeName, habitatName, facilityName, facilityDescription, facilityLocation, securityRating, facilityPhoto, facilityNote], (err, result)=> {
+        console.log(result);
+        res.send(result);
+    });
+});
+
+// Update
+app.put('/api/updateFacilities', (req, res) =>{
+    const parkName = req.body.parkName
+    const facTypeName = req.body.facTypeName
+    const habitatName = req.body.habitatName
+    const facilityName = req.body.facilityName
+    const facilityDescription = req.body.facilityDescription
+    const facilityLocation = req.body.facilityLocation
+    const securityRating = req.body.securityRating
+    const facilityPhoto = req.body.facilityPhoto
+    const facilityNote = req.body.facilityNote
+    const idFacility = req.body.idFacility
+    const sqlUpdate = `
+    UPDATE Facilities
+    SET     idPark =                (SELECT idPark FROM Parks WHERE parkName = ?),
+            idFacilityType =        (SELECT idFacilityType FROM FacilityTypes WHERE facTypeName = ?),
+            idHabitat =             (SELECT idHabitat FROM Habitats WHERE habitatName = ?),
+            facilityName = ?, facilityDescription = ?, facilityLocation = ?, 
+            securityRating = ?, facilityPhoto = ?, facilityNote = ?
+    WHERE idFacility = ?;
+    `;
+    db.query(sqlUpdate, [parkName, facTypeName, habitatName, facilityName, facilityDescription, facilityLocation, securityRating, facilityPhoto, facilityNote, idFacility], (err, result)=> {
+        if (err) console.log(err); else console.log(result);
+        res.send(result);
+    });
+});
+
+// Delete
+app.delete('/api/deleteFacilities/:idFacility', (req, res) =>{
+    const idFacility = req.params.idFacility
+    const sqlDelete = `
+    DELETE
+    FROM Facilities
+    WHERE idFacility = ?;
+    `;
+    db.query(sqlDelete, idFacility, (err, result)=> {
+        if (err) console.log(err);
+        res.send(result);
+    });
+});
+
+
+
 //////////////////////////////
 // Biological Asset Queries //
 //////////////////////////////
