@@ -17,7 +17,7 @@ function EmployeesUpdateForm ({hostURL}) {
     const { id, oldJobTitle, oldLastName, oldFirstName, oldEmployeeUsername, oldHourlyWage, oldEmployeePhone, oldEmployeeEmail, oldEmployeeRadio, oldEmployeePhoto, oldEmployeeNote} = location.state;
 
     // Employee Update SQL Endpoint
-    const updateEmployeeTasksURL = hostURL + '/api/updateEmployees';
+    const updateEmployeesURL = hostURL + '/api/updateEmployees';
     const navTo = useNavigate();
 
     // Emp Task States for the Form
@@ -49,7 +49,7 @@ function EmployeesUpdateForm ({hostURL}) {
     // UPDATE - Submit Changes to a Bio Asset then return to Asset home (hours/cost can be zero'd in case they need to be cleared for an entry error)
     const update = () => {
         if (jobTitle && lastName && firstName && employeeUsername && employeePhone && employeeEmail) {
-        Axios.put(updateEmployeeTasksURL, {
+        Axios.put(updateEmployeesURL, {
             jobTitle: jobTitle,
             lastName: lastName,
             firstName: firstName,
