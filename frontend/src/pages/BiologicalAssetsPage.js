@@ -35,9 +35,9 @@ function BiologicalAssetsPage ({hostURL}) {
 
     // READ Asset Habitat Alerts
     useEffect(()=> {
-    Axios.get(checkBiologicalAssetsHabitatsURL).then((response)=> {
-        setAssetHabMismatchList(response.data)
-        console.log(response.data)
+        Axios.get(checkBiologicalAssetsHabitatsURL).then((response)=> {
+            setAssetHabMismatchList(response.data)
+            console.log(response.data)
         })
     }, [])
 
@@ -54,27 +54,30 @@ function BiologicalAssetsPage ({hostURL}) {
         speciesFilter();
     }, [species]);
 
+
     // DELETE - Deletes target bio asset and refreshes all 3 tables
-    const delBiologicalAsset = (delID) => {
-        if (window.confirm(`Are you sure you want to remove Asset #${delID}?`)) {
-        Axios.delete(deleteBiologicalAssetsURL + delID)
-        .then(() => {Axios.get(getBiologicalAssetsURL)
-        .then((response) => {setBiologicalAssetList(response.data);
-            console.log(response.data)})
-        .then(() => {Axios.get(checkBiologicalAssetsHabitatsURL)
-        .then((response) => {setAssetHabMismatchList(response.data);
-            console.log(response.data)})
-        .then(() => {Axios.get(checkBiologicalAssetsSecurityURL)
-        .then((response) => {setAssetSecMismatchList(response.data);
-            console.log(response.data)})
-        .then(alert(`Biological Asset #${delID} has been removed from the database.`)
-            );
-          });
-        });
-      });
-     }; 
+    const delBiologicalAsset = async (delID) => {
+        try {
+            if (window.confirm(`Are you sure you want to remove Asset #${delID}?`)) {
+                await Axios.delete(deleteBiologicalAssetsURL + delID);
+                
+                const mainViewResponse = await Axios.get(getBiologicalAssetsURL);
+                setBiologicalAssetList(mainViewResponse.data);
+                console.log(mainViewResponse.data);
+        
+                const habMismatchResponse = await Axios.get(checkBiologicalAssetsHabitatsURL);
+                setAssetHabMismatchList(habMismatchResponse.data);
+                console.log(habMismatchResponse.data);
+        
+                const securityMismatchResponse = await Axios.get(checkBiologicalAssetsSecurityURL);
+                setAssetSecMismatchList(securityMismatchResponse.data);
+                console.log(securityMismatchResponse.data);
+        
+                alert(`Biological Asset #${delID} has been removed from the database.`);
+            }} catch (error) {
+                console.error('Error deleting biological asset.', error);
+        }
     };
-    // Lol at all the parenthesis. No idea how to clean that up or make it look consistent. Just stack 'em?
 
     // READ Apply Species Filter to Bio Asset Table
     const speciesFilter = async () => {
@@ -87,18 +90,18 @@ function BiologicalAssetsPage ({hostURL}) {
                 setBiologicalAssetList(response.data);
                 console.log(response.data);
             } catch (error) {
-                console.error('Error!', error);
+                console.error('Error applying the filter to the View table.', error);
             }
         }
     }
-
+    
     // Fully Populate the Bio Asset List (without filters)
     const getAllBioAssets = async ()=> {
         try {
             const response = await Axios.get(getBiologicalAssetsURL)
             setBiologicalAssetList(response.data)
         } catch (error) {
-            console.error('Error!', error);
+            console.error('Error populating the view table.', error);
         }
     }
 

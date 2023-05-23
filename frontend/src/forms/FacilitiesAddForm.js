@@ -29,24 +29,28 @@ function FacilitiesAddForm ({hostURL}) {
     const [facTypeName, setFacTypeName] = useState('');
 
     // CREATE - Insert New Bio Asset then return to asset home (only if all required state variables are not null)
-    const submit = () => {
-        if (parkName && facTypeName && facilityLocation && securityRating) {
-        Axios.post(createFacilitiesURL, {
-            parkName: parkName,
-            facilityName: facilityName,
-            facTypeName: facTypeName,
-            habitatName: habitatName,
-            facilityLocation: facilityLocation,
-            securityRating: securityRating,
-            facilityPhoto: facilityPhoto,
-            facilityDescription: facilityDescription,
-            facilityNote: facilityNote,
-        });
-        alert(`${facilityName} has been added to the database!`);
-        navTo('/Facilities');
-        } else {
-            alert("Please fill out all required fields and try again.")
-        };
+    const submit = async () => {
+        try {
+            if (parkName && facTypeName && facilityLocation && securityRating) {
+                await Axios.post(createFacilitiesURL, {
+                    parkName: parkName,
+                    facilityName: facilityName,
+                    facTypeName: facTypeName,
+                    habitatName: habitatName,
+                    facilityLocation: facilityLocation,
+                    securityRating: securityRating,
+                    facilityPhoto: facilityPhoto,
+                    facilityDescription: facilityDescription,
+                    facilityNote: facilityNote,
+                });
+                alert(`${facilityName} has been added to the database!`);
+                navTo('/Facilities');
+                } else {
+                    alert("Please fill out all required fields and try again.")
+                }
+        } catch(error) {
+                console.error('Error inserting facility.', error)
+        }
     };
 
     return (

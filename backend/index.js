@@ -409,7 +409,7 @@ app.delete('/api/deleteFacilities/:idFacility', (req, res) =>{
 // READ List All Assets
 app.get('/api/getBiologicalAssets', (req, res) =>{
     const sqlRead = `
-    SELECT BiologicalAssets.idBiologicalAsset, BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName 
+    SELECT BiologicalAssets.idBiologicalAsset, BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName, Species.threatLevel 
     FROM BiologicalAssets
     JOIN Species ON BiologicalAssets.idSpecies = Species.idSpecies
     JOIN Facilities ON BiologicalAssets.idFacility = Facilities.idFacility
