@@ -48,22 +48,29 @@ function EmployeesPage ({hostURL}) {
     }, [])
 
     // DELETE - Deletes target bio asset and refreshes all 3 tables
-    const delEmployee = (delID) => {
-        if (window.confirm(`Are you sure you want to remove Employee #${delID}?`)) {
-        Axios.delete(deleteEmployeesURL + delID)
-        .then(() => {Axios.get(getEmployeesURL)
-        .then((response) => {setEmployeesList(response.data);
-            console.log(response.data)})
-        .then(alert(`Employee #${delID} has been removed from the database.`)
-            );
-          });
-     }; 
+    const delEmployee = async (delID) => {
+        try {
+            if (window.confirm(`Are you sure you want to remove Employee #${delID}?`)) {
+                await Axios.delete(deleteEmployeesURL + delID);
+                
+                const mainViewResponse = await Axios.get(getEmployeesURL);
+                setEmployeesList(mainViewResponse.data);
+                console.log(mainViewResponse.data);
+        
+                alert(`Employee #${delID} has been removed from the database.`);
+            }} catch (error) {
+                console.error('Error deleting employee.', error);
+        }
     };
 
     //Populate Employee List
-    const getEmployees = ()=> {
-        Axios.get(getEmployeesURL)
-        .then((response)=> {setEmployeesList(response.data)})
+    const getEmployees = async ()=> {
+        try {
+            const response = await Axios.get(getEmployeesURL)
+            setEmployeesList(response.data)
+        } catch (error) {
+            console.error('Error populating the view table.', error);
+        }
     }
 
     // UPDATE Primer: Passes an object containing "current" (old) attributes to the useNavigate() function, navTo(), to the edit page.

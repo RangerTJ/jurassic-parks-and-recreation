@@ -33,7 +33,7 @@ function BiologicalAssetsUpdateForm ({hostURL}) {
     }, [])
 
     // UPDATE - Submit Changes to a Bio Asset then return to Asset home
-    const updateBioAsset = async () => {
+    const update = async () => {
         try {
             if (species && name && facility) {
                 await Axios.put(updateBiologicalAssetsURL, {
@@ -86,7 +86,7 @@ function BiologicalAssetsUpdateForm ({hostURL}) {
                     </fieldset>
                 </form>
                 <div>
-                    <p><button onClick={updateBioAsset}>Save</button></p>
+                    <p><button onClick={update}>Save</button></p>
                 </div>
             </article>
         </>
