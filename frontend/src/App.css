@@ -387,9 +387,23 @@ img {
 }
 
 .tableButton {
-  margin: 10px 0px 10px 0px;
+  margin: 0px 0px 0px 0px;
   justify-content: center;
   vertical-align: middle;
+  font-size: 22px;
+  text-shadow: none;
+  box-shadow: none;
+  margin: 0;
+}
+
+.buttonHolder {
+  flex:none;
+  width: 0px;
+}
+
+.demoRex {
+  font-family: var(--jpFont);
+  font-size: large;
 }
 
 /* Mimic default P format for spacing selectors so HTML doesn't get angry about DIV in P elements */

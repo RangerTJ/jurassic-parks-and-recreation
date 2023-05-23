@@ -130,6 +130,14 @@ function BiologicalAssetsPage ({hostURL}) {
                 </div>
             </article>
             <article>
+                <h3>Edit and Delete</h3>
+                <p>
+                    To edit or delete any entity within the database, simply click the "Edit" or "<span className="demoRex">*</span>"
+                    buttons on the left side of the asset's corresponding column to enter the edit menu or delete
+                    it from the database, respectively.
+                </p>
+            </article>
+            <article>
                 <h3>Security Risks</h3>
                 <p>
                     The table below shows detected security risks where an asset's current threat level is greater than its current facility's security rating.
@@ -140,35 +148,36 @@ function BiologicalAssetsPage ({hostURL}) {
                     should be heavily prioritized over less severe misalignments. For example, a severity of 1 implies that under worst-case conditions, an asset could 
                     escape containment. A severity of 9 indicates that the asset could break out of containment at any time, and that they are incredibly likely to do so.
                 </p>
-                <p>
-                    Click the T-Rex fossil button (* in some browsers) in the corresponding row to "fix" (update) the corresponding Biological Asset record, 
-                    once the placement issue is resolved.
-                </p>
                 <div className="scrollableTable">
                     <table>
                         <tbody>
                         <tr>
-                            <th>ID</th>
-                            <th>Name</th>
+                            <th>Edit</th>
+                            <th>Asset</th>
                             <th>Species</th>
                             <th>Facility</th>
                             <th>Facility Security</th>
                             <th>Asset Threat</th>
                             <th>Severity</th>
-                            <th>Fix</th> 
+                             
                         </tr>
                         {/* NEED TO UPDATE QUERY TO GET ID TO - SO UPDATE POPULATES RIGHT */}
                         {assetSecMismatchList.map((val, index)=> {
                             return (
                                 <tr key={index}>
-                                    <td>{val.idBiologicalAsset}</td>
-                                    <td>{val.bioAssetName}</td>
+                                    <td>
+                                        <div><button className="tableButton" onClick={()=> {navToUpdate(val)}}>Edit</button></div>
+                                        <div><button className="tableButton" onClick={()=> {delBiologicalAsset(val.idBiologicalAsset)}}>*</button></div>
+                                    </td>
+                                    <td>
+                                        <div>ID #{val.idBiologicalAsset}</div>
+                                        <div><strong>{val.bioAssetName}</strong></div>
+                                    </td>
                                     <td>{val.speciesName}</td>
                                     <td>{val.facilityName}</td>
                                     <td>{val.securityRating}</td>
                                     <td>{val.threatLevel}</td>
                                     <td>{val.severity}</td>
-                                    <td><button onClick={()=> {navToUpdate(val)}}>*</button></td>
                                 </tr>
                             )}
                         )}
@@ -186,34 +195,36 @@ function BiologicalAssetsPage ({hostURL}) {
                     While not as critical as a security mismatch, it is still important that assets are assigned to appropriate habitats to ensure that they
                     are happy and healthy.
                 </p>
-                <p>
-                    Click the T-Rex fossil button (* in some browsers) in the corresponding row to "fix" (update) the corresponding Biological Asset record, 
-                    once the placement issue is resolved.
-                </p>
                 <div className="scrollableTable">
                     <table>
                         <tbody>
                         <tr>
-                            <th>ID</th>
-                            <th>Name</th>
+                            <th>Edit</th>
+                            <th>Asset</th>
                             <th>Species</th>
                             <th>Facility</th>
-                            <th>Current Habitat</th>
-                            <th>Needed Habitat</th>
-                            <th>Fix</th>
+                            <th>Habitat Misalignment</th>
                         </tr>
                         {/* NEED TO UPDATE QUERY TO GET ID TO - SO UPDATE POPULATES RIGHT */}
                         {assetHabMismatchList.map((val, index)=> {
                             const filteredHab = val.currentHabitat ? val.currentHabitat : "WARNING: NOT AN ENCLOSURE";
                             return (
                                 <tr key={index}>
-                                    <td>{val.idBiologicalAsset}</td>
-                                    <td>{val.bioAssetName}</td>
+                                    <td>
+                                        <div><button className="tableButton" onClick={()=> {navToUpdate(val)}}>Edit</button></div>
+                                        <div><button className="tableButton" onClick={()=> {delBiologicalAsset(val.idBiologicalAsset)}}>*</button></div>
+                                    </td>
+                                    <td>
+                                        <div>ID #{val.idBiologicalAsset}</div>
+                                        <div><strong>{val.bioAssetName}</strong></div>
+                                    </td>
                                     <td>{val.speciesName}</td>
                                     <td>{val.facilityName}</td>
-                                    <td>{filteredHab}</td>
-                                    <td>{val.needsHabitat}</td>
-                                    <td><button onClick={()=> {navToUpdate(val)}}>*</button></td>
+                                    <td>
+                                        <div>Current: {filteredHab}</div>
+                                        <div>Needs: {val.needsHabitat}</div>
+                                        <div><strong></strong></div>
+                                    </td>
                                 </tr>
                             )}
                         )}
@@ -226,33 +237,34 @@ function BiologicalAssetsPage ({hostURL}) {
                 <p>
                     The table below shows existing information for Biological Assets entities and includes
                     buttons to update or delete them. You can use the species selector below to filter for
-                    a specific species, then hit "Apply" for the filter to take effect. Select "None" and
-                    apply it to remove the species filter and view the entire database of biological assets. 
+                    a specific species. Select "None" to remove the species filter and view the entire 
+                    database of biological assets. 
                 </p>
                 <div className="selectorP">
-                    <SelectorSpecies hostURL={hostURL} setSpecies={setSpecies} species={species} isRequired={false}/> <button onClick={speciesFilter}>Apply</button>
+                    <SelectorSpecies hostURL={hostURL} setSpecies={setSpecies} species={species} isRequired={false}/>
                 </div>
                 <div className="scrollableTable">
                     <table>
                         <tbody>
                         <tr>
-                            <th>ID</th>
-                            <th>Name</th>
+                            <th className="buttonHolder">Edit</th>
+                            <th>Asset</th>
                             <th>Species</th>
                             <th>Home Facility</th>
-
-                            <th>Update</th>
-                            <th>Delete</th>
                         </tr>
                         {biologicalAssetList.map((val, index)=> {
                             return (
                                 <tr key={index}>
-                                    <td>{val.idBiologicalAsset}</td>
-                                    <td>{val.bioAssetName}</td>
+                                    <td>
+                                        <div><button className="tableButton" onClick={()=> {navToUpdate(val)}}>Edit</button></div>
+                                        <div><button className="tableButton" onClick={()=> {delBiologicalAsset(val.idBiologicalAsset)}}>*</button></div>
+                                    </td>
+                                    <td>
+                                        <div>ID #{val.idBiologicalAsset}</div>
+                                        <div><strong>{val.bioAssetName}</strong></div>
+                                    </td>
                                     <td>{val.speciesName}</td>
                                     <td>{val.facilityName}</td>
-                                    <td><button onClick={()=> {navToUpdate(val)}}>Update</button></td>
-                                    <td><button onClick={()=> {delBiologicalAsset(val.idBiologicalAsset)}}>Delete</button></td>
                                 </tr>
                             )}
                         )}
