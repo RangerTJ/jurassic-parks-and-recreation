@@ -38,7 +38,7 @@ const SelectorFacilities = ({preSelected, isRequired, autoFocus, hostURL, facili
         {/* Set default option then map query results to populate the select menu */}
         <option value="">None (Select a Facility)</option>
         {list.map((val, index) => {
-          return <option key={index} value={val.facilityName}>{val.facilityName} (Security: {val.securityRating})</option>;
+          return <option key={index} value={val.facilityName}>{val.parkName}, {val.facilityName} (Security: {val.securityRating})</option>;
         })}
       </select>
       {/* <p>{preSelected},{selected} DEBUG STUFF</p> */}

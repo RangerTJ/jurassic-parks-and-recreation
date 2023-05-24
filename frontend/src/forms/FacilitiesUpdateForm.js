@@ -79,7 +79,6 @@ function FacilitiesUpdateForm ({hostURL}) {
                 <p>
                     Make changes to this Facility's record and click "Save" to retain them.
                 </p>
-                Debug: {facTypeName}, {parkName}, {facilityName}, {habitatName}, {facilityLocation}, {securityRating}, {facilityPhoto}, {facilityDescription}, {facilityNote}
                 <form>
                     <fieldset>
                         <legend>Information</legend>

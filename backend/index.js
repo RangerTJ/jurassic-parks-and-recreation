@@ -627,9 +627,10 @@ app.get('/api/getSpeciesList', (req, res) =>{
 // Facility Selector
 app.get('/api/getFacilitiesList', (req, res) =>{
     const sqlRead = `
-    SELECT facilityName, securityRating
+    SELECT facilityName, securityRating, parkName
     FROM Facilities
-    ORDER BY facilityName, securityRating ASC;
+    JOIN Parks ON Facilities.idPark = Parks.idPark
+    ORDER BY parkName, facilityName ASC;
     `;
     db.query(sqlRead, (err, result)=> {
         console.log(result);
