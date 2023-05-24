@@ -115,6 +115,8 @@ function EmployeeTasksPage ({hostURL}) {
                         {employeeTaskList.map((val, index)=> {
                             // Convert cost to USD or set to 0 USD if there is a null entry
                             const taskCost = val.empTaskCost ? val.empTaskCost.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) : '$0.00';
+                            const startDateAbridged = val.empTaskStart.substring(0, 10);
+                            const endDateAbridged = val.empTaskEnd.substring(0, 10);
                             return (
                                 <tr key={index}>
                                     <td>
@@ -134,8 +136,8 @@ function EmployeeTasksPage ({hostURL}) {
                                     <td className="tableDescription">{taskCost}</td>
                                     <td className="tableDescription">
                                         <ul>
-                                            <li><strong>Start:</strong> {val.empTaskStart}</li>
-                                            <li><strong>End:</strong> {val.empTaskEnd}</li>
+                                            <li><strong>Start:</strong> {startDateAbridged}</li>
+                                            <li><strong>End:</strong> {endDateAbridged}</li>
                                         </ul>
                                     </td>
                                 </tr>
