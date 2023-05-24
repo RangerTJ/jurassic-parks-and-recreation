@@ -239,7 +239,7 @@ app.delete('/api/deleteEmployeeTasks/:idEmployeeTask', (req, res) =>{
 //////////////////////////////
 
 // READ - Select Assigned Tasks
-app.get('/api/getAssignedTasks', (req, res) => {
+app.get('/api/getTasksAssignedList', (req, res) => {
     const sqlRead = `
     SELECT  TasksAssigned.idTaskAssigned, TasksAssigned.taskName, Facilities.facilityName, BiologicalAssets.idBiologicalAsset, Species.speciesName,
             TasksAssigned.taskDescription, TasksAssigned.taskStart, TasksAssigned.taskEnd
@@ -256,7 +256,9 @@ app.get('/api/getAssignedTasks', (req, res) => {
 });
 
 //CREATE - Assigned Task Entry
-app.post('/api/insertAssignedTasks', (req, res) => {
+app.post('/api/insertTasksAssigned', (req, res) => {
+    const facilityName = req.body.facility
+    const bioAssetName = req.body.bioAssetName
     const taskName = req.body.taskName
     const taskDescription = req.body.taskDescription
     const taskStart = req.body.taskStart
@@ -269,45 +271,47 @@ app.post('/api/insertAssignedTasks', (req, res) => {
                     ?, ?, ?, ?
             );
         `;
-    db.query(sqlInsert, [taskName, taskDescription, taskStart, taskEnd], (err, result) => {
+    db.query(sqlInsert, [facilityName, bioAssetName, taskName, taskDescription, taskStart, taskEnd], (err, result) => {
         console.log(result);
         res.send(result);
     });
 });
 
-// UPDATE Employee Task Entry
-app.put('/api/updateAssignedTasks', (req, res) =>{
-    const taskName = req.body.taskName
-    const taskDescription = req.body.taskDescription
-    const taskStart = req.body.taskStart
-    const taskEnd = req.body.taskEnd
-    const sqlUpdate = `
-    UPDATE AssignedTasks
-    SET     idFacility =            (SELECT idFacility FROM Facilities WHERE facilityName = ?),
-            idBiologicalAsset =     (SELECT idBiologicalAsset FROM BiologicalAssets WHERE bioAssetName = ?),
-            taskname = ?, taskDescription = ?,
-            taskStart = ?, taskEnd = ?
-    WHERE idAssignedTask = ?;
-    `;
-    db.query(sqlUpdate, [taskName, taskDescription, taskStart, taskEnd], (err, result)=> {
-        if (err) console.log(err); else console.log(result);
-        res.send(result);
-    });
-});
 
 // DELETE Assigned Task
-app.delete('/api/deletetAssignedTasks/:idAssignedTask', (req, res) =>{
-    const idAssignedTask = req.params.idAssignedTask
+app.delete('/api/deleteTasksAssigned/:idTaskAssigned', (req, res) =>{
+    const idTaskAssigned = req.params.idTaskAssigned
     const sqlDelete = `
     DELETE
-    FROM AssignedTasks
-    WHERE idAssignedTask = ?;
+    FROM TasksAssigned
+    WHERE idTaskAssigned = ?;
     `;
-    db.query(sqlDelete, idAssignedTask, (err, result)=> {
+    db.query(sqlDelete, idTaskAssigned, (err, result)=> {
         if (err) console.log(err);
         res.send(result);
     });
 });
+
+/* To work on after CRUD complete
+READ Tasks Assigned Filtered by Category
+app.post('/api/filterTasksByCategory', (req, res) =>{
+    const categoryName = req.body.categoryName
+    const sqlRead = `
+    SELECT  TasksAssigned.idTaskAssigned, TasksAssigned.taskName, Facilities.facilityName, BiologicalAssets.idBiologicalAsset, Species.speciesName,
+            TasksAssigned.taskDescription, TasksAssigned.taskStart, TasksAssigned.taskEnd
+    FROM TasksAssigned
+    LEFT JOIN Facilities ON TasksAssigned.idFacility = Facilities.idFacility
+    LEFT JOIN BiologicalAssets ON TasksAssigned.idBiologicalAsset = BiologicalAssets.idBiologicalAsset
+    LEFT JOIN Species ON BiologicalAssets.idSpecies = Species.idSpecies
+    WHERE TasksAssigned.categoryName = ?
+    ORDER BY TasksAssigned.idTaskAssigned ASC;
+    `;
+    db.query(sqlRead, categoryName, (err, result)=> {
+        console.log(result);
+        res.send(result);
+    });
+}); */
+
 
 
 //////////////////////////
