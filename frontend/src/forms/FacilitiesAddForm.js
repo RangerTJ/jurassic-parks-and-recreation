@@ -61,7 +61,6 @@ function FacilitiesAddForm ({hostURL}) {
                     To add a new Facility to the database, enter values for its attributes below
                     and click the "Add Facility" button.
                 </p>
-                Debug: {facTypeName}, {parkName}, {facilityName}, {habitatName}, {facilityLocation}, {securityRating}, {facilityPhoto}, {facilityDescription}, {facilityNote}
                 <form>
                     <fieldset>
                         <legend>Information</legend>

@@ -36,7 +36,7 @@ import FacilitiesUpdateForm from "./forms/FacilitiesUpdateForm";
 
 // React Application
 function App() {
-    const hostURL = 'http://localhost:' + process.env.REACT_APP_BACKEND_PORT;
+    const hostURL = process.env.REACT_APP_FRONTEND_URL + process.env.REACT_APP_BACKEND_PORT;
     
   // HTML Rendering Structure
   return (

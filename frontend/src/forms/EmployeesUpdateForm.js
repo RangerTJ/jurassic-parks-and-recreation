@@ -83,7 +83,6 @@ function EmployeesUpdateForm ({hostURL}) {
                 <form>
                     <fieldset>
                         <legend>Update Employee #{id}</legend>
-                        <p>DEBUG: {lastName}</p>
                         <div className="selectorP">
                                 <div><label htmlFor="lastName">Last Name</label></div>
                                 <input 
