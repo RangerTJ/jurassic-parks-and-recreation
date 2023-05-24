@@ -277,6 +277,29 @@ app.post('/api/insertTasksAssigned', (req, res) => {
     });
 });
 
+// UPDATE Task Entry
+app.put('/api/updateTasksAssigned', (req, res) =>{
+
+    const facilityName = req.body.facilityName
+    const bioAssetName = req.body.bioAssetName
+    const taskName = req.body.taskName
+    const taskDescription = req.body.taskDescription
+    const taskStart = req.body.taskStart
+    const taskEnd = req.body.taskEnd
+    const idTaskAssigned = req.body.idTaskAssigned
+    const sqlUpdate = `
+    UPDATE TasksAssigned
+    SET     idFacility =            (SELECT idFacility FROM Facilities WHERE facilityName = ?),
+            idBiologicalAsset =     (SELECT idBiologicalAsset FROM BiologicalAssets WHERE bioAssetName = ?),
+            taskname = ?, taskDescription = ?,
+            taskStart = ?, taskEnd = ?
+    WHERE idTaskAssigned = ?;
+    `;
+    db.query(sqlUpdate, [facilityName, bioAssetName, taskName, taskDescription, taskStart, taskEnd, idTaskAssigned], (err, result)=> {
+        if (err) console.log(err); else console.log(result);
+        res.send(result);
+    });
+});
 
 // DELETE Assigned Task
 app.delete('/api/deleteTasksAssigned/:idTaskAssigned', (req, res) =>{
