@@ -33,6 +33,8 @@ import EmployeesAddForm from "./forms/EmployeesAddForm";
 import EmployeesUpdateForm from "./forms/EmployeesUpdateForm";
 import FacilitiesAddForm from "./forms/FacilitiesAddForm";
 import FacilitiesUpdateForm from "./forms/FacilitiesUpdateForm";
+import TasksAssignedAddForm from "./forms/TasksAssignedAdd"; // Done
+import TasksAssignedUpdateForm from "./forms/TasksAssignedUpdate";
 
 // React Application
 function App() {
@@ -51,6 +53,7 @@ function App() {
         <section>
             {/* Load different page content here depending on route below */}
             <Routes>
+
                 {/* Primary Page Routes */}
                 <Route path="/" element={<HomePage hostURL={hostURL} />} />
                 <Route path="/Parks" element={<ParksPage hostURL={hostURL} />} />
@@ -75,6 +78,9 @@ function App() {
                 <Route path="/EmployeesUpdate" element={<EmployeesUpdateForm hostURL={hostURL} />} />
                 <Route path="/FacilitiesAdd" element={<FacilitiesAddForm hostURL={hostURL} />} />
                 <Route path="/FacilitiesUpdate" element={<FacilitiesUpdateForm hostURL={hostURL} />} />
+                <Route path="/TasksAssignedAdd" element={<TasksAssignedAddForm hostURL={hostURL} />} />
+                <Route path="/TasksAssignedUpdate" element={<TasksAssignedUpdateForm hostURL={hostURL} />} />
+
             </Routes>
         </section>
       </main>
