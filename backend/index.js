@@ -630,7 +630,7 @@ app.get('/api/getFacilitiesList', (req, res) =>{
     SELECT facilityName, securityRating, parkName
     FROM Facilities
     JOIN Parks ON Facilities.idPark = Parks.idPark
-    ORDER BY facilityName, securityRating ASC;
+    ORDER BY parkName, facilityName ASC;
     `;
     db.query(sqlRead, (err, result)=> {
         console.log(result);
