@@ -132,7 +132,7 @@ ORDER BY idEmployee ASC;
 
 -- SELECT TasksAssigned (Bio Asset ID'd by displaying actual asset ID# and Species, since may not have a bioAssetName)
 SELECT  TasksAssigned.idTaskAssigned, TasksAssigned.taskName, Facilities.facilityName, BiologicalAssets.idBiologicalAsset, Species.speciesName,
-        TasksAssigned.taskDescription, TasksAssigned.taskStart, TasksAssigned.taskEnd
+        TasksAssigned.taskDescription, TasksAssigned.taskStart, TasksAssigned.taskEnd, BiologicalAssets.bioAssetName
 FROM TasksAssigned
 -- Need to join TasksAssigned -> Facility -> Bio Asset -> Species
 LEFT JOIN Facilities ON TasksAssigned.idFacility = Facilities.idFacility

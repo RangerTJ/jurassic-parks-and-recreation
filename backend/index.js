@@ -243,7 +243,7 @@ app.delete('/api/deleteEmployeeTasks/:idEmployeeTask', (req, res) =>{
 app.get('/api/getTasksAssigned', (req, res) => {
     const sqlRead = `
     SELECT  TasksAssigned.idTaskAssigned, TasksAssigned.taskName, Facilities.facilityName, BiologicalAssets.idBiologicalAsset, Species.speciesName,
-            TasksAssigned.taskDescription, TasksAssigned.taskStart, TasksAssigned.taskEnd
+            TasksAssigned.taskDescription, TasksAssigned.taskStart, TasksAssigned.taskEnd, BiologicalAssets.bioAssetName
     FROM TasksAssigned
     LEFT JOIN Facilities ON TasksAssigned.idFacility = Facilities.idFacility
     LEFT JOIN BiologicalAssets ON TasksAssigned.idBiologicalAsset = BiologicalAssets.idBiologicalAsset
@@ -732,8 +732,9 @@ app.get('/api/getFacilityTypesList', (req, res) =>{
 // Biological Assets Selector
 app.get('/api/getBiologicalAssetsList', (req, res) => {
     const sqlRead = `
-    SELECT bioAssetName
+    SELECT BiologicalAssets.bioAssetName, BiologicalAssets.idBiologicalAsset, Species.speciesName
     FROM BiologicalAssets
+    JOIN Species ON BiologicalAssets.idSpecies = Species.idSpecies
     ORDER BY bioAssetName ASC;
     `;
     db.query(sqlRead, (err, result) => {

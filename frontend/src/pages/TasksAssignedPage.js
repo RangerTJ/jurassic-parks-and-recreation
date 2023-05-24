@@ -29,7 +29,7 @@ function TasksAssignedPage ({hostURL}) {
     const navToUpdate = (updateVal) => {
         const state = {
             oldFacilityName:            updateVal.facilityName,
-            oldBiologicalAsset:         updateVal.idBiologicalAsset,
+            oldBiologicalAsset:         updateVal.bioAssetName,
             oldTaskName:                updateVal.taskName,
             oldTaskDescription:         updateVal.taskDescription,
             oldTaskStart:               updateVal.taskStart,
@@ -64,7 +64,6 @@ function TasksAssignedPage ({hostURL}) {
             console.error('Error deleting Task.', error);
         }
     };
-
 
     // Render Webpage
     return (
@@ -105,12 +104,13 @@ function TasksAssignedPage ({hostURL}) {
                             <th>Task Name</th>
                             <th>Facility</th>
                             <th>Bio. Asset</th>  
-                            <th>Species</th>
                             <th>Description</th>
-                            <th>Start</th>
-                            <th>End</th>
+                            <th>Start/End</th>
                         </tr>
                         {tasksAssignedList.map((val, index) => {
+                            // TODO: Figure out syntax issues with this later
+                            // const startDateAbridged = val.taskStart.substring(0, 10);
+                            // const endDateAbridged = val.taskEnd.substring(0, 10);
                             return (
                                 <tr key={index}>
                                     <td>
@@ -120,11 +120,18 @@ function TasksAssignedPage ({hostURL}) {
                                     <td>{val.idTaskAssigned}</td>
                                     <td>{val.taskName}</td>
                                     <td>{val.facilityName}</td>
-                                    <td>{val.idBiologicalAsset}</td>
-                                    <td>{val.speciesName}</td>
-                                    <td>{val.taskDescription}</td>
-                                    <td>{val.taskStart}</td>
-                                    <td>{val.taskEnd}</td>
+                                    <td>
+                                        <div>ID #{val.idBiologicalAsset}</div>
+                                        <div><strong>{val.bioAssetName}</strong></div>
+                                        <div>{val.speciesName}</div>
+                                    </td>
+                                    <td className="tableDescription">{val.taskDescription}</td>
+                                    <td className="tableDescription">
+                                        <ul>
+                                            <li>Start: {val.taskStart}</li>
+                                            <li>End: {val.taskEnd}</li>
+                                        </ul>
+                                    </td>
                                 </tr>
                             )}
                         )}
