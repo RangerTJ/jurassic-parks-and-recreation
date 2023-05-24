@@ -240,7 +240,7 @@ app.delete('/api/deleteEmployeeTasks/:idEmployeeTask', (req, res) =>{
 //////////////////////////////
 
 // READ - Select Assigned Tasks
-app.get('/api/getTasksAssignedList', (req, res) => {
+app.get('/api/getTasksAssigned', (req, res) => {
     const sqlRead = `
     SELECT  TasksAssigned.idTaskAssigned, TasksAssigned.taskName, Facilities.facilityName, BiologicalAssets.idBiologicalAsset, Species.speciesName,
             TasksAssigned.taskDescription, TasksAssigned.taskStart, TasksAssigned.taskEnd
@@ -723,6 +723,19 @@ app.get('/api/getFacilityTypesList', (req, res) =>{
     ORDER BY idFacilityType ASC;
     `;
     db.query(sqlRead, (err, result)=> {
+        console.log(result);
+        res.send(result);
+    });
+});
+
+// Biological Assets Selector
+app.get('/api/getBiologicalAssetsList', (req, res) => {
+    const sqlRead = `
+    SELECT bioAssetName
+    FROM BiologicalAssets
+    ORDER BY bioAssetName ASC;
+    `;
+    db.query(sqlRead, (err, result) => {
         console.log(result);
         res.send(result);
     });

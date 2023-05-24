@@ -13,7 +13,7 @@ function TasksAssignedPage ({hostURL}) {
     const navTo = useNavigate();
 
     // TasksAssigned SQL Endpoints
-    const getTasksAssignedURL = hostURL + '/api/getTasksAssignedList';
+    const getTasksAssignedURL = hostURL + '/api/getTasksAssigned';
     const deleteTasksAssignedURL = hostURL + '/api/deleteTasksAssigned/';
 
     // TasksAssigned Table Functions
@@ -100,6 +100,7 @@ function TasksAssignedPage ({hostURL}) {
                     <table>
                         <tbody>
                         <tr>
+                            <th>Edit</th>
                             <th>ID</th>
                             <th>Task Name</th>
                             <th>Facility</th>
@@ -108,13 +109,14 @@ function TasksAssignedPage ({hostURL}) {
                             <th>Description</th>
                             <th>Start</th>
                             <th>End</th>
-
-                            <th>Update</th>
-                            <th>Delete</th>
                         </tr>
                         {tasksAssignedList.map((val, index) => {
                             return (
                                 <tr key={index}>
+                                    <td>
+                                        <div><button className="tableButton" onClick={()=> {navToUpdate(val)}}>Edit</button></div>
+                                        <div><button className="tableButton" onClick={()=> {delTaskAssigned(val.idTaskAssigned)}}>*</button></div>
+                                    </td>
                                     <td>{val.idTaskAssigned}</td>
                                     <td>{val.taskName}</td>
                                     <td>{val.facilityName}</td>
@@ -123,8 +125,6 @@ function TasksAssignedPage ({hostURL}) {
                                     <td>{val.taskDescription}</td>
                                     <td>{val.taskStart}</td>
                                     <td>{val.taskEnd}</td>
-                                    <td><button onClick={() => navToUpdate(val)}>Update</button></td>
-                                    <td><button onClick={() => delTaskAssigned(val.idTaskAssigned)}>Delete</button></td>
                                 </tr>
                             )}
                         )}
