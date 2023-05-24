@@ -81,6 +81,15 @@ function TasksAssignedPage ({hostURL}) {
             </article>
 
             <article>
+                <h3>Edit and Delete</h3>
+                <p>
+                    To edit or delete any entity within the database, simply click the "Edit" or "<span className="demoRex">*</span>"
+                    buttons on the left side of the asset's corresponding column to enter the edit menu or delete
+                    it from the database, respectively.
+                </p>
+            </article>
+
+            <article>
                 <h3>View Assigned Tasks</h3>
                 <p>
                     The table below shows existing information for Tasks Assigned entities (that is, tasks that have been assigned for fulfillment) and includes
