@@ -39,7 +39,7 @@ const SelectorBiologicalAssets = ({preSelected, isRequired, autoFocus, hostURL, 
         {/* Set default option then map query results to populate the select menu */}
         <option value="">None (Select a Biological Asset)</option>
         {list.map((val, index) => {
-          return <option key={index} value={val.bioAssetName}>{val.bioAssetName}</option>;
+          return <option key={index} value={val.bioAssetName}>#{val.idBiologicalAsset}: {val.bioAssetName} ({val.speciesName})</option>;
         })}
       </select>
     </>

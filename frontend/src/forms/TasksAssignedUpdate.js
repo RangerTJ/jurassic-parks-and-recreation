@@ -16,6 +16,10 @@ function TasksAssignedUpdateForm ({hostURL}) {
     const location = useLocation();
     const { oldFacilityName, oldBiologicalAsset, oldTaskName, oldTaskDescription, oldTaskStart, oldTaskEnd, id } = location.state;
 
+    // Clip off time part of dates so they can pre-populate date pickers (some data loss, but probably should have just done dates instead of datetime anyways)
+    const oldStartDateString = oldTaskStart.substring(0, 10);
+    const oldEndDateString = oldTaskEnd.substring(0, 10);
+
     // TasksAssigned SQL Endpoints
     const updateTasksAssignedURL = hostURL + '/api/updateTasksAssigned';
     const navTo = useNavigate();
@@ -34,8 +38,8 @@ function TasksAssignedUpdateForm ({hostURL}) {
         setBioAssetName(oldBiologicalAsset);
         setTaskName(oldTaskName)
         setTaskDescription(oldTaskDescription);
-        setTaskStart(oldTaskStart);
-        setTaskEnd(oldTaskEnd);
+        setTaskStart(oldStartDateString);
+        setTaskEnd(oldEndDateString);
     }, [])
 
     // UPDATE - Submit Changes to a Task then return to TasksAssigned page
@@ -96,6 +100,7 @@ function TasksAssignedUpdateForm ({hostURL}) {
                                     name="taskName"
                                     placeholder="Name of Task" 
                                     required
+                                    value={taskName}
                                     autoFocus 
                                     onChange={(e) => {setTaskName(e.target.value)}
                                     }/>
@@ -108,7 +113,8 @@ function TasksAssignedUpdateForm ({hostURL}) {
                                     id="taskDescription"
                                     name="taskDescription"
                                     placeholder="Describe the Task:" 
-                                    required 
+                                    required
+                                    value={taskDescription}
                                     onChange={(e) => {setTaskDescription(e.target.value)}
                                     }/>
                                 <div>Original: {oldTaskDescription}</div>
@@ -119,7 +125,8 @@ function TasksAssignedUpdateForm ({hostURL}) {
                                     type="date"
                                     id="taskStart"
                                     name="taskStart"
-                                    required 
+                                    required
+                                    value={taskStart}
                                     onChange={(e) => {setTaskStart(e.target.value)}
                                     }/>
                                 <div>Original: {oldTaskStart}</div>
@@ -129,7 +136,8 @@ function TasksAssignedUpdateForm ({hostURL}) {
                                 <input 
                                     type="date"
                                     id="taskEnd"
-                                    name="taskEnd" 
+                                    name="taskEnd"
+                                    value={taskEnd}
                                     onChange={(e) => {setTaskEnd(e.target.value)}
                                     }/>
                                 <div>Original: {oldTaskEnd}</div>
