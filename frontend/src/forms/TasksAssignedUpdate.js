@@ -16,11 +16,11 @@ function TasksAssignedUpdateForm ({hostURL}) {
     const location = useLocation();
     const { oldFacilityName, oldBiologicalAsset, oldTaskName, oldTaskDescription, oldTaskStart, oldTaskEnd, id } = location.state;
 
-    // BiologicalAssets SQL Endpoints
+    // TasksAssigned SQL Endpoints
     const updateTasksAssignedURL = hostURL + '/api/updateTasksAssigned';
     const navTo = useNavigate();
 
-    // Bio Asset States for the Form (2x arrays for select menus + 3x values to submit)
+    // Task Assigned States for the Form
     const [facility, setFacility] = useState('')
     const [bioAssetName, setBioAssetName] = useState('')
     const [taskName, setTaskName] = useState('')
@@ -38,7 +38,7 @@ function TasksAssignedUpdateForm ({hostURL}) {
         setTaskEnd(oldTaskEnd);
     }, [])
 
-    // UPDATE - Submit Changes to a Bio Asset then return to Asset home
+    // UPDATE - Submit Changes to a Task then return to TasksAssigned page
     const updateTaskAssigned = async () => {
 
         if (taskName && facility && taskDescription && taskStart) {
