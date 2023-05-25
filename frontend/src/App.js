@@ -35,6 +35,8 @@ import FacilitiesAddForm from "./forms/FacilitiesAddForm";
 import FacilitiesUpdateForm from "./forms/FacilitiesUpdateForm";
 import TasksAssignedAddForm from "./forms/TasksAssignedAdd"; // Done
 import TasksAssignedUpdateForm from "./forms/TasksAssignedUpdate";
+import ParksAddForm from "./forms/TasksAssignedAdd";
+import ParksUpdateForm from "./forms/ParksUpdateForm";
 
 // React Application
 function App() {
@@ -45,7 +47,7 @@ function App() {
     <div className="App">
       <BrowserRouter>
       <header>
-          <h1 className="headerBox">Jurassic Parks and Recreation <img className="headerLogo" src={logo} alt="Test"></img></h1>
+        <h1 className="headerBox">Jurassic Parks and Recreation <img className="headerLogo" src={logo} alt="Test"></img></h1>
         <p className="headerP">D.I.N.O<a className="whte_rbt_obj" href="https://markhjorth.github.io/nedry/">.</a></p>
       </header>
       <Nav />
@@ -80,6 +82,8 @@ function App() {
                 <Route path="/FacilitiesUpdate" element={<FacilitiesUpdateForm hostURL={hostURL} />} />
                 <Route path="/TasksAssignedAdd" element={<TasksAssignedAddForm hostURL={hostURL} />} />
                 <Route path="/TasksAssignedUpdate" element={<TasksAssignedUpdateForm hostURL={hostURL} />} />
+                <Route path="/ParksAdd" element={<ParksAddForm hostURL={hostURL} />} />
+                <Route path="/ParksUpdate" element={<ParksUpdateForm hostURL={hostURL} />} />
 
             </Routes>
         </section>
