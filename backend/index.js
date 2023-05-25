@@ -308,11 +308,12 @@ app.delete('/api/deleteEmployeeTasks/:idEmployeeTask', (req, res) =>{
 app.get('/api/getTasksAssigned', (req, res) => {
     const sqlRead = `
     SELECT  TasksAssigned.idTaskAssigned, TasksAssigned.taskName, Facilities.facilityName, BiologicalAssets.idBiologicalAsset, Species.speciesName,
-            TasksAssigned.taskDescription, TasksAssigned.taskStart, TasksAssigned.taskEnd, BiologicalAssets.bioAssetName
+            TasksAssigned.taskDescription, TasksAssigned.taskStart, TasksAssigned.taskEnd, BiologicalAssets.bioAssetName, Parks.parkName
     FROM TasksAssigned
     LEFT JOIN Facilities ON TasksAssigned.idFacility = Facilities.idFacility
     LEFT JOIN BiologicalAssets ON TasksAssigned.idBiologicalAsset = BiologicalAssets.idBiologicalAsset
     LEFT JOIN Species ON BiologicalAssets.idSpecies = Species.idSpecies
+    LEFT JOIN Parks ON Facilities.idPark = Parks.idPark
     ORDER BY TasksAssigned.idTaskAssigned ASC;
     `;
     db.query(sqlRead, (err, result) => {
