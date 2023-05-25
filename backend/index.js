@@ -62,6 +62,71 @@ app.get('/api/getCategoryCost', (req, res) =>{
 });
 
 
+///////////////////////////
+// TASK CATEGORY QUERIES //
+///////////////////////////
+
+// CREATE Park
+app.post('/api/insertParks', (req, res) =>{
+    const parkName = req.body.parkName
+    const parkDescription = req.body.parkDescription
+    const parkLocation = req.body.parkLocation
+    const sqlInsert = `
+    INSERT INTO Parks                 (parkName, parkDescription, parkLocation)
+    VALUES  (
+                                    ?, ?, ?
+            );
+    `;
+    db.query(sqlInsert, [parkName, parkDescription, parkLocation], (err, result)=> {
+        console.log(result);
+        res.send(result);
+    })
+})
+
+// READ Parks (Table View)
+app.get('/api/getParks', (req, res) =>{
+    const sqlRead = `
+    SELECT * FROM Parks;
+    `;
+    db.query(sqlRead, (err, result)=> {
+        console.log(result);
+        res.send(result);
+    });
+});
+
+// UPDATE Park
+app.put('/api/updatePark', (req, res) =>{
+    const parkName = req.body.parkName
+    const parkDescription = req.body.parkDescription
+    const parkLocation = req.body.parkLocation
+    const idPark = req.body.idPark
+    const sqlUpdate = `
+    UPDATE Parks
+    SET     parkName = ?, parkLocation = ?, parkDescription = ?
+    WHERE idPark = ?;
+    `;
+    db.query(sqlUpdate, [parkName, parkDescription, parkLocation, idPark], (err, result)=> {
+        if (err) console.log(err); else console.log(result);
+        res.send(result);
+    });
+});
+
+//
+// DELETE TASK CATEGORIES
+app.delete('/api/deleteParks/:idPark', (req, res) =>{
+    const idPark = req.params.idPark
+    const sqlDelete = `
+    DELETE
+    FROM Parks
+    WHERE idPark = :idPark_input;
+    `;
+    db.query(sqlDelete, idPark, (err, result)=> {
+        if (err) console.log(err);
+        res.send(result);
+    });
+});
+
+
 ///////////////////////
 // Employees Queries //
 ///////////////////////
