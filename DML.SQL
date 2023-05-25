@@ -254,7 +254,7 @@ VALUES  (
 
 -- Update Park
 UPDATE Parks
-SET     parkName = :parkName_input, parkLocation = :parkLocation_input, parkDescription = :parkDescription_input
+SET     parkName = :parkName_input, parkDescription = :parkDescription_input, parkLocation = :parkLocation_input
 WHERE idPark = :idPark_input;
 
 -- Update Facility Type

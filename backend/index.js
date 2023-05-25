@@ -95,14 +95,14 @@ app.get('/api/getParks', (req, res) =>{
 });
 
 // UPDATE Park
-app.put('/api/updatePark', (req, res) =>{
+app.put('/api/updateParks', (req, res) =>{
     const parkName = req.body.parkName
     const parkDescription = req.body.parkDescription
     const parkLocation = req.body.parkLocation
     const idPark = req.body.idPark
     const sqlUpdate = `
     UPDATE Parks
-    SET     parkName = ?, parkLocation = ?, parkDescription = ?
+    SET     parkName = ?, parkDescription = ?, parkLocation = ?
     WHERE idPark = ?;
     `;
     db.query(sqlUpdate, [parkName, parkDescription, parkLocation, idPark], (err, result)=> {
@@ -118,7 +118,7 @@ app.delete('/api/deleteParks/:idPark', (req, res) =>{
     const sqlDelete = `
     DELETE
     FROM Parks
-    WHERE idPark = :idPark_input;
+    WHERE idPark = ?;
     `;
     db.query(sqlDelete, idPark, (err, result)=> {
         if (err) console.log(err);

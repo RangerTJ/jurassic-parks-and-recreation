@@ -99,11 +99,11 @@ function ParksPage ({hostURL}) {
     return (
         <>  
             {/* End experimental copy/paste */}
-            <h2>Employees</h2>
+            <h2>Parks</h2>
             <article>
-                <h3>Add New Employee</h3>
+                <h3>Add New Park</h3>
                 <p>
-                    Click the "Create" button below to add a new Employee to the DINO database.
+                Click the "Create" button below to add a new Park to the DINO database.
                 </p>
                 <div>
                     <p><button onClick={() => navTo("/ParksAdd")}>Create</button></p>
@@ -121,9 +121,8 @@ function ParksPage ({hostURL}) {
             <article>
                 <h3>View Parks</h3>
                 <p>
-                    The table below shows existing information for Employee entities and includes
-                    buttons to update or delete them. If you would like to view a larger version of a 
-                    non-default photo click it to see a larger version. Then click anywhere again to dismiss the view.
+                    The table below shows existing information for Park entities and includes
+                    buttons to update or delete them.
                 </p>
                 {/* Lightbox example code used from: Creating a Simple Lightbox From Scratch in React by Alexandra Radevich
                 URL: https://medium.com/swlh/creating-a-simple-lightbox-from-scratch-in-react-caea84f90960

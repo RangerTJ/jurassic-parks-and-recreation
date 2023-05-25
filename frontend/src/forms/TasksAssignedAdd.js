@@ -9,7 +9,7 @@ import SelectorBiologicalAssets from '../components/selectorBiologicalAssets';
 
 
 // HostURL Passed from App.js
-function ParksAddForm ({hostURL}) {
+function TasksAssignedAddForm ({hostURL}) {
 
     // BiologicalAssets SQL Endpoints
     const createTasksAssignedURL = hostURL + '/api/insertTasksAssigned';
@@ -115,4 +115,4 @@ function ParksAddForm ({hostURL}) {
     );
 }
 
-export default ParksAddForm;
+export default TasksAssignedAddForm;
