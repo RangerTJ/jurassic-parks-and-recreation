@@ -117,7 +117,7 @@ function TasksAssignedPage ({hostURL}) {
                                         <div><button className="tableButton" onClick={()=> {navToUpdate(val)}}>Edit</button></div>
                                         <div><button className="tableButton" onClick={()=> {delTaskAssigned(val.idTaskAssigned)}}>*</button></div>
                                     </td>
-                                    <td>
+                                    <td className="tableDescription">
                                         <div>#{val.idTaskAssigned}</div>
                                         <div><strong>{val.taskName}</strong></div>
                                         <div>{val.parkName}</div>
