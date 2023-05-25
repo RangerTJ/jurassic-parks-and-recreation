@@ -32,11 +32,10 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.get('/api/getParkCost', (req, res) =>{
     const sqlRead = `
     SELECT  Parks.parkName, SUM(EmployeeTasks.empTaskCost) AS parkCost
-    FROM TaskCategories
-    LEFT JOIN EmployeeTasks ON TaskCategories.idTaskCategory = EmployeeTasks.idTaskCategory
-    LEFT JOIN TasksAssigned ON EmployeeTasks.idTaskAssigned = TasksAssigned.idTaskAssigned
-    JOIN Facilities ON TasksAssigned.idFacility = Facilities.idFacility
-    JOIN Parks ON Facilities.idPark = Parks.idPark
+    FROM Parks
+    LEFT JOIN Facilities ON Parks.idPark = Facilities.idPark
+    LEFT JOIN TasksAssigned ON Facilities.idFacility = TasksAssigned.idFacility
+    LEFT JOIN EmployeeTasks ON TasksAssigned.idTaskAssigned = EmployeeTasks.idTaskAssigned
     GROUP BY Parks.parkName
     ORDER BY ParkCost DESC;
     `;

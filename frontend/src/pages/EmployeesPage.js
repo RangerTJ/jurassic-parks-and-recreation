@@ -149,7 +149,8 @@ function EmployeesPage ({hostURL}) {
                             // URL: https://stackoverflow.com/questions/9133102/how-to-grab-substring-before-a-specified-character-in-javascript
                             // No, I didn't make that name up.
                             const altText = val.employeePhoto ? val.employeePhoto.substring(14, val.employeePhoto.indexOf('.')) : "Default"
-                            
+                            const radio = val.employeeRadio ? val.employeeRadio : "N/A"
+
                             return (
                                 <tr key={index}>
                                     <td>
@@ -166,7 +167,7 @@ function EmployeesPage ({hostURL}) {
                                         <ul>
                                             <li>{val.employeePhone}</li>
                                             <li>{val.employeeEmail}</li>
-                                            <li>Radio Callsign: {val.employeeRadio}</li>
+                                            <li>Radio Callsign: {radio}</li>
                                         </ul>
                                     </td>
                                     <td>

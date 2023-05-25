@@ -418,12 +418,10 @@ ORDER BY TaskTypeCost DESC;
 
 -- SELECT - Cost Analysis Report by Park
 SELECT  Parks.parkName, SUM(EmployeeTasks.empTaskCost) AS parkCost
-FROM TaskCategories
+FROM Parks
 -- Need to JOIN TaskCategories -> EmployeeTasks -> TasksAssigned -> Facilities -> Parks
-LEFT JOIN EmployeeTasks ON TaskCategories.idTaskCategory = EmployeeTasks.idTaskCategory
-LEFT JOIN TasksAssigned ON EmployeeTasks.idTaskAssigned = TasksAssigned.idTaskAssigned
-JOIN Facilities ON TasksAssigned.idFacility = Facilities.idFacility
-JOIN Parks ON Facilities.idPark = Parks.idPark
+LEFT JOIN Facilities ON Parks.idPark = Facilities.idPark
+LEFT JOIN TasksAssigned ON Facilities.idFacility = TasksAssigned.idFacility
 GROUP BY Parks.parkName
 ORDER BY ParkCost DESC;
 
