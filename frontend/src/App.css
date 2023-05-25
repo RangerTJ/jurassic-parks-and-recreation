@@ -401,8 +401,9 @@ img {
   width: 0px;
 }
 
+/* Experimental / For Possible use of capping small int column width */
 .smallIntTD {
-  max-width: 10px;
+  width: min-content;
 }
 
 .demoRex {
