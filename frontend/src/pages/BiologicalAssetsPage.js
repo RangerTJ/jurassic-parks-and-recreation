@@ -172,8 +172,8 @@ function BiologicalAssetsPage ({hostURL}) {
                                         <div><button className="tableButton" onClick={()=> {navToUpdate(val)}}>Edit</button></div>
                                         <div><button className="tableButton" onClick={()=> {delBiologicalAsset(val.idBiologicalAsset)}}>*</button></div>
                                     </td>
-                                    <td>
-                                        <div>ID #{val.idBiologicalAsset}</div>
+                                    <td className="tableDescription">
+                                        <div>#{val.idBiologicalAsset}</div>
                                         <div><strong>{val.bioAssetName}</strong></div>
                                     </td>
                                     <td>{val.speciesName}</td>
@@ -217,8 +217,8 @@ function BiologicalAssetsPage ({hostURL}) {
                                         <div><button className="tableButton" onClick={()=> {navToUpdate(val)}}>Edit</button></div>
                                         <div><button className="tableButton" onClick={()=> {delBiologicalAsset(val.idBiologicalAsset)}}>*</button></div>
                                     </td>
-                                    <td>
-                                        <div>ID #{val.idBiologicalAsset}</div>
+                                    <td className="tableDescription">
+                                        <div>#{val.idBiologicalAsset}</div>
                                         <div><strong>{val.bioAssetName}</strong></div>
                                     </td>
                                     <td>{val.speciesName}</td>
@@ -263,8 +263,8 @@ function BiologicalAssetsPage ({hostURL}) {
                                         <div><button className="tableButton" onClick={()=> {navToUpdate(val)}}>Edit</button></div>
                                         <div><button className="tableButton" onClick={()=> {delBiologicalAsset(val.idBiologicalAsset)}}>*</button></div>
                                     </td>
-                                    <td>
-                                        <div>ID #{val.idBiologicalAsset}</div>
+                                    <td className="tableDescription">
+                                        <div>#{val.idBiologicalAsset}</div>
                                         <div><strong>{val.bioAssetName}</strong></div>
                                     </td>
                                     <td>{val.speciesName}</td>

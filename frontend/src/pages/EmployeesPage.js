@@ -156,13 +156,19 @@ function EmployeesPage ({hostURL}) {
                                         <div><button className="tableButton" onClick={()=> {navToUpdate(val)}}>Edit</button></div>
                                         <div><button className="tableButton" onClick={()=> {delEmployee(val.idEmployee)}}>*</button></div>
                                     </td>
-                                    <td>
-                                        <div>ID #{val.idEmployee}</div>
+                                    <td className="tableDescription">
+                                        <div>#{val.idEmployee}</div>
                                         <div><strong>{val.lastName}, {val.firstName}</strong></div>
                                         <div>({val.employeeUsername})</div>
                                     </td>
                                     <td>{val.jobTitle} ({wage}/hr)</td>
-                                    <td><div>{val.employeePhone}</div><div>{val.employeeEmail}</div><div>Radio Callsign: {val.employeeRadio}</div></td>
+                                    <td className="tableDescription">
+                                        <ul>
+                                            <li>{val.employeePhone}</li>
+                                            <li>{val.employeeEmail}</li>
+                                            <li>Radio Callsign: {val.employeeRadio}</li>
+                                        </ul>
+                                    </td>
                                     <td>
                                         {/* Lightbox tutorial by Alexandra Radevich provided the code for the on-click trigger here
                                         URL: https://medium.com/swlh/creating-a-simple-lightbox-from-scratch-in-react-caea84f90960

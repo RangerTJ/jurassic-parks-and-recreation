@@ -159,8 +159,8 @@ function FacilitiesPage ({hostURL}) {
                                         <div><button className="tableButton" onClick={()=> {navToUpdate(val)}}>Edit</button></div>
                                         <div><button className="tableButton" onClick={()=> {delFacility(val.idFacility)}}>*</button></div>
                                     </td>
-                                    <td>
-                                        <div>ID #{val.idFacility}</div>
+                                    <td className="tableDescription">
+                                        <div>#{val.idFacility}</div>
                                         <div><strong>{val.facilityName}</strong></div>
                                     </td>
                                     <td>{val.parkName}</td>
