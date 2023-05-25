@@ -101,41 +101,50 @@ nav {
   margin: 0;
 }
 
+nav {
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 0;
+}
+
 nav a {
   background-color: var(--parkRed);
   color: var(--parkYellow);
   border: solid var(--parkRed);
-  padding-left: 5px;
-  padding-right: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin: 0;
   font-size: 35px;
   font-weight: normal;
   text-decoration: none;
-  display:flex;
+  display: flex;
   justify-content: center;
   flex-grow: 1;
-  line-height: 1.00;
+  /* line-height: 1.00; */
   font-family: var(--jpFont);
-  margin: 0;
   text-shadow: 0px 1px 1px var(--feralGreen);
+  max-width: 200px;
 }
 
-nav a:hover {       
+nav a:hover {
   background-color: black;
   color: white;
   border: ridge gold;
   text-decoration: none;
-  text-shadow:
-  0.25px -0.25px 0px red,
-  -0.25px 0.25px 0px red,
-  0.25px 0.25px 0px red,
-  -0.25px -0.25px 0px red;
+  text-shadow: 0.25px -0.25px 0px red, -0.25px 0.25px 0px red, 0.25px 0.25px 0px red, -0.25px -0.25px 0px red;
 }
-  
+
 nav a:focus {
   background-color: black;
   color: white;
   border: solid gold;
   outline: none;
+}
+
+.navBackground {
+  background-color: var(--parkRed);
 }
 
 
