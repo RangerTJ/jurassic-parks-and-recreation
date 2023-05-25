@@ -186,55 +186,6 @@ function EmployeesPage ({hostURL}) {
                         </tbody>
                     </table>
                 </div>                                  
-                {/* Old Design - propose we go with the new one that's more compact/reads better */}
-                {/* <div className="scrollableTable">
-                    <table>
-                        <tbody>
-                        <tr>
-                            <th>ID</th>
-                            <th>Last Name</th>
-                            <th>First Name</th>
-                            <th>Username</th>
-                            <th>Job</th>
-                            <th>Wage</th>
-                            <th>Phone</th>
-                            <th>Email</th>
-                            <th>Radio</th>
-                            <th>Photo</th>
-                            <th>Notes</th>
-
-                            <th>Update</th>
-                            <th>Delete</th>
-                        </tr>
-                        {employeesList.map((val, index)=> {
-                            const wage = val.hourlyWage ? val.hourlyWage.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) : '$0.00';
-                            return (
-                                <tr key={index}>
-                                    <td>{val.idEmployee}</td>
-                                    <td>{val.lastName}</td>
-                                    <td>{val.firstName}</td>
-                                    <td>{val.employeeUsername}</td>
-                                    <td>{val.jobTitle}</td>
-                                    <td className="tableDescription">{wage}</td>
-                                    <td>{val.employeePhone}</td>
-                                    <td>{val.employeeEmail}</td>
-                                    <td>{val.employeeRadio}</td>
-                                    <td>
-                                        
-                                        <a href={val.employeePhoto}>
-                                            <img src={val.employeePhoto} alt={val.employeePhoto} width={200}/>
-                                        </a>
-                                    </td>
-                                    <td className="tableDescription">{val.employeeNote}</td>
-
-                                    <td><button onClick={()=> {navToUpdate(val)}}>Update</button></td>
-                                    <td><button onClick={()=> {delEmployee(val.idEmployee)}}>Delete</button></td>
-                                </tr>
-                            )}
-                        )}
-                        </tbody>
-                    </table>  
-                </div> */}
             </article>
         </>
     );

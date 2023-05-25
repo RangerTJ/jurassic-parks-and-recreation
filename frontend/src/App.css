@@ -401,6 +401,10 @@ img {
   width: 0px;
 }
 
+.smallIntTD {
+  max-width: 10px;
+}
+
 .demoRex {
   font-family: var(--jpFont);
   font-size: large;
