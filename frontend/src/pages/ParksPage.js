@@ -156,7 +156,7 @@ function ParksPage ({hostURL}) {
                                         {/* ** Edit later tonight - pass whole object to delete for better errors messages ** */}
                                         <div><button className="tableButton" onClick={()=> {delParks(val.idPark)}}>*</button></div>
                                     </td>
-                                    <td>
+                                    <td className="tableDescription">
                                         <div>Park #{val.idPark}</div>
                                         <div><strong>{val.parkName}</strong></div>
                                     </td>
