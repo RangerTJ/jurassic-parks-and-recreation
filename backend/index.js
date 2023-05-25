@@ -62,9 +62,9 @@ app.get('/api/getCategoryCost', (req, res) =>{
 });
 
 
-///////////////////////////
-// TASK CATEGORY QUERIES //
-///////////////////////////
+///////////////////
+// PARKS QUERIES //
+///////////////////
 
 // CREATE Park
 app.post('/api/insertParks', (req, res) =>{
@@ -111,8 +111,7 @@ app.put('/api/updateParks', (req, res) =>{
     });
 });
 
-//
-// DELETE TASK CATEGORIES
+// DELETE Park
 app.delete('/api/deleteParks/:idPark', (req, res) =>{
     const idPark = req.params.idPark
     const sqlDelete = `
@@ -494,6 +493,68 @@ app.delete('/api/deleteFacilities/:idFacility', (req, res) =>{
     });
 });
 
+
+////////////////////////////
+// Facility Types QUERIES //
+////////////////////////////
+
+//
+// CREATE Facility Type
+app.post('/api/insertFacilityTypes', (req, res) =>{
+    const facTypeName = req.body.facTypeName
+    const facTypeDescription = req.body.facTypeDescription
+    const sqlInsert = `
+    INSERT INTO FacilityTypes       (facTypeName, facTypeDescription)
+    VALUES                          (?, ?);
+    `;
+    db.query(sqlInsert, [facTypeName, facTypeDescription], (err, result)=> {
+        console.log(result);
+        res.send(result);
+    })
+})
+
+// READ Facility Type (Table View)
+app.get('/api/getFacilityTypes', (req, res) =>{
+    const sqlRead = `
+    SELECT * FROM FacilityTypes
+    ORDER BY idFacilityType ASC;
+    `;
+    db.query(sqlRead, (err, result)=> {
+        console.log(result);
+        res.send(result);
+    });
+});
+
+// UPDATE Facility Type
+app.put('/api/updateFacilityTypes', (req, res) =>{
+    const facTypeName = req.body.facTypeName
+    const facTypeDescription = req.body.facTypeDescription
+    const idFacilityType = req.body.idFacilityType
+    const sqlUpdate = `
+    UPDATE FacilityTypes
+    SET     facTypeName = ?, facTypeDescription = ?
+    WHERE idFacilityType = ?;
+    `;
+    db.query(sqlUpdate, [facTypeName, facTypeDescription, idFacilityType], (err, result)=> {
+        if (err) console.log(err); else console.log(result);
+        res.send(result);
+    });
+});
+
+//
+// DELETE Facility Type
+app.delete('/api/deleteFacilityTypes/:idFacilityType', (req, res) =>{
+    const idFacilityType = req.params.idFacilityType
+    const sqlDelete = `
+    DELETE
+    FROM FacilityTypes
+    WHERE idFacilityType = ?;
+    `;
+    db.query(sqlDelete, idFacilityType, (err, result)=> {
+        if (err) console.log(err);
+        res.send(result);
+    });
+});
 
 
 //////////////////////////////

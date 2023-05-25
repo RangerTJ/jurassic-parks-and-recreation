@@ -33,6 +33,8 @@ import EmployeesAddForm from "./forms/EmployeesAddForm";
 import EmployeesUpdateForm from "./forms/EmployeesUpdateForm";
 import FacilitiesAddForm from "./forms/FacilitiesAddForm";
 import FacilitiesUpdateForm from "./forms/FacilitiesUpdateForm";
+import FacilityTypesAddForm from "./forms/FacilityTypesAddForm";
+import FacilityTypesUpdateForm from "./forms/FacilityTypesUpdateForm";
 import TasksAssignedAddForm from "./forms/TasksAssignedAdd"; // Done
 import TasksAssignedUpdateForm from "./forms/TasksAssignedUpdate";
 import ParksAddForm from "./forms/ParksAddForm";
@@ -80,6 +82,8 @@ function App() {
                 <Route path="/EmployeesUpdate" element={<EmployeesUpdateForm hostURL={hostURL} />} />
                 <Route path="/FacilitiesAdd" element={<FacilitiesAddForm hostURL={hostURL} />} />
                 <Route path="/FacilitiesUpdate" element={<FacilitiesUpdateForm hostURL={hostURL} />} />
+                <Route path="/FacilityTypesAdd" element={<FacilityTypesAddForm hostURL={hostURL} />} />
+                <Route path="/FacilityTypesUpdate" element={<FacilityTypesUpdateForm hostURL={hostURL} />} />
                 <Route path="/TasksAssignedAdd" element={<TasksAssignedAddForm hostURL={hostURL} />} />
                 <Route path="/TasksAssignedUpdate" element={<TasksAssignedUpdateForm hostURL={hostURL} />} />
                 <Route path="/ParksAdd" element={<ParksAddForm hostURL={hostURL} />} />
