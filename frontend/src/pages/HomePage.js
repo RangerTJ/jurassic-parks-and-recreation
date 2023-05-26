@@ -125,7 +125,7 @@ function HomePage({hostURL}) {
             and adapting it for React syntax. Footage recorded in-game footage from Jurassic World Evolution 2
             URL: https://web.dev/replace-gifs-with-videos/ */}
             <article>
-                <h2>Security Feed</h2>
+                <h3>Security Feed</h3>
                 <div>
                     <video autoPlay loop muted>
                         <source src={securityCamera1} type="video/mp4"></source>
