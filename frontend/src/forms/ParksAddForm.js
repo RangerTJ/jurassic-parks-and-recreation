@@ -18,7 +18,7 @@ function ParksAddForm ({hostURL}) {
     const [parkDescription, setParkDescription] = useState('')
     const [parkLocation, setParkLocation] = useState('')
 
-    // CREATE - Insert New Bio Asset then return to asset home
+    // CREATE - Insert New then return to form launcher
     const submit = async () => {
         try {
             if (parkName && parkDescription && parkLocation) {

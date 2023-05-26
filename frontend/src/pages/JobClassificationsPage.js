@@ -78,7 +78,7 @@ function JobClassificationsPage ({hostURL}) {
                     Click the "Create" button below to add a new Job Classification to the DINO database.
                </p>
                <div>
-                   <p><button onClick={() => navTo("/JobClassificationAdd")}>Create</button></p>
+                   <p><button onClick={() => navTo("/JobClassificationsAdd")}>Create</button></p>
                </div>
            </article>
            <article>
@@ -118,7 +118,6 @@ function JobClassificationsPage ({hostURL}) {
                                        <div><strong>{val.jobTitle}</strong></div>
                                    </td>
                                    <td className="tableDescription">{val.jobDescription}</td>
-                                   <td>{val.parkLocation}</td>
                                </tr>
                            )}
                        )}

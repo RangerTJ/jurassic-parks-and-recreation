@@ -14,7 +14,7 @@ function ParksUpdateForm ({hostURL}) {
     const location = useLocation();
     const { id, oldParkName, oldParkDescription, oldParkLocation} = location.state;
 
-    // Employee Update SQL Endpoint
+    // Parks SQL Endpoint
     const updateParksURL = hostURL + '/api/updateParks';
     const navTo = useNavigate();
 
@@ -30,7 +30,7 @@ function ParksUpdateForm ({hostURL}) {
         setParkLocation(oldParkLocation);
     }, [])
 
-    // UPDATE - Submit Changes to a Bio Asset then return to Asset home (hours/cost can be zero'd in case they need to be cleared for an entry error)
+    // UPDATE - Submit changes then return to parent page
     const update = async () => {
         try {
             if (parkName && parkDescription && parkLocation) {

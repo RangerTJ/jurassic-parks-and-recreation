@@ -90,8 +90,8 @@ function App() {
                 <Route path="/TasksAssignedUpdate" element={<TasksAssignedUpdateForm hostURL={hostURL} />} />
                 <Route path="/ParksAdd" element={<ParksAddForm hostURL={hostURL} />} />
                 <Route path="/ParksUpdate" element={<ParksUpdateForm hostURL={hostURL} />} />
-                <Route path="/ParksAdd" element={<JobClassificationsAddForm hostURL={hostURL} />} />
-                <Route path="/ParksUpdate" element={<JobClassificationsUpdateForm hostURL={hostURL} />} />
+                <Route path="/JobClassificationsAdd" element={<JobClassificationsAddForm hostURL={hostURL} />} />
+                <Route path="/JobClassificationsUpdate" element={<JobClassificationsUpdateForm hostURL={hostURL} />} />
 
             </Routes>
         </section>

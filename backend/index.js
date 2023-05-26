@@ -181,7 +181,7 @@ app.delete('/api/deleteJobClassifications/:idJobClassification', (req, res) =>{
     const sqlDelete = `
     DELETE
     FROM JobClassifications
-    WHERE idJobClassification = :idJobClassification_input;
+    WHERE idJobClassification = ?;
     `;
     db.query(sqlDelete, idJobClassification, (err, result)=> {
         if (err) console.log(err);

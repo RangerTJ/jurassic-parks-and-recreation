@@ -9,69 +9,69 @@ import Axios from 'axios';
 // HostURL Passed from App.js
 function JobClassificationsAddForm ({hostURL}) {
 
-    // Facility Type SQL Endpoint
-    const createFacilityTypesURL = hostURL + '/api/insertFacilityTypes';
+    // Job Classification SQL Endpoint
+    const createJobClassificationsURL = hostURL + '/api/insertJobClassifications';
     const navTo = useNavigate();
 
-    // Facility Type States for the Form
-    const [facTypeName, setFacTypeName] = useState('')
-    const [facTypeDescription, setFacTypeDescription] = useState('')
+    // Job Classification States for the Form
+    const [jobTitle, setJobTitle] = useState('')
+    const [jobDescription, setJobDescription] = useState('')
 
-    // CREATE - Insert New Bio Asset then return to asset home
+    // CREATE - Insert Job Classification then return to asset home
     const submit = async () => {
         try {
-            if (facTypeName && facTypeDescription) {
-                await Axios.post(createFacilityTypesURL, {
-                    facTypeName: facTypeName,
-                    facTypeDescription: facTypeDescription,
+            if (jobTitle && jobDescription) {
+                await Axios.post(createJobClassificationsURL, {
+                    jobTitle: jobTitle,
+                    jobDescription: jobDescription,
                 });
-                alert(`Facility Type ${facTypeName} has been added to the database!`);
-                navTo('/FacilityTypes');
+                alert(`Job Classification ${jobTitle} has been added to the database!`);
+                navTo('/JobClassifications');
                 } else {
                     alert("Please fill out all required fields and try again.")
                 }
         } catch(error) {
-                console.error('Error inserting Facility Type.', error)
+                console.error('Error inserting Job Classifications Type.', error)
         }
     };
 
     return (
         <>
-            <h2>Add Facility Type</h2>
+            <h2>Add Job Classification</h2>
             <article>
                 <p>
-                    If you would like to add a new Facility Type to the database, enter values for its attributes below
-                    and click the "Add Type" button.
+                    If you would like to add a new Job Classification to the database, enter values for its attributes below
+                    and click the "Add Job" button.
                 </p>
                 <form>
                     <fieldset>
                         <legend>Information</legend>
                             <div className="selectorP">
-                                <div><label htmlFor="facTypeName">Name</label></div>
+                                <div><label htmlFor="jobTitle">Name</label></div>
                                 <input 
                                     type="text"
-                                    id="facTypeName"
-                                    name="facTypeName"
-                                    placeholder="Ex. Aquatic Enclosure" 
+                                    id="jobTitle"
+                                    name="jobTitle"
+                                    placeholder="Ex. Ranger" 
                                     required
                                     autoFocus
-                                    onChange={(e) => {setFacTypeName(e.target.value)}
+                                    onChange={(e) => {setJobTitle(e.target.value)}
                                     }/>
                             </div>
-                            <div><label htmlFor="facTypeDescription">Description</label></div>
+                            <div><label htmlFor="jobDescription">Description</label></div>
                             <textarea
-                                    name="facTypeDescription"
-                                    id ="facTypeDescription"
+                                    name="jobDescription"
+                                    id ="jobDescription"
                                     cols="40" rows="5" 
                                     min="5" max="255"
-                                    placeholder="Ex. Enclosure for aquatic marine reptiles."
+                                    placeholder="Ex. Patrols park, assists visitors, and manages wildlife."
                                     required
-                                    onChange={(e) => {setFacTypeDescription(e.target.value)}
+                                    onChange={(e) => {setJobDescription(e.target.value)}
                                     }></textarea>
                     </fieldset>
                 </form>
                 <div>
-                    <p><button onClick={submit}>Add Type</button></p>
+                    <p><button onClick={submit}>Add Job</button></p>
                 </div>
             </article>
         </>

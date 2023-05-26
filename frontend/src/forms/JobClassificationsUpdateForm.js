@@ -12,33 +12,33 @@ function JobClassificationsUpdateForm ({hostURL}) {
     // Follows reference strategy to read state object, as suggested by stackoverflow user Abdulazeez Jimoh on 10/25/2022
     // URL: https://stackoverflow.com/questions/68911432/how-to-pass-parameters-with-react-router-dom-version-6-usenavigate-and-typescrip
     const location = useLocation();
-    const { id, oldFacTypeName, oldFacTypeDescription} = location.state;
+    const { id, oldJobTitle, oldJobDescription} = location.state;
 
-    // Facility Type SQL Endpoint
-    const updateFacilityTypesURL = hostURL + '/api/updateFacilityTypes';
+    // Job Classification SQL Endpoint
+    const updateJobClassificationsURL = hostURL + '/api/updateJobClassifications';
     const navTo = useNavigate();
 
-    // Facility Type States for the Form
-    const [facTypeName, setFacTypeName] = useState('')
-    const [facTypeDescription, setFacTypeDescription] = useState('')
+    // Job Classification States for the Form
+    const [jobTitle, setJobTitle] = useState('')
+    const [jobDescription, setJobDescription] = useState('')
 
     // Pre-sets all the old values into the fields
     useEffect(()=> {
-        setFacTypeName(oldFacTypeName);
-        setFacTypeDescription(oldFacTypeDescription);
+        setJobTitle(oldJobTitle);
+        setJobDescription(oldJobDescription);
     }, [])
 
-    // UPDATE - Submit Changes to a Bio Asset then return to Asset home (hours/cost can be zero'd in case they need to be cleared for an entry error)
+    // UPDATE - Submit Changes to a Job Classification then return to parent page
     const update = async () => {
         try {
-            if (facTypeName && facTypeDescription) {
-                await Axios.put(updateFacilityTypesURL, {
-                    facTypeName: facTypeName,
-                    facTypeDescription: facTypeDescription,
-                    idFacilityType: id,
+            if (jobTitle && jobDescription) {
+                await Axios.put(updateJobClassificationsURL, {
+                    jobTitle: jobTitle,
+                    jobDescription: jobDescription,
+                    idJobClassification: id,
                 });
-                alert(`${facTypeName}'s database record has been updated!`)
-                navTo('/FacilityTypes');
+                alert(`${jobTitle}'s database record has been updated!`)
+                navTo('/JobClassifications');
                 } else {
                     alert("Please fill out all required fields and try again.")
                 }
@@ -49,7 +49,7 @@ function JobClassificationsUpdateForm ({hostURL}) {
 
     return (
         <>
-            <h2>Update Facility Type</h2>
+            <h2>Update Job Classification</h2>
             <article>
                 <p>
                     If you would like to update this entry, enter new values for its attributes below
@@ -59,28 +59,28 @@ function JobClassificationsUpdateForm ({hostURL}) {
                     <fieldset>
                         <legend>Information</legend>
                             <div className="selectorP">
-                                <div><label htmlFor="facTypeName">Name</label></div>
+                                <div><label htmlFor="jobTitle">Name</label></div>
                                 <input 
                                     type="text"
-                                    id="facTypeName"
-                                    name="facTypeName"
-                                    placeholder="Ex. Aquatic Enclosure" 
+                                    id="jobTitle"
+                                    name="jobTitle"
+                                    placeholder="Ex. Ranger" 
                                     required
-                                    value={facTypeName}
+                                    value={jobTitle}
                                     autoFocus
-                                    onChange={(e) => {setFacTypeName(e.target.value)}
+                                    onChange={(e) => {setJobTitle(e.target.value)}
                                     }/>
                             </div>
-                            <div><label htmlFor="facTypeDescription">Description</label></div>
+                            <div><label htmlFor="jobDescription">Description</label></div>
                             <textarea
-                                    name="facTypeDescription"
-                                    id ="facTypeDescription"
+                                    name="jobDescription"
+                                    id ="jobDescription"
                                     cols="40" rows="5" 
                                     min="5" max="255"
-                                    placeholder="Ex. Enclosure for aquatic marine reptiles."
+                                    placeholder="Ex. Patrols park, assists visitors, and manages wildlife."
                                     required
-                                    value={facTypeDescription}
-                                    onChange={(e) => {setFacTypeDescription(e.target.value)}
+                                    value={jobDescription}
+                                    onChange={(e) => {setJobDescription(e.target.value)}
                                     }></textarea>
                     </fieldset>
                 </form>
