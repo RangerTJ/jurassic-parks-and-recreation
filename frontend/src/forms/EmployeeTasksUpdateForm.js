@@ -18,8 +18,8 @@ function EmployeeTasksUpdateForm ({hostURL}) {
     const { id, oldTask, oldEmployee, oldCategory, oldHours, oldCost, oldStart, oldEnd} = location.state;
     
     // Clip off time part of dates so they can pre-populate date pickers (some data loss, but probably should have just done dates instead of datetime anyways)
-    const oldStartDateString = oldStart.substring(0, 10);
-    const oldEndDateString = oldEnd.substring(0, 10);
+    const oldStartDateString = oldStart ? oldStart.substring(0, 10): '';
+    const oldEndDateString = oldEnd ? oldEnd.substring(0, 10): '';
 
     // BiologicalAssets SQL Endpoints
     const updateEmployeeTasksURL = hostURL + '/api/updateEmployeeTasks';

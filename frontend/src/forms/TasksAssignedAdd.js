@@ -58,10 +58,10 @@ function TasksAssignedAddForm ({hostURL}) {
                     <fieldset>
                         <legend>Details</legend>
                             <div className="selectorP">
-                                <SelectorFacilities hostURL={hostURL} facility={facility} setFacility={setFacility} isRequired={true}/>
+                                <SelectorFacilities hostURL={hostURL} facility={facility} setFacility={setFacility} isRequired={true} autoFocus={true}/>
                             </div>
                             <div className="selectorP">
-                                <SelectorBiologicalAssets hostURL={hostURL} bioAssetName={bioAssetName} setBioAssetName={setBioAssetName} isRequired={true}/>
+                                <SelectorBiologicalAssets hostURL={hostURL} bioAssetName={bioAssetName} setBioAssetName={setBioAssetName} isRequired={false}/>
                             </div>
                             <div className="selectorP">
                                 <div><label htmlFor="taskName">Task Name</label></div>
@@ -71,7 +71,6 @@ function TasksAssignedAddForm ({hostURL}) {
                                     name="taskName"
                                     placeholder="Name of Task" 
                                     required
-                                    autoFocus 
                                     onChange={(e) => {setTaskName(e.target.value)}
                                     }/>
                             </div>

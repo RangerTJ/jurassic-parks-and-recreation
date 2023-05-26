@@ -17,8 +17,8 @@ function TasksAssignedUpdateForm ({hostURL}) {
     const { oldFacilityName, oldBiologicalAsset, oldTaskName, oldTaskDescription, oldTaskStart, oldTaskEnd, id } = location.state;
 
     // Clip off time part of dates so they can pre-populate date pickers (some data loss, but probably should have just done dates instead of datetime anyways)
-    const oldStartDateString = oldTaskStart.substring(0, 10);
-    const oldEndDateString = oldTaskEnd.substring(0, 10);
+    const oldStartDateString = oldTaskStart ? oldTaskStart.substring(0, 10) : '';
+    const oldEndDateString = oldTaskEnd ? oldTaskEnd.substring(0, 10) : '';
 
     // TasksAssigned SQL Endpoints
     const updateTasksAssignedURL = hostURL + '/api/updateTasksAssigned';
@@ -85,11 +85,11 @@ function TasksAssignedUpdateForm ({hostURL}) {
                     <fieldset>
                         <legend>Details</legend>
                             <div className="selectorP">
-                                <SelectorFacilities hostURL={hostURL} facility={facility} setFacility={setFacility} isRequired={true} preSelected={oldFacilityName}/>
+                                <SelectorFacilities hostURL={hostURL} facility={facility} setFacility={setFacility} isRequired={true} preSelected={oldFacilityName} autoFocus={true}/>
                                 <div>Original: {oldFacilityName}</div>
                             </div>
                             <div className="selectorP">
-                                <SelectorBiologicalAssets hostURL={hostURL} bioAssetName={bioAssetName} setBioAssetName={setBioAssetName} isRequired={true} preSelected={oldBiologicalAsset}/>
+                                <SelectorBiologicalAssets hostURL={hostURL} bioAssetName={bioAssetName} setBioAssetName={setBioAssetName} isRequired={false} preSelected={oldBiologicalAsset}/>
                                 <div>Original: {oldBiologicalAsset}</div>
                             </div>
                             <div className="selectorP">
@@ -101,7 +101,6 @@ function TasksAssignedUpdateForm ({hostURL}) {
                                     placeholder="Name of Task" 
                                     required
                                     value={taskName}
-                                    autoFocus 
                                     onChange={(e) => {setTaskName(e.target.value)}
                                     }/>
                                 <div>Original: {oldTaskName}</div>
