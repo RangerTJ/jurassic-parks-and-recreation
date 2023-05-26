@@ -320,6 +320,14 @@ img {
   vertical-align: middle;
 }
 
+video {
+  border: solid 2px var(--parkRed);
+  outline-offset: -3px;
+  outline: solid 2px var(--parkYellow);
+  margin: 2px;
+  vertical-align: middle;
+}
+
 
 /* Custom Elements */
 
