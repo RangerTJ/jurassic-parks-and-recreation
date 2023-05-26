@@ -105,8 +105,6 @@ function JobClassificationsPage ({hostURL}) {
                            <th>Description</th>
                        </tr>
                        {jobClassificationsList.map((val, index)=> {
-                        
-                           
                            return (
                                <tr key={index}>
                                    <td>
@@ -116,7 +114,7 @@ function JobClassificationsPage ({hostURL}) {
                                        <div><button className="tableButton" onClick={()=> {delJobClassifications(val.idJobClassification)}}>*</button></div>
                                    </td>
                                    <td className="tableDescription">
-                                       <div>Park #{val.idJobClassification}</div>
+                                       <div>Job Code #{val.idJobClassification}</div>
                                        <div><strong>{val.jobTitle}</strong></div>
                                    </td>
                                    <td className="tableDescription">{val.jobDescription}</td>

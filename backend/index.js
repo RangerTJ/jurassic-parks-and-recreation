@@ -148,10 +148,11 @@ app.post('/api/insertParks', (req, res) =>{
 })
 
 //
-// READ Parks (Table View)
-app.get('/api/getParks', (req, res) =>{
+// READ Job Classifications (Table View)
+app.get('/api/getJobClassifications', (req, res) =>{
     const sqlRead = `
-    SELECT * FROM Parks;
+    SELECT * FROM JobClassifications
+    ORDER BY idJobClassification ASC;
     `;
     db.query(sqlRead, (err, result)=> {
         console.log(result);
