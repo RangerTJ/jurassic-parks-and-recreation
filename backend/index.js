@@ -762,7 +762,8 @@ app.post('/api/insertTaskCategories', (req, res) =>{
 // READ TASK CATEGORIES - Select
 app.get('/api/getTaskCategories', (req, res) =>{
     const sqlRead = `
-    SELECT * FROM TaskCategories;
+    SELECT * FROM TaskCategories
+    ORDER BY idTaskCategory;
     `;
     db.query(sqlRead, (err, result)=> {
         console.log(result);

@@ -58,7 +58,7 @@ function TaskCategoryPage({hostURL}) {
     // URL: https://stackoverflow.com/questions/68911432/how-to-pass-parameters-with-react-router-dom-version-6-usenavigate-and-typescrip
     const navToUpdate = (updateVal) => {
         const state = {
-        categoryName: updateVal.categoryName,
+        oldCategoryName: updateVal.categoryName,
         id: updateVal.idTaskCategory
     };
         navTo("/TaskCategoriesUpdate", {state});
