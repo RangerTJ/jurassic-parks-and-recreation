@@ -129,25 +129,22 @@ app.delete('/api/deleteParks/:idPark', (req, res) =>{
 // Job Classification Queries //
 ////////////////////////////////
 
-//
-// CREATE Park
-app.post('/api/insertParks', (req, res) =>{
-    const parkName = req.body.parkName
-    const parkDescription = req.body.parkDescription
-    const parkLocation = req.body.parkLocation
+// CREATE Job Classification
+app.post('/api/insertJobClassifications', (req, res) =>{
+    const jobTitle = req.body.jobTitle
+    const jobDescription = req.body.jobDescription
     const sqlInsert = `
-    INSERT INTO Parks                 (parkName, parkDescription, parkLocation)
+    INSERT INTO JobClassifications  (jobTitle, jobDescription)
     VALUES  (
-                                    ?, ?, ?
+                    ?, ?
             );
     `;
-    db.query(sqlInsert, [parkName, parkDescription, parkLocation], (err, result)=> {
+    db.query(sqlInsert, [jobTitle, jobDescription], (err, result)=> {
         console.log(result);
         res.send(result);
     })
 })
 
-//
 // READ Job Classifications (Table View)
 app.get('/api/getJobClassifications', (req, res) =>{
     const sqlRead = `
@@ -161,33 +158,32 @@ app.get('/api/getJobClassifications', (req, res) =>{
 });
 
 //
-// UPDATE Park
-app.put('/api/updateParks', (req, res) =>{
-    const parkName = req.body.parkName
-    const parkDescription = req.body.parkDescription
-    const parkLocation = req.body.parkLocation
-    const idPark = req.body.idPark
+// UPDATE Job Classifications
+app.put('/api/updateJobClassifications', (req, res) =>{
+    const jobTitle = req.body.jobTitle
+    const jobDescription = req.body.jobDescription
+    const idJobClassification = req.body.idJobClassification
     const sqlUpdate = `
-    UPDATE Parks
-    SET     parkName = ?, parkDescription = ?, parkLocation = ?
-    WHERE idPark = ?;
+    UPDATE JobClassifications
+    SET     jobTitle = ?, jobDescription = ?
+    WHERE idJobClassification = ?;
     `;
-    db.query(sqlUpdate, [parkName, parkDescription, parkLocation, idPark], (err, result)=> {
+    db.query(sqlUpdate, [jobTitle, jobDescription, idJobClassification], (err, result)=> {
         if (err) console.log(err); else console.log(result);
         res.send(result);
     });
 });
 
 //
-// DELETE Park
-app.delete('/api/deleteParks/:idPark', (req, res) =>{
-    const idPark = req.params.idPark
+// DELETE Job Classifications
+app.delete('/api/deleteJobClassifications/:idJobClassification', (req, res) =>{
+    const idJobClassification = req.params.idJobClassification
     const sqlDelete = `
     DELETE
-    FROM Parks
-    WHERE idPark = ?;
+    FROM JobClassifications
+    WHERE idJobClassification = :idJobClassification_input;
     `;
-    db.query(sqlDelete, idPark, (err, result)=> {
+    db.query(sqlDelete, idJobClassification, (err, result)=> {
         if (err) console.log(err);
         res.send(result);
     });
