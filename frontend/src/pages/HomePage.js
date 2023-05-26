@@ -121,8 +121,9 @@ function HomePage({hostURL}) {
                 </p>
             </article>
 
-            {/* Simulated security camera made following guide here and recording in-game footage from Jurassic World Evolution 2
-            https://web.dev/replace-gifs-with-videos/ */}
+            {/* Simulated security camera made following 'Replace animated GIFs with video for faster page loads' by Houssein Djirdeh 
+            and adapting it for React syntax. Footage recorded in-game footage from Jurassic World Evolution 2
+            URL: https://web.dev/replace-gifs-with-videos/ */}
             <article>
                 <h2>Security Feed</h2>
                 <div>
