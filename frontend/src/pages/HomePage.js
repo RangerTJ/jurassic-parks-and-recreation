@@ -127,7 +127,7 @@ function HomePage({hostURL}) {
             <article>
                 <h3>Security Feed</h3>
                 <div>
-                    <video autoPlay loop muted>
+                    <video autoPlay loop muted title="Security Camera Feed">
                         <source src={securityCamera1} type="video/mp4"></source>
                     </video>
                 </div>
