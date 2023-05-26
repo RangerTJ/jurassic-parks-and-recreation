@@ -110,7 +110,7 @@ function FacilitiesPage ({hostURL}) {
                 <h3>Edit and Delete</h3>
                 <p>
                     To edit or delete any entity within the database, simply click the "Edit" or "<span className="demoRex">*</span>"
-                    buttons on the left side of the asset's corresponding column to enter the edit menu or delete
+                    buttons on the left side of the corresponding row to enter the edit menu or delete
                     it from the database, respectively.
                 </p>
             </article>

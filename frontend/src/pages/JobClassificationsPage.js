@@ -18,7 +18,7 @@ function JobClassificationsPage ({hostURL}) {
    const updateJobClassificationsURL = hostURL + '/api/updateJobClassifications';
    const deleteJobClassificationsURL = hostURL + '/api/deleteJobClassifications/';
 
-   // Bio Asset Table Functions
+   // Job Table States
    const [jobClassificationsList, setJobClassificationsList] = useState([])
    const [jobClassification, setJobClassification] = useState('')
 
@@ -70,7 +70,6 @@ function JobClassificationsPage ({hostURL}) {
    // Render Webpage
    return (
        <>  
-           {/* End experimental copy/paste */}
            <h2>Job Classifications</h2>
            <article>
                <h3>Add New Job Classification</h3>
@@ -84,9 +83,9 @@ function JobClassificationsPage ({hostURL}) {
            <article>
                <h3>Edit and Delete</h3>
                <p>
-                   To edit or delete any entity within the database, simply click the "Edit" or "<span className="demoRex">*</span>"
-                   buttons on the left side of the asset's corresponding column to enter the edit menu or delete
-                   it from the database, respectively.
+                To edit or delete any entity within the database, simply click the "Edit" or "<span className="demoRex">*</span>"
+                    buttons on the left side of the corresponding row to enter the edit menu or delete
+                    it from the database, respectively.
                </p>
            </article>
            {/* Could potentially reuse the bio assets species filter for job titles here or do a last name search or something */}
@@ -101,7 +100,7 @@ function JobClassificationsPage ({hostURL}) {
                        <tbody>
                        <tr>
                            <th>Edit</th>
-                           <th>Job Title</th>
+                           <th>Job</th>
                            <th>Description</th>
                        </tr>
                        {jobClassificationsList.map((val, index)=> {

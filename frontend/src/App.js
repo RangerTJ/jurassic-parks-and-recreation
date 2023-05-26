@@ -25,22 +25,25 @@ import FacilityTypesPage from "./pages/FacilityTypesPage";
 import JobClassificationsPage from "./pages/JobClassificationsPage";
 
 // Form Page Imports
+import ParksAddForm from "./forms/ParksAddForm";
+import ParksUpdateForm from "./forms/ParksUpdateForm";
 import BiologicalAssetsAddForm from "./forms/BiologicalAssetsAddForm";
 import BiologicalAssetsUpdateForm from "./forms/BiologicalAssetsUpdateForm";
 import EmployeeTasksAddForm from "./forms/EmployeeTasksAddForm";
 import EmployeeTasksUpdateForm from "./forms/EmployeeTasksUpdateForm";
 import EmployeesAddForm from "./forms/EmployeesAddForm";
 import EmployeesUpdateForm from "./forms/EmployeesUpdateForm";
+import JobClassificationsAddForm from "./forms/JobClassificationsAddForm";
+import JobClassificationsUpdateForm from "./forms/JobClassificationsUpdateForm";
 import FacilitiesAddForm from "./forms/FacilitiesAddForm";
 import FacilitiesUpdateForm from "./forms/FacilitiesUpdateForm";
 import FacilityTypesAddForm from "./forms/FacilityTypesAddForm";
 import FacilityTypesUpdateForm from "./forms/FacilityTypesUpdateForm";
 import TasksAssignedAddForm from "./forms/TasksAssignedAdd"; // Done
 import TasksAssignedUpdateForm from "./forms/TasksAssignedUpdate";
-import ParksAddForm from "./forms/ParksAddForm";
-import ParksUpdateForm from "./forms/ParksUpdateForm";
-import JobClassificationsAddForm from "./forms/JobClassificationsAddForm";
-import JobClassificationsUpdateForm from "./forms/JobClassificationsUpdateForm";
+import TaskCategoriesAddForm from "./forms/TaskCategoriesAddForm";
+import TaskCategoriesUpdateForm from "./forms/TaskCategoriesUpdateForm";
+
 
 // React Application
 function App() {
@@ -88,6 +91,8 @@ function App() {
                 <Route path="/FacilityTypesUpdate" element={<FacilityTypesUpdateForm hostURL={hostURL} />} />
                 <Route path="/TasksAssignedAdd" element={<TasksAssignedAddForm hostURL={hostURL} />} />
                 <Route path="/TasksAssignedUpdate" element={<TasksAssignedUpdateForm hostURL={hostURL} />} />
+                <Route path="/TaskCategoriesAdd" element={<TaskCategoriesAddForm hostURL={hostURL} />} />
+                <Route path="/TaskCategoriesUpdate" element={<TaskCategoriesUpdateForm hostURL={hostURL} />} />
                 <Route path="/ParksAdd" element={<ParksAddForm hostURL={hostURL} />} />
                 <Route path="/ParksUpdate" element={<ParksUpdateForm hostURL={hostURL} />} />
                 <Route path="/JobClassificationsAdd" element={<JobClassificationsAddForm hostURL={hostURL} />} />
