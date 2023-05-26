@@ -49,7 +49,7 @@ const ImageSelectorSpecies = ({preSelected, isRequired, autoFocus, hostURL, imag
         {/* Map the Options after hard-coded default */}
         <option value="">Select an Image (Default - None)</option>
         {filenames.map((imagePath, index) => {
-          return <option key={index} value={imagePath}>{imagePath}</option>;
+          return <option key={index} value={imagePath}>{imagePath.substring(14, imagePath.indexOf('.'))}</option>;
         })}
       </select>
       {/* <p>{preSelected},{selected} DEBUG STUFF</p> */}
