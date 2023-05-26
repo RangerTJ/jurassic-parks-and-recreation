@@ -823,7 +823,7 @@ app.get('/api/getFacilitiesList', (req, res) =>{
     const sqlRead = `
     SELECT facilityName, securityRating, parkName
     FROM Facilities
-    JOIN Parks ON Facilities.idPark = Parks.idPark
+    LEFT JOIN Parks ON Facilities.idPark = Parks.idPark
     ORDER BY parkName, facilityName ASC;
     `;
     db.query(sqlRead, (err, result)=> {
@@ -928,7 +928,7 @@ app.get('/api/getBiologicalAssetsList', (req, res) => {
     const sqlRead = `
     SELECT BiologicalAssets.bioAssetName, BiologicalAssets.idBiologicalAsset, Species.speciesName
     FROM BiologicalAssets
-    JOIN Species ON BiologicalAssets.idSpecies = Species.idSpecies
+    LEFT JOIN Species ON BiologicalAssets.idSpecies = Species.idSpecies
     ORDER BY bioAssetName ASC;
     `;
     db.query(sqlRead, (err, result) => {
