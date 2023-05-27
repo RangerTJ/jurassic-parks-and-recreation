@@ -49,13 +49,10 @@ SELECT jobTitle
 FROM JobClassifications
 ORDER BY jobTitle ASC;
 
--- Assigned Task Selector
--- May expand further later to filter out "completed" tasks to reduce selector bloat
--- Completed tasks could still be viewed on the table and be re-opened to see on drop-down again
--- Would need to add the "completed" tinyint field back so you could add Employee Task records to a "finished"
--- task until all records are in, then DB admin could check it closed to take it out of the filter.
+-- Assigned Task Selector (Only returns stuff that isn't finished yet - finished definition includes the paperwork to log all hours to it)
 SELECT taskName, taskStart
 FROM TasksAssigned
+WHERE taskEnd IS NULL
 ORDER BY taskName ASC;
 
 -- Employees Selector

@@ -898,11 +898,12 @@ app.get('/api/getFacilitiesList', (req, res) =>{
     });
 });
 
-// Assigned Task Selector
+// Assigned Task Selector (filters out completed tasks, which assume no more work needs to be assigned)
 app.get('/api/getTasksAssignedList', (req, res) =>{
     const sqlRead = `
     SELECT taskName, taskStart
     FROM TasksAssigned
+    WHERE taskEnd IS NULL
     ORDER BY taskName ASC;
     `;
     db.query(sqlRead, (err, result)=> {
