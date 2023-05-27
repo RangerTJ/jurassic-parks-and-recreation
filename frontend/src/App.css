@@ -258,6 +258,7 @@ input {
   color: var(--feralGreen);
   background-color: var(--parkYellowGreenPale);
   margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 input:invalid {

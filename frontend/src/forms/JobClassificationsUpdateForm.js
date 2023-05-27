@@ -70,6 +70,7 @@ function JobClassificationsUpdateForm ({hostURL}) {
                                     autoFocus
                                     onChange={(e) => {setJobTitle(e.target.value)}
                                     }/>
+                                <div>Original: {oldJobTitle}</div>
                             </div>
                             <div><label htmlFor="jobDescription">Description</label></div>
                             <textarea
@@ -82,6 +83,7 @@ function JobClassificationsUpdateForm ({hostURL}) {
                                     value={jobDescription}
                                     onChange={(e) => {setJobDescription(e.target.value)}
                                     }></textarea>
+                            <div>Original: {oldJobDescription}</div>
                     </fieldset>
                 </form>
                 <div>

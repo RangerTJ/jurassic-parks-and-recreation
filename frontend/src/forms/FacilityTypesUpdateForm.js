@@ -70,6 +70,7 @@ function FacilityTypesUpdateForm ({hostURL}) {
                                     autoFocus
                                     onChange={(e) => {setFacTypeName(e.target.value)}
                                     }/>
+                                <div>Original: {oldFacTypeName}</div>
                             </div>
                             <div><label htmlFor="facTypeDescription">Description</label></div>
                             <textarea
@@ -82,6 +83,7 @@ function FacilityTypesUpdateForm ({hostURL}) {
                                     value={facTypeDescription}
                                     onChange={(e) => {setFacTypeDescription(e.target.value)}
                                     }></textarea>
+                                <div>Original: {oldFacTypeDescription}</div>
                     </fieldset>
                 </form>
                 <div>

@@ -125,7 +125,7 @@ function TasksAssignedPage ({hostURL}) {
                                         <div>{val.parkName}</div>
                                     </td>
                                     <td>{val.facilityName}</td>
-                                    <td>
+                                    <td className="tableDescription">
                                         <div>{nullableAssetID}</div>
                                         <div><strong>{val.bioAssetName}</strong></div>
                                         <div>{val.speciesName}</div>

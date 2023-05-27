@@ -73,6 +73,7 @@ function ParksUpdateForm ({hostURL}) {
                                     autoFocus
                                     onChange={(e) => {setParkName(e.target.value)}
                                     }/>
+                                <div>Original: {oldParkName}</div>
                             </div>
                             <div><label htmlFor="parkDescription">Description</label></div>
                             <textarea
@@ -85,6 +86,7 @@ function ParksUpdateForm ({hostURL}) {
                                     value={parkDescription}
                                     onChange={(e) => {setParkDescription(e.target.value)}
                                     }></textarea>
+                                <div>Original: {oldParkDescription}</div>
                             <div className="selectorP">
                                 <div><label htmlFor="parkLocation">Location</label></div>
                                 <input type="text"
@@ -95,6 +97,7 @@ function ParksUpdateForm ({hostURL}) {
                                     value={parkLocation}
                                     onChange={(e) => {setParkLocation(e.target.value)}
                                     }/>
+                                <div>Original: {oldParkLocation}</div>
                             </div>
                     </fieldset>
                 </form>

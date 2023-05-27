@@ -67,7 +67,9 @@ function TaskCategoriesUpdateForm ({hostURL}) {
                                     autoFocus
                                     onChange={(e) => {setCategoryName(e.target.value)}
                                     }/>
+                                <div>Original: {oldCategoryName}</div>
                             </div>
+                            
                     </fieldset>
                 </form>
                 <div>
