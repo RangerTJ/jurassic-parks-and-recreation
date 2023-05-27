@@ -743,6 +743,74 @@ app.delete('/api/deleteBiologicalAssets/:idBiologicalAsset', (req, res) =>{
 });
 
 
+//////////////////////
+// Habitats QUERIES //
+//////////////////////
+
+// Read Habitats
+app.get('/api/getHabitats', (req, res) =>{
+    const sqlRead = `
+    SELECT * FROM Habitats
+    ORDER BY idHabitat ASC;
+    `;
+    db.query(sqlRead, (err, result)=> {
+        console.log(result);
+        res.send(result);
+    });
+});
+
+// Create Habitat
+app.post('/api/insertHabitats', (req, res) =>{
+    const habitatName = req.body.habitatName
+    const habitatDescription = req.body.habitatDescription
+    const habitatSize = req.body.habitatSize
+    const habitatPhoto = req.body.habitatPhoto
+    const sqlInsert = `
+    INSERT INTO Habitats            (habitatName, habitatDescription, habitatSize, habitatPhoto)
+    VALUES (
+                                    ?, ?, ?, ?
+            );
+    `;
+    db.query(sqlInsert, [habitatName, habitatDescription, habitatSize, habitatPhoto], (err, result)=> {
+        console.log(result);
+        res.send(result);
+    });
+});
+
+// Update Habitat
+app.put('/api/updateHabitats', (req, res) =>{
+    const habitatName = req.body.habitatName
+    const habitatDescription = req.body.habitatDescription
+    const habitatSize = req.body.habitatSize
+    const habitatPhoto = req.body.habitatPhoto
+    const idHabitat = req.body.idHabitat
+    const sqlUpdate = `
+    UPDATE Habitats
+    SET     habitatName = ?, habitatDescription = ?, habitatSize = ?,
+            habitatPhoto = ?
+    WHERE   idHabitat = ?;
+    `;
+    db.query(sqlUpdate, [habitatName, habitatDescription, habitatSize, habitatPhoto, idHabitat], (err, result)=> {
+        if (err) console.log(err); else console.log(result);
+        res.send(result);
+    });
+});
+
+// Delete Habitat
+app.delete('/api/deleteHabitats/:idHabitat', (req, res) =>{
+    const idHabitat = req.params.idHabitat
+    const sqlDelete = `
+    DELETE
+    FROM Habitats
+    WHERE idHabitat = ?
+    `;
+    db.query(sqlDelete, idHabitat, (err, result)=> {
+        if (err) console.log(err);
+        res.send(result);
+    });
+});
+
+
 ///////////////////////////
 // TASK CATEGORY QUERIES //
 ///////////////////////////

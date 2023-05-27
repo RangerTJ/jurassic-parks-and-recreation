@@ -75,7 +75,7 @@ function EmployeesUpdateForm ({hostURL}) {
 
     return (
         <>
-            <h2>Update Employee Task Record</h2>
+            <h2>Update Employee</h2>
             <article>
                 <p>
                     Make changes to this Employee Task record and click "Save" to retain them.

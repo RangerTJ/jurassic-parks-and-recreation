@@ -5,10 +5,6 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import Axios from 'axios';
 
-// ////////////////////////
-// // UNDER CONSTRUCTION //
-// ////////////////////////
-
 
 // HostURL Passed from App.js
 function ParksPage ({hostURL}) {
@@ -22,7 +18,7 @@ function ParksPage ({hostURL}) {
     const updateParksURL = hostURL + '/api/updateParks';
     const deleteParksURL = hostURL + '/api/deleteParks/';
 
-    // Bio Asset Table Functions
+    // Parks Table Functions
     const [parksList, setParksList] = useState([])
     const [park, setPark] = useState('')
 
@@ -146,7 +142,7 @@ function ParksPage ({hostURL}) {
                             // Citation: Used slicing method suggested by user Bumptious Q Bangwhistle on stackoverflow on 1/23/2017 to slice image paths to more useful descriptive text for alt text.
                             // URL: https://stackoverflow.com/questions/9133102/how-to-grab-substring-before-a-specified-character-in-javascript
                             // No, I didn't make that name up.
-                            const altText = val.employeePhoto ? val.employeePhoto.substring(14, val.employeePhoto.indexOf('.')) : "Default"
+                            const altText = val.parksPhoto ? val.parksPhoto.substring(14, val.parksPhoto.indexOf('.')) : "Default"
                             
                             return (
                                 <tr key={index}>
