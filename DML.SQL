@@ -89,7 +89,7 @@ ORDER BY idHabitat ASC;
 -- SELECT Facilities
 SELECT  Facilities.idFacility, Parks.parkName, FacilityTypes.facTypeName, Habitats.habitatName,
         Facilities.facilityName, Facilities.facilityDescription, Facilities.facilityLocation, 
-        Facilities.securityRating, Facilities.facilityPhoto, Facilities.facilityNote
+        Facilities.securityRating, Facilities.facilityPhoto, Facilities.facilityNote, Parks.parkLocation
 FROM Facilities
 -- Need to join Facilities -> Parks -> FacilityTypes -> Habitats
 LEFT JOIN Parks ON Facilities.idPark = Parks.idPark

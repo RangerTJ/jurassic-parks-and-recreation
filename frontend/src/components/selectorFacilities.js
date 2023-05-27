@@ -38,16 +38,16 @@ const SelectorFacilities = ({preSelected, isRequired, autoFocus, hostURL, facili
         {/* Set default option then map query results to populate the select menu */}
         <option value="">None (Select a Facility)</option>
         {list.map((val, index) => {
-    if (val.habitatName !== null) {
-      return (
-        <option key={index} value={val.facilityName}>{val.parkName}, {val.facilityName} (Security: {val.securityRating}, {val.habitatName})</option>
-      );
-    } else {
-      return (
-        <option key={index} value={val.facilityName}>{val.parkName}, {val.facilityName} (Security: {val.securityRating}, NOT ENCLOSURE)</option>
-      );
-    }
-  })}
+      if (val.habitatName !== null) {
+        return (
+          <option key={index} value={val.facilityName}>{val.parkName}, {val.facilityName} (Security: {val.securityRating}, {val.habitatName})</option>
+        );
+      } else {
+        return (
+          <option key={index} value={val.facilityName}>{val.parkName}, {val.facilityName} (Security: {val.securityRating}, NOT ENCLOSURE)</option>
+        );
+      }
+    })}
       </select>
     </>
   );

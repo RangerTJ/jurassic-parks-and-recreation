@@ -476,7 +476,7 @@ app.get('/api/getFacilities', (req, res) =>{
     const sqlRead = `
     SELECT  Facilities.idFacility, Parks.parkName, FacilityTypes.facTypeName, Habitats.habitatName,
             Facilities.facilityName, Facilities.facilityDescription, Facilities.facilityLocation, 
-            Facilities.securityRating, Facilities.facilityPhoto, Facilities.facilityNote
+            Facilities.securityRating, Facilities.facilityPhoto, Facilities.facilityNote, Parks.parkLocation
     FROM Facilities
     LEFT JOIN Parks ON Facilities.idPark = Parks.idPark
     LEFT JOIN FacilityTypes ON Facilities.idFacilityType = FacilityTypes.idFacilityType

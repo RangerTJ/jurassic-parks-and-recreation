@@ -163,7 +163,10 @@ function FacilitiesPage ({hostURL}) {
                                         <div>#{val.idFacility}</div>
                                         <div><strong>{val.facilityName}</strong></div>
                                     </td>
-                                    <td>{val.parkName}</td>
+                                    <td className="tableDescription">
+                                        <div><strong>{val.parkName}</strong></div>
+                                        <p>{val.parkLocation}</p>
+                                    </td>
                                     <td className="tableDescription">
                                         <ul>
                                             <li>{val.facTypeName}</li>
