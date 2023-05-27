@@ -4,7 +4,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from 'react-router-dom'; // May not need?
 import Axios from 'axios';
-
+import securityCamera1 from '../images/cameraCompressed.mp4'
 
 // HostURL Passed from App.js
 function HomePage({hostURL}) {
@@ -119,6 +119,18 @@ function HomePage({hostURL}) {
                 <p>
                     This empowers managers to quickly and easily perform tasks, like assigning a new dinosaur to an appropriate habitat based on its own habitat and diet needs and those of available enclosure facilities. As another example, a park manager could quickly and easily discern whether or not a certain biological asset is secure enough in its current enclosure.
                 </p>
+            </article>
+
+            {/* Simulated security camera made following 'Replace animated GIFs with video for faster page loads' by Houssein Djirdeh 
+            and adapting it for React syntax. Footage recorded in-game footage from Jurassic World Evolution 2
+            URL: https://web.dev/replace-gifs-with-videos/ */}
+            <article>
+                <h3>Security Feed</h3>
+                <div>
+                    <video autoPlay loop muted title="Security Camera Feed">
+                        <source src={securityCamera1} type="video/mp4"></source>
+                    </video>
+                </div>
             </article>
             </>
     )

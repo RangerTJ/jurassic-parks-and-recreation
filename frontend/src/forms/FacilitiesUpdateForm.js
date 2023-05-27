@@ -94,16 +94,20 @@ function FacilitiesUpdateForm ({hostURL}) {
                                 autoFocus
                                 onChange={(e) => {setFacilityName(e.target.value)}
                                 }/>
+                            <div>Original: {oldFacilityName}</div>
                         </div>
                         <div className="selectorP">
                             <SelectorParks  hostURL={hostURL} parkName={parkName} setParkName={setParkName} isRequired={true} autoFocus={false} preSelected={oldParkName}/>
+                            <div>Original: {oldParkName}</div>
                         </div>
                         <div className="selectorP">
                             <SelectorFacilityTypes  hostURL={hostURL} facTypeName={facTypeName} setFacTypeName={setFacTypeName} isRequired={true} autoFocus={false} preSelected={oldFacTypeName}/>
+                            <div>Original: {oldFacTypeName}</div>
                         </div>
                         <div className="selectorP">
                             <SelectorHabitats  hostURL={hostURL} habitatName={habitatName} setHabitatName={setHabitatName} isRequired={false} autoFocus={false} preSelected={oldHabitatName}/>
                             <div>(Enclosures Only)</div>
+                            <div>Original: {oldHabitatName}</div>
                         </div>
                         <div className="selectorP">
                             <div><label htmlFor="facilityLocation">Location</label></div>
@@ -116,6 +120,7 @@ function FacilitiesUpdateForm ({hostURL}) {
                                 value={facilityLocation}
                                 onChange={(e) => {setFacilityLocation(e.target.value)}
                                 }/>
+                            <div>Original: {oldFacilityLocation}</div>
                         </div>
                         <div className="selectorP">
                             <div><label htmlFor="securityRating">Security Rating</label></div>
@@ -133,33 +138,38 @@ function FacilitiesUpdateForm ({hostURL}) {
                                 <option value="9">9</option>
                                 <option value="10">10</option>
                             </select>
+                            <div>Original: {oldSecurityRating}</div>
                         </div>
                         <div className="selectorP">
                             <ImageSelectorFacilities  hostURL={hostURL} image={facilityPhoto} setImage={setFacilityPhoto} isRequired={false} autoFocus={false} preSelected={oldFacilityPhoto}/>
+                            <div>Original: {oldFacilityPhoto.substring(14, oldFacilityPhoto.indexOf('.'))}</div>
+                            <div><img src={oldFacilityPhoto} alt ={oldFacilityPhoto.substring(14, oldFacilityPhoto.indexOf('.'))} width={100}/></div>
                         </div>
                         <div className="selectorP">
-                                <div><label htmlFor="facilityDescription">Description</label></div>
-                                <textarea
-                                    id ="facilityDescription"
-                                    name="facilityDescription"
-                                    cols="40" rows="5" 
-                                    min="5" max="255"
-                                    placeholder="Ex. Houses sauropods."
-                                    value={facilityDescription}
-                                    onChange={(e) => {setFacilityDescription(e.target.value)}
-                                    }/>
+                            <div><label htmlFor="facilityDescription">Description</label></div>
+                            <textarea
+                                id ="facilityDescription"
+                                name="facilityDescription"
+                                cols="40" rows="5" 
+                                min="5" max="255"
+                                placeholder="Ex. Houses sauropods."
+                                value={facilityDescription}
+                                onChange={(e) => {setFacilityDescription(e.target.value)}
+                                }/>
+                            <div>Original: {oldFacilityDescription}</div>
                         </div>
                         <div className="selectorP">
-                                <div><label htmlFor="facilityNote">Notes</label></div>
-                                <textarea
-                                    id ="facilityNote"
-                                    name="facilityNote"
-                                    cols="40" rows="5" 
-                                    min="5" max="255"
-                                    placeholder="Ex. Suffers from erosion. Schedule regular maintenance."
-                                    value={facilityNote}
-                                    onChange={(e) => {setFacilityNote(e.target.value)}
-                                    }/>
+                            <div><label htmlFor="facilityNote">Notes</label></div>
+                            <textarea
+                                id ="facilityNote"
+                                name="facilityNote"
+                                cols="40" rows="5" 
+                                min="5" max="255"
+                                placeholder="Ex. Suffers from erosion. Schedule regular maintenance."
+                                value={facilityNote}
+                                onChange={(e) => {setFacilityNote(e.target.value)}
+                                }/>
+                            <div>Original: {oldFacilityNote}</div>
                         </div>
                     </fieldset>
                 </form>

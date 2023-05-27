@@ -48,16 +48,16 @@ function EmployeesPage ({hostURL}) {
     }, [])
 
     // DELETE - Deletes target bio asset and refreshes all 3 tables
-    const delEmployee = async (delID) => {
+    const delEmployee = async (delVal) => {
         try {
-            if (window.confirm(`Are you sure you want to remove Employee #${delID}?`)) {
-                await Axios.delete(deleteEmployeesURL + delID);
+            if (window.confirm(`Are you sure you want to remove ${delVal.firstName} ${delVal.lastName}?`)) {
+                await Axios.delete(deleteEmployeesURL + delVal.idEmployee);
                 
                 const mainViewResponse = await Axios.get(getEmployeesURL);
                 setEmployeesList(mainViewResponse.data);
                 console.log(mainViewResponse.data);
         
-                alert(`Employee #${delID} has been removed from the database.`);
+                alert(`${delVal.firstName} ${delVal.lastName} has been removed from the database.`);
             }} catch (error) {
                 console.error('Error deleting employee.', error);
         }
@@ -111,7 +111,7 @@ function EmployeesPage ({hostURL}) {
                 <h3>Edit and Delete</h3>
                 <p>
                     To edit or delete any entity within the database, simply click the "Edit" or "<span className="demoRex">*</span>"
-                    buttons on the left side of the asset's corresponding column to enter the edit menu or delete
+                    buttons on the left side of the corresponding row to enter the edit menu or delete
                     it from the database, respectively.
                 </p>
             </article>
@@ -149,20 +149,27 @@ function EmployeesPage ({hostURL}) {
                             // URL: https://stackoverflow.com/questions/9133102/how-to-grab-substring-before-a-specified-character-in-javascript
                             // No, I didn't make that name up.
                             const altText = val.employeePhoto ? val.employeePhoto.substring(14, val.employeePhoto.indexOf('.')) : "Default"
-                            
+                            const radio = val.employeeRadio ? val.employeeRadio : "N/A"
+
                             return (
                                 <tr key={index}>
                                     <td>
                                         <div><button className="tableButton" onClick={()=> {navToUpdate(val)}}>Edit</button></div>
-                                        <div><button className="tableButton" onClick={()=> {delEmployee(val.idEmployee)}}>*</button></div>
+                                        <div><button className="tableButton" onClick={()=> {delEmployee(val)}}>*</button></div>
                                     </td>
-                                    <td>
-                                        <div>ID #{val.idEmployee}</div>
+                                    <td className="tableDescription">
+                                        <div>#{val.idEmployee}</div>
                                         <div><strong>{val.lastName}, {val.firstName}</strong></div>
                                         <div>({val.employeeUsername})</div>
                                     </td>
                                     <td>{val.jobTitle} ({wage}/hr)</td>
-                                    <td><div>{val.employeePhone}</div><div>{val.employeeEmail}</div><div>Radio Callsign: {val.employeeRadio}</div></td>
+                                    <td className="tableDescription">
+                                        <ul>
+                                            <li>{val.employeePhone}</li>
+                                            <li>{val.employeeEmail}</li>
+                                            <li>Radio Callsign: {radio}</li>
+                                        </ul>
+                                    </td>
                                     <td>
                                         {/* Lightbox tutorial by Alexandra Radevich provided the code for the on-click trigger here
                                         URL: https://medium.com/swlh/creating-a-simple-lightbox-from-scratch-in-react-caea84f90960
@@ -180,55 +187,6 @@ function EmployeesPage ({hostURL}) {
                         </tbody>
                     </table>
                 </div>                                  
-                {/* Old Design - propose we go with the new one that's more compact/reads better */}
-                {/* <div className="scrollableTable">
-                    <table>
-                        <tbody>
-                        <tr>
-                            <th>ID</th>
-                            <th>Last Name</th>
-                            <th>First Name</th>
-                            <th>Username</th>
-                            <th>Job</th>
-                            <th>Wage</th>
-                            <th>Phone</th>
-                            <th>Email</th>
-                            <th>Radio</th>
-                            <th>Photo</th>
-                            <th>Notes</th>
-
-                            <th>Update</th>
-                            <th>Delete</th>
-                        </tr>
-                        {employeesList.map((val, index)=> {
-                            const wage = val.hourlyWage ? val.hourlyWage.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) : '$0.00';
-                            return (
-                                <tr key={index}>
-                                    <td>{val.idEmployee}</td>
-                                    <td>{val.lastName}</td>
-                                    <td>{val.firstName}</td>
-                                    <td>{val.employeeUsername}</td>
-                                    <td>{val.jobTitle}</td>
-                                    <td className="tableDescription">{wage}</td>
-                                    <td>{val.employeePhone}</td>
-                                    <td>{val.employeeEmail}</td>
-                                    <td>{val.employeeRadio}</td>
-                                    <td>
-                                        
-                                        <a href={val.employeePhoto}>
-                                            <img src={val.employeePhoto} alt={val.employeePhoto} width={200}/>
-                                        </a>
-                                    </td>
-                                    <td className="tableDescription">{val.employeeNote}</td>
-
-                                    <td><button onClick={()=> {navToUpdate(val)}}>Update</button></td>
-                                    <td><button onClick={()=> {delEmployee(val.idEmployee)}}>Delete</button></td>
-                                </tr>
-                            )}
-                        )}
-                        </tbody>
-                    </table>  
-                </div> */}
             </article>
         </>
     );

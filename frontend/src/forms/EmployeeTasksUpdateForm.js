@@ -18,8 +18,8 @@ function EmployeeTasksUpdateForm ({hostURL}) {
     const { id, oldTask, oldEmployee, oldCategory, oldHours, oldCost, oldStart, oldEnd} = location.state;
     
     // Clip off time part of dates so they can pre-populate date pickers (some data loss, but probably should have just done dates instead of datetime anyways)
-    const oldStartDateString = oldStart.substring(0, 10);
-    const oldEndDateString = oldEnd.substring(0, 10);
+    const oldStartDateString = oldStart ? oldStart.substring(0, 10): '';
+    const oldEndDateString = oldEnd ? oldEnd.substring(0, 10): '';
 
     // BiologicalAssets SQL Endpoints
     const updateEmployeeTasksURL = hostURL + '/api/updateEmployeeTasks';
@@ -75,6 +75,11 @@ function EmployeeTasksUpdateForm ({hostURL}) {
             <article>
                 <p>
                     Make changes to this Employee Task record and click "Save" to retain them.
+                </p>
+                <p>
+                    Please be aware that the Tasks select menu will only show tasks that have not yet been "completed" (that is, given an end date).
+                    This is done to avoid cluttering up the interface. To add an Employee Task report entry to the database for a completed Task,
+                    you will need to navigate to the Assigned Tasks page and set the Task's ending date to null. It can then be selected.
                 </p>
                 <form>
                     <fieldset>

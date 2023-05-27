@@ -53,6 +53,7 @@ function BiologicalAssetsAddForm ({hostURL}) {
                         <legend>Information</legend>
                         <div className="selectorP">
                             <SelectorSpecies  hostURL={hostURL} species={species} setSpecies={setSpecies} isRequired={true} autoFocus={true}/>
+                            {/* Try to add preview image of species here using conditional code (if species image isn't NULL) */}
                         </div>
                         <div className="selectorP">
                             <div><label htmlFor="bioAssetName">Name</label></div>

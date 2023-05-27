@@ -43,13 +43,13 @@ const ImageSelectorParks = ({preSelected, isRequired, autoFocus, hostURL, image,
 
   return (
     <>
-      <div><label htmlFor="speciesImageSelector">Image Selection</label></div>
-      <select id="speciesImageSelector" value={selected} onChange={selectionHandler} autoFocus={autoFocus ? true : false} required={isRequired ? true : false}>
+      <div><label htmlFor="parksImageSelector">Image Selection</label></div>
+      <select id="parksImageSelector" value={selected} onChange={selectionHandler} autoFocus={autoFocus ? true : false} required={isRequired ? true : false}>
 
         {/* Map the Options after hard-coded default */}
         <option value="">Select an Image (Default - None)</option>
         {filenames.map((imagePath, index) => {
-          return <option key={index} value={imagePath}>{imagePath}</option>;
+          return <option key={index} value={imagePath}>{imagePath.substring(14, imagePath.indexOf('.'))}</option>;
         })}
       </select>
       {/* <p>{preSelected},{selected} DEBUG STUFF</p> */}

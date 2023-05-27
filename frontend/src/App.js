@@ -25,16 +25,27 @@ import FacilityTypesPage from "./pages/FacilityTypesPage";
 import JobClassificationsPage from "./pages/JobClassificationsPage";
 
 // Form Page Imports
+import ParksAddForm from "./forms/ParksAddForm";
+import ParksUpdateForm from "./forms/ParksUpdateForm";
 import BiologicalAssetsAddForm from "./forms/BiologicalAssetsAddForm";
 import BiologicalAssetsUpdateForm from "./forms/BiologicalAssetsUpdateForm";
 import EmployeeTasksAddForm from "./forms/EmployeeTasksAddForm";
 import EmployeeTasksUpdateForm from "./forms/EmployeeTasksUpdateForm";
 import EmployeesAddForm from "./forms/EmployeesAddForm";
 import EmployeesUpdateForm from "./forms/EmployeesUpdateForm";
+import JobClassificationsAddForm from "./forms/JobClassificationsAddForm";
+import JobClassificationsUpdateForm from "./forms/JobClassificationsUpdateForm";
 import FacilitiesAddForm from "./forms/FacilitiesAddForm";
 import FacilitiesUpdateForm from "./forms/FacilitiesUpdateForm";
+import FacilityTypesAddForm from "./forms/FacilityTypesAddForm";
+import FacilityTypesUpdateForm from "./forms/FacilityTypesUpdateForm";
 import TasksAssignedAddForm from "./forms/TasksAssignedAdd"; // Done
 import TasksAssignedUpdateForm from "./forms/TasksAssignedUpdate";
+import TaskCategoriesAddForm from "./forms/TaskCategoriesAddForm";
+import TaskCategoriesUpdateForm from "./forms/TaskCategoriesUpdateForm";
+import HabitatsAddForm from "./forms/HabitatsAddForm";
+import HabitatsUpdateForm from "./forms/HabitatsUpdateForm";
+
 
 // React Application
 function App() {
@@ -45,7 +56,7 @@ function App() {
     <div className="App">
       <BrowserRouter>
       <header>
-          <h1 className="headerBox">Jurassic Parks and Recreation <img className="headerLogo" src={logo} alt="Test"></img></h1>
+        <h1 className="headerBox">Jurassic Parks and Recreation <img className="headerLogo" src={logo} alt="Test"></img></h1>
         <p className="headerP">D.I.N.O<a className="whte_rbt_obj" href="https://markhjorth.github.io/nedry/">.</a></p>
       </header>
       <Nav />
@@ -78,8 +89,18 @@ function App() {
                 <Route path="/EmployeesUpdate" element={<EmployeesUpdateForm hostURL={hostURL} />} />
                 <Route path="/FacilitiesAdd" element={<FacilitiesAddForm hostURL={hostURL} />} />
                 <Route path="/FacilitiesUpdate" element={<FacilitiesUpdateForm hostURL={hostURL} />} />
+                <Route path="/FacilityTypesAdd" element={<FacilityTypesAddForm hostURL={hostURL} />} />
+                <Route path="/FacilityTypesUpdate" element={<FacilityTypesUpdateForm hostURL={hostURL} />} />
                 <Route path="/TasksAssignedAdd" element={<TasksAssignedAddForm hostURL={hostURL} />} />
                 <Route path="/TasksAssignedUpdate" element={<TasksAssignedUpdateForm hostURL={hostURL} />} />
+                <Route path="/TaskCategoriesAdd" element={<TaskCategoriesAddForm hostURL={hostURL} />} />
+                <Route path="/TaskCategoriesUpdate" element={<TaskCategoriesUpdateForm hostURL={hostURL} />} />
+                <Route path="/ParksAdd" element={<ParksAddForm hostURL={hostURL} />} />
+                <Route path="/ParksUpdate" element={<ParksUpdateForm hostURL={hostURL} />} />
+                <Route path="/JobClassificationsAdd" element={<JobClassificationsAddForm hostURL={hostURL} />} />
+                <Route path="/JobClassificationsUpdate" element={<JobClassificationsUpdateForm hostURL={hostURL} />} />
+                <Route path="/HabitatsAdd" element={<HabitatsAddForm hostURL={hostURL} />} />
+                <Route path="/HabitatsUpdate" element={<HabitatsUpdateForm hostURL={hostURL} />} />
 
             </Routes>
         </section>

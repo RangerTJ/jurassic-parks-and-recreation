@@ -90,7 +90,7 @@ function EmployeeTasksPage ({hostURL}) {
                 <h3>Edit and Delete</h3>
                 <p>
                     To edit or delete any entity within the database, simply click the "Edit" or "<span className="demoRex">*</span>"
-                    buttons on the left side of the asset's corresponding column to enter the edit menu or delete
+                    buttons on the left side of the corresponding row to enter the edit menu or delete
                     it from the database, respectively.
                 </p>
             </article>
@@ -105,27 +105,27 @@ function EmployeeTasksPage ({hostURL}) {
                         <tbody>
                         <tr>
                             <th>Edit</th>
-                            <th>Report</th>
+                            <th>Employee Task Report</th>
                             <th>Employee</th>  
                             <th>Category</th>
                             <th>Hours Worked</th>
                             <th>Total Cost</th>
-                            <th>Timestamps</th>
+                            <th>Start/End</th>
                         </tr>
                         {employeeTaskList.map((val, index)=> {
                             // Convert cost to USD or set to 0 USD if there is a null entry
                             const taskCost = val.empTaskCost ? val.empTaskCost.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) : '$0.00';
-                            const startDateAbridged = val.empTaskStart.substring(0, 10);
-                            const endDateAbridged = val.empTaskEnd.substring(0, 10);
+                            const startDateAbridged = val.empTaskStart ? val.empTaskStart.substring(0, 10) : 'Issue: NULL Start';
+                            const endDateAbridged = val.empTaskEnd ? val.empTaskEnd.substring(0, 10) : 'Issue: NULL End';
                             return (
                                 <tr key={index}>
                                     <td>
                                         <div><button className="tableButton" onClick={()=> {navToUpdate(val)}}>Edit</button></div>
                                         <div><button className="tableButton" onClick={()=> {delEmployeeTask(val.idEmployeeTask)}}>*</button></div>
                                     </td>
-                                    <td>
+                                    <td className="tableDescription">
                                         <div><strong>Report #{val.idEmployeeTask}</strong></div>
-                                        <div>for '{val.taskName}'</div>
+                                        <div>For '{val.taskName}'</div>
                                     </td>
                                     <td>
                                         <div>{val.contributingEmployee}</div>

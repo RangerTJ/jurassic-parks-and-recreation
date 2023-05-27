@@ -9,6 +9,12 @@
 
 -- Disable key checks per suggestions from assignment page:
 -- URL: https://canvas.oregonstate.edu/courses/1914747/assignments/9180999?module_item_id=23040579
+
+-- Proposed Changes 5/27/23:
+-- Convert DELETE cascades to RESTRICT for pretty much everything
+-- Remove size from habitats
+
+
 SET FOREIGN_KEY_CHECKS=0;
 SET AUTOCOMMIT = 0;
 

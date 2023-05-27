@@ -75,7 +75,7 @@ function EmployeesUpdateForm ({hostURL}) {
 
     return (
         <>
-            <h2>Update Employee Task Record</h2>
+            <h2>Update Employee</h2>
             <article>
                 <p>
                     Make changes to this Employee Task record and click "Save" to retain them.
@@ -179,8 +179,8 @@ function EmployeesUpdateForm ({hostURL}) {
                             </div>
                             <div className="selectorP">
                                 <ImageSelectorStaff  hostURL={hostURL} image={employeePhoto} setImage={setEmployeePhoto} isRequired={false} autoFocus={false} preSelected={oldEmployeePhoto}/>
-                                <div>Original: {oldEmployeePhoto}</div>
-                                <div><img src={oldEmployeePhoto} alt ={oldEmployeePhoto} width={100}/></div>
+                                <div>Original: {oldEmployeePhoto.substring(14, oldEmployeePhoto.indexOf('.'))}</div>
+                                <div><img src={oldEmployeePhoto} alt ={oldEmployeePhoto.substring(14, oldEmployeePhoto.indexOf('.'))} width={100}/></div>
                             </div>
                             <div className="selectorP">
                                 <div><label htmlFor="employeeNote">Notes</label></div>

@@ -48,16 +48,16 @@ function FacilitiesPage ({hostURL}) {
     }, [])
 
     // DELETE - Deletes target bio asset and refreshes all 3 tables
-    const delFacility = async (delID) => {
+    const delFacility = async (delVal) => {
         try {
-            if (window.confirm(`Are you sure you want to remove Facility #${delID}?`)) {
-                await Axios.delete(deleteFacilitiesURL + delID);
+            if (window.confirm(`Are you sure you want to remove ${delVal.facilityName}?`)) {
+                await Axios.delete(deleteFacilitiesURL + delVal.idFacility);
                 
                 const mainViewResponse = await Axios.get(getFacilitiesURL);
                 setFacilitiesList(mainViewResponse.data);
                 console.log(mainViewResponse.data);
         
-                alert(`Facility #${delID} has been removed from the database.`);
+                alert(`${delVal.facilityName} has been removed from the database.`);
             }} catch (error) {
                 console.error('Error deleting facility.', error);
         }
@@ -110,7 +110,7 @@ function FacilitiesPage ({hostURL}) {
                 <h3>Edit and Delete</h3>
                 <p>
                     To edit or delete any entity within the database, simply click the "Edit" or "<span className="demoRex">*</span>"
-                    buttons on the left side of the asset's corresponding column to enter the edit menu or delete
+                    buttons on the left side of the corresponding row to enter the edit menu or delete
                     it from the database, respectively.
                 </p>
             </article>
@@ -157,13 +157,16 @@ function FacilitiesPage ({hostURL}) {
                                 <tr key={index}>
                                     <td>
                                         <div><button className="tableButton" onClick={()=> {navToUpdate(val)}}>Edit</button></div>
-                                        <div><button className="tableButton" onClick={()=> {delFacility(val.idFacility)}}>*</button></div>
+                                        <div><button className="tableButton" onClick={()=> {delFacility(val)}}>*</button></div>
                                     </td>
-                                    <td>
-                                        <div>ID #{val.idFacility}</div>
+                                    <td className="tableDescription">
+                                        <div>#{val.idFacility}</div>
                                         <div><strong>{val.facilityName}</strong></div>
                                     </td>
-                                    <td>{val.parkName}</td>
+                                    <td className="tableDescription">
+                                        <div><strong>{val.parkName}</strong></div>
+                                        <p>{val.parkLocation}</p>
+                                    </td>
                                     <td className="tableDescription">
                                         <ul>
                                             <li>{val.facTypeName}</li>

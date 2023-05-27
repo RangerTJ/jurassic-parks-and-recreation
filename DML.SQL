@@ -23,9 +23,11 @@ FROM Habitats
 ORDER BY habitatName ASC;
 
 -- Facilities Selector
-SELECT facilityName, securityRating
+SELECT facilityName, securityRating, parkName, habitatName
 FROM Facilities
-ORDER BY facilityName, securityRating ASC;
+LEFT JOIN Parks ON Facilities.idPark = Parks.idPark
+LEFT JOIN Habitats ON Facilities.idHabitat = Habitats.idHabitat
+ORDER BY parkName, facilityName ASC;
 
 -- Diets Selector
 SELECT dietName
@@ -33,8 +35,9 @@ FROM Diets
 ORDER BY dietName ASC;
 
 -- Species Selector
-SELECT speciesName, threatLevel
+SELECT speciesName, threatLevel, habitatName
 FROM Species
+LEFT JOIN Habitats ON Species.idHabitat = Habitats.idHabitat
 ORDER BY speciesName ASC;
 
 -- Biological Assets Selector (Bio Asset -> Species JOIN needed)
@@ -48,13 +51,10 @@ SELECT jobTitle
 FROM JobClassifications
 ORDER BY jobTitle ASC;
 
--- Assigned Task Selector
--- May expand further later to filter out "completed" tasks to reduce selector bloat
--- Completed tasks could still be viewed on the table and be re-opened to see on drop-down again
--- Would need to add the "completed" tinyint field back so you could add Employee Task records to a "finished"
--- task until all records are in, then DB admin could check it closed to take it out of the filter.
+-- Assigned Task Selector (Only returns stuff that isn't finished yet - finished definition includes the paperwork to log all hours to it)
 SELECT taskName, taskStart
 FROM TasksAssigned
+WHERE taskEnd IS NULL
 ORDER BY taskName ASC;
 
 -- Employees Selector
@@ -89,7 +89,7 @@ ORDER BY idHabitat ASC;
 -- SELECT Facilities
 SELECT  Facilities.idFacility, Parks.parkName, FacilityTypes.facTypeName, Habitats.habitatName,
         Facilities.facilityName, Facilities.facilityDescription, Facilities.facilityLocation, 
-        Facilities.securityRating, Facilities.facilityPhoto, Facilities.facilityNote
+        Facilities.securityRating, Facilities.facilityPhoto, Facilities.facilityNote, Parks.parkLocation
 FROM Facilities
 -- Need to join Facilities -> Parks -> FacilityTypes -> Habitats
 LEFT JOIN Parks ON Facilities.idPark = Parks.idPark
@@ -254,7 +254,7 @@ VALUES  (
 
 -- Update Park
 UPDATE Parks
-SET     parkName = :parkName_input, parkLocation = :parkLocation_input, parkDescription = :parkDescription_input
+SET     parkName = :parkName_input, parkDescription = :parkDescription_input, parkLocation = :parkLocation_input
 WHERE idPark = :idPark_input;
 
 -- Update Facility Type
@@ -418,12 +418,10 @@ ORDER BY TaskTypeCost DESC;
 
 -- SELECT - Cost Analysis Report by Park
 SELECT  Parks.parkName, SUM(EmployeeTasks.empTaskCost) AS parkCost
-FROM TaskCategories
+FROM Parks
 -- Need to JOIN TaskCategories -> EmployeeTasks -> TasksAssigned -> Facilities -> Parks
-LEFT JOIN EmployeeTasks ON TaskCategories.idTaskCategory = EmployeeTasks.idTaskCategory
-LEFT JOIN TasksAssigned ON EmployeeTasks.idTaskAssigned = TasksAssigned.idTaskAssigned
-JOIN Facilities ON TasksAssigned.idFacility = Facilities.idFacility
-JOIN Parks ON Facilities.idPark = Parks.idPark
+LEFT JOIN Facilities ON Parks.idPark = Facilities.idPark
+LEFT JOIN TasksAssigned ON Facilities.idFacility = TasksAssigned.idFacility
 GROUP BY Parks.parkName
 ORDER BY ParkCost DESC;
 

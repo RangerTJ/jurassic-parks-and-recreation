@@ -69,6 +69,11 @@ function EmployeeTasksAddForm ({hostURL}) {
                     in the reported work performed for the related assigned task. This is important, as it gives JP&R a way to analyze
                     total costs related to different sectors.
                 </p>
+                <p>
+                    Please be aware that the Tasks select menu will only show tasks that have not yet been "completed" (that is, given an end date).
+                    This is done to avoid cluttering up the interface. To add an Employee Task report entry to the database for a completed Task,
+                    you will need to navigate to the Assigned Tasks page and set the Task's ending date to null. It can then be selected.
+                </p>
                 <form>
                     <fieldset>
                         <legend>Information</legend>
