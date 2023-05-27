@@ -48,16 +48,16 @@ function EmployeesPage ({hostURL}) {
     }, [])
 
     // DELETE - Deletes target bio asset and refreshes all 3 tables
-    const delEmployee = async (delID) => {
+    const delEmployee = async (delVal) => {
         try {
-            if (window.confirm(`Are you sure you want to remove Employee #${delID}?`)) {
-                await Axios.delete(deleteEmployeesURL + delID);
+            if (window.confirm(`Are you sure you want to remove ${delVal.firstName} ${delVal.lastName}?`)) {
+                await Axios.delete(deleteEmployeesURL + delVal.idEmployee);
                 
                 const mainViewResponse = await Axios.get(getEmployeesURL);
                 setEmployeesList(mainViewResponse.data);
                 console.log(mainViewResponse.data);
         
-                alert(`Employee #${delID} has been removed from the database.`);
+                alert(`${delVal.firstName} ${delVal.lastName} has been removed from the database.`);
             }} catch (error) {
                 console.error('Error deleting employee.', error);
         }
@@ -155,7 +155,7 @@ function EmployeesPage ({hostURL}) {
                                 <tr key={index}>
                                     <td>
                                         <div><button className="tableButton" onClick={()=> {navToUpdate(val)}}>Edit</button></div>
-                                        <div><button className="tableButton" onClick={()=> {delEmployee(val.idEmployee)}}>*</button></div>
+                                        <div><button className="tableButton" onClick={()=> {delEmployee(val)}}>*</button></div>
                                     </td>
                                     <td className="tableDescription">
                                         <div>#{val.idEmployee}</div>

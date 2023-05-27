@@ -50,15 +50,17 @@ function TasksAssignedPage ({hostURL}) {
     }
 
     // Deletes selected Task Assigned and refreshes the table
-    const delTaskAssigned = async (delID) => {
+    const delTaskAssigned = async (delVal) => {
         try {
-            if (window.confirm(`Are you sure you want to remove Task #${delID}?`)) {
+            if (window.confirm(`Are you sure you want to remove ${delVal.taskName}?`)) {
                 
-                await Axios.delete(deleteTasksAssignedURL + delID)
+                await Axios.delete(deleteTasksAssignedURL + delVal.idTaskAssigned)
 
                 const mainViewResponse = await Axios.get(getTasksAssignedURL);
                 setTasksAssignedList(mainViewResponse.data);
-                console.log(mainViewResponse.data)
+                console.log(mainViewResponse.data);
+
+                alert(`${delVal.taskName} has been removed from the database.`)
             }}
         catch (error) {
             console.error('Error deleting Task.', error);
@@ -115,7 +117,7 @@ function TasksAssignedPage ({hostURL}) {
                                 <tr key={index}>
                                     <td>
                                         <div><button className="tableButton" onClick={()=> {navToUpdate(val)}}>Edit</button></div>
-                                        <div><button className="tableButton" onClick={()=> {delTaskAssigned(val.idTaskAssigned)}}>*</button></div>
+                                        <div><button className="tableButton" onClick={()=> {delTaskAssigned(val)}}>*</button></div>
                                     </td>
                                     <td className="tableDescription">
                                         <div>#{val.idTaskAssigned}</div>

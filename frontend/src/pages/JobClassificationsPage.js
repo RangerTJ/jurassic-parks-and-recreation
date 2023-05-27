@@ -30,18 +30,18 @@ function JobClassificationsPage ({hostURL}) {
 
    // ** Delete the manual refresh later and see if using the use-effect when parksList is modified works instead - was spam refreshing on just a load? **
    // DELETE - Deletes target
-   const delJobClassifications = async (delID) => {
+   const delJobClassifications = async (delVal) => {
        try {
-           if (window.confirm(`Are you sure you want to Job Classification #${delID}?`)) {
-               await Axios.delete(deleteJobClassificationsURL + delID);
+           if (window.confirm(`Are you sure you want to delete ${delVal.jobTitle}?`)) {
+               await Axios.delete(deleteJobClassificationsURL + delVal.idJobClassification);
                
                const mainViewResponse = await Axios.get(getJobClassificationsURL);
                setJobClassificationsList(mainViewResponse.data);
                console.log(mainViewResponse.data);
        
-               alert(`Job Classification #${delID} has been removed from the database.`);
+               alert(`${delVal.jobTitle} has been removed from the database.`);
            }} catch (error) {
-               console.error('Error deleting Park.', error);
+               console.error('Error deleting Job.', error);
        }
    };
 
@@ -110,7 +110,7 @@ function JobClassificationsPage ({hostURL}) {
                                        <div><button className="tableButton" onClick={()=> {navToUpdate(val)}}>Edit</button></div>
 
                                        {/* ** Edit later tonight - pass whole object to delete for better errors messages ** */}
-                                       <div><button className="tableButton" onClick={()=> {delJobClassifications(val.idJobClassification)}}>*</button></div>
+                                       <div><button className="tableButton" onClick={()=> {delJobClassifications(val)}}>*</button></div>
                                    </td>
                                    <td className="tableDescription">
                                        <div>Job Code #{val.idJobClassification}</div>

@@ -53,17 +53,16 @@ function ParksPage ({hostURL}) {
 
     // ** Delete the manual refresh later and see if using the use-effect when parksList is modified works instead - was spam refreshing on just a load? **
     // DELETE - Deletes target
-    const delParks = async (delID) => {
+    const delParks = async (delVal) => {
         try {
-            if (window.confirm(`Are you sure you want to remove Park #${delID}?`)) {
-                await Axios.delete(deleteParksURL + delID);
-                
-                const mainViewResponse = await Axios.get(getParksURL);
-                setParksList(mainViewResponse.data);
-                console.log(mainViewResponse.data);
-        
-                alert(`Park #${delID} has been removed from the database.`);
-            }} catch (error) {
+            if (window.confirm(`Are you sure you want to remove ${delVal.parkName}?`)) {
+                if (window.confirm  (`CASCADE WARNING - PROCEED WITH EXTREME CAUTION: Deleting ${delVal.parkName} will also delete all Facilities, Biological Assets, and Assigned Tasks associated with the park. Deleting a Park is STRONGLY discouraged unless you have a VERY good reason, such as a need to wipe all of the park's affiliated data immediately. ONLY PROCEED IF YOU WANT TO WIPE ALL RELATED DATA FROM THE DATABASE AND YOU ARE WILLING TO ACCEPT RESPONSIBILITY FOR ANY RESULTING DATA LOSS. Are you ABSOLUTELY sure that you want to proceed?`)) {
+                    await Axios.delete(deleteParksURL + delVal.idPark);
+                    const mainViewResponse = await Axios.get(getParksURL);
+                    setParksList(mainViewResponse.data);
+                    console.log(mainViewResponse.data);
+                    alert(`${delVal.parkName} has been removed from the database.`);
+           }}} catch (error) {
                 console.error('Error deleting Park.', error);
         }
     };
@@ -150,7 +149,7 @@ function ParksPage ({hostURL}) {
                                         <div><button className="tableButton" onClick={()=> {navToUpdate(val)}}>Edit</button></div>
 
                                         {/* ** Edit later tonight - pass whole object to delete for better errors messages ** */}
-                                        <div><button className="tableButton" onClick={()=> {delParks(val.idPark)}}>*</button></div>
+                                        <div><button className="tableButton" onClick={()=> {delParks(val)}}>*</button></div>
                                     </td>
                                     <td className="tableDescription">
                                         <div>Park #{val.idPark}</div>

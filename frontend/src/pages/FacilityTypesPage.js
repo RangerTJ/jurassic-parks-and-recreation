@@ -27,16 +27,16 @@ function FacilityTypesPage ({hostURL}) {
         getFacilityTypes();
     }, [])
 
-    const delFacilityTypes = async (delID) => {
+    const delFacilityTypes = async (delVal) => {
         try {
-            if (window.confirm(`Are you sure you want to remove Facility Type #${delID}?`)) {
-                await Axios.delete(deleteFacilityTypesURL + delID);
+            if (window.confirm(`Are you sure you want to remove ${delVal.facTypeName}?`)) {
+                await Axios.delete(deleteFacilityTypesURL + delVal.idFacilityType);
                 
                 const mainViewResponse = await Axios.get(getFacilityTypesURL);
                 setFacilityTypesList(mainViewResponse.data);
                 console.log(mainViewResponse.data);
         
-                alert(`Facility Type #${delID} has been removed from the database.`);
+                alert(`${delVal.facTypeName} has been removed from the database.`);
             }} catch (error) {
                 console.error('Error deleting Facility Type.', error);
         }
@@ -107,7 +107,7 @@ function FacilityTypesPage ({hostURL}) {
                                         <div><button className="tableButton" onClick={()=> {navToUpdate(val)}}>Edit</button></div>
 
                                         {/* ** Edit later - pass whole object to delete for better errors messages ** */}
-                                        <div><button className="tableButton" onClick={()=> {delFacilityTypes(val.idFacilityType)}}>*</button></div>
+                                        <div><button className="tableButton" onClick={()=> {delFacilityTypes(val)}}>*</button></div>
                                     </td>
                                     <td className="tableDescription">
                                         <div>Type #{val.idFacilityType}</div>

@@ -28,16 +28,16 @@ function TaskCategoryPage({hostURL}) {
 
     // ** Delete the manual refresh later and see if using the use-effect when parksList is modified works instead - was spam refreshing on just a load? **
     // DELETE - Deletes target
-    const delTaskCategories = async (delID) => {
+    const delTaskCategories = async (delVal) => {
         try {
-            if (window.confirm(`Are you sure you want to Job Classification #${delID}?`)) {
-                await Axios.delete(deleteTaskCategoriesURL + delID);
+            if (window.confirm(`Are you sure you want to delete ${delVal.categoryName}?`)) {
+                await Axios.delete(deleteTaskCategoriesURL + delVal.idTaskCategory);
                 
                 const mainViewResponse = await Axios.get(getTaskCategoriesURL);
                 setTaskCategoriesList(mainViewResponse.data);
                 console.log(mainViewResponse.data);
         
-                alert(`Category #${delID} has been removed from the database.`);
+                alert(`${delVal.categoryName} has been removed from the database.`);
             }} catch (error) {
                 console.error('Error deleting Category.', error);
         }
@@ -107,7 +107,7 @@ function TaskCategoryPage({hostURL}) {
                                         <div><button className="tableButton" onClick={()=> {navToUpdate(val)}}>Edit</button></div>
 
                                         {/* ** Edit later tonight - pass whole object to delete for better errors messages ** */}
-                                        <div><button className="tableButton" onClick={()=> {delTaskCategories(val.idTaskCategory)}}>*</button></div>
+                                        <div><button className="tableButton" onClick={()=> {delTaskCategories(val)}}>*</button></div>
                                     </td>
                                     <td>{val.idTaskCategory}</td>
                                     <td>{val.categoryName}</td>

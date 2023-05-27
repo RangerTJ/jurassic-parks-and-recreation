@@ -48,16 +48,16 @@ function FacilitiesPage ({hostURL}) {
     }, [])
 
     // DELETE - Deletes target bio asset and refreshes all 3 tables
-    const delFacility = async (delID) => {
+    const delFacility = async (delVal) => {
         try {
-            if (window.confirm(`Are you sure you want to remove Facility #${delID}?`)) {
-                await Axios.delete(deleteFacilitiesURL + delID);
+            if (window.confirm(`Are you sure you want to remove ${delVal.facilityName}?`)) {
+                await Axios.delete(deleteFacilitiesURL + delVal.idFacility);
                 
                 const mainViewResponse = await Axios.get(getFacilitiesURL);
                 setFacilitiesList(mainViewResponse.data);
                 console.log(mainViewResponse.data);
         
-                alert(`Facility #${delID} has been removed from the database.`);
+                alert(`${delVal.facilityName} has been removed from the database.`);
             }} catch (error) {
                 console.error('Error deleting facility.', error);
         }
@@ -157,7 +157,7 @@ function FacilitiesPage ({hostURL}) {
                                 <tr key={index}>
                                     <td>
                                         <div><button className="tableButton" onClick={()=> {navToUpdate(val)}}>Edit</button></div>
-                                        <div><button className="tableButton" onClick={()=> {delFacility(val.idFacility)}}>*</button></div>
+                                        <div><button className="tableButton" onClick={()=> {delFacility(val)}}>*</button></div>
                                     </td>
                                     <td className="tableDescription">
                                         <div>#{val.idFacility}</div>

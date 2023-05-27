@@ -56,10 +56,10 @@ function BiologicalAssetsPage ({hostURL}) {
 
 
     // DELETE - Deletes target bio asset and refreshes all 3 tables
-    const delBiologicalAsset = async (delID) => {
+    const delBiologicalAsset = async (delVal) => {
         try {
-            if (window.confirm(`Are you sure you want to remove Asset #${delID}?`)) {
-                await Axios.delete(deleteBiologicalAssetsURL + delID);
+            if (window.confirm(`Are you sure you want to remove ${delVal.bioAssetName}?`)) {
+                await Axios.delete(deleteBiologicalAssetsURL + delVal.idBiologicalAsset);
                 
                 const mainViewResponse = await Axios.get(getBiologicalAssetsURL);
                 setBiologicalAssetList(mainViewResponse.data);
@@ -73,7 +73,7 @@ function BiologicalAssetsPage ({hostURL}) {
                 setAssetSecMismatchList(securityMismatchResponse.data);
                 console.log(securityMismatchResponse.data);
         
-                alert(`Biological Asset #${delID} has been removed from the database.`);
+                alert(`${delVal.bioAssetName} has been removed from the database.`);
             }} catch (error) {
                 console.error('Error deleting biological asset.', error);
         }
@@ -261,7 +261,7 @@ function BiologicalAssetsPage ({hostURL}) {
                                 <tr key={index}>
                                     <td>
                                         <div><button className="tableButton" onClick={()=> {navToUpdate(val)}}>Edit</button></div>
-                                        <div><button className="tableButton" onClick={()=> {delBiologicalAsset(val.idBiologicalAsset)}}>*</button></div>
+                                        <div><button className="tableButton" onClick={()=> {delBiologicalAsset(val)}}>*</button></div>
                                     </td>
                                     <td className="tableDescription">
                                         <div>#{val.idBiologicalAsset}</div>

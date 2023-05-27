@@ -52,16 +52,16 @@ function HabitatsPage ({hostURL}) {
     }, [])
 
     // DELETE - Deletes target
-    const delHabitats = async (delID) => {
+    const delHabitats = async (delVal) => {
         try {
-            if (window.confirm(`Are you sure you want to remove Habitat #${delID}?`)) {
-                await Axios.delete(deleteHabitatsURL + delID);
+            if (window.confirm(`Are you sure you want to remove ${delVal.habitatName}?`)) {
+                await Axios.delete(deleteHabitatsURL + delVal.idHabitat);
                 
                 const mainViewResponse = await Axios.get(getHabitatsURL);
                 setHabitatsList(mainViewResponse.data);
                 console.log(mainViewResponse.data);
         
-                alert(`Habitat #${delID} has been removed from the database.`);
+                alert(`${delVal.habitatName} has been removed from the database.`);
             }} catch (error) {
                 console.error('Error deleting Habitat.', error);
         }
@@ -151,7 +151,7 @@ function HabitatsPage ({hostURL}) {
                                         <div><button className="tableButton" onClick={()=> {navToUpdate(val)}}>Edit</button></div>
 
                                         {/* ** Edit later tonight - pass whole object to delete for better errors messages ** */}
-                                        <div><button className="tableButton" onClick={()=> {delHabitats(val.idHabitat)}}>*</button></div>
+                                        <div><button className="tableButton" onClick={()=> {delHabitats(val)}}>*</button></div>
                                     </td>
                                     <td className="tableDescription">
                                         <div>Habitat #{val.idHabitat}</div>
