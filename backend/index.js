@@ -516,7 +516,7 @@ app.post('/api/insertFacilities', (req, res) =>{
     });
 });
 
-// Update facility
+// Update Facility
 app.put('/api/updateFacilities', (req, res) =>{
     const parkName = req.body.parkName
     const facTypeName = req.body.facTypeName
@@ -741,6 +741,145 @@ app.delete('/api/deleteBiologicalAssets/:idBiologicalAsset', (req, res) =>{
         res.send(result);
     });
 });
+
+//////////////////////////////
+//     Species Queries      //
+//////////////////////////////
+
+// Read Species
+app.get('/api/getSpecies', (req, res) => {
+    const sqlRead = `
+    SELECT Species.idSpecies, Species.speciesName, Diets.dietName, Habitats.habitatName, Species.speciesDescription,
+       Species.threatLevel, Species.speciesPhoto
+    FROM Species
+    LEFT JOIN Diets ON Species.idDiet = Diets.idDiet
+    LEFT JOIN Habitats ON Species.idHabitat = Habitats.idHabitat
+    ORDER BY idSpecies ASC;
+    `;
+    db.query(sqlRead, (err, result) => {
+        console.log(result);
+        res.send(result);
+    });
+});
+
+// Create Species
+app.post('/api/insertSpecies', (req, res) => {
+    const dietName = req.body.dietName
+    const habitatName = req.body.habitatName
+    const speciesName = req.body.speciesName
+    const speciesDescription = req.body.speciesDescription
+    const threatLevel = req.body.threatLevel
+    const speciesPhoto = req.body.speciesPhoto
+    const sqlInsert =`
+    INSERT INTO Species             (idDiet, idHabitat, speciesName, speciesDescription, threatLevel, speciesPhoto)
+    VALUES  (
+                (SELECT idDiet FROM Diets WHERE dietName = ?), 
+                (SELECT idHabitat FROM Habitat WHERE habitatName = ?), 
+                ?, ?, ?, ?
+            );
+    `;
+    db.query(sqlInsert, [dietName, habitatName, speciesName, speciesDescription, threatLevel, speciesPhoto], (err, result) => {
+        console.log(result);
+        res.send(result);
+    });
+});
+
+// Update Species
+app.put('/api/updateSpecies', (req, res) => {
+    const dietName = req.body.dietName
+    const habitatName = req.body.habitatName
+    const speciesName = req.body.speciesName
+    const speciesDescription = req.body.speciesDescription
+    const threatLevel = req.body.threatLevel
+    const speciesPhoto = req.body.speciesPhoto
+    const sqlUpdate = `
+    UPDATE Species
+    SET     idDiet =                (SELECT idDiet FROM Diets WHERE dietName = ?),
+            idHabitat =             (SELECT idHabitat FROM Habitats WHERE habitatName = ?),
+            speciesName = ?, speciesDescription = ?, threatLevel = ?, speciesPhoto = ?
+    WHERE   idSpecies = ?;
+    `;
+    db.query(sqlUpdate, [dietName, habitatName, speciesName, speciesDescription, threatLevel, speciesPhoto], (err, result) => {
+        if (err) console.log(err); else console.log(result);
+        res.send(result);
+    });
+});
+
+// Delete Species
+app.delete('/api/deleteSpecies/:idSpecies', (req, res) => {
+    const idSpecies = req.params.idSpecies
+    const sqlDelete = `
+    DELETE
+    FROM Species
+    WHERE idSpecies = ?;
+    `;
+    db.query(sqlDelete, idSpecies, (err, result) => {
+        if (err) console.log(err);
+        res.send(result);
+    });
+});
+
+//////////////////////
+//  Diets QUERIES   //
+//////////////////////
+
+// Read Diets
+app.get('/api/getDiets', (req,res) => {
+    const sqlRead = `
+    SELECT * FROM Diets
+    ORDER BY idDiet ASC;
+    `;
+    db.query(sqlRead, (err, result) => {
+        console.log(result);
+        res.send(result);
+    });
+});
+
+// Create Diets
+app.post('/api/insertDiets', (req, res) => {
+    const dietName = req.body.dietName
+    const dietDescription = req.body.dietDescription
+    const dietIcon = req.body.dietIcon
+    const sqlInsert = `
+    INSERT INTO Diets               (dietName, dietDescription, dietIcon)
+    VALUES  (?, ?, ?);
+    `;
+    db.query(sqlInsert, [dietName, dietDescription, dietIcon], (err, result) => {
+        console.log(result);
+        res.send(result);
+    });
+});
+
+// Update Diets
+app.put('/api/updateDiets', (req, res) => {
+    const dietName = req.body.dietName
+    const dietDescription = req.body.dietDescription
+    const dietIcon = req.body.dietIcon
+    const sqlUpdate = `
+    UPDATE Diets
+    SET     dietName = ?, dietDescription = ?, dietIcon = ?
+    WHERE idDiet = ?;
+    `;
+    db.query(sqlUpdate, [dietName, dietDescription, dietIcon], (err, result) => {
+        if (err) console.log(err); else console.log(result);
+        res.send(result);
+    });
+});
+
+// Delete Diets
+app.delete('/api/deleteDiets/:idDiet', (req, res) => {
+    const idDiet = req.params.idDiet
+    const sqlDelete = `
+    DELETE
+    FROM Diets
+    WHERE idDiet = ?;
+    `;
+    db.query(sqlDelete, idDiet, (err, result) => {
+        if (err) console.log(err);
+        res.send(result);
+    });
+});
+
 
 
 //////////////////////

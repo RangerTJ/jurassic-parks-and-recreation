@@ -43,9 +43,10 @@ import TasksAssignedAddForm from "./forms/TasksAssignedAdd"; // Done
 import TasksAssignedUpdateForm from "./forms/TasksAssignedUpdate";
 import TaskCategoriesAddForm from "./forms/TaskCategoriesAddForm";
 import TaskCategoriesUpdateForm from "./forms/TaskCategoriesUpdateForm";
-import HabitatsAddForm from "./forms/HabitatsAddForm";
-import HabitatsUpdateForm from "./forms/HabitatsUpdateForm";
-
+/*import HabitatsAddForm from "./forms/HabitatsAddForm";
+import HabitatsUpdateForm from "./forms/HabitatsUpdateForm";*/
+import DietsAddForm from "./forms/DietsAddForm";
+import DietsUpdateForm from "./forms/DietsUpdateForm";
 
 // React Application
 function App() {
@@ -99,8 +100,10 @@ function App() {
                 <Route path="/ParksUpdate" element={<ParksUpdateForm hostURL={hostURL} />} />
                 <Route path="/JobClassificationsAdd" element={<JobClassificationsAddForm hostURL={hostURL} />} />
                 <Route path="/JobClassificationsUpdate" element={<JobClassificationsUpdateForm hostURL={hostURL} />} />
-                <Route path="/HabitatsAdd" element={<HabitatsAddForm hostURL={hostURL} />} />
-                <Route path="/HabitatsUpdate" element={<HabitatsUpdateForm hostURL={hostURL} />} />
+                {/*<Route path="/HabitatsAdd" element={<HabitatsAddForm hostURL={hostURL} />} />
+                <Route path="/HabitatsUpdate" element={<HabitatsUpdateForm hostURL={hostURL} />} />*/}
+                <Route path="/DietsAdd" element={<DietsAddForm hostURL={hostURL} />} />
+                <Route path="/DietsUpdate" element={<DietsUpdateForm hostURL={hostURL} />} />
 
             </Routes>
         </section>
