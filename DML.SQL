@@ -23,9 +23,10 @@ FROM Habitats
 ORDER BY habitatName ASC;
 
 -- Facilities Selector
-SELECT facilityName, securityRating, parkName
+SELECT facilityName, securityRating, parkName, habitatName
 FROM Facilities
 LEFT JOIN Parks ON Facilities.idPark = Parks.idPark
+LEFT JOIN Habitats ON Facilities.idHabitat = Habitats.idHabitat
 ORDER BY parkName, facilityName ASC;
 
 -- Diets Selector
@@ -34,8 +35,9 @@ FROM Diets
 ORDER BY dietName ASC;
 
 -- Species Selector
-SELECT speciesName, threatLevel
+SELECT speciesName, threatLevel, habitatName
 FROM Species
+LEFT JOIN Habitats ON Species.idHabitat = Habitats.idHabitat
 ORDER BY speciesName ASC;
 
 -- Biological Assets Selector (Bio Asset -> Species JOIN needed)

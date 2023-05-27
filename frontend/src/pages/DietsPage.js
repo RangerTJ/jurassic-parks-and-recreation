@@ -17,6 +17,7 @@ function DietsPage ({hostURL}) {
 
     return (
         <>
+            <h2>Diets</h2>
             <h2> * Under Construction +</h2>
         </>
     );

@@ -38,7 +38,7 @@ const SelectorSpecies = ({preSelected, isRequired, autoFocus, hostURL, species, 
         {/* Set default option then map query results to populate the select menu */}
         <option value="">None (Select a Species)</option>
         {list.map((val, index) => {
-          return <option key={index} value={val.speciesName}>{val.speciesName} (Threat: {val.threatLevel})</option>;
+          return <option key={index} value={val.speciesName}>{val.speciesName} (Threat: {val.threatLevel}, Needs: {val.habitatName})</option>;
         })}
       </select>
       {/* <p>{preSelected},{selected} DEBUG STUFF</p> */}

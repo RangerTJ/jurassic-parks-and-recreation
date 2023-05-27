@@ -871,11 +871,12 @@ app.delete('/api/deleteTaskCategories/:idTaskCategory', (req, res) =>{
 // SELECT LIST ROUTES //
 ////////////////////////
 
-// Biological Asset Selector
+// Species Selector
 app.get('/api/getSpeciesList', (req, res) =>{
     const sqlRead = `
-    SELECT speciesName, threatLevel
+    SELECT speciesName, threatLevel, habitatName
     FROM Species
+    LEFT JOIN Habitats ON Species.idHabitat = Habitats.idHabitat
     ORDER BY speciesName ASC;
     `;
     db.query(sqlRead, (err, result)=> {
@@ -887,9 +888,10 @@ app.get('/api/getSpeciesList', (req, res) =>{
 // Facility Selector
 app.get('/api/getFacilitiesList', (req, res) =>{
     const sqlRead = `
-    SELECT facilityName, securityRating, parkName
+    SELECT facilityName, securityRating, parkName, habitatName
     FROM Facilities
     LEFT JOIN Parks ON Facilities.idPark = Parks.idPark
+    LEFT JOIN Habitats ON Facilities.idHabitat = Habitats.idHabitat
     ORDER BY parkName, facilityName ASC;
     `;
     db.query(sqlRead, (err, result)=> {
