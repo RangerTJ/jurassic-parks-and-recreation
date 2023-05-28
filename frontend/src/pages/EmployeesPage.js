@@ -18,7 +18,7 @@ function EmployeesPage ({hostURL}) {
     const getEmployeesURL = hostURL + '/api/getEmployees';  // TO DO - CREATE USE EFFECT AND USE STATE
     const deleteEmployeesURL = hostURL + '/api/deleteEmployees/';  // TO DO - NEED TO ADD USE STATES AND CRUD FUNCTIONS FOR THIS; INSERT/UPDATE GO ON RESPECTIVE FORM PAGES
 
-    // Bio Asset Table Functions
+    // States
     const [employeesList, setEmployeesList] = useState([])
     const [employee, setEmployee] = useState('')
 

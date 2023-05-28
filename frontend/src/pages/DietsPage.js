@@ -4,6 +4,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom'; // May not need?
 import Axios from 'axios';
+import staffDefaultImg from '../images/staffImages/default_staff.png';
 
 
 // HostURL Passed from App.js
@@ -14,11 +15,9 @@ function DietsPage ({hostURL}) {
     
     // Diets SQL Endpoints
     const getDietsURL = hostURL + '/api/getDiets';
-    const createDietsURL = hostURL + '/api/insertDiets';
-    const updateDietsURL = hostURL + '/api/updateDiets';
     const deleteDietsURL = hostURL + '/api/deleteDiets/';
 
-    // Diet Table Functions
+    // States
     const [dietsList, setDietsList] = useState([])
     const [diets, setDiets] = useState('')
 
@@ -49,18 +48,17 @@ function DietsPage ({hostURL}) {
     }, []);
 
     // DELETE Function
-    const delDiets = async (delID) => {
+    const delDiets = async (delVal) => {
         try {
-            if (window.confirm(`Are you sure you want to remove ${delID.dietName}?`)) {
-                await Axios.delete(deleteDietsURL + delID.idDiet);
+            if (window.confirm(`Are you sure you want to remove ${delVal.dietName}?`)) {
+                await Axios.delete(deleteDietsURL + delVal.idDiet);
 
                 const mainViewResponse = await Axios.get(getDietsURL);
-                setDiets(mainViewResponse.data);
+                setDietsList(mainViewResponse.data);
                 console.log(mainViewResponse.data);
 
-                alert(`${delID.dietName} has been removed from the database.`);
-            }} 
-        catch (error) {
+                alert(`${delVal.dietName} has been removed from the database.`);
+            }} catch (error) {
                 console.error('Error deleting Diet.', error);
         }
     };
@@ -114,7 +112,7 @@ function DietsPage ({hostURL}) {
             <article>
                 <h3>View Diets</h3>
                 <p>
-                    The table below shows existing information for Diet ettities and includes buttons to update or delete them.
+                    The table below shows existing information for Diet entities and includes buttons to update or delete them.
                 </p>
 
                 {/* Lightbox example code used from: Creating a Simple Lightbox From Scratch in React by Alexandra Radevich
@@ -134,7 +132,7 @@ function DietsPage ({hostURL}) {
                                 <th>ID #</th>
                                 <th>Name</th>
                                 <th>Description</th>
-                                <th>dietIcon</th>
+                                <th>Icon</th>
                             </tr>
                             {dietsList.map((val, index) => {
 
@@ -162,7 +160,11 @@ function DietsPage ({hostURL}) {
                                             {/* Lightbox tutorial by Alexandra Radevich provided the code for the on-click trigger here
                                             URL: https://medium.com/swlh/creating-a-simple-lightbox-from-scratch-in-react-caea84f90960
                                             Accessed 5/22/2023. No modification of code for on-click trigger.*/}
+                                            {val.dietIcon ?
                                             <img src={val.dietIcon} alt={altText} width={160} height={90} onClick={() => showImage(val.dietIcon)}/>
+                                            :
+                                            <img src={staffDefaultImg} alt="Default Image" width={160} height={90} />
+                                            }
                                         </td>
                                     </tr>
                                 )
