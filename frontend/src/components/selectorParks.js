@@ -20,7 +20,7 @@ const SelectorParks = ({preSelected, isRequired, autoFocus, hostURL, parkName, s
   useEffect(()=> {
     if (preSelected !== null) {setSelected(preSelected);}}, [preSelected])
 
-  // BiologicalAssets SQL Endpoints
+  // Parks SQL Endpoints
   const getListURL = hostURL + '/api/getParksList';
 
   // Populate list
@@ -42,10 +42,9 @@ const SelectorParks = ({preSelected, isRequired, autoFocus, hostURL, parkName, s
           return <option key={index} value={val.parkName}>{val.parkName}</option>;
         })}
       </select>
-      {/* <p>{preSelected},{selected} DEBUG STUFF</p> */}
     </>
   );
 };
 
 
-export default SelectorParks
+export default SelectorParks;

@@ -10,16 +10,16 @@ import ImageSelectorDiets from '../components/imageSelectorDiets';
 // HostURL Passed from App.js
 function DietsAddForm ({hostURL}) {
 
-    // Facility Type SQL Endpoint
+    // Diets SQL Endpoint
     const createDietsURL = hostURL + '/api/insertDiets';
     const navTo = useNavigate();
 
-    // Facility Type States for the Form
+    // Diets States for the Form
     const [dietName, setDietName] = useState('');
     const [dietDescription, setDietDescription] = useState('');
     const [dietIcon, setDietIcon] = useState('');
 
-    // CREATE - Insert New Bio Asset then return to asset home
+    // CREATE - Insert New Diet then return to Diets page
     const submit = async () => {
         try {
             if (dietName && dietDescription) {

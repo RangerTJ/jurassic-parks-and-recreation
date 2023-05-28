@@ -3,7 +3,7 @@
 
 
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Axios from 'axios';
 import staffDefaultImg from '../images/staffImages/default_staff.png';
 
@@ -47,7 +47,7 @@ function FacilitiesPage ({hostURL}) {
         getFacilities();
     }, [])
 
-    // DELETE - Deletes target Facility and refreshes all 3 tables
+    // DELETE - Deletes target Facility and refreshes Table
     const delFacility = async (delVal) => {
         try {
             if (window.confirm(`Are you sure you want to remove ${delVal.facilityName}?`)) {
@@ -95,7 +95,6 @@ function FacilitiesPage ({hostURL}) {
     // Render Webpage
     return (
         <>  
-            {/* End experimental copy/paste */}
             <h2>Facilities</h2>
             <article>
                 <h3>Add New Facility</h3>
@@ -114,7 +113,7 @@ function FacilitiesPage ({hostURL}) {
                     it from the database, respectively.
                 </p>
             </article>
-            {/* Could potentially reuse the bio assets species filter for job titles here or do a last name search or something */}
+            {/* Could potentially reuse the bio assets species filter for facility types here */}
             <article>
                 <h3>View Facilities</h3>
                 <p>

@@ -52,7 +52,6 @@ const ImageSelectorParks = ({preSelected, isRequired, autoFocus, hostURL, image,
           return <option key={index} value={imagePath}>{imagePath.substring(14, imagePath.indexOf('.'))}</option>;
         })}
       </select>
-      {/* <p>{preSelected},{selected} DEBUG STUFF</p> */}
 
       {/* Conditionally Render Preview Image (if not null) */}
       {selected && (
@@ -65,4 +64,4 @@ const ImageSelectorParks = ({preSelected, isRequired, autoFocus, hostURL, image,
   );
 };
 
-export default ImageSelectorParks
+export default ImageSelectorParks;

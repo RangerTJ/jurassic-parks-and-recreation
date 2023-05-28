@@ -20,7 +20,7 @@ const SelectorEmployees = ({preSelected, isRequired, autoFocus, hostURL, employe
   useEffect(()=> {
     if (preSelected !== null) {setSelected(preSelected);}}, [preSelected])
 
-  // BiologicalAssets SQL Endpoints
+  // Employees SQL Endpoints
   const getListURL = hostURL + '/api/getEmployeesList';
 
   // Populate list
@@ -42,10 +42,9 @@ const SelectorEmployees = ({preSelected, isRequired, autoFocus, hostURL, employe
           return <option key={index} value={val.employeeUsername}>{val.lastName}, {val.firstName} ({val.employeeUsername})</option>;
         })}
       </select>
-      {/* <p>{preSelected},{selected} DEBUG STUFF</p> */}
     </>
   );
 };
 
 
-export default SelectorEmployees
+export default SelectorEmployees;

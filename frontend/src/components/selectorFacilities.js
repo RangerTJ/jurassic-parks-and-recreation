@@ -54,4 +54,4 @@ const SelectorFacilities = ({preSelected, isRequired, autoFocus, hostURL, facili
 };
 
 
-export default SelectorFacilities
+export default SelectorFacilities;

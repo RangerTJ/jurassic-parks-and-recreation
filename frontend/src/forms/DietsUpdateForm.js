@@ -15,7 +15,7 @@ function DietsUpdateForm ({hostURL}) {
     const location = useLocation();
     const { id, oldDietName, oldDietDescription, oldDietIcon} = location.state;
 
-    // Diet SQL Endpoint
+    // Diets SQL Endpoint
     const updateDietsURL = hostURL + '/api/updateDiets';
     const navTo = useNavigate();
 
@@ -31,7 +31,7 @@ function DietsUpdateForm ({hostURL}) {
         setDietIcon(oldDietIcon);
     }, [])
 
-    // UPDATE - Submit Changes to a Bio Asset then return to Asset home (hours/cost can be zero'd in case they need to be cleared for an entry error)
+    // UPDATE - Submit Changes to a Diet then return to Diet page
     const update = async () => {
         try {
             if (dietName && dietDescription) {

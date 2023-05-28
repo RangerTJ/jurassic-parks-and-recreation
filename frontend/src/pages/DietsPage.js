@@ -19,7 +19,6 @@ function DietsPage ({hostURL}) {
 
     // States
     const [dietsList, setDietsList] = useState([])
-    const [diets, setDiets] = useState('')
 
     /* Citation: Creating a Simple Lightbox From Scratch in React by Alexandra Radevich
     URL: https://medium.com/swlh/creating-a-simple-lightbox-from-scratch-in-react-caea84f90960

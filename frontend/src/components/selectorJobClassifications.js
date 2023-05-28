@@ -20,7 +20,7 @@ const SelectorJobClassifications = ({preSelected, isRequired, autoFocus, hostURL
   useEffect(()=> {
     if (preSelected !== null) {setSelected(preSelected);}}, [preSelected])
 
-  // BiologicalAssets SQL Endpoints
+  // JobClassifications SQL Endpoints
   const getListURL = hostURL + '/api/getJobClassificationsList';
 
   // Populate list
@@ -42,10 +42,9 @@ const SelectorJobClassifications = ({preSelected, isRequired, autoFocus, hostURL
           return <option key={index} value={val.jobTitle}>{val.jobTitle}</option>;
         })}
       </select>
-      {/* <p>{preSelected},{selected} DEBUG STUFF</p> */}
     </>
   );
 };
 
 
-export default SelectorJobClassifications
+export default SelectorJobClassifications;

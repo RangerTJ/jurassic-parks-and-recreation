@@ -20,7 +20,7 @@ const SelectorFacilityTypes = ({preSelected, isRequired, autoFocus, hostURL, fac
   useEffect(()=> {
     if (preSelected !== null) {setSelected(preSelected);}}, [preSelected])
 
-  // Facility Type SQL Endpoint
+  // FacilityTypes SQL Endpoint
   const getListURL = hostURL + '/api/getFacilityTypesList';
 
   // Populate list
@@ -42,10 +42,9 @@ const SelectorFacilityTypes = ({preSelected, isRequired, autoFocus, hostURL, fac
           return <option key={index} value={val.facTypeName}>{val.facTypeName}</option>;
         })}
       </select>
-      {/* <p>{preSelected},{selected} DEBUG STUFF</p> */}
     </>
   );
 };
 
 
-export default SelectorFacilityTypes
+export default SelectorFacilityTypes;

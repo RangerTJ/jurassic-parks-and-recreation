@@ -47,4 +47,4 @@ const SelectorBiologicalAssets = ({preSelected, isRequired, autoFocus, hostURL, 
 };
 
 
-export default SelectorBiologicalAssets
+export default SelectorBiologicalAssets;

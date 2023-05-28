@@ -20,7 +20,7 @@ const SelectorTaskCategories = ({preSelected, isRequired, autoFocus, hostURL, ca
   useEffect(()=> {
     if (preSelected !== null) {setSelected(preSelected);}}, [preSelected])
 
-  // BiologicalAssets SQL Endpoints
+  // TaskCategories SQL Endpoints
   const getListURL = hostURL + '/api/getTaskCategoriesList';
 
   // Populate list
@@ -42,10 +42,9 @@ const SelectorTaskCategories = ({preSelected, isRequired, autoFocus, hostURL, ca
           return <option key={index} value={val.categoryName}>{val.categoryName}</option>;
         })}
       </select>
-      {/* <p>{preSelected},{selected} DEBUG STUFF</p> */}
     </>
   );
 };
 
 
-export default SelectorTaskCategories
+export default SelectorTaskCategories;

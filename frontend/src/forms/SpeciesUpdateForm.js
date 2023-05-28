@@ -41,7 +41,7 @@ function SpeciesUpdateForm ({hostURL}) {
     }, [])
 
     
-    // UPDATE - Submit Changes to a Species then return to Species home
+    // UPDATE - Submit Changes to a Species then return to Species page
     const update = async () => {
         try {
             if (dietName && habitatName && speciesName && speciesDescription && threatLevel) {

@@ -2,7 +2,7 @@
 // URLs - Part1: https://www.youtube.com/watch?v=T8mqZZ0r-RA, Part2: https://www.youtube.com/watch?v=3YrOOia3-mo, Part3: https://www.youtube.com/watch?v=_S2GKnFpdtE
 
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import Axios from 'axios';
 import SelectorJobClassifications from "../components/selectorJobClassifications";
 import ImageSelectorStaff from "../components/imageSelectorStaff";
@@ -16,11 +16,11 @@ function EmployeesUpdateForm ({hostURL}) {
     const location = useLocation();
     const { id, oldJobTitle, oldLastName, oldFirstName, oldEmployeeUsername, oldHourlyWage, oldEmployeePhone, oldEmployeeEmail, oldEmployeeRadio, oldEmployeePhoto, oldEmployeeNote} = location.state;
 
-    // Employee Update SQL Endpoint
+    // Employees Update SQL Endpoint
     const updateEmployeesURL = hostURL + '/api/updateEmployees';
     const navTo = useNavigate();
 
-    // Emp Task States for the Form
+    // Employees States for the Form
     const [jobTitle, setJobTitle] = useState('')
     const [lastName, setLastName] = useState('')
     const [firstName, setFirstName] = useState('')
@@ -46,7 +46,7 @@ function EmployeesUpdateForm ({hostURL}) {
         setEmployeeNote(oldEmployeeNote);
     }, [])
 
-    // UPDATE - Submit Changes to a Bio Asset then return to Asset home (hours/cost can be zero'd in case they need to be cleared for an entry error)
+    // UPDATE - Submit Changes to an Employee then return to Employee page
     const update = async () => {
         try {
             if (jobTitle && lastName && firstName && employeeUsername && employeePhone && employeeEmail) {

@@ -2,21 +2,21 @@
 // URLs - Part1: https://www.youtube.com/watch?v=T8mqZZ0r-RA, Part2: https://www.youtube.com/watch?v=3YrOOia3-mo, Part3: https://www.youtube.com/watch?v=_S2GKnFpdtE
 
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Axios from 'axios';
 
 
 // HostURL Passed from App.js
 function TaskCategoriesAddForm ({hostURL}) {
 
-    // Facility Type SQL Endpoint
+    // Task Categories SQL Endpoint
     const createTaskCategoriesURL = hostURL + '/api/insertTaskCategories';
     const navTo = useNavigate();
 
-    // Facility Type States for the Form
+    // Task Category States for the Form
     const [categoryName, setCategoryName] = useState('')
 
-    // CREATE - Insert New category then return to parent page
+    // CREATE - Insert New Task Category then return to Task Categories page
     const submit = async () => {
         try {
             if (categoryName) {

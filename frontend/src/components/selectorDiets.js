@@ -20,7 +20,7 @@ const SelectorDietTypes = ({preSelected, isRequired, autoFocus, hostURL, dietNam
   useEffect(()=> {
     if (preSelected !== null) {setSelected(preSelected);}}, [preSelected])
 
-  // Diet SQL Endpoint
+  // Diets SQL Endpoint
   const getListURL = hostURL + '/api/getDietsList';
 
   // Populate list

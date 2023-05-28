@@ -2,7 +2,7 @@
 // URLs - Part1: https://www.youtube.com/watch?v=T8mqZZ0r-RA, Part2: https://www.youtube.com/watch?v=3YrOOia3-mo, Part3: https://www.youtube.com/watch?v=_S2GKnFpdtE
 
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Axios from 'axios';
 import SelectorFacilities from '../components/selectorFacilities';
 import SelectorBiologicalAssets from '../components/selectorBiologicalAssets';
@@ -11,11 +11,11 @@ import SelectorBiologicalAssets from '../components/selectorBiologicalAssets';
 // HostURL Passed from App.js
 function TasksAssignedAddForm ({hostURL}) {
 
-    // BiologicalAssets SQL Endpoints
+    // TasksAssigned SQL Endpoints
     const createTasksAssignedURL = hostURL + '/api/insertTasksAssigned';
     const navTo = useNavigate();
 
-    // Emp Task States for the Form
+    // Task States for the Form
     const [facility, setFacility] = useState(null);
     const [bioAssetName, setBioAssetName] = useState(null);
     const [taskName, setTaskName] = useState('')

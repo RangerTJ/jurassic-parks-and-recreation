@@ -2,7 +2,7 @@
 // URLs - Part1: https://www.youtube.com/watch?v=T8mqZZ0r-RA, Part2: https://www.youtube.com/watch?v=3YrOOia3-mo, Part3: https://www.youtube.com/watch?v=_S2GKnFpdtE
 
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Axios from 'axios';
 
 
@@ -14,13 +14,10 @@ function JobClassificationsPage ({hostURL}) {
 
    //// JobClassifications SQL Endpoints
    const getJobClassificationsURL = hostURL + '/api/getJobClassifications';
-   const createJobClassificationsURL = hostURL + '/api/insertJobClassifications';
-   const updateJobClassificationsURL = hostURL + '/api/updateJobClassifications';
    const deleteJobClassificationsURL = hostURL + '/api/deleteJobClassifications/';
 
    // Job Table States
    const [jobClassificationsList, setJobClassificationsList] = useState([])
-   const [jobClassification, setJobClassification] = useState('')
 
    // READ Populate Table on load
    useEffect(()=> {
@@ -88,7 +85,6 @@ function JobClassificationsPage ({hostURL}) {
                     it from the database, respectively.
                </p>
            </article>
-           {/* Could potentially reuse the bio assets species filter for job titles here or do a last name search or something */}
            <article>
                <h3>View Job Classifications</h3>
                <p>
