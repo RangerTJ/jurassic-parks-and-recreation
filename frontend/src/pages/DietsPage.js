@@ -160,7 +160,7 @@ function DietsPage ({hostURL}) {
                                             {/* Lightbox tutorial by Alexandra Radevich provided the code for the on-click trigger here
                                             URL: https://medium.com/swlh/creating-a-simple-lightbox-from-scratch-in-react-caea84f90960
                                             Accessed 5/22/2023. No modification of code for on-click trigger.*/}
-                                            {val.employeePhoto ?
+                                            {val.dietIcon ?
                                             <img src={val.dietIcon} alt={altText} width={160} height={90} onClick={() => showImage(val.dietIcon)}/>
                                             :
                                             <img src={staffDefaultImg} alt="Default Image" width={160} height={90} />
