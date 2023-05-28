@@ -47,6 +47,8 @@ import HabitatsAddForm from "./forms/HabitatsAddForm";
 import HabitatsUpdateForm from "./forms/HabitatsUpdateForm";
 import DietsAddForm from "./forms/DietsAddForm";
 import DietsUpdateForm from "./forms/DietsUpdateForm";
+import SpeciesAddForm from "./forms/SpeciesAddForm";
+import SpeciesUpdateForm from "./forms/SpeciesUpdateForm";
 
 // React Application
 function App() {
@@ -104,6 +106,8 @@ function App() {
                 <Route path="/HabitatsUpdate" element={<HabitatsUpdateForm hostURL={hostURL} />} />
                 <Route path="/DietsAdd" element={<DietsAddForm hostURL={hostURL} />} />
                 <Route path="/DietsUpdate" element={<DietsUpdateForm hostURL={hostURL} />} />
+                <Route path="/SpeciesAdd" element={<SpeciesAddForm hostURL={hostURL} />} />
+                <Route path="/SpeciesUpdate" element={<SpeciesUpdateForm hostURL={hostURL} />} />
 
             </Routes>
         </section>

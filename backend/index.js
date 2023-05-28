@@ -774,7 +774,7 @@ app.post('/api/insertSpecies', (req, res) => {
     INSERT INTO Species             (idDiet, idHabitat, speciesName, speciesDescription, threatLevel, speciesPhoto)
     VALUES  (
                 (SELECT idDiet FROM Diets WHERE dietName = ?), 
-                (SELECT idHabitat FROM Habitat WHERE habitatName = ?), 
+                (SELECT idHabitat FROM Habitats WHERE habitatName = ?), 
                 ?, ?, ?, ?
             );
     `;
@@ -1020,6 +1020,19 @@ app.get('/api/getSpeciesList', (req, res) =>{
     ORDER BY speciesName ASC;
     `;
     db.query(sqlRead, (err, result)=> {
+        console.log(result);
+        res.send(result);
+    });
+});
+
+// Diets Selector
+app.get('/api/getDietsList', (req, res) => {
+    const sqlRead = `
+    SELECT dietName
+    FROM Diets
+    ORDER BY dietName ASC;
+    `;
+    db.query(sqlRead, (err, result) => {
         console.log(result);
         res.send(result);
     });

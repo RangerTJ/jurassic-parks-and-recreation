@@ -42,12 +42,12 @@ function FacilitiesPage ({hostURL}) {
      }
     /*!!! End of lightbox-tutorial code for function portion of page (see HTML rendering for calling of Lightbox commands) !!!*/
 
-    // READ Populate Biological Asset Table
+    // READ Populate Facilities Table
     useEffect(()=> {
         getFacilities();
     }, [])
 
-    // DELETE - Deletes target bio asset and refreshes all 3 tables
+    // DELETE - Deletes target Facility and refreshes all 3 tables
     const delFacility = async (delVal) => {
         try {
             if (window.confirm(`Are you sure you want to remove ${delVal.facilityName}?`)) {
