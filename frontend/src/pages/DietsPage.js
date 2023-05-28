@@ -132,7 +132,7 @@ function DietsPage ({hostURL}) {
                                 <th>ID #</th>
                                 <th>Name</th>
                                 <th>Description</th>
-                                <th>dietIcon</th>
+                                <th>Icon</th>
                             </tr>
                             {dietsList.map((val, index) => {
 
