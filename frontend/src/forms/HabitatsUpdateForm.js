@@ -1,0 +1,125 @@
+// Basic CRUD operations and React implementation was heavily based on the CRUD React tutorial series created by PedroTech
+// URLs - Part1: https://www.youtube.com/watch?v=T8mqZZ0r-RA, Part2: https://www.youtube.com/watch?v=3YrOOia3-mo, Part3: https://www.youtube.com/watch?v=_S2GKnFpdtE
+
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+import Axios from 'axios';
+import ImageSelectorHabitats from "../components/imageSelectorHabitats";
+
+//////////////////////
+// REMINDER: REMOVING/DEPRECATING SIZE ATTRIBUTE (eliminate references to it later)
+/////////////////////
+
+// HostURL Passed from App.js
+function HabitatsUpdateForm ({hostURL}) {
+
+    // Follows reference strategy to read state object, as suggested by stackoverflow user Abdulazeez Jimoh on 10/25/2022
+    // URL: https://stackoverflow.com/questions/68911432/how-to-pass-parameters-with-react-router-dom-version-6-usenavigate-and-typescrip
+    const location = useLocation();
+    const { id, oldHabitatName, oldHabitatDescription, oldHabitatSize, oldHabitatPhoto} = location.state;
+
+    // Update SQL Endpoint
+    const updateHabitatsURL = hostURL + '/api/updateHabitats';
+    const navTo = useNavigate();
+
+    // States for the Form
+    const [habitatName, setHabitatName] = useState('')
+    const [habitatDescription, setHabitatDescription] = useState('')
+    const [habitatSize, setHabitatSize] = useState('')  // TO BE REMOVED
+    const [habitatPhoto, setHabitatPhoto] = useState('')
+
+    // Pre-sets all the old values into the fields
+    useEffect(()=> {
+        setHabitatName(oldHabitatName);
+        setHabitatDescription(oldHabitatDescription);
+        setHabitatSize(oldHabitatSize);
+        setHabitatPhoto(oldHabitatPhoto);
+    }, [])
+
+    // UPDATE - Submit Changes to a Bio Asset then return to Asset home (hours/cost can be zero'd in case they need to be cleared for an entry error)
+    const update = async () => {
+        try {
+            if (habitatName && habitatDescription && habitatSize) {
+                await Axios.put(updateHabitatsURL, {
+                    habitatName: habitatName,
+                    habitatDescription: habitatDescription,
+                    habitatSize: habitatSize,
+                    habitatPhoto: habitatPhoto,
+                    idHabitat: id,
+                });
+                alert(`${habitatName}'s database record has been updated!`)
+                navTo('/Habitats');
+                } else {
+                    alert("Please fill out all required fields and try again.")
+                }
+        } catch (error) {
+                console.error('Error updating employee.', error)
+        };
+    };
+
+    return (
+        <>
+            <h2>Update Habitat Record</h2>
+            <article>
+                <p>
+                    Make changes to this Habitat record and click "Save" to retain them.
+                </p>
+                <form>
+                    <fieldset>
+                        <legend>Information</legend>
+                            <div className="selectorP">
+                                <div><label htmlFor="habitatName">Name</label></div>
+                                <input 
+                                    type="text"
+                                    id="habitatName"
+                                    name="habitatName"
+                                    placeholder="Ex. Savannah" 
+                                    required
+                                    autoFocus
+                                    value={habitatName}
+                                    onChange={(e) => {setHabitatName(e.target.value)}
+                                    }/>
+                                <div>Original: {oldHabitatName}</div>
+                            </div>
+                            <div className="selectorP">
+                                <div><label htmlFor="habitatDescription">Description</label></div>
+                                <textarea
+                                    id ="habitatDescription"
+                                    name="habitatDescription"
+                                    cols="40" rows="5" 
+                                    min="5" max="255"
+                                    placeholder="Ex. Dry, grassy plains with sparse deciduous vegetation...."
+                                    required
+                                    value={habitatDescription}
+                                    onChange={(e) => {setHabitatDescription(e.target.value)}
+                                    }/>
+                                <div>Original: {oldHabitatDescription}</div>
+                            </div>
+                            <div><label htmlFor="habitatSize">Size</label></div>
+                                <input 
+                                    type="number"
+                                    id="habitatSize"
+                                    name="habitatSize"
+                                    min="1"
+                                    max="3"
+                                    required
+                                    value={habitatSize}
+                                    onChange={(e) => {setHabitatSize(e.target.value)}
+                                    }/>
+                                <div>Original: {oldHabitatSize}</div>
+                            <div className="selectorP">
+                                <ImageSelectorHabitats  hostURL={hostURL} image={habitatPhoto} setImage={setHabitatPhoto} isRequired={false} autoFocus={false} preSelected={oldHabitatPhoto}/>
+                                <div>Original: {oldHabitatPhoto.substring(14, oldHabitatPhoto.indexOf('.'))}</div>
+                                <div><img src={oldHabitatPhoto} alt ={oldHabitatPhoto.substring(14, oldHabitatPhoto.indexOf('.'))} width={100}/></div>
+                            </div>
+                    </fieldset>
+                </form>
+                <div>
+                    <p><button onClick={update}>Save</button></p>
+                </div>
+            </article>
+        </>
+    );
+}
+
+export default HabitatsUpdateForm;

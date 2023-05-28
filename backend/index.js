@@ -855,12 +855,13 @@ app.put('/api/updateDiets', (req, res) => {
     const dietName = req.body.dietName
     const dietDescription = req.body.dietDescription
     const dietIcon = req.body.dietIcon
+    const idDiet = req.body.idDiet
     const sqlUpdate = `
     UPDATE Diets
     SET     dietName = ?, dietDescription = ?, dietIcon = ?
     WHERE idDiet = ?;
     `;
-    db.query(sqlUpdate, [dietName, dietDescription, dietIcon], (err, result) => {
+    db.query(sqlUpdate, [dietName, dietDescription, dietIcon, idDiet], (err, result) => {
         if (err) console.log(err); else console.log(result);
         res.send(result);
     });

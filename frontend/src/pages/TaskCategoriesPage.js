@@ -14,8 +14,6 @@ function TaskCategoryPage({hostURL}) {
 
     // TaskCategories SQL Endpoints
     const getTaskCategoriesURL = hostURL + '/api/getTaskCategories';
-    const createTaskCategoriesURL = hostURL + '/api/insertTaskCategories';
-    const updateTaskCategoriesURL = hostURL + '/api/updateTaskCategories';
     const deleteTaskCategoriesURL = hostURL + '/api/deleteTaskCategories/';
 
     // Task Category useStates

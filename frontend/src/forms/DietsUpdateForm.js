@@ -94,7 +94,6 @@ function DietsUpdateForm ({hostURL}) {
                                 <div><img src={oldDietIcon} alt ={oldDietIcon.substring(14, oldDietIcon.indexOf('.'))} width={100}/></div>
                             </div>
                     </fieldset>
-
                 </form>
                 <div>
                     <p><button onClick={update}>Save</button></p>
