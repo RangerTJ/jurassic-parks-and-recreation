@@ -14,11 +14,11 @@ function FacilitiesPage ({hostURL}) {
     // Navigation Function
     const navTo = useNavigate();
 
-    // BiologicalAssets SQL Endpoints
+    // Facilities SQL Endpoints
     const getFacilitiesURL = hostURL + '/api/getFacilities';  // TO DO - CREATE USE EFFECT AND USE STATE
     const deleteFacilitiesURL = hostURL + '/api/deleteFacilities/';  // TO DO - NEED TO ADD USE STATES AND CRUD FUNCTIONS FOR THIS; INSERT/UPDATE GO ON RESPECTIVE FORM PAGES
 
-    // Bio Asset Table Functions
+    // Facilities Table Functions
     const [facilitiesList, setFacilitiesList] = useState([])
     const [facility, setFacility] = useState('')
 
