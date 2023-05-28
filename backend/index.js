@@ -792,6 +792,7 @@ app.put('/api/updateSpecies', (req, res) => {
     const speciesDescription = req.body.speciesDescription
     const threatLevel = req.body.threatLevel
     const speciesPhoto = req.body.speciesPhoto
+    const idSpecies = req.body.idSpecies
     const sqlUpdate = `
     UPDATE Species
     SET     idDiet =                (SELECT idDiet FROM Diets WHERE dietName = ?),
@@ -799,7 +800,7 @@ app.put('/api/updateSpecies', (req, res) => {
             speciesName = ?, speciesDescription = ?, threatLevel = ?, speciesPhoto = ?
     WHERE   idSpecies = ?;
     `;
-    db.query(sqlUpdate, [dietName, habitatName, speciesName, speciesDescription, threatLevel, speciesPhoto], (err, result) => {
+    db.query(sqlUpdate, [dietName, habitatName, speciesName, speciesDescription, threatLevel, speciesPhoto, idSpecies], (err, result) => {
         if (err) console.log(err); else console.log(result);
         res.send(result);
     });

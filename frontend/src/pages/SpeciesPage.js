@@ -16,13 +16,10 @@ function SpeciesPage ({hostURL}) {
 
     // Species SQL Endpoints
     const getSpeciesURL = hostURL + '/api/getSpecies';
-    const createSpeciesURL = hostURL + '/api/insertSpecies';
-    const updateSpeciesURL = hostURL + '/api/updateSpecies';
     const deleteSpeciesURL = hostURL + '/api/deleteSpecies/';
 
     // Species Table Functions
     const [speciesList, setSpeciesList] = useState([])
-    const [species, setSpecies] = useState('')
 
     // READ Populate Species Table
     useEffect(() => {
