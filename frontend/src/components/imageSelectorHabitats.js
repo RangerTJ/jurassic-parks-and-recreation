@@ -52,7 +52,6 @@ const ImageSelectorHabitats = ({preSelected, isRequired, autoFocus, hostURL, ima
           return <option key={index} value={imagePath}>{imagePath.substring(14, imagePath.indexOf('.'))}</option>;
         })}
       </select>
-      {/* <p>{preSelected},{selected} DEBUG STUFF</p> */}
 
       {/* Conditionally Render Preview Image (if not null) */}
       {selected && (
@@ -65,4 +64,4 @@ const ImageSelectorHabitats = ({preSelected, isRequired, autoFocus, hostURL, ima
   );
 };
 
-export default ImageSelectorHabitats
+export default ImageSelectorHabitats;

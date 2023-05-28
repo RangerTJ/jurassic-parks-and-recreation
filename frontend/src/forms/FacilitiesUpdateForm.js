@@ -2,7 +2,7 @@
 // URLs - Part1: https://www.youtube.com/watch?v=T8mqZZ0r-RA, Part2: https://www.youtube.com/watch?v=3YrOOia3-mo, Part3: https://www.youtube.com/watch?v=_S2GKnFpdtE
 
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import Axios from 'axios';
 import SelectorParks from "../components/selectorParks";
 import SelectorFacilityTypes from "../components/selectorFacilityTypes";
@@ -46,7 +46,7 @@ function FacilitiesUpdateForm ({hostURL}) {
         setFacTypeName(oldFacTypeName);
     }, [])
 
-    // UPDATE - Submit Changes to a Bio Asset then return to Asset home (hours/cost can be zero'd in case they need to be cleared for an entry error)
+    // UPDATE - Submit Changes to a Facility then return to Facilities page
     const update = async () => {
         try {
             if (parkName && facTypeName && facilityLocation && securityRating) {

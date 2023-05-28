@@ -21,7 +21,7 @@ function EmployeeTasksUpdateForm ({hostURL}) {
     const oldStartDateString = oldStart ? oldStart.substring(0, 10): '';
     const oldEndDateString = oldEnd ? oldEnd.substring(0, 10): '';
 
-    // BiologicalAssets SQL Endpoints
+    // EmployeeTasks Update SQL Endpoint
     const updateEmployeeTasksURL = hostURL + '/api/updateEmployeeTasks';
     const navTo = useNavigate();
 
@@ -45,7 +45,7 @@ function EmployeeTasksUpdateForm ({hostURL}) {
         setEmpTaskEnd(oldEndDateString);
     }, [])
 
-    // UPDATE - Submit Changes to a Bio Asset then return to Asset home (hours/cost can be zero'd in case they need to be cleared for an entry error)
+    // UPDATE - Submit Changes to an Employee Task then return to Employee Tasks home (hours/cost can be zero'd in case they need to be cleared for an entry error)
     const update = async () => {
         try {
             if (taskName && employeeUsername && categoryName && empTaskStart && empTaskEnd) {

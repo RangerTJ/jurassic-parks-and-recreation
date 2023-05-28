@@ -2,7 +2,7 @@
 // URLs - Part1: https://www.youtube.com/watch?v=T8mqZZ0r-RA, Part2: https://www.youtube.com/watch?v=3YrOOia3-mo, Part3: https://www.youtube.com/watch?v=_S2GKnFpdtE
 
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Axios from 'axios';
 
 
@@ -17,7 +17,7 @@ function JobClassificationsAddForm ({hostURL}) {
     const [jobTitle, setJobTitle] = useState('')
     const [jobDescription, setJobDescription] = useState('')
 
-    // CREATE - Insert Job Classification then return to asset home
+    // CREATE - Insert Job Classification then return to Job Classifications page
     const submit = async () => {
         try {
             if (jobTitle && jobDescription) {

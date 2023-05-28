@@ -774,7 +774,7 @@ app.post('/api/insertSpecies', (req, res) => {
     INSERT INTO Species             (idDiet, idHabitat, speciesName, speciesDescription, threatLevel, speciesPhoto)
     VALUES  (
                 (SELECT idDiet FROM Diets WHERE dietName = ?), 
-                (SELECT idHabitat FROM Habitat WHERE habitatName = ?), 
+                (SELECT idHabitat FROM Habitats WHERE habitatName = ?), 
                 ?, ?, ?, ?
             );
     `;
@@ -792,6 +792,7 @@ app.put('/api/updateSpecies', (req, res) => {
     const speciesDescription = req.body.speciesDescription
     const threatLevel = req.body.threatLevel
     const speciesPhoto = req.body.speciesPhoto
+    const idSpecies = req.body.idSpecies
     const sqlUpdate = `
     UPDATE Species
     SET     idDiet =                (SELECT idDiet FROM Diets WHERE dietName = ?),
@@ -799,7 +800,7 @@ app.put('/api/updateSpecies', (req, res) => {
             speciesName = ?, speciesDescription = ?, threatLevel = ?, speciesPhoto = ?
     WHERE   idSpecies = ?;
     `;
-    db.query(sqlUpdate, [dietName, habitatName, speciesName, speciesDescription, threatLevel, speciesPhoto], (err, result) => {
+    db.query(sqlUpdate, [dietName, habitatName, speciesName, speciesDescription, threatLevel, speciesPhoto, idSpecies], (err, result) => {
         if (err) console.log(err); else console.log(result);
         res.send(result);
     });
@@ -1020,6 +1021,19 @@ app.get('/api/getSpeciesList', (req, res) =>{
     ORDER BY speciesName ASC;
     `;
     db.query(sqlRead, (err, result)=> {
+        console.log(result);
+        res.send(result);
+    });
+});
+
+// Diets Selector
+app.get('/api/getDietsList', (req, res) => {
+    const sqlRead = `
+    SELECT dietName
+    FROM Diets
+    ORDER BY dietName ASC;
+    `;
+    db.query(sqlRead, (err, result) => {
         console.log(result);
         res.send(result);
     });

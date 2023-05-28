@@ -3,7 +3,7 @@ import Axios from 'axios';
 
 
 // If no old value passed, defaults the old value to "null". Also adjusts autoFocus and required rendering aspects as needed.
-const SelectorTaskCategories = ({preSelected, isRequired, autoFocus, hostURL, categoryName, setCategoryName}) => {
+const SelectorDietTypes = ({preSelected, isRequired, autoFocus, hostURL, dietName, setDietName}) => {
 
   // Create useState for the selection and list
   // For update, just update pre-selected image to match an input variable first
@@ -13,15 +13,15 @@ const SelectorTaskCategories = ({preSelected, isRequired, autoFocus, hostURL, ca
   // Selection event handler to pass on selection data to DB
   const selectionHandler = (event) => {
     setSelected(event.target.value)
-    setCategoryName(event.target.value)
+    setDietName(event.target.value)
   };
   
   // Update the field to the preset option any time it's null
   useEffect(()=> {
     if (preSelected !== null) {setSelected(preSelected);}}, [preSelected])
 
-  // TaskCategories SQL Endpoints
-  const getListURL = hostURL + '/api/getTaskCategoriesList';
+  // Diets SQL Endpoint
+  const getListURL = hostURL + '/api/getDietsList';
 
   // Populate list
   useEffect(()=> {
@@ -34,12 +34,12 @@ const SelectorTaskCategories = ({preSelected, isRequired, autoFocus, hostURL, ca
   // Autofocus and isRequired elements passed in can tailor it to use on different pages
   return (
     <>
-      <div><label htmlFor="taskCategorySelector">Category</label></div>
-      <select id="taskCategorySelector" value={selected} onChange={selectionHandler} autoFocus={autoFocus ? true : false} required={isRequired ? true : false}>
+      <div><label htmlFor="dietSelector">Diet</label></div>
+      <select id="dietSelector" value={selected} onChange={selectionHandler} autoFocus={autoFocus ? true : false} required={isRequired ? true : false}>
         {/* Set default option then map query results to populate the select menu */}
-        <option value="">None (Select a Category)</option>
+        <option value="">None (Select a Type)</option>
         {list.map((val, index) => {
-          return <option key={index} value={val.categoryName}>{val.categoryName}</option>;
+          return <option key={index} value={val.dietName}>{val.dietName}</option>;
         })}
       </select>
     </>
@@ -47,4 +47,4 @@ const SelectorTaskCategories = ({preSelected, isRequired, autoFocus, hostURL, ca
 };
 
 
-export default SelectorTaskCategories;
+export default SelectorDietTypes;

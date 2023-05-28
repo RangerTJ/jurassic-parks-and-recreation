@@ -3,7 +3,7 @@
 
 
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Axios from 'axios';
 import SelectorSpecies from "../components/selectorSpecies";
 
@@ -55,7 +55,7 @@ function BiologicalAssetsPage ({hostURL}) {
     }, [species]);
 
 
-    // DELETE - Deletes target bio asset and refreshes all 3 tables
+    // DELETE - Deletes target Bio asset and refreshes all 3 tables
     const delBiologicalAsset = async (delVal) => {
         try {
             if (window.confirm(`Are you sure you want to remove ${delVal.bioAssetName}?`)) {

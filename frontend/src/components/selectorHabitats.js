@@ -42,10 +42,9 @@ const SelectorHabitats = ({preSelected, isRequired, autoFocus, hostURL, habitatN
           return <option key={index} value={val.habitatName}>{val.habitatName}</option>;
         })}
       </select>
-      {/* <p>{preSelected},{selected} DEBUG STUFF</p> */}
     </>
   );
 };
 
 
-export default SelectorHabitats
+export default SelectorHabitats;

@@ -2,7 +2,7 @@
 // URLs - Part1: https://www.youtube.com/watch?v=T8mqZZ0r-RA, Part2: https://www.youtube.com/watch?v=3YrOOia3-mo, Part3: https://www.youtube.com/watch?v=_S2GKnFpdtE
 
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import Axios from 'axios';
 import ImageSelectorHabitats from "../components/imageSelectorHabitats";
 
@@ -18,11 +18,11 @@ function HabitatsUpdateForm ({hostURL}) {
     const location = useLocation();
     const { id, oldHabitatName, oldHabitatDescription, oldHabitatSize, oldHabitatPhoto} = location.state;
 
-    // Update SQL Endpoint
+    // Habitats Update SQL Endpoint
     const updateHabitatsURL = hostURL + '/api/updateHabitats';
     const navTo = useNavigate();
 
-    // States for the Form
+    // Habitat States for the Form
     const [habitatName, setHabitatName] = useState('')
     const [habitatDescription, setHabitatDescription] = useState('')
     const [habitatSize, setHabitatSize] = useState('')  // TO BE REMOVED
@@ -36,7 +36,7 @@ function HabitatsUpdateForm ({hostURL}) {
         setHabitatPhoto(oldHabitatPhoto);
     }, [])
 
-    // UPDATE - Submit Changes to a Bio Asset then return to Asset home (hours/cost can be zero'd in case they need to be cleared for an entry error)
+    // UPDATE - Submit Changes to a Habitat then return to Habitats page
     const update = async () => {
         try {
             if (habitatName && habitatDescription && habitatSize) {

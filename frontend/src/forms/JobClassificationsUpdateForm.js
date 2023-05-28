@@ -2,7 +2,7 @@
 // URLs - Part1: https://www.youtube.com/watch?v=T8mqZZ0r-RA, Part2: https://www.youtube.com/watch?v=3YrOOia3-mo, Part3: https://www.youtube.com/watch?v=_S2GKnFpdtE
 
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import Axios from 'axios';
 
 
@@ -28,7 +28,7 @@ function JobClassificationsUpdateForm ({hostURL}) {
         setJobDescription(oldJobDescription);
     }, [])
 
-    // UPDATE - Submit Changes to a Job Classification then return to parent page
+    // UPDATE - Submit Changes to a Job Classification then return to Job Classifications page
     const update = async () => {
         try {
             if (jobTitle && jobDescription) {

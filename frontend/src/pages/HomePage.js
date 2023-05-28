@@ -2,7 +2,6 @@
 // URLs - Part1: https://www.youtube.com/watch?v=T8mqZZ0r-RA, Part2: https://www.youtube.com/watch?v=3YrOOia3-mo, Part3: https://www.youtube.com/watch?v=_S2GKnFpdtE
 
 import React, { useEffect, useState } from "react";
-import { Link } from 'react-router-dom'; // May not need?
 import Axios from 'axios';
 import securityCamera1 from '../images/cameraCompressed.mp4'
 

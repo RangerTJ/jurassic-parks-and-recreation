@@ -2,7 +2,7 @@
 // URLs - Part1: https://www.youtube.com/watch?v=T8mqZZ0r-RA, Part2: https://www.youtube.com/watch?v=3YrOOia3-mo, Part3: https://www.youtube.com/watch?v=_S2GKnFpdtE
 
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Axios from 'axios';
 import ImageSelectorHabitats from "../components/imageSelectorHabitats";
 
@@ -13,18 +13,18 @@ import ImageSelectorHabitats from "../components/imageSelectorHabitats";
 // HostURL Passed from App.js
 function HabitatsAddForm ({hostURL}) {
 
-    // SQL Endpoints
+    // Habitats SQL Endpoints
     const createHabitatsURL = hostURL + '/api/insertHabitats';
     const navTo = useNavigate();
 
-    // States for the Form
+    // Habitat States for the Form
     const [habitatName, setHabitatName] = useState('')
     const [habitatDescription, setHabitatDescription] = useState('')
     const [habitatSize, setHabitatSize] = useState('')  // TO BE REMOVED
     const [habitatPhoto, setHabitatPhoto] = useState('')
 
 
-    // CREATE - Insert New then return to parent page
+    // CREATE - Insert New Habitat then return to Habitats page
     const submit = async () => {
         try {
             if (habitatName && habitatDescription && habitatSize) {

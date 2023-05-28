@@ -52,7 +52,6 @@ const ImageSelectorSpecies = ({preSelected, isRequired, autoFocus, hostURL, imag
           return <option key={index} value={imagePath}>{imagePath.substring(14, imagePath.indexOf('.'))}</option>;
         })}
       </select>
-      {/* <p>{preSelected},{selected} DEBUG STUFF</p> */}
 
       {/* Conditionally Render Preview Image (if not null) */}
       {selected && (
@@ -65,4 +64,4 @@ const ImageSelectorSpecies = ({preSelected, isRequired, autoFocus, hostURL, imag
   );
 };
 
-export default ImageSelectorSpecies
+export default ImageSelectorSpecies;

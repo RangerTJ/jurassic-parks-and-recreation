@@ -19,7 +19,7 @@ const SelectorSpecies = ({preSelected, isRequired, autoFocus, hostURL, species, 
   useEffect(()=> {
     if (preSelected !== null) {setSelected(preSelected);}}, [preSelected])
 
-  // BiologicalAssets SQL Endpoints
+  // Species SQL Endpoints
   const getListURL = hostURL + '/api/getSpeciesList';
 
   // Populate list
@@ -41,10 +41,9 @@ const SelectorSpecies = ({preSelected, isRequired, autoFocus, hostURL, species, 
           return <option key={index} value={val.speciesName}>{val.speciesName} (Threat: {val.threatLevel}, Needs: {val.habitatName})</option>;
         })}
       </select>
-      {/* <p>{preSelected},{selected} DEBUG STUFF</p> */}
     </>
   );
 };
 
 
-export default SelectorSpecies
+export default SelectorSpecies;

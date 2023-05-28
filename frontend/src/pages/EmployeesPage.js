@@ -3,7 +3,7 @@
 
 
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Axios from 'axios';
 import staffDefaultImg from '../images/staffImages/default_staff.png';
 
@@ -14,13 +14,12 @@ function EmployeesPage ({hostURL}) {
     // Navigation Function
     const navTo = useNavigate();
 
-    // BiologicalAssets SQL Endpoints
+    // Employees SQL Endpoints
     const getEmployeesURL = hostURL + '/api/getEmployees';  // TO DO - CREATE USE EFFECT AND USE STATE
     const deleteEmployeesURL = hostURL + '/api/deleteEmployees/';  // TO DO - NEED TO ADD USE STATES AND CRUD FUNCTIONS FOR THIS; INSERT/UPDATE GO ON RESPECTIVE FORM PAGES
 
-    // States
+    // Employee States
     const [employeesList, setEmployeesList] = useState([])
-    const [employee, setEmployee] = useState('')
 
     /* Citation: Creating a Simple Lightbox From Scratch in React by Alexandra Radevich
     URL: https://medium.com/swlh/creating-a-simple-lightbox-from-scratch-in-react-caea84f90960
@@ -42,12 +41,12 @@ function EmployeesPage ({hostURL}) {
      }
     /*!!! End of lightbox-tutorial code for function portion of page (see HTML rendering for calling of Lightbox commands) !!!*/
 
-    // READ Populate Biological Asset Table
+    // READ Populate Employee Table
     useEffect(()=> {
         getEmployees();
     }, [])
 
-    // DELETE - Deletes target bio asset and refreshes all 3 tables
+    // DELETE - Deletes target Employee and refreshes table
     const delEmployee = async (delVal) => {
         try {
             if (window.confirm(`Are you sure you want to remove ${delVal.firstName} ${delVal.lastName}?`)) {
@@ -96,7 +95,6 @@ function EmployeesPage ({hostURL}) {
     // Render Webpage
     return (
         <>  
-            {/* End experimental copy/paste */}
             <h2>Employees</h2>
             <article>
                 <h3>Add New Employee</h3>

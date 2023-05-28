@@ -2,7 +2,7 @@
 // URLs - Part1: https://www.youtube.com/watch?v=T8mqZZ0r-RA, Part2: https://www.youtube.com/watch?v=3YrOOia3-mo, Part3: https://www.youtube.com/watch?v=_S2GKnFpdtE
 
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Axios from 'axios';
 
 
@@ -18,15 +18,15 @@ function FacilityTypesPage ({hostURL}) {
     const updateFacilityTypesURL = hostURL + '/api/updateFacilityTypes';
     const deleteFacilityTypesURL = hostURL + '/api/deleteFacilityTypes/';
 
-    // Bio Asset Table Functions
+    // Facility Type Table Functions
     const [facilityTypesList, setFacilityTypesList] = useState([])
-    const [facilityType, setFacilityType] = useState('')
 
     // READ Populate Table on load
     useEffect(()=> {
         getFacilityTypes();
     }, [])
 
+    // DELETE - Deletes target Facility Type and refreshes Table
     const delFacilityTypes = async (delVal) => {
         try {
             if (window.confirm(`Are you sure you want to remove ${delVal.facTypeName}?`)) {
@@ -42,7 +42,7 @@ function FacilityTypesPage ({hostURL}) {
         }
     };
 
-    // Get table info
+    // Populate Facility Types List
     const getFacilityTypes = async ()=> {
         try {
             const response = await Axios.get(getFacilityTypesURL)
@@ -85,7 +85,6 @@ function FacilityTypesPage ({hostURL}) {
                     it from the database, respectively.
                 </p>
             </article>
-            {/* Could potentially reuse the bio assets species filter for job titles here or do a last name search or something */}
             <article>
                 <h3>View Facility Types</h3>
                 <p>

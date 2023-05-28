@@ -2,7 +2,7 @@
 // URLs - Part1: https://www.youtube.com/watch?v=T8mqZZ0r-RA, Part2: https://www.youtube.com/watch?v=3YrOOia3-mo, Part3: https://www.youtube.com/watch?v=_S2GKnFpdtE
 
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import Axios from 'axios';
 
 
@@ -14,11 +14,11 @@ function TaskCategoriesUpdateForm ({hostURL}) {
     const location = useLocation();
     const { id, oldCategoryName} = location.state;
 
-    // Facility Type SQL Endpoint
+    // Task Categories SQL Endpoint
     const updateTaskCategoriesURL = hostURL + '/api/updateTaskCategories';
     const navTo = useNavigate();
 
-    // Facility Type States for the Form
+    // Task Category States for the Form
     const [categoryName, setCategoryName] = useState('')
 
     // Pre-sets all the old values into the fields
@@ -26,7 +26,7 @@ function TaskCategoriesUpdateForm ({hostURL}) {
         setCategoryName(oldCategoryName);
     }, [])
 
-    // UPDATE - Submit Changes to a Bio Asset then return to Asset home (hours/cost can be zero'd in case they need to be cleared for an entry error)
+    // UPDATE - Submit Changes to a Task Category then return to Task Categories page
     const update = async () => {
         try {
             if (categoryName) {

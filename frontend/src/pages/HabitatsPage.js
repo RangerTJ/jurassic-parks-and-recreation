@@ -2,7 +2,7 @@
 // URLs - Part1: https://www.youtube.com/watch?v=T8mqZZ0r-RA, Part2: https://www.youtube.com/watch?v=3YrOOia3-mo, Part3: https://www.youtube.com/watch?v=_S2GKnFpdtE
 
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Axios from 'axios';
 import staffDefaultImg from '../images/staffImages/default_staff.png';  // TEMP
 
@@ -16,15 +16,12 @@ function HabitatsPage ({hostURL}) {
     // Navigation Function
     const navTo = useNavigate();
 
-    // SQL Endpoints
+    // Habitats SQL Endpoints
     const getHabitatsURL = hostURL + '/api/getHabitats';
-    const createHabitatsURL = hostURL + '/api/insertHabitats';
-    const updateHabitatsURL = hostURL + '/api/updateHabitats';
     const deleteHabitatsURL = hostURL + '/api/deleteHabitats/';
 
-    // States
+    // Habitat States
     const [habitatsList, setHabitatsList] = useState([])
-    const [habitat, setHabitat] = useState('')
 
     /* Citation: Creating a Simple Lightbox From Scratch in React by Alexandra Radevich
     URL: https://medium.com/swlh/creating-a-simple-lightbox-from-scratch-in-react-caea84f90960
@@ -51,7 +48,7 @@ function HabitatsPage ({hostURL}) {
         getHabitats();
     }, [])
 
-    // DELETE - Deletes target
+    // DELETE - Deletes target Habitat and refreshes Table
     const delHabitats = async (delVal) => {
         try {
             if (window.confirm(`Are you sure you want to remove ${delVal.habitatName}?`)) {
@@ -67,7 +64,7 @@ function HabitatsPage ({hostURL}) {
         }
     };
 
-    // Get table info
+    // Get Habitats List
     const getHabitats = async ()=> {
         try {
             const response = await Axios.get(getHabitatsURL)
@@ -94,7 +91,6 @@ function HabitatsPage ({hostURL}) {
     // Render Webpage
     return (
         <>  
-            {/* End experimental copy/paste */}
             <h2>Habitats</h2>
             <article>
                 <h3>Add New Habitat</h3>
@@ -113,7 +109,6 @@ function HabitatsPage ({hostURL}) {
                     it from the database, respectively.
                 </p>
             </article>
-            {/* Could potentially reuse the bio assets species filter for job titles here or do a last name search or something */}
             <article>
                 <h3>View Habitats</h3>
                 <p>

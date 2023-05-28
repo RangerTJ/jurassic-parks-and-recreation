@@ -2,7 +2,7 @@
 // // URLs - Part1: https://www.youtube.com/watch?v=T8mqZZ0r-RA, Part2: https://www.youtube.com/watch?v=3YrOOia3-mo, Part3: https://www.youtube.com/watch?v=_S2GKnFpdtE
 
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Axios from 'axios';
 
 
@@ -14,13 +14,10 @@ function ParksPage ({hostURL}) {
 
     //// Park SQL Endpoints
     const getParksURL = hostURL + '/api/getParks';
-    const createParksURL = hostURL + '/api/insertParks';
-    const updateParksURL = hostURL + '/api/updateParks';
     const deleteParksURL = hostURL + '/api/deleteParks/';
 
     // Parks Table Functions
     const [parksList, setParksList] = useState([])
-    const [park, setPark] = useState('')
 
 
     // Lightbox stuff placeholder in case of using park images later
@@ -93,7 +90,6 @@ function ParksPage ({hostURL}) {
     // Render Webpage
     return (
         <>  
-            {/* End experimental copy/paste */}
             <h2>Parks</h2>
             <article>
                 <h3>Add New Park</h3>
@@ -112,7 +108,6 @@ function ParksPage ({hostURL}) {
                     it from the database, respectively.
                 </p>
             </article>
-            {/* Could potentially reuse the bio assets species filter for job titles here or do a last name search or something */}
             <article>
                 <h3>View Parks</h3>
                 <p>

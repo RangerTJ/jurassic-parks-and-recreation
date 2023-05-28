@@ -2,7 +2,7 @@
 // URLs - Part1: https://www.youtube.com/watch?v=T8mqZZ0r-RA, Part2: https://www.youtube.com/watch?v=3YrOOia3-mo, Part3: https://www.youtube.com/watch?v=_S2GKnFpdtE
 
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Axios from 'axios';
 import SelectorParks from "../components/selectorParks";
 import SelectorHabitats from "../components/selectorHabitats";
@@ -13,7 +13,7 @@ import SelectorFacilityTypes from "../components/selectorFacilityTypes";
 // HostURL Passed from App.js
 function FacilitiesAddForm ({hostURL}) {
 
-    // BiologicalAssets SQL Endpoints
+    // Facilities SQL Endpoints
     const createFacilitiesURL = hostURL + '/api/insertFacilities';
     const navTo = useNavigate();
 
@@ -28,7 +28,7 @@ function FacilitiesAddForm ({hostURL}) {
     const [facilityNote, setFacilityNote] = useState('');
     const [facTypeName, setFacTypeName] = useState('');
 
-    // CREATE - Insert New Bio Asset then return to asset home (only if all required state variables are not null)
+    // CREATE - Insert New Facility then return to Facilities page (only if all required state variables are not null)
     const submit = async () => {
         try {
             if (parkName && facTypeName && facilityLocation && securityRating) {

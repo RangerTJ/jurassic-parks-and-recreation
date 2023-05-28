@@ -2,7 +2,7 @@
 // URLs - Part1: https://www.youtube.com/watch?v=T8mqZZ0r-RA, Part2: https://www.youtube.com/watch?v=3YrOOia3-mo, Part3: https://www.youtube.com/watch?v=_S2GKnFpdtE
 
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Axios from 'axios';
 import SelectorJobClassifications from "../components/selectorJobClassifications";
 import ImageSelectorStaff from "../components/imageSelectorStaff";
@@ -11,11 +11,11 @@ import ImageSelectorStaff from "../components/imageSelectorStaff";
 // HostURL Passed from App.js
 function EmployeesAddForm ({hostURL}) {
 
-    // BiologicalAssets SQL Endpoints
+    // Employees SQL Endpoints
     const createEmployeesURL = hostURL + '/api/insertEmployees';
     const navTo = useNavigate();
 
-    // Emp Task States for the Form
+    // Employees States for the Form
     const [jobTitle, setJobTitle] = useState('')
     const [lastName, setLastName] = useState('')
     const [firstName, setFirstName] = useState('')
@@ -27,7 +27,7 @@ function EmployeesAddForm ({hostURL}) {
     const [employeePhoto, setEmployeePhoto] = useState('')
     const [employeeNote, setEmployeeNote] = useState('')
 
-    // CREATE - Insert New Bio Asset then return to asset home (only if all required state variables are not null)
+    // CREATE - Insert New Employee then return to Employee page (only if all required state variables are not null)
     const submit = async () => {
         try {
             if (jobTitle && lastName && firstName && employeeUsername && hourlyWage && employeePhone && employeeEmail) {

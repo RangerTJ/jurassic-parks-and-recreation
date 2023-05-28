@@ -22,7 +22,7 @@ const SelectorTasksAssigned = ({preSelected, isRequired, autoFocus, hostURL, tas
   useEffect(()=> {
     if (preSelected !== null) {setSelected(preSelected);}}, [preSelected])
 
-  // BiologicalAssets SQL Endpoints
+  // TasksAssigned SQL Endpoints
   const getListURL = hostURL + '/api/getTasksAssignedList';
 
   // Populate list
@@ -44,10 +44,9 @@ const SelectorTasksAssigned = ({preSelected, isRequired, autoFocus, hostURL, tas
           return <option key={index} value={val.taskName}>{val.taskName} (Started: {val.taskStart})</option>;
         })}
       </select>
-      {/* <p>{preSelected},{selected} DEBUG STUFF</p> */}
     </>
   );
 };
 
 
-export default SelectorTasksAssigned
+export default SelectorTasksAssigned;
