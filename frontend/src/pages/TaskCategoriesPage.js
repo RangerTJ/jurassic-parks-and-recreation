@@ -101,8 +101,6 @@ function TaskCategoryPage({hostURL}) {
                                 <tr key={index}>
                                     <td className="buttonHolder">
                                         <div><button className="tableButton" onClick={()=> {navToUpdate(val)}}>Edit</button></div>
-
-                                        {/* ** Edit later tonight - pass whole object to delete for better errors messages ** */}
                                         <div><button className="tableButton" onClick={()=> {delTaskCategories(val)}}>*</button></div>
                                     </td>
                                     <td  className="tableDescription">

@@ -100,10 +100,8 @@ function FacilityTypesPage ({hostURL}) {
                         {facilityTypesList.map((val, index)=> {
                             return (
                                 <tr key={index}>
-                                    <td>
+                                    <td className="buttonHolder">
                                         <div><button className="tableButton" onClick={()=> {navToUpdate(val)}}>Edit</button></div>
-
-                                        {/* ** Edit later - pass whole object to delete for better errors messages ** */}
                                         <div><button className="tableButton" onClick={()=> {delFacilityTypes(val)}}>*</button></div>
                                     </td>
                                     <td className="tableDescription">

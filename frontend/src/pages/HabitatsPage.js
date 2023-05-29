@@ -142,10 +142,8 @@ function HabitatsPage ({hostURL}) {
                             
                             return (
                                 <tr key={index}>
-                                    <td>
+                                    <td className="buttonHolder">
                                         <div><button className="tableButton" onClick={()=> {navToUpdate(val)}}>Edit</button></div>
-
-                                        {/* ** Edit later tonight - pass whole object to delete for better errors messages ** */}
                                         <div><button className="tableButton" onClick={()=> {delHabitats(val)}}>*</button></div>
                                     </td>
                                     <td className="tableDescription">

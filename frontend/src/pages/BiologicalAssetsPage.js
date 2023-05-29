@@ -168,7 +168,7 @@ function BiologicalAssetsPage ({hostURL}) {
                         {assetSecMismatchList.map((val, index)=> {
                             return (
                                 <tr key={index}>
-                                    <td>
+                                    <td className="buttonHolder">
                                         <div><button className="tableButton" onClick={()=> {navToUpdate(val)}}>Edit</button></div>
                                         <div><button className="tableButton" onClick={()=> {delBiologicalAsset(val.idBiologicalAsset)}}>*</button></div>
                                     </td>
@@ -213,7 +213,7 @@ function BiologicalAssetsPage ({hostURL}) {
                             const filteredHab = val.currentHabitat ? val.currentHabitat : "WARNING: NOT AN ENCLOSURE";
                             return (
                                 <tr key={index}>
-                                    <td>
+                                    <td className="buttonHolder">
                                         <div><button className="tableButton" onClick={()=> {navToUpdate(val)}}>Edit</button></div>
                                         <div><button className="tableButton" onClick={()=> {delBiologicalAsset(val.idBiologicalAsset)}}>*</button></div>
                                     </td>
@@ -259,7 +259,7 @@ function BiologicalAssetsPage ({hostURL}) {
                         {biologicalAssetList.map((val, index)=> {
                             return (
                                 <tr key={index}>
-                                    <td>
+                                    <td className="buttonHolder">
                                         <div><button className="tableButton" onClick={()=> {navToUpdate(val)}}>Edit</button></div>
                                         <div><button className="tableButton" onClick={()=> {delBiologicalAsset(val)}}>*</button></div>
                                     </td>
