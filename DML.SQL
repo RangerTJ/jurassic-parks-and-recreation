@@ -496,6 +496,8 @@ ORDER BY Facilities.facilityName ASC;
 -- Additional Custom Filters and Lookups (added 5/28/23)
 -- --------
 
+-- New Filters and Lookup Queries
+
 -- FILTER EmployeeTasks by Category
 SELECT  EmployeeTasks.idEmployeeTask, TasksAssigned.taskName, (SELECT CONCAT(Employees.firstName, ' ', Employees.lastName)) AS contributingEmployee,
         TaskCategories.categoryName, EmployeeTasks.taskHoursWorked, EmployeeTasks.empTaskCost, EmployeeTasks.empTaskStart, EmployeeTasks.empTaskEnd,
@@ -637,19 +639,40 @@ LEFT JOIN Habitats ON Facilities.idHabitat = Habitats.idHabitat
 WHERE Habitats.idHabitat IS NOT NULL
 ORDER BY idFacility ASC;
 
+-- New Cost Reports for Home Page
+
 -- SELECT - Cost Analysis Report by Employee
 SELECT  Employees.lastName, Employees.firstName, Employees.employeeUsername, SUM(EmployeeTasks.empTaskCost) AS employeeCost
-FROM TaskCategories
-LEFT JOIN EmployeeTasks ON TaskCategories.idTaskCategory = EmployeeTasks.idTaskCategory
+FROM EmployeeTasks
 LEFT JOIN Employees ON EmployeeTasks.idEmployee = Employees.idEmployee
 GROUP BY Employees.employeeUsername
 ORDER BY employeeCost DESC;
 
+-- SELECT - Cost Analysis Report by Tasks
+SELECT  TasksAssigned.taskName, SUM(EmployeeTasks.empTaskCost) AS taskCost
+FROM EmployeeTasks
+LEFT JOIN TasksAssigned ON EmployeeTasks.idTaskAssigned = TasksAssigned.idTaskAssigned
+GROUP BY TasksAssigned.taskName
+ORDER BY taskCost DESC;
 
+-- Cost Analysis by Facility
+SELECT  Facilities.facilityName, Parks.parkName, SUM(EmployeeTasks.empTaskCost) AS facilityCost
+FROM EmployeeTasks
+LEFT JOIN TasksAssigned ON EmployeeTasks.idTaskAssigned = TasksAssigned.idTaskAssigned
+LEFT JOIN Facilities ON TasksAssigned.idFacility = Facilities.idFacility
+LEFT JOIN Parks ON Facilities.idPark = Parks.idPark
+GROUP BY Facilities.facilityName
+ORDER BY facilityCost DESC;
 
--- MORE CUSTOM REPORT IDEAS
--- Cost Analysis Report by Biological Asset
--- Same Idea, but for facilities
+-- Cost Analysis by Biological Asset
+SELECT  BiologicalAssets.bioAssetName, Parks.parkName, SUM(EmployeeTasks.empTaskCost) AS assetCost
+FROM EmployeeTasks
+LEFT JOIN TasksAssigned ON EmployeeTasks.idTaskAssigned = TasksAssigned.idTaskAssigned
+LEFT JOIN BiologicalAssets ON TasksAssigned.idBiologicalAsset = BiologicalAssets.idBiologicalAsset
+LEFT JOIN Facilities ON BiologicalAssets.idFacility = Facilities.idFacility
+LEFT JOIN Parks ON Facilities.idPark = Parks.idPark
+GROUP BY BiologicalAssets.bioAssetName
+ORDER BY assetCost DESC;
 
 
 -- ----------------
