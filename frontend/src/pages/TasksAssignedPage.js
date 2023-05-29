@@ -115,7 +115,7 @@ function TasksAssignedPage ({hostURL}) {
                             const nullableAssetID = val.idBiologicalAsset ? '#' + val.idBiologicalAsset : 'N/A'
                             return (
                                 <tr key={index}>
-                                    <td>
+                                    <td className="buttonHolder">
                                         <div><button className="tableButton" onClick={()=> {navToUpdate(val)}}>Edit</button></div>
                                         <div><button className="tableButton" onClick={()=> {delTaskAssigned(val)}}>*</button></div>
                                     </td>

@@ -84,6 +84,7 @@ function SpeciesUpdateForm ({hostURL}) {
                                 name="speciesName"
                                 placeholder="Ex. Tyrannosaurus Rex" 
                                 required
+                                value={speciesName}
                                 autoFocus
                                 onChange={(e) => {setSpeciesName(e.target.value)}
                                 }/>
@@ -98,22 +99,23 @@ function SpeciesUpdateForm ({hostURL}) {
                                     cols="40" rows="5" 
                                     min="5" max="255"
                                     placeholder="Ex. A large carnivorous dinosaur with powerful jaws and sharp teeth."
+                                    value={speciesDescription}
                                     onChange={(e) => {setSpeciesDescription(e.target.value)}
                                     }/>
                                     <div>Original: {oldSpeciesDescription}</div>
                         </div>
                         <div className="selectorP">
-                            <SelectorDietTypes  hostURL={hostURL} dietName={dietName} setDietName={setDietName} isRequired={true} autoFocus={false}/>
+                            <SelectorDietTypes  hostURL={hostURL} dietName={dietName} setDietName={setDietName} isRequired={true} autoFocus={false} preSelected={oldDietName}/>
                             <div>Original: {oldDietName}</div>
                         </div>
                         <div className="selectorP">
-                            <SelectorHabitats  hostURL={hostURL} habitatName={habitatName} setHabitatName={setHabitatName} isRequired={false} autoFocus={false}/>
+                            <SelectorHabitats  hostURL={hostURL} habitatName={habitatName} setHabitatName={setHabitatName} isRequired={false} autoFocus={false} preSelected={oldHabitatName}/>
                             <div>(Enclosures Only)</div>
                             <div>Original: {oldHabitatName}</div>
                         </div>
                         <div className="selectorP">
                             <div><label htmlFor="threatLevel">Threat Level</label></div>
-                            <select name="threatLevel" id="threatLevel" onChange={(e) => {setThreatLevel(e.target.value)}} required>
+                            <select name="threatLevel" id="threatLevel" value={threatLevel} onChange={(e) => {setThreatLevel(e.target.value)}} required>
                                 <option value="" hidden>Select Threat Level</option>
                                 <option value="0">0</option>
                                 <option value="1">1</option>
@@ -130,7 +132,7 @@ function SpeciesUpdateForm ({hostURL}) {
                             <div>Original: {oldThreatLevel}</div>
                         </div>                        
                         <div className="selectorP">
-                            <ImageSelectorSpecies  hostURL={hostURL} image={speciesPhoto} setImage={setSpeciesPhoto} isRequired={false} autoFocus={false}/>
+                            <ImageSelectorSpecies  hostURL={hostURL} image={speciesPhoto} setImage={setSpeciesPhoto} isRequired={false} autoFocus={false} preSelected={oldSpeciesPhoto}/>
                             {oldSpeciesPhoto ? 
                                 <>
                                     <div>Original: {oldSpeciesPhoto.substring(14, oldSpeciesPhoto.indexOf('.'))}</div>

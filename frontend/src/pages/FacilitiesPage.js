@@ -154,7 +154,7 @@ function FacilitiesPage ({hostURL}) {
                             
                             return (
                                 <tr key={index}>
-                                    <td>
+                                    <td className="buttonHolder">
                                         <div><button className="tableButton" onClick={()=> {navToUpdate(val)}}>Edit</button></div>
                                         <div><button className="tableButton" onClick={()=> {delFacility(val)}}>*</button></div>
                                     </td>

@@ -45,9 +45,18 @@ function TasksAssignedUpdateForm ({hostURL}) {
     // UPDATE - Submit Changes to a Task then return to TasksAssigned page
     const updateTaskAssigned = async () => {
 
+
+
         if (taskName && facility && taskDescription && taskStart) {
         
         try {
+            // Send Null value to SQL if task is re-opened
+            let taskEndVar = taskEnd
+            if (taskEnd === '') {
+                taskEndVar = null
+            }
+            
+            // The actual update code
             const res = await Axios.put(updateTasksAssignedURL, {
 
             facilityName: facility,
@@ -55,7 +64,7 @@ function TasksAssignedUpdateForm ({hostURL}) {
             taskName: taskName,
             taskDescription: taskDescription,
             taskStart: taskStart,
-            taskEnd: taskEnd,
+            taskEnd: taskEndVar,
             idTaskAssigned: id
         });
 

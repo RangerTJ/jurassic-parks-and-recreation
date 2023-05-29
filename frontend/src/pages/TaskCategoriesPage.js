@@ -94,20 +94,19 @@ function TaskCategoryPage({hostURL}) {
                         <tbody>
                         <tr>
                             <th>Edit</th>
-                            <th>Category ID</th>
-                            <th>Name</th>
+                            <th>Category</th>
                         </tr>
                         {taskCategoriesList.map((val, index)=> {
                             return (
                                 <tr key={index}>
-                                    <td>
+                                    <td className="buttonHolder">
                                         <div><button className="tableButton" onClick={()=> {navToUpdate(val)}}>Edit</button></div>
-
-                                        {/* ** Edit later tonight - pass whole object to delete for better errors messages ** */}
                                         <div><button className="tableButton" onClick={()=> {delTaskCategories(val)}}>*</button></div>
                                     </td>
-                                    <td>{val.idTaskCategory}</td>
-                                    <td>{val.categoryName}</td>
+                                    <td  className="tableDescription">
+                                        <div>#{val.idTaskCategory}</div>
+                                        <div>{val.categoryName}</div>
+                                    </td>
                                 </tr>
                             )}
                         )}

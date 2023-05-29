@@ -73,12 +73,12 @@ CREATE TABLE `Facilities` (
   CONSTRAINT `fk_Facilities_Parks1`
     FOREIGN KEY (`idPark`)
     REFERENCES `Parks` (`idPark`)
-    ON DELETE CASCADE
+    ON DELETE RESTRICT
     ON UPDATE CASCADE,
   CONSTRAINT `fk_Facilities_FacilityType1`
     FOREIGN KEY (`idFacilityType`)
     REFERENCES `FacilityTypes` (`idFacilityType`)
-    ON DELETE CASCADE
+    ON DELETE RESTRICT
     ON UPDATE CASCADE,
   CONSTRAINT `fk_Facilities_Habitats1`
     FOREIGN KEY (`idHabitat`)
@@ -115,12 +115,12 @@ CREATE TABLE `Species` (
   CONSTRAINT `fk_Species_Diets1`
     FOREIGN KEY (`idDiet`)
     REFERENCES `Diets` (`idDiet`)
-    ON DELETE CASCADE
+    ON DELETE RESTRICT
     ON UPDATE CASCADE,
   CONSTRAINT `fk_Species_Habitats1`
     FOREIGN KEY (`idHabitat`)
     REFERENCES `Habitats` (`idHabitat`)
-    ON DELETE CASCADE
+    ON DELETE RESTRICT
     ON UPDATE CASCADE);
 
 
@@ -137,12 +137,12 @@ CREATE TABLE `BiologicalAssets` (
   CONSTRAINT `fk_BiologicalAssets_Facilities1`
     FOREIGN KEY (`idFacility`)
     REFERENCES `Facilities` (`idFacility`)
-    ON DELETE CASCADE
+    ON DELETE RESTRICT
     ON UPDATE CASCADE,
   CONSTRAINT `fk_BiologicalAssets_Species1`
     FOREIGN KEY (`idSpecies`)
     REFERENCES `Species` (`idSpecies`)
-    ON DELETE CASCADE
+    ON DELETE RESTRICT
     ON UPDATE CASCADE);
 
 
@@ -177,7 +177,7 @@ CREATE TABLE `Employees` (
   CONSTRAINT `fk_Employees_JobClassifications1`
     FOREIGN KEY (`idJobClassification`)
     REFERENCES `JobClassifications` (`idJobClassification`)
-    ON DELETE CASCADE
+    ON DELETE RESTRICT
     ON UPDATE CASCADE);
 
 
@@ -197,7 +197,7 @@ CREATE TABLE `TasksAssigned` (
   CONSTRAINT `fk_Tasks_Facilities1`
     FOREIGN KEY (`idFacility`)
     REFERENCES `Facilities` (`idFacility`)
-    ON DELETE CASCADE
+    ON DELETE RESTRICT
     ON UPDATE CASCADE,
   CONSTRAINT `fk_Tasks_BiologicalAssets1`
     FOREIGN KEY (`idBiologicalAsset`)
