@@ -498,7 +498,7 @@ ORDER BY Facilities.facilityName ASC;
 
 -- New Filters and Lookup Queries
 
--- FILTER EmployeeTasks by Category
+-- FILTER EmployeeTasks by Category (SELECT)
 SELECT  EmployeeTasks.idEmployeeTask, TasksAssigned.taskName, (SELECT CONCAT(Employees.firstName, ' ', Employees.lastName)) AS contributingEmployee,
         TaskCategories.categoryName, EmployeeTasks.taskHoursWorked, EmployeeTasks.empTaskCost, EmployeeTasks.empTaskStart, EmployeeTasks.empTaskEnd,
         Employees.employeeUsername
@@ -509,7 +509,7 @@ LEFT JOIN Employees ON EmployeeTasks.idEmployee = Employees.idEmployee
 WHERE TaskCategories.categoryName = ?
 ORDER BY EmployeeTasks.idEmployeeTask ASC;
 
--- LOOKUP EmployeeTask BY USERNAME (employee select menu)
+-- LOOKUP EmployeeTask BY USERNAME (employee select menu) (SELECT)
 SELECT  EmployeeTasks.idEmployeeTask, TasksAssigned.taskName, (SELECT CONCAT(Employees.firstName, ' ', Employees.lastName)) AS contributingEmployee,
         TaskCategories.categoryName, EmployeeTasks.taskHoursWorked, EmployeeTasks.empTaskCost, EmployeeTasks.empTaskStart, EmployeeTasks.empTaskEnd,
         Employees.employeeUsername
@@ -520,7 +520,7 @@ LEFT JOIN Employees ON EmployeeTasks.idEmployee = Employees.idEmployee
 WHERE Employees.employeeUsername = ?
 ORDER BY EmployeeTasks.idEmployeeTask ASC;
 
--- LOOKUP EmployeeTask by TaskAssigned Name
+-- LOOKUP EmployeeTask by TaskAssigned Name (Input... or SELECT? Would require modifying current tasksassigned selector)
 SELECT  EmployeeTasks.idEmployeeTask, TasksAssigned.taskName, (SELECT CONCAT(Employees.firstName, ' ', Employees.lastName)) AS contributingEmployee,
         TaskCategories.categoryName, EmployeeTasks.taskHoursWorked, EmployeeTasks.empTaskCost, EmployeeTasks.empTaskStart, EmployeeTasks.empTaskEnd,
         Employees.employeeUsername
@@ -531,7 +531,7 @@ LEFT JOIN Employees ON EmployeeTasks.idEmployee = Employees.idEmployee
 WHERE TasksAssigned.taskName = ?
 ORDER BY EmployeeTasks.idEmployeeTask ASC;
 
--- FILTER TasksAssigned - OPEN TASKS
+-- FILTER TasksAssigned - OPEN TASKS (BINARY SELECT)
 SELECT  TasksAssigned.idTaskAssigned, TasksAssigned.taskName, Facilities.facilityName, BiologicalAssets.idBiologicalAsset, Species.speciesName,
         TasksAssigned.taskDescription, TasksAssigned.taskStart, TasksAssigned.taskEnd, BiologicalAssets.bioAssetName, Parks.parkName
 FROM TasksAssigned
@@ -542,7 +542,7 @@ LEFT JOIN Parks ON Facilities.idPark = Parks.idPark
 WHERE TasksAssigned.taskEnd IS NULL
 ORDER BY TasksAssigned.idTaskAssigned ASC;
 
--- FILTER TasksAssigned - CLOSED TASKS
+-- FILTER TasksAssigned - CLOSED TASKS (BINARY SELECT)
 SELECT  TasksAssigned.idTaskAssigned, TasksAssigned.taskName, Facilities.facilityName, BiologicalAssets.idBiologicalAsset, Species.speciesName,
         TasksAssigned.taskDescription, TasksAssigned.taskStart, TasksAssigned.taskEnd, BiologicalAssets.bioAssetName, Parks.parkName
 FROM TasksAssigned
@@ -553,7 +553,7 @@ LEFT JOIN Parks ON Facilities.idPark = Parks.idPark
 WHERE TasksAssigned.taskEnd IS NOT NULL
 ORDER BY TasksAssigned.idTaskAssigned ASC;
 
--- LOOKUP Employees by Last Name
+-- LOOKUP Employees by Last Name (INPUT)
 SELECT  Employees.idEmployee, Employees.lastName, Employees.firstName, Employees.employeeUsername, JobClassifications.jobTitle, Employees.hourlyWage,
 Employees.employeePhone, Employees.employeeEmail, Employees.employeeRadio, Employees.employeeNote, Employees.employeePhoto
 FROM Employees
@@ -561,7 +561,7 @@ JOIN JobClassifications ON Employees.idJobClassification = JobClassifications.id
 WHERE lastName = ?
 ORDER BY idEmployee ASC;
 
--- FILTER Employees by Job Title
+-- FILTER Employees by Job Title (SELECT)
 SELECT  Employees.idEmployee, Employees.lastName, Employees.firstName, Employees.employeeUsername, JobClassifications.jobTitle, Employees.hourlyWage,
 Employees.employeePhone, Employees.employeeEmail, Employees.employeeRadio, Employees.employeeNote, Employees.employeePhoto
 FROM Employees
@@ -569,7 +569,7 @@ JOIN JobClassifications ON Employees.idJobClassification = JobClassifications.id
 WHERE JobClassifications.jobTitle = ? 
 ORDER BY idEmployee ASC;
 
--- FILTER Facilities by Park Name
+-- FILTER Facilities by Park Name (SELECT)
 SELECT  Facilities.idFacility, Parks.parkName, FacilityTypes.facTypeName, Habitats.habitatName,
         Facilities.facilityName, Facilities.facilityDescription, Facilities.facilityLocation, 
         Facilities.securityRating, Facilities.facilityPhoto, Facilities.facilityNote, Parks.parkLocation
@@ -580,7 +580,7 @@ LEFT JOIN Habitats ON Facilities.idHabitat = Habitats.idHabitat
 WHERE Parks.parkName = ?
 ORDER BY idFacility ASC;
 
--- FILTER Facilities - Non-enclosures
+-- FILTER Facilities - Non-enclosures (BINARY SELECT))
 SELECT  Facilities.idFacility, Parks.parkName, FacilityTypes.facTypeName, Habitats.habitatName,
         Facilities.facilityName, Facilities.facilityDescription, Facilities.facilityLocation, 
         Facilities.securityRating, Facilities.facilityPhoto, Facilities.facilityNote, Parks.parkLocation
@@ -591,7 +591,7 @@ LEFT JOIN Habitats ON Facilities.idHabitat = Habitats.idHabitat
 WHERE Habitats.habitatName IS NULL
 ORDER BY idFacility ASC;
 
--- FILTER Facilities - Enclosures Only
+-- FILTER Facilities - Enclosures Only (BINARY SELECT)
 SELECT  Facilities.idFacility, Parks.parkName, FacilityTypes.facTypeName, Habitats.habitatName,
         Facilities.facilityName, Facilities.facilityDescription, Facilities.facilityLocation, 
         Facilities.securityRating, Facilities.facilityPhoto, Facilities.facilityNote, Parks.parkLocation
@@ -602,7 +602,7 @@ LEFT JOIN Habitats ON Facilities.idHabitat = Habitats.idHabitat
 WHERE Habitats.habitatName IS NOT NULL
 ORDER BY idFacility ASC;
 
--- FILTER Species by Diet
+-- FILTER Species by Diet (SELECT)
 SELECT Species.idSpecies, Species.speciesName, Diets.dietName, Habitats.habitatName, Species.speciesDescription,
 Species.threatLevel, Species.speciesPhoto
 FROM Species
@@ -611,7 +611,7 @@ LEFT JOIN Habitats ON Species.idHabitat = Habitats.idHabitat
 WHERE Diets.dietName = ?
 ORDER BY idSpecies ASC;
 
--- FILTER Species by Habitats
+-- FILTER Species by Habitats (SELECT)
 SELECT Species.idSpecies, Species.speciesName, Diets.dietName, Habitats.habitatName, Species.speciesDescription,
 Species.threatLevel, Species.speciesPhoto
 FROM Species
@@ -620,7 +620,7 @@ LEFT JOIN Habitats ON Species.idHabitat = Habitats.idHabitat
 WHERE Habitats.habitatName = ?
 ORDER BY idSpecies ASC;
 
--- FILTER Biological Assets by Facility
+-- FILTER Biological Assets by Facility (SELECT)
 SELECT BiologicalAssets.idBiologicalAsset, BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName
 FROM BiologicalAssets
 LEFT JOIN Species ON BiologicalAssets.idSpecies = Species.idSpecies
@@ -628,7 +628,7 @@ LEFT JOIN Facilities ON BiologicalAssets.idFacility = Facilities.idFacility
 WHERE Facilities.facilityName = ? AND Facilities.idHabitat IS NULL
 ORDER BY idBiologicalAsset ASC;
 
--- POPULATE SELECT MENU FOR FACILITIES WITH ENCLOSURES (Habitats) - Designed to work with the above (Optional)
+-- (Optional) POPULATE SELECT MENU FOR FACILITIES WITH ENCLOSURES (Habitats) - Designed to work with the above (Optional)
 SELECT  Facilities.idFacility, Parks.parkName, FacilityTypes.facTypeName, Habitats.habitatName,
         Facilities.facilityName, Facilities.facilityDescription, Facilities.facilityLocation, 
         Facilities.securityRating, Facilities.facilityPhoto, Facilities.facilityNote, Parks.parkLocation
