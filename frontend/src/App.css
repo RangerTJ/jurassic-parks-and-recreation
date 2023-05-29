@@ -408,8 +408,7 @@ video {
 }
 
 .buttonHolder {
-  flex:none;
-  width: 0px;
+  width: 50px;
 }
 
 /* Experimental / For Possible use of capping small int column width */

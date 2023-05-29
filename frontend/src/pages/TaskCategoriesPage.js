@@ -100,7 +100,7 @@ function TaskCategoryPage({hostURL}) {
                         {taskCategoriesList.map((val, index)=> {
                             return (
                                 <tr key={index}>
-                                    <td>
+                                    <td className="buttonHolder">
                                         <div><button className="tableButton" onClick={()=> {navToUpdate(val)}}>Edit</button></div>
 
                                         {/* ** Edit later tonight - pass whole object to delete for better errors messages ** */}

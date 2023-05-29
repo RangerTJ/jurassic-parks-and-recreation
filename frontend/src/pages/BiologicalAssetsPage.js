@@ -224,10 +224,10 @@ function BiologicalAssetsPage ({hostURL}) {
                                     <td>{val.speciesName}</td>
                                     <td>{val.facilityName}</td>
                                     <td className="tableDescription">
-                                        <lu>
+                                        <ul>
                                             <li>Current: {filteredHab}</li>
                                             <li>Needs: {val.needsHabitat}</li>
-                                        </lu>
+                                        </ul>
                                     </td>
                                 </tr>
                             )}
