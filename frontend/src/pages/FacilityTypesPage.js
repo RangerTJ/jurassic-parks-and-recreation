@@ -14,8 +14,6 @@ function FacilityTypesPage ({hostURL}) {
 
     // FacilityTypes SQL Endpoints
     const getFacilityTypesURL = hostURL + '/api/getFacilityTypes';
-    const createFacilityTypesURL = hostURL + '/api/insertFacilityTypes';
-    const updateFacilityTypesURL = hostURL + '/api/updateFacilityTypes';
     const deleteFacilityTypesURL = hostURL + '/api/deleteFacilityTypes/';
 
     // Facility Type Table Functions
@@ -96,7 +94,7 @@ function FacilityTypesPage ({hostURL}) {
                         <tbody>
                         <tr>
                             <th>Edit</th>
-                            <th>Name</th>
+                            <th>Type</th>
                             <th>Description</th>
                         </tr>
                         {facilityTypesList.map((val, index)=> {
@@ -109,7 +107,7 @@ function FacilityTypesPage ({hostURL}) {
                                         <div><button className="tableButton" onClick={()=> {delFacilityTypes(val)}}>*</button></div>
                                     </td>
                                     <td className="tableDescription">
-                                        <div>Type #{val.idFacilityType}</div>
+                                        <div>#{val.idFacilityType}</div>
                                         <div><strong>{val.facTypeName}</strong></div>
                                     </td>
                                     <td className="tableDescription">{val.facTypeDescription}</td>

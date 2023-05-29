@@ -128,8 +128,7 @@ function DietsPage ({hostURL}) {
                         <tbody>
                             <tr>
                                 <th>Edit</th>
-                                <th>ID #</th>
-                                <th>Name</th>
+                                <th>Diet</th>
                                 <th>Description</th>
                                 <th>Icon</th>
                             </tr>
@@ -147,9 +146,7 @@ function DietsPage ({hostURL}) {
                                             <div><button className="tableButton" onClick={() => {delDiets(val)}}>*</button></div>
                                         </td>
                                         <td className="tableDescription">
-                                            <div>{val.idDiet}</div>
-                                        </td>
-                                        <td className="tableDescription">
+                                            <div>#{val.idDiet}</div>
                                             <div><strong>{val.dietName}</strong></div>
                                         </td>
                                         <td className="tableDescription">

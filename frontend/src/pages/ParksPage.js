@@ -147,7 +147,7 @@ function ParksPage ({hostURL}) {
                                         <div><button className="tableButton" onClick={()=> {delParks(val)}}>*</button></div>
                                     </td>
                                     <td className="tableDescription">
-                                        <div>Park #{val.idPark}</div>
+                                        <div>#{val.idPark}</div>
                                         <div><strong>{val.parkName}</strong></div>
                                     </td>
                                     <td className="tableDescription">{val.parkDescription}</td>

@@ -109,7 +109,7 @@ function JobClassificationsPage ({hostURL}) {
                                        <div><button className="tableButton" onClick={()=> {delJobClassifications(val)}}>*</button></div>
                                    </td>
                                    <td className="tableDescription">
-                                       <div>Job Code #{val.idJobClassification}</div>
+                                       <div>#{val.idJobClassification}</div>
                                        <div><strong>{val.jobTitle}</strong></div>
                                    </td>
                                    <td className="tableDescription">{val.jobDescription}</td>

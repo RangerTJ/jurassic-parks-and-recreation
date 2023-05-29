@@ -149,7 +149,7 @@ function HabitatsPage ({hostURL}) {
                                         <div><button className="tableButton" onClick={()=> {delHabitats(val)}}>*</button></div>
                                     </td>
                                     <td className="tableDescription">
-                                        <div>Habitat #{val.idHabitat}</div>
+                                        <div>#{val.idHabitat}</div>
                                         <div><strong>{val.habitatName}</strong></div>
                                     </td>
                                     <td className="tableDescription">{val.habitatDescription}</td>
