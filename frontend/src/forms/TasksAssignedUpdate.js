@@ -163,7 +163,7 @@ function TasksAssignedUpdateForm ({hostURL}) {
                                     value={taskEnd}
                                     onChange={(e) => {setTaskEnd(e.target.value)}
                                     }/>
-                                <div>Original: {oldTaskEnd}</div>Current: {taskEnd}
+                                <div>Original: {oldTaskEnd}</div>
                             </div>
                     </fieldset>
                 </form>
