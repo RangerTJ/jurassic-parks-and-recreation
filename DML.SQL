@@ -492,16 +492,164 @@ AND BiologicalAssets.idBiologicalAsset = (SELECT idBiologicalAsset FROM Biologic
 WHERE Facilities.idHabitat = Species.idHabitat AND Facilities.securityRating >= Species.threatLevel
 ORDER BY Facilities.facilityName ASC;
 
+-- --------
+-- Additional Custom Filters and Lookups (added 5/28/23)
+-- --------
+
+-- FILTER EmployeeTasks by Category
+SELECT  EmployeeTasks.idEmployeeTask, TasksAssigned.taskName, (SELECT CONCAT(Employees.firstName, ' ', Employees.lastName)) AS contributingEmployee,
+        TaskCategories.categoryName, EmployeeTasks.taskHoursWorked, EmployeeTasks.empTaskCost, EmployeeTasks.empTaskStart, EmployeeTasks.empTaskEnd,
+        Employees.employeeUsername
+FROM EmployeeTasks
+LEFT JOIN TasksAssigned ON EmployeeTasks.idTaskAssigned = TasksAssigned.idTaskAssigned
+LEFT JOIN TaskCategories ON EmployeeTasks.idTaskCategory = TaskCategories.idTaskCategory
+LEFT JOIN Employees ON EmployeeTasks.idEmployee = Employees.idEmployee
+WHERE TaskCategories.categoryName = ?
+ORDER BY EmployeeTasks.idEmployeeTask ASC;
+
+-- LOOKUP EmployeeTask BY USERNAME (employee select menu)
+SELECT  EmployeeTasks.idEmployeeTask, TasksAssigned.taskName, (SELECT CONCAT(Employees.firstName, ' ', Employees.lastName)) AS contributingEmployee,
+        TaskCategories.categoryName, EmployeeTasks.taskHoursWorked, EmployeeTasks.empTaskCost, EmployeeTasks.empTaskStart, EmployeeTasks.empTaskEnd,
+        Employees.employeeUsername
+FROM EmployeeTasks
+LEFT JOIN TasksAssigned ON EmployeeTasks.idTaskAssigned = TasksAssigned.idTaskAssigned
+LEFT JOIN TaskCategories ON EmployeeTasks.idTaskCategory = TaskCategories.idTaskCategory
+LEFT JOIN Employees ON EmployeeTasks.idEmployee = Employees.idEmployee
+WHERE Employees.employeeUsername = ?
+ORDER BY EmployeeTasks.idEmployeeTask ASC;
+
+-- LOOKUP EmployeeTask by TaskAssigned Name
+SELECT  EmployeeTasks.idEmployeeTask, TasksAssigned.taskName, (SELECT CONCAT(Employees.firstName, ' ', Employees.lastName)) AS contributingEmployee,
+        TaskCategories.categoryName, EmployeeTasks.taskHoursWorked, EmployeeTasks.empTaskCost, EmployeeTasks.empTaskStart, EmployeeTasks.empTaskEnd,
+        Employees.employeeUsername
+FROM EmployeeTasks
+LEFT JOIN TasksAssigned ON EmployeeTasks.idTaskAssigned = TasksAssigned.idTaskAssigned
+LEFT JOIN TaskCategories ON EmployeeTasks.idTaskCategory = TaskCategories.idTaskCategory
+LEFT JOIN Employees ON EmployeeTasks.idEmployee = Employees.idEmployee
+WHERE TasksAssigned.taskName = ?
+ORDER BY EmployeeTasks.idEmployeeTask ASC;
+
+-- FILTER TasksAssigned - OPEN TASKS
+SELECT  TasksAssigned.idTaskAssigned, TasksAssigned.taskName, Facilities.facilityName, BiologicalAssets.idBiologicalAsset, Species.speciesName,
+        TasksAssigned.taskDescription, TasksAssigned.taskStart, TasksAssigned.taskEnd, BiologicalAssets.bioAssetName, Parks.parkName
+FROM TasksAssigned
+LEFT JOIN Facilities ON TasksAssigned.idFacility = Facilities.idFacility
+LEFT JOIN BiologicalAssets ON TasksAssigned.idBiologicalAsset = BiologicalAssets.idBiologicalAsset
+LEFT JOIN Species ON BiologicalAssets.idSpecies = Species.idSpecies
+LEFT JOIN Parks ON Facilities.idPark = Parks.idPark
+WHERE TasksAssigned.taskEnd IS NULL
+ORDER BY TasksAssigned.idTaskAssigned ASC;
+
+-- FILTER TasksAssigned - CLOSED TASKS
+SELECT  TasksAssigned.idTaskAssigned, TasksAssigned.taskName, Facilities.facilityName, BiologicalAssets.idBiologicalAsset, Species.speciesName,
+        TasksAssigned.taskDescription, TasksAssigned.taskStart, TasksAssigned.taskEnd, BiologicalAssets.bioAssetName, Parks.parkName
+FROM TasksAssigned
+LEFT JOIN Facilities ON TasksAssigned.idFacility = Facilities.idFacility
+LEFT JOIN BiologicalAssets ON TasksAssigned.idBiologicalAsset = BiologicalAssets.idBiologicalAsset
+LEFT JOIN Species ON BiologicalAssets.idSpecies = Species.idSpecies
+LEFT JOIN Parks ON Facilities.idPark = Parks.idPark
+WHERE TasksAssigned.taskEnd IS NOT NULL
+ORDER BY TasksAssigned.idTaskAssigned ASC;
+
+-- LOOKUP Employees by Last Name
+SELECT  Employees.idEmployee, Employees.lastName, Employees.firstName, Employees.employeeUsername, JobClassifications.jobTitle, Employees.hourlyWage,
+Employees.employeePhone, Employees.employeeEmail, Employees.employeeRadio, Employees.employeeNote, Employees.employeePhoto
+FROM Employees
+JOIN JobClassifications ON Employees.idJobClassification = JobClassifications.idJobClassification
+WHERE lastName = ?
+ORDER BY idEmployee ASC;
+
+-- FILTER Employees by Job Title
+SELECT  Employees.idEmployee, Employees.lastName, Employees.firstName, Employees.employeeUsername, JobClassifications.jobTitle, Employees.hourlyWage,
+Employees.employeePhone, Employees.employeeEmail, Employees.employeeRadio, Employees.employeeNote, Employees.employeePhoto
+FROM Employees
+JOIN JobClassifications ON Employees.idJobClassification = JobClassifications.idJobClassification
+WHERE JobClassifications.jobTitle = ? 
+ORDER BY idEmployee ASC;
+
+-- FILTER Facilities by Park Name
+SELECT  Facilities.idFacility, Parks.parkName, FacilityTypes.facTypeName, Habitats.habitatName,
+        Facilities.facilityName, Facilities.facilityDescription, Facilities.facilityLocation, 
+        Facilities.securityRating, Facilities.facilityPhoto, Facilities.facilityNote, Parks.parkLocation
+FROM Facilities
+LEFT JOIN Parks ON Facilities.idPark = Parks.idPark
+LEFT JOIN FacilityTypes ON Facilities.idFacilityType = FacilityTypes.idFacilityType
+LEFT JOIN Habitats ON Facilities.idHabitat = Habitats.idHabitat
+WHERE Parks.parkName = ?
+ORDER BY idFacility ASC;
+
+-- FILTER Facilities - Non-enclosures
+SELECT  Facilities.idFacility, Parks.parkName, FacilityTypes.facTypeName, Habitats.habitatName,
+        Facilities.facilityName, Facilities.facilityDescription, Facilities.facilityLocation, 
+        Facilities.securityRating, Facilities.facilityPhoto, Facilities.facilityNote, Parks.parkLocation
+FROM Facilities
+LEFT JOIN Parks ON Facilities.idPark = Parks.idPark
+LEFT JOIN FacilityTypes ON Facilities.idFacilityType = FacilityTypes.idFacilityType
+LEFT JOIN Habitats ON Facilities.idHabitat = Habitats.idHabitat
+WHERE Habitats.habitatName IS NULL
+ORDER BY idFacility ASC;
+
+-- FILTER Facilities - Enclosures Only
+SELECT  Facilities.idFacility, Parks.parkName, FacilityTypes.facTypeName, Habitats.habitatName,
+        Facilities.facilityName, Facilities.facilityDescription, Facilities.facilityLocation, 
+        Facilities.securityRating, Facilities.facilityPhoto, Facilities.facilityNote, Parks.parkLocation
+FROM Facilities
+LEFT JOIN Parks ON Facilities.idPark = Parks.idPark
+LEFT JOIN FacilityTypes ON Facilities.idFacilityType = FacilityTypes.idFacilityType
+LEFT JOIN Habitats ON Facilities.idHabitat = Habitats.idHabitat
+WHERE Habitats.habitatName IS NOT NULL
+ORDER BY idFacility ASC;
+
+-- FILTER Species by Diet
+SELECT Species.idSpecies, Species.speciesName, Diets.dietName, Habitats.habitatName, Species.speciesDescription,
+Species.threatLevel, Species.speciesPhoto
+FROM Species
+LEFT JOIN Diets ON Species.idDiet = Diets.idDiet
+LEFT JOIN Habitats ON Species.idHabitat = Habitats.idHabitat
+WHERE Diets.dietName = ?
+ORDER BY idSpecies ASC;
+
+-- FILTER Species by Habitats
+SELECT Species.idSpecies, Species.speciesName, Diets.dietName, Habitats.habitatName, Species.speciesDescription,
+Species.threatLevel, Species.speciesPhoto
+FROM Species
+LEFT JOIN Diets ON Species.idDiet = Diets.idDiet
+LEFT JOIN Habitats ON Species.idHabitat = Habitats.idHabitat
+WHERE Habitats.habitatName = ?
+ORDER BY idSpecies ASC;
+
+-- FILTER Biological Assets by Facility
+SELECT BiologicalAssets.idBiologicalAsset, BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName
+FROM BiologicalAssets
+LEFT JOIN Species ON BiologicalAssets.idSpecies = Species.idSpecies
+LEFT JOIN Facilities ON BiologicalAssets.idFacility = Facilities.idFacility
+WHERE Facilities.facilityName = ? AND Facilities.idHabitat IS NULL
+ORDER BY idBiologicalAsset ASC;
+
+-- POPULATE SELECT MENU FOR FACILITIES WITH ENCLOSURES (Habitats) - Designed to work with the above (Optional)
+SELECT  Facilities.idFacility, Parks.parkName, FacilityTypes.facTypeName, Habitats.habitatName,
+        Facilities.facilityName, Facilities.facilityDescription, Facilities.facilityLocation, 
+        Facilities.securityRating, Facilities.facilityPhoto, Facilities.facilityNote, Parks.parkLocation
+FROM Facilities
+LEFT JOIN Parks ON Facilities.idPark = Parks.idPark
+LEFT JOIN FacilityTypes ON Facilities.idFacilityType = FacilityTypes.idFacilityType
+LEFT JOIN Habitats ON Facilities.idHabitat = Habitats.idHabitat
+WHERE Habitats.idHabitat IS NOT NULL
+ORDER BY idFacility ASC;
+
+-- SELECT - Cost Analysis Report by Employee
+SELECT  Employees.lastName, Employees.firstName, Employees.employeeUsername, SUM(EmployeeTasks.empTaskCost) AS employeeCost
+FROM TaskCategories
+LEFT JOIN EmployeeTasks ON TaskCategories.idTaskCategory = EmployeeTasks.idTaskCategory
+LEFT JOIN Employees ON EmployeeTasks.idEmployee = Employees.idEmployee
+GROUP BY Employees.employeeUsername
+ORDER BY employeeCost DESC;
+
+
 
 -- MORE CUSTOM REPORT IDEAS
--- View Enclosure Inhabitants (for a specific enclosure)
 -- Cost Analysis Report by Biological Asset
--- Cost Analysis Report by Employee
--- Search for all tasks associated with an employee
--- Search for all task contributions (EmployeeTasks) associated with an employee
 -- Same Idea, but for facilities
--- All employees that contributed to a task (search by task ID)
--- All EmployeeTasks that contributed to a specific assignedTask (search by task ID)
 
 
 -- ----------------
