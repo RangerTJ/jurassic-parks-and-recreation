@@ -4,7 +4,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import Axios from 'axios';
-import staffDefaultImg from '../images/staffImages/default_staff.png';  // TEMP
+import defaultImg from '../images/tableDefaultPreview.png';
 
 //////////////////////
 // REMINDER: REMOVING/DEPRECATING SIZE ATTRIBUTE (eliminate references to it later)
@@ -157,7 +157,7 @@ function HabitatsPage ({hostURL}) {
                                         {val.habitatPhoto ?
                                         <img src={val.habitatPhoto} alt={altText} width={160} height={90} onClick={() => showImage(val.habitatPhoto)}/>
                                         :
-                                        <img src={staffDefaultImg} alt="Default Image" width={160} height={90} />
+                                        <img src={defaultImg} alt="Default Image" width={160} height={90} />
                                         }
                                     </td>
                                 </tr>

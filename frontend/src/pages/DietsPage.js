@@ -4,7 +4,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom'; // May not need?
 import Axios from 'axios';
-import staffDefaultImg from '../images/staffImages/default_staff.png';
+import defaultImg from '../images/tableDefaultPreview.png';
 
 
 // HostURL Passed from App.js
@@ -160,7 +160,7 @@ function DietsPage ({hostURL}) {
                                             {val.dietIcon ?
                                             <img src={val.dietIcon} alt={altText} width={160} height={90} onClick={() => showImage(val.dietIcon)}/>
                                             :
-                                            <img src={staffDefaultImg} alt="Default Image" width={160} height={90} />
+                                            <img src={defaultImg} alt="Default Image" width={160} height={90} />
                                             }
                                         </td>
                                     </tr>
