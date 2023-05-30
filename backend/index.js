@@ -60,6 +60,72 @@ app.get('/api/getCategoryCost', (req, res) =>{
     });
 });
 
+// READ Employee COSTS - Select
+app.get('/api/getEmployeeCost', (req, res) =>{
+    const sqlRead = `
+    SELECT  Employees.lastName, Employees.firstName, Employees.employeeUsername, SUM(EmployeeTasks.empTaskCost) AS employeeCost
+    FROM EmployeeTasks
+    LEFT JOIN Employees ON EmployeeTasks.idEmployee = Employees.idEmployee
+    GROUP BY Employees.employeeUsername
+    ORDER BY employeeCost DESC;
+    `;
+    db.query(sqlRead, (err, result)=> {
+        console.log(result);
+        res.send(result);
+    });
+});
+
+// READ Task COSTS - Select
+app.get('/api/getTaskCost', (req, res) =>{
+    const sqlRead = `
+    SELECT  TasksAssigned.taskName, SUM(EmployeeTasks.empTaskCost) AS taskCost
+    FROM EmployeeTasks
+    LEFT JOIN TasksAssigned ON EmployeeTasks.idTaskAssigned = TasksAssigned.idTaskAssigned
+    GROUP BY TasksAssigned.taskName
+    ORDER BY taskCost DESC;
+    `;
+    db.query(sqlRead, (err, result)=> {
+        console.log(result);
+        res.send(result);
+    });
+});
+
+// READ Facility COSTS - Select
+app.get('/api/getFacilityCost', (req, res) =>{
+    const sqlRead = `
+    SELECT  Facilities.facilityName, Parks.parkName, SUM(EmployeeTasks.empTaskCost) AS facilityCost
+    FROM EmployeeTasks
+    LEFT JOIN TasksAssigned ON EmployeeTasks.idTaskAssigned = TasksAssigned.idTaskAssigned
+    LEFT JOIN Facilities ON TasksAssigned.idFacility = Facilities.idFacility
+    LEFT JOIN Parks ON Facilities.idPark = Parks.idPark
+    GROUP BY Facilities.facilityName
+    ORDER BY facilityCost DESC;
+    `;
+    db.query(sqlRead, (err, result)=> {
+        console.log(result);
+        res.send(result);
+    });
+});
+
+// READ Bio Asset  COSTS - Select
+app.get('/api/getBioAssetCost', (req, res) =>{
+    const sqlRead = `
+    SELECT  BiologicalAssets.bioAssetName, Species.speciesName, Parks.parkName, SUM(EmployeeTasks.empTaskCost) AS assetCost
+    FROM EmployeeTasks
+    LEFT JOIN TasksAssigned ON EmployeeTasks.idTaskAssigned = TasksAssigned.idTaskAssigned
+    JOIN BiologicalAssets ON TasksAssigned.idBiologicalAsset = BiologicalAssets.idBiologicalAsset
+    LEFT JOIN Species ON BiologicalAssets.idSpecies = Species.idSpecies
+    LEFT JOIN Facilities ON BiologicalAssets.idFacility = Facilities.idFacility
+    LEFT JOIN Parks ON Facilities.idPark = Parks.idPark
+    GROUP BY BiologicalAssets.bioAssetName
+    ORDER BY assetCost DESC;
+    `;
+    db.query(sqlRead, (err, result)=> {
+        console.log(result);
+        res.send(result);
+    });
+});
+
 
 ///////////////////
 // PARKS QUERIES //

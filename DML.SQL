@@ -665,14 +665,15 @@ GROUP BY Facilities.facilityName
 ORDER BY facilityCost DESC;
 
 -- Cost Analysis by Biological Asset
-SELECT  BiologicalAssets.bioAssetName, Parks.parkName, SUM(EmployeeTasks.empTaskCost) AS assetCost
-FROM EmployeeTasks
-LEFT JOIN TasksAssigned ON EmployeeTasks.idTaskAssigned = TasksAssigned.idTaskAssigned
-LEFT JOIN BiologicalAssets ON TasksAssigned.idBiologicalAsset = BiologicalAssets.idBiologicalAsset
-LEFT JOIN Facilities ON BiologicalAssets.idFacility = Facilities.idFacility
-LEFT JOIN Parks ON Facilities.idPark = Parks.idPark
-GROUP BY BiologicalAssets.bioAssetName
-ORDER BY assetCost DESC;
+    SELECT  BiologicalAssets.bioAssetName, Species.speciesName, Parks.parkName, SUM(EmployeeTasks.empTaskCost) AS assetCost
+    FROM EmployeeTasks
+    LEFT JOIN TasksAssigned ON EmployeeTasks.idTaskAssigned = TasksAssigned.idTaskAssigned
+    JOIN BiologicalAssets ON TasksAssigned.idBiologicalAsset = BiologicalAssets.idBiologicalAsset
+    LEFT JOIN Species ON BiologicalAssets.idSpecies = Species.idSpecies
+    LEFT JOIN Facilities ON BiologicalAssets.idFacility = Facilities.idFacility
+    LEFT JOIN Parks ON Facilities.idPark = Parks.idPark
+    GROUP BY BiologicalAssets.bioAssetName
+    ORDER BY assetCost DESC;
 
 
 -- ----------------

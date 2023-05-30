@@ -11,11 +11,19 @@ function HomePage({hostURL}) {
     // Index Table SQL Endpoints
     const getParkCostURL = hostURL + '/api/getParkCost';
     const getCategoryCostURL = hostURL + '/api/getCategoryCost';
+    const getEmployeeCostURL = hostURL + '/api/getEmployeeCost';
+    const getTaskCostURL = hostURL + '/api/getTaskCost';
+    const getFacilityCostURL = hostURL + '/api/getFacilityCost';
+    const getBioAssetCostURL = hostURL + '/api/getBioAssetCost';
 
     // Index Table Functions
     // CRUD operations modeled off tutorial - CITE IN DETAIL LATER (or top of each page?)
     const [parkCostList, setParkCostList] = useState([])
     const [categoryCostList, setCategoryCostList] = useState([])
+    const [employeeCostList, setEmployeeCostList] = useState([])
+    const [taskCostList, setTaskCostList] = useState([])
+    const [facilityCostList, setFacilityCostList] = useState([])
+    const [bioAssetCostList, setBioAssetCostList] = useState([])
 
     // READ Park Costs Table
     useEffect(()=> {
@@ -32,6 +40,40 @@ function HomePage({hostURL}) {
         console.log(response.data)
         })
     }, []);
+
+    // READ Employee Costs Table
+    useEffect(()=> {
+        Axios.get(getEmployeeCostURL).then((response)=> {
+        setEmployeeCostList(response.data)
+        console.log(response.data)
+        })
+    }, []);
+
+    // READ Task Costs Table
+    useEffect(()=> {
+        Axios.get(getTaskCostURL).then((response)=> {
+        setTaskCostList(response.data)
+        console.log(response.data)
+        })
+    }, []);
+
+    // READ Facility Costs Table
+    useEffect(()=> {
+        Axios.get(getFacilityCostURL).then((response)=> {
+        setFacilityCostList(response.data)
+        console.log(response.data)
+        })
+    }, []);
+
+    // READ BioAsset Costs Table
+    useEffect(()=> {
+        Axios.get(getBioAssetCostURL).then((response)=> {
+        setBioAssetCostList(response.data)
+        console.log(response.data)
+        })
+    }, []);
+
+
 
     // Render the Home Page
     return(
@@ -50,29 +92,44 @@ function HomePage({hostURL}) {
                     delete a specific entry.
                 </p>
             </article>
-
+            {/* Simulated security camera made following 'Replace animated GIFs with video for faster page loads' by Houssein Djirdeh 
+            and adapting it for React syntax. Footage recorded in-game footage from Jurassic World Evolution 2
+            URL: https://web.dev/replace-gifs-with-videos/ */}
+            <article>
+                <h3>Security Feed</h3>
+                <div>
+                    <video autoPlay loop muted title="Security Camera Feed">
+                        <source src={securityCamera1} type="video/mp4"></source>
+                    </video>
+                </div>
+            </article>
             <article>
                 <h3>Financial Reports</h3>
                 <p>
                     The summary tables below provide high-level overviews of current costs associated with aspects of
-                    managing our system of parks and zoological attractions.
+                    managing our system of parks and zoological attractions. Note that for the 'Top 10' style tables below, if there
+                    are fewer than 10 related entities with EmployeeTasks relating to them, the tables will
+                    have fewer than 10 elements displayed.
                 </p>
                 <h4 className="st-header">Cost Summary by Sector</h4>
                 <div className="scrollableST">
                     <div className="st-holder">
-                        <table className="summary-table">
+                        <table>
                             <tbody>
-                            <tr >
+                            <tr>
+                                <th>Rank</th>
                                 <th>Sector</th>
                                 <th>Cost</th>
                             </tr>
                             {categoryCostList.map((val, index)=> {
                                 // Convert cost to USD or set to 0 USD if there is a null entry
                                 const usdCategoryCost = val.taskTypeCost ? val.taskTypeCost.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) : '$0.00';
+                                const rank = index + 1
                                 return (
-                                    <tr key={index} className="st-left">
-                                        <td>{val.categoryName}</td>
-                                        <td>{usdCategoryCost}</td>
+                                    <tr key={index}>
+                                        <td>{rank}</td>
+                                        <td className="st-left">{val.categoryName}</td>
+                                        <td className="st-left">{usdCategoryCost}</td>
                                     </tr>
                                 )
                             })}
@@ -86,14 +143,17 @@ function HomePage({hostURL}) {
                         <table>
                             <tbody>
                             <tr >
+                                <th>Rank</th>
                                 <th>Park</th>
                                 <th>Cost</th>
                             </tr>
                             {parkCostList.map((val, index)=> {
                                 // Convert cost to USD or set to 0 USD if there is a null entry
                                 const usdParkCost = val.parkCost ? val.parkCost.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) : '$0.00';
+                                const rank = index + 1
                                 return (
                                     <tr key={index}>
+                                        <td>{rank}</td>
                                         <td className="st-left">{val.parkName}</td>
                                         <td className="st-left">{usdParkCost}</td>
                                     </tr>
@@ -103,6 +163,118 @@ function HomePage({hostURL}) {
                         </table>
                     </div>
                 </div>
+                <h4 className="st-header">Top 10 Most Expensive Employees</h4>
+                <div className="scrollableST">
+                    <div className="st-holder">
+                        <table>
+                            <tbody>
+                            <tr >
+                                <th>Rank</th>
+                                <th>Employee</th>
+                                <th>Cost</th>
+                            </tr>
+                            {employeeCostList.slice(0, 10).map((val, index)=> {
+                                // Convert cost to USD or set to 0 USD if there is a null entry
+                                const usdEmployeeCost = val.employeeCost ? val.employeeCost.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) : '$0.00';
+                                const rank = index + 1
+                                return (
+                                    <tr key={index}>
+                                        <td>{rank}</td>
+                                        <td className="st-left">{val.lastName}, {val.firstName}</td>
+                                        <td className="st-left">{usdEmployeeCost}</td>
+                                    </tr>
+                                )
+                            })}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <h4 className="st-header">Top 10 Most Expensive Tasks</h4>
+                <div className="scrollableST">
+                    <div className="st-holder">
+                        <table>
+                            <tbody>
+                            <tr >
+                                <th>Rank</th>
+                                <th>Task</th>
+                                <th>Cost</th>
+                            </tr>
+                            {taskCostList.slice(0, 10).map((val, index)=> {
+                                // Convert cost to USD or set to 0 USD if there is a null entry
+                                const usdTaskCost = val.taskCost ? val.taskCost.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) : '$0.00';
+                                const rank = index + 1
+                                return (
+                                    <tr key={index}>
+                                        <td>{rank}</td>
+                                        <td className="st-left">{val.taskName}</td>
+                                        <td className="st-left">{usdTaskCost}</td>
+                                    </tr>
+                                )
+                            })}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <h4 className="st-header">Top 10 Most Expensive Facilities</h4>
+                <div className="scrollableST">
+                    <div className="st-holder">
+                        <table>
+                            <tbody>
+                            <tr >
+                                <th>Rank</th>
+                                <th>Facility</th>
+                                <th>Park</th>
+                                <th>Cost</th>
+                            </tr>
+                            {facilityCostList.slice(0, 10).map((val, index)=> {
+                                // Convert cost to USD or set to 0 USD if there is a null entry
+                                const usdFacilityCost = val.facilityCost ? val.facilityCost.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) : '$0.00';
+                                const rank = index + 1
+                                return (
+                                    <tr key={index}>
+                                        <td>{rank}</td>
+                                        <td className="st-left">{val.facilityName}</td>
+                                        <td className="st-left">{val.parkName}</td>
+                                        <td className="st-left">{usdFacilityCost}</td>
+                                    </tr>
+                                )
+                            })}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <h4 className="st-header">Top 10 Most Expensive Biological Assets</h4>
+                <div className="scrollableST">
+                    <div className="st-holder">
+                        <table>
+                            <tbody>
+                            <tr >
+                                <th>Rank</th>
+                                <th>Asset</th>
+                                <th>Species</th>
+                                <th>Park</th>
+                                <th>Cost</th>
+                            </tr>
+                            {bioAssetCostList.slice(0, 10).map((val, index)=> {
+                                // Convert cost to USD or set to 0 USD if there is a null entry
+                                const usdBioAssetCost = val.assetCost ? val.assetCost.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) : '$0.00';
+                                const rank = index + 1
+                                return (
+                                    <tr key={index}>
+                                        <td>{rank}</td>
+                                        <td className="st-left">{val.bioAssetName}</td>
+                                        <td className="st-left">{val.speciesName}</td>
+                                        <td className="st-left">{val.parkName}</td>
+                                        <td className="st-left">{usdBioAssetCost}</td>
+                                    </tr>
+                                )
+                            })}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
             </article>
             <article>
                 <h3>Overview</h3>
@@ -118,18 +290,6 @@ function HomePage({hostURL}) {
                 <p>
                     This empowers managers to quickly and easily perform tasks, like assigning a new dinosaur to an appropriate habitat based on its own habitat and diet needs and those of available enclosure facilities. As another example, a park manager could quickly and easily discern whether or not a certain biological asset is secure enough in its current enclosure.
                 </p>
-            </article>
-
-            {/* Simulated security camera made following 'Replace animated GIFs with video for faster page loads' by Houssein Djirdeh 
-            and adapting it for React syntax. Footage recorded in-game footage from Jurassic World Evolution 2
-            URL: https://web.dev/replace-gifs-with-videos/ */}
-            <article>
-                <h3>Security Feed</h3>
-                <div>
-                    <video autoPlay loop muted title="Security Camera Feed">
-                        <source src={securityCamera1} type="video/mp4"></source>
-                    </video>
-                </div>
             </article>
             </>
     )
