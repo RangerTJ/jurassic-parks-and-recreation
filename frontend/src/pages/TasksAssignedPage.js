@@ -46,7 +46,6 @@ function TasksAssignedPage ({hostURL}) {
             setTasksAssignedList(response.data)
         } catch (error) {
             console.error('Error!', error);
-            alert('MYSQL Server Error: ' + error.response.data);
         }
     }
 
@@ -65,6 +64,7 @@ function TasksAssignedPage ({hostURL}) {
             }}
         catch (error) {
             console.error('Error deleting Task.', error);
+            alert('MYSQL Server Error: ' + error.response.data);
         }
     };
 

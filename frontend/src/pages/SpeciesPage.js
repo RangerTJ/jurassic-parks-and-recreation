@@ -34,7 +34,6 @@ function SpeciesPage ({hostURL}) {
         }
         catch (error) {
             console.error('Error populating the Species table.', error);
-            alert('MYSQL Server Error: ' + error.response.data);
         }
     };
 
@@ -68,6 +67,7 @@ function SpeciesPage ({hostURL}) {
             }}
         catch (error) {
             console.error('Error deleting Species.', error);
+            alert('MYSQL Server Error: ' + error.response.data);
         }
     };
 
