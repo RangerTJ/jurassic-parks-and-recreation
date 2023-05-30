@@ -68,7 +68,8 @@ function FacilitiesUpdateForm ({hostURL}) {
                     alert("Please fill out all required fields and try again.")
                 }
         } catch (error) {
-                console.error('Error updating facility.', error)
+            console.error('Error updating facility.', error);
+            alert('MYSQL Server Error: ' + error.response.data);
         };
     };
 

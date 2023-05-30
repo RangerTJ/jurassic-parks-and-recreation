@@ -58,11 +58,12 @@ function SpeciesUpdateForm ({hostURL}) {
                 navTo('/Species');
             }
             else {
-                alert("Please fill out all required fields and try again.")
+                alert("Please fill out all required fields and try again.");
             }
         }
         catch (error) {
             console.error('Error updating Species.', error)
+            alert('MYSQL Server Error: ' + error.response.data);
         }
     };
 

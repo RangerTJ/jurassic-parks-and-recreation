@@ -43,7 +43,8 @@ function JobClassificationsUpdateForm ({hostURL}) {
                     alert("Please fill out all required fields and try again.")
                 }
         } catch (error) {
-                console.error('Error updating Facility Type.', error)
+            console.error('Error updating Facility Type.', error);
+            alert('MYSQL Server Error: ' + error.response.data);
         };
     };
 

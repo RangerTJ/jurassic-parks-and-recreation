@@ -40,8 +40,13 @@ app.get('/api/getParkCost', (req, res) =>{
     ORDER BY ParkCost DESC;
     `;
     db.query(sqlRead, (err, result)=> {
-        console.log(result);
-        res.send(result);
+        if (err) {
+            console.error(err);
+            res.status(500).send(err.sqlMessage)
+        } else {
+            console.log(result)
+            res.send(result);
+        };
     });
 });
 
@@ -55,8 +60,13 @@ app.get('/api/getCategoryCost', (req, res) =>{
     ORDER BY TaskTypeCost DESC;
     `;
     db.query(sqlRead, (err, result)=> {
-        console.log(result);
-        res.send(result);
+        if (err) {
+            console.error(err);
+            res.status(500).send(err.sqlMessage)
+        } else {
+            console.log(result)
+            res.send(result);
+        };
     });
 });
 
@@ -70,8 +80,13 @@ app.get('/api/getEmployeeCost', (req, res) =>{
     ORDER BY employeeCost DESC;
     `;
     db.query(sqlRead, (err, result)=> {
-        console.log(result);
-        res.send(result);
+        if (err) {
+            console.error(err);
+            res.status(500).send(err.sqlMessage)
+        } else {
+            console.log(result)
+            res.send(result);
+        };
     });
 });
 
@@ -85,8 +100,13 @@ app.get('/api/getTaskCost', (req, res) =>{
     ORDER BY taskCost DESC;
     `;
     db.query(sqlRead, (err, result)=> {
-        console.log(result);
-        res.send(result);
+        if (err) {
+            console.error(err);
+            res.status(500).send(err.sqlMessage)
+        } else {
+            console.log(result)
+            res.send(result);
+        };
     });
 });
 
@@ -102,8 +122,13 @@ app.get('/api/getFacilityCost', (req, res) =>{
     ORDER BY facilityCost DESC;
     `;
     db.query(sqlRead, (err, result)=> {
-        console.log(result);
-        res.send(result);
+        if (err) {
+            console.error(err);
+            res.status(500).send(err.sqlMessage)
+        } else {
+            console.log(result)
+            res.send(result);
+        };
     });
 });
 
@@ -121,8 +146,13 @@ app.get('/api/getBioAssetCost', (req, res) =>{
     ORDER BY assetCost DESC;
     `;
     db.query(sqlRead, (err, result)=> {
-        console.log(result);
-        res.send(result);
+        if (err) {
+            console.error(err);
+            res.status(500).send(err.sqlMessage)
+        } else {
+            console.log(result)
+            res.send(result);
+        };
     });
 });
 
@@ -146,10 +176,10 @@ app.post('/api/insertParks', (req, res) =>{
     db.query(sqlInsert, [parkName, parkDescription, parkLocation, parkPhoto], (err, result)=> {
         if (err) {
             console.error(err);
-            res.status(500).send('SQL Error while attempting to create.')
+            res.status(500).send(err.sqlMessage)
         } else {
+            console.log(result)
             res.send(result);
-            console.log(result);
         };
     });
 })
@@ -160,8 +190,13 @@ app.get('/api/getParks', (req, res) =>{
     SELECT * FROM Parks;
     `;
     db.query(sqlRead, (err, result)=> {
-        console.log(result);
-        res.send(result);
+        if (err) {
+            console.error(err);
+            res.status(500).send(err.sqlMessage)
+        } else {
+            console.log(result)
+            res.send(result);
+        };
     });
 });
 
@@ -180,11 +215,11 @@ app.put('/api/updateParks', (req, res) =>{
     db.query(sqlUpdate, [parkName, parkDescription, parkLocation, parkPhoto, idPark], (err, result)=> {
         if (err) {
             console.error(err);
-            res.status(500).send('SQL Error while attempting to update.');
+            res.status(500).send(err.sqlMessage)
         } else {
-            console.log(result);
+            console.log(result)
             res.send(result);
-        }
+        };
     });
 });
 
@@ -199,8 +234,9 @@ app.delete('/api/deleteParks/:idPark', (req, res) =>{
     db.query(sqlDelete, idPark, (err, result)=> {
         if (err) {
             console.error(err);
-            res.status(500).send('SQL Error while attempting to delete.')
+            res.status(500).send(err.sqlMessage)
         } else {
+            console.log(result)
             res.send(result);
         };
     });
@@ -224,10 +260,10 @@ app.post('/api/insertJobClassifications', (req, res) =>{
     db.query(sqlInsert, [jobTitle, jobDescription], (err, result)=> {
         if (err) {
             console.error(err);
-            res.status(500).send('SQL Error while attempting to create.')
+            res.status(500).send(err.sqlMessage)
         } else {
+            console.log(result)
             res.send(result);
-            console.log(result);
         };
     });
 })
@@ -239,8 +275,13 @@ app.get('/api/getJobClassifications', (req, res) =>{
     ORDER BY idJobClassification ASC;
     `;
     db.query(sqlRead, (err, result)=> {
-        console.log(result);
-        res.send(result);
+        if (err) {
+            console.error(err);
+            res.status(500).send(err.sqlMessage)
+        } else {
+            console.log(result)
+            res.send(result);
+        };
     });
 });
 
@@ -258,11 +299,11 @@ app.put('/api/updateJobClassifications', (req, res) =>{
     db.query(sqlUpdate, [jobTitle, jobDescription, idJobClassification], (err, result)=> {
         if (err) {
             console.error(err);
-            res.status(500).send('SQL Error while attempting to update.');
+            res.status(500).send(err.sqlMessage)
         } else {
-            console.log(result);
+            console.log(result)
             res.send(result);
-        }
+        };
     });
 });
 
@@ -278,8 +319,9 @@ app.delete('/api/deleteJobClassifications/:idJobClassification', (req, res) =>{
     db.query(sqlDelete, idJobClassification, (err, result)=> {
         if (err) {
             console.error(err);
-            res.status(500).send('SQL Error while attempting to delete.')
+            res.status(500).send(err.sqlMessage)
         } else {
+            console.log(result)
             res.send(result);
         };
     });
@@ -300,8 +342,13 @@ app.get('/api/getEmployees', (req, res) =>{
     ORDER BY idEmployee ASC;
     `;
     db.query(sqlRead, (err, result)=> {
-        console.log(result);
-        res.send(result);
+        if (err) {
+            console.error(err);
+            res.status(500).send(err.sqlMessage)
+        } else {
+            console.log(result)
+            res.send(result);
+        };
     });
 });
 
@@ -328,10 +375,10 @@ app.post('/api/insertEmployees', (req, res) =>{
     db.query(sqlInsert, [jobTitle, firstName, lastName, employeeUsername, hourlyWage, employeePhone, employeeEmail, employeeRadio, employeeNote, employeePhoto], (err, result)=> {
         if (err) {
             console.error(err);
-            res.status(500).send('SQL Error while attempting to create.')
+            res.status(500).send(err.sqlMessage)
         } else {
+            console.log(result)
             res.send(result);
-            console.log(result);
         };
     });
 });
@@ -360,11 +407,11 @@ app.put('/api/updateEmployees', (req, res) =>{
     db.query(sqlUpdate, [jobTitle, firstName, lastName, employeeUsername, hourlyWage, employeePhone, employeeEmail, employeeRadio, employeeNote, employeePhoto, idEmployee], (err, result)=> {
         if (err) {
             console.error(err);
-            res.status(500).send('SQL Error while attempting to update.');
+            res.status(500).send(err.sqlMessage)
         } else {
-            console.log(result);
+            console.log(result)
             res.send(result);
-        }
+        };
     });
 });
 
@@ -379,8 +426,9 @@ app.delete('/api/deleteEmployees/:idEmployeeTask', (req, res) =>{
     db.query(sqlDelete, idEmployee, (err, result)=> {
         if (err) {
             console.error(err);
-            res.status(500).send('SQL Error while attempting to delete.')
+            res.status(500).send(err.sqlMessage)
         } else {
+            console.log(result)
             res.send(result);
         };
     });
@@ -430,10 +478,10 @@ app.post('/api/insertEmployeeTasks', (req, res) =>{
     db.query(sqlInsert, [taskName, employeeUsername, categoryName, taskHoursWorked, empTaskCost, empTaskStart, empTaskEnd], (err, result)=> {
         if (err) {
             console.error(err);
-            res.status(500).send('SQL Error while attempting to create.')
+            res.status(500).send(err.sqlMessage)
         } else {
+            console.log(result)
             res.send(result);
-            console.log(result);
         };
     });
 });
@@ -461,11 +509,11 @@ app.put('/api/updateEmployeeTasks', (req, res) =>{
     db.query(sqlUpdate, [employeeUsername, categoryName, taskName, taskHoursWorked, empTaskCost, empTaskStart, empTaskEnd, idEmployeeTask], (err, result)=> {
         if (err) {
             console.error(err);
-            res.status(500).send('SQL Error while attempting to update.');
+            res.status(500).send(err.sqlMessage)
         } else {
-            console.log(result);
+            console.log(result)
             res.send(result);
-        }
+        };
     });
 });
 
@@ -480,8 +528,9 @@ app.delete('/api/deleteEmployeeTasks/:idEmployeeTask', (req, res) =>{
     db.query(sqlDelete, idEmployeeTask, (err, result)=> {
         if (err) {
             console.error(err);
-            res.status(500).send('SQL Error while attempting to delete.')
+            res.status(500).send(err.sqlMessage)
         } else {
+            console.log(result)
             res.send(result);
         };
     });
@@ -504,8 +553,13 @@ app.get('/api/getTasksAssigned', (req, res) => {
     ORDER BY TasksAssigned.idTaskAssigned ASC;
     `;
     db.query(sqlRead, (err, result) => {
-        console.log(result);
-        res.send(result);
+        if (err) {
+            console.error(err);
+            res.status(500).send(err.sqlMessage)
+        } else {
+            console.log(result)
+            res.send(result);
+        };
     });
 });
 
@@ -528,10 +582,10 @@ app.post('/api/insertTasksAssigned', (req, res) => {
     db.query(sqlInsert, [facilityName, bioAssetName, taskName, taskDescription, taskStart, taskEnd], (err, result) => {
         if (err) {
             console.error(err);
-            res.status(500).send('SQL Error while attempting to create.')
+            res.status(500).send(err.sqlMessage)
         } else {
+            console.log(result)
             res.send(result);
-            console.log(result);
         };
     });
 });
@@ -557,11 +611,11 @@ app.put('/api/updateTasksAssigned', (req, res) =>{
     db.query(sqlUpdate, [facilityName, bioAssetName, taskName, taskDescription, taskStart, taskEnd, idTaskAssigned], (err, result)=> {
         if (err) {
             console.error(err);
-            res.status(500).send('SQL Error while attempting to update.');
+            res.status(500).send(err.sqlMessage)
         } else {
-            console.log(result);
+            console.log(result)
             res.send(result);
-        }
+        };
     });
 });
 
@@ -576,8 +630,9 @@ app.delete('/api/deleteTasksAssigned/:idTaskAssigned', (req, res) =>{
     db.query(sqlDelete, idTaskAssigned, (err, result)=> {
         if (err) {
             console.error(err);
-            res.status(500).send('SQL Error while attempting to delete.')
+            res.status(500).send(err.sqlMessage)
         } else {
+            console.log(result)
             res.send(result);
         };
     });
@@ -622,8 +677,13 @@ app.get('/api/getFacilities', (req, res) =>{
     ORDER BY idFacility ASC;
     `;
     db.query(sqlRead, (err, result)=> {
-        console.log(result);
-        res.send(result);
+        if (err) {
+            console.error(err);
+            res.status(500).send(err.sqlMessage)
+        } else {
+            console.log(result)
+            res.send(result);
+        };
     });
 });
 
@@ -649,8 +709,13 @@ app.post('/api/insertFacilities', (req, res) =>{
             );
     `;
     db.query(sqlInsert, [parkName, facTypeName, habitatName, facilityName, facilityDescription, facilityLocation, securityRating, facilityPhoto, facilityNote], (err, result)=> {
-        console.log(result);
-        res.send(result);
+        if (err) {
+            console.error(err);
+            res.status(500).send(err.sqlMessage)
+        } else {
+            console.log(result)
+            res.send(result);
+        };
     });
 });
 
@@ -678,11 +743,11 @@ app.put('/api/updateFacilities', (req, res) =>{
     db.query(sqlUpdate, [parkName, facTypeName, habitatName, facilityName, facilityDescription, facilityLocation, securityRating, facilityPhoto, facilityNote, idFacility], (err, result)=> {
         if (err) {
             console.error(err);
-            res.status(500).send('SQL Error while attempting to update.');
+            res.status(500).send(err.sqlMessage)
         } else {
-            console.log(result);
+            console.log(result)
             res.send(result);
-        }
+        };
     });
 });
 
@@ -697,8 +762,9 @@ app.delete('/api/deleteFacilities/:idFacility', (req, res) =>{
     db.query(sqlDelete, idFacility, (err, result)=> {
         if (err) {
             console.error(err);
-            res.status(500).send('SQL Error while attempting to delete.')
+            res.status(500).send(err.sqlMessage)
         } else {
+            console.log(result)
             res.send(result);
         };
     });
@@ -721,10 +787,10 @@ app.post('/api/insertFacilityTypes', (req, res) =>{
     db.query(sqlInsert, [facTypeName, facTypeDescription], (err, result)=> {
         if (err) {
             console.error(err);
-            res.status(500).send('SQL Error while attempting to create.')
+            res.status(500).send(err.sqlMessage)
         } else {
+            console.log(result)
             res.send(result);
-            console.log(result);
         };
     });
 })
@@ -736,8 +802,13 @@ app.get('/api/getFacilityTypes', (req, res) =>{
     ORDER BY idFacilityType ASC;
     `;
     db.query(sqlRead, (err, result)=> {
-        console.log(result);
-        res.send(result);
+        if (err) {
+            console.error(err);
+            res.status(500).send(err.sqlMessage)
+        } else {
+            console.log(result)
+            res.send(result);
+        };
     });
 });
 
@@ -754,11 +825,11 @@ app.put('/api/updateFacilityTypes', (req, res) =>{
     db.query(sqlUpdate, [facTypeName, facTypeDescription, idFacilityType], (err, result)=> {
         if (err) {
             console.error(err);
-            res.status(500).send('SQL Error while attempting to update.');
+            res.status(500).send(err.sqlMessage)
         } else {
-            console.log(result);
+            console.log(result)
             res.send(result);
-        }
+        };
     });
 });
 
@@ -774,8 +845,9 @@ app.delete('/api/deleteFacilityTypes/:idFacilityType', (req, res) =>{
     db.query(sqlDelete, idFacilityType, (err, result)=> {
         if (err) {
             console.error(err);
-            res.status(500).send('SQL Error while attempting to delete.')
+            res.status(500).send(err.sqlMessage)
         } else {
+            console.log(result)
             res.send(result);
         };
     });
@@ -796,8 +868,13 @@ app.get('/api/getBiologicalAssets', (req, res) =>{
     ORDER BY idBiologicalAsset ASC;
     `;
     db.query(sqlRead, (err, result)=> {
-        console.log(result);
-        res.send(result);
+        if (err) {
+            console.error(err);
+            res.status(500).send(err.sqlMessage)
+        } else {
+            console.log(result)
+            res.send(result);
+        };
     });
 });
 
@@ -814,8 +891,13 @@ app.get('/api/checkBiologicalAssetsHabitats', (req, res) =>{
     ORDER BY facilityName, speciesName, bioAssetName;
     `;
     db.query(sqlRead, (err, result)=> {
-        console.log(result);
-        res.send(result);
+        if (err) {
+            console.error(err);
+            res.status(500).send(err.sqlMessage)
+        } else {
+            console.log(result)
+            res.send(result);
+        };
     });
 });
 
@@ -830,8 +912,13 @@ app.get('/api/checkBiologicalAssetsSecurity', (req, res) =>{
     ORDER BY severity, Facilities.facilityName, BiologicalAssets.bioAssetName;
     `;
     db.query(sqlRead, (err, result)=> {
-        console.log(result);
-        res.send(result);
+        if (err) {
+            console.error(err);
+            res.status(500).send(err.sqlMessage)
+        } else {
+            console.log(result)
+            res.send(result);
+        };
     });
 });
 
@@ -851,10 +938,10 @@ app.post('/api/insertBiologicalAssets', (req, res) =>{
     db.query(sqlInsert, [speciesName, facilityName, bioAssetName], (err, result)=> {
         if (err) {
             console.error(err);
-            res.status(500).send('SQL Error while attempting to create.')
+            res.status(500).send(err.sqlMessage)
         } else {
+            console.log(result)
             res.send(result);
-            console.log(result);
         };
     });
 });
@@ -875,11 +962,11 @@ app.put('/api/updateBiologicalAssets', (req, res) =>{
     db.query(sqlUpdate, [speciesName, facilityName, bioAssetName, idBiologicalAsset], (err, result)=> {
         if (err) {
             console.error(err);
-            res.status(500).send('SQL Error while attempting to update.');
+            res.status(500).send(err.sqlMessage)
         } else {
-            console.log(result);
+            console.log(result)
             res.send(result);
-        }
+        };
     });
 });
 
@@ -895,8 +982,13 @@ app.post('/api/filterBioAssetsBySpecies', (req, res) =>{
     ORDER BY idBiologicalAsset ASC;
     `;
     db.query(sqlRead, speciesName, (err, result)=> {
-        console.log(result);
-        res.send(result);
+        if (err) {
+            console.error(err);
+            res.status(500).send(err.sqlMessage)
+        } else {
+            console.log(result)
+            res.send(result);
+        };
     });
 });
 
@@ -910,8 +1002,9 @@ app.delete('/api/deleteBiologicalAssets/:idBiologicalAsset', (req, res) =>{
     db.query(sqlDelete, idBiologicalAsset, (err, result)=> {
         if (err) {
             console.error(err);
-            res.status(500).send('SQL Error while attempting to delete.')
+            res.status(500).send(err.sqlMessage)
         } else {
+            console.log(result)
             res.send(result);
         };
     });
@@ -932,8 +1025,13 @@ app.get('/api/getSpecies', (req, res) => {
     ORDER BY idSpecies ASC;
     `;
     db.query(sqlRead, (err, result) => {
-        console.log(result);
-        res.send(result);
+        if (err) {
+            console.error(err);
+            res.status(500).send(err.sqlMessage)
+        } else {
+            console.log(result)
+            res.send(result);
+        };
     });
 });
 
@@ -956,10 +1054,10 @@ app.post('/api/insertSpecies', (req, res) => {
     db.query(sqlInsert, [dietName, habitatName, speciesName, speciesDescription, threatLevel, speciesPhoto], (err, result) => {
         if (err) {
             console.error(err);
-            res.status(500).send('SQL Error while attempting to create.')
+            res.status(500).send(err.sqlMessage)
         } else {
+            console.log(result)
             res.send(result);
-            console.log(result);
         };
     });
 });
@@ -983,11 +1081,11 @@ app.put('/api/updateSpecies', (req, res) => {
     db.query(sqlUpdate, [dietName, habitatName, speciesName, speciesDescription, threatLevel, speciesPhoto, idSpecies], (err, result) => {
         if (err) {
             console.error(err);
-            res.status(500).send('SQL Error while attempting to update.');
+            res.status(500).send(err.sqlMessage)
         } else {
-            console.log(result);
+            console.log(result)
             res.send(result);
-        }
+        };
     });
 });
 
@@ -1002,8 +1100,9 @@ app.delete('/api/deleteSpecies/:idSpecies', (req, res) => {
     db.query(sqlDelete, idSpecies, (err, result) => {
         if (err) {
             console.error(err);
-            res.status(500).send('SQL Error while attempting to delete.')
+            res.status(500).send(err.sqlMessage)
         } else {
+            console.log(result)
             res.send(result);
         };
     });
@@ -1020,8 +1119,13 @@ app.get('/api/getDiets', (req,res) => {
     ORDER BY idDiet ASC;
     `;
     db.query(sqlRead, (err, result) => {
-        console.log(result);
-        res.send(result);
+        if (err) {
+            console.error(err);
+            res.status(500).send(err.sqlMessage)
+        } else {
+            console.log(result)
+            res.send(result);
+        };
     });
 });
 
@@ -1037,10 +1141,10 @@ app.post('/api/insertDiets', (req, res) => {
     db.query(sqlInsert, [dietName, dietDescription, dietIcon], (err, result) => {
         if (err) {
             console.error(err);
-            res.status(500).send('SQL Error while attempting to create.')
+            res.status(500).send(err.sqlMessage)
         } else {
+            console.log(result)
             res.send(result);
-            console.log(result);
         };
     });
 });
@@ -1059,11 +1163,11 @@ app.put('/api/updateDiets', (req, res) => {
     db.query(sqlUpdate, [dietName, dietDescription, dietIcon, idDiet], (err, result) => {
         if (err) {
             console.error(err);
-            res.status(500).send('SQL Error while attempting to update.');
+            res.status(500).send(err.sqlMessage)
         } else {
-            console.log(result);
+            console.log(result)
             res.send(result);
-        }
+        };
     });
 });
 
@@ -1078,8 +1182,9 @@ app.delete('/api/deleteDiets/:idDiet', (req, res) => {
     db.query(sqlDelete, idDiet, (err, result) => {
         if (err) {
             console.error(err);
-            res.status(500).send('SQL Error while attempting to delete.')
+            res.status(500).send(err.sqlMessage)
         } else {
+            console.log(result)
             res.send(result);
         };
     });
@@ -1098,8 +1203,13 @@ app.get('/api/getHabitats', (req, res) =>{
     ORDER BY idHabitat ASC;
     `;
     db.query(sqlRead, (err, result)=> {
-        console.log(result);
-        res.send(result);
+        if (err) {
+            console.error(err);
+            res.status(500).send(err.sqlMessage)
+        } else {
+            console.log(result)
+            res.send(result);
+        };
     });
 });
 
@@ -1117,10 +1227,10 @@ app.post('/api/insertHabitats', (req, res) =>{
     db.query(sqlInsert, [habitatName, habitatDescription, habitatPhoto], (err, result)=> {
         if (err) {
             console.error(err);
-            res.status(500).send('SQL Error while attempting to create.')
+            res.status(500).send(err.sqlMessage)
         } else {
+            console.log(result)
             res.send(result);
-            console.log(result);
         };
     });
 });
@@ -1139,11 +1249,11 @@ app.put('/api/updateHabitats', (req, res) =>{
     db.query(sqlUpdate, [habitatName, habitatDescription, habitatPhoto, idHabitat], (err, result)=> {
         if (err) {
             console.error(err);
-            res.status(500).send('SQL Error while attempting to update.');
+            res.status(500).send(err.sqlMessage)
         } else {
-            console.log(result);
+            console.log(result)
             res.send(result);
-        }
+        };
     });
 });
 
@@ -1158,8 +1268,9 @@ app.delete('/api/deleteHabitats/:idHabitat', (req, res) =>{
     db.query(sqlDelete, idHabitat, (err, result)=> {
         if (err) {
             console.error(err);
-            res.status(500).send('SQL Error while attempting to delete.')
+            res.status(500).send(err.sqlMessage)
         } else {
+            console.log(result)
             res.send(result);
         };
     });
@@ -1179,10 +1290,10 @@ app.post('/api/insertTaskCategories', (req, res) =>{
     db.query(sqlInsert, [categoryName], (err, result)=> {
         if (err) {
             console.error(err);
-            res.status(500).send('SQL Error while attempting to create.')
+            res.status(500).send(err.sqlMessage)
         } else {
+            console.log(result)
             res.send(result);
-            console.log(result);
         };
     });
 })
@@ -1194,8 +1305,13 @@ app.get('/api/getTaskCategories', (req, res) =>{
     ORDER BY idTaskCategory;
     `;
     db.query(sqlRead, (err, result)=> {
-        console.log(result);
-        res.send(result);
+        if (err) {
+            console.error(err);
+            res.status(500).send(err.sqlMessage)
+        } else {
+            console.log(result)
+            res.send(result);
+        };
     });
 });
 
@@ -1211,11 +1327,11 @@ app.put('/api/updateTaskCategories', (req, res) =>{
     db.query(sqlUpdate, [categoryName, idTaskCategory], (err, result)=> {
         if (err) {
             console.error(err);
-            res.status(500).send('SQL Error while attempting to update.');
+            res.status(500).send(err.sqlMessage)
         } else {
-            console.log(result);
+            console.log(result)
             res.send(result);
-        }
+        };
     });
 });
 
@@ -1229,8 +1345,9 @@ app.delete('/api/deleteTaskCategories/:idTaskCategory', (req, res) =>{
     db.query(sqlDelete, idTaskCategory, (err, result)=> {
         if (err) {
             console.error(err);
-            res.status(500).send('SQL Error while attempting to delete.')
+            res.status(500).send(err.sqlMessage)
         } else {
+            console.log(result)
             res.send(result);
         };
     });
@@ -1249,8 +1366,13 @@ app.get('/api/getSpeciesList', (req, res) =>{
     ORDER BY speciesName ASC;
     `;
     db.query(sqlRead, (err, result)=> {
-        console.log(result);
-        res.send(result);
+        if (err) {
+            console.error(err);
+            res.status(500).send(err.sqlMessage)
+        } else {
+            console.log(result)
+            res.send(result);
+        };
     });
 });
 
@@ -1262,8 +1384,13 @@ app.get('/api/getDietsList', (req, res) => {
     ORDER BY dietName ASC;
     `;
     db.query(sqlRead, (err, result) => {
-        console.log(result);
-        res.send(result);
+        if (err) {
+            console.error(err);
+            res.status(500).send(err.sqlMessage)
+        } else {
+            console.log(result)
+            res.send(result);
+        };
     });
 });
 
@@ -1277,8 +1404,13 @@ app.get('/api/getFacilitiesList', (req, res) =>{
     ORDER BY parkName, facilityName ASC;
     `;
     db.query(sqlRead, (err, result)=> {
-        console.log(result);
-        res.send(result);
+        if (err) {
+            console.error(err);
+            res.status(500).send(err.sqlMessage)
+        } else {
+            console.log(result)
+            res.send(result);
+        };
     });
 });
 
@@ -1291,8 +1423,13 @@ app.get('/api/getTasksAssignedList', (req, res) =>{
     ORDER BY taskName ASC;
     `;
     db.query(sqlRead, (err, result)=> {
-        console.log(result);
-        res.send(result);
+        if (err) {
+            console.error(err);
+            res.status(500).send(err.sqlMessage)
+        } else {
+            console.log(result)
+            res.send(result);
+        };
     });
 });
 
@@ -1304,8 +1441,13 @@ app.get('/api/getEmployeesList', (req, res) =>{
     ORDER BY lastName, firstName, employeeUsername ASC;
     `;
     db.query(sqlRead, (err, result)=> {
-        console.log(result);
-        res.send(result);
+        if (err) {
+            console.error(err);
+            res.status(500).send(err.sqlMessage)
+        } else {
+            console.log(result)
+            res.send(result);
+        };
     });
 });
 
@@ -1317,8 +1459,13 @@ app.get('/api/getTaskCategoriesList', (req, res) =>{
     ORDER BY categoryName ASC;
     `;
     db.query(sqlRead, (err, result)=> {
-        console.log(result);
-        res.send(result);
+        if (err) {
+            console.error(err);
+            res.status(500).send(err.sqlMessage)
+        } else {
+            console.log(result)
+            res.send(result);
+        };
     });
 });
 
@@ -1330,8 +1477,13 @@ app.get('/api/getJobClassificationsList', (req, res) =>{
     ORDER BY jobTitle ASC;
     `;
     db.query(sqlRead, (err, result)=> {
-        console.log(result);
-        res.send(result);
+        if (err) {
+            console.error(err);
+            res.status(500).send(err.sqlMessage)
+        } else {
+            console.log(result)
+            res.send(result);
+        };
     });
 });
 
@@ -1343,8 +1495,13 @@ app.get('/api/getParksList', (req, res) =>{
     ORDER BY parkName ASC;
     `;
     db.query(sqlRead, (err, result)=> {
-        console.log(result);
-        res.send(result);
+        if (err) {
+            console.error(err);
+            res.status(500).send(err.sqlMessage)
+        } else {
+            console.log(result)
+            res.send(result);
+        };
     });
 });
 
@@ -1356,8 +1513,13 @@ app.get('/api/getHabitatsList', (req, res) =>{
     ORDER BY habitatName ASC;
     `;
     db.query(sqlRead, (err, result)=> {
-        console.log(result);
-        res.send(result);
+        if (err) {
+            console.error(err);
+            res.status(500).send(err.sqlMessage)
+        } else {
+            console.log(result)
+            res.send(result);
+        };
     });
 });
 
@@ -1369,8 +1531,13 @@ app.get('/api/getFacilityTypesList', (req, res) =>{
     ORDER BY idFacilityType ASC;
     `;
     db.query(sqlRead, (err, result)=> {
-        console.log(result);
-        res.send(result);
+        if (err) {
+            console.error(err);
+            res.status(500).send(err.sqlMessage)
+        } else {
+            console.log(result)
+            res.send(result);
+        };
     });
 });
 
@@ -1383,8 +1550,13 @@ app.get('/api/getBiologicalAssetsList', (req, res) => {
     ORDER BY bioAssetName ASC;
     `;
     db.query(sqlRead, (err, result) => {
-        console.log(result);
-        res.send(result);
+        if (err) {
+            console.error(err);
+            res.status(500).send(err.sqlMessage)
+        } else {
+            console.log(result)
+            res.send(result);
+        };
     });
 });
 

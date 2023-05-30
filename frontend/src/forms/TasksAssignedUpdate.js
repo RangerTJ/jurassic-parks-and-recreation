@@ -44,12 +44,10 @@ function TasksAssignedUpdateForm ({hostURL}) {
 
     // UPDATE - Submit Changes to a Task then return to TasksAssigned page
     const updateTaskAssigned = async () => {
-
-
-
-        if (taskName && facility && taskDescription && taskStart) {
         
         try {
+            if (taskName && facility && taskDescription && taskStart) {
+
             // Send Null value to SQL if task is re-opened
             let taskEndVar = taskEnd
             if (taskEnd === '') {
@@ -59,28 +57,26 @@ function TasksAssignedUpdateForm ({hostURL}) {
             // The actual update code
             const res = await Axios.put(updateTasksAssignedURL, {
 
-            facilityName: facility,
-            bioAssetName: bioAssetName,
-            taskName: taskName,
-            taskDescription: taskDescription,
-            taskStart: taskStart,
-            taskEnd: taskEndVar,
-            idTaskAssigned: id
-        });
+                facilityName: facility,
+                bioAssetName: bioAssetName,
+                taskName: taskName,
+                taskDescription: taskDescription,
+                taskStart: taskStart,
+                taskEnd: taskEndVar,
+                idTaskAssigned: id
+            });
 
-        console.log(res);
-        alert(`${taskName}'s database entry has been updated!`)
-        navTo('/TasksAssigned');
+            console.log(res);
+            alert(`${taskName}'s database entry has been updated!`)
+            navTo('/TasksAssigned');
+            } else {
+                alert("Please fill out all required fields and try again.");
+            };
         
-        } catch(err) {
-            console.error(err);
-            alert("Error occured while updating.");
+        } catch(error) {
+            console.error(error);
+            alert('MYSQL Server Error: ' + error.response.data);
         }}
-
-        else {
-            alert("Please fill out all required fields and try again.")
-        };
-    };
 
     return (
         <>
@@ -173,6 +169,6 @@ function TasksAssignedUpdateForm ({hostURL}) {
             </article>
         </>
     );
-}
+};
 
 export default TasksAssignedUpdateForm;
