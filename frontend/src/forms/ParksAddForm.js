@@ -38,7 +38,7 @@ function ParksAddForm ({hostURL}) {
         } catch(error) {
             console.error('Error inserting Park.', error);
             alert('MYSQL Server Error: ' + error.response.data);
-        }
+        };
     };
 
     return (

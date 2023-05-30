@@ -44,7 +44,8 @@ function EmployeeTasksAddForm ({hostURL}) {
                     alert("Please fill out all required fields and try again.")
                 }
         } catch(error) {
-                console.error('Error inserting Employee Task Report.', error)
+            console.error('Error inserting Employee Task Report.', error);
+            alert('MYSQL Server Error: ' + error.response.data);
         }
     };
 

@@ -44,7 +44,6 @@ function TasksAssignedUpdateForm ({hostURL}) {
 
     // UPDATE - Submit Changes to a Task then return to TasksAssigned page
     const updateTaskAssigned = async () => {
-        
         try {
             if (taskName && facility && taskDescription && taskStart) {
 
@@ -56,7 +55,6 @@ function TasksAssignedUpdateForm ({hostURL}) {
             
             // The actual update code
             const res = await Axios.put(updateTasksAssignedURL, {
-
                 facilityName: facility,
                 bioAssetName: bioAssetName,
                 taskName: taskName,

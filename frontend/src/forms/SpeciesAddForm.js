@@ -44,7 +44,8 @@ function SpeciesAddForm ({hostURL}) {
             }
         }
         catch (error) {
-            console.error('Error inserting Species.', error)
+            console.error('Error inserting Species.', error);
+            alert('MYSQL Server Error: ' + error.response.data);
         }
     };
 

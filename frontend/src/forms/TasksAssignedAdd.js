@@ -25,24 +25,29 @@ function TasksAssignedAddForm ({hostURL}) {
 
 
     // CREATE - Insert New Task then return to Tasks Assigned (only if all required state variables are not null)
-    const submit = () => {
-        if (facility && taskName && taskDescription && taskStart) {
-            let finalTaskEnd = taskEnd === '' ? null : taskEnd;
-
-            Axios.post(createTasksAssignedURL, {
-                facility: facility,
-                bioAssetName: bioAssetName,
-                taskName: taskName,
-                taskDescription: taskDescription,
-                taskStart: taskStart,
-                taskEnd: finalTaskEnd
-            });
-
-            alert(`${taskName} has been added to the database!`);
-            navTo('/TasksAssigned');
-
-        } else {
-            alert("Please fill out all required fields and try again.")
+    const submit = async () => {
+        try {
+            if (facility && taskName && taskDescription && taskStart) {
+                let finalTaskEnd = taskEnd === '' ? null : taskEnd;
+    
+                Axios.post(createTasksAssignedURL, {
+                    facility: facility,
+                    bioAssetName: bioAssetName,
+                    taskName: taskName,
+                    taskDescription: taskDescription,
+                    taskStart: taskStart,
+                    taskEnd: finalTaskEnd
+                });
+    
+                alert(`${taskName} has been added to the database!`);
+                navTo('/TasksAssigned');
+    
+            } else {
+                alert("Please fill out all required fields and try again.");
+            };
+        } catch(error) {
+            console.error('Error inserting Park.', error);
+            alert('MYSQL Server Error: ' + error.response.data);
         };
     };
 

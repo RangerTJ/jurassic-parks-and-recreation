@@ -49,7 +49,8 @@ function FacilitiesAddForm ({hostURL}) {
                     alert("Please fill out all required fields and try again.")
                 }
         } catch(error) {
-                console.error('Error inserting facility.', error)
+            console.error('Error inserting facility.', error);
+            alert('MYSQL Server Error: ' + error.response.data);
         }
     };
 
