@@ -4,6 +4,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation } from 'react-router-dom';
 import Axios from 'axios';
+import ImageSelectorParks from "../components/imageSelectorParks";
 
 
 // HostURL Passed from App.js
@@ -12,7 +13,7 @@ function ParksUpdateForm ({hostURL}) {
     // Follows reference strategy to read state object, as suggested by stackoverflow user Abdulazeez Jimoh on 10/25/2022
     // URL: https://stackoverflow.com/questions/68911432/how-to-pass-parameters-with-react-router-dom-version-6-usenavigate-and-typescrip
     const location = useLocation();
-    const { id, oldParkName, oldParkDescription, oldParkLocation} = location.state;
+    const { id, oldParkName, oldParkDescription, oldParkLocation, oldParkPhoto} = location.state;
 
     // Parks SQL Endpoint
     const updateParksURL = hostURL + '/api/updateParks';
@@ -22,12 +23,14 @@ function ParksUpdateForm ({hostURL}) {
     const [parkName, setParkName] = useState('')
     const [parkDescription, setParkDescription] = useState('')
     const [parkLocation, setParkLocation] = useState('')
+    const [parkPhoto, setParkPhoto] = useState('')
 
     // Pre-sets all the old values into the fields
     useEffect(()=> {
         setParkName(oldParkName);
         setParkDescription(oldParkDescription);
         setParkLocation(oldParkLocation);
+        setParkPhoto(oldParkPhoto);
     }, [])
 
     // UPDATE - Submit changes to Park then return to Parks page
@@ -38,6 +41,7 @@ function ParksUpdateForm ({hostURL}) {
                     parkName: parkName,
                     parkDescription: parkDescription,
                     parkLocation: parkLocation,
+                    parkPhoto: parkPhoto,
                     idPark: id,
                 });
                 alert(`${parkName}'s database record has been updated!`)
@@ -98,6 +102,15 @@ function ParksUpdateForm ({hostURL}) {
                                     onChange={(e) => {setParkLocation(e.target.value)}
                                     }/>
                                 <div>Original: {oldParkLocation}</div>
+                            </div>
+                            <div className="selectorP">
+                                <ImageSelectorParks  hostURL={hostURL} image={parkPhoto} setImage={setParkPhoto} isRequired={false} autoFocus={false} preSelected={oldParkPhoto}/>
+                                {oldParkPhoto ? 
+                                    (<>
+                                        <div>Original: {oldParkPhoto.substring(14, oldParkPhoto.indexOf('.'))}</div>
+                                        <div><img src={oldParkPhoto} alt ={oldParkPhoto.substring(14, oldParkPhoto.indexOf('.'))} width={100}/></div>
+                                    </>) : (<><div>Original: None Selected</div></>)
+                                }
                             </div>
                     </fieldset>
                 </form>

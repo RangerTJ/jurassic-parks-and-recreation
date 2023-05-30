@@ -4,6 +4,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import Axios from 'axios';
+import ImageSelectorParks from "../components/imageSelectorParks";
 
 
 // HostURL Passed from App.js
@@ -17,6 +18,7 @@ function ParksAddForm ({hostURL}) {
     const [parkName, setParkName] = useState('')
     const [parkDescription, setParkDescription] = useState('')
     const [parkLocation, setParkLocation] = useState('')
+    const [parkPhoto, setParkPhoto] = useState('')
 
     // CREATE - Insert New Park then return to Parks page
     const submit = async () => {
@@ -26,6 +28,7 @@ function ParksAddForm ({hostURL}) {
                     parkName: parkName,
                     parkDescription: parkDescription,
                     parkLocation: parkLocation,
+                    parkPhoto: parkPhoto,
                 });
                 alert(`${parkName} has been added to the database!`);
                 navTo('/Parks');
@@ -79,6 +82,9 @@ function ParksAddForm ({hostURL}) {
                                     required 
                                     onChange={(e) => {setParkLocation(e.target.value)}
                                     }/>
+                            </div>
+                            <div className="selectorP">
+                                <ImageSelectorParks  hostURL={hostURL} image={parkPhoto} setImage={setParkPhoto} isRequired={false} autoFocus={false}/>
                             </div>
                     </fieldset>
                 </form>

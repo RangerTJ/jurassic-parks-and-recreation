@@ -161,9 +161,9 @@ ORDER BY idTaskCategory ASC;
 -- ----------------
 
 -- Add new Park to the system
-INSERT INTO Parks                 (parkName, parkDescription, parkLocation)
+INSERT INTO Parks                 (parkName, parkDescription, parkLocation, parkPhoto)
 VALUES  (
-                :parkName_input, :parkDescription_input, :parkLocation_input
+                :parkName_input, :parkDescription_input, :parkLocation_input, :parkPhoto_input
         );
 
 -- Add a new facility using populated dropdowns of easier to ID unique names for input values
@@ -214,9 +214,9 @@ VALUES  (
         );
 
 -- Add a new habitat
-INSERT INTO Habitats            (habitatName, habitatDescription, habitatSize, habitatPhoto)
+INSERT INTO Habitats            (habitatName, habitatDescription, habitatPhoto)
 VALUES (
-                :habitatName_input, :habitatDescription_input, :habitatSize_input, :habitatPhoto_input
+                :habitatName_input, :habitatDescription_input, :habitatPhoto_input
         );
 
 -- Add a new biological asset
@@ -254,7 +254,7 @@ VALUES  (
 
 -- Update Park
 UPDATE Parks
-SET     parkName = :parkName_input, parkDescription = :parkDescription_input, parkLocation = :parkLocation_input
+SET     parkName = :parkName_input, parkDescription = :parkDescription_input, parkLocation = :parkLocation_input, parkPhoto = :parkPhoto_input
 WHERE idPark = :idPark_input;
 
 -- Update Facility Type
@@ -321,8 +321,7 @@ WHERE   idBiologicalAsset = :idBiologicalAsset_input;
 
 -- Habitat
 UPDATE Habitats
-SET     habitatName = :habitatName_input, habitatDescription = :habitatDescription_input, habitatSize = :habitatSize_input,
-        habitatPhoto = :habitatPhoto_input
+SET     habitatName = :habitatName_input, habitatDescription = :habitatDescription_input, habitatPhoto = :habitatPhoto_input
 WHERE   idHabitat = :idHabitat_input;
 
 -- Diet

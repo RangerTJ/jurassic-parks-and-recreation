@@ -136,13 +136,14 @@ app.post('/api/insertParks', (req, res) =>{
     const parkName = req.body.parkName
     const parkDescription = req.body.parkDescription
     const parkLocation = req.body.parkLocation
+    const parkPhoto = req.body.parkPhoto
     const sqlInsert = `
-    INSERT INTO Parks                 (parkName, parkDescription, parkLocation)
+    INSERT INTO Parks                 (parkName, parkDescription, parkLocation, parkPhoto)
     VALUES  (
-                                    ?, ?, ?
+                                    ?, ?, ?, ?
             );
     `;
-    db.query(sqlInsert, [parkName, parkDescription, parkLocation], (err, result)=> {
+    db.query(sqlInsert, [parkName, parkDescription, parkLocation, parkPhoto], (err, result)=> {
         console.log(result);
         res.send(result);
     })
@@ -164,13 +165,14 @@ app.put('/api/updateParks', (req, res) =>{
     const parkName = req.body.parkName
     const parkDescription = req.body.parkDescription
     const parkLocation = req.body.parkLocation
+    const parkPhoto = req.body.parkPhoto
     const idPark = req.body.idPark
     const sqlUpdate = `
     UPDATE Parks
-    SET     parkName = ?, parkDescription = ?, parkLocation = ?
+    SET     parkName = ?, parkDescription = ?, parkLocation = ?, parkPhoto = ?
     WHERE idPark = ?;
     `;
-    db.query(sqlUpdate, [parkName, parkDescription, parkLocation, idPark], (err, result)=> {
+    db.query(sqlUpdate, [parkName, parkDescription, parkLocation, parkPhoto, idPark], (err, result)=> {
         if (err) console.log(err); else console.log(result);
         res.send(result);
     });
@@ -970,15 +972,14 @@ app.get('/api/getHabitats', (req, res) =>{
 app.post('/api/insertHabitats', (req, res) =>{
     const habitatName = req.body.habitatName
     const habitatDescription = req.body.habitatDescription
-    const habitatSize = req.body.habitatSize
     const habitatPhoto = req.body.habitatPhoto
     const sqlInsert = `
-    INSERT INTO Habitats            (habitatName, habitatDescription, habitatSize, habitatPhoto)
+    INSERT INTO Habitats            (habitatName, habitatDescription, habitatPhoto)
     VALUES (
-                                    ?, ?, ?, ?
+                                    ?, ?, ?
             );
     `;
-    db.query(sqlInsert, [habitatName, habitatDescription, habitatSize, habitatPhoto], (err, result)=> {
+    db.query(sqlInsert, [habitatName, habitatDescription, habitatPhoto], (err, result)=> {
         console.log(result);
         res.send(result);
     });
@@ -988,16 +989,14 @@ app.post('/api/insertHabitats', (req, res) =>{
 app.put('/api/updateHabitats', (req, res) =>{
     const habitatName = req.body.habitatName
     const habitatDescription = req.body.habitatDescription
-    const habitatSize = req.body.habitatSize
     const habitatPhoto = req.body.habitatPhoto
     const idHabitat = req.body.idHabitat
     const sqlUpdate = `
     UPDATE Habitats
-    SET     habitatName = ?, habitatDescription = ?, habitatSize = ?,
-            habitatPhoto = ?
+    SET     habitatName = ?, habitatDescription = ?, habitatPhoto = ?
     WHERE   idHabitat = ?;
     `;
-    db.query(sqlUpdate, [habitatName, habitatDescription, habitatSize, habitatPhoto, idHabitat], (err, result)=> {
+    db.query(sqlUpdate, [habitatName, habitatDescription, habitatPhoto, idHabitat], (err, result)=> {
         if (err) console.log(err); else console.log(result);
         res.send(result);
     });

@@ -4,6 +4,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import Axios from 'axios';
+import staffDefaultImg from '../images/staffImages/default_staff.png';
 
 
 // HostURL Passed from App.js
@@ -81,6 +82,7 @@ function ParksPage ({hostURL}) {
         oldParkName: updateVal.parkName,
         oldParkDescription: updateVal.parkDescription,
         oldParkLocation: updateVal.parkLocation,
+        oldParkPhoto: updateVal.parkPhoto,
         id: updateVal.idPark
     };
         navTo("/ParksUpdate", {state});
@@ -129,7 +131,7 @@ function ParksPage ({hostURL}) {
                             <th>Park</th>
                             <th>Description</th>
                             <th>Location</th>
-                            {/* <th>Photo</th> */}
+                            <th>Photo</th>
                         </tr>
                         {parksList.map((val, index)=> {
                             // Citation: Used slicing method suggested by user Bumptious Q Bangwhistle on stackoverflow on 1/23/2017 to slice image paths to more useful descriptive text for alt text.
@@ -150,16 +152,16 @@ function ParksPage ({hostURL}) {
                                     <td className="tableDescription">{val.parkDescription}</td>
                                     <td>{val.parkLocation}</td>
                                     {/* May use later if image attribute added */}
-                                    {/* <td>
-                                        Lightbox tutorial by Alexandra Radevich provided the code for the on-click trigger here
+                                    <td>
+                                        {/* Lightbox tutorial by Alexandra Radevich provided the code for the on-click trigger here
                                         URL: https://medium.com/swlh/creating-a-simple-lightbox-from-scratch-in-react-caea84f90960
-                                        Accessed 5/22/2023. No modification of code for on-click trigger.
-                                        {val.employeePhoto ?
-                                        <img src={val.employeePhoto} alt={altText} width={160} height={90} onClick={() => showImage(val.employeePhoto)}/>
+                                        Accessed 5/22/2023. No modification of code for on-click trigger. */}
+                                        {val.parkPhoto ?
+                                        <img src={val.parkPhoto} alt={altText} width={160} height={90} onClick={() => showImage(val.parkPhoto)}/>
                                         :
                                         <img src={staffDefaultImg} alt="Default Image" width={160} height={90} />
                                         }
-                                    </td> */}
+                                    </td>
                                 </tr>
                             )}
                         )}

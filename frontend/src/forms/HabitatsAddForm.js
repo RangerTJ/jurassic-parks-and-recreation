@@ -6,9 +6,6 @@ import { useNavigate } from 'react-router-dom';
 import Axios from 'axios';
 import ImageSelectorHabitats from "../components/imageSelectorHabitats";
 
-//////////////////////
-// REMINDER: REMOVING/DEPRECATING SIZE ATTRIBUTE (eliminate references to it later)
-/////////////////////
 
 // HostURL Passed from App.js
 function HabitatsAddForm ({hostURL}) {
@@ -20,18 +17,16 @@ function HabitatsAddForm ({hostURL}) {
     // Habitat States for the Form
     const [habitatName, setHabitatName] = useState('')
     const [habitatDescription, setHabitatDescription] = useState('')
-    const [habitatSize, setHabitatSize] = useState('')  // TO BE REMOVED
     const [habitatPhoto, setHabitatPhoto] = useState('')
 
 
     // CREATE - Insert New Habitat then return to Habitats page
     const submit = async () => {
         try {
-            if (habitatName && habitatDescription && habitatSize) {
+            if (habitatName && habitatDescription) {
                 await Axios.post(createHabitatsURL, {
                     habitatName: habitatName,
                     habitatDescription: habitatDescription,
-                    habitatSize: habitatSize,
                     habitatPhoto: habitatPhoto,
                 });
                 alert(`${habitatName} has been added to the database!`);
@@ -79,16 +74,6 @@ function HabitatsAddForm ({hostURL}) {
                                     onChange={(e) => {setHabitatDescription(e.target.value)}
                                     }/>
                             </div>
-                            <div><label htmlFor="habitatSize">Size</label></div>
-                                <input 
-                                    type="number"
-                                    id="habitatSize"
-                                    name="habitatSize"
-                                    min="1"
-                                    max="3"
-                                    required
-                                    onChange={(e) => {setHabitatSize(e.target.value)}
-                                    }/>
                             <div className="selectorP">
                                 <ImageSelectorHabitats  hostURL={hostURL} image={habitatPhoto} setImage={setHabitatPhoto} isRequired={false} autoFocus={false}/>
                             </div>
