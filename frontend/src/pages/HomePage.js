@@ -107,7 +107,9 @@ function HomePage({hostURL}) {
                 <h3>Financial Reports</h3>
                 <p>
                     The summary tables below provide high-level overviews of current costs associated with aspects of
-                    managing our system of parks and zoological attractions.
+                    managing our system of parks and zoological attractions. Note that for the 'Top 10' style tables below, if there
+                    are fewer than 10 related entities with EmployeeTasks relating to them, the tables will
+                    have fewer than 10 elements displayed.
                 </p>
                 <h4 className="st-header">Cost Summary by Sector</h4>
                 <div className="scrollableST">
@@ -161,7 +163,7 @@ function HomePage({hostURL}) {
                         </table>
                     </div>
                 </div>
-                <h4 className="st-header">Cost Summary by Employee</h4>
+                <h4 className="st-header">Top 10 Most Expensive Employees</h4>
                 <div className="scrollableST">
                     <div className="st-holder">
                         <table>
@@ -171,7 +173,7 @@ function HomePage({hostURL}) {
                                 <th>Employee</th>
                                 <th>Cost</th>
                             </tr>
-                            {employeeCostList.map((val, index)=> {
+                            {employeeCostList.slice(0, 10).map((val, index)=> {
                                 // Convert cost to USD or set to 0 USD if there is a null entry
                                 const usdEmployeeCost = val.employeeCost ? val.employeeCost.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) : '$0.00';
                                 const rank = index + 1
@@ -187,7 +189,7 @@ function HomePage({hostURL}) {
                         </table>
                     </div>
                 </div>
-                <h4 className="st-header">Cost Summary by Assigned Task</h4>
+                <h4 className="st-header">Top 10 Most Expensive Tasks</h4>
                 <div className="scrollableST">
                     <div className="st-holder">
                         <table>
@@ -197,7 +199,7 @@ function HomePage({hostURL}) {
                                 <th>Task</th>
                                 <th>Cost</th>
                             </tr>
-                            {taskCostList.map((val, index)=> {
+                            {taskCostList.slice(0, 10).map((val, index)=> {
                                 // Convert cost to USD or set to 0 USD if there is a null entry
                                 const usdTaskCost = val.taskCost ? val.taskCost.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) : '$0.00';
                                 const rank = index + 1
@@ -213,7 +215,7 @@ function HomePage({hostURL}) {
                         </table>
                     </div>
                 </div>
-                <h4 className="st-header">Cost Summary by Facility</h4>
+                <h4 className="st-header">Top 10 Most Expensive Facilities</h4>
                 <div className="scrollableST">
                     <div className="st-holder">
                         <table>
@@ -224,7 +226,7 @@ function HomePage({hostURL}) {
                                 <th>Park</th>
                                 <th>Cost</th>
                             </tr>
-                            {facilityCostList.map((val, index)=> {
+                            {facilityCostList.slice(0, 10).map((val, index)=> {
                                 // Convert cost to USD or set to 0 USD if there is a null entry
                                 const usdFacilityCost = val.facilityCost ? val.facilityCost.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) : '$0.00';
                                 const rank = index + 1
@@ -242,7 +244,7 @@ function HomePage({hostURL}) {
                     </div>
                 </div>
 
-                <h4 className="st-header">Cost Summary by Biological Asset</h4>
+                <h4 className="st-header">Top 10 Most Expensive Biological Assets</h4>
                 <div className="scrollableST">
                     <div className="st-holder">
                         <table>
@@ -254,7 +256,7 @@ function HomePage({hostURL}) {
                                 <th>Park</th>
                                 <th>Cost</th>
                             </tr>
-                            {bioAssetCostList.map((val, index)=> {
+                            {bioAssetCostList.slice(0, 10).map((val, index)=> {
                                 // Convert cost to USD or set to 0 USD if there is a null entry
                                 const usdBioAssetCost = val.assetCost ? val.assetCost.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) : '$0.00';
                                 const rank = index + 1
