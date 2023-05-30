@@ -60,7 +60,7 @@ function FacilitiesPage ({hostURL}) {
                 alert(`${delVal.facilityName} has been removed from the database.`);
             }} catch (error) {
                 console.error('Error deleting facility.', error);
-                alert("ERROR: Restricted delete action or server error (most parent entities with dependents may not be deleted).");
+                alert('MYSQL Server Error: ' + error.response.data);
         }
     };
     

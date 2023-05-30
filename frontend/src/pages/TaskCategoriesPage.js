@@ -38,7 +38,7 @@ function TaskCategoryPage({hostURL}) {
                 alert(`${delVal.categoryName} has been removed from the database.`);
             }} catch (error) {
                 console.error('Error deleting Category.', error);
-                alert("ERROR: Restricted delete action or server error (most parent entities with dependents may not be deleted).");
+                alert('MYSQL Server Error: ' + error.response.data);
             }
     };
 

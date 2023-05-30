@@ -46,7 +46,7 @@ function TasksAssignedPage ({hostURL}) {
             setTasksAssignedList(response.data)
         } catch (error) {
             console.error('Error!', error);
-            alert("ERROR: Restricted delete action or server error (most parent entities with dependents may not be deleted).");
+            alert('MYSQL Server Error: ' + error.response.data);
         }
     }
 
