@@ -179,8 +179,12 @@ function EmployeesUpdateForm ({hostURL}) {
                             </div>
                             <div className="selectorP">
                                 <ImageSelectorStaff  hostURL={hostURL} image={employeePhoto} setImage={setEmployeePhoto} isRequired={false} autoFocus={false} preSelected={oldEmployeePhoto}/>
-                                <div>Original: {oldEmployeePhoto.substring(14, oldEmployeePhoto.indexOf('.'))}</div>
-                                <div><img src={oldEmployeePhoto} alt ={oldEmployeePhoto.substring(14, oldEmployeePhoto.indexOf('.'))} width={100}/></div>
+                                {oldEmployeePhoto ? 
+                                    (<>
+                                        <div>Original: {oldEmployeePhoto.substring(14, oldEmployeePhoto.indexOf('.'))}</div>
+                                        <div><img src={oldEmployeePhoto} alt ={oldEmployeePhoto.substring(14, oldEmployeePhoto.indexOf('.'))} width={100}/></div>
+                                    </>) : (<><div>No original image.</div></>)
+                                }
                             </div>
                             <div className="selectorP">
                                 <div><label htmlFor="employeeNote">Notes</label></div>

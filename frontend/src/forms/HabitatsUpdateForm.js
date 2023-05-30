@@ -94,8 +94,12 @@ function HabitatsUpdateForm ({hostURL}) {
                             </div>
                             <div className="selectorP">
                                 <ImageSelectorHabitats  hostURL={hostURL} image={habitatPhoto} setImage={setHabitatPhoto} isRequired={false} autoFocus={false} preSelected={oldHabitatPhoto}/>
-                                <div>Original: {oldHabitatPhoto.substring(14, oldHabitatPhoto.indexOf('.'))}</div>
-                                <div><img src={oldHabitatPhoto} alt ={oldHabitatPhoto.substring(14, oldHabitatPhoto.indexOf('.'))} width={100}/></div>
+                                {oldHabitatPhoto ? 
+                                    (<>
+                                        <div>Original: {oldHabitatPhoto.substring(14, oldHabitatPhoto.indexOf('.'))}</div>
+                                        <div><img src={oldHabitatPhoto} alt ={oldHabitatPhoto.substring(14, oldHabitatPhoto.indexOf('.'))} width={100}/></div>
+                                    </>) : (<><div>No original image.</div></>)
+                                }
                             </div>
                     </fieldset>
                 </form>

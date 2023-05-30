@@ -109,7 +109,7 @@ function ParksUpdateForm ({hostURL}) {
                                     (<>
                                         <div>Original: {oldParkPhoto.substring(14, oldParkPhoto.indexOf('.'))}</div>
                                         <div><img src={oldParkPhoto} alt ={oldParkPhoto.substring(14, oldParkPhoto.indexOf('.'))} width={100}/></div>
-                                    </>) : (<><div>Original: None Selected</div></>)
+                                    </>) : (<><div>No original image.</div></>)
                                 }
                             </div>
                     </fieldset>
