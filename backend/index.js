@@ -187,8 +187,12 @@ app.delete('/api/deleteParks/:idPark', (req, res) =>{
     WHERE idPark = ?;
     `;
     db.query(sqlDelete, idPark, (err, result)=> {
-        if (err) console.log(err);
-        res.send(result);
+        if (err) {
+            console.error(err);
+            res.status(500).send('SQL Error while attempting to delete.')
+        } else {
+            res.send(result);
+        };
     });
 });
 
@@ -252,8 +256,12 @@ app.delete('/api/deleteJobClassifications/:idJobClassification', (req, res) =>{
     WHERE idJobClassification = ?;
     `;
     db.query(sqlDelete, idJobClassification, (err, result)=> {
-        if (err) console.log(err);
-        res.send(result);
+        if (err) {
+            console.error(err);
+            res.status(500).send('SQL Error while attempting to delete.')
+        } else {
+            res.send(result);
+        };
     });
 });
 
@@ -339,8 +347,12 @@ app.delete('/api/deleteEmployees/:idEmployeeTask', (req, res) =>{
     WHERE idEmployee = ?;
     `;
     db.query(sqlDelete, idEmployee, (err, result)=> {
-        if (err) console.log(err);
-        res.send(result);
+        if (err) {
+            console.error(err);
+            res.status(500).send('SQL Error while attempting to delete.')
+        } else {
+            res.send(result);
+        };
     });
 });
 
@@ -426,8 +438,12 @@ app.delete('/api/deleteEmployeeTasks/:idEmployeeTask', (req, res) =>{
     WHERE idEmployeeTask = ?;
     `;
     db.query(sqlDelete, idEmployeeTask, (err, result)=> {
-        if (err) console.log(err);
-        res.send(result);
+        if (err) {
+            console.error(err);
+            res.status(500).send('SQL Error while attempting to delete.')
+        } else {
+            res.send(result);
+        };
     });
 });
 
@@ -508,8 +524,12 @@ app.delete('/api/deleteTasksAssigned/:idTaskAssigned', (req, res) =>{
     WHERE idTaskAssigned = ?;
     `;
     db.query(sqlDelete, idTaskAssigned, (err, result)=> {
-        if (err) console.log(err);
-        res.send(result);
+        if (err) {
+            console.error(err);
+            res.status(500).send('SQL Error while attempting to delete.')
+        } else {
+            res.send(result);
+        };
     });
 });
 
@@ -620,8 +640,12 @@ app.delete('/api/deleteFacilities/:idFacility', (req, res) =>{
     WHERE idFacility = ?;
     `;
     db.query(sqlDelete, idFacility, (err, result)=> {
-        if (err) console.log(err);
-        res.send(result);
+        if (err) {
+            console.error(err);
+            res.status(500).send('SQL Error while attempting to delete.')
+        } else {
+            res.send(result);
+        };
     });
 });
 
@@ -683,8 +707,12 @@ app.delete('/api/deleteFacilityTypes/:idFacilityType', (req, res) =>{
     WHERE idFacilityType = ?;
     `;
     db.query(sqlDelete, idFacilityType, (err, result)=> {
-        if (err) console.log(err);
-        res.send(result);
+        if (err) {
+            console.error(err);
+            res.status(500).send('SQL Error while attempting to delete.')
+        } else {
+            res.send(result);
+        };
     });
 });
 
@@ -805,8 +833,12 @@ app.delete('/api/deleteBiologicalAssets/:idBiologicalAsset', (req, res) =>{
     FROM BiologicalAssets
     WHERE idBiologicalAsset = ?`;
     db.query(sqlDelete, idBiologicalAsset, (err, result)=> {
-        if (err) console.log(err);
-        res.send(result);
+        if (err) {
+            console.error(err);
+            res.status(500).send('SQL Error while attempting to delete.')
+        } else {
+            res.send(result);
+        };
     });
 });
 
@@ -883,8 +915,12 @@ app.delete('/api/deleteSpecies/:idSpecies', (req, res) => {
     WHERE idSpecies = ?;
     `;
     db.query(sqlDelete, idSpecies, (err, result) => {
-        if (err) console.log(err);
-        res.send(result);
+        if (err) {
+            console.error(err);
+            res.status(500).send('SQL Error while attempting to delete.')
+        } else {
+            res.send(result);
+        };
     });
 });
 
@@ -945,8 +981,12 @@ app.delete('/api/deleteDiets/:idDiet', (req, res) => {
     WHERE idDiet = ?;
     `;
     db.query(sqlDelete, idDiet, (err, result) => {
-        if (err) console.log(err);
-        res.send(result);
+        if (err) {
+            console.error(err);
+            res.status(500).send('SQL Error while attempting to delete.')
+        } else {
+            res.send(result);
+        };
     });
 });
 
@@ -1011,8 +1051,12 @@ app.delete('/api/deleteHabitats/:idHabitat', (req, res) =>{
     WHERE idHabitat = ?
     `;
     db.query(sqlDelete, idHabitat, (err, result)=> {
-        if (err) console.log(err);
-        res.send(result);
+        if (err) {
+            console.error(err);
+            res.status(500).send('SQL Error while attempting to delete.')
+        } else {
+            res.send(result);
+        };
     });
 });
 
@@ -1068,8 +1112,12 @@ app.delete('/api/deleteTaskCategories/:idTaskCategory', (req, res) =>{
     FROM TaskCategories
     WHERE idTaskCategory = ?`;
     db.query(sqlDelete, idTaskCategory, (err, result)=> {
-        if (err) console.log(err);
-        res.send(result);
+        if (err) {
+            console.error(err);
+            res.status(500).send('SQL Error while attempting to delete.')
+        } else {
+            res.send(result);
+        };
     });
 });
 

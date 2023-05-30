@@ -48,8 +48,6 @@ function ParksPage ({hostURL}) {
         getParks();
     }, [])
 
-
-    // ** Delete the manual refresh later and see if using the use-effect when parksList is modified works instead - was spam refreshing on just a load? **
     // DELETE - Deletes target
     const delParks = async (delVal) => {
         try {
@@ -61,7 +59,8 @@ function ParksPage ({hostURL}) {
                 alert(`${delVal.parkName} has been removed from the database.`);
            }} catch (error) {
                 console.error('Error deleting Park.', error);
-        }
+                alert("ERROR: Restricted delete action or server error (most parent entities with dependents may not be deleted).")
+            }
     };
 
     // Get table info

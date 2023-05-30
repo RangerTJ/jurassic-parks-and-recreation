@@ -59,6 +59,7 @@ function EmployeesPage ({hostURL}) {
                 alert(`${delVal.firstName} ${delVal.lastName} has been removed from the database.`);
             }} catch (error) {
                 console.error('Error deleting employee.', error);
+                alert("ERROR: Restricted delete action or server error (most parent entities with dependents may not be deleted).");
         }
     };
 
