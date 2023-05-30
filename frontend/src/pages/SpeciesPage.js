@@ -34,6 +34,7 @@ function SpeciesPage ({hostURL}) {
         }
         catch (error) {
             console.error('Error populating the Species table.', error);
+            alert("ERROR: Restricted delete action or server error (most parent entities with dependents may not be deleted).");
         }
     };
 

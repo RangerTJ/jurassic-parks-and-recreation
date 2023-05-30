@@ -61,7 +61,8 @@ function HabitatsPage ({hostURL}) {
                 alert(`${delVal.habitatName} has been removed from the database.`);
             }} catch (error) {
                 console.error('Error deleting Habitat.', error);
-        }
+                alert("ERROR: Restricted delete action or server error (most parent entities with dependents may not be deleted).");
+            }
     };
 
     // Get Habitats List
@@ -130,8 +131,6 @@ function HabitatsPage ({hostURL}) {
                             <th>Edit</th>
                             <th>Habitat</th>
                             <th>Description</th>
-                            {/* Size will be deprecated/deleted from DDL */}
-                            <th>Size</th>
                             <th>Photo</th>
                         </tr>
                         {habitatsList.map((val, index)=> {
@@ -151,8 +150,6 @@ function HabitatsPage ({hostURL}) {
                                         <div><strong>{val.habitatName}</strong></div>
                                     </td>
                                     <td className="tableDescription">{val.habitatDescription}</td>
-                                    {/* Size will be deprecated/deleted from DDL */}
-                                    <td>{val.habitatSize}</td>
                                     <td>
                                         {/* Lightbox tutorial by Alexandra Radevich provided the code for the on-click trigger here
                                         URL: https://medium.com/swlh/creating-a-simple-lightbox-from-scratch-in-react-caea84f90960

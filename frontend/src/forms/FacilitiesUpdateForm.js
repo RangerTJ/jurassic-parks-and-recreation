@@ -142,8 +142,12 @@ function FacilitiesUpdateForm ({hostURL}) {
                         </div>
                         <div className="selectorP">
                             <ImageSelectorFacilities  hostURL={hostURL} image={facilityPhoto} setImage={setFacilityPhoto} isRequired={false} autoFocus={false} preSelected={oldFacilityPhoto}/>
-                            <div>Original: {oldFacilityPhoto.substring(14, oldFacilityPhoto.indexOf('.'))}</div>
-                            <div><img src={oldFacilityPhoto} alt ={oldFacilityPhoto.substring(14, oldFacilityPhoto.indexOf('.'))} width={100}/></div>
+                            {oldFacilityPhoto ? 
+                                (<>
+                                    <div>Original: {oldFacilityPhoto.substring(14, oldFacilityPhoto.indexOf('.'))}</div>
+                                    <div><img src={oldFacilityPhoto} alt ={oldFacilityPhoto.substring(14, oldFacilityPhoto.indexOf('.'))} width={100}/></div>
+                                </>) : (<><div>No original image.</div></>)
+                            }
                         </div>
                         <div className="selectorP">
                             <div><label htmlFor="facilityDescription">Description</label></div>

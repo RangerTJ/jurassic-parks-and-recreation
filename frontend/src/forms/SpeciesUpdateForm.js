@@ -134,11 +134,10 @@ function SpeciesUpdateForm ({hostURL}) {
                         <div className="selectorP">
                             <ImageSelectorSpecies  hostURL={hostURL} image={speciesPhoto} setImage={setSpeciesPhoto} isRequired={false} autoFocus={false} preSelected={oldSpeciesPhoto}/>
                             {oldSpeciesPhoto ? 
-                                <>
+                                (<>
                                     <div>Original: {oldSpeciesPhoto.substring(14, oldSpeciesPhoto.indexOf('.'))}</div>
                                     <div><img src={oldSpeciesPhoto} alt ={oldSpeciesPhoto.substring(14, oldSpeciesPhoto.indexOf('.'))} width={100}/></div>                        
-                                </> 
-                                : <div>No Original Image</div>
+                                </>) : (<><div>No Original Image</div></>)
                             }
                         </div>
                     </fieldset>

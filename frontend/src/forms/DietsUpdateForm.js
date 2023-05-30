@@ -90,8 +90,12 @@ function DietsUpdateForm ({hostURL}) {
                                 <div>Original: {oldDietDescription}</div>
                             <div className="selectorP">
                                 <ImageSelectorDiets  hostURL={hostURL} image={dietIcon} setImage={setDietIcon} isRequired={false} autoFocus={false} preSelected={oldDietIcon}/>
-                                <div>Original: {oldDietIcon.substring(14, oldDietIcon.indexOf('.'))}</div>
-                                <div><img src={oldDietIcon} alt ={oldDietIcon.substring(14, oldDietIcon.indexOf('.'))} width={100}/></div>
+                                {oldDietIcon ? 
+                                    (<>
+                                        <div>Original: {oldDietIcon.substring(14, oldDietIcon.indexOf('.'))}</div>
+                                        <div><img src={oldDietIcon} alt ={oldDietIcon.substring(14, oldDietIcon.indexOf('.'))} width={100}/></div>
+                                    </>) : (<><div>No original image.</div></>)
+                                }
                             </div>
                     </fieldset>
                 </form>

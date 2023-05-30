@@ -37,7 +37,8 @@ function FacilityTypesPage ({hostURL}) {
                 alert(`${delVal.facTypeName} has been removed from the database.`);
             }} catch (error) {
                 console.error('Error deleting Facility Type.', error);
-        }
+                alert("ERROR: Restricted delete action or server error (most parent entities with dependents may not be deleted).");
+            }
     };
 
     // Populate Facility Types List

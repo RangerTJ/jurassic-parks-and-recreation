@@ -16,7 +16,7 @@ function HabitatsUpdateForm ({hostURL}) {
     // Follows reference strategy to read state object, as suggested by stackoverflow user Abdulazeez Jimoh on 10/25/2022
     // URL: https://stackoverflow.com/questions/68911432/how-to-pass-parameters-with-react-router-dom-version-6-usenavigate-and-typescrip
     const location = useLocation();
-    const { id, oldHabitatName, oldHabitatDescription, oldHabitatSize, oldHabitatPhoto} = location.state;
+    const { id, oldHabitatName, oldHabitatDescription, oldHabitatPhoto} = location.state;
 
     // Habitats Update SQL Endpoint
     const updateHabitatsURL = hostURL + '/api/updateHabitats';
@@ -25,25 +25,22 @@ function HabitatsUpdateForm ({hostURL}) {
     // Habitat States for the Form
     const [habitatName, setHabitatName] = useState('')
     const [habitatDescription, setHabitatDescription] = useState('')
-    const [habitatSize, setHabitatSize] = useState('')  // TO BE REMOVED
     const [habitatPhoto, setHabitatPhoto] = useState('')
 
     // Pre-sets all the old values into the fields
     useEffect(()=> {
         setHabitatName(oldHabitatName);
         setHabitatDescription(oldHabitatDescription);
-        setHabitatSize(oldHabitatSize);
         setHabitatPhoto(oldHabitatPhoto);
     }, [])
 
     // UPDATE - Submit Changes to a Habitat then return to Habitats page
     const update = async () => {
         try {
-            if (habitatName && habitatDescription && habitatSize) {
+            if (habitatName && habitatDescription) {
                 await Axios.put(updateHabitatsURL, {
                     habitatName: habitatName,
                     habitatDescription: habitatDescription,
-                    habitatSize: habitatSize,
                     habitatPhoto: habitatPhoto,
                     idHabitat: id,
                 });
@@ -95,22 +92,14 @@ function HabitatsUpdateForm ({hostURL}) {
                                     }/>
                                 <div>Original: {oldHabitatDescription}</div>
                             </div>
-                            <div><label htmlFor="habitatSize">Size</label></div>
-                                <input 
-                                    type="number"
-                                    id="habitatSize"
-                                    name="habitatSize"
-                                    min="1"
-                                    max="3"
-                                    required
-                                    value={habitatSize}
-                                    onChange={(e) => {setHabitatSize(e.target.value)}
-                                    }/>
-                                <div>Original: {oldHabitatSize}</div>
                             <div className="selectorP">
                                 <ImageSelectorHabitats  hostURL={hostURL} image={habitatPhoto} setImage={setHabitatPhoto} isRequired={false} autoFocus={false} preSelected={oldHabitatPhoto}/>
-                                <div>Original: {oldHabitatPhoto.substring(14, oldHabitatPhoto.indexOf('.'))}</div>
-                                <div><img src={oldHabitatPhoto} alt ={oldHabitatPhoto.substring(14, oldHabitatPhoto.indexOf('.'))} width={100}/></div>
+                                {oldHabitatPhoto ? 
+                                    (<>
+                                        <div>Original: {oldHabitatPhoto.substring(14, oldHabitatPhoto.indexOf('.'))}</div>
+                                        <div><img src={oldHabitatPhoto} alt ={oldHabitatPhoto.substring(14, oldHabitatPhoto.indexOf('.'))} width={100}/></div>
+                                    </>) : (<><div>No original image.</div></>)
+                                }
                             </div>
                     </fieldset>
                 </form>

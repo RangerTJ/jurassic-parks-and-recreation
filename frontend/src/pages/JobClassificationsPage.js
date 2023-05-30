@@ -39,7 +39,8 @@ function JobClassificationsPage ({hostURL}) {
                alert(`${delVal.jobTitle} has been removed from the database.`);
            }} catch (error) {
                console.error('Error deleting Job.', error);
-       }
+               alert("ERROR: Restricted delete action or server error (most parent entities with dependents may not be deleted).");
+            }
    };
 
    // Get table info
