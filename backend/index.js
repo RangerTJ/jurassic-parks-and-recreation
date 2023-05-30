@@ -144,9 +144,14 @@ app.post('/api/insertParks', (req, res) =>{
             );
     `;
     db.query(sqlInsert, [parkName, parkDescription, parkLocation, parkPhoto], (err, result)=> {
-        console.log(result);
-        res.send(result);
-    })
+        if (err) {
+            console.error(err);
+            res.status(500).send('SQL Error while attempting to create.')
+        } else {
+            res.send(result);
+            console.log(result);
+        };
+    });
 })
 
 // READ Parks (Table View)
@@ -173,8 +178,13 @@ app.put('/api/updateParks', (req, res) =>{
     WHERE idPark = ?;
     `;
     db.query(sqlUpdate, [parkName, parkDescription, parkLocation, parkPhoto, idPark], (err, result)=> {
-        if (err) console.log(err); else console.log(result);
-        res.send(result);
+        if (err) {
+            console.error(err);
+            res.status(500).send('SQL Error while attempting to update.');
+        } else {
+            console.log(result);
+            res.send(result);
+        }
     });
 });
 
@@ -212,9 +222,14 @@ app.post('/api/insertJobClassifications', (req, res) =>{
             );
     `;
     db.query(sqlInsert, [jobTitle, jobDescription], (err, result)=> {
-        console.log(result);
-        res.send(result);
-    })
+        if (err) {
+            console.error(err);
+            res.status(500).send('SQL Error while attempting to create.')
+        } else {
+            res.send(result);
+            console.log(result);
+        };
+    });
 })
 
 // READ Job Classifications (Table View)
@@ -241,8 +256,13 @@ app.put('/api/updateJobClassifications', (req, res) =>{
     WHERE idJobClassification = ?;
     `;
     db.query(sqlUpdate, [jobTitle, jobDescription, idJobClassification], (err, result)=> {
-        if (err) console.log(err); else console.log(result);
-        res.send(result);
+        if (err) {
+            console.error(err);
+            res.status(500).send('SQL Error while attempting to update.');
+        } else {
+            console.log(result);
+            res.send(result);
+        }
     });
 });
 
@@ -306,8 +326,13 @@ app.post('/api/insertEmployees', (req, res) =>{
             );
     `;
     db.query(sqlInsert, [jobTitle, firstName, lastName, employeeUsername, hourlyWage, employeePhone, employeeEmail, employeeRadio, employeeNote, employeePhoto], (err, result)=> {
-        console.log(result);
-        res.send(result);
+        if (err) {
+            console.error(err);
+            res.status(500).send('SQL Error while attempting to create.')
+        } else {
+            res.send(result);
+            console.log(result);
+        };
     });
 });
 
@@ -333,8 +358,13 @@ app.put('/api/updateEmployees', (req, res) =>{
     WHERE idEmployee = ?;
     `;
     db.query(sqlUpdate, [jobTitle, firstName, lastName, employeeUsername, hourlyWage, employeePhone, employeeEmail, employeeRadio, employeeNote, employeePhoto, idEmployee], (err, result)=> {
-        if (err) console.log(err); else console.log(result);
-        res.send(result);
+        if (err) {
+            console.error(err);
+            res.status(500).send('SQL Error while attempting to update.');
+        } else {
+            console.log(result);
+            res.send(result);
+        }
     });
 });
 
@@ -398,8 +428,13 @@ app.post('/api/insertEmployeeTasks', (req, res) =>{
             );
     `;
     db.query(sqlInsert, [taskName, employeeUsername, categoryName, taskHoursWorked, empTaskCost, empTaskStart, empTaskEnd], (err, result)=> {
-        console.log(result);
-        res.send(result);
+        if (err) {
+            console.error(err);
+            res.status(500).send('SQL Error while attempting to create.')
+        } else {
+            res.send(result);
+            console.log(result);
+        };
     });
 });
 
@@ -424,8 +459,13 @@ app.put('/api/updateEmployeeTasks', (req, res) =>{
     WHERE idEmployeeTask = ?;
     `;
     db.query(sqlUpdate, [employeeUsername, categoryName, taskName, taskHoursWorked, empTaskCost, empTaskStart, empTaskEnd, idEmployeeTask], (err, result)=> {
-        if (err) console.log(err); else console.log(result);
-        res.send(result);
+        if (err) {
+            console.error(err);
+            res.status(500).send('SQL Error while attempting to update.');
+        } else {
+            console.log(result);
+            res.send(result);
+        }
     });
 });
 
@@ -486,8 +526,13 @@ app.post('/api/insertTasksAssigned', (req, res) => {
             );
         `;
     db.query(sqlInsert, [facilityName, bioAssetName, taskName, taskDescription, taskStart, taskEnd], (err, result) => {
-        console.log(result);
-        res.send(result);
+        if (err) {
+            console.error(err);
+            res.status(500).send('SQL Error while attempting to create.')
+        } else {
+            res.send(result);
+            console.log(result);
+        };
     });
 });
 
@@ -510,8 +555,13 @@ app.put('/api/updateTasksAssigned', (req, res) =>{
     WHERE idTaskAssigned = ?;
     `;
     db.query(sqlUpdate, [facilityName, bioAssetName, taskName, taskDescription, taskStart, taskEnd, idTaskAssigned], (err, result)=> {
-        if (err) console.log(err); else console.log(result);
-        res.send(result);
+        if (err) {
+            console.error(err);
+            res.status(500).send('SQL Error while attempting to update.');
+        } else {
+            console.log(result);
+            res.send(result);
+        }
     });
 });
 
@@ -626,8 +676,13 @@ app.put('/api/updateFacilities', (req, res) =>{
     WHERE idFacility = ?;
     `;
     db.query(sqlUpdate, [parkName, facTypeName, habitatName, facilityName, facilityDescription, facilityLocation, securityRating, facilityPhoto, facilityNote, idFacility], (err, result)=> {
-        if (err) console.log(err); else console.log(result);
-        res.send(result);
+        if (err) {
+            console.error(err);
+            res.status(500).send('SQL Error while attempting to update.');
+        } else {
+            console.log(result);
+            res.send(result);
+        }
     });
 });
 
@@ -664,9 +719,14 @@ app.post('/api/insertFacilityTypes', (req, res) =>{
     VALUES                          (?, ?);
     `;
     db.query(sqlInsert, [facTypeName, facTypeDescription], (err, result)=> {
-        console.log(result);
-        res.send(result);
-    })
+        if (err) {
+            console.error(err);
+            res.status(500).send('SQL Error while attempting to create.')
+        } else {
+            res.send(result);
+            console.log(result);
+        };
+    });
 })
 
 // READ Facility Type (Table View)
@@ -692,8 +752,13 @@ app.put('/api/updateFacilityTypes', (req, res) =>{
     WHERE idFacilityType = ?;
     `;
     db.query(sqlUpdate, [facTypeName, facTypeDescription, idFacilityType], (err, result)=> {
-        if (err) console.log(err); else console.log(result);
-        res.send(result);
+        if (err) {
+            console.error(err);
+            res.status(500).send('SQL Error while attempting to update.');
+        } else {
+            console.log(result);
+            res.send(result);
+        }
     });
 });
 
@@ -784,8 +849,13 @@ app.post('/api/insertBiologicalAssets', (req, res) =>{
             );
     `;
     db.query(sqlInsert, [speciesName, facilityName, bioAssetName], (err, result)=> {
-        console.log(result);
-        res.send(result);
+        if (err) {
+            console.error(err);
+            res.status(500).send('SQL Error while attempting to create.')
+        } else {
+            res.send(result);
+            console.log(result);
+        };
     });
 });
 
@@ -803,8 +873,13 @@ app.put('/api/updateBiologicalAssets', (req, res) =>{
     WHERE   idBiologicalAsset = ?;
     `;
     db.query(sqlUpdate, [speciesName, facilityName, bioAssetName, idBiologicalAsset], (err, result)=> {
-        if (err) console.log(err); else console.log(result);
-        res.send(result);
+        if (err) {
+            console.error(err);
+            res.status(500).send('SQL Error while attempting to update.');
+        } else {
+            console.log(result);
+            res.send(result);
+        }
     });
 });
 
@@ -879,8 +954,13 @@ app.post('/api/insertSpecies', (req, res) => {
             );
     `;
     db.query(sqlInsert, [dietName, habitatName, speciesName, speciesDescription, threatLevel, speciesPhoto], (err, result) => {
-        console.log(result);
-        res.send(result);
+        if (err) {
+            console.error(err);
+            res.status(500).send('SQL Error while attempting to create.')
+        } else {
+            res.send(result);
+            console.log(result);
+        };
     });
 });
 
@@ -901,8 +981,13 @@ app.put('/api/updateSpecies', (req, res) => {
     WHERE   idSpecies = ?;
     `;
     db.query(sqlUpdate, [dietName, habitatName, speciesName, speciesDescription, threatLevel, speciesPhoto, idSpecies], (err, result) => {
-        if (err) console.log(err); else console.log(result);
-        res.send(result);
+        if (err) {
+            console.error(err);
+            res.status(500).send('SQL Error while attempting to update.');
+        } else {
+            console.log(result);
+            res.send(result);
+        }
     });
 });
 
@@ -950,8 +1035,13 @@ app.post('/api/insertDiets', (req, res) => {
     VALUES  (?, ?, ?);
     `;
     db.query(sqlInsert, [dietName, dietDescription, dietIcon], (err, result) => {
-        console.log(result);
-        res.send(result);
+        if (err) {
+            console.error(err);
+            res.status(500).send('SQL Error while attempting to create.')
+        } else {
+            res.send(result);
+            console.log(result);
+        };
     });
 });
 
@@ -967,8 +1057,13 @@ app.put('/api/updateDiets', (req, res) => {
     WHERE idDiet = ?;
     `;
     db.query(sqlUpdate, [dietName, dietDescription, dietIcon, idDiet], (err, result) => {
-        if (err) console.log(err); else console.log(result);
-        res.send(result);
+        if (err) {
+            console.error(err);
+            res.status(500).send('SQL Error while attempting to update.');
+        } else {
+            console.log(result);
+            res.send(result);
+        }
     });
 });
 
@@ -1020,8 +1115,13 @@ app.post('/api/insertHabitats', (req, res) =>{
             );
     `;
     db.query(sqlInsert, [habitatName, habitatDescription, habitatPhoto], (err, result)=> {
-        console.log(result);
-        res.send(result);
+        if (err) {
+            console.error(err);
+            res.status(500).send('SQL Error while attempting to create.')
+        } else {
+            res.send(result);
+            console.log(result);
+        };
     });
 });
 
@@ -1037,8 +1137,13 @@ app.put('/api/updateHabitats', (req, res) =>{
     WHERE   idHabitat = ?;
     `;
     db.query(sqlUpdate, [habitatName, habitatDescription, habitatPhoto, idHabitat], (err, result)=> {
-        if (err) console.log(err); else console.log(result);
-        res.send(result);
+        if (err) {
+            console.error(err);
+            res.status(500).send('SQL Error while attempting to update.');
+        } else {
+            console.log(result);
+            res.send(result);
+        }
     });
 });
 
@@ -1072,9 +1177,14 @@ app.post('/api/insertTaskCategories', (req, res) =>{
     INSERT INTO TaskCategories (categoryName) VALUES (?);
     `;
     db.query(sqlInsert, [categoryName], (err, result)=> {
-        console.log(result);
-        res.send(result);
-    })
+        if (err) {
+            console.error(err);
+            res.status(500).send('SQL Error while attempting to create.')
+        } else {
+            res.send(result);
+            console.log(result);
+        };
+    });
 })
 
 // READ TASK CATEGORIES - Select
@@ -1099,8 +1209,13 @@ app.put('/api/updateTaskCategories', (req, res) =>{
     WHERE idTaskCategory = ?;
     `;
     db.query(sqlUpdate, [categoryName, idTaskCategory], (err, result)=> {
-        if (err) console.log(err); else console.log(result);
-        res.send(result);
+        if (err) {
+            console.error(err);
+            res.status(500).send('SQL Error while attempting to update.');
+        } else {
+            console.log(result);
+            res.send(result);
+        }
     });
 });
 
