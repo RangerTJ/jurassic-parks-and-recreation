@@ -6,6 +6,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import Axios from 'axios';
 import SelectorSpecies from "../components/selectorSpecies";
+import defaultImg from '../images/tableDefaultPreview.png';
 
 
 // HostURL Passed from App.js
@@ -120,6 +121,26 @@ function BiologicalAssetsPage ({hostURL}) {
         navTo("/BiologicalAssetsUpdate", {state});
     }
 
+    /* Citation: Creating a Simple Lightbox From Scratch in React by Alexandra Radevich
+    URL: https://medium.com/swlh/creating-a-simple-lightbox-from-scratch-in-react-caea84f90960
+    Example code used to begin implementation and modified slightly to suit project needs. 
+    All of the lightbox-related code on this page was directly adapted from this tutorial.
+    Accessed 5/22/2023. No modification of the following 2x declared useStates and 2x functions.*/
+    const [lightboxDisplay, setLightBoxDisplay] = useState(false)
+    const [imageToShow, setImageToShow] = useState('')
+    
+    // Displays lightbox + selected image when triggered
+    const showImage = (image) => {  
+        setImageToShow(image);
+        setLightBoxDisplay(true);
+    };
+    
+    // Hides lightbox when triggered ()
+    const hideLightBox = () => {
+        setLightBoxDisplay(false)
+     }
+    /*!!! End of lightbox-tutorial code for function portion of page (see HTML rendering for calling of Lightbox commands) !!!*/
+
     // Render Webpage
     return (
         <>
@@ -140,6 +161,14 @@ function BiologicalAssetsPage ({hostURL}) {
                     buttons on the left side of the corresponding row to enter the edit menu or delete
                     it from the database, respectively.
                 </p>
+                {/* Lightbox example code used from: Creating a Simple Lightbox From Scratch in React by Alexandra Radevich
+                URL: https://medium.com/swlh/creating-a-simple-lightbox-from-scratch-in-react-caea84f90960
+                Accessed 5/22/2023. Modified with alt text value and custom display class.*/}
+                { lightboxDisplay ?
+                <div id="lightbox"onClick={hideLightBox} className="lightbox">
+                    <img id="lightbox-img" src={imageToShow} atl={imageToShow} className="lightbox-image"></img>
+                </div>
+                : '' }
             </article>
             <article>
                 <h3>Security Risks</h3>
@@ -157,6 +186,7 @@ function BiologicalAssetsPage ({hostURL}) {
                         <tbody>
                         <tr>
                             <th>Edit</th>
+                            <th>Species Photo</th>
                             <th>Asset</th>
                             <th>Species</th>
                             <th>Facility</th>
@@ -167,11 +197,22 @@ function BiologicalAssetsPage ({hostURL}) {
                         </tr>
                         {/* NEED TO UPDATE QUERY TO GET ID TO - SO UPDATE POPULATES RIGHT */}
                         {assetSecMismatchList.map((val, index)=> {
+                            const altText = val.speciesPhoto ? val.speciesPhoto.substring(14, val.speciesPhoto.indexOf('.')) : "Default";
                             return (
                                 <tr key={index}>
                                     <td className="buttonHolder">
                                         <div><button className="tableButton" onClick={()=> {navToUpdate(val)}}>Edit</button></div>
                                         <div><button className="tableButton" onClick={()=> {delBiologicalAsset(val.idBiologicalAsset)}}>*</button></div>
+                                    </td>
+                                    <td>
+                                        {/* Lightbox tutorial by Alexandra Radevich provided the code for the on-click trigger here
+                                        URL: https://medium.com/swlh/creating-a-simple-lightbox-from-scratch-in-react-caea84f90960
+                                        Accessed 5/22/2023. No modification of code for on-click trigger.*/}
+                                        {val.speciesPhoto ?
+                                        <img src={val.speciesPhoto} alt={altText} width={160} height={90} onClick={() => showImage(val.speciesPhoto)}/>
+                                        :
+                                        <img src={defaultImg} alt="Default Image" width={160} height={90} />
+                                        }
                                     </td>
                                     <td className="tableDescription">
                                         <div>#{val.idBiologicalAsset}</div>
@@ -204,19 +245,30 @@ function BiologicalAssetsPage ({hostURL}) {
                         <tbody>
                         <tr>
                             <th>Edit</th>
+                            <th>Species Photo</th>
                             <th>Asset</th>
                             <th>Species</th>
                             <th>Facility</th>
                             <th>Habitat Misalignment</th>
                         </tr>
-                        {/* NEED TO UPDATE QUERY TO GET ID TO - SO UPDATE POPULATES RIGHT */}
                         {assetHabMismatchList.map((val, index)=> {
                             const filteredHab = val.currentHabitat ? val.currentHabitat : "WARNING: NOT AN ENCLOSURE";
+                            const altText = val.speciesPhoto ? val.speciesPhoto.substring(14, val.speciesPhoto.indexOf('.')) : "Default";
                             return (
                                 <tr key={index}>
                                     <td className="buttonHolder">
                                         <div><button className="tableButton" onClick={()=> {navToUpdate(val)}}>Edit</button></div>
                                         <div><button className="tableButton" onClick={()=> {delBiologicalAsset(val.idBiologicalAsset)}}>*</button></div>
+                                    </td>
+                                    <td>
+                                        {/* Lightbox tutorial by Alexandra Radevich provided the code for the on-click trigger here
+                                        URL: https://medium.com/swlh/creating-a-simple-lightbox-from-scratch-in-react-caea84f90960
+                                        Accessed 5/22/2023. No modification of code for on-click trigger.*/}
+                                        {val.speciesPhoto ?
+                                        <img src={val.speciesPhoto} alt={altText} width={160} height={90} onClick={() => showImage(val.speciesPhoto)}/>
+                                        :
+                                        <img src={defaultImg} alt="Default Image" width={160} height={90} />
+                                        }
                                     </td>
                                     <td className="tableDescription">
                                         <div>#{val.idBiologicalAsset}</div>
@@ -253,16 +305,28 @@ function BiologicalAssetsPage ({hostURL}) {
                         <tbody>
                         <tr>
                             <th className="buttonHolder">Edit</th>
+                            <th>Species Photo</th>
                             <th>Asset</th>
                             <th>Species</th>
                             <th>Home Facility</th>
                         </tr>
                         {biologicalAssetList.map((val, index)=> {
+                            const altText = val.speciesPhoto ? val.speciesPhoto.substring(14, val.speciesPhoto.indexOf('.')) : "Default";
                             return (
                                 <tr key={index}>
                                     <td className="buttonHolder">
                                         <div><button className="tableButton" onClick={()=> {navToUpdate(val)}}>Edit</button></div>
                                         <div><button className="tableButton" onClick={()=> {delBiologicalAsset(val)}}>*</button></div>
+                                    </td>
+                                    <td>
+                                        {/* Lightbox tutorial by Alexandra Radevich provided the code for the on-click trigger here
+                                        URL: https://medium.com/swlh/creating-a-simple-lightbox-from-scratch-in-react-caea84f90960
+                                        Accessed 5/22/2023. No modification of code for on-click trigger.*/}
+                                        {val.speciesPhoto ?
+                                        <img src={val.speciesPhoto} alt={altText} width={160} height={90} onClick={() => showImage(val.speciesPhoto)}/>
+                                        :
+                                        <img src={defaultImg} alt="Default Image" width={160} height={90} />
+                                        }
                                     </td>
                                     <td className="tableDescription">
                                         <div>#{val.idBiologicalAsset}</div>

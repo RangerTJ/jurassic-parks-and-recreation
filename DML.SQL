@@ -111,11 +111,11 @@ LEFT JOIN Habitats ON Species.idHabitat = Habitats.idHabitat
 ORDER BY idSpecies ASC; 
 
 -- SELECT BiologicalAssets
-SELECT BiologicalAssets.idBiologicalAsset, BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName
+SELECT BiologicalAssets.idBiologicalAsset, BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName, Species.speciesPhoto
 FROM BiologicalAssets
 -- Need to join Species -> BiologicalAssets -> Facilities
-LEFT JOIN Species ON BiologicalAssets.idSpecies = Species.idSpecies
-LEFT JOIN Facilities ON BiologicalAssets.idFacility = Facilities.idFacility
+JOIN Species ON BiologicalAssets.idSpecies = Species.idSpecies
+JOIN Facilities ON BiologicalAssets.idFacility = Facilities.idFacility
 ORDER BY idBiologicalAsset ASC;
 
 -- SELECT JobClassifications
@@ -425,7 +425,7 @@ GROUP BY Parks.parkName
 ORDER BY ParkCost DESC;
 
 -- SELECT biological assets in a non-ideal habitat (for use in summary report to quickly flag down inappropriate assignments)
-SELECT BiologicalAssets.idBiologicalAsset, BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName, currentHab.habitatName AS currentHabitat, speciesHab.habitatName AS needsHabitat
+SELECT BiologicalAssets.idBiologicalAsset, BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName, currentHab.habitatName AS currentHabitat, speciesHab.habitatName AS needsHabitat, Species.speciesPhoto
 FROM BiologicalAssets
 -- Need to JOIN BioAssets -> Species -> Facilities
 JOIN Species ON BiologicalAssets.idSpecies = Species.idSpecies
@@ -436,7 +436,7 @@ WHERE Species.idHabitat != Facilities.idHabitat OR Facilities.idHabitat IS NULL
 ORDER BY facilityName, speciesName, bioAssetName;
 
 -- SELECT biological assets that are not adequately secured (and indicates how bad it is with a severity rating from 1-9)
-SELECT BiologicalAssets.idBiologicalAsset, BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName, Facilities.securityRating, Species.threatLevel, Species.threatLevel - Facilities.securityRating AS severity
+SELECT BiologicalAssets.idBiologicalAsset, BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName, Facilities.securityRating, Species.threatLevel, Species.threatLevel - Facilities.securityRating AS severity, Species.speciesPhoto
 FROM BiologicalAssets
 -- Need to JOIN BioAssets -> Species -> Facilities
 JOIN Species on BiologicalAssets.idSpecies = Species.idSpecies
@@ -445,7 +445,7 @@ WHERE Facilities.securityRating < Species.threatLevel
 ORDER BY severity, facilities.facilityName, BiologicalAssets.bioAssetName;
 
 -- SELECT BiologicalAssets / FILTER for Species
-SELECT BiologicalAssets.idBiologicalAsset, BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName 
+SELECT BiologicalAssets.idBiologicalAsset, BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName, Species.speciesPhoto
 FROM BiologicalAssets
 -- Need to join Species -> BiologicalAssets -> Facilities
 JOIN Species ON BiologicalAssets.idSpecies = Species.idSpecies
@@ -664,15 +664,15 @@ GROUP BY Facilities.facilityName
 ORDER BY facilityCost DESC;
 
 -- Cost Analysis by Biological Asset
-    SELECT  BiologicalAssets.bioAssetName, Species.speciesName, Parks.parkName, SUM(EmployeeTasks.empTaskCost) AS assetCost
-    FROM EmployeeTasks
-    LEFT JOIN TasksAssigned ON EmployeeTasks.idTaskAssigned = TasksAssigned.idTaskAssigned
-    JOIN BiologicalAssets ON TasksAssigned.idBiologicalAsset = BiologicalAssets.idBiologicalAsset
-    LEFT JOIN Species ON BiologicalAssets.idSpecies = Species.idSpecies
-    LEFT JOIN Facilities ON BiologicalAssets.idFacility = Facilities.idFacility
-    LEFT JOIN Parks ON Facilities.idPark = Parks.idPark
-    GROUP BY BiologicalAssets.bioAssetName
-    ORDER BY assetCost DESC;
+SELECT  BiologicalAssets.bioAssetName, Species.speciesName, Parks.parkName, SUM(EmployeeTasks.empTaskCost) AS assetCost
+FROM EmployeeTasks
+LEFT JOIN TasksAssigned ON EmployeeTasks.idTaskAssigned = TasksAssigned.idTaskAssigned
+JOIN BiologicalAssets ON TasksAssigned.idBiologicalAsset = BiologicalAssets.idBiologicalAsset
+LEFT JOIN Species ON BiologicalAssets.idSpecies = Species.idSpecies
+LEFT JOIN Facilities ON BiologicalAssets.idFacility = Facilities.idFacility
+LEFT JOIN Parks ON Facilities.idPark = Parks.idPark
+GROUP BY BiologicalAssets.bioAssetName
+ORDER BY assetCost DESC;
 
 
 -- ----------------

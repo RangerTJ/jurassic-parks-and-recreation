@@ -861,7 +861,7 @@ app.delete('/api/deleteFacilityTypes/:idFacilityType', (req, res) =>{
 // READ List All Assets
 app.get('/api/getBiologicalAssets', (req, res) =>{
     const sqlRead = `
-    SELECT BiologicalAssets.idBiologicalAsset, BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName, Species.threatLevel 
+    SELECT BiologicalAssets.idBiologicalAsset, BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName, Species.threatLevel, Species.speciesPhoto  
     FROM BiologicalAssets
     JOIN Species ON BiologicalAssets.idSpecies = Species.idSpecies
     JOIN Facilities ON BiologicalAssets.idFacility = Facilities.idFacility
@@ -881,7 +881,7 @@ app.get('/api/getBiologicalAssets', (req, res) =>{
 // READ Habitat Alert
 app.get('/api/checkBiologicalAssetsHabitats', (req, res) =>{
     const sqlRead = `
-    SELECT BiologicalAssets.idBiologicalAsset, BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName, currentHab.habitatName AS currentHabitat, speciesHab.habitatName AS needsHabitat
+    SELECT BiologicalAssets.idBiologicalAsset, BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName, currentHab.habitatName AS currentHabitat, speciesHab.habitatName AS needsHabitat, Species.speciesPhoto
     FROM BiologicalAssets
     JOIN Species ON BiologicalAssets.idSpecies = Species.idSpecies
     JOIN Facilities ON BiologicalAssets.idFacility = Facilities.idFacility
@@ -904,7 +904,7 @@ app.get('/api/checkBiologicalAssetsHabitats', (req, res) =>{
 // READ Security Alert
 app.get('/api/checkBiologicalAssetsSecurity', (req, res) =>{
     const sqlRead = `
-    SELECT BiologicalAssets.idBiologicalAsset, BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName, Facilities.securityRating, Species.threatLevel, Species.threatLevel - Facilities.securityRating AS severity
+    SELECT BiologicalAssets.idBiologicalAsset, BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName, Facilities.securityRating, Species.threatLevel, Species.threatLevel - Facilities.securityRating AS severity, Species.speciesPhoto
     FROM BiologicalAssets
     JOIN Species on BiologicalAssets.idSpecies = Species.idSpecies
     JOIN Facilities on BiologicalAssets.idFacility = Facilities.idFacility
@@ -974,7 +974,7 @@ app.put('/api/updateBiologicalAssets', (req, res) =>{
 app.post('/api/filterBioAssetsBySpecies', (req, res) =>{
     const speciesName = req.body.speciesName
     const sqlRead = `
-    SELECT BiologicalAssets.idBiologicalAsset, BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName 
+    SELECT BiologicalAssets.idBiologicalAsset, BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName, Species.speciesPhoto 
     FROM BiologicalAssets
     JOIN Species ON BiologicalAssets.idSpecies = Species.idSpecies
     JOIN Facilities ON BiologicalAssets.idFacility = Facilities.idFacility
