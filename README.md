@@ -20,8 +20,10 @@ A pre-emptive special thanks to Mark Hjorth for making this error page that we w
 
 Also, special thanks to Frontier studios, the developers behind the game Jurassic World Evolution 2, from which most of our simulated "photo" media has been derived.
 
-Image Credits (converted to .png format by Taylor Jordan):
+Image Credits  
 ----------------------------------------------------------
+Jurassic World Evolution 2 (by Frontier Studios) in-game Screenshots taken by Taylor Jordan  
+  
 Hesperornis (Nobu Tamura)  
 https://commons.wikimedia.org/wiki/File:Hesperornis_BW_(white_background).jpg  
   
