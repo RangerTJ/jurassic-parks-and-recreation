@@ -153,7 +153,7 @@ function DietsPage ({hostURL}) {
                                         <td className="tableDescription">
                                             <div>{val.dietDescription}</div>
                                         </td>
-                                        <td>
+                                        <td className="imageHolder">
                                             {/* Lightbox tutorial by Alexandra Radevich provided the code for the on-click trigger here
                                             URL: https://medium.com/swlh/creating-a-simple-lightbox-from-scratch-in-react-caea84f90960
                                             Accessed 5/22/2023. No modification of code for on-click trigger.*/}

@@ -412,6 +412,10 @@ video {
   width: 50px;
 }
 
+.imageHolder {
+  width: 170px;
+}
+
 /* Experimental / For Possible use of capping small int column width */
 .smallIntTD {
   width: min-content;
