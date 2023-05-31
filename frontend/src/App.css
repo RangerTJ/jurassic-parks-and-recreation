@@ -479,6 +479,11 @@ popup that shows up in a fixed position in the center of the screen that scales 
 /* -------------------- */
 @media (max-device-width: 780px) {
 
+body {
+  max-width: 100%;
+  margin: 0;
+}
+
 h1 {
   font-size: 40px;
   margin-bottom: 0px;
@@ -490,6 +495,10 @@ h1 {
 .headerP {
   margin-top: -10px;
   font-size: 25px;
+}
+
+.headerBox {
+  margin: 0;
 }
 
 .headerLogo {
@@ -541,8 +550,9 @@ nav a:focus {
   outline: none;
 }
 
-table {
+.st-holder {
   font-size: 12px;
+  width: 100%;
 }
 
 td {
