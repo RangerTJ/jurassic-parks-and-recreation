@@ -275,7 +275,7 @@ and heavy-duty fencing/containment covers the gaps and protects other site facil
 Doors and walls able to withstand most assets, but in the event of a category 9 or higher escape, visitors should be guided to the max security shelters."),
 
 (3, 2, 3, 'Jurassic Stadium', 'Stadium viewing area for special biological asset exhibitions.', 
-'Center of Jurassic Park San Diego.', 10, 'images/arena_test.png', "Both a large-scale visitor viewing area and a 
+'Center of Jurassic Park San Diego.', 10, NULL, "Both a large-scale visitor viewing area and a 
 specialized enclosure for short-term viewing of a showcase asset."),
 
 (3, 3, 2, 'Mosasaur Lagoon', 'Salt-water tank for the largest aquatic biological assets at Jurassic World.', 
@@ -299,7 +299,7 @@ VALUES
 (4, 'rmuldoon', 'Robert', 'Muldoon', 35.00, '+1-202-555-0144', 'rmuldoon@jw.org', '200', 'Firearm certified.', NULL),
 (3, 'dnedry', 'Dennis', 'Nedry', 60.00, '+1-202-555-8073', 'dnedry@jw.org', NULL, 'Debt issues. Monitor behavior.', NULL),
 (2, 'rwiggum', 'Ralph', 'Wiggum', 0.00, '+1-202-555-1989', 'mefailenglish@hotmail.com', '325', 'Unpaid student intern. "I''m in danger!"', NULL),
-(1, 'gharding', 'Gerry', 'Harding', 40.00, '+1-202-555-1993', 'gharding@jw.org', '501', 'Medical certified.', 'images/staff_test.png'),
+(1, 'gharding', 'Gerry', 'Harding', 40.00, '+1-202-555-1993', 'gharding@jw.org', '501', 'Medical certified.', NULL),
 (3, 'mbackes', 'Michael', 'Backes', 100.00, '+1-202-555-1221', 'mbackes@jw.org', '800', 'Head Honcho.', NULL);
 
 
