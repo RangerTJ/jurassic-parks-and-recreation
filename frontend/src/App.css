@@ -328,7 +328,7 @@ video {
   outline: solid 2px var(--parkYellow);
   margin: 2px;
   vertical-align: middle;
-  max-width: 100%;
+  width: 100%;
 }
 
 
