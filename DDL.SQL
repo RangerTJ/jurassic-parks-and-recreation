@@ -360,22 +360,22 @@ VALUES
 
 INSERT INTO `BiologicalAssets`      (idSpecies, idFacility, bioAssetName)
 VALUES
-(1, 1, 'Alpha'),
-(2, 4, 'Beta'),
-(3, 3, 'Gamma'),
-(4, 1, 'Delta'),
-(5, 1, 'Epsilon'),
-(6, 2, 'Zeta'),
-(7, 3, 'Eta'),
-(8, 4, 'Theta'),
-(9, 3, 'Iota'),
-(10, 2, 'Kappa'),
-(11, 2, 'Lambda'),
-(12, 4, 'Mu'),
-(13, 5, 'Nu'),
-(14, 5, 'Xi'),
-(15, 5, 'Omicron'),
-(1, 1, 'Omega');
+(1, 1, 'Rexy'),
+(2, 4, 'Blue'),
+(3, 3, 'Stabby McGee'),
+(4, 1, 'Littlefoot'),
+(5, 1, 'Thagomizerus'),
+(6, 2, 'Mariner'),
+(7, 3, 'Al'),
+(8, 4, 'Bumpy'),
+(9, 3, 'Luxor'),
+(10, 2, 'Mr. Puddles'),
+(11, 2, 'Duckie'),
+(12, 4, 'Yoshi'),
+(13, 5, 'Captain Boomerang'),
+(14, 5, 'Slinker'),
+(15, 5, 'Bitey'),
+(1, 1, 'Junior');
 
 
 INSERT INTO `Species`               (idDiet, idHabitat, speciesName, speciesDescription, threatLevel, speciesPhoto)
