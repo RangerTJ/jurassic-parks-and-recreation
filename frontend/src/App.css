@@ -479,7 +479,7 @@ popup that shows up in a fixed position in the center of the screen that scales 
 /* -------------------- */
 @media (max-device-width: 780px) {
 
-body {
+body, html {
   max-width: 100%;
   margin: 0;
 }
@@ -561,6 +561,15 @@ nav a:focus {
 
 td {
   padding: 2px;
+}
+
+.tableButton {
+  margin: 5px 0px 5px 0px;
+  justify-content: center;
+  vertical-align: middle;
+  font-size: 22px;
+  text-shadow: none;
+  box-shadow: none;
 }
 
 }
