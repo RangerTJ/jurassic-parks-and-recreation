@@ -171,7 +171,7 @@ function FacilitiesPage ({hostURL}) {
                                         <ul>
                                             <li>{val.facTypeName}</li>
                                             <li>{habitatDesc}</li>
-                                            <li>{val.facilityLocation}</li>
+                                            <li><strong>Location: </strong>{val.facilityLocation}</li>
                                             <li><strong>Security: {val.securityRating}</strong></li>
                                         </ul>
                                     </td>
