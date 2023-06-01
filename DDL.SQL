@@ -256,9 +256,9 @@ CREATE TABLE `EmployeeTasks` (
 
 INSERT INTO `Parks`                 (parkName, parkDescription, parkLocation, parkPhoto)
 VALUES
-('Jurassic World', 'Premier zoological theme park in the system. 500+ employees and 200+ assets.', 'Isla Nublar, Costa Rica', null),
-('Site B', 'Asset research and staging park. Limited facilities and employees.', 'Isla Sorna, Costa Rica', null),
-('Jurassic Park: San Diego', 'Urban zoological theme park. 200+ employees and 50+ assets.', 'San Diego, CA', null);
+('Jurassic World', 'Premier zoological theme park in the system. 500+ employees and 200+ assets.', 'Isla Nublar, Costa Rica', '/static/media/Jurassic World Gates (Night).5304f32b0c9705b1680c.jpg'),
+('Site B', 'Asset research and staging park. Limited facilities and employees.', 'Isla Sorna, Costa Rica', '/static/media/Jurassic World Isla Sorna.7063960e692e69b5b37e.jpg'),
+('Jurassic Park: San Diego', 'Urban zoological theme park. 200+ employees and 50+ assets.', 'San Diego, CA', '/static/media/Jurassic Park San Diego (Daytime Overview).bdc41c9c3b8b8f23c10c.jpg');
 
 
 INSERT INTO `Facilities`            (idPark, idFacilityType, idHabitat, facilityName, facilityDescription, 
@@ -267,28 +267,28 @@ VALUES
 
 -- Note: Inserted habitat values are for assumed appropriate habitats, since that table has not been populated yet
 (2, 5, 1, 'Wild Zone', 'Undeveloped area of Site B where assets can roam free until they need to be collected for transfer to a different facility.', 
-'All of Sorna outside of the docks and laboratories.', 10, NULL, "The island's natural terrain makes an impassible barrier for most assets to escape, 
+'All of Sorna outside of the docks and laboratories.', 10, '/static/media/Perimeter Fence.1f2f403fda80b3f81c1a.jpg', "The island's natural terrain makes an impassible barrier for most assets to escape, 
 and heavy-duty fencing/containment covers the gaps and protects other site facilities."),
 
 (1, 1, NULL, 'Visitor Center', 'Primary Visitor Center for Jurassic World and general hub for visitor experiences.', 
-'Central Isla Nublar, near ferry monorail drop-off.', 8, NULL, "Can double as a shelter location in the event that an asset escapes containment. 
+'Central Isla Nublar, near ferry monorail drop-off.', 8, '/static/media/Innovation Center.f08bc26dca4f6062cd53.jpg', "Can double as a shelter location in the event that an asset escapes containment. 
 Doors and walls able to withstand most assets, but in the event of a category 9 or higher escape, visitors should be guided to the max security shelters."),
 
 (3, 2, 3, 'Jurassic Stadium', 'Stadium viewing area for special biological asset exhibitions.', 
-'Center of Jurassic Park San Diego.', 10, NULL, "Both a large-scale visitor viewing area and a 
+'Center of Jurassic Park San Diego.', 10, '/static/media/Jurassic Arena (Day).ceaa7e2f021e65065453.jpg', "Both a large-scale visitor viewing area and a 
 specialized enclosure for short-term viewing of a showcase asset."),
 
 (3, 3, 2, 'Mosasaur Lagoon', 'Salt-water tank for the largest aquatic biological assets at Jurassic World.', 
-'Adjacent to main street, down main path from the Visitor Center.', 10, NULL, "Largest and most secure salt-water viewing tank in Jurassic World. 
+'Adjacent to main street, down main path from the Visitor Center.', 10, '/static/media/Lagoon (San Diego).c1092b11fe1d7f5152a8.jpg', "Largest and most secure salt-water viewing tank in Jurassic World. 
 Viewing facilities are adjacent."),
 
 (1, 2, 4, 'Redwood Retreat', 'A facility designed to showcase the biodiversity and beauty of ancient redwood forests.',
-'North end of the park, surrounded by existing redwood forest.', 10, NULL, "Redwood trees are delicate and should not be disturbed.
+'North end of the park, surrounded by existing redwood forest.', 10, '/static/media/Viewing Log.9741f962fc62c2327eac.jpg', "Redwood trees are delicate and should not be disturbed.
 The facility is designed in a way to minimize the impact on the existing ecosystem. Visitors must stay on designated paths to prevent
 damage to the forest floor."),
 
 (1, 2, 5, 'Swamp Explorer', 'A facility designed to showcase the unique ecosystems and biodiversity of Jurassic swamps.',
-'Southern end of the park, adjacent to a large body of water.', 10, NULL, "Swamps can be dangerous and difficult to navigate.
+'Southern end of the park, adjacent to a large body of water.', 10, '/static/media/Enclosure - Swamp.5c42b268b64a0ee4aec6.jpg', "Swamps can be dangerous and difficult to navigate.
 Visitors must stay on designated paths to prevent injury or getting lost. The facility is designed to withstand potential flooding and
 other natural hazards commonly found in swamp environments.");
 
@@ -296,11 +296,12 @@ other natural hazards commonly found in swamp environments.");
 INSERT INTO `Employees`             (idJobClassification, employeeUsername, firstName, lastName, hourlyWage, employeePhone, employeeEmail,
                                     employeeRadio, employeeNote, employeePhoto)
 VALUES
-(4, 'rmuldoon', 'Robert', 'Muldoon', 35.00, '+1-202-555-0144', 'rmuldoon@jw.org', '200', 'Firearm certified.', NULL),
-(3, 'dnedry', 'Dennis', 'Nedry', 60.00, '+1-202-555-8073', 'dnedry@jw.org', NULL, 'Debt issues. Monitor behavior.', NULL),
-(2, 'rwiggum', 'Ralph', 'Wiggum', 0.00, '+1-202-555-1989', 'mefailenglish@hotmail.com', '325', 'Unpaid student intern. "I''m in danger!"', NULL),
-(1, 'gharding', 'Gerry', 'Harding', 40.00, '+1-202-555-1993', 'gharding@jw.org', '501', 'Medical certified.', NULL),
-(3, 'mbackes', 'Michael', 'Backes', 100.00, '+1-202-555-1221', 'mbackes@jw.org', '800', 'Head Honcho.', NULL);
+(4, 'rmuldoon', 'Robert', 'Muldoon', 35.00, '+1-202-555-0144', 'rmuldoon@jw.org', '200', 'Firearm certified.', '/static/media/ACU Helicopter Gunner 01 (Masculine).2dd094bd931f29aae647.jpg'),
+(3, 'dnedry', 'Dennis', 'Nedry', 60.00, '+1-202-555-8073', 'dnedry@jw.org', NULL, 'Debt issues. Monitor behavior.', '/static/media/Office Worker 08 (Masculine).3a6ec38eef69738ff491.jpg'),
+(2, 'rwiggum', 'Ralph', 'Wiggum', 0.00, '+1-202-555-1989', 'mefailenglish@hotmail.com', '325', 'Unpaid student intern. "I''m in danger!"', '/static/media/Maintenance Worker 02 (Masculine).d70ed5a023e8e14a696b.jpg'),
+(1, 'gharding', 'Gerry', 'Harding', 40.00, '+1-202-555-1993', 'gharding@jw.org', '501', 'Medical certified.', '/static/media/Ranger Medical 02 (Masculine).cff363824b0017514468.jpg'),
+(3, 'mbackes', 'Michael', 'Backes', 100.00, '+1-202-555-1221', 'mbackes@jw.org', '800', 'Head Honcho.', '/static/media/Office Worker 03 (Feminine).39bac9b76701e6ccd094.jpg'),
+(1, 'Harding', 'Sarah', 'sharding', 35.00, '+1-555-555-5558', 'sharding@jw.org', 'R-02', 'Daughter of Gerry Harding, chief veterinary specialist. Renowned wildlife behavioral specialist.', '/static/media/Ranger 02 (Feminine).87c9dd19d251ebd703fa.jpg');
 
 
 -- Note: Transport tasks are generated for the facility where the transport operation begins.
@@ -351,12 +352,12 @@ VALUES
 
 INSERT INTO `Habitats`              (habitatName, habitatDescription, habitatPhoto)
 VALUES
-  ('Prehistoric Jungle', 'Prehistoric jungles were dense, lush environments teeming with plant and animal life. These habitats supported a variety of herbivorous and carnivorous dinosaur species, including smaller predators, long-necked sauropods, and armored herbivores. Many plants were ferns, horsetails, and primitive conifers.', null),
-  ('Cretaceous Coastline', 'Cretaceous coastlines were shallow marine environments that supported a diverse array of aquatic life, including marine reptiles like ichthyosaurs and plesiosaurs, as well as various fish and invertebrates. These habitats also provided nesting areas for shore-dwelling dinosaurs and resources for other dinosaur species.', null),
-  ('Prehistoric Savannah', 'Prehistoric savannahs were open, grassy landscapes with scattered trees and shrubs, providing ample food and resources for grazing and browsing dinosaur species. These habitats supported herds of herbivorous dinosaurs, like hadrosaurs and ceratopsians, as well as carnivorous predators that hunted them.', null),
-  ('Ancient Redwood Forest', 'Ancient redwood forests were home to towering trees, providing a unique ecosystem for a variety of dinosaur species. These habitats were particularly suitable for tree-dwelling and gliding dinosaur species, such as small theropods and early birds, who could navigate the forest canopy with ease.', null),
-  ('Jurassic Swamp', 'Jurassic swamps were wetland habitats characterized by an abundance of water and lush vegetation, supporting a diverse range of dinosaur species. These habitats provided ideal conditions for semi-aquatic dinosaurs, like Spinosaurus, and attracted other dinosaur species who relied on the water and resources found in swamps.', null);
-
+('Prehistoric Jungle', 'Prehistoric jungles were dense, lush environments teeming with plant and animal life. These habitats supported a variety of herbivorous and carnivorous dinosaur species, including smaller predators, long-necked sauropods, and armored herbivores. Many plants were ferns, horsetails, and primitive conifers.', '/static/media/Tropical Prehistoric Forest.662dfbcdc3cf15e91965.jpg'),
+('Cretaceous Coastline', 'Cretaceous coastlines were shallow marine environments that supported a diverse array of aquatic life, including marine reptiles like ichthyosaurs and plesiosaurs, as well as various fish and invertebrates. These habitats also provided nesting areas for shore-dwelling dinosaurs and resources for other dinosaur species.', '/static/media/Coast.d094bc338f9cdd3bf7a3.jpg'),
+('Prehistoric Savannah', 'Prehistoric savannahs were open, grassy landscapes with scattered trees and shrubs, providing ample food and resources for grazing and browsing dinosaur species. These habitats supported herds of herbivorous dinosaurs, like hadrosaurs and ceratopsians, as well as carnivorous predators that hunted them.', '/static/media/Sandy Grasslands.50540e3f5529d53bca84.jpg'),
+('Ancient Redwood Forest', 'Ancient redwood forests were home to towering trees, providing a unique ecosystem for a variety of dinosaur species. These habitats were particularly suitable for tree-dwelling and gliding dinosaur species, such as small theropods and early birds, who could navigate the forest canopy with ease.', '/static/media/Redwood Forest.12fb9ff753e7c739debf.jpg'),
+('Jurassic Swamp', 'Jurassic swamps were wetland habitats characterized by an abundance of water and lush vegetation, supporting a diverse range of dinosaur species. These habitats provided ideal conditions for semi-aquatic dinosaurs, like Spinosaurus, and attracted other dinosaur species who relied on the water and resources found in swamps.', '/static/media/Tropical Forest Pond.2828fb7b303d80234e66.jpg'),
+('Pelagic', 'The deep waters of the open ocean.', '/static/media/Open Ocean.96066dbd38108ca3bc2b.jpg');
 
 INSERT INTO `BiologicalAssets`      (idSpecies, idFacility, bioAssetName)
 VALUES
@@ -380,29 +381,32 @@ VALUES
 
 INSERT INTO `Species`               (idDiet, idHabitat, speciesName, speciesDescription, threatLevel, speciesPhoto)
 VALUES
-(1, 1, 'Tyrannosaurus Rex', 'A large carnivorous dinosaur with powerful jaws and sharp teeth.', 10, NULL),
-(1, 4, 'Velociraptor', 'A small, agile carnivorous dinosaur with sharp claws.', 9, NULL),
-(2, 3, 'Triceratops', 'A large herbivorous dinosaur with three horns and a bony frill.', 4, NULL),
-(2, 1, 'Brachiosaurus', 'A massive herbivorous dinosaur with a long neck and small head.', 3, NULL),
-(2, 1, 'Stegosaurus', 'A large herbivorous dinosaur with plates along its back and a spiked tail.', 5, NULL),
-(4, 2, 'Spinosaurus', 'A large, primarily piscivorous dinosaur with a distinctive sail on its back.', 8, NULL),
-(1, 3, 'Allosaurus', 'A large carnivorous dinosaur with sharp teeth and strong arms.', 9, NULL),
-(2, 4, 'Ankylosaurus', 'A heavily-armored herbivorous dinosaur with a club-like tail.', 6, NULL),
-(2, 3, 'Parasaurolophus', 'A herbivorous dinosaur with a distinctive crest on its head.', 2, NULL),
-(4, 2, 'Mosasaurus', 'A large marine reptile; it was an apex predator, feeding primarily on fish, seabirds, and other marine creatures.', 10, NULL),
-(4, 2, 'Hesperornis', 'A large flightless aquatic bird, characterized by its powerful legs adapted for swimming and diving. It fed primarily on fish.', 3, NULL),
-(2, 4, 'Thescelosaurus', 'A small, bipedal herbivore characterized by its long legs, suggesting it was a fast runner.', 2, NULL),
-(1, 5, 'Diplocaulus', 'A prehistoric amphibian with a distinctive boomerang-shaped skull. Likely a carnivorous ambush predator.', 4, NULL),
-(4, 5, 'Metriorhynchus', 'A marine crocodile-like reptile, fed primarily on fish and other small marine creatures.', 5, NULL),
-(1, 5, 'Eustreptospondylus', 'A medium-sized theropod dinosaur, it was carnivorous, bipedal, and had a stiffened tail.', 7, NULL);
+(1, 1, 'Tyrannosaurus Rex', 'A large carnivorous dinosaur with powerful jaws and sharp teeth.', 10, '/static/media/Tyranosaurus Rex (Jungle).903bfc34a4fb353bac2c.jpg'),
+(1, 4, 'Velociraptor', 'A small, agile carnivorous dinosaur with sharp claws.', 9, '/static/media/Velociraptor (Blue).23c111b4e227b1f0eb3d.jpg'),
+(2, 3, 'Triceratops', 'A large herbivorous dinosaur with three horns and a bony frill.', 4, '/static/media/Triceratops.4828d7955f574072c103.jpg'),
+(2, 1, 'Brachiosaurus', 'A massive herbivorous dinosaur with a long neck and small head.', 3, '/static/media/Brachiosaurus.6358ef4569f0db90c182.jpg'),
+(2, 1, 'Stegosaurus', 'A large herbivorous dinosaur with plates along its back and a spiked tail.', 5, '/static/media/Stegosaurus.830aa052ea7ade62bd4e.jpg'),
+(4, 2, 'Spinosaurus', 'A large, primarily piscivorous dinosaur with a distinctive sail on its back.', 8, '/static/media/Spinosaurus.08de0c55fab99ce93792.jpg'),
+(1, 3, 'Allosaurus', 'A large carnivorous dinosaur with sharp teeth and strong arms.', 9, '/static/media/Allosaurus.2f7730877f82a0754b3f.jpg'),
+(2, 4, 'Ankylosaurus', 'A heavily-armored herbivorous dinosaur with a club-like tail.', 6, '/static/media/Ankylosaurus.1f7da3d261f2a72cb88f.jpg'),
+(2, 3, 'Parasaurolophus', 'A herbivorous dinosaur with a distinctive crest on its head.', 2, '/static/media/Parasaurolophus (Lux Variant).1136ace8c5176c832f68.jpg'),
+(4, 2, 'Mosasaurus', 'A large marine reptile; it was an apex predator, feeding primarily on fish, seabirds, and other marine creatures.', 10, '/static/media/Mosasaurus.3742f5eee82188574bcd.jpg'),
+(4, 2, 'Hesperornis', 'A large flightless aquatic bird, characterized by its powerful legs adapted for swimming and diving. It fed primarily on fish.', 3, '/static/media/Hesperornis.71827d1f6f92d1fae9e4.png'),
+(2, 4, 'Thescelosaurus', 'A small, bipedal herbivore characterized by its long legs, suggesting it was a fast runner.', 2, '/static/media/Thescelosaurus.52b3e750f81a48607cfd.png'),
+(1, 5, 'Diplocaulus', 'A prehistoric amphibian with a distinctive boomerang-shaped skull. Likely a carnivorous ambush predator.', 4, '/static/media/Diplocaulus.b7657f9d80f9f25f9c7c.png'),
+(4, 5, 'Metriorhynchus', 'A marine crocodile-like reptile, fed primarily on fish and other small marine creatures.', 5, '/static/media/Metriorhynchus.53b89c9cdd939843fc67.png'),
+(1, 5, 'Eustreptospondylus', 'A medium-sized theropod dinosaur, it was carnivorous, bipedal, and had a stiffened tail.', 7, '/static/media/Eustreptospondylus.fd7f59c0ee2ecf84b8f7.png');
 
 
 INSERT INTO `Diets`                 (dietName, dietDescription, dietIcon)
 VALUES
-('Carnivore', 'A diet consisting primarily of meat from other animals. Includes hunters and scavengers.', NULL),
-('Herbivore', 'A diet consisting primarily of plant material. Includes grazers and browsers.', NULL),
-('Omnivore', 'A diet consisting of a mix of plant and animal materials. Opportunistic eaters.', NULL),
-('Piscivore', 'A diet consisting primarily of fish and other aquatic organisms.', NULL);
+('Carnivore', 'A diet consisting primarily of meat from other animals. Includes hunters and scavengers.', '/static/media/Meat (Feeder).eef0ce8bee30851e2ada.jpg'),
+('Herbivore', 'A diet consisting primarily of plant material. Includes grazers and browsers.', '/static/media/Plants (Tree Feeding).c5095cccde8802e6c019.jpg'),
+('Omnivore', 'A diet consisting of a mix of plant and animal materials. Opportunistic eaters.', '/static/media/Omnivore Options.9425a4cf9c8909a10c3b.jpg'),
+('Piscivore (Terrestrial)', 'A diet consisting primarily of fish and other aquatic organisms.', '/static/media/Fish (Feeder).55b9a3bf00ea73bf4113.jpg'),
+('Piscivore (Pelagic)', 'Diet consists of large, hunted open-ocean fish.', '/static/media/Fish (Free-Swimming).db06c25e2ae3d13821fc.jpg'),
+('Insectivore', 'Diet consists primarily of insects.', '/static/media/Rotten Fruit (Insectivore Feeder).20c3f9c7bd0209ecc5de.jpg');
+
 
 -- Re-enabling checks/commit per suggestions from assignment page:
 -- URL: https://canvas.oregonstate.edu/courses/1914747/assignments/9180999?module_item_id=23040579
