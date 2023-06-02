@@ -13,6 +13,10 @@
 SET FOREIGN_KEY_CHECKS=0;
 SET AUTOCOMMIT = 0;
 
+-- Make sure USE is properly set to match DB and that FK checks are off in myphp admin for it import correctly
+-- USE needs to be changed to reflect the name of the DB where this DDL script will be run.
+USE cs340_jordatay;
+
 -- -----------------------------------------------------
 -- Table `Parks`
 -- -----------------------------------------------------
@@ -270,7 +274,7 @@ VALUES
 and heavy-duty fencing/containment covers the gaps and protects other site facilities."),
 
 (1, 1, NULL, 'JW Innovation Center', 'Primary Visitor Center for Jurassic World and general hub for visitor experiences.', 
-'Central Plaza', 8, '/static/media/Innovation Center.f08bc26dca4f6062cd53.jpg', "Can double as a shelter location in the event that an asset escapes containment. 
+'Central Plaza', 8, '/static/media/Innovation Center (Nublar).f08bc26dca4f6062cd53.jpg', "Can double as a shelter location in the event that an asset escapes containment. 
 Doors and walls able to withstand most assets, but in the event of a category 9 or higher escape, visitors should be guided to the max security shelters."),
 
 (3, 2, 3, 'Jurassic Stadium', 'Stadium viewing area for special biological asset exhibitions.', 
