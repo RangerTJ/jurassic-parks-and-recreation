@@ -266,7 +266,7 @@ VALUES
 
 -- Note: Inserted habitat values are for assumed appropriate habitats, since that table has not been populated yet
 (2, 5, 1, 'Wild Zone', 'Undeveloped area of Site B where assets can roam free until they need to be collected for transfer to a different facility.', 
-'Mixed Habitat Region.', 10, '/static/media/Fence - Perimeter.1f2f403fda80b3f81c1a.jpg', "The island's natural terrain makes an impassible barrier for most assets to escape, 
+'Mixed Habitat Region', 10, '/static/media/Fence - Perimeter.1f2f403fda80b3f81c1a.jpg', "The island's natural terrain makes an impassible barrier for most assets to escape, 
 and heavy-duty fencing/containment covers the gaps and protects other site facilities."),
 
 (1, 1, NULL, 'JW Innovation Center', 'Primary Visitor Center for Jurassic World and general hub for visitor experiences.', 
