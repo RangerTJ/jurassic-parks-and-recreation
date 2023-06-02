@@ -300,7 +300,7 @@ VALUES
 (2, 'rwiggum', 'Ralph', 'Wiggum', 0.00, '+1-202-555-1989', 'mefailenglish@hotmail.com', 'MI-01', 'Unpaid student intern. "I''m in danger!"', '/static/media/Maintenance Worker 02 (Masculine).d70ed5a023e8e14a696b.jpg'),
 (1, 'gharding', 'Gerry', 'Harding', 40.00, '+1-202-555-1993', 'gharding@jw.org', 'R-01', 'Medical certified.', '/static/media/Ranger Medical 02 (Masculine).cff363824b0017514468.jpg'),
 (3, 'mbackes', 'Michael', 'Backes', 100.00, '+1-202-555-1221', 'mbackes@jw.org', 'E-01', 'Head Honcho.', '/static/media/Office Worker 03 (Feminine).39bac9b76701e6ccd094.jpg'),
-(1, 'Harding', 'Sarah', 'sharding', 35.00, '+1-555-555-5558', 'sharding@jw.org', 'R-02', 'Daughter of Gerry Harding, chief veterinary specialist. Renowned wildlife behavioral specialist.', '/static/media/Ranger 02 (Feminine).87c9dd19d251ebd703fa.jpg');
+(1, 'sharding', 'Harding', 'Sarah',  35.00, '+1-555-555-5558', 'sharding@jw.org', 'R-02', 'Daughter of Gerry Harding, chief veterinary specialist. Renowned wildlife behavioral specialist.', '/static/media/Ranger 02 (Feminine).87c9dd19d251ebd703fa.jpg');
 
 
 -- Note: Transport tasks are generated for the facility where the transport operation begins.
@@ -314,15 +314,22 @@ VALUES
 (4, NULL, 'Lagoon Repair', 'Repair leak in tank.', '2023-04-28', NULL),
 (10, NULL, 'Cloning Research - FY23', 'R&D for cloning and genetic engineering technologies related to prehistoric creatures.', '2022-10-01', NULL),
 (13, NULL, 'Safari Tour Operations - FY23', 'Operation of the guided car-based safari tours at Jurassic Park: San Diego.', '2022-10-01', NULL),
-(1, NULL, 'Wild Asset Monitoring - FY23', 'Monitoring assets on Site B and any operations that support this goal.', '2022-10-01', NULL);
+(1, NULL, 'Wild Asset Monitoring - FY23', 'Monitoring assets on Site B and any operations that support this goal.', '2022-10-01', NULL),
+(11, 1, 'Containment Breach 3/1/2023', 'Asset escaped containment - recovery, repair, and medical response.', '2023-03-01', '2023-03-02');
 
 
-INSERT INTO `EmployeeTasks`         (idTaskAssigned, idEmployee, taskHoursWorked, empTaskCost, empTaskStart, empTaskEnd, idTaskCategory)
+
+
+
+INSERT INTO `EmployeeTasks`         (idTaskAssigned, idEmployee, idTaskCategory, taskHoursWorked, empTaskCost, empTaskStart, empTaskEnd)
 VALUES
-(1, 1, 40, 10000.00, '2023-04-04', '2023-04-25', 5),
-(1, 4, 10, 5000.00, '2023-04-26', '2023-04-28', 2),
-(2, 3, 160, 0.00, '2022-10-01', '2022-10-31', 4),
-(3, 4, 10, 2000.00, '2023-03-30', '2023-03-30', 2);
+(1, 1, 5, 40, 10000.00, '2023-04-04', '2023-04-25'),
+(1, 4, 2, 10, 5000.00, '2023-04-26', '2023-04-28'),
+(2, 3, 4, 160, 0.00, '2022-10-01', '2022-10-31'),
+(3, 4, 2, 10, 2000.00, '2023-03-30', '2023-03-30'),
+(5, 12, 3, 1000, 100000.00, '2023-01-01', '2023-05-31'),
+(6, 13, 6, 1000, 45000.00, '2023-01-01', '2023-05-31'),
+(8, 1, 5, 30, 2000000.00, '2023-03-01', '2023-03-02');
 
 INSERT INTO `TaskCategories`        (categoryName)
 VALUES
