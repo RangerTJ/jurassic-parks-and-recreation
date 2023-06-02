@@ -207,7 +207,7 @@ function BiologicalAssetsPage ({hostURL}) {
                                 <tr key={index}>
                                     <td className="buttonHolder">
                                         <div><button className="tableButton" onClick={()=> {navToUpdate(val)}}>Edit</button></div>
-                                        <div><button className="tableButton" onClick={()=> {delBiologicalAsset(val.idBiologicalAsset)}}>*</button></div>
+                                        <div><button className="tableButton" onClick={()=> {delBiologicalAsset(val)}}>*</button></div>
                                     </td>
                                     <td className="imageHolder">
                                         {/* Lightbox tutorial by Alexandra Radevich provided the code for the on-click trigger here
@@ -263,7 +263,7 @@ function BiologicalAssetsPage ({hostURL}) {
                                 <tr key={index}>
                                     <td className="buttonHolder">
                                         <div><button className="tableButton" onClick={()=> {navToUpdate(val)}}>Edit</button></div>
-                                        <div><button className="tableButton" onClick={()=> {delBiologicalAsset(val.idBiologicalAsset)}}>*</button></div>
+                                        <div><button className="tableButton" onClick={()=> {delBiologicalAsset(val)}}>*</button></div>
                                     </td>
                                     <td className="imageHolder">
                                         {/* Lightbox tutorial by Alexandra Radevich provided the code for the on-click trigger here
