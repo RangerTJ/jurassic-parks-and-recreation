@@ -146,7 +146,9 @@ function FacilitiesUpdateForm ({hostURL}) {
                         </div>
                         <div className="selectorP">
                             <ImageSelectorFacilities  hostURL={hostURL} image={facilityPhoto} setImage={setFacilityPhoto} isRequired={false} autoFocus={false} preSelected={oldFacilityPhoto}/>
-                            {/* Slice up file path so that it becomes a more readable (save core part of file name only) */}
+                            {/* Citation: Used slicing method suggested by user Bumptious Q Bangwhistle on stackoverflow on 1/23/2017 to slice image paths to more useful descriptive text for alt text.
+                            URL: https://stackoverflow.com/questions/9133102/how-to-grab-substring-before-a-specified-character-in-javascript
+                            Link Accessed/Verified on 6/1/2023 */}
                             {oldFacilityPhoto ? 
                                 (<>
                                     <div>Original: {oldFacilityPhoto.substring(14, oldFacilityPhoto.indexOf('.'))}</div>
