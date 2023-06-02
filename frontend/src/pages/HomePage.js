@@ -109,7 +109,9 @@ function HomePage({hostURL}) {
                     The summary tables below provide high-level overviews of current costs associated with aspects of
                     managing our system of parks and zoological attractions. Note that for the 'Top 10' style tables below, if there
                     are fewer than 10 related entities with EmployeeTasks relating to them, the tables will
-                    have fewer than 10 elements displayed.
+                    have fewer than 10 elements displayed. Note, the tables are independent, so there's overlap in the cost reported between tables.
+                    'Most Expensive Employees' refers to costs-affiliated the employee was involved in, not necessarily their overhead cost
+                    (since things like supplies, etc. are factored into the Employee Task Report's cost figure).
                 </p>
                 <h4 className="st-header">Cost Summary by Sector</h4>
                 <div className="scrollableST">
