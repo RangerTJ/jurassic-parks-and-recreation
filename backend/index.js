@@ -352,6 +352,28 @@ app.get('/api/getEmployees', (req, res) =>{
     });
 });
 
+// READ Employees Filtered by Job
+app.post('/api/filterEmployeesByJob', (req, res) =>{
+    const jobTitle = req.body.jobTitle
+    const sqlRead = `
+    SELECT  Employees.idEmployee, Employees.lastName, Employees.firstName, Employees.employeeUsername, JobClassifications.jobTitle, Employees.hourlyWage,
+    Employees.employeePhone, Employees.employeeEmail, Employees.employeeRadio, Employees.employeeNote, Employees.employeePhoto
+    FROM Employees
+    JOIN JobClassifications ON Employees.idJobClassification = JobClassifications.idJobClassification
+    WHERE JobClassifications.jobTitle = ?
+    ORDER BY idEmployee ASC;
+    `;
+    db.query(sqlRead, jobTitle, (err, result)=> {
+        if (err) {
+            console.error(err);
+            res.status(500).send(err.sqlMessage)
+        } else {
+            console.log(result)
+            res.send(result);
+        };
+    });
+});
+
 // CREATE Employee
 app.post('/api/insertEmployees', (req, res) =>{
     const jobTitle = req.body.jobTitle

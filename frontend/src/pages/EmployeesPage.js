@@ -6,6 +6,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import Axios from 'axios';
 import defaultImg from '../images/tableDefaultPreview.png';
+import SelectorJobClassifications from "../components/selectorJobClassifications";
 
 
 // HostURL Passed from App.js
@@ -15,8 +16,9 @@ function EmployeesPage ({hostURL}) {
     const navTo = useNavigate();
 
     // Employees SQL Endpoints
-    const getEmployeesURL = hostURL + '/api/getEmployees';  // TO DO - CREATE USE EFFECT AND USE STATE
-    const deleteEmployeesURL = hostURL + '/api/deleteEmployees/';  // TO DO - NEED TO ADD USE STATES AND CRUD FUNCTIONS FOR THIS; INSERT/UPDATE GO ON RESPECTIVE FORM PAGES
+    const getEmployeesURL = hostURL + '/api/getEmployees';
+    const deleteEmployeesURL = hostURL + '/api/deleteEmployees/';
+    const filterEmployeesByJobURL = hostURL + '/api/filterEmployeesByJob/';
 
     // Employee States
     const [employeesList, setEmployeesList] = useState([])
@@ -28,6 +30,7 @@ function EmployeesPage ({hostURL}) {
     Accessed 5/22/2023. No modification of the following 2x declared useStates and 2x functions.*/
     const [lightboxDisplay, setLightBoxDisplay] = useState(false)
     const [imageToShow, setImageToShow] = useState('')
+    const [jobTitle, setJobTitle] = useState('')
     
     // Displays lightbox + selected image when triggered
     const showImage = (image) => {  
@@ -45,6 +48,27 @@ function EmployeesPage ({hostURL}) {
     useEffect(()=> {
         getEmployees();
     }, [])
+
+    // READ Changes to Employees Table
+    useEffect(() => {
+        jobsFilter();
+    }, [jobTitle]);
+
+    // READ Apply Jobs Filter to Bio Asset Table
+    const jobsFilter = async () => {
+        if(jobTitle === "") {
+            await getEmployees();
+        }
+        else {
+            try {
+                const response = await Axios.post(filterEmployeesByJobURL, {jobTitle : jobTitle})
+                setEmployeesList(response.data);
+                console.log(response.data);
+            } catch (error) {
+                console.error('Error applying the filter to the View table.', error);
+            }
+        }
+    }
 
     // DELETE - Deletes target Employee and refreshes table
     const delEmployee = async (delVal) => {
@@ -130,6 +154,15 @@ function EmployeesPage ({hostURL}) {
                     <img id="lightbox-img" src={imageToShow} atl={imageToShow} className="lightbox-image"></img>
                 </div>
                 : '' }
+                <p>
+                    The table below shows existing information for Biological Assets entities and includes
+                    buttons to update or delete them. You can use the Job Title selector below to filter for
+                    employees that have a specific job. Select "None" to remove the filter and view the entire 
+                    database of employees. 
+                </p>
+                <div className="selectorP">
+                    <SelectorJobClassifications hostURL={hostURL} setJobTitle={setJobTitle} jobTitle={jobTitle} isRequired={false}/>
+                </div>
                 <div className="scrollableTable">
                     <table>
                         <tbody>
