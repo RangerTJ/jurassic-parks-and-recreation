@@ -137,6 +137,7 @@ function SpeciesUpdateForm ({hostURL}) {
                         </div>                        
                         <div className="selectorP">
                             <ImageSelectorSpecies  hostURL={hostURL} image={speciesPhoto} setImage={setSpeciesPhoto} isRequired={false} autoFocus={false} preSelected={oldSpeciesPhoto}/>
+                            {/* Slice up file path so that it becomes a more readable (save core part of file name only) */}
                             {oldSpeciesPhoto ? 
                                 (<>
                                     <div>Original: {oldSpeciesPhoto.substring(14, oldSpeciesPhoto.indexOf('.'))}</div>

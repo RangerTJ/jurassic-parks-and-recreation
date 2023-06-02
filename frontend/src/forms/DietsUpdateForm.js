@@ -94,6 +94,7 @@ function DietsUpdateForm ({hostURL}) {
                                 <div>Original: {oldDietDescription}</div>
                             <div className="selectorP">
                                 <ImageSelectorDiets  hostURL={hostURL} image={dietIcon} setImage={setDietIcon} isRequired={false} autoFocus={false} preSelected={oldDietIcon}/>
+                                {/* Slice up file path so that it becomes a more readable (save core part of file name only) */}
                                 {oldDietIcon ? 
                                     (<>
                                         <div>Original: {oldDietIcon.substring(14, oldDietIcon.indexOf('.'))}</div>

@@ -183,6 +183,7 @@ function EmployeesUpdateForm ({hostURL}) {
                             </div>
                             <div className="selectorP">
                                 <ImageSelectorStaff  hostURL={hostURL} image={employeePhoto} setImage={setEmployeePhoto} isRequired={false} autoFocus={false} preSelected={oldEmployeePhoto}/>
+                                {/* Slice up file path so that it becomes a more readable (save core part of file name only) */}
                                 {oldEmployeePhoto ? 
                                     (<>
                                         <div>Original: {oldEmployeePhoto.substring(14, oldEmployeePhoto.indexOf('.'))}</div>

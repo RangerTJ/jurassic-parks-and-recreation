@@ -146,6 +146,7 @@ function FacilitiesUpdateForm ({hostURL}) {
                         </div>
                         <div className="selectorP">
                             <ImageSelectorFacilities  hostURL={hostURL} image={facilityPhoto} setImage={setFacilityPhoto} isRequired={false} autoFocus={false} preSelected={oldFacilityPhoto}/>
+                            {/* Slice up file path so that it becomes a more readable (save core part of file name only) */}
                             {oldFacilityPhoto ? 
                                 (<>
                                     <div>Original: {oldFacilityPhoto.substring(14, oldFacilityPhoto.indexOf('.'))}</div>

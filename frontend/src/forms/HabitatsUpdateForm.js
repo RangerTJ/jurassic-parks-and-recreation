@@ -95,6 +95,7 @@ function HabitatsUpdateForm ({hostURL}) {
                             </div>
                             <div className="selectorP">
                                 <ImageSelectorHabitats  hostURL={hostURL} image={habitatPhoto} setImage={setHabitatPhoto} isRequired={false} autoFocus={false} preSelected={oldHabitatPhoto}/>
+                                {/* Slice up file path so that it becomes a more readable (save core part of file name only) */}
                                 {oldHabitatPhoto ? 
                                     (<>
                                         <div>Original: {oldHabitatPhoto.substring(14, oldHabitatPhoto.indexOf('.'))}</div>

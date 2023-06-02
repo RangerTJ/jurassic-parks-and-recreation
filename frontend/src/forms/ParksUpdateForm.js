@@ -109,6 +109,7 @@ function ParksUpdateForm ({hostURL}) {
                             </div>
                             <div className="selectorP">
                                 <ImageSelectorParks  hostURL={hostURL} image={parkPhoto} setImage={setParkPhoto} isRequired={false} autoFocus={false} preSelected={oldParkPhoto}/>
+                                {/* Slice up file path so that it becomes a more readable (save core part of file name only) */}
                                 {oldParkPhoto ? 
                                     (<>
                                         <div>Original: {oldParkPhoto.substring(14, oldParkPhoto.indexOf('.'))}</div>
