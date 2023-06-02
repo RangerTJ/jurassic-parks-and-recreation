@@ -58,9 +58,10 @@ WHERE taskEnd IS NULL
 ORDER BY taskName ASC;
 
 -- Employees Selector
-SELECT lastName, firstName, employeeUsername
+SELECT lastName, firstName, employeeUsername, jobTitle
 FROM Employees
-ORDER BY lastName, firstName, employeeUsername ASC;
+JOIN jobClassifications ON Employees.idJobClassification = JobClassifications.idJobClassification
+ORDER BY lastName, firstName, employeeUser
 
 -- Task Categories Selector
 SELECT categoryName

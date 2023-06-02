@@ -39,7 +39,7 @@ const SelectorEmployees = ({preSelected, isRequired, autoFocus, hostURL, employe
         {/* Set default option then map query results to populate the select menu */}
         <option value="">None (Select an Employee)</option>
         {list.map((val, index) => {
-          return <option key={index} value={val.employeeUsername}>{val.lastName}, {val.firstName} ({val.employeeUsername})</option>;
+          return <option key={index} value={val.employeeUsername}>{val.lastName}, {val.firstName} ({val.employeeUsername}) - {val.jobTitle}</option>;
         })}
       </select>
     </>

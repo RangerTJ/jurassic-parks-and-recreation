@@ -1433,11 +1433,12 @@ app.get('/api/getTasksAssignedList', (req, res) =>{
     });
 });
 
-// Employee Selector (First/Last + Username)
+// Employee Selector (First/Last + Username) + Job
 app.get('/api/getEmployeesList', (req, res) =>{
     const sqlRead = `
-    SELECT lastName, firstName, employeeUsername
+    SELECT lastName, firstName, employeeUsername, jobTitle
     FROM Employees
+    JOIN jobClassifications ON Employees.idJobClassification = JobClassifications.idJobClassification
     ORDER BY lastName, firstName, employeeUsername ASC;
     `;
     db.query(sqlRead, (err, result)=> {
