@@ -1,5 +1,7 @@
 // Basic CRUD operations and React implementation was heavily based on the CRUD React tutorial series created by PedroTech
 // URLs - Part1: https://www.youtube.com/watch?v=T8mqZZ0r-RA, Part2: https://www.youtube.com/watch?v=3YrOOia3-mo, Part3: https://www.youtube.com/watch?v=_S2GKnFpdtE
+// Link Accessed/Verified on 6/1/2023
+
 
 import React, { useEffect, useState } from "react";
 import Axios from 'axios';
@@ -17,7 +19,6 @@ function HomePage({hostURL}) {
     const getBioAssetCostURL = hostURL + '/api/getBioAssetCost';
 
     // Index Table Functions
-    // CRUD operations modeled off tutorial - CITE IN DETAIL LATER (or top of each page?)
     const [parkCostList, setParkCostList] = useState([])
     const [categoryCostList, setCategoryCostList] = useState([])
     const [employeeCostList, setEmployeeCostList] = useState([])
@@ -73,8 +74,6 @@ function HomePage({hostURL}) {
         })
     }, []);
 
-
-
     // Render the Home Page
     return(
         <>
@@ -94,7 +93,8 @@ function HomePage({hostURL}) {
             </article>
             {/* Simulated security camera made following 'Replace animated GIFs with video for faster page loads' by Houssein Djirdeh 
             and adapting it for React syntax. Footage recorded in-game footage from Jurassic World Evolution 2
-            URL: https://web.dev/replace-gifs-with-videos/ */}
+            URL: https://web.dev/replace-gifs-with-videos/ 
+            Link Accessed/Verified on 6/1/2023*/}
             <article>
                 <h3>Security Feed</h3>
                 <div>

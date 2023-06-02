@@ -1,5 +1,6 @@
 // Basic CRUD operations and React implementation was heavily based on the CRUD React tutorial series created by PedroTech
 // URLs - Part1: https://www.youtube.com/watch?v=T8mqZZ0r-RA, Part2: https://www.youtube.com/watch?v=3YrOOia3-mo, Part3: https://www.youtube.com/watch?v=_S2GKnFpdtE
+// Link Accessed/Verified on 6/1/2023
 
 import React, { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom'; // May not need?
@@ -25,7 +26,10 @@ function TasksAssignedPage ({hostURL}) {
     }, [])
     
 
-    // Update Function
+    // UPDATE Primer: Passes an object containing "current" (old) attributes to the useNavigate() function, navTo(), to the edit page.
+    // Follows general strategy suggested by stackoverflow user Abdulazeez Jimoh on 10/25/2022
+    // URL: https://stackoverflow.com/questions/68911432/how-to-pass-parameters-with-react-router-dom-version-6-usenavigate-and-typescrip
+    // Link Accessed/Verified on 6/1/2023
     const navToUpdate = (updateVal) => {
         const state = {
             oldFacilityName:            updateVal.facilityName,
@@ -109,8 +113,8 @@ function TasksAssignedPage ({hostURL}) {
                             <th>Description</th>
                             <th>Start/End</th>
                         </tr>
+                        {/* Map values from SQL and handle null entries */}
                         {tasksAssignedList.map((val, index) => {
-                            // TODO: Figure out syntax issues with this later
                             const startDateAbridged = val.taskStart ? val.taskStart.substring(0, 10) : 'Issue: Undefined Start Date';
                             const endDateAbridged = val.taskEnd ? val.taskEnd.substring(0, 10) + ' (End)' : 'In-Progress';
                             const nullableAssetID = val.idBiologicalAsset ? '#' + val.idBiologicalAsset : 'N/A'
