@@ -53,7 +53,7 @@ function TasksAssignedAddForm ({hostURL}) {
 
     return (
         <>
-            <h2>Add Task</h2>
+            <h2>Add Task Assignment</h2>
             <article>
                 <p>
                     To add a new Task to the database, enter values for its attributes below

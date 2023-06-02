@@ -148,6 +148,11 @@ function BiologicalAssetsPage ({hostURL}) {
             <article>
                 <h3>Add New Biological Asset</h3>
                 <p>
+                    In addition to being a way of identifying a unique creature managed by a given park, Biological Assets entities
+                    also allow a many-to-many relationship between Species and Facilities, so that many different species can be affiliated
+                    with multiple facilities (via the different species of assets that may be assigned to a given facility).
+                </p>
+                <p>
                     Click the "Create" button below to add a new Biological Asset to the DINO database.
                 </p>
                 <div>
