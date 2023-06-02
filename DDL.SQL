@@ -13,10 +13,6 @@
 SET FOREIGN_KEY_CHECKS=0;
 SET AUTOCOMMIT = 0;
 
--- Make sure USE is properly set to match DB and that FK checks are off in myphp admin for it import correctly
--- USE needs to be changed to reflect the name of the DB where this DDL script will be run.
-USE cs340_jordatay;
-
 -- -----------------------------------------------------
 -- Table `Parks`
 -- -----------------------------------------------------
