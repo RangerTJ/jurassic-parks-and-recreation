@@ -15,7 +15,7 @@ import React, { useState, useEffect } from 'react';
 
 
 // If no old value passed, defaults the old value to "null". Also adjusts autoFocus and required rendering aspects as needed.
-const ImageSelectorStaff = ({preSelected, isRequired, autoFocus, hostURL, image, setImage}) => {
+const ImageSelectorStaff = ({preSelected, isRequired, autoFocus, setImage}) => {
   const images = require.context(`../images/staffImages`, false, /\.(png|jpg|svg)$/);
 
   // Map available images in directory

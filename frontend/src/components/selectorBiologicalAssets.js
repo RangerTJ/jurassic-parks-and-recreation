@@ -3,7 +3,7 @@ import Axios from 'axios';
 
 
 // If no old value passed, defaults the old value to "null". Also adjusts autoFocus and required rendering aspects as needed.
-const SelectorBiologicalAssets = ({preSelected, isRequired, autoFocus, hostURL, bioAssetName, setBioAssetName}) => {
+const SelectorBiologicalAssets = ({preSelected, isRequired, autoFocus, hostURL, setBioAssetName}) => {
 
   // Create useState for the selection and list
   // For update, just update pre-selected image to match an input variable first

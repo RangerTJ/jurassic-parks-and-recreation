@@ -3,7 +3,7 @@ import Axios from 'axios';
 
 
 // If no old value passed, defaults the old value to "null". Also adjusts autoFocus and required rendering aspects as needed.
-const SelectorFacilityTypes = ({preSelected, isRequired, autoFocus, hostURL, facTypeName, setFacTypeName}) => {
+const SelectorFacilityTypes = ({preSelected, isRequired, autoFocus, hostURL, setFacTypeName}) => {
 
   // Create useState for the selection and list
   // For update, just update pre-selected image to match an input variable first

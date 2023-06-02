@@ -3,7 +3,7 @@ import Axios from 'axios';
 
 
 // If no old value passed, defaults the old value to "null". Also adjusts autoFocus and required rendering aspects as needed.
-const SelectorDietTypes = ({preSelected, isRequired, autoFocus, hostURL, dietName, setDietName}) => {
+const SelectorDietTypes = ({preSelected, isRequired, autoFocus, hostURL, setDietName}) => {
 
   // Create useState for the selection and list
   // For update, just update pre-selected image to match an input variable first

@@ -14,7 +14,7 @@ import React, { useState, useEffect } from 'react';
 // Link Accessed/Verified on 6/1/2023
 
 // If no old value passed, defaults the old value to "null". Also adjusts autoFocus and required rendering aspects as needed.
-const ImageSelectorParks = ({preSelected, isRequired, autoFocus, hostURL, image, setImage}) => {
+const ImageSelectorParks = ({preSelected, isRequired, autoFocus, setImage}) => {
   const images = require.context(`../images/parkImages`, false, /\.(png|jpg|svg)$/);
 
   // Map available images in directory

@@ -3,7 +3,7 @@ import Axios from 'axios';
 
 
 // If no old value passed, defaults the old value to "null". Also adjusts autoFocus and required rendering aspects as needed.
-const SelectorSpecies = ({preSelected, isRequired, autoFocus, hostURL, species, setSpecies}) => {
+const SelectorSpecies = ({preSelected, isRequired, autoFocus, hostURL, setSpecies}) => {
 
   // Create useState for the selection and list
   const [selected, setSelected] = useState()

@@ -5,7 +5,7 @@ import Axios from 'axios';
 
 
 // If no old value passed, defaults the old value to "null". Also adjusts autoFocus and required rendering aspects as needed.
-const SelectorTasksAssigned = ({preSelected, isRequired, autoFocus, hostURL, taskName, setTaskName}) => {
+const SelectorTasksAssigned = ({preSelected, isRequired, autoFocus, hostURL, setTaskName}) => {
 
   // Create useState for the selection and list
   // For update, just update pre-selected image to match an input variable first
