@@ -165,7 +165,7 @@ function HomePage({hostURL}) {
                         </table>
                     </div>
                 </div>
-                <h4 className="st-header">Top 10 Most Expensive Employees</h4>
+                <h4 className="st-header">Top 10 Highest Impact Employees</h4>
                 <div className="scrollableST">
                     <div className="st-holder">
                         <table>
@@ -173,7 +173,7 @@ function HomePage({hostURL}) {
                             <tr >
                                 <th>Rank</th>
                                 <th>Employee</th>
-                                <th>Cost</th>
+                                <th>Associated Costs</th>
                             </tr>
                             {employeeCostList.slice(0, 10).map((val, index)=> {
                                 // Convert cost to USD or set to 0 USD if there is a null entry
