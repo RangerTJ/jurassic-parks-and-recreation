@@ -317,10 +317,6 @@ VALUES
 (1, NULL, 'Wild Asset Monitoring - FY23', 'Monitoring assets on Site B and any operations that support this goal.', '2022-10-01', NULL),
 (11, 1, 'Containment Breach 3/1/2023', 'Asset escaped containment - recovery, repair, and medical response.', '2023-03-01', '2023-03-02');
 
-
-
-
-
 INSERT INTO `EmployeeTasks`         (idTaskAssigned, idEmployee, idTaskCategory, taskHoursWorked, empTaskCost, empTaskStart, empTaskEnd)
 VALUES
 (1, 1, 5, 40, 10000.00, '2023-04-04', '2023-04-25'),
