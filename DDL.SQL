@@ -266,7 +266,7 @@ VALUES
 
 -- Note: Inserted habitat values are for assumed appropriate habitats, since that table has not been populated yet
 (2, 5, 1, 'Wild Zone', 'Undeveloped area of Site B where assets can roam free until they need to be collected for transfer to a different facility.', 
-'Mixed Habitat Region.', 10, '/static/media/Perimeter Fence.1f2f403fda80b3f81c1a.jpg', "The island's natural terrain makes an impassible barrier for most assets to escape, 
+'Mixed Habitat Region.', 10, '/static/media/Fence - Perimeter.1f2f403fda80b3f81c1a.jpg', "The island's natural terrain makes an impassible barrier for most assets to escape, 
 and heavy-duty fencing/containment covers the gaps and protects other site facilities."),
 
 (1, 1, NULL, 'JW Innovation Center', 'Primary Visitor Center for Jurassic World and general hub for visitor experiences.', 
@@ -278,7 +278,7 @@ Doors and walls able to withstand most assets, but in the event of a category 9 
 specialized enclosure for short-term viewing of a showcase asset."),
 
 (3, 3, 6, 'Mosasaur Lagoon', 'Salt-water tank for the largest aquatic biological assets at Jurassic World.', 
-'Lagoon District', 10, '/static/media/Lagoon (San Diego).c1092b11fe1d7f5152a8.jpg', "Largest and most secure salt-water viewing tank in Jurassic World. 
+'Lagoon District', 10, '/static/media/Enclosure - Lagoon (San Diego).c1092b11fe1d7f5152a8.jpg', "Largest and most secure salt-water viewing tank in the parks system. 
 Viewing facilities are adjacent."),
 
 (1, 2, 4, 'Redwood Retreat', 'A facility designed to showcase the biodiversity and beauty of ancient redwood forests.',
@@ -464,9 +464,9 @@ VALUES
 ('2', '1', NULL, 'Transit Hospital', 'Secure facility to provide asset medical exams before transit to enclosures in other parks.', 'Basecamp', '10', '/static/media/Veterinary Hospital.86e814876534323ca991.jpg', 'Has supplies for incidental personnel injuries.'),
 ('3', '2', '3', 'Safari Enclosure', 'Spacious enclosure for herbivorous dinosaurs.', 'Jurassic Valley', '10', '/static/media/Enclosure - Car Safari (San Diego).ba39b9038f10152cdd0e.jpg', NULL),
 ('2', '1', NULL, 'Satcomm  - Site B', 'Communication link to the outside world.', 'Camp Jurassic', '6', '/static/media/Satcom Facility.22d94e61bdada83dcb25.jpg', NULL),
-('1', '3', '5', 'Swamp Enclosure', 'Enclosure simulating a Jurassic swamp habitat.', 'Misty Marshes', '8', '/static/media/Herbivore Drive-Thru Enclosure (Night).e372da67fc6e621976f7.jpg', 'Truck tour passes through enclosure.'),
-('1', '1', '1', 'Herbivore Jungle', 'Habitat for jungle herbivores.', 'Herbivore Valley', '8', '/static/media/Herbivore Enclosure.a82ac997187d6f994958.jpg', NULL),
-('3', '4', '2', 'Tim Murphy Aviary', 'Habitat for prehistoric pterosaurs.', 'Aviary District', '7', '/static/media/Aviary (San Diego).2ef66c7eae28d09554b1.jpg', NULL),
+('1', '3', '5', 'Swamp Enclosure', 'Enclosure simulating a Jurassic swamp habitat.', 'Misty Marshes', '8', '/static/media/Enclosure - Herbivore Drive-Thru (Night).e372da67fc6e621976f7.jpg', 'Truck tour passes through enclosure.'),
+('1', '1', '1', 'Herbivore Jungle', 'Habitat for jungle herbivores.', 'Herbivore Valley', '8', '/static/media/Enclosure - Field Pen.4fdc7dca85a2f6cbdbd0.jpg', NULL),
+('3', '4', '2', 'Tim Murphy Aviary', 'Habitat for prehistoric pterosaurs.', 'Aviary District', '7', '/static/media/Enclosure - Aviary (San Diego).2ef66c7eae28d09554b1.jpg', NULL),
 ('1', '5', 3, 'Ancient Plains', 'Tropical flatlands exhibit and enclosure.', 'Coastal Life Exhibit', '6', '/static/media/Enclosure - Tropical Field.a06851e6cda78834a423.jpg', NULL),
 ('3', '1', NULL, 'Jurassic Hotel', 'Primary hotel for guests staying on-site, with hotel-based wildlife viewing.', 'Hotel District', '9', '/static/media/Hotel Complex (Rustic).ff03b2d46b768ac750f5.jpg', 'Install new "don''t put your fingers through the fence signs. Too many incidents."');
 
