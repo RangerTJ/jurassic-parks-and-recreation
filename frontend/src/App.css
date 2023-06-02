@@ -1,9 +1,11 @@
 /* Fonts */
 /* SVG/Stroke Styling Inspired by "Everything about Stroke Text in CSS" by codingdudecom
-https://dev.to/codingdudecom/everything-about-stroke-text-in-css-561i */
+https://dev.to/codingdudecom/everything-about-stroke-text-in-css-561i
+Link Accessed/Verified on 6/1/2023 */
 
 /* Font-face code style/syntax based on "How to use @font-face in CSS" by Chris Coyler
-URL: https://css-tricks.com/snippets/css/using-font-face-in-css/ */
+URL: https://css-tricks.com/snippets/css/using-font-face-in-css/ 
+Link Accessed/Verified on 6/1/2023 */
 @font-face {
   font-family: 'Jurassic Park';
   src: url('fonts/JurassicPark-BL48.ttf') format('truetype');
@@ -195,8 +197,6 @@ table {
   border: 2px solid var(--parkYellow);
   border-collapse: collapse;
   width: 100%;
-  /* Ideally should probably make container and alignment styles for columns and use fit content in final version */
-  /* width: fit-content; */
   text-align: center;
 }
 
@@ -440,6 +440,7 @@ video {
 
 /* Citation: Creating a Simple Lightbox From Scratch in React by Alexandra Radevich
 URL: https://medium.com/swlh/creating-a-simple-lightbox-from-scratch-in-react-caea84f90960
+Link Accessed/Verified on 6/1/2023
 Example code used to begin implementation and modified slightly to suit project needs.
 .lightbox is very, very close to the raw example code (modified background color), while .light-box image was 
 made from scratch to address some image scaling/positioning issues. The combined end result is a lightbox image

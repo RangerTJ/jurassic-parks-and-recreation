@@ -1,9 +1,11 @@
 // Basic CRUD operations and React implementation was heavily based on the CRUD React tutorial series created by PedroTech
 // URLs - Part1: https://www.youtube.com/watch?v=T8mqZZ0r-RA, Part2: https://www.youtube.com/watch?v=3YrOOia3-mo, Part3: https://www.youtube.com/watch?v=_S2GKnFpdtE
+// Link Accessed/Verified on 6/1/2023
 
 // Citation: "How to Use Node Environment Variables with a DotEnv File for Node.js and npm" by Veronica Stork
 // Our .env file was set up following the Veronica's guide write-up.
 // https://www.freecodecamp.org/news/how-to-use-node-environment-variables-with-a-dotenv-file-for-node-js-and-npm/
+// Link Accessed/Verified on 6/1/2023
 
 const express = require("express");
 const bodyParser = require('body-parser');
@@ -1582,15 +1584,6 @@ app.get('/api/getBiologicalAssetsList', (req, res) => {
         };
     });
 });
-
-
-/////////////////////////////////////////
-// Test Connection to the MySQL server //
-/////////////////////////////////////////
-db.connect((err) => {
-  if (err) {
-    console.error('Error connecting to MySQL:', err);
-    return;}});
 
 
 //////////////////
