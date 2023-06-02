@@ -87,7 +87,7 @@ function BiologicalAssetsUpdateForm ({hostURL}) {
                     </fieldset>
                 </form>
                 <div>
-                    <p><button onClick={update}>Save</button></p>
+                    <p><button onClick={update}>Save</button> <button onClick={()=> navTo('/BiologicalAssets')}>Cancel</button></p>
                 </div>
             </article>
         </>

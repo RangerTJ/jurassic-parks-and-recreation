@@ -78,7 +78,7 @@ function DietsAddForm ({hostURL}) {
                     </fieldset>
                 </form>
                 <div>
-                    <p><button onClick={submit}>Add Diet</button></p>
+                    <p><button onClick={submit}>Add Diet</button> <button onClick={()=> navTo('/Diets')}>Cancel</button></p>
                 </div>
             </article>
         </>

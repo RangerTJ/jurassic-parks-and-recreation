@@ -81,7 +81,7 @@ function HabitatsAddForm ({hostURL}) {
                     </fieldset>
                 </form>
                 <div>
-                    <p><button onClick={submit}>Add Habitat</button></p>
+                    <p><button onClick={submit}>Add Habitat</button> <button onClick={()=> navTo('/Habitats')}>Cancel</button></p>
                 </div>
             </article>
         </>

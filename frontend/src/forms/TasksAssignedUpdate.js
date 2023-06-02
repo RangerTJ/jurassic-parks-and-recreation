@@ -162,7 +162,7 @@ function TasksAssignedUpdateForm ({hostURL}) {
                     </fieldset>
                 </form>
                 <div>
-                    <p><button onClick={updateTaskAssigned}>Update Task</button></p>
+                    <p><button onClick={updateTaskAssigned}>Update Task</button> <button onClick={()=> navTo('/TasksAssigned')}>Cancel</button></p>
                 </div>
             </article>
         </>

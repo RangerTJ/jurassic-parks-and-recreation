@@ -132,7 +132,7 @@ function EmployeeTasksAddForm ({hostURL}) {
                     </fieldset>
                 </form>
                 <div>
-                    <p><button onClick={submit}>Add Report</button></p>
+                    <p><button onClick={submit}>Add Report</button> <button onClick={()=> navTo('/EmployeeTasks')}>Cancel</button></p>
                 </div>
             </article>
         </>

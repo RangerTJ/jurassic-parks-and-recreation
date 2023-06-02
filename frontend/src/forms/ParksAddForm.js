@@ -90,7 +90,7 @@ function ParksAddForm ({hostURL}) {
                     </fieldset>
                 </form>
                 <div>
-                    <p><button onClick={submit}>Add Park</button></p>
+                    <p><button onClick={submit}>Add Park</button> <button onClick={()=> navTo('/Parks')}>Cancel</button></p>
                 </div>
             </article>
         </>

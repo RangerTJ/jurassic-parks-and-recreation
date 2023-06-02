@@ -150,7 +150,7 @@ function EmployeeTasksUpdateForm ({hostURL}) {
                     </fieldset>
                 </form>
                 <div>
-                    <p><button onClick={update}>Save</button></p>
+                    <p><button onClick={update}>Save</button> <button onClick={()=> navTo('/EmployeeTasks')}>Cancel</button></p>
                 </div>
             </article>
         </>

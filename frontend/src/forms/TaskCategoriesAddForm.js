@@ -60,7 +60,7 @@ function TaskCategoriesAddForm ({hostURL}) {
                     </fieldset>
                 </form>
                 <div>
-                    <p><button onClick={submit}>Add Category</button></p>
+                    <p><button onClick={submit}>Add Category</button> <button onClick={()=> navTo('/TaskCategories')}>Cancel</button></p>
                 </div>
             </article>
         </>

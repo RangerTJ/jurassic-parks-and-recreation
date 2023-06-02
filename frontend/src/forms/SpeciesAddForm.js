@@ -114,7 +114,7 @@ function SpeciesAddForm ({hostURL}) {
                     </fieldset>
                 </form>
                 <div>
-                    <p><button onClick={submit}>Add Species</button></p>
+                    <p><button onClick={submit}>Add Species</button> <button onClick={()=> navTo('/Species')}>Cancel</button></p>
                 </div>
             </article>
         </>

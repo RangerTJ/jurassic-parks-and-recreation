@@ -73,7 +73,7 @@ function BiologicalAssetsAddForm ({hostURL}) {
                     </fieldset>
                 </form>
                 <div>
-                    <p><button onClick={submit}>Add Asset</button></p>
+                    <p><button onClick={submit}>Add Asset</button> <button onClick={()=> navTo('/BiologicalAssets')}>Cancel</button></p>
                 </div>
             </article>
         </>

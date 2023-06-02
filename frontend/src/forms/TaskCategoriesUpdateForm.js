@@ -74,7 +74,7 @@ function TaskCategoriesUpdateForm ({hostURL}) {
                     </fieldset>
                 </form>
                 <div>
-                    <p><button onClick={update}>Save</button></p>
+                    <p><button onClick={update}>Save</button> <button onClick={()=> navTo('/TaskCategories')}>Cancel</button></p>
                 </div>
             </article>
         </>

@@ -72,7 +72,7 @@ function JobClassificationsAddForm ({hostURL}) {
                     </fieldset>
                 </form>
                 <div>
-                    <p><button onClick={submit}>Add Job</button></p>
+                    <p><button onClick={submit}>Add Job</button> <button onClick={()=> navTo('/JobClassifications')}>Cancel</button></p>
                 </div>
             </article>
         </>

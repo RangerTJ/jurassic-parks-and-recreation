@@ -162,7 +162,7 @@ function EmployeesAddForm ({hostURL}) {
                     </fieldset>
                 </form>
                 <div>
-                    <p><button onClick={submit}>Add Employee</button></p>
+                    <p><button onClick={submit}>Add Employee</button> <button onClick={()=> navTo('/Employees')}>Cancel</button></p>
                 </div>
             </article>
         </>

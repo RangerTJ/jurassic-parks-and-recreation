@@ -127,7 +127,7 @@ function TasksAssignedAddForm ({hostURL}) {
                     </fieldset>
                 </form>
                 <div>
-                    <p><button onClick={submit}>Add Task</button></p>
+                    <p><button onClick={submit}>Add Task</button> <button onClick={()=> navTo('/TasksAssigned')}>Cancel</button></p>
                 </div>
             </article>
         </>

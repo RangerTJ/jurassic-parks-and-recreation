@@ -143,7 +143,7 @@ function FacilitiesAddForm ({hostURL}) {
                     </fieldset>
                 </form>
                 <div>
-                    <p><button onClick={submit}>Add Facility</button></p>
+                    <p><button onClick={submit}>Add Facility</button> <button onClick={()=> navTo('/Facilities')}>Cancel</button></p>
                 </div>
             </article>
         </>
