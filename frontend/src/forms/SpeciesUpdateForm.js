@@ -76,6 +76,8 @@ function SpeciesUpdateForm ({hostURL}) {
             <article>
                 <p>
                     Make changes to this Species' record and click "Save" to retain them.
+                    This action will <strong>cascade</strong> to the <strong>Biological Assets</strong> relational entity (a creature of a species)
+                    that handles the many-to-many relationship between a Species and a Facility.
                 </p>
                 <form>
                     <fieldset>

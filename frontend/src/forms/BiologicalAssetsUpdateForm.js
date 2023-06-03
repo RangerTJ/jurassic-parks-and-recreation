@@ -62,6 +62,8 @@ function BiologicalAssetsUpdateForm ({hostURL}) {
             <article>
                 <p>
                     Make changes to this asset and click "Save" to retain them.
+                    This action will <strong>cascade</strong> to <strong>Tasks Assigned</strong>. This will also update the 
+                    asset as a many-to-many relational link between a Species and a Facility.
                 </p>
                 <form>
                     <fieldset>

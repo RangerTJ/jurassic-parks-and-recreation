@@ -78,7 +78,8 @@ function EmployeeTasksUpdateForm ({hostURL}) {
             <h2>Update Employee Task Record</h2>
             <article>
                 <p>
-                    Make changes to this Employee Task record and click "Save" to retain them.
+                    Make changes to this Employee Task record and click "Save" to retain them. This will update the many-to-many relational link
+                    between an Employee and a Task Assigned for this work report.
                 </p>
                 <p>
                     Please be aware that the Tasks select menu will only show tasks that have not yet been "completed" (that is, given an end date).

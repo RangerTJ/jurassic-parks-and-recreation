@@ -61,6 +61,7 @@ function HabitatsUpdateForm ({hostURL}) {
             <article>
                 <p>
                     Make changes to this Habitat record and click "Save" to retain them.
+                    This action will <strong>cascade</strong> to <strong>Species</strong> and <strong>Facilities</strong>.
                 </p>
                 <form>
                     <fieldset>

@@ -61,7 +61,7 @@ function DietsUpdateForm ({hostURL}) {
             <article>
                 <p>
                     If you would like to update this entry, enter new values for its attributes below
-                    and click the "Save" button.
+                    and click the "Save" button. This action will <strong>cascade</strong> to <strong>Species</strong>.
                 </p>
                 <form>
                     <fieldset>

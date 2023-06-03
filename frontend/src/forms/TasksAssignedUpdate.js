@@ -86,6 +86,9 @@ function TasksAssignedUpdateForm ({hostURL}) {
                 <p>
                     To add a new Task to the database, enter values for its attributes below
                     and click the "Add Task" button.
+                    This action will <strong>cascade</strong> to the <strong>Employee Tasks</strong> relational entity
+                    that handles the many-to-many relationship between an Assigned Task and Employee by documenting a 
+                    period of labor that the Employee contributed towards the Assigned Task.
                 </p>
                 <p>
                     Only fill out the "Date Ended" field once all work on the task has been fully completed.
