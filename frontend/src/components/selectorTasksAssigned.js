@@ -50,7 +50,7 @@ const SelectorTasksAssigned = ({preSelected, isRequired, autoFocus, hostURL, set
       <select id="tasksAssignedSelector" value={selected} onChange={selectionHandler} autoFocus={autoFocus ? true : false} required={isRequired ? true : false}>
         {/* Set default option then map query results to populate the select menu / all or only open tasks depending on what we want */}
         <option value="">None (Select an existing Assigned Task)</option>
-        {getAll === true ? (fullList.map((val, index) => {
+        {getAll ? (fullList.map((val, index) => {
           return (<option key={index} value={val.taskName}>{val.taskName} (Started: {val.taskStart})</option>);
         })) : (list.map((val, index) => {
           return (<option key={index} value={val.taskName}>{val.taskName} (Started: {val.taskStart})</option>);
