@@ -139,7 +139,7 @@ function EmployeeTasksPage ({hostURL}) {
                     table of Employee Tasks. 
                 </p>
                 <div className="selectorP">
-                    <SelectorTasksAssigned hostURL={hostURL} setTaskName={setTaskName} taskName={taskName} isRequired={false}/>
+                    <SelectorTasksAssigned hostURL={hostURL} setTaskName={setTaskName} taskName={taskName} isRequired={false} getAll={true}/>
                 </div>
                 <div className="scrollableTable">
                     <table>

@@ -1477,6 +1477,24 @@ app.get('/api/getTasksAssignedList', (req, res) =>{
     });
 });
 
+// Assigned Task Selector (returns everything)
+app.get('/api/getFullTasksAssignedList', (req, res) =>{
+    const sqlRead = `
+    SELECT taskName, taskStart
+    FROM TasksAssigned
+    ORDER BY taskName ASC;
+    `;
+    db.query(sqlRead, (err, result)=> {
+        if (err) {
+            console.error(err);
+            res.status(500).send(err.sqlMessage)
+        } else {
+            console.log(result)
+            res.send(result);
+        };
+    });
+});
+
 // Employee Selector (First/Last + Username) + Job
 app.get('/api/getEmployeesList', (req, res) =>{
     const sqlRead = `
