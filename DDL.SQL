@@ -382,6 +382,7 @@ VALUES
 (8, 5, 'Bumpy'),
 (9, 3, 'Luxor'),
 (10, 4, 'Mr. Puddles'),
+(16, 16, 'Petrie'),
 (11, 16, 'Duckie'),
 (12, 5, 'Yoshi'),
 (13, 6, 'Captain Boomerang'),
@@ -406,7 +407,8 @@ VALUES
 (2, 4, 'Thescelosaurus', 'A small, bipedal herbivore characterized by its long legs, suggesting it was a fast runner.', 2, '/static/media/Thescelosaurus.52b3e750f81a48607cfd.png'),
 (1, 5, 'Diplocaulus', 'A prehistoric amphibian with a distinctive boomerang-shaped skull. Likely a carnivorous ambush predator.', 4, '/static/media/Diplocaulus.b7657f9d80f9f25f9c7c.png'),
 (4, 6, 'Metriorhynchus', 'A marine crocodile-like reptile, fed primarily on fish and other small marine creatures.', 5, '/static/media/Metriorhynchus.53b89c9cdd939843fc67.png'),
-(1, 5, 'Eustreptospondylus', 'A medium-sized theropod dinosaur, it was carnivorous, bipedal, and had a stiffened tail.', 7, '/static/media/Eustreptospondylus.fd7f59c0ee2ecf84b8f7.png');
+(1, 5, 'Eustreptospondylus', 'A medium-sized theropod dinosaur, it was carnivorous, bipedal, and had a stiffened tail.', 7, '/static/media/Eustreptospondylus.fd7f59c0ee2ecf84b8f7.png'),
+(4, 2, 'Pteranodon', 'Iconic, mid-size pterosaur that feeds on fish.', 6, '/static/media/Pteranodon.714bebe3f0de699c1e04.jpg');
 
 
 INSERT INTO `Diets`                 (dietName, dietDescription, dietIcon)
