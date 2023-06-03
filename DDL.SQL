@@ -373,20 +373,20 @@ VALUES
 INSERT INTO `BiologicalAssets`      (idSpecies, idFacility, bioAssetName)
 VALUES
 (1, 1, 'Rexy'),
-(2, 4, 'Blue'),
+(2, 14, 'Blue'),
 (3, 3, 'Stabby McGee'),
 (4, 1, 'Littlefoot'),
 (5, 1, 'Thagomizerus'),
-(6, 2, 'Mariner'),
+(6, 3, 'Mariner'),
 (7, 3, 'Al'),
-(8, 4, 'Bumpy'),
+(8, 5, 'Bumpy'),
 (9, 3, 'Luxor'),
-(10, 2, 'Mr. Puddles'),
-(11, 2, 'Duckie'),
-(12, 4, 'Yoshi'),
-(13, 5, 'Captain Boomerang'),
-(14, 5, 'Slinker'),
-(15, 5, 'Bitey'),
+(10, 4, 'Mr. Puddles'),
+(11, 16, 'Duckie'),
+(12, 5, 'Yoshi'),
+(13, 6, 'Captain Boomerang'),
+(14, 4, 'Slinker'),
+(15, 6, 'Bitey'),
 (1, 1, 'Junior');
 
 

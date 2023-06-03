@@ -308,7 +308,7 @@ function BiologicalAssetsPage ({hostURL}) {
                     The table below shows existing information for Biological Assets entities and includes
                     buttons to update or delete them. You can use the species selector below to filter for
                     a specific species. Select "None" to remove the species filter and view the entire 
-                    database of biological assets. 
+                    table of Biological Assets. 
                 </p>
                 <div className="selectorP">
                     <SelectorSpecies hostURL={hostURL} setSpecies={setSpecies} species={species} isRequired={false}/>

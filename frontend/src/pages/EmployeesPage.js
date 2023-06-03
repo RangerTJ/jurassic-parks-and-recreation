@@ -160,7 +160,7 @@ function EmployeesPage ({hostURL}) {
                     The table below shows existing records and includes
                     buttons to update or delete them. You can use the Job Title selector below to filter for
                     employees that have a specific job. Select "None" to remove the filter and view the entire 
-                    database of employees. 
+                    table of Employees. 
                 </p>
                 <div className="selectorP">
                     <SelectorJobClassifications hostURL={hostURL} setJobTitle={setJobTitle} jobTitle={jobTitle} isRequired={false}/>

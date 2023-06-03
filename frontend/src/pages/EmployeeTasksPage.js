@@ -134,9 +134,10 @@ function EmployeeTasksPage ({hostURL}) {
                 <h3>View Employee Tasks</h3>
                 <p>
                     The table below shows existing information for Employee Task entities and includes
-                    buttons to update or delete them.
+                    buttons to update or delete them. You can use the Tasks selector below to filter for Employee Task records
+                    that pertain to a specific Task Assigned. Select "None" to remove the filter and view the entire 
+                    table of Employee Tasks. 
                 </p>
-                <div>Debug: {taskName}</div>
                 <div className="selectorP">
                     <SelectorTasksAssigned hostURL={hostURL} setTaskName={setTaskName} taskName={taskName} isRequired={false}/>
                 </div>
