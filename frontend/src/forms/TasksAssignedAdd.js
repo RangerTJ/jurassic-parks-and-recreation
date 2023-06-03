@@ -28,8 +28,14 @@ function TasksAssignedAddForm ({hostURL}) {
 
     // CREATE - Insert New Task then return to Tasks Assigned (only if all required state variables are not null)
     const submit = async () => {
+        // Convert start/end date strings to date values for comparison
+        const trueStart = new Date(taskStart);
+        const trueEnd = new Date(taskEnd)
+
         try {
-            if (facility && taskName && taskDescription && taskStart) {
+            if (trueStart > trueEnd) {
+                alert("We don't yet use time machines to obtain our prehistoric assets! Fix the start/end dates.");
+            } else if  (facility && taskName && taskDescription && taskStart) {
                 let finalTaskEnd = taskEnd === '' ? null : taskEnd;
     
                 Axios.post(createTasksAssignedURL, {

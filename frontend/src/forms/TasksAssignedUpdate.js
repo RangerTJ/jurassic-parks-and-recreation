@@ -47,8 +47,14 @@ function TasksAssignedUpdateForm ({hostURL}) {
 
     // UPDATE - Submit Changes to a Task then return to TasksAssigned page
     const updateTaskAssigned = async () => {
+        // Convert start/end date strings to date values for comparison
+        const trueStart = new Date(taskStart);
+        const trueEnd = new Date(taskEnd)
+
         try {
-            if (taskName && facility && taskDescription && taskStart) {
+            if (trueStart > trueEnd) {
+                alert("We don't yet use time machines to obtain our prehistoric assets! Fix the start/end dates.");
+            } else if  (facility && taskName && taskDescription && taskStart) {
 
             // Send Null value to SQL if task is re-opened
             let taskEndVar = taskEnd
