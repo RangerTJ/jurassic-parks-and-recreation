@@ -29,8 +29,14 @@ function EmployeeTasksAddForm ({hostURL}) {
 
     // CREATE - Insert New Employee Task then return to EmployeeTasks Page
     const submit = async () => {
+        // Convert start/end date strings to date values for comparison
+        const trueStart = new Date(empTaskStart);
+        const trueEnd = new Date(empTaskEnd)
+
         try {
-            if (taskName && employeeUsername && categoryName && taskHoursWorked && empTaskCost && empTaskStart && empTaskEnd) {
+            if (trueStart > trueEnd) {
+                alert("No time machine shenanigans, bucko! Fix the start/end dates.");
+            } else if (taskName && employeeUsername && categoryName && taskHoursWorked && empTaskCost && empTaskStart && empTaskEnd) {
                 await Axios.post(createEmployeeTasksURL, {
                     taskName: taskName,
                     employeeUsername: employeeUsername,
