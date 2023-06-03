@@ -174,6 +174,10 @@ function BiologicalAssetsPage ({hostURL}) {
                     it from the database, respectively. Be aware that <strong>updates</strong> will <strong>cascade</strong> to Tasks Assigned.
                     If you <strong>delete</strong> a Biological Asset, their record in any Task Assignment will be set to <strong>null</strong>.
                 </p>
+                <p>
+                    You may edit or delete a Biological Asset entry on either of the mismatch tables below (intended to highlight issues that should be addressed
+                    as soon as possible), or with the full Biological Asset table that follows.
+                </p>
                 {/* Lightbox example code used from: Creating a Simple Lightbox From Scratch in React by Alexandra Radevich
                 URL: https://medium.com/swlh/creating-a-simple-lightbox-from-scratch-in-react-caea84f90960
                 Accessed 5/22/2023. Modified with alt text value and custom display class.*/}
@@ -187,12 +191,6 @@ function BiologicalAssetsPage ({hostURL}) {
                 <h3>Security Risks</h3>
                 <p>
                     The table below shows detected security risks where an asset's current threat level is greater than its current facility's security rating.
-                    These risks should be mitigated as soon as possible by transferring an at-risk asset to an appropriate enclosure at the soonest opportunity. 
-                    Both facility security and threat potential of an asset are rated on a scale of 1-10. If a facility security is equal to an asset threat level, 
-                    that means that the asset is fully contained with a 99.9% confidence index that the asset cannot escape or harm guests/staff. 
-                    The severity deferential between an asset and its current containment strength is rated on a scale of 1-9. More severe security misalignment 
-                    should be heavily prioritized over less severe misalignments. For example, a severity of 1 implies that under worst-case conditions, an asset could 
-                    escape containment. A severity of 9 indicates that the asset could break out of containment at any time, and that they are incredibly likely to do so.
                 </p>
                 <div className="scrollableTable">
                     <table>
@@ -247,11 +245,7 @@ function BiologicalAssetsPage ({hostURL}) {
                 <h3>Habitat Misalignment</h3>
                 <p>
                     The following table summarizes any known mismatch between the habitat that a specific Biological Asset needs, and the
-                    habitat found in its current enclosure facility. Once a misalignment has been resolved by moving an asset to an appropriate
-                    facility, the "update" button next to the BiologicalAsset record can be used to update the database. These misalignments should
-                    be resolved as soon as possible to minimize stress on assets (and thus trickle-down impacts like behavioral issues and escape attempts).
-                    While not as critical as a security mismatch, it is still important that assets are assigned to appropriate habitats to ensure that they
-                    are happy and healthy.
+                    habitat found in its current enclosure facility.
                 </p>
                 <div className="scrollableTable">
                     <table>
