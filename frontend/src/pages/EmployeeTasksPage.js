@@ -6,6 +6,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import Axios from 'axios';
+import SelectorTasksAssigned from "../components/selectorTasksAssigned";
 
 
 // HostURL Passed from App.js
@@ -17,14 +18,39 @@ function EmployeeTasksPage ({hostURL}) {
     // EmployeeTasks SQL Endpoints
     const getEmployeeTasksURL = hostURL + '/api/getEmployeeTasks';
     const deleteEmployeeTasksURL = hostURL + '/api/deleteEmployeeTasks/';
+    const filterEmployeeTasksByTaskNameURL = hostURL + '/api/filterEmployeeTasksByTaskName';
 
     // Employee Task Table Functions
-    const [employeeTaskList, setEmployeeTaskList] = useState([])
+    const [employeeTaskList, setEmployeeTaskList] = useState([]);
+    const [taskName, setTaskName] = useState('');
 
     // READ Populate Employee Task Table
     useEffect(()=> {
         getEmployeeTasks();
     }, [])
+
+    // READ Changes to Employee Tasks Table
+    useEffect(() => {
+        taskFilter();
+    }, [taskName]);
+
+    // READ Apply Task Filter to Employee Tasks Table
+    const taskFilter = async () => {
+        // Get the unfiltered menu if default/null selected
+        if(taskName === "") {
+            await getEmployeeTasks();
+        }
+        // Apply filter otherwise
+        else {
+            try {
+                const response = await Axios.post(filterEmployeeTasksByTaskNameURL, {taskName : taskName})
+                setEmployeeTaskList(response.data);
+                console.log(response.data);
+            } catch (error) {
+                console.error('Error applying the filter to the View table.', error);
+            }
+        }
+    }
 
     // DELETE - Deletes target Employee Task and Refreshes Table
     const delEmployeeTask = async (delID) => {
@@ -110,6 +136,10 @@ function EmployeeTasksPage ({hostURL}) {
                     The table below shows existing information for Employee Task entities and includes
                     buttons to update or delete them.
                 </p>
+                <div>Debug: {taskName}</div>
+                <div className="selectorP">
+                    <SelectorTasksAssigned hostURL={hostURL} setTaskName={setTaskName} taskName={taskName} isRequired={false}/>
+                </div>
                 <div className="scrollableTable">
                     <table>
                         <tbody>

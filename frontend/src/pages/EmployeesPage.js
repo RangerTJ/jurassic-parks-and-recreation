@@ -55,7 +55,7 @@ function EmployeesPage ({hostURL}) {
         jobsFilter();
     }, [jobTitle]);
 
-    // READ Apply Jobs Filter to Bio Asset Table
+    // READ Apply Jobs Filter to Employees Table
     const jobsFilter = async () => {
         if(jobTitle === "") {
             await getEmployees();

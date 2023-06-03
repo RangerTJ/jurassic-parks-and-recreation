@@ -481,8 +481,8 @@ app.get('/api/getEmployeeTasks', (req, res) =>{
     });
 });
 
-// READ - Select Employee Tasks
-app.get('/api/getEmployeeTasksByTaskName', (req, res) =>{
+// READ - FILTER Employee Tasks by TaskName
+app.post('/api/filterEmployeeTasksByTaskName', (req, res) =>{
     const taskName = req.body.taskName
     const sqlRead = `
     SELECT  EmployeeTasks.idEmployeeTask, TasksAssigned.taskName, (SELECT CONCAT(Employees.firstName, ' ', Employees.lastName)) AS contributingEmployee,
