@@ -287,13 +287,6 @@ SET     idJobClassification =   (SELECT idJobClassification FROM JobClassificati
         employeeNote = :employeeNote_input, employeePhoto = :employeePhoto_input
 WHERE idEmployee = :idEmployee_input;
 
-    UPDATE Employees
-    SET     idJobClassification =   (SELECT idJobClassification FROM JobClassifications WHERE jobTitle = ?),
-            firstName = ?, lastName = ?, employeeUsername = ?, hourlyWage = ?,
-            employeePhone = ?, employeeEmail = ?, employeeRadio = ?, 
-            employeeNote = ?, employeePhoto = ?
-    WHERE idEmployee = ?;
-
 -- Update an Employee Task (if needed to re-assign orphaned FK's if/when parents are deleted)
 UPDATE EmployeeTasks
 SET     idEmployee =            (SELECT idEmployee FROM Employees WHERE employeeUsername = :employeeUsername_input),
@@ -445,7 +438,7 @@ JOIN Facilities on BiologicalAssets.idFacility = Facilities.idFacility
 WHERE Facilities.securityRating < Species.threatLevel
 ORDER BY severity, facilities.facilityName, BiologicalAssets.bioAssetName;
 
--- SELECT BiologicalAssets / FILTER for Species
+-- FILTER BiologicalAssets by Species
 SELECT BiologicalAssets.idBiologicalAsset, BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName, Species.speciesPhoto
 FROM BiologicalAssets
 -- Need to join Species -> BiologicalAssets -> Facilities
@@ -453,6 +446,25 @@ JOIN Species ON BiologicalAssets.idSpecies = Species.idSpecies
 JOIN Facilities ON BiologicalAssets.idFacility = Facilities.idFacility
 WHERE Species.speciesName = :speciesName_input
 ORDER BY idBiologicalAsset ASC;
+
+-- FILTER Employee Tasks by Task Name
+SELECT  EmployeeTasks.idEmployeeTask, TasksAssigned.taskName, (SELECT CONCAT(Employees.firstName, ' ', Employees.lastName)) AS contributingEmployee,
+        TaskCategories.categoryName, EmployeeTasks.taskHoursWorked, EmployeeTasks.empTaskCost, EmployeeTasks.empTaskStart, EmployeeTasks.empTaskEnd,
+        Employees.employeeUsername
+FROM EmployeeTasks
+LEFT JOIN TasksAssigned ON EmployeeTasks.idTaskAssigned = TasksAssigned.idTaskAssigned
+LEFT JOIN TaskCategories ON EmployeeTasks.idTaskCategory = TaskCategories.idTaskCategory
+LEFT JOIN Employees ON EmployeeTasks.idEmployee = Employees.idEmployee
+WHERE TasksAssigned.taskName = :taskName_input
+ORDER BY EmployeeTasks.idEmployeeTask ASC;
+
+-- FILTER Employee by Job Title
+SELECT  Employees.idEmployee, Employees.lastName, Employees.firstName, Employees.employeeUsername, JobClassifications.jobTitle, Employees.hourlyWage,
+Employees.employeePhone, Employees.employeeEmail, Employees.employeeRadio, Employees.employeeNote, Employees.employeePhoto
+FROM Employees
+JOIN JobClassifications ON Employees.idJobClassification = JobClassifications.idJobClassification
+WHERE JobClassifications.jobTitle = :jobTitle_input
+ORDER BY idEmployee ASC;
 
 
 -- -------------
@@ -506,7 +518,7 @@ FROM EmployeeTasks
 LEFT JOIN TasksAssigned ON EmployeeTasks.idTaskAssigned = TasksAssigned.idTaskAssigned
 LEFT JOIN TaskCategories ON EmployeeTasks.idTaskCategory = TaskCategories.idTaskCategory
 LEFT JOIN Employees ON EmployeeTasks.idEmployee = Employees.idEmployee
-WHERE TaskCategories.categoryName = ?
+WHERE TaskCategories.categoryName = :categoryName_input
 ORDER BY EmployeeTasks.idEmployeeTask ASC;
 
 -- LOOKUP EmployeeTask BY USERNAME (employee select menu) (SELECT)
@@ -517,18 +529,7 @@ FROM EmployeeTasks
 LEFT JOIN TasksAssigned ON EmployeeTasks.idTaskAssigned = TasksAssigned.idTaskAssigned
 LEFT JOIN TaskCategories ON EmployeeTasks.idTaskCategory = TaskCategories.idTaskCategory
 LEFT JOIN Employees ON EmployeeTasks.idEmployee = Employees.idEmployee
-WHERE Employees.employeeUsername = ?
-ORDER BY EmployeeTasks.idEmployeeTask ASC;
-
--- LOOKUP EmployeeTask by TaskAssigned Name (Input... or SELECT? Would require modifying current tasksassigned selector)
-SELECT  EmployeeTasks.idEmployeeTask, TasksAssigned.taskName, (SELECT CONCAT(Employees.firstName, ' ', Employees.lastName)) AS contributingEmployee,
-        TaskCategories.categoryName, EmployeeTasks.taskHoursWorked, EmployeeTasks.empTaskCost, EmployeeTasks.empTaskStart, EmployeeTasks.empTaskEnd,
-        Employees.employeeUsername
-FROM EmployeeTasks
-LEFT JOIN TasksAssigned ON EmployeeTasks.idTaskAssigned = TasksAssigned.idTaskAssigned
-LEFT JOIN TaskCategories ON EmployeeTasks.idTaskCategory = TaskCategories.idTaskCategory
-LEFT JOIN Employees ON EmployeeTasks.idEmployee = Employees.idEmployee
-WHERE TasksAssigned.taskName = ?
+WHERE Employees.employeeUsername = :employeeUsername_input
 ORDER BY EmployeeTasks.idEmployeeTask ASC;
 
 -- FILTER TasksAssigned - OPEN TASKS (BINARY SELECT)
@@ -558,15 +559,7 @@ SELECT  Employees.idEmployee, Employees.lastName, Employees.firstName, Employees
 Employees.employeePhone, Employees.employeeEmail, Employees.employeeRadio, Employees.employeeNote, Employees.employeePhoto
 FROM Employees
 JOIN JobClassifications ON Employees.idJobClassification = JobClassifications.idJobClassification
-WHERE lastName = ?
-ORDER BY idEmployee ASC;
-
--- FILTER Employees by Job Title (SELECT)
-SELECT  Employees.idEmployee, Employees.lastName, Employees.firstName, Employees.employeeUsername, JobClassifications.jobTitle, Employees.hourlyWage,
-Employees.employeePhone, Employees.employeeEmail, Employees.employeeRadio, Employees.employeeNote, Employees.employeePhoto
-FROM Employees
-JOIN JobClassifications ON Employees.idJobClassification = JobClassifications.idJobClassification
-WHERE JobClassifications.jobTitle = ? 
+WHERE lastName = :lastName_input
 ORDER BY idEmployee ASC;
 
 -- FILTER Facilities by Park Name (SELECT)
@@ -577,7 +570,7 @@ FROM Facilities
 LEFT JOIN Parks ON Facilities.idPark = Parks.idPark
 LEFT JOIN FacilityTypes ON Facilities.idFacilityType = FacilityTypes.idFacilityType
 LEFT JOIN Habitats ON Facilities.idHabitat = Habitats.idHabitat
-WHERE Parks.parkName = ?
+WHERE Parks.parkName = :parkName_input
 ORDER BY idFacility ASC;
 
 -- FILTER Facilities - Non-enclosures (BINARY SELECT))
@@ -608,7 +601,7 @@ Species.threatLevel, Species.speciesPhoto
 FROM Species
 LEFT JOIN Diets ON Species.idDiet = Diets.idDiet
 LEFT JOIN Habitats ON Species.idHabitat = Habitats.idHabitat
-WHERE Diets.dietName = ?
+WHERE Diets.dietName = :dietName_input
 ORDER BY idSpecies ASC;
 
 -- FILTER Species by Habitats (SELECT)
@@ -617,7 +610,7 @@ Species.threatLevel, Species.speciesPhoto
 FROM Species
 LEFT JOIN Diets ON Species.idDiet = Diets.idDiet
 LEFT JOIN Habitats ON Species.idHabitat = Habitats.idHabitat
-WHERE Habitats.habitatName = ?
+WHERE Habitats.habitatName = :habitatName_input
 ORDER BY idSpecies ASC;
 
 -- FILTER Biological Assets by Facility (SELECT)
@@ -625,7 +618,7 @@ SELECT BiologicalAssets.idBiologicalAsset, BiologicalAssets.bioAssetName, Specie
 FROM BiologicalAssets
 LEFT JOIN Species ON BiologicalAssets.idSpecies = Species.idSpecies
 LEFT JOIN Facilities ON BiologicalAssets.idFacility = Facilities.idFacility
-WHERE Facilities.facilityName = ? AND Facilities.idHabitat IS NULL
+WHERE Facilities.facilityName = :facilityName_input AND Facilities.idHabitat IS NULL
 ORDER BY idBiologicalAsset ASC;
 
 -- (Optional) POPULATE SELECT MENU FOR FACILITIES WITH ENCLOSURES (Habitats) - Designed to work with the above (Optional)
@@ -674,6 +667,8 @@ LEFT JOIN Facilities ON BiologicalAssets.idFacility = Facilities.idFacility
 LEFT JOIN Parks ON Facilities.idPark = Parks.idPark
 GROUP BY BiologicalAssets.bioAssetName
 ORDER BY assetCost DESC;
+
+
 
 
 -- ----------------
