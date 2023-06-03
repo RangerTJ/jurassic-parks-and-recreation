@@ -2,6 +2,11 @@
 // URLs - Part1: https://www.youtube.com/watch?v=T8mqZZ0r-RA, Part2: https://www.youtube.com/watch?v=3YrOOia3-mo, Part3: https://www.youtube.com/watch?v=_S2GKnFpdtE
 // Link Accessed/Verified on 6/1/2023
 
+/* Method for detecting if object is empty by using keys length (count) based on the solution suggest in 
+stackoverflow post by user Dhaval Chaudhary on 9/16/2016. Accessed on 6/3/2023.
+This criteria was used to determine whether to conditionally render mismatch articles and tables conditionally displayed on this page.
+URL: https://stackoverflow.com/questions/2673121/how-to-check-if-object-has-any-properties-in-javascript */
+
 
 import React, { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
@@ -175,9 +180,11 @@ function BiologicalAssetsPage ({hostURL}) {
                     If you <strong>delete</strong> a Biological Asset, their record in any Task Assignment will be set to <strong>null</strong>.
                 </p>
                 <p>
-                    You may edit or delete a Biological Asset entry on either of the mismatch tables below (intended to highlight issues that should be addressed
-                    as soon as possible), or with the full Biological Asset table that follows.
+                    You may edit or delete a Biological Asset entry in any of the tables that may appear on this page. 
+                    In addition to the View Biological Assets table, tables for
+                    habitat and security misalignments will appear if any issues are detected.
                 </p>
+
                 {/* Lightbox example code used from: Creating a Simple Lightbox From Scratch in React by Alexandra Radevich
                 URL: https://medium.com/swlh/creating-a-simple-lightbox-from-scratch-in-react-caea84f90960
                 Accessed 5/22/2023. Modified with alt text value and custom display class.*/}
@@ -186,116 +193,124 @@ function BiologicalAssetsPage ({hostURL}) {
                     <img id="lightbox-img" src={imageToShow} alt={imageToShow} className="lightbox-image"></img>
                 </div>
                 : '' }
+
             </article>
-            <article>
-                <h3>Security Risks</h3>
-                <p>
-                    The table below shows detected security risks where an asset's current threat level is greater than its current facility's security rating.
-                </p>
-                <div className="scrollableTable">
-                    <table>
-                        <tbody>
-                        <tr>
-                            <th>Edit</th>
-                            <th>Species Photo</th>
-                            <th>Asset</th>
-                            <th>Species</th>
-                            <th>Facility</th>
-                            <th>Facility Security</th>
-                            <th>Asset Threat</th>
-                            <th>Severity</th>
-                             
-                        </tr>
-                        {/* NEED TO UPDATE QUERY TO GET ID TO - SO UPDATE POPULATES RIGHT */}
-                        {assetSecMismatchList.map((val, index)=> {
-                            const altText = val.speciesPhoto ? val.speciesPhoto.substring(14, val.speciesPhoto.indexOf('.')) : "Default";
-                            return (
-                                <tr key={index}>
-                                    <td className="buttonHolder">
-                                        <div><button className="tableButton" onClick={()=> {navToUpdate(val)}}>Edit</button></div>
-                                        <div><button className="tableButton" onClick={()=> {delBiologicalAsset(val)}}>*</button></div>
-                                    </td>
-                                    <td className="imageHolder">
-                                        {/* Lightbox tutorial by Alexandra Radevich provided the code for the on-click trigger here
-                                        URL: https://medium.com/swlh/creating-a-simple-lightbox-from-scratch-in-react-caea84f90960
-                                        Accessed 5/22/2023. No modification of code for on-click trigger.*/}
-                                        {val.speciesPhoto ?
-                                        <img src={val.speciesPhoto} alt={altText} width={160} height={90} onClick={() => showImage(val.speciesPhoto)}/>
-                                        :
-                                        <img src={defaultImg} alt="Default" width={160} height={90} />
-                                        }
-                                    </td>
-                                    <td className="tableDescription">
-                                        <div>#{val.idBiologicalAsset}</div>
-                                        <div><strong>{val.bioAssetName}</strong></div>
-                                    </td>
-                                    <td>{val.speciesName}</td>
-                                    <td>{val.facilityName}</td>
-                                    <td>{val.securityRating}</td>
-                                    <td>{val.threatLevel}</td>
-                                    <td>{val.severity}</td>
-                                </tr>
+            {/* Conditionally render article/table ONLY if a security mismatch is detected */}
+            {Object.keys(assetSecMismatchList).length ?
+                <article>
+                    <h3>Security Risks</h3>
+                    <p>
+                        The table below shows detected security risks where an asset's current threat level is greater than its current facility's security rating.
+                    </p>
+                    <div className="scrollableTable">
+                        <table>
+                            <tbody>
+                            <tr>
+                                <th>Edit</th>
+                                <th>Species Photo</th>
+                                <th>Asset</th>
+                                <th>Species</th>
+                                <th>Facility</th>
+                                <th>Facility Security</th>
+                                <th>Asset Threat</th>
+                                <th>Severity</th>
+                                
+                            </tr>
+                            {assetSecMismatchList.map((val, index)=> {
+                                const altText = val.speciesPhoto ? val.speciesPhoto.substring(14, val.speciesPhoto.indexOf('.')) : "Default";
+                                return (
+                                    <tr key={index}>
+                                        <td className="buttonHolder">
+                                            <div><button className="tableButton" onClick={()=> {navToUpdate(val)}}>Edit</button></div>
+                                            <div><button className="tableButton" onClick={()=> {delBiologicalAsset(val)}}>*</button></div>
+                                        </td>
+                                        <td className="imageHolder">
+                                            {/* Lightbox tutorial by Alexandra Radevich provided the code for the on-click trigger here
+                                            URL: https://medium.com/swlh/creating-a-simple-lightbox-from-scratch-in-react-caea84f90960
+                                            Accessed 5/22/2023. No modification of code for on-click trigger.*/}
+                                            {val.speciesPhoto ?
+                                            <img src={val.speciesPhoto} alt={altText} width={160} height={90} onClick={() => showImage(val.speciesPhoto)}/>
+                                            :
+                                            <img src={defaultImg} alt="Default" width={160} height={90} />
+                                            }
+                                        </td>
+                                        <td className="tableDescription">
+                                            <div>#{val.idBiologicalAsset}</div>
+                                            <div><strong>{val.bioAssetName}</strong></div>
+                                        </td>
+                                        <td>{val.speciesName}</td>
+                                        <td>{val.facilityName}</td>
+                                        <td>{val.securityRating}</td>
+                                        <td>{val.threatLevel}</td>
+                                        <td>{val.severity}</td>
+                                    </tr>
+                                )}
                             )}
-                        )}
-                        </tbody>
-                    </table>
-                </div>
-            </article>
-            <article>
-                <h3>Habitat Misalignment</h3>
-                <p>
-                    The following table summarizes any known mismatch between the habitat that a specific Biological Asset needs, and the
-                    habitat found in its current enclosure facility.
-                </p>
-                <div className="scrollableTable">
-                    <table>
-                        <tbody>
-                        <tr>
-                            <th>Edit</th>
-                            <th>Species Photo</th>
-                            <th>Asset</th>
-                            <th>Species</th>
-                            <th>Facility</th>
-                            <th>Habitat Misalignment</th>
-                        </tr>
-                        {assetHabMismatchList.map((val, index)=> {
-                            const filteredHab = val.currentHabitat ? val.currentHabitat : "WARNING: NOT AN ENCLOSURE";
-                            const altText = val.speciesPhoto ? val.speciesPhoto.substring(14, val.speciesPhoto.indexOf('.')) : "Default";
-                            return (
-                                <tr key={index}>
-                                    <td className="buttonHolder">
-                                        <div><button className="tableButton" onClick={()=> {navToUpdate(val)}}>Edit</button></div>
-                                        <div><button className="tableButton" onClick={()=> {delBiologicalAsset(val)}}>*</button></div>
-                                    </td>
-                                    <td className="imageHolder">
-                                        {/* Lightbox tutorial by Alexandra Radevich provided the code for the on-click trigger here
-                                        URL: https://medium.com/swlh/creating-a-simple-lightbox-from-scratch-in-react-caea84f90960
-                                        Accessed 5/22/2023. No modification of code for on-click trigger.*/}
-                                        {val.speciesPhoto ?
-                                        <img src={val.speciesPhoto} alt={altText} width={160} height={90} onClick={() => showImage(val.speciesPhoto)}/>
-                                        :
-                                        <img src={defaultImg} alt="Default" width={160} height={90} />
-                                        }
-                                    </td>
-                                    <td className="tableDescription">
-                                        <div>#{val.idBiologicalAsset}</div>
-                                        <div><strong>{val.bioAssetName}</strong></div>
-                                    </td>
-                                    <td>{val.speciesName}</td>
-                                    <td>{val.facilityName}</td>
-                                    <td className="tableDescription">
-                                        <ul>
-                                            <li>Current: {filteredHab}</li>
-                                            <li>Needs: {val.needsHabitat}</li>
-                                        </ul>
-                                    </td>
-                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </article>
+            : null}
+            {/* End of conditional security mismatch section */}
+            {/* Conditionally render article/table ONLY if a habitat mismatch is detected */}
+            {Object.keys(assetHabMismatchList).length ? 
+                <article>
+                    <h3>Habitat Misalignment</h3>
+                    <p>
+                        The following table summarizes any known mismatch between the habitat that a specific Biological Asset needs, and the
+                        habitat found in its current enclosure facility.
+                    </p>
+                    <div className="scrollableTable">
+                        <table>
+                            <tbody>
+                            <tr>
+                                <th>Edit</th>
+                                <th>Species Photo</th>
+                                <th>Asset</th>
+                                <th>Species</th>
+                                <th>Facility</th>
+                                <th>Habitat Misalignment</th>
+                            </tr>
+                            {assetHabMismatchList.map((val, index)=> {
+                                const filteredHab = val.currentHabitat ? val.currentHabitat : "WARNING: NOT AN ENCLOSURE";
+                                const altText = val.speciesPhoto ? val.speciesPhoto.substring(14, val.speciesPhoto.indexOf('.')) : "Default";
+                                return (
+                                    <tr key={index}>
+                                        <td className="buttonHolder">
+                                            <div><button className="tableButton" onClick={()=> {navToUpdate(val)}}>Edit</button></div>
+                                            <div><button className="tableButton" onClick={()=> {delBiologicalAsset(val)}}>*</button></div>
+                                        </td>
+                                        <td className="imageHolder">
+                                            {/* Lightbox tutorial by Alexandra Radevich provided the code for the on-click trigger here
+                                            URL: https://medium.com/swlh/creating-a-simple-lightbox-from-scratch-in-react-caea84f90960
+                                            Accessed 5/22/2023. No modification of code for on-click trigger.*/}
+                                            {val.speciesPhoto ?
+                                            <img src={val.speciesPhoto} alt={altText} width={160} height={90} onClick={() => showImage(val.speciesPhoto)}/>
+                                            :
+                                            <img src={defaultImg} alt="Default" width={160} height={90} />
+                                            }
+                                        </td>
+                                        <td className="tableDescription">
+                                            <div>#{val.idBiologicalAsset}</div>
+                                            <div><strong>{val.bioAssetName}</strong></div>
+                                        </td>
+                                        <td>{val.speciesName}</td>
+                                        <td>{val.facilityName}</td>
+                                        <td className="tableDescription">
+                                            <ul>
+                                                <li>Current: {filteredHab}</li>
+                                                <li>Needs: {val.needsHabitat}</li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                )}
                             )}
-                        )}
-                        </tbody>
-                    </table>
-                </div>
-            </article>
+                            </tbody>
+                        </table>
+                    </div>
+                </article>
+            : null}
+            {/* End of conditional security mismatch section */}
             <article>
                 <h3>View Biological Assets</h3>
                 <p>
