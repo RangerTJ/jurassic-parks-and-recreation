@@ -35,7 +35,7 @@ function EmployeeTasksAddForm ({hostURL}) {
 
         try {
             if (trueStart > trueEnd) {
-                alert("No time machine shenanigans, bucko! Fix the start/end dates.");
+                alert("We don't yet use time machines to obtain our prehistoric assets! Fix the start/end dates.");
             } else if (taskName && employeeUsername && categoryName && taskHoursWorked && empTaskCost && empTaskStart && empTaskEnd) {
                 await Axios.post(createEmployeeTasksURL, {
                     taskName: taskName,

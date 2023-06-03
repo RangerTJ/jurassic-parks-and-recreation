@@ -50,8 +50,14 @@ function EmployeeTasksUpdateForm ({hostURL}) {
 
     // UPDATE - Submit Changes to an Employee Task then return to Employee Tasks home (hours/cost can be zero'd in case they need to be cleared for an entry error)
     const update = async () => {
+        // Convert start/end date strings to date values for comparison
+        const trueStart = new Date(empTaskStart);
+        const trueEnd = new Date(empTaskEnd)
+
         try {
-            if (taskName && employeeUsername && categoryName && empTaskStart && empTaskEnd) {
+            if (trueStart > trueEnd) {
+                alert("We don't yet use time machines to obtain our prehistoric assets! Fix the start/end dates.");
+            } else if (taskName && employeeUsername && categoryName && taskHoursWorked && empTaskCost && empTaskStart && empTaskEnd) {
                 await Axios.put(updateEmployeeTasksURL, {
                     taskName: taskName,
                     employeeUsername: employeeUsername,
