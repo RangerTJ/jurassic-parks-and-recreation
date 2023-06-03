@@ -100,8 +100,8 @@ function EmployeeTasksPage ({hostURL}) {
                 <p>
                     To edit or delete any entity within the database, simply click the "Edit" or "<span className="demoRex">*</span>"
                     buttons on the left side of the corresponding row to enter the edit menu or delete
-                    it from the database, respectively. Be aware that deleting an EmployeeTask entry will
-                    sever a link between an Employee and a Task Assigned.
+                    it from the database, respectively. Be aware that <strong>deleting an EmployeeTask entry will
+                    sever a link between an Employee and a Task Assigned</strong>.
                 </p>
             </article>
             <article>

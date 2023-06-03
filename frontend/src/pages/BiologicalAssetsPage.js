@@ -156,7 +156,8 @@ function BiologicalAssetsPage ({hostURL}) {
                 </p>
                 <p>
                     Deleting a Facility or Species is <strong>restricted</strong> as long as they are referenced by a Biological Asset.
-                    Updates to any affiliated parent entities will cascade.
+                    Updates to any affiliated parent entities will cascade. As such, it is not possible to sever a link between Species and
+                    Facilities by deleting a Biological Asset.
                 </p>
                 <p>
                     Click the "Create" button below to add a new Biological Asset to the DINO database.
@@ -170,7 +171,8 @@ function BiologicalAssetsPage ({hostURL}) {
                 <p>
                     To edit or delete any entity within the database, simply click the "Edit" or "<span className="demoRex">*</span>"
                     buttons on the left side of the corresponding row to enter the edit menu or delete
-                    it from the database, respectively.
+                    it from the database, respectively. Be aware that <strong>updates</strong> will <strong>cascade</strong> to Tasks Assigned.
+                    If you <strong>delete</strong> a Biological Asset, their record in any Task Assignment will be set to <strong>null</strong>.
                 </p>
                 {/* Lightbox example code used from: Creating a Simple Lightbox From Scratch in React by Alexandra Radevich
                 URL: https://medium.com/swlh/creating-a-simple-lightbox-from-scratch-in-react-caea84f90960
