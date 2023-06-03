@@ -91,7 +91,8 @@ function TasksAssignedPage ({hostURL}) {
                 <p>
                     To edit or delete any entity within the database, simply click the "Edit" or "<span className="demoRex">*</span>"
                     buttons on the left side of the corresponding row to enter the edit menu or delete
-                    it from the database, respectively.
+                    it from the database, respectively. Be aware that <strong>updates</strong> will <strong>cascade</strong> to Employee Tasks.
+                    If you <strong>delete</strong> an Assigned Task, their record in any Employee Tasks will be set to <strong>null</strong>.
                 </p>
             </article>
 

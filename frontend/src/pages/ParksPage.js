@@ -108,7 +108,8 @@ function ParksPage ({hostURL}) {
                 <p>
                     To edit or delete any entity within the database, simply click the "Edit" or "<span className="demoRex">*</span>"
                     buttons on the left side of the corresponding row to enter the edit menu or delete
-                    it from the database, respectively.
+                    it from the database, respectively. Be aware that <strong>updates</strong> will <strong>cascade</strong> to Facilities.
+                    You are <strong>restricted</strong> from <strong>deleting</strong> a Park, if it has been assigned to a Facility.
                 </p>
             </article>
             <article>

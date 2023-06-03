@@ -137,7 +137,8 @@ function EmployeesPage ({hostURL}) {
                 <p>
                     To edit or delete any entity within the database, simply click the "Edit" or "<span className="demoRex">*</span>"
                     buttons on the left side of the corresponding row to enter the edit menu or delete
-                    it from the database, respectively.
+                    it from the database, respectively. Be aware that <strong>updates</strong> will <strong>cascade</strong> to Employee Tasks.
+                    If you <strong>delete</strong> an employee, their record in any Employee Tasks will be set to <strong>null</strong>.
                 </p>
             </article>
             <article>
@@ -156,7 +157,7 @@ function EmployeesPage ({hostURL}) {
                 </div>
                 : '' }
                 <p>
-                    The table below shows existing information for Biological Assets entities and includes
+                    The table below shows existing records and includes
                     buttons to update or delete them. You can use the Job Title selector below to filter for
                     employees that have a specific job. Select "None" to remove the filter and view the entire 
                     database of employees. 

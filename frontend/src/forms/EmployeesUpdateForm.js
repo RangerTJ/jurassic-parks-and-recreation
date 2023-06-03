@@ -83,6 +83,7 @@ function EmployeesUpdateForm ({hostURL}) {
             <article>
                 <p>
                     Make changes to this Employee Task record and click "Save" to retain them.
+                    This action will <strong>cascade</strong> to <strong>Employee Tasks</strong>.
                 </p>
                 <form>
                     <fieldset>

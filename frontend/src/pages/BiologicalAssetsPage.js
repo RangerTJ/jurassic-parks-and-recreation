@@ -155,6 +155,10 @@ function BiologicalAssetsPage ({hostURL}) {
                     with multiple facilities (via the different species of assets that may be assigned to a given facility).
                 </p>
                 <p>
+                    Deleting a Facility or Species is <strong>restricted</strong> as long as they are referenced by a Biological Asset.
+                    Updates to any affiliated parent entities will cascade.
+                </p>
+                <p>
                     Click the "Create" button below to add a new Biological Asset to the DINO database.
                 </p>
                 <div>

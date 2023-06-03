@@ -82,9 +82,11 @@ function EmployeeTasksPage ({hostURL}) {
                     relationship between Employees and Assigned Tasks, in addition to providing a way 
                     to track labor and costs in the process. Each "Employee Task" entity represents 
                     a report with a unique ID that shows work information performed for an existing Task.
-                    Deleting a Task Assigned, Employee, or Task Category that an Employee Task report references will result
+                </p>
+                <p> 
+                    <strong>Deleting</strong> a Task Assigned, Employee, or Task Category that an Employee Task report references will result
                     in the corresponding Employee Task values being set to <strong>null</strong> to retain a record
-                    of the costs and labor.
+                    of the costs and labor. <strong>Updates</strong> to any of these affiliated parent entities will <strong>cascade</strong>.
                 </p>
                 <p>
                     Click the "Create" button below to add a new Employee Task to the DINO database.
@@ -98,7 +100,8 @@ function EmployeeTasksPage ({hostURL}) {
                 <p>
                     To edit or delete any entity within the database, simply click the "Edit" or "<span className="demoRex">*</span>"
                     buttons on the left side of the corresponding row to enter the edit menu or delete
-                    it from the database, respectively.
+                    it from the database, respectively. Be aware that deleting an EmployeeTask entry will
+                    sever a link between an Employee and a Task Assigned.
                 </p>
             </article>
             <article>

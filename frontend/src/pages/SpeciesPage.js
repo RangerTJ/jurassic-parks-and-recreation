@@ -97,7 +97,6 @@ function SpeciesPage ({hostURL}) {
     return (
         <>
             <h2>Species</h2>
-
             <article>
                 <h3>Add New Species</h3>
                 <p>
@@ -107,16 +106,15 @@ function SpeciesPage ({hostURL}) {
                     <p><button onClick={() => navTo("/SpeciesAdd")}>Create</button></p>
                 </div>
             </article>
-
             <article>
                 <h3>Edit and Delete</h3>
                 <p>
                     To edit or delete any entity within the database, simply click the "Edit" or "<span className="demoRex">*</span>"
                     buttons on the left side of the corresponding row to enter the edit menu or delete
-                    it from the database, respectively.
+                    it from the database, respectively. Be aware that <strong>updates</strong> will <strong>cascade</strong> to Biological Assets.
+                    You are <strong>restricted</strong> from <strong>deleting</strong> a Species, if it has been assigned to a Biological Asset.
                 </p>
             </article>
-
             <article>
                 <h3>View Species</h3>
                 <p>
@@ -133,7 +131,6 @@ function SpeciesPage ({hostURL}) {
                 </div>
                 : '' }
             </article>
-            
             <div className="scrollableTable">
                 <table>
                     <tbody>
