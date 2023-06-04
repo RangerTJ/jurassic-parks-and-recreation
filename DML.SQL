@@ -573,6 +573,17 @@ LEFT JOIN Habitats ON Facilities.idHabitat = Habitats.idHabitat
 WHERE Parks.parkName = :parkName_input
 ORDER BY idFacility ASC;
 
+-- FILTER Facilities by TYPE (SELECT)
+SELECT  Facilities.idFacility, Parks.parkName, FacilityTypes.facTypeName, Habitats.habitatName,
+        Facilities.facilityName, Facilities.facilityDescription, Facilities.facilityLocation, 
+        Facilities.securityRating, Facilities.facilityPhoto, Facilities.facilityNote, Parks.parkLocation
+FROM Facilities
+LEFT JOIN Parks ON Facilities.idPark = Parks.idPark
+LEFT JOIN FacilityTypes ON Facilities.idFacilityType = FacilityTypes.idFacilityType
+LEFT JOIN Habitats ON Facilities.idHabitat = Habitats.idHabitat
+WHERE FacilityTypes.facTypeName = :facTypeName_input
+ORDER BY idFacility ASC;
+
 -- FILTER Facilities - Non-enclosures (BINARY SELECT))
 SELECT  Facilities.idFacility, Parks.parkName, FacilityTypes.facTypeName, Habitats.habitatName,
         Facilities.facilityName, Facilities.facilityDescription, Facilities.facilityLocation, 

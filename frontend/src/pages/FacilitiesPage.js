@@ -7,6 +7,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import Axios from 'axios';
 import defaultImg from '../images/tableDefaultPreview.png';
+import SelectorParks from "../components/selectorParks";
 
 
 // HostURL Passed from App.js

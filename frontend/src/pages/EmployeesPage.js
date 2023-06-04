@@ -23,6 +23,7 @@ function EmployeesPage ({hostURL}) {
 
     // Employee States
     const [employeesList, setEmployeesList] = useState([])
+    const [jobTitle, setJobTitle] = useState('')
 
     /* Citation: Creating a Simple Lightbox From Scratch in React by Alexandra Radevich
     URL: https://medium.com/swlh/creating-a-simple-lightbox-from-scratch-in-react-caea84f90960
@@ -31,7 +32,6 @@ function EmployeesPage ({hostURL}) {
     Accessed 5/22/2023. No modification of the following 2x declared useStates and 2x functions.*/
     const [lightboxDisplay, setLightBoxDisplay] = useState(false)
     const [imageToShow, setImageToShow] = useState('')
-    const [jobTitle, setJobTitle] = useState('')
     
     // Displays lightbox + selected image when triggered
     const showImage = (image) => {  
