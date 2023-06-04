@@ -157,8 +157,7 @@ function EmployeesPage ({hostURL}) {
                 </div>
                 : '' }
                 <p>
-                    The table below shows existing records and includes
-                    buttons to update or delete them. You can use the Job Title selector below to filter for
+                    You can use the Job Title selector below to filter for
                     employees that have a specific job. Select "None" to remove the filter and view the entire 
                     table of Employees. 
                 </p>

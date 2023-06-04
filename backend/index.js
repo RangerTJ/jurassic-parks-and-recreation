@@ -732,7 +732,7 @@ app.get('/api/getFacilities', (req, res) =>{
 });
 
 // READ Facilities BY PARK
-app.post('/api/getFacilitiesByPark', (req, res) =>{
+app.post('/api/filterFacilitiesByPark', (req, res) =>{
     const parkName = req.body.parkName
     const sqlRead = `
     SELECT  Facilities.idFacility, Parks.parkName, FacilityTypes.facTypeName, Habitats.habitatName,
@@ -757,7 +757,7 @@ app.post('/api/getFacilitiesByPark', (req, res) =>{
 });
 
 // READ Facilities BY TYPE
-app.post('/api/getFacilitiesByType', (req, res) =>{
+app.post('/api/filterFacilitiesByType', (req, res) =>{
     const facTypeName = req.body.facTypeName
     const sqlRead = `
     SELECT  Facilities.idFacility, Parks.parkName, FacilityTypes.facTypeName, Habitats.habitatName,

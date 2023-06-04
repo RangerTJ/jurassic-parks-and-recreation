@@ -17,11 +17,13 @@ function FacilitiesPage ({hostURL}) {
     const navTo = useNavigate();
 
     // Facilities SQL Endpoints
-    const getFacilitiesURL = hostURL + '/api/getFacilities';  // TO DO - CREATE USE EFFECT AND USE STATE
-    const deleteFacilitiesURL = hostURL + '/api/deleteFacilities/';  // TO DO - NEED TO ADD USE STATES AND CRUD FUNCTIONS FOR THIS; INSERT/UPDATE GO ON RESPECTIVE FORM PAGES
+    const getFacilitiesURL = hostURL + '/api/getFacilities';
+    const deleteFacilitiesURL = hostURL + '/api/deleteFacilities/';
+    const filterFacilitiesByParkURL = hostURL + '/api/filterFacilitiesByPark'
 
     // Facilities Table Functions
     const [facilitiesList, setFacilitiesList] = useState([])
+    const [parkName, setParkName] = useState('')
 
     /* Citation: Creating a Simple Lightbox From Scratch in React by Alexandra Radevich
     URL: https://medium.com/swlh/creating-a-simple-lightbox-from-scratch-in-react-caea84f90960
@@ -43,10 +45,31 @@ function FacilitiesPage ({hostURL}) {
      }
     /*!!! End of lightbox-tutorial code for function portion of page (see HTML rendering for calling of Lightbox commands) !!!*/
 
-    // READ Populate Facilities Table
+    // READ Facilities Table
     useEffect(()=> {
         getFacilities();
     }, [])
+
+    // READ Changes to Facilities Table
+    useEffect(() => {
+        parksFilter();
+    }, [parkName]);
+
+    // READ Apply Parks Filter to Facilities Table
+    const parksFilter = async () => {
+        if(parkName === "") {
+            await getFacilities();
+        }
+        else {
+            try {
+                const response = await Axios.post(filterFacilitiesByParkURL, {parkName : parkName})
+                setFacilitiesList(response.data);
+                console.log(response.data);
+            } catch (error) {
+                console.error('Error applying the filter to the View table.', error);
+            }
+        }
+    }
 
     // DELETE - Deletes target Facility and refreshes Table
     const delFacility = async (delVal) => {
@@ -125,6 +148,9 @@ function FacilitiesPage ({hostURL}) {
                     buttons to update or delete them. If you would like to view a larger version of a 
                     non-default photo click it to see a larger version. Then click anywhere again to dismiss the view.
                 </p>
+                <div className="selectorP">
+                    <SelectorParks hostURL={hostURL} setParkName={setParkName} parkName={parkName} isRequired={false}/>
+                </div>
                 {/* Lightbox example code used from: Creating a Simple Lightbox From Scratch in React by Alexandra Radevich
                 URL: https://medium.com/swlh/creating-a-simple-lightbox-from-scratch-in-react-caea84f90960
                 Accessed 5/22/2023. Modified with alt text value and custom display class.*/}
