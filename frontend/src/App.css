@@ -426,6 +426,10 @@ video {
   font-size: large;
 }
 
+.inlineDiv {
+  display: flex;
+}
+
 /* Mimic default P format for spacing selectors so HTML doesn't get angry about DIV in P elements */
 /* Information on default <p> settings provided by ChatGPT query on 5/19/23 */
 .selectorP {
@@ -433,7 +437,7 @@ video {
   margin-top: 1em;
   margin-bottom: 1em;
   margin-left: 0;
-  margin-right: 0;
+  margin-right: 10px;
   padding-left: 0;
   padding-right: 0;
 }

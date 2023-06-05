@@ -176,9 +176,9 @@ function FacilitiesPage ({hostURL}) {
                     You can use the Park and Facility Type selectors below to concurrently filter Facilities by these attributes.
                     Select "None" for both to remove the filters and view the entire table. 
                 </p>
-                <div className="selectorP">
-                    <SelectorParks hostURL={hostURL} setParkName={setParkName} parkName={parkName} isRequired={false}/>
-                    <SelectorFacilityTypes hostURL={hostURL} setFacTypeName={setFacTypeName} facTypeName={facTypeName} isRequired={false}/>
+                <div className="inlineDiv">
+                    <div className="selectorP"><SelectorParks hostURL={hostURL} setParkName={setParkName} parkName={parkName} isRequired={false}/></div>
+                    <div className="selectorP"><SelectorFacilityTypes hostURL={hostURL} setFacTypeName={setFacTypeName} facTypeName={facTypeName} isRequired={false}/></div>
                 </div>
                 {/* Lightbox example code used from: Creating a Simple Lightbox From Scratch in React by Alexandra Radevich
                 URL: https://medium.com/swlh/creating-a-simple-lightbox-from-scratch-in-react-caea84f90960
