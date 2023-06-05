@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import Axios from 'axios';
 import defaultImg from '../images/tableDefaultPreview.png';
 import SelectorParks from "../components/selectorParks";
+import SelectorFacilityTypes from "../components/selectorFacilityTypes";
 
 
 // HostURL Passed from App.js
@@ -20,10 +21,12 @@ function FacilitiesPage ({hostURL}) {
     const getFacilitiesURL = hostURL + '/api/getFacilities';
     const deleteFacilitiesURL = hostURL + '/api/deleteFacilities/';
     const filterFacilitiesByParkURL = hostURL + '/api/filterFacilitiesByPark'
+    const filterFacilitiesByTypeURL = hostURL + '/api/filterFacilitiesByType'
 
     // Facilities Table Functions
     const [facilitiesList, setFacilitiesList] = useState([])
     const [parkName, setParkName] = useState('')
+    const [facTypeName, setFacTypeName] = useState('')
 
     /* Citation: Creating a Simple Lightbox From Scratch in React by Alexandra Radevich
     URL: https://medium.com/swlh/creating-a-simple-lightbox-from-scratch-in-react-caea84f90960
@@ -50,10 +53,15 @@ function FacilitiesPage ({hostURL}) {
         getFacilities();
     }, [])
 
-    // READ Changes to Facilities Table
+    // READ Changes to Facilities Table (park filter changes)
     useEffect(() => {
         parksFilter();
     }, [parkName]);
+
+    // READ Changes to Facilities Table (facility types changes)
+    useEffect(() => {
+        typesFilter();
+    }, [facTypeName]);
 
     // READ Apply Parks Filter to Facilities Table
     const parksFilter = async () => {
@@ -63,6 +71,23 @@ function FacilitiesPage ({hostURL}) {
         else {
             try {
                 const response = await Axios.post(filterFacilitiesByParkURL, {parkName : parkName})
+                setFacilitiesList(response.data);
+                console.log(response.data);
+            } catch (error) {
+                console.error('Error applying the filter to the View table.', error);
+            }
+        }
+    }
+    
+    
+    // READ Apply Facility Types Filter to Facilities Table
+    const typesFilter = async () => {
+        if(facTypeName === "") {
+            await getFacilities();
+        }
+        else {
+            try {
+                const response = await Axios.post(filterFacilitiesByTypeURL, {facTypeName : facTypeName})
                 setFacilitiesList(response.data);
                 console.log(response.data);
             } catch (error) {
@@ -150,6 +175,7 @@ function FacilitiesPage ({hostURL}) {
                 </p>
                 <div className="selectorP">
                     <SelectorParks hostURL={hostURL} setParkName={setParkName} parkName={parkName} isRequired={false}/>
+                    <SelectorFacilityTypes hostURL={hostURL} setFacTypeName={setFacTypeName} facTypeName={facTypeName} isRequired={false}/>
                 </div>
                 {/* Lightbox example code used from: Creating a Simple Lightbox From Scratch in React by Alexandra Radevich
                 URL: https://medium.com/swlh/creating-a-simple-lightbox-from-scratch-in-react-caea84f90960
