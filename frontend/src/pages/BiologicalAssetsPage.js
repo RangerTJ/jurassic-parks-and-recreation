@@ -126,22 +126,6 @@ function BiologicalAssetsPage ({hostURL}) {
                 alert('MYSQL Server Error: ' + error.response.data);
             }
     };
-
-    // // READ Apply Species Filter to Bio Asset Table
-    // const speciesFilter = async () => {
-    //     if(species === "") {
-    //         await getAllBioAssets();
-    //     }
-    //     else {
-    //         try {
-    //             const response = await Axios.post(filterBioAssetsBySpeciesURL, {speciesName : species })
-    //             setBiologicalAssetList(response.data);
-    //             console.log(response.data);
-    //         } catch (error) {
-    //             console.error('Error applying the filter to the View table.', error);
-    //         }
-    //     }
-    // }
     
     // Fully Populate the Bio Asset List (without filters)
     const getAllBioAssets = async ()=> {
