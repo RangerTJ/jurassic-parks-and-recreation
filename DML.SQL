@@ -1,7 +1,6 @@
 -- Taylor Jordan and Nick Schmidt (Team 100: Jurassic Parks and Recreation)
 -- : colon prefix used (for now) to denote variables that will be involved with back end data.
 
-
 -- -----------------
 -- Functional Queries to Populate Drop-downs, etc.
 -- WARNING: May need to revisit if multi-column selects are too hard to use in drop-downs when we're using column1 only as the input
@@ -604,6 +603,17 @@ LEFT JOIN Parks ON Facilities.idPark = Parks.idPark
 LEFT JOIN FacilityTypes ON Facilities.idFacilityType = FacilityTypes.idFacilityType
 LEFT JOIN Habitats ON Facilities.idHabitat = Habitats.idHabitat
 WHERE Habitats.habitatName IS NOT NULL
+ORDER BY idFacility ASC;
+
+-- FILTER Facilities - Park AND Type
+SELECT  Facilities.idFacility, Parks.parkName, FacilityTypes.facTypeName, Habitats.habitatName,
+        Facilities.facilityName, Facilities.facilityDescription, Facilities.facilityLocation, 
+        Facilities.securityRating, Facilities.facilityPhoto, Facilities.facilityNote, Parks.parkLocation
+FROM Facilities
+LEFT JOIN Parks ON Facilities.idPark = Parks.idPark
+LEFT JOIN FacilityTypes ON Facilities.idFacilityType = FacilityTypes.idFacilityType
+LEFT JOIN Habitats ON Facilities.idHabitat = Habitats.idHabitat
+WHERE FacilityTypes.facTypeName = :facTypeName_input AND Parks.parkName = :parkName_input
 ORDER BY idFacility ASC;
 
 -- FILTER Species by Diet (SELECT)
