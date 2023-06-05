@@ -54,7 +54,7 @@ function FacilitiesPage ({hostURL}) {
         getFacilities();
     }, [])
 
-    // READ Changes to Facilities Table (facility types changes)
+    // READ Changes to Facilities Table (Filter Changes)
     useEffect(() => {
         facilitiesFilters();
     }, [parkName, facTypeName]);

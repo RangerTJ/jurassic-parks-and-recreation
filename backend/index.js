@@ -501,6 +501,47 @@ app.post('/api/filterEmployeeTasksByTaskName', (req, res) =>{
     });
 });
 
+// READ - FILTER Employee Tasks by Employee (username)
+app.post('/api/filterEmployeeTasksByEmployee', (req, res) =>{
+    const employeeUsername = req.body.employeeUsername
+    const sqlRead = `
+    SELECT  EmployeeTasks.idEmployeeTask, TasksAssigned.taskName, (SELECT CONCAT(Employees.firstName, ' ', Employees.lastName)) AS contributingEmployee,
+            TaskCategories.categoryName, EmployeeTasks.taskHoursWorked, EmployeeTasks.empTaskCost, EmployeeTasks.empTaskStart, EmployeeTasks.empTaskEnd,
+            Employees.employeeUsername
+    FROM EmployeeTasks
+    LEFT JOIN TasksAssigned ON EmployeeTasks.idTaskAssigned = TasksAssigned.idTaskAssigned
+    LEFT JOIN TaskCategories ON EmployeeTasks.idTaskCategory = TaskCategories.idTaskCategory
+    LEFT JOIN Employees ON EmployeeTasks.idEmployee = Employees.idEmployee
+    WHERE Employees.employeeUsername = ?
+    ORDER BY EmployeeTasks.idEmployeeTask ASC;
+    `;
+    db.query(sqlRead, employeeUsername, (err, result)=> {
+        console.log(result);
+        res.send(result);
+    });
+});
+
+// READ - FILTER Employee Tasks by Task + Employee (username)
+app.post('/api/filterEmployeeTasksByTaskAndEmployee', (req, res) =>{
+    const taskName = req.body.taskName
+    const employeeUsername = req.body.employeeUsername
+    const sqlRead = `
+    SELECT  EmployeeTasks.idEmployeeTask, TasksAssigned.taskName, (SELECT CONCAT(Employees.firstName, ' ', Employees.lastName)) AS contributingEmployee,
+            TaskCategories.categoryName, EmployeeTasks.taskHoursWorked, EmployeeTasks.empTaskCost, EmployeeTasks.empTaskStart, EmployeeTasks.empTaskEnd,
+            Employees.employeeUsername
+    FROM EmployeeTasks
+    LEFT JOIN TasksAssigned ON EmployeeTasks.idTaskAssigned = TasksAssigned.idTaskAssigned
+    LEFT JOIN TaskCategories ON EmployeeTasks.idTaskCategory = TaskCategories.idTaskCategory
+    LEFT JOIN Employees ON EmployeeTasks.idEmployee = Employees.idEmployee
+    WHERE TasksAssigned.taskName = ? AND Employees.employeeUsername = ?
+    ORDER BY EmployeeTasks.idEmployeeTask ASC;
+    `;
+    db.query(sqlRead, [taskName, employeeUsername], (err, result)=> {
+        console.log(result);
+        res.send(result);
+    });
+});
+
 // CREATE Employee Task Entry
 app.post('/api/insertEmployeeTasks', (req, res) =>{
     const taskName = req.body.taskName

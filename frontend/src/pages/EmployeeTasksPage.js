@@ -7,6 +7,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import Axios from 'axios';
 import SelectorTasksAssigned from "../components/selectorTasksAssigned";
+import SelectorEmployees from "../components/selectorEmployees";
 
 
 // HostURL Passed from App.js
@@ -19,29 +20,37 @@ function EmployeeTasksPage ({hostURL}) {
     const getEmployeeTasksURL = hostURL + '/api/getEmployeeTasks';
     const deleteEmployeeTasksURL = hostURL + '/api/deleteEmployeeTasks/';
     const filterEmployeeTasksByTaskNameURL = hostURL + '/api/filterEmployeeTasksByTaskName';
+    const filterEmployeeTasksByEmployeeURL = hostURL + '/api/filterEmployeeTasksByEmployee';
+    const filterEmployeeTasksByTaskNameAndEmployeeURL = hostURL + '/api/filterEmployeeTasksByTaskAndEmployee';
 
     // Employee Task Table Functions
     const [employeeTaskList, setEmployeeTaskList] = useState([]);
     const [taskName, setTaskName] = useState('');
+    const [employeeUsername, setEmployeeUsername] = useState('');
 
     // READ Populate Employee Task Table
     useEffect(()=> {
         getEmployeeTasks();
     }, [])
 
-    // READ Changes to Employee Tasks Table
+    // READ Changes to Employee Tasks Table (Filter Changes)
     useEffect(() => {
-        taskFilter();
-    }, [taskName]);
+        EmpTaskFilters();
+    }, [taskName, employeeUsername]);
 
-    // READ Apply Task Filter to Employee Tasks Table
-    const taskFilter = async () => {
-        // Get the unfiltered menu if default/null selected
-        if(taskName === "") {
-            await getEmployeeTasks();
-        }
-        // Apply filter otherwise
-        else {
+    // Handle two filters and let them be used concurrently
+    const EmpTaskFilters = async () => {
+        // If both filters selected, apply return of both selections
+        if(taskName && employeeUsername) {
+            try {
+                const response = await Axios.post(filterEmployeeTasksByTaskNameAndEmployeeURL, {taskName : taskName, employeeUsername: employeeUsername})
+                setEmployeeTaskList(response.data);
+                console.log(response.data);
+            } catch (error) {
+                console.error('Error applying the filter to the View table.', error);
+            }
+        } else if (taskName && employeeUsername==='') {
+            // If just Parks selected, return parks filter
             try {
                 const response = await Axios.post(filterEmployeeTasksByTaskNameURL, {taskName : taskName})
                 setEmployeeTaskList(response.data);
@@ -49,6 +58,19 @@ function EmployeeTasksPage ({hostURL}) {
             } catch (error) {
                 console.error('Error applying the filter to the View table.', error);
             }
+        } else if (taskName==='' && employeeUsername) {
+            // If just Types selected, return types filter
+            try {
+                const response = await Axios.post(filterEmployeeTasksByEmployeeURL, {employeeUsername : employeeUsername})
+                setEmployeeTaskList(response.data);
+                console.log(response.data);
+            } catch (error) {
+                console.error('Error applying the filter to the View table.', error);
+            }
+        }
+        // If neither filter selected, return everything
+        else {
+            await getEmployeeTasks();
         }
     }
 
@@ -138,8 +160,13 @@ function EmployeeTasksPage ({hostURL}) {
                     that pertain to a specific Task Assigned. Select "None" to remove the filter and view the entire 
                     table of Employee Tasks. All Assigned Tasks can be filtered for.
                 </p>
-                <div className="selectorP">
-                    <SelectorTasksAssigned hostURL={hostURL} setTaskName={setTaskName} taskName={taskName} isRequired={false} getAll={true}/>
+                <p>
+                    You can use the Tasks and Employee selectors below to concurrently filter Employee Tasks by these attributes.
+                    Select "None" for both to remove the filters and view the entire table. 
+                </p>
+                <div className="inlineDiv">
+                    <div className="selectorP"><SelectorTasksAssigned hostURL={hostURL} setTaskName={setTaskName} taskName={taskName} isRequired={false} getAll={true}/></div>
+                    <div className="selectorP"><SelectorEmployees hostURL={hostURL} setEmployeeUsername={setEmployeeUsername} employeeUsername={employeeUsername} isRequired={false}/></div>
                 </div>
                 <div className="scrollableTable">
                     <table>
