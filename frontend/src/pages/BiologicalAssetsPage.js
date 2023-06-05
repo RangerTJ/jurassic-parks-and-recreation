@@ -354,7 +354,10 @@ function BiologicalAssetsPage ({hostURL}) {
                                         <div>#{val.idBiologicalAsset}</div>
                                         <div><strong>{val.bioAssetName}</strong></div>
                                     </td>
-                                    <td>{val.speciesName}</td>
+                                    <td>
+                                        <div><strong>{val.speciesName}</strong></div>
+                                        <div>{val.dietName}</div>
+                                    </td>
                                     <td>{val.facilityName}</td>
                                 </tr>
                             )}

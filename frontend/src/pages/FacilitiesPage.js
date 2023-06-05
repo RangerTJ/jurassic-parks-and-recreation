@@ -174,7 +174,7 @@ function FacilitiesPage ({hostURL}) {
                 </p>
                 <p>
                     You can use the Park and Facility Type selectors below to concurrently filter Facilities by these attributes.
-                    Select "None" for both to remove the filters and view the entire table. 
+                    Select "None" to remove the respective filter.
                 </p>
                 <div className="inlineDiv">
                     <div className="selectorP"><SelectorParks hostURL={hostURL} setParkName={setParkName} parkName={parkName} isRequired={false}/></div>

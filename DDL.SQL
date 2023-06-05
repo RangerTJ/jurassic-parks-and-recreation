@@ -402,7 +402,7 @@ VALUES
 (1, 3, 'Allosaurus', 'A large carnivorous dinosaur with sharp teeth and strong arms.', 9, '/static/media/Allosaurus.2f7730877f82a0754b3f.jpg'),
 (2, 4, 'Ankylosaurus', 'A heavily-armored herbivorous dinosaur with a club-like tail.', 6, '/static/media/Ankylosaurus.1f7da3d261f2a72cb88f.jpg'),
 (2, 3, 'Parasaurolophus', 'A herbivorous dinosaur with a distinctive crest on its head.', 2, '/static/media/Parasaurolophus (Lux Variant).1136ace8c5176c832f68.jpg'),
-(4, 6, 'Mosasaurus', 'A large marine reptile; it was an apex predator, feeding primarily on fish, seabirds, and other marine creatures.', 10, '/static/media/Mosasaurus.3742f5eee82188574bcd.jpg'),
+(5, 6, 'Mosasaurus', 'A large marine reptile; it was an apex predator, feeding primarily on fish, seabirds, and other marine creatures.', 10, '/static/media/Mosasaurus.3742f5eee82188574bcd.jpg'),
 (4, 2, 'Hesperornis', 'A large flightless aquatic bird, characterized by its powerful legs adapted for swimming and diving. It fed primarily on fish.', 3, '/static/media/Hesperornis.71827d1f6f92d1fae9e4.png'),
 (2, 4, 'Thescelosaurus', 'A small, bipedal herbivore characterized by its long legs, suggesting it was a fast runner.', 2, '/static/media/Thescelosaurus.52b3e750f81a48607cfd.png'),
 (1, 5, 'Diplocaulus', 'A prehistoric amphibian with a distinctive boomerang-shaped skull. Likely a carnivorous ambush predator.', 4, '/static/media/Diplocaulus.b7657f9d80f9f25f9c7c.png'),

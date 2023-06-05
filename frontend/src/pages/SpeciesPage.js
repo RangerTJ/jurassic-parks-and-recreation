@@ -7,6 +7,8 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom'; 
 import Axios from 'axios';
 import defaultImg from '../images/tableDefaultPreview.png';
+import SelectorDietTypes from "../components/selectorDiets";
+import SelectorHabitats from "../components/selectorHabitats";
 
 
 // HostURL Passed from App.js
@@ -18,9 +20,14 @@ function SpeciesPage ({hostURL}) {
     // Species SQL Endpoints
     const getSpeciesURL = hostURL + '/api/getSpecies';
     const deleteSpeciesURL = hostURL + '/api/deleteSpecies/';
+    const filterSpeciesByDiet = hostURL + '/api/getSpeciesByDiet';
+    const filterSpeciesByHabitat = hostURL + '/api/getSpeciesByHabitat';
+    const filterSpeciesByDietAndHabitat = hostURL + '/api/getSpeciesByDietAndHabitat';
 
     // Species Table Functions
     const [speciesList, setSpeciesList] = useState([])
+    const [dietName, setDietName] = useState('');
+    const [habitatName, setHabitatName] = useState('');
 
     // READ Populate Species Table
     useEffect(() => {
@@ -37,6 +44,47 @@ function SpeciesPage ({hostURL}) {
             console.error('Error populating the Species table.', error);
         }
     };
+
+    // READ Changes to Employee Tasks Table (Filter Changes)
+    useEffect(() => {
+        SpeciesFilters();
+    }, [dietName, habitatName]);
+
+    // Handle two filters and let them be used concurrently
+    const SpeciesFilters = async () => {
+        // If both filters selected, apply return of both selections
+        if(dietName && habitatName) {
+            try {
+                const response = await Axios.post(filterSpeciesByDietAndHabitat, {dietName: dietName, habitatName: habitatName})
+                setSpeciesList(response.data);
+                console.log(response.data);
+            } catch (error) {
+                console.error('Error applying the filter to the View table.', error);
+            }
+        } else if (dietName && habitatName==='') {
+            // If just Parks selected, return parks filter
+            try {
+                const response = await Axios.post(filterSpeciesByDiet, {dietName: dietName})
+                setSpeciesList(response.data);
+                console.log(response.data);
+            } catch (error) {
+                console.error('Error applying the filter to the View table.', error);
+            }
+        } else if (dietName==='' && habitatName) {
+            // If just Types selected, return types filter
+            try {
+                const response = await Axios.post(filterSpeciesByHabitat, {habitatName: habitatName})
+                setSpeciesList(response.data);
+                console.log(response.data);
+            } catch (error) {
+                console.error('Error applying the filter to the View table.', error);
+            }
+        }
+        // If neither filter selected, return everything
+        else {
+            await getSpecies();
+        }
+    }
 
     // UPDATE Primer: Passes an object containing "current" (old) attributes to the useNavigate() function, navTo(), to the edit page.
     // Follows general strategy suggested by stackoverflow user Abdulazeez Jimoh on 10/25/2022
@@ -130,7 +178,15 @@ function SpeciesPage ({hostURL}) {
                     <img id="lightbox-img" src={imageToShow} alt={imageToShow} className="lightbox-image"></img>
                 </div>
                 : '' }
+                <p>
+                    You can use the Diet or Habitat selectors below to concurrently filter the species Table.
+                    Select "None" for either filter to remove it.
+                </p>
             </article>
+            <div className="inlineDiv">
+                <div className="selectorP"><SelectorDietTypes hostURL={hostURL} setDietName={setDietName} dietName={dietName} isRequired={false}/></div>
+                <div className="selectorP"><SelectorHabitats hostURL={hostURL} setHabitatName={setHabitatName} habitatName={habitatName} isRequired={false}/></div>
+            </div>
             <div className="scrollableTable">
                 <table>
                     <tbody>

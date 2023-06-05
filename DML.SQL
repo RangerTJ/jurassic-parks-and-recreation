@@ -110,11 +110,12 @@ LEFT JOIN Habitats ON Species.idHabitat = Habitats.idHabitat
 ORDER BY idSpecies ASC; 
 
 -- SELECT BiologicalAssets
-SELECT BiologicalAssets.idBiologicalAsset, BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName, Species.speciesPhoto
+SELECT BiologicalAssets.idBiologicalAsset, BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName, Species.threatLevel, Species.speciesPhoto, Diets.dietName  
 FROM BiologicalAssets
--- Need to join Species -> BiologicalAssets -> Facilities
+-- Need to join Species -> BiologicalAssets -> Facilities -> Diets
 JOIN Species ON BiologicalAssets.idSpecies = Species.idSpecies
 JOIN Facilities ON BiologicalAssets.idFacility = Facilities.idFacility
+JOIN Diets ON Species.idDiet = Diets.idDiet
 ORDER BY idBiologicalAsset ASC;
 
 -- SELECT JobClassifications
@@ -631,6 +632,15 @@ FROM Species
 LEFT JOIN Diets ON Species.idDiet = Diets.idDiet
 LEFT JOIN Habitats ON Species.idHabitat = Habitats.idHabitat
 WHERE Habitats.habitatName = :habitatName_input
+ORDER BY idSpecies ASC;
+
+-- FILTER Species by Diet + Habitat (SELECT)
+SELECT Species.idSpecies, Species.speciesName, Diets.dietName, Habitats.habitatName, Species.speciesDescription,
+Species.threatLevel, Species.speciesPhoto
+FROM Species
+LEFT JOIN Diets ON Species.idDiet = Diets.idDiet
+LEFT JOIN Habitats ON Species.idHabitat = Habitats.idHabitat
+WHERE Habitats.habitatName = :habitatName_input AND Diets.dietName = :dietName_input
 ORDER BY idSpecies ASC;
 
 -- FILTER Biological Assets by Facility (SELECT)

@@ -1022,10 +1022,11 @@ app.delete('/api/deleteFacilityTypes/:idFacilityType', (req, res) =>{
 // READ List All Assets
 app.get('/api/getBiologicalAssets', (req, res) =>{
     const sqlRead = `
-    SELECT BiologicalAssets.idBiologicalAsset, BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName, Species.threatLevel, Species.speciesPhoto  
+    SELECT BiologicalAssets.idBiologicalAsset, BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName, Species.threatLevel, Species.speciesPhoto, Diets.dietName  
     FROM BiologicalAssets
     JOIN Species ON BiologicalAssets.idSpecies = Species.idSpecies
     JOIN Facilities ON BiologicalAssets.idFacility = Facilities.idFacility
+    JOIN Diets ON Species.idDiet = Diets.idDiet
     ORDER BY idBiologicalAsset ASC;
     `;
     db.query(sqlRead, (err, result)=> {
@@ -1197,10 +1198,74 @@ app.get('/api/getSpecies', (req, res) => {
 });
 
 // Filter Species by Diet
+app.post('/api/getSpeciesByDiet', (req, res) => {
+    const dietName = req.body.dietName
+    const sqlRead = `
+    SELECT Species.idSpecies, Species.speciesName, Diets.dietName, Habitats.habitatName, Species.speciesDescription,
+    Species.threatLevel, Species.speciesPhoto
+    FROM Species
+    LEFT JOIN Diets ON Species.idDiet = Diets.idDiet
+    LEFT JOIN Habitats ON Species.idHabitat = Habitats.idHabitat
+    WHERE Diets.dietName = ?
+    ORDER BY idSpecies ASC;
+    `;
+    db.query(sqlRead, [dietName], (err, result) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send(err.sqlMessage)
+        } else {
+            console.log(result)
+            res.send(result);
+        };
+    });
+});
 
 // Filter by Species Habitat
+app.post('/api/getSpeciesByHabitat', (req, res) => {
+    const habitatName = req.body.habitatName
+    const sqlRead = `
+    SELECT Species.idSpecies, Species.speciesName, Diets.dietName, Habitats.habitatName, Species.speciesDescription,
+    Species.threatLevel, Species.speciesPhoto
+    FROM Species
+    LEFT JOIN Diets ON Species.idDiet = Diets.idDiet
+    LEFT JOIN Habitats ON Species.idHabitat = Habitats.idHabitat
+    WHERE Habitats.habitatName = ?
+    ORDER BY idSpecies ASC;
+    `;
+    db.query(sqlRead, [habitatName], (err, result) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send(err.sqlMessage)
+        } else {
+            console.log(result)
+            res.send(result);
+        };
+    });
+});
 
 // Filter by Species Both
+app.post('/api/getSpeciesByDietAndHabitat', (req, res) => {
+    const dietName = req.body.dietName
+    const habitatName = req.body.habitatName
+    const sqlRead = `
+    SELECT Species.idSpecies, Species.speciesName, Diets.dietName, Habitats.habitatName, Species.speciesDescription,
+       Species.threatLevel, Species.speciesPhoto
+    FROM Species
+    LEFT JOIN Diets ON Species.idDiet = Diets.idDiet
+    LEFT JOIN Habitats ON Species.idHabitat = Habitats.idHabitat
+    WHERE Diets.dietName = ? AND Habitats.habitatName = ?
+    ORDER BY idSpecies ASC;
+    `;
+    db.query(sqlRead, [dietName, habitatName], (err, result) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send(err.sqlMessage)
+        } else {
+            console.log(result)
+            res.send(result);
+        };
+    });
+});
 
 // Create Species
 app.post('/api/insertSpecies', (req, res) => {

@@ -43,7 +43,7 @@ function EmployeeTasksPage ({hostURL}) {
         // If both filters selected, apply return of both selections
         if(taskName && employeeUsername) {
             try {
-                const response = await Axios.post(filterEmployeeTasksByTaskNameAndEmployeeURL, {taskName : taskName, employeeUsername: employeeUsername})
+                const response = await Axios.post(filterEmployeeTasksByTaskNameAndEmployeeURL, {taskName: taskName, employeeUsername: employeeUsername})
                 setEmployeeTaskList(response.data);
                 console.log(response.data);
             } catch (error) {
@@ -52,7 +52,7 @@ function EmployeeTasksPage ({hostURL}) {
         } else if (taskName && employeeUsername==='') {
             // If just Parks selected, return parks filter
             try {
-                const response = await Axios.post(filterEmployeeTasksByTaskNameURL, {taskName : taskName})
+                const response = await Axios.post(filterEmployeeTasksByTaskNameURL, {taskName: taskName})
                 setEmployeeTaskList(response.data);
                 console.log(response.data);
             } catch (error) {
@@ -61,7 +61,7 @@ function EmployeeTasksPage ({hostURL}) {
         } else if (taskName==='' && employeeUsername) {
             // If just Types selected, return types filter
             try {
-                const response = await Axios.post(filterEmployeeTasksByEmployeeURL, {employeeUsername : employeeUsername})
+                const response = await Axios.post(filterEmployeeTasksByEmployeeURL, {employeeUsername: employeeUsername})
                 setEmployeeTaskList(response.data);
                 console.log(response.data);
             } catch (error) {
@@ -162,7 +162,7 @@ function EmployeeTasksPage ({hostURL}) {
                 </p>
                 <p>
                     You can use the Tasks and Employee selectors below to concurrently filter Employee Tasks by these attributes.
-                    Select "None" for both to remove the filters and view the entire table. 
+                    Select "None" to remove the respective filter. 
                 </p>
                 <div>
                     <div className="selectorP"><SelectorTasksAssigned hostURL={hostURL} setTaskName={setTaskName} taskName={taskName} isRequired={false} getAll={true}/></div>
