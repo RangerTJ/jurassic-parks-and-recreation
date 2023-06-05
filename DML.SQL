@@ -3,7 +3,6 @@
 
 -- -----------------
 -- Functional Queries to Populate Drop-downs, etc.
--- WARNING: May need to revisit if multi-column selects are too hard to use in drop-downs when we're using column1 only as the input
 -- -----------------
 
 -- Park Selector
@@ -688,9 +687,6 @@ LEFT JOIN Facilities ON BiologicalAssets.idFacility = Facilities.idFacility
 LEFT JOIN Parks ON Facilities.idPark = Parks.idPark
 GROUP BY BiologicalAssets.bioAssetName
 ORDER BY assetCost DESC;
-
-
-
 
 -- ----------------
 -- Required Subqueries - For Easy Copy/Pasting as needed in larger queries
