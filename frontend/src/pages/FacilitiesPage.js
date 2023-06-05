@@ -22,6 +22,7 @@ function FacilitiesPage ({hostURL}) {
     const deleteFacilitiesURL = hostURL + '/api/deleteFacilities/';
     const filterFacilitiesByParkURL = hostURL + '/api/filterFacilitiesByPark'
     const filterFacilitiesByTypeURL = hostURL + '/api/filterFacilitiesByType'
+    const filterFacilitiesParkAndTypeURL = hostURL + '/api/filterFacilitiesParkAndType'
 
     // Facilities Table Functions
     const [facilitiesList, setFacilitiesList] = useState([])
@@ -53,22 +54,34 @@ function FacilitiesPage ({hostURL}) {
         getFacilities();
     }, [])
 
-    // READ Changes to Facilities Table (park filter changes)
-    useEffect(() => {
-        parksFilter();
-    }, [parkName]);
+    // // READ Changes to Facilities Table (park filter changes)
+    // useEffect(() => {
+    //     parksFilter();
+    // }, [parkName]);
+
+    // // READ Changes to Facilities Table (facility types changes)
+    // useEffect(() => {
+    //     typesFilter();
+    // }, [facTypeName]);
 
     // READ Changes to Facilities Table (facility types changes)
     useEffect(() => {
-        typesFilter();
-    }, [facTypeName]);
+        facilitiesFilters();
+    }, [parkName, facTypeName]);
 
-    // READ Apply Parks Filter to Facilities Table
-    const parksFilter = async () => {
-        if(parkName === "") {
-            await getFacilities();
-        }
-        else {
+
+    const facilitiesFilters = async () => {
+        // If both filters selected, apply return of both selections
+        if(parkName && facTypeName) {
+            try {
+                const response = await Axios.post(filterFacilitiesParkAndTypeURL, {parkName : parkName, facTypeName: facTypeName})
+                setFacilitiesList(response.data);
+                console.log(response.data);
+            } catch (error) {
+                console.error('Error applying the filter to the View table.', error);
+            }
+        } else if (parkName && facTypeName==='') {
+            // If just Parks selected, return parks filter
             try {
                 const response = await Axios.post(filterFacilitiesByParkURL, {parkName : parkName})
                 setFacilitiesList(response.data);
@@ -76,16 +89,8 @@ function FacilitiesPage ({hostURL}) {
             } catch (error) {
                 console.error('Error applying the filter to the View table.', error);
             }
-        }
-    }
-    
-    
-    // READ Apply Facility Types Filter to Facilities Table
-    const typesFilter = async () => {
-        if(facTypeName === "") {
-            await getFacilities();
-        }
-        else {
+        } else if (parkName==='' && facTypeName) {
+            // If just Types selected, return types filter
             try {
                 const response = await Axios.post(filterFacilitiesByTypeURL, {facTypeName : facTypeName})
                 setFacilitiesList(response.data);
@@ -94,7 +99,43 @@ function FacilitiesPage ({hostURL}) {
                 console.error('Error applying the filter to the View table.', error);
             }
         }
+        // If neither filter selected, return everything
+        else {
+            await getFacilities();
+        }
     }
+
+    // // READ Apply Parks Filter to Facilities Table
+    // const parksFilter = async () => {
+    //     if(parkName === "") {
+    //         await getFacilities();
+    //     }
+    //     else {
+    //         try {
+    //             const response = await Axios.post(filterFacilitiesByParkURL, {parkName : parkName})
+    //             setFacilitiesList(response.data);
+    //             console.log(response.data);
+    //         } catch (error) {
+    //             console.error('Error applying the filter to the View table.', error);
+    //         }
+    //     }
+    // }
+    
+    // // READ Apply Facility Types Filter to Facilities Table
+    // const typesFilter = async () => {
+    //     if(facTypeName === "") {
+    //         await getFacilities();
+    //     }
+    //     else {
+    //         try {
+    //             const response = await Axios.post(filterFacilitiesByTypeURL, {facTypeName : facTypeName})
+    //             setFacilitiesList(response.data);
+    //             console.log(response.data);
+    //         } catch (error) {
+    //             console.error('Error applying the filter to the View table.', error);
+    //         }
+    //     }
+    // }
 
     // DELETE - Deletes target Facility and refreshes Table
     const delFacility = async (delVal) => {
@@ -174,6 +215,7 @@ function FacilitiesPage ({hostURL}) {
                     non-default photo click it to see a larger version. Then click anywhere again to dismiss the view.
                 </p>
                 <div className="selectorP">
+                    DEBUG: {parkName},{facTypeName}
                     <SelectorParks hostURL={hostURL} setParkName={setParkName} parkName={parkName} isRequired={false}/>
                     <SelectorFacilityTypes hostURL={hostURL} setFacTypeName={setFacTypeName} facTypeName={facTypeName} isRequired={false}/>
                 </div>

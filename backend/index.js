@@ -781,6 +781,32 @@ app.post('/api/filterFacilitiesByType', (req, res) =>{
     });
 });
 
+// READ Facilities BY TYPE AND PARK
+app.post('/api/filterFacilitiesParkAndType', (req, res) =>{
+    const facTypeName = req.body.facTypeName
+    const parkName = req.body.parkName
+    const sqlRead = `
+    SELECT  Facilities.idFacility, Parks.parkName, FacilityTypes.facTypeName, Habitats.habitatName,
+            Facilities.facilityName, Facilities.facilityDescription, Facilities.facilityLocation, 
+            Facilities.securityRating, Facilities.facilityPhoto, Facilities.facilityNote, Parks.parkLocation
+    FROM Facilities
+    LEFT JOIN Parks ON Facilities.idPark = Parks.idPark
+    LEFT JOIN FacilityTypes ON Facilities.idFacilityType = FacilityTypes.idFacilityType
+    LEFT JOIN Habitats ON Facilities.idHabitat = Habitats.idHabitat
+    WHERE FacilityTypes.facTypeName = ? AND Parks.parkName = ?
+    ORDER BY idFacility ASC;
+    `;
+    db.query(sqlRead, [facTypeName, parkName], (err, result)=> {
+        if (err) {
+            console.error(err);
+            res.status(500).send(err.sqlMessage)
+        } else {
+            console.log(result)
+            res.send(result);
+        };
+    });
+});
+
 // Add Facility
 app.post('/api/insertFacilities', (req, res) =>{
     const parkName = req.body.parkName
