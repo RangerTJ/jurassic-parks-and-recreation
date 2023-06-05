@@ -651,6 +651,15 @@ LEFT JOIN Facilities ON BiologicalAssets.idFacility = Facilities.idFacility
 WHERE Facilities.facilityName = :facilityName_input AND Facilities.idHabitat IS NULL
 ORDER BY idBiologicalAsset ASC;
 
+-- FILTER Biological Asset by Species AND Facility
+SELECT BiologicalAssets.idBiologicalAsset, BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName, Species.speciesPhoto, Diets.dietName
+FROM BiologicalAssets
+JOIN Species ON BiologicalAssets.idSpecies = Species.idSpecies
+JOIN Diets ON Species.idDiet = Diets.idDiet
+JOIN Facilities ON BiologicalAssets.idFacility = Facilities.idFacility
+WHERE Species.speciesName = ? AND Facilities.facilityName = ?
+ORDER BY idBiologicalAsset ASC;
+
 -- (Optional) POPULATE SELECT MENU FOR FACILITIES WITH ENCLOSURES (Habitats) - Designed to work with the above (Optional)
 SELECT  Facilities.idFacility, Parks.parkName, FacilityTypes.facTypeName, Habitats.habitatName,
         Facilities.facilityName, Facilities.facilityDescription, Facilities.facilityLocation, 

@@ -20,9 +20,9 @@ function SpeciesPage ({hostURL}) {
     // Species SQL Endpoints
     const getSpeciesURL = hostURL + '/api/getSpecies';
     const deleteSpeciesURL = hostURL + '/api/deleteSpecies/';
-    const filterSpeciesByDiet = hostURL + '/api/getSpeciesByDiet';
-    const filterSpeciesByHabitat = hostURL + '/api/getSpeciesByHabitat';
-    const filterSpeciesByDietAndHabitat = hostURL + '/api/getSpeciesByDietAndHabitat';
+    const filterSpeciesByDietURL = hostURL + '/api/getSpeciesByDiet';
+    const filterSpeciesByHabitatURL = hostURL + '/api/getSpeciesByHabitat';
+    const filterSpeciesByDietAndHabitatURL = hostURL + '/api/getSpeciesByDietAndHabitat';
 
     // Species Table Functions
     const [speciesList, setSpeciesList] = useState([])
@@ -55,7 +55,7 @@ function SpeciesPage ({hostURL}) {
         // If both filters selected, apply return of both selections
         if(dietName && habitatName) {
             try {
-                const response = await Axios.post(filterSpeciesByDietAndHabitat, {dietName: dietName, habitatName: habitatName})
+                const response = await Axios.post(filterSpeciesByDietAndHabitatURL, {dietName: dietName, habitatName: habitatName})
                 setSpeciesList(response.data);
                 console.log(response.data);
             } catch (error) {
@@ -64,7 +64,7 @@ function SpeciesPage ({hostURL}) {
         } else if (dietName && habitatName==='') {
             // If just Parks selected, return parks filter
             try {
-                const response = await Axios.post(filterSpeciesByDiet, {dietName: dietName})
+                const response = await Axios.post(filterSpeciesByDietURL, {dietName: dietName})
                 setSpeciesList(response.data);
                 console.log(response.data);
             } catch (error) {
@@ -73,7 +73,7 @@ function SpeciesPage ({hostURL}) {
         } else if (dietName==='' && habitatName) {
             // If just Types selected, return types filter
             try {
-                const response = await Axios.post(filterSpeciesByHabitat, {habitatName: habitatName})
+                const response = await Axios.post(filterSpeciesByHabitatURL, {habitatName: habitatName})
                 setSpeciesList(response.data);
                 console.log(response.data);
             } catch (error) {

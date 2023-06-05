@@ -17,18 +17,18 @@ function BiologicalAssetsAddForm ({hostURL}) {
     const navTo = useNavigate();
 
     // Bio Asset States for the Form (2x arrays for select menus + 3x values to submit)
-    const [species, setSpecies] = useState('')
+    const [speciesName, setSpeciesName] = useState('')
     const [name, setName] = useState('')
-    const [facility, setFacility] = useState('')
+    const [facilityName, setFacilityName] = useState('')
 
     // CREATE - Insert New Bio Asset then return to asset home
     const submit = async () => {
         try {
-            if (species && name && facility) {
+            if (speciesName && name && facilityName) {
                 await Axios.post(createBiologicalAssetsURL, {
-                    speciesName: species,
+                    speciesName: speciesName,
                     bioAssetName: name,
-                    facilityName: facility,
+                    facilityName: facilityName,
                 });
                 alert(`${name} has been added to the database!`);
                 navTo('/BiologicalAssets');
@@ -54,7 +54,7 @@ function BiologicalAssetsAddForm ({hostURL}) {
                     <fieldset>
                         <legend>Information</legend>
                         <div className="selectorP">
-                            <SelectorSpecies  hostURL={hostURL} species={species} setSpecies={setSpecies} isRequired={true} autoFocus={true}/>
+                            <SelectorSpecies  hostURL={hostURL} speciesName={speciesName} setSpeciesName={setSpeciesName} isRequired={true} autoFocus={true}/>
                         </div>
                         <div className="selectorP">
                             <div><label htmlFor="bioAssetName">Name</label></div>
@@ -68,7 +68,7 @@ function BiologicalAssetsAddForm ({hostURL}) {
                                 }/>
                         </div>
                         <div className="selectorP">
-                            <SelectorFacilities hostURL={hostURL} facility={facility} setFacility={setFacility} isRequired={true}/>
+                            <SelectorFacilities hostURL={hostURL} facilityName={facilityName} setFacilityName={setFacilityName} isRequired={true}/>
                         </div>
                     </fieldset>
                 </form>

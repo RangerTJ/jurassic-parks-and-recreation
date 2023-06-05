@@ -650,7 +650,7 @@ app.get('/api/getTasksAssigned', (req, res) => {
 
 //CREATE - Assigned Task Entry
 app.post('/api/insertTasksAssigned', (req, res) => {
-    const facilityName = req.body.facility
+    const facilityName = req.body.facilityName
     const bioAssetName = req.body.bioAssetName
     const taskName = req.body.taskName
     const taskDescription = req.body.taskDescription
@@ -1136,14 +1136,62 @@ app.put('/api/updateBiologicalAssets', (req, res) =>{
 app.post('/api/filterBioAssetsBySpecies', (req, res) =>{
     const speciesName = req.body.speciesName
     const sqlRead = `
-    SELECT BiologicalAssets.idBiologicalAsset, BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName, Species.speciesPhoto 
+    SELECT BiologicalAssets.idBiologicalAsset, BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName, Species.speciesPhoto, Diets.dietName
     FROM BiologicalAssets
     JOIN Species ON BiologicalAssets.idSpecies = Species.idSpecies
+    JOIN Diets ON Species.idDiet = Diets.idDiet
     JOIN Facilities ON BiologicalAssets.idFacility = Facilities.idFacility
     WHERE Species.speciesName = ?
     ORDER BY idBiologicalAsset ASC;
     `;
     db.query(sqlRead, speciesName, (err, result)=> {
+        if (err) {
+            console.error(err);
+            res.status(500).send(err.sqlMessage)
+        } else {
+            console.log(result)
+            res.send(result);
+        };
+    });
+});
+
+// READ Assets Filtered by Facility
+app.post('/api/filterBioAssetsByFacility', (req, res) =>{
+    const facilityName = req.body.facilityName
+    const sqlRead = `
+    SELECT BiologicalAssets.idBiologicalAsset, BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName, Species.speciesPhoto, Diets.dietName
+    FROM BiologicalAssets
+    JOIN Species ON BiologicalAssets.idSpecies = Species.idSpecies
+    JOIN Diets ON Species.idDiet = Diets.idDiet
+    JOIN Facilities ON BiologicalAssets.idFacility = Facilities.idFacility
+    WHERE Facilities.facilityName = ?
+    ORDER BY idBiologicalAsset ASC;
+    `;
+    db.query(sqlRead, facilityName, (err, result)=> {
+        if (err) {
+            console.error(err);
+            res.status(500).send(err.sqlMessage)
+        } else {
+            console.log(result)
+            res.send(result);
+        };
+    });
+});
+
+// READ Assets Filtered by Species + Facility
+app.post('/api/filterBioAssetsBySpeciesAndFacility', (req, res) =>{
+    const speciesName = req.body.speciesName
+    const facilityName = req.body.facilityName
+    const sqlRead = `
+    SELECT BiologicalAssets.idBiologicalAsset, BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName, Species.speciesPhoto, Diets.dietName
+    FROM BiologicalAssets
+    JOIN Species ON BiologicalAssets.idSpecies = Species.idSpecies
+    JOIN Diets ON Species.idDiet = Diets.idDiet
+    JOIN Facilities ON BiologicalAssets.idFacility = Facilities.idFacility
+    WHERE Species.speciesName = ? AND Facilities.facilityName = ?
+    ORDER BY idBiologicalAsset ASC;
+    `;
+    db.query(sqlRead, [speciesName, facilityName], (err, result)=> {
         if (err) {
             console.error(err);
             res.status(500).send(err.sqlMessage)

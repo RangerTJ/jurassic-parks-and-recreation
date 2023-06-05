@@ -18,7 +18,7 @@ function TasksAssignedAddForm ({hostURL}) {
     const navTo = useNavigate();
 
     // Task States for the Form
-    const [facility, setFacility] = useState(null);
+    const [facilityName, setFacilityName] = useState(null);
     const [bioAssetName, setBioAssetName] = useState(null);
     const [taskName, setTaskName] = useState('')
     const [taskDescription, setTaskDescription] = useState('')
@@ -35,11 +35,11 @@ function TasksAssignedAddForm ({hostURL}) {
         try {
             if (trueStart > trueEnd) {
                 alert("We don't yet use time machines to obtain our prehistoric assets! Fix the start/end dates.");
-            } else if  (facility && taskName && taskDescription && taskStart) {
+            } else if  (facilityName && taskName && taskDescription && taskStart) {
                 let finalTaskEnd = taskEnd === '' ? null : taskEnd;
     
                 Axios.post(createTasksAssignedURL, {
-                    facility: facility,
+                    facilityName: facilityName,
                     bioAssetName: bioAssetName,
                     taskName: taskName,
                     taskDescription: taskDescription,
@@ -84,7 +84,7 @@ function TasksAssignedAddForm ({hostURL}) {
                     <fieldset>
                         <legend>Details</legend>
                             <div className="selectorP">
-                                <SelectorFacilities hostURL={hostURL} facility={facility} setFacility={setFacility} isRequired={true} autoFocus={true}/>
+                                <SelectorFacilities hostURL={hostURL} facilityName={facilityName} setFacilityName={setFacilityName} isRequired={true} autoFocus={true}/>
                             </div>
                             <div className="selectorP">
                                 <SelectorBiologicalAssets hostURL={hostURL} bioAssetName={bioAssetName} setBioAssetName={setBioAssetName} isRequired={false}/>

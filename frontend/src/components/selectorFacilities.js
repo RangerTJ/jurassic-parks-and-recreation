@@ -3,7 +3,7 @@ import Axios from 'axios';
 
 
 // If no old value passed, defaults the old value to "null". Also adjusts autoFocus and required rendering aspects as needed.
-const SelectorFacilities = ({preSelected, isRequired, autoFocus, hostURL, setFacility}) => {
+const SelectorFacilities = ({preSelected, isRequired, autoFocus, hostURL, setFacilityName}) => {
 
   // Create useState for the selection and list
   // For update, just update pre-selected image to match an input variable first
@@ -13,7 +13,7 @@ const SelectorFacilities = ({preSelected, isRequired, autoFocus, hostURL, setFac
   // Selection event handler to pass on selection data to DB
   const selectionHandler = (event) => {
     setSelected(event.target.value)
-    setFacility(event.target.value)
+    setFacilityName(event.target.value)
   };
 
   // Update pre-selected

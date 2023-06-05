@@ -24,25 +24,25 @@ function BiologicalAssetsUpdateForm ({hostURL}) {
     const navTo = useNavigate();
 
     // Bio Asset States for the Form (2x arrays for select menus + 3x values to submit)
-    const [species, setSpecies] = useState('')
+    const [speciesName, setSpeciesName] = useState('')
     const [name, setName] = useState(oldName)
-    const [facility, setFacility] = useState('')
+    const [facilityName, setFacilityName] = useState('')
 
     // Pre-sets all the old values into the fields
     useEffect(()=> {
-        setSpecies(oldSpecies);
-        setFacility(oldFacility);
+        setSpeciesName(oldSpecies);
+        setFacilityName(oldFacility);
         setName(oldName);
     }, [])
 
     // UPDATE - Submit Changes to a Bio Asset then return to Asset home
     const update = async () => {
         try {
-            if (species && name && facility) {
+            if (speciesName && name && facilityName) {
                 await Axios.put(updateBiologicalAssetsURL, {
-                    speciesName: species,
+                    speciesName: speciesName,
                     bioAssetName: name,
-                    facilityName: facility,
+                    facilityName: facilityName,
                     idBiologicalAsset: id
                 });
                 alert(`${name}'s database entry has been updated!`)
@@ -69,7 +69,7 @@ function BiologicalAssetsUpdateForm ({hostURL}) {
                     <fieldset>
                         <legend>Update Asset ID# {id}</legend>
                         <div className="selectorP">
-                            <SelectorSpecies  hostURL={hostURL} species={species} setSpecies={setSpecies} preSelected={oldSpecies} isRequired={true} autoFocus={true}/>
+                            <SelectorSpecies  hostURL={hostURL} speciesName={speciesName} setSpeciesName={setSpeciesName} preSelected={oldSpecies} isRequired={true} autoFocus={true}/>
                         <div>Original: {oldSpecies}</div>
                         </div>
                         <div className="selectorP">
@@ -86,7 +86,7 @@ function BiologicalAssetsUpdateForm ({hostURL}) {
                             <div>Original: {oldName}</div>
                         </div>
                         <div className="selectorP">
-                            <SelectorFacilities hostURL={hostURL} facility={facility} setFacility={setFacility} preSelected={oldFacility} isRequired={true}/>
+                            <SelectorFacilities hostURL={hostURL} facilityName={facilityName} setFacilityName={setFacilityName} preSelected={oldFacility} isRequired={true}/>
                             <div>Original: {oldFacility}</div>
                         </div>
                     </fieldset>

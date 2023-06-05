@@ -13,6 +13,7 @@ import { useNavigate } from 'react-router-dom';
 import Axios from 'axios';
 import SelectorSpecies from "../components/selectorSpecies";
 import defaultImg from '../images/tableDefaultPreview.png';
+import SelectorFacilities from "../components/selectorFacilities";
 
 
 // HostURL Passed from App.js
@@ -22,18 +23,21 @@ function BiologicalAssetsPage ({hostURL}) {
     const navTo = useNavigate();
 
     // BiologicalAssets SQL Endpoints
-    const getBiologicalAssetsURL = hostURL + '/api/getBiologicalAssets';  // TO DO - CREATE USE EFFECT AND USE STATE
-    const deleteBiologicalAssetsURL = hostURL + '/api/deleteBiologicalAssets/';  // TO DO - NEED TO ADD USE STATES AND CRUD FUNCTIONS FOR THIS; INSERT/UPDATE GO ON RESPECTIVE FORM PAGES
-    const checkBiologicalAssetsHabitatsURL = hostURL + '/api/checkBiologicalAssetsHabitats';  // Habitat report for welcome screen
-    const checkBiologicalAssetsSecurityURL = hostURL + '/api/checkBiologicalAssetsSecurity';  // Security report for welcome screen
-    const filterBioAssetsBySpeciesURL = hostURL + '/api/filterBioAssetsBySpecies';  // Security report for welcome screen
+    const getBiologicalAssetsURL = hostURL + '/api/getBiologicalAssets';  // Get All Assets
+    const deleteBiologicalAssetsURL = hostURL + '/api/deleteBiologicalAssets/';  // 
+    const checkBiologicalAssetsHabitatsURL = hostURL + '/api/checkBiologicalAssetsHabitats';  // Habitat mismatches
+    const checkBiologicalAssetsSecurityURL = hostURL + '/api/checkBiologicalAssetsSecurity';  // Security mismatches
+    const filterBioAssetsBySpeciesURL = hostURL + '/api/filterBioAssetsBySpecies';  // Species Filter
+    const filterBioAssetsByFacilityURL = hostURL + '/api/filterBioAssetsByFacility';  // Facility Filter
+    const filterBioAssetsBySpeciesAndFacilityURL = hostURL + '/api/filterBioAssetsBySpeciesAndFacility';  // Species + Facility Filter
 
 
     // Bio Asset Table Functions
     const [biologicalAssetList, setBiologicalAssetList] = useState([])
     const [assetHabMismatchList, setAssetHabMismatchList] = useState([])
     const [assetSecMismatchList, setAssetSecMismatchList] = useState([])
-    const [species, setSpecies] = useState('')
+    const [speciesName, setSpeciesName] = useState('')
+    const [facilityName, setFacilityName] = useState('')
 
     // READ Populate Biological Asset Table
     useEffect(()=> {
@@ -58,9 +62,45 @@ function BiologicalAssetsPage ({hostURL}) {
 
     // READ Changes to Species Table
     useEffect(() => {
-        speciesFilter();
-    }, [species]);
+        assetFilters();
+    }, [speciesName, facilityName]);
 
+
+    // Handle two filters and let them be used concurrently
+    const assetFilters = async () => {
+        // If both filters selected, apply return of both selections
+        if(speciesName && facilityName) {
+            try {
+                const response = await Axios.post(filterBioAssetsBySpeciesAndFacilityURL, {speciesName: speciesName, facilityName: facilityName})
+                setBiologicalAssetList(response.data);
+                console.log(response.data);
+            } catch (error) {
+                console.error('Error applying the filter to the View table.', error);
+            }
+        } else if (speciesName && facilityName==='') {
+            // If just Parks selected, return parks filter
+            try {
+                const response = await Axios.post(filterBioAssetsBySpeciesURL, {speciesName: speciesName})
+                setBiologicalAssetList(response.data);
+                console.log(response.data);
+            } catch (error) {
+                console.error('Error applying the filter to the View table.', error);
+            }
+        } else if (speciesName==='' && facilityName) {
+            // If just Types selected, return types filter
+            try {
+                const response = await Axios.post(filterBioAssetsByFacilityURL, {facilityName: facilityName})
+                setBiologicalAssetList(response.data);
+                console.log(response.data);
+            } catch (error) {
+                console.error('Error applying the filter to the View table.', error);
+            }
+        }
+        // If neither filter selected, return everything
+        else {
+            await getAllBioAssets();
+        }
+    }
 
     // DELETE - Deletes target Bio asset and refreshes all 3 tables
     const delBiologicalAsset = async (delVal) => {
@@ -87,21 +127,21 @@ function BiologicalAssetsPage ({hostURL}) {
             }
     };
 
-    // READ Apply Species Filter to Bio Asset Table
-    const speciesFilter = async () => {
-        if(species === "") {
-            await getAllBioAssets();
-        }
-        else {
-            try {
-                const response = await Axios.post(filterBioAssetsBySpeciesURL, {speciesName : species })
-                setBiologicalAssetList(response.data);
-                console.log(response.data);
-            } catch (error) {
-                console.error('Error applying the filter to the View table.', error);
-            }
-        }
-    }
+    // // READ Apply Species Filter to Bio Asset Table
+    // const speciesFilter = async () => {
+    //     if(species === "") {
+    //         await getAllBioAssets();
+    //     }
+    //     else {
+    //         try {
+    //             const response = await Axios.post(filterBioAssetsBySpeciesURL, {speciesName : species })
+    //             setBiologicalAssetList(response.data);
+    //             console.log(response.data);
+    //         } catch (error) {
+    //             console.error('Error applying the filter to the View table.', error);
+    //         }
+    //     }
+    // }
     
     // Fully Populate the Bio Asset List (without filters)
     const getAllBioAssets = async ()=> {
@@ -315,12 +355,15 @@ function BiologicalAssetsPage ({hostURL}) {
                 <h3>View Biological Assets</h3>
                 <p>
                     The table below shows existing information for Biological Assets entities and includes
-                    buttons to update or delete them. You can use the species selector below to filter for
-                    a specific species. Select "None" to remove the species filter and view the entire 
-                    table of Biological Assets. 
+                    buttons to update or delete them.
                 </p>
-                <div className="selectorP">
-                    <SelectorSpecies hostURL={hostURL} setSpecies={setSpecies} species={species} isRequired={false}/>
+                <p>
+                    You can use the Species or Facility selectors below to concurrently filter the table.
+                    Select "None" for either filter to remove it.
+                </p>
+                <div>
+                    <div className="selectorP"><SelectorSpecies hostURL={hostURL} setSpeciesName={setSpeciesName} speciesName={speciesName} isRequired={false}/></div>
+                    <div className="selectorP"><SelectorFacilities hostURL={hostURL} setFacilityName={setFacilityName} facilityName={facilityName} isRequired={false}/></div>
                 </div>
                 <div className="scrollableTable">
                     <table>

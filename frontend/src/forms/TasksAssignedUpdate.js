@@ -28,7 +28,7 @@ function TasksAssignedUpdateForm ({hostURL}) {
     const navTo = useNavigate();
 
     // Task Assigned States for the Form
-    const [facility, setFacility] = useState('')
+    const [facilityName, setFacilityName] = useState('')
     const [bioAssetName, setBioAssetName] = useState('')
     const [taskName, setTaskName] = useState('')
     const [taskDescription, setTaskDescription] = useState('')
@@ -37,7 +37,7 @@ function TasksAssignedUpdateForm ({hostURL}) {
 
     // Pre-sets all the old values into the fields
     useEffect(()=> {
-        setFacility(oldFacilityName);
+        setFacilityName(oldFacilityName);
         setBioAssetName(oldBiologicalAsset);
         setTaskName(oldTaskName)
         setTaskDescription(oldTaskDescription);
@@ -54,7 +54,7 @@ function TasksAssignedUpdateForm ({hostURL}) {
         try {
             if (trueStart > trueEnd) {
                 alert("We don't yet use time machines to obtain our prehistoric assets! Fix the start/end dates.");
-            } else if  (facility && taskName && taskDescription && taskStart) {
+            } else if  (facilityName && taskName && taskDescription && taskStart) {
 
             // Send Null value to SQL if task is re-opened
             let taskEndVar = taskEnd
@@ -64,7 +64,7 @@ function TasksAssignedUpdateForm ({hostURL}) {
             
             // The actual update code
             const res = await Axios.put(updateTasksAssignedURL, {
-                facilityName: facility,
+                facilityName: facilityName,
                 bioAssetName: bioAssetName,
                 taskName: taskName,
                 taskDescription: taskDescription,
@@ -113,7 +113,7 @@ function TasksAssignedUpdateForm ({hostURL}) {
                     <fieldset>
                         <legend>Details</legend>
                             <div className="selectorP">
-                                <SelectorFacilities hostURL={hostURL} facility={facility} setFacility={setFacility} isRequired={true} preSelected={oldFacilityName} autoFocus={true}/>
+                                <SelectorFacilities hostURL={hostURL} facilityName={facilityName} setFacilityName={setFacilityName} isRequired={true} preSelected={oldFacilityName} autoFocus={true}/>
                                 <div>Original: {oldFacilityName}</div>
                             </div>
                             <div className="selectorP">
