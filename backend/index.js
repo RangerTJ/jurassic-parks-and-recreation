@@ -1196,6 +1196,12 @@ app.get('/api/getSpecies', (req, res) => {
     });
 });
 
+// Filter Species by Diet
+
+// Filter by Species Habitat
+
+// Filter by Species Both
+
 // Create Species
 app.post('/api/insertSpecies', (req, res) => {
     const dietName = req.body.dietName
