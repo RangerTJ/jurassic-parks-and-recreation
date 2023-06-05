@@ -46,7 +46,7 @@ const SelectorTasksAssigned = ({preSelected, isRequired, autoFocus, hostURL, set
   // Autofocus and isRequired elements passed in can tailor it to use on different pages
   return (
     <>
-      <div><label htmlFor="tasksAssignedSelector">Tasks</label></div>
+      <div><label htmlFor="tasksAssignedSelector">Task</label></div>
       <select id="tasksAssignedSelector" value={selected} onChange={selectionHandler} autoFocus={autoFocus ? true : false} required={isRequired ? true : false}>
         {/* Set default option then map query results to populate the select menu / all or only open tasks depending on what we want */}
         <option value="">None (Select an existing Assigned Task)</option>

@@ -164,7 +164,7 @@ function EmployeeTasksPage ({hostURL}) {
                     You can use the Tasks and Employee selectors below to concurrently filter Employee Tasks by these attributes.
                     Select "None" for both to remove the filters and view the entire table. 
                 </p>
-                <div className="inlineDiv">
+                <div>
                     <div className="selectorP"><SelectorTasksAssigned hostURL={hostURL} setTaskName={setTaskName} taskName={taskName} isRequired={false} getAll={true}/></div>
                     <div className="selectorP"><SelectorEmployees hostURL={hostURL} setEmployeeUsername={setEmployeeUsername} employeeUsername={employeeUsername} isRequired={false}/></div>
                 </div>
