@@ -87,11 +87,6 @@ function EmployeeTasksUpdateForm ({hostURL}) {
                     Make changes to this Employee Task record and click "Save" to retain them. This will update the many-to-many relational link
                     between an Employee and a Task Assigned for this work report.
                 </p>
-                <p>
-                    Please be aware that the Tasks select menu will only show tasks that have not yet been "completed" (that is, given an end date).
-                    This is done to avoid cluttering up the interface. To add an Employee Task report entry to the database for a completed Task,
-                    you will need to navigate to the Assigned Tasks page and set the Task's ending date to null. It can then be selected.
-                </p>
                 <form>
                     <fieldset>
                         <legend>Update Employee Task Report #{id}</legend>
