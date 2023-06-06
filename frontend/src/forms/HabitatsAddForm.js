@@ -49,6 +49,7 @@ function HabitatsAddForm ({hostURL}) {
                 <p>
                     To add a new Habitat entity to the database, enter values for its attributes below
                     and click the "Add Habitat" button.
+                    A red border around an input field means that it is required and that it still needs a valid input.
                 </p>
                 <form>
                     <fieldset>

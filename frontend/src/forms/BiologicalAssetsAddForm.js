@@ -49,6 +49,7 @@ function BiologicalAssetsAddForm ({hostURL}) {
                     If you would like to add a new Biological Assets entity to the database, enter values for its attributes below
                     and click the "Add Asset" button. To put it more simply, this is how you create an entry for a dinosaur - or any other 
                     tracked and managed creature found in one of our parks.
+                    A red border around an input field means that it is required and that it still needs a valid input.
                 </p>
                 <form>
                     <fieldset>

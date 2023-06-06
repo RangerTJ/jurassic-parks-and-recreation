@@ -84,6 +84,7 @@ function FacilitiesUpdateForm ({hostURL}) {
                     Make changes to this Facility's record and click "Save" to retain them.
                     This action will <strong>cascade</strong> to the <strong>Biological Assets</strong> relational entity (a creature of a species)
                     that handles the many-to-many relationship between a Facility and a Species.
+                    A red border around an input field means that it is required and that it still needs a valid input.
                 </p>
                 <form>
                     <fieldset>

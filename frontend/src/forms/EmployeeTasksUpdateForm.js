@@ -86,6 +86,7 @@ function EmployeeTasksUpdateForm ({hostURL}) {
                 <p>
                     Make changes to this Employee Task record and click "Save" to retain them. This will update the many-to-many relational link
                     between an Employee and a Task Assigned for this work report.
+                    A red border around an input field means that it is required and that it still needs a valid input.
                 </p>
                 <form>
                     <fieldset>

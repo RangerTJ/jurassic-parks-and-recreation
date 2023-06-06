@@ -63,6 +63,7 @@ function EmployeesAddForm ({hostURL}) {
                 <p>
                     To add a new Employee entity to the database, enter values for its attributes below
                     and click the "Add Employee" button.
+                    A red border around an input field means that it is required and that it still needs a valid input.
                 </p>
                 <form>
                     <fieldset>

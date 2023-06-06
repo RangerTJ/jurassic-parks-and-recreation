@@ -48,6 +48,7 @@ function DietsAddForm ({hostURL}) {
                 <p>
                     If you would like to add a new Diet to the database, enter values for its attributes below
                     and click the "Add Type" button.
+                    A red border around an input field means that it is required and that it still needs a valid input.
                 </p>
                 <form>
                     <fieldset>

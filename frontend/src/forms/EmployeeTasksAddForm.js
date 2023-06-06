@@ -63,7 +63,8 @@ function EmployeeTasksAddForm ({hostURL}) {
             <article>
                 <p>
                     Please fill out this form to document an employee's work towards an assigned task within our managed park system. 
-                    Click the "Add Report" button below when you are ready to submit.
+                    Click the "Add Report" button below when you are ready to submit. 
+                    A red border around an input field means that it is required and that it still needs a valid input.
                 </p>
                 <p>
                     For the "Category" field, please select the overall most relevant category to the work performed for this report.

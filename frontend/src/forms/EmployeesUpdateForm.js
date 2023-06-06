@@ -84,6 +84,7 @@ function EmployeesUpdateForm ({hostURL}) {
                 <p>
                     Make changes to this Employee Task record and click "Save" to retain them.
                     This action will <strong>cascade</strong> to <strong>Employee Tasks</strong>.
+                    A red border around an input field means that it is required and that it still needs a valid input.
                 </p>
                 <form>
                     <fieldset>

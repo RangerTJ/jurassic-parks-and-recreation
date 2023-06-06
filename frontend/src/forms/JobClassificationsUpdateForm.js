@@ -59,6 +59,7 @@ function JobClassificationsUpdateForm ({hostURL}) {
                     If you would like to update this entry, enter new values for its attributes below
                     and click the "Save" button.
                     This action will <strong>cascade</strong> to <strong>Employees</strong>.
+                    A red border around an input field means that it is required and that it still needs a valid input.
                 </p>
                 <form>
                     <fieldset>
