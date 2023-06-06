@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-
+// Taylor Jordan and Nick Schmidt (Team 100: Jurassic Parks and Recreation)
 
 // Citation: Code to map images in src folders heavily based on example code from stackoverflow by user Savior on 9/9/2021.
 // URL: https://stackoverflow.com/questions/69111477/how-to-iterate-through-public-assets-images-so-i-can-get-all-images-filename-in
@@ -12,6 +11,9 @@ import React, { useState, useEffect } from 'react';
 // Citation: Code for event triggering using onChange event heavily inspired by Abdullah Ch's stackoverflow answer on 8/15/2021
 // URL: https://stackoverflow.com/questions/68790381/how-to-use-onchange-in-react-select
 // Link Accessed/Verified on 6/1/2023
+
+import React, { useState, useEffect } from 'react';
+
 
 // If no old value passed, defaults the old value to "null". Also adjusts autoFocus and required rendering aspects as needed.
 const ImageSelectorParks = ({preSelected, isRequired, autoFocus, setImage}) => {

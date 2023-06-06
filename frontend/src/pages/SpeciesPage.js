@@ -1,3 +1,5 @@
+// Taylor Jordan and Nick Schmidt (Team 100: Jurassic Parks and Recreation)
+
 // Basic CRUD operations and React implementation was heavily based on the CRUD React tutorial series created by PedroTech
 // URLs - Part1: https://www.youtube.com/watch?v=T8mqZZ0r-RA, Part2: https://www.youtube.com/watch?v=3YrOOia3-mo, Part3: https://www.youtube.com/watch?v=_S2GKnFpdtE
 // Link Accessed/Verified on 6/1/2023
@@ -62,7 +64,7 @@ function SpeciesPage ({hostURL}) {
                 console.error('Error applying the filter to the View table.', error);
             }
         } else if (dietName && habitatName==='') {
-            // If just Parks selected, return parks filter
+            // If just Diets selected, return diets filter
             try {
                 const response = await Axios.post(filterSpeciesByDietURL, {dietName: dietName})
                 setSpeciesList(response.data);
@@ -71,7 +73,7 @@ function SpeciesPage ({hostURL}) {
                 console.error('Error applying the filter to the View table.', error);
             }
         } else if (dietName==='' && habitatName) {
-            // If just Types selected, return types filter
+            // If just Habitats selected, return habitats filter
             try {
                 const response = await Axios.post(filterSpeciesByHabitatURL, {habitatName: habitatName})
                 setSpeciesList(response.data);

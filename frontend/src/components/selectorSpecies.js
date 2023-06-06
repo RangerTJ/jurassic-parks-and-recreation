@@ -1,3 +1,5 @@
+// Taylor Jordan and Nick Schmidt (Team 100: Jurassic Parks and Recreation)
+
 import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
 
