@@ -468,6 +468,24 @@ popup that shows up in a fixed position in the center of the screen that scales 
   width: 100%;
 }
 
+.returnToTop {
+  text-decoration: none;
+  color: var(--parkRed);
+  font-size: xx-large;
+  position: fixed; right: 10px; bottom: 0px;
+  text-shadow:  0.5px -0.5px 0px var(--parkYellow),
+                -0.5px 0.5px 0px var(--parkYellow),
+                0.5px 0.5px 0px var(--parkYellow),
+                -0.5px -0.5px 0px var(--parkYellow);
+}
+
+.topText {
+  font-size: xx-small;
+  text-align: center;
+  text-shadow: none;
+  color: var(--parkYellow);
+}
+
 /* Happy Eater Egg Hunting! */
 .whte_rbt_obj {
   text-decoration: none;
@@ -570,6 +588,13 @@ td {
 
 .tableButton {
   margin: 5px 0px 5px 0px;
+}
+
+.returnToTop {
+  font-size: xx-large;
+  position: fixed; 
+    right: 0px; 
+    bottom: 0px;
 }
 
 }

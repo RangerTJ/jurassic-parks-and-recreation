@@ -5,6 +5,7 @@
 import React from "react";
 import './App.css';
 import logo from './images/logo.png'
+import { Link } from 'react-router-dom';
 
 // Main Page Imports
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
@@ -51,7 +52,15 @@ import SpeciesUpdateForm from "./forms/SpeciesUpdateForm";
 
 // React Application
 function App() {
-    const hostURL = process.env.REACT_APP_FRONTEND_URL + process.env.REACT_APP_BACKEND_PORT;
+  const hostURL = process.env.REACT_APP_FRONTEND_URL + process.env.REACT_APP_BACKEND_PORT;
+
+  // Citation: 'Window: scrollTo() method' from mdn web docs
+  // URL: https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollTo
+  // Accessed 6/6/2023. Code syntax used to create 'scroll back to top' input.
+  // Function to scroll to the top of the current page
+  const returnToTop = () => {
+    window.scrollTo({top: 0, behavior: 'smooth'})
+  }
     
   // HTML Rendering Structure
   return (
@@ -61,8 +70,10 @@ function App() {
         <h1 className="headerBox">Jurassic Parks and Recreation <img className="headerLogo" src={logo} alt="Test"></img></h1>
         <p className="headerP">D.I.N.O<a className="whte_rbt_obj" href="https://markhjorth.github.io/nedry/">.</a></p>
       </header>
-      <Nav />
+      <Nav className="nav"/>
       <main>
+        {/* Link that moves with page that you can click to return to the nav header quickly - work on all pages since it's in app.js*/}
+        <Link to='#' onClick={returnToTop} className="returnToTop"><div>^<div className="topText">To</div><div className="topText">Top</div></div></Link>
         <section>
             {/* Load different page content here depending on route below */}
             <Routes>
@@ -114,7 +125,7 @@ function App() {
       <footer>&copy;2023 Taylor Jordan and Nicholas Schmidt (Team: Jurassic Parks and Recreation)</footer>
       </BrowserRouter>
     </div>
-  );
+  )
 }
 
 export default App;

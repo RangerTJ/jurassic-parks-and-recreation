@@ -88,7 +88,8 @@ function HomePage({hostURL}) {
                 <p>
                     To use this database, use the navigational bar above to navigate to the respective entity that you are interested in.
                     All pages display the existing data and have menu options to add new entries, update a specified, existing entry, and 
-                    delete a specific entry.
+                    delete a specific entry. At any point you may click the red (with gold border) '<strong>^</strong>' icon on bottom right side of the screen to 
+                    scroll to the top of the current page.
                 </p>
             </article>
             {/* Simulated security camera made following 'Replace animated GIFs with video for faster page loads' by Houssein Djirdeh 
