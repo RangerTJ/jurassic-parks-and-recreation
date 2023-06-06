@@ -112,6 +112,7 @@ function EmployeesAddForm ({hostURL}) {
                                     name="wage"
                                     placeholder="Ex. 26.00" 
                                     required 
+                                    min="0"
                                     onChange={(e) => {setHourlyWage(e.target.value)}
                                     }/>
                             </div>

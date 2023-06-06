@@ -115,6 +115,7 @@ function EmployeeTasksUpdateForm ({hostURL}) {
                                     name="hoursWorked"
                                     placeholder="Ex. 20"
                                     required
+                                    min="0"
                                     value={taskHoursWorked}
                                     onChange={(e) => {setTaskHoursWorked(e.target.value)}
                                     }/>
@@ -128,6 +129,7 @@ function EmployeeTasksUpdateForm ({hostURL}) {
                                     name="empTaskCost"
                                     placeholder="Ex. 2000.00" 
                                     required
+                                    min="0"
                                     value={empTaskCost}
                                     onChange={(e) => {setEmpTaskCost(e.target.value)}
                                     }/>
@@ -151,8 +153,8 @@ function EmployeeTasksUpdateForm ({hostURL}) {
                                     type="date"
                                     id="empTaskEnd"
                                     name="empTaskEnd"
-                                    required 
                                     value={empTaskEnd}
+                                    required
                                     onChange={(e) => {setEmpTaskEnd(e.target.value)}
                                     }/>
                                 <div>Original: {oldEnd}</div>

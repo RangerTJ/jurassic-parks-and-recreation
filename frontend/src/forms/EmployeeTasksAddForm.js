@@ -103,6 +103,7 @@ function EmployeeTasksAddForm ({hostURL}) {
                                     name="hoursWorked"
                                     placeholder="Ex. 20" 
                                     required 
+                                    min="0"
                                     onChange={(e) => {setTaskHoursWorked(e.target.value)}
                                     }/>
                             </div>
@@ -114,6 +115,7 @@ function EmployeeTasksAddForm ({hostURL}) {
                                     name="empTaskCost"
                                     placeholder="Ex. 2000.00" 
                                     required 
+                                    min="0"
                                     onChange={(e) => {setEmpTaskCost(e.target.value)}
                                     }/>
                             </div>
