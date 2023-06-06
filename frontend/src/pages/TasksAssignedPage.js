@@ -142,6 +142,10 @@ function TasksAssignedPage ({hostURL}) {
                     buttons to update or delete them. Information includes the facility affiliated with the task and affiliated biological asset
                     (if the task has been assigned for one).
                 </p>
+                <p>
+                    You can use the Task Status selector below to filter for open or closed tasks. Select "None" to remove the filter and view the entire 
+                    table of Assigned Tasks. 
+                </p>
                 <div><label htmlFor="statusFilter">Task Status</label></div>
                 <select id="statusFilter" className="selectorP" onChange={selectionHandlerTasks}>
                     <option value="">None (All Tasks)</option>
