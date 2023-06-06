@@ -1786,7 +1786,7 @@ app.get('/api/getEmployeesList', (req, res) =>{
     const sqlRead = `
     SELECT lastName, firstName, employeeUsername, jobTitle
     FROM Employees
-    JOIN jobClassifications ON Employees.idJobClassification = JobClassifications.idJobClassification
+    JOIN JobClassifications ON Employees.idJobClassification = JobClassifications.idJobClassification
     ORDER BY lastName, firstName, employeeUsername ASC;
     `;
     db.query(sqlRead, (err, result)=> {
