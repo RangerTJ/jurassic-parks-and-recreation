@@ -5,6 +5,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom'; // May not need?
 import Axios from 'axios';
+import SelectorFacilities from "../components/selectorFacilities";
 
 
 // HostURL Passed from App.js
@@ -16,15 +17,54 @@ function TasksAssignedPage ({hostURL}) {
     // TasksAssigned SQL Endpoints
     const getTasksAssignedURL = hostURL + '/api/getTasksAssigned';
     const deleteTasksAssignedURL = hostURL + '/api/deleteTasksAssigned/';
+    const filterTasksAssignedByOpenTaskURL = hostURL + '/api/filterTasksAssignedByOpenTask'
+    const filterTasksAssignedByClosedTaskURL = hostURL + '/api/filterTasksAssignedByClosedTask'
 
     // TasksAssigned Table Functions
     const [tasksAssignedList, setTasksAssignedList] = useState([])
+    const [taskStatus, setTaskStatus] = useState([])
 
     // READ Populate Tasks Assigned Table
     useEffect(()=> {
         getAllTasksAssigned();
     }, [])
-    
+
+    // READ Changes to Filters
+    useEffect(() => {
+        taskFilters();
+    }, [taskStatus]);
+
+    // Selection event handler to pass on selection data to DB
+    const selectionHandlerTasks = (event) => {
+        setTaskStatus(event.target.value)
+    };
+
+    // Handle two filters and let them be used concurrently
+    const taskFilters = async () => {
+        // Return only open tasks
+        if(taskStatus === 'open') {
+            try {
+                const response = await Axios.get(filterTasksAssignedByOpenTaskURL)
+                setTasksAssignedList(response.data);
+                console.log(response.data);
+            } catch (error) {
+                console.error('Error applying the filter to the View table.', error);
+            }
+        } else if (taskStatus === 'closed') {
+            // Return only closed tasks
+            try {
+                const response = await Axios.get(filterTasksAssignedByClosedTaskURL)
+                setTasksAssignedList(response.data);
+                console.log(response.data);
+            } catch (error) {
+                console.error('Error applying the filter to the View table.', error);
+            }
+        }
+        // If neither filter selected, return everything
+        else {
+            await getAllTasksAssigned();
+        }
+    }
 
     // UPDATE Primer: Passes an object containing "current" (old) attributes to the useNavigate() function, navTo(), to the edit page.
     // Follows general strategy suggested by stackoverflow user Abdulazeez Jimoh on 10/25/2022
@@ -95,7 +135,6 @@ function TasksAssignedPage ({hostURL}) {
                     If you <strong>delete</strong> an Assigned Task, their record in any Employee Tasks will be set to <strong>null</strong>.
                 </p>
             </article>
-
             <article>
                 <h3>View Assigned Tasks</h3>
                 <p>
@@ -103,6 +142,12 @@ function TasksAssignedPage ({hostURL}) {
                     buttons to update or delete them. Information includes the facility affiliated with the task and affiliated biological asset
                     (if the task has been assigned for one).
                 </p>
+                <div><label htmlFor="statusFilter">Task Status</label></div>
+                <select id="statusFilter" className="selectorP" onChange={selectionHandlerTasks}>
+                    <option value="">None (All Tasks)</option>
+                    <option value="open">Open Tasks</option>
+                    <option value="closed">Completed Tasks</option>
+                </select>
                 <div className="scrollableTable">
                     <table>
                         <tbody>
