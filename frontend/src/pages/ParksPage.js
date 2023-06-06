@@ -118,7 +118,8 @@ function ParksPage ({hostURL}) {
                 <h3>View Parks</h3>
                 <p>
                     The table below shows existing information for Park entities and includes
-                    buttons to update or delete them.
+                    buttons to update or delete them. If you would like to view a larger version of a 
+                    non-default photo click it to see an expanded view. Click anywhere again to dismiss it.
                 </p>
                 {/* Lightbox example code used from: Creating a Simple Lightbox From Scratch in React by Alexandra Radevich
                 URL: https://medium.com/swlh/creating-a-simple-lightbox-from-scratch-in-react-caea84f90960

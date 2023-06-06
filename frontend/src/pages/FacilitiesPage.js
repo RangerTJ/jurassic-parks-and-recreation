@@ -172,7 +172,7 @@ function FacilitiesPage ({hostURL}) {
                 <p>
                     The table below shows existing information for park facilities and includes
                     buttons to update or delete them. If you would like to view a larger version of a 
-                    non-default photo click it to see a larger version. Then click anywhere again to dismiss the view.
+                    non-default photo click it to see an expanded view. Click anywhere again to dismiss it.
                 </p>
                 <p>
                     You can use the Park and Facility Type selectors below to concurrently filter Facilities by these attributes.
