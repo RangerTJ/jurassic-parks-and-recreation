@@ -96,7 +96,7 @@ function EmployeeTasksUpdateForm ({hostURL}) {
                     <fieldset>
                         <legend>Update Employee Task Report #{id}</legend>
                             <div className="selectorP">
-                                <SelectorTasksAssigned  hostURL={hostURL} taskName={taskName} setTaskName={setTaskName} isRequired={true} autoFocus={true} preSelected={oldTask}/>
+                                <SelectorTasksAssigned  hostURL={hostURL} taskName={taskName} setTaskName={setTaskName} isRequired={true} autoFocus={true} preSelected={oldTask} getAll={true}/>
                                 <div>Original: {oldTask}</div>
                             </div>
                             <div className="selectorP">
