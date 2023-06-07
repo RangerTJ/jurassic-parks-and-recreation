@@ -1,4 +1,5 @@
 -- Taylor Jordan and Nick Schmidt (Team 100: Jurassic Parks and Recreation)
+-- Portfolio Project
 -- : colon prefix used (for now) to denote variables that will be involved with back end data.
 
 -- -----------------
