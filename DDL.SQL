@@ -258,9 +258,9 @@ CREATE TABLE `EmployeeTasks` (
 
 INSERT INTO `Parks`                 (parkName, parkDescription, parkLocation, parkPhoto)
 VALUES
-('Jurassic World', 'Premier zoological theme park in the system. 500+ employees and 200+ assets.', 'Isla Nublar, Costa Rica', '/static/media/Jurassic World Gates (Night).5304f32b0c9705b1680c.jpg'),
+('Jurassic World', 'Premier zoological theme park in the system. 500+ employees and 200+ assets.', 'Isla Nublar, Costa Rica', '/static/media/Jurassic World Gates (Isla Nublar).490bfb608e2de674bc7f.jpg'),
 ('Site B', 'Asset research and staging park. Limited facilities and employees.', 'Isla Sorna, Costa Rica', '/static/media/Jurassic World Isla Sorna.7063960e692e69b5b37e.jpg'),
-('Jurassic Park: San Diego', 'Urban zoological theme park. 200+ employees and 50+ assets.', 'San Diego, CA', '/static/media/Jurassic Park San Diego (Daytime Overview).bdc41c9c3b8b8f23c10c.jpg');
+('Jurassic Park: San Diego', 'Urban zoological theme park. 200+ employees and 50+ assets.', 'San Diego, CA', '/static/media/Jurassic Park San Diego (Night).b60a7269ca5dc8d9ca58.jpg');
 
 
 INSERT INTO `Facilities`            (idPark, idFacilityType, idHabitat, facilityName, facilityDescription, 
