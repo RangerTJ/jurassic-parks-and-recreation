@@ -90,9 +90,12 @@ Once all dependencies are in place, you may start up the back-end server's index
         * Accessed/Verified on 6/1/2023
 
 ## Media Citations ##
-* The Jurassic Park font is used non-commercially for educational project purposes under a freeware, non-commercial license courtesy of the font created by Jens R. Ziehn (https://www.fontspace.com/jurassic-park-font-f3555).  
-* Park "photos" and "Security Feed" were in-game screenshots and footage taken by the site authors from Jurassic World Evolution 2, by Frontier Studios.  
-* Special thanks to Mark Hjorth for putting together the beautiful easter egg that we've linked to in a hidden spot on the website: https://github.com/MarkHjorth/nedry.  
+* The Jurassic Park font is used non-commercially for educational project purposes under a freeware, non-commercial license. Created by Jens R. Ziehn.
+    * https://www.fontspace.com/jurassic-park-font-f3555  
+* Park "photos" and "Security Feed" were in-game screenshots and footage taken by the site authors from Jurassic World Evolution 2, by Frontier Studios.
+    * https://www.jurassicworldevolution2.com/
+* Special thanks to Mark Hjorth for putting together the beautiful easter egg that we've linked to in a hidden spot on the website.
+    * https://github.com/MarkHjorth/nedry.  
 
 ### Additional Image Credits ###
 * Hesperornis (Nobu Tamura)  
