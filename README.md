@@ -14,7 +14,11 @@ Digital Information Nexus for Operations (DINO) is a database program used to si
 * Task Categories  
 
 ## Setup Guide ##
-To set the site up, first clone this repo into a folder. Once this is done, set up the front-end and back-end .env files with proper credentials, ports, and host URLs so that the backend can connect to the MYSQL server hosting the site database (which can be generated from DDL.sql on the SQL server) and so the the front-end can connect to the back-end and use it to process UI requests through the SQL server. Make sure to run NPM install in both frontend and backend folders so that all dependencies are in place before attempting to run any part of this program. Once all dependencies are in place, you may start up the back-end server's index.js file, then start up the front-end after running a build command for it. At this point (assuming the SQL server is online and connected), the site should be operational.
+Before you can do anything with this program, you need to make sure that the PC hosting both the backend and frontend have Node.js installed and ready to use (at least version 16.5).  
+
+To set the site up, first clone this repo into a folder. Once this is done, set up the front-end and back-end .env files with proper credentials, ports, and host URLs so that the backend can connect to the MYSQL server hosting the site database (which can be generated from DDL.sql on the SQL server) and so the the front-end can connect to the back-end and use it to process UI requests through the SQL server. Make sure to run 'npm install' in both frontend and backend folders so that all dependencies are in place before attempting to run any part of this program. 
+
+Once all dependencies are in place, you may start up the back-end server's index.js file (on a forever loop for production), then start up the front-end ('npm start' for dev mode or 'npm run build' for production). At this point (assuming the SQL server is online and connected), the site should be fully operational.  
 
 ## Code Citations ##
 * CRUD React tutorial series created by PedroTech
