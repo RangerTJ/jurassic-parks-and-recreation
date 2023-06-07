@@ -21,7 +21,7 @@ function TasksAssignedUpdateForm ({hostURL}) {
     const location = useLocation();
     const { oldFacilityName, oldBiologicalAsset, oldTaskName, oldTaskDescription, oldTaskStart, oldTaskEnd, id } = location.state;
 
-    // Clip off time part of dates so they can pre-populate date pickers (some data loss, but probably should have just done dates instead of datetime anyways)
+    // Clip off time part of dates so they can pre-populate date pickers
     const oldStartDateString = oldTaskStart ? oldTaskStart.substring(0, 10) : '';
     const oldEndDateString = oldTaskEnd ? oldTaskEnd.substring(0, 10) : '';
 

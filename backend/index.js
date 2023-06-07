@@ -1,6 +1,8 @@
 // Taylor Jordan and Nick Schmidt (Team 100: Jurassic Parks and Recreation)
+// All SQL queries themselves were entirely hand-crafted by members of our team.
 
-// Basic CRUD operations and React implementation was heavily based on the CRUD React tutorial series created by PedroTech
+// Basic CRUD operations and React implementation was heavily based on the CRUD React tutorial series created by PedroTech.
+// Our notable addition to his suggested query method was to log and send results (or error messages) back to the client, in addition to the backend console.
 // URLs - Part1: https://www.youtube.com/watch?v=T8mqZZ0r-RA, Part2: https://www.youtube.com/watch?v=3YrOOia3-mo, Part3: https://www.youtube.com/watch?v=_S2GKnFpdtE
 // Link Accessed/Verified on 6/1/2023
 
