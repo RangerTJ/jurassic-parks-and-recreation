@@ -1,4 +1,6 @@
 // Taylor Jordan and Nick Schmidt (Team 100: Jurassic Parks and Recreation)
+// Basic selector component functions and HTML layout created by the team, unless otherwise noted in general page or section-specific citation comments, 
+// using standard JS and React syntax and built-in functions.
 
 // Citation: Code to map images in src folders heavily based on example code from stackoverflow by user Savior on 9/9/2021.
 // URL: https://stackoverflow.com/questions/69111477/how-to-iterate-through-public-assets-images-so-i-can-get-all-images-filename-in
