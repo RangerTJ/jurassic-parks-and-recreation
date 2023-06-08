@@ -1,5 +1,11 @@
-// Basic CRUD operations and React implementation was heavily based on the CRUD React tutorial series created by PedroTech
+// Taylor Jordan and Nick Schmidt (Team 100: Jurassic Parks and Recreation)
+// Front-end CRUD/filter error-handling implementations and the returned HTML layout for the page were entirely hand-crafted by our own team members, unless otherwise noted.
+
+// Basic CRUD operations, React implementation, and HTML value mapping was heavily based on code from the CRUD React tutorial series created by PedroTech. We used his tutorial code as our foundation
+// and added to or modified it as needed (such as adding additional endpoints, React states, additional/expanded useEffect functions and so on). 
 // URLs - Part1: https://www.youtube.com/watch?v=T8mqZZ0r-RA, Part2: https://www.youtube.com/watch?v=3YrOOia3-mo, Part3: https://www.youtube.com/watch?v=_S2GKnFpdtE
+// Link Accessed/Verified on 6/1/2023
+
 
 import React, { useEffect, useState } from "react";
 import Axios from 'axios';
@@ -17,7 +23,6 @@ function HomePage({hostURL}) {
     const getBioAssetCostURL = hostURL + '/api/getBioAssetCost';
 
     // Index Table Functions
-    // CRUD operations modeled off tutorial - CITE IN DETAIL LATER (or top of each page?)
     const [parkCostList, setParkCostList] = useState([])
     const [categoryCostList, setCategoryCostList] = useState([])
     const [employeeCostList, setEmployeeCostList] = useState([])
@@ -73,8 +78,6 @@ function HomePage({hostURL}) {
         })
     }, []);
 
-
-
     // Render the Home Page
     return(
         <>
@@ -89,12 +92,14 @@ function HomePage({hostURL}) {
                 <p>
                     To use this database, use the navigational bar above to navigate to the respective entity that you are interested in.
                     All pages display the existing data and have menu options to add new entries, update a specified, existing entry, and 
-                    delete a specific entry.
+                    delete a specific entry. At any point you may click the red (with gold border) '<strong>^</strong>' icon on bottom right side of the screen to 
+                    scroll to the top of the current page.
                 </p>
             </article>
             {/* Simulated security camera made following 'Replace animated GIFs with video for faster page loads' by Houssein Djirdeh 
             and adapting it for React syntax. Footage recorded in-game footage from Jurassic World Evolution 2
-            URL: https://web.dev/replace-gifs-with-videos/ */}
+            URL: https://web.dev/replace-gifs-with-videos/ 
+            Link Accessed/Verified on 6/1/2023*/}
             <article>
                 <h3>Security Feed</h3>
                 <div>
@@ -109,7 +114,9 @@ function HomePage({hostURL}) {
                     The summary tables below provide high-level overviews of current costs associated with aspects of
                     managing our system of parks and zoological attractions. Note that for the 'Top 10' style tables below, if there
                     are fewer than 10 related entities with EmployeeTasks relating to them, the tables will
-                    have fewer than 10 elements displayed.
+                    have fewer than 10 elements displayed. Note, the tables are independent, so there's overlap in the cost reported between tables.
+                    'Most Expensive Employees' refers to costs-affiliated the employee was involved in, not necessarily their overhead cost
+                    (since things like supplies, etc. are factored into the Employee Task Report's cost figure).
                 </p>
                 <h4 className="st-header">Cost Summary by Sector</h4>
                 <div className="scrollableST">
@@ -163,7 +170,7 @@ function HomePage({hostURL}) {
                         </table>
                     </div>
                 </div>
-                <h4 className="st-header">Top 10 Most Expensive Employees</h4>
+                <h4 className="st-header">Top 10 Highest Impact Employees</h4>
                 <div className="scrollableST">
                     <div className="st-holder">
                         <table>
@@ -171,7 +178,7 @@ function HomePage({hostURL}) {
                             <tr >
                                 <th>Rank</th>
                                 <th>Employee</th>
-                                <th>Cost</th>
+                                <th>Associated Costs</th>
                             </tr>
                             {employeeCostList.slice(0, 10).map((val, index)=> {
                                 // Convert cost to USD or set to 0 USD if there is a null entry
@@ -274,7 +281,6 @@ function HomePage({hostURL}) {
                         </table>
                     </div>
                 </div>
-
             </article>
             <article>
                 <h3>Overview</h3>

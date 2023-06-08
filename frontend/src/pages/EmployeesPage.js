@@ -1,11 +1,16 @@
-// Basic CRUD operations and React implementation was heavily based on the CRUD React tutorial series created by PedroTech
+// Taylor Jordan and Nick Schmidt (Team 100: Jurassic Parks and Recreation)
+// Front-end CRUD/filter error-handling implementations and the returned HTML layout for the page were entirely hand-crafted by our own team members, unless otherwise noted.
+
+// Basic CRUD operations, React implementation, and HTML value mapping was heavily based on code from the CRUD React tutorial series created by PedroTech
 // URLs - Part1: https://www.youtube.com/watch?v=T8mqZZ0r-RA, Part2: https://www.youtube.com/watch?v=3YrOOia3-mo, Part3: https://www.youtube.com/watch?v=_S2GKnFpdtE
+// Link Accessed/Verified on 6/1/2023
 
 
 import React, { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import Axios from 'axios';
-import staffDefaultImg from '../images/staffImages/default_staff.png';
+import defaultImg from '../images/tableDefaultPreview.png';
+import SelectorJobClassifications from "../components/selectorJobClassifications";
 
 
 // HostURL Passed from App.js
@@ -15,11 +20,13 @@ function EmployeesPage ({hostURL}) {
     const navTo = useNavigate();
 
     // Employees SQL Endpoints
-    const getEmployeesURL = hostURL + '/api/getEmployees';  // TO DO - CREATE USE EFFECT AND USE STATE
-    const deleteEmployeesURL = hostURL + '/api/deleteEmployees/';  // TO DO - NEED TO ADD USE STATES AND CRUD FUNCTIONS FOR THIS; INSERT/UPDATE GO ON RESPECTIVE FORM PAGES
+    const getEmployeesURL = hostURL + '/api/getEmployees';
+    const deleteEmployeesURL = hostURL + '/api/deleteEmployees/';
+    const filterEmployeesByJobURL = hostURL + '/api/filterEmployeesByJob/';
 
     // Employee States
     const [employeesList, setEmployeesList] = useState([])
+    const [jobTitle, setJobTitle] = useState('')
 
     /* Citation: Creating a Simple Lightbox From Scratch in React by Alexandra Radevich
     URL: https://medium.com/swlh/creating-a-simple-lightbox-from-scratch-in-react-caea84f90960
@@ -46,6 +53,27 @@ function EmployeesPage ({hostURL}) {
         getEmployees();
     }, [])
 
+    // READ Changes to Employees Table
+    useEffect(() => {
+        jobsFilter();
+    }, [jobTitle]);
+
+    // READ Apply Jobs Filter to Employees Table
+    const jobsFilter = async () => {
+        if(jobTitle === "") {
+            await getEmployees();
+        }
+        else {
+            try {
+                const response = await Axios.post(filterEmployeesByJobURL, {jobTitle : jobTitle})
+                setEmployeesList(response.data);
+                console.log(response.data);
+            } catch (error) {
+                console.error('Error applying the filter to the View table.', error);
+            }
+        }
+    }
+
     // DELETE - Deletes target Employee and refreshes table
     const delEmployee = async (delVal) => {
         try {
@@ -59,7 +87,7 @@ function EmployeesPage ({hostURL}) {
                 alert(`${delVal.firstName} ${delVal.lastName} has been removed from the database.`);
             }} catch (error) {
                 console.error('Error deleting employee.', error);
-                alert("ERROR: Restricted delete action or server error (most parent entities with dependents may not be deleted).");
+                alert('MYSQL Server Error: ' + error.response.data);
         }
     };
 
@@ -76,6 +104,7 @@ function EmployeesPage ({hostURL}) {
     // UPDATE Primer: Passes an object containing "current" (old) attributes to the useNavigate() function, navTo(), to the edit page.
     // Follows general strategy suggested by stackoverflow user Abdulazeez Jimoh on 10/25/2022
     // URL: https://stackoverflow.com/questions/68911432/how-to-pass-parameters-with-react-router-dom-version-6-usenavigate-and-typescrip
+    // Link Accessed/Verified on 6/1/2023
     const navToUpdate = (updateVal) => {
         const state = {
         oldLastName: updateVal.lastName,
@@ -111,25 +140,33 @@ function EmployeesPage ({hostURL}) {
                 <p>
                     To edit or delete any entity within the database, simply click the "Edit" or "<span className="demoRex">*</span>"
                     buttons on the left side of the corresponding row to enter the edit menu or delete
-                    it from the database, respectively.
+                    it from the database, respectively. Be aware that <strong>updates</strong> will <strong>cascade</strong> to Employee Tasks.
+                    If you <strong>delete</strong> an employee, their record in any Employee Tasks will be set to <strong>null</strong>.
                 </p>
             </article>
-            {/* Could potentially reuse the bio assets species filter for job titles here or do a last name search or something */}
             <article>
                 <h3>View Employees</h3>
                 <p>
                     The table below shows existing information for Employee entities and includes
                     buttons to update or delete them. If you would like to view a larger version of a 
-                    non-default photo click it to see a larger version. Then click anywhere again to dismiss the view.
+                    non-default photo click it to see an expanded view. Click anywhere again to dismiss it.
                 </p>
                 {/* Lightbox example code used from: Creating a Simple Lightbox From Scratch in React by Alexandra Radevich
                 URL: https://medium.com/swlh/creating-a-simple-lightbox-from-scratch-in-react-caea84f90960
                 Accessed 5/22/2023. Modified with alt text value and custom display class.*/}
                 { lightboxDisplay ?
                 <div id="lightbox"onClick={hideLightBox} className="lightbox">
-                    <img id="lightbox-img" src={imageToShow} atl={imageToShow} className="lightbox-image"></img>
+                    <img id="lightbox-img" src={imageToShow} alt={imageToShow} className="lightbox-image"></img>
                 </div>
                 : '' }
+                <p>
+                    You can use the Job Title selector below to filter for
+                    employees that have a specific job. Select "None" to remove the filter and view the entire 
+                    table of Employees. 
+                </p>
+                <div className="selectorP">
+                    <SelectorJobClassifications hostURL={hostURL} setJobTitle={setJobTitle} jobTitle={jobTitle} isRequired={false}/>
+                </div>
                 <div className="scrollableTable">
                     <table>
                         <tbody>
@@ -146,7 +183,7 @@ function EmployeesPage ({hostURL}) {
                             
                             // Citation: Used slicing method suggested by user Bumptious Q Bangwhistle on stackoverflow on 1/23/2017 to slice image paths to more useful descriptive text for alt text.
                             // URL: https://stackoverflow.com/questions/9133102/how-to-grab-substring-before-a-specified-character-in-javascript
-                            // No, I didn't make that name up.
+                            // Link Accessed/Verified on 6/1/2023
                             const altText = val.employeePhoto ? val.employeePhoto.substring(14, val.employeePhoto.indexOf('.')) : "Default"
                             const radio = val.employeeRadio ? val.employeeRadio : "N/A"
 
@@ -169,14 +206,14 @@ function EmployeesPage ({hostURL}) {
                                             <li>Radio Callsign: {radio}</li>
                                         </ul>
                                     </td>
-                                    <td>
+                                    <td className="imageHolder">
                                         {/* Lightbox tutorial by Alexandra Radevich provided the code for the on-click trigger here
                                         URL: https://medium.com/swlh/creating-a-simple-lightbox-from-scratch-in-react-caea84f90960
                                         Accessed 5/22/2023. No modification of code for on-click trigger.*/}
                                         {val.employeePhoto ?
                                         <img src={val.employeePhoto} alt={altText} width={160} height={90} onClick={() => showImage(val.employeePhoto)}/>
                                         :
-                                        <img src={staffDefaultImg} alt="Default Image" width={160} height={90} />
+                                        <img src={defaultImg} alt="Default" width={160} height={90} />
                                         }
                                     </td>
                                     <td className="tableDescription">{val.employeeNote}</td>

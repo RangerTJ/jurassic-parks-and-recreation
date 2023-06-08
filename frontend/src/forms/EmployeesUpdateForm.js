@@ -1,5 +1,11 @@
+// Taylor Jordan and Nick Schmidt (Team 100: Jurassic Parks and Recreation)
+// Basic form functions and HTML layout created by the team, unless otherwise noted in general page or section-specific citation comments, 
+// using standard JS and React syntax and built-in functions.
+
 // Basic CRUD operations and React implementation was heavily based on the CRUD React tutorial series created by PedroTech
 // URLs - Part1: https://www.youtube.com/watch?v=T8mqZZ0r-RA, Part2: https://www.youtube.com/watch?v=3YrOOia3-mo, Part3: https://www.youtube.com/watch?v=_S2GKnFpdtE
+// Link Accessed/Verified on 6/1/2023
+
 
 import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation } from 'react-router-dom';
@@ -13,6 +19,7 @@ function EmployeesUpdateForm ({hostURL}) {
 
     // Follows reference strategy to read state object, as suggested by stackoverflow user Abdulazeez Jimoh on 10/25/2022
     // URL: https://stackoverflow.com/questions/68911432/how-to-pass-parameters-with-react-router-dom-version-6-usenavigate-and-typescrip
+    // Link Accessed/Verified on 6/1/2023
     const location = useLocation();
     const { id, oldJobTitle, oldLastName, oldFirstName, oldEmployeeUsername, oldHourlyWage, oldEmployeePhone, oldEmployeeEmail, oldEmployeeRadio, oldEmployeePhoto, oldEmployeeNote} = location.state;
 
@@ -69,7 +76,8 @@ function EmployeesUpdateForm ({hostURL}) {
                     alert("Please fill out all required fields and try again.")
                 }
         } catch (error) {
-                console.error('Error updating employee.', error)
+            console.error('Error updating employee.', error);
+            alert('MYSQL Server Error: ' + error.response.data);
         };
     };
 
@@ -79,6 +87,8 @@ function EmployeesUpdateForm ({hostURL}) {
             <article>
                 <p>
                     Make changes to this Employee Task record and click "Save" to retain them.
+                    This action will <strong>cascade</strong> to <strong>Employee Tasks</strong>.
+                    A red border around an input field means that it is required and that it still needs a valid input.
                 </p>
                 <form>
                     <fieldset>
@@ -134,6 +144,7 @@ function EmployeesUpdateForm ({hostURL}) {
                                     name="wage"
                                     placeholder="Ex. 26.00" 
                                     required
+                                    min="0"
                                     value={hourlyWage}
                                     onChange={(e) => {setHourlyWage(e.target.value)}
                                     }/>
@@ -179,6 +190,9 @@ function EmployeesUpdateForm ({hostURL}) {
                             </div>
                             <div className="selectorP">
                                 <ImageSelectorStaff  hostURL={hostURL} image={employeePhoto} setImage={setEmployeePhoto} isRequired={false} autoFocus={false} preSelected={oldEmployeePhoto}/>
+                                {/* Citation: Used slicing method suggested by user Bumptious Q Bangwhistle on stackoverflow on 1/23/2017 to slice image paths to more useful descriptive text for alt text.
+                                URL: https://stackoverflow.com/questions/9133102/how-to-grab-substring-before-a-specified-character-in-javascript
+                                Link Accessed/Verified on 6/1/2023 */}
                                 {oldEmployeePhoto ? 
                                     (<>
                                         <div>Original: {oldEmployeePhoto.substring(14, oldEmployeePhoto.indexOf('.'))}</div>
@@ -202,7 +216,7 @@ function EmployeesUpdateForm ({hostURL}) {
                     </fieldset>
                 </form>
                 <div>
-                    <p><button onClick={update}>Save</button></p>
+                    <p><button onClick={update}>Save</button> <button onClick={()=> navTo('/Employees')}>Cancel</button></p>
                 </div>
             </article>
         </>

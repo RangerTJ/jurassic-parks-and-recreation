@@ -1,18 +1,24 @@
-import React, { useState, useEffect } from 'react';
-
+// Taylor Jordan and Nick Schmidt (Team 100: Jurassic Parks and Recreation)
+// Basic selector component functions and HTML layout created by the team, unless otherwise noted in general page or section-specific citation comments, 
+// using standard JS and React syntax and built-in functions.
 
 // Citation: Code to map images in src folders heavily based on example code from stackoverflow by user Savior on 9/9/2021.
 // URL: https://stackoverflow.com/questions/69111477/how-to-iterate-through-public-assets-images-so-i-can-get-all-images-filename-in
+// Link Accessed/Verified on 6/1/2023
 
 // Citation: Code for mapping select menu heavily inspired by the following discussion (posts by ) on stackoverflow
 // URL: https://stackoverflow.com/questions/31413053/how-to-use-an-array-as-option-for-react-select-component
+// Link Accessed/Verified on 6/1/2023
 
 // Citation: Code for event triggering using onChange event heavily inspired by Abdullah Ch's stackoverflow answer on 8/15/2021
 // URL: https://stackoverflow.com/questions/68790381/how-to-use-onchange-in-react-select
+// Link Accessed/Verified on 6/1/2023
+
+import React, { useState, useEffect } from 'react';
 
 
 // If no old value passed, defaults the old value to "null". Also adjusts autoFocus and required rendering aspects as needed.
-const ImageSelectorHabitats = ({preSelected, isRequired, autoFocus, hostURL, image, setImage}) => {
+const ImageSelectorHabitats = ({preSelected, isRequired, autoFocus, setImage}) => {
   const images = require.context(`../images/habitatImages`, false, /\.(png|jpg|svg)$/);
 
   // Map available images in directory
@@ -38,7 +44,8 @@ const ImageSelectorHabitats = ({preSelected, isRequired, autoFocus, hostURL, ima
 
   // Citation: Used slicing method suggested by user Bumptious Q Bangwhistle on stackoverflow on 1/23/2017 to slice image paths to more useful descriptive text for alt text.
   // URL: https://stackoverflow.com/questions/9133102/how-to-grab-substring-before-a-specified-character-in-javascript
-  // No, I didn't make that name up. Ternary condition selected to prevent null-selection crash.
+  // Link Accessed/Verified on 6/1/2023
+  // Ternary condition selected to prevent null-selection crash.
   const altText = selected ? selected.substring(14, selected.indexOf('.')) : selected
 
   return (

@@ -1,8 +1,14 @@
+// Taylor Jordan and Nick Schmidt (Team 100: Jurassic Parks and Recreation)
+// Basic form functions and HTML layout created by the team, unless otherwise noted in general page or section-specific citation comments, 
+// using standard JS and React syntax and built-in functions.
+
 // Basic CRUD operations and React implementation was heavily based on the CRUD React tutorial series created by PedroTech
 // URLs - Part1: https://www.youtube.com/watch?v=T8mqZZ0r-RA, Part2: https://www.youtube.com/watch?v=3YrOOia3-mo, Part3: https://www.youtube.com/watch?v=_S2GKnFpdtE
+// Link Accessed/Verified on 6/1/2023
+
 
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import Axios from 'axios';
 import SelectorTasksAssigned from "../components/selectorTasksAssigned";
 import SelectorEmployees from "../components/selectorEmployees";
@@ -14,6 +20,7 @@ function EmployeeTasksUpdateForm ({hostURL}) {
 
     // Follows reference strategy to read state object, as suggested by stackoverflow user Abdulazeez Jimoh on 10/25/2022
     // URL: https://stackoverflow.com/questions/68911432/how-to-pass-parameters-with-react-router-dom-version-6-usenavigate-and-typescrip
+    // Link Accessed/Verified on 6/1/2023
     const location = useLocation();
     const { id, oldTask, oldEmployee, oldCategory, oldHours, oldCost, oldStart, oldEnd} = location.state;
     
@@ -47,8 +54,14 @@ function EmployeeTasksUpdateForm ({hostURL}) {
 
     // UPDATE - Submit Changes to an Employee Task then return to Employee Tasks home (hours/cost can be zero'd in case they need to be cleared for an entry error)
     const update = async () => {
+        // Convert start/end date strings to date values for comparison
+        const trueStart = new Date(empTaskStart);
+        const trueEnd = new Date(empTaskEnd)
+
         try {
-            if (taskName && employeeUsername && categoryName && empTaskStart && empTaskEnd) {
+            if (trueStart > trueEnd) {
+                alert("We don't yet use time machines to obtain our prehistoric assets! Fix the start/end dates.");
+            } else if (taskName && employeeUsername && categoryName && taskHoursWorked && empTaskCost && empTaskStart && empTaskEnd) {
                 await Axios.put(updateEmployeeTasksURL, {
                     taskName: taskName,
                     employeeUsername: employeeUsername,
@@ -65,7 +78,8 @@ function EmployeeTasksUpdateForm ({hostURL}) {
                     alert("Please fill out all required fields and try again.")
                 }
         } catch (error) {
-                console.error('Error updating Employee Task Report.', error)
+            console.error('Error updating Employee Task Report.', error);
+            alert('MYSQL Server Error: ' + error.response.data);
         };
     };
 
@@ -74,18 +88,15 @@ function EmployeeTasksUpdateForm ({hostURL}) {
             <h2>Update Employee Task Record</h2>
             <article>
                 <p>
-                    Make changes to this Employee Task record and click "Save" to retain them.
-                </p>
-                <p>
-                    Please be aware that the Tasks select menu will only show tasks that have not yet been "completed" (that is, given an end date).
-                    This is done to avoid cluttering up the interface. To add an Employee Task report entry to the database for a completed Task,
-                    you will need to navigate to the Assigned Tasks page and set the Task's ending date to null. It can then be selected.
+                    Make changes to this Employee Task record and click "Save" to retain them. This will update the many-to-many relational link
+                    between an Employee and a Task Assigned for this work report.
+                    A red border around an input field means that it is required and that it still needs a valid input.
                 </p>
                 <form>
                     <fieldset>
                         <legend>Update Employee Task Report #{id}</legend>
                             <div className="selectorP">
-                                <SelectorTasksAssigned  hostURL={hostURL} taskName={taskName} setTaskName={setTaskName} isRequired={true} autoFocus={true} preSelected={oldTask}/>
+                                <SelectorTasksAssigned  hostURL={hostURL} taskName={taskName} setTaskName={setTaskName} isRequired={true} autoFocus={true} preSelected={oldTask} getAll={true}/>
                                 <div>Original: {oldTask}</div>
                             </div>
                             <div className="selectorP">
@@ -104,6 +115,7 @@ function EmployeeTasksUpdateForm ({hostURL}) {
                                     name="hoursWorked"
                                     placeholder="Ex. 20"
                                     required
+                                    min="0"
                                     value={taskHoursWorked}
                                     onChange={(e) => {setTaskHoursWorked(e.target.value)}
                                     }/>
@@ -117,6 +129,7 @@ function EmployeeTasksUpdateForm ({hostURL}) {
                                     name="empTaskCost"
                                     placeholder="Ex. 2000.00" 
                                     required
+                                    min="0"
                                     value={empTaskCost}
                                     onChange={(e) => {setEmpTaskCost(e.target.value)}
                                     }/>
@@ -140,8 +153,8 @@ function EmployeeTasksUpdateForm ({hostURL}) {
                                     type="date"
                                     id="empTaskEnd"
                                     name="empTaskEnd"
-                                    required 
                                     value={empTaskEnd}
+                                    required
                                     onChange={(e) => {setEmpTaskEnd(e.target.value)}
                                     }/>
                                 <div>Original: {oldEnd}</div>
@@ -149,7 +162,7 @@ function EmployeeTasksUpdateForm ({hostURL}) {
                     </fieldset>
                 </form>
                 <div>
-                    <p><button onClick={update}>Save</button></p>
+                    <p><button onClick={update}>Save</button> <button onClick={()=> navTo('/EmployeeTasks')}>Cancel</button></p>
                 </div>
             </article>
         </>

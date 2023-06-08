@@ -1,9 +1,13 @@
+/* Taylor Jordan and Nick Schmidt (Team 100: Jurassic Parks and Recreation) */
+
 /* Fonts */
 /* SVG/Stroke Styling Inspired by "Everything about Stroke Text in CSS" by codingdudecom
-https://dev.to/codingdudecom/everything-about-stroke-text-in-css-561i */
+https://dev.to/codingdudecom/everything-about-stroke-text-in-css-561i
+Link Accessed/Verified on 6/1/2023 */
 
 /* Font-face code style/syntax based on "How to use @font-face in CSS" by Chris Coyler
-URL: https://css-tricks.com/snippets/css/using-font-face-in-css/ */
+URL: https://css-tricks.com/snippets/css/using-font-face-in-css/ 
+Link Accessed/Verified on 6/1/2023 */
 @font-face {
   font-family: 'Jurassic Park';
   src: url('fonts/JurassicPark-BL48.ttf') format('truetype');
@@ -56,6 +60,7 @@ body {
   font-family: var(--normalText);
   max-width: 90%;
   margin: auto;
+  overflow-y: scroll;
 }
 
 header {
@@ -194,8 +199,6 @@ table {
   border: 2px solid var(--parkYellow);
   border-collapse: collapse;
   width: 100%;
-  /* Ideally should probably make container and alignment styles for columns and use fit content in final version */
-  /* width: fit-content; */
   text-align: center;
 }
 
@@ -327,7 +330,7 @@ video {
   outline: solid 2px var(--parkYellow);
   margin: 2px;
   vertical-align: middle;
-  max-width: 100%;
+  width: 100%;
 }
 
 
@@ -411,6 +414,10 @@ video {
   width: 50px;
 }
 
+.imageHolder {
+  width: 170px;
+}
+
 /* Experimental / For Possible use of capping small int column width */
 .smallIntTD {
   width: min-content;
@@ -421,6 +428,10 @@ video {
   font-size: large;
 }
 
+.inlineDiv {
+  display: flex;
+}
+
 /* Mimic default P format for spacing selectors so HTML doesn't get angry about DIV in P elements */
 /* Information on default <p> settings provided by ChatGPT query on 5/19/23 */
 .selectorP {
@@ -428,13 +439,14 @@ video {
   margin-top: 1em;
   margin-bottom: 1em;
   margin-left: 0;
-  margin-right: 0;
+  margin-right: 10px;
   padding-left: 0;
   padding-right: 0;
 }
 
 /* Citation: Creating a Simple Lightbox From Scratch in React by Alexandra Radevich
 URL: https://medium.com/swlh/creating-a-simple-lightbox-from-scratch-in-react-caea84f90960
+Link Accessed/Verified on 5/22/2023
 Example code used to begin implementation and modified slightly to suit project needs.
 .lightbox is very, very close to the raw example code (modified background color), while .light-box image was 
 made from scratch to address some image scaling/positioning issues. The combined end result is a lightbox image
@@ -458,6 +470,24 @@ popup that shows up in a fixed position in the center of the screen that scales 
   width: 100%;
 }
 
+.returnToTop {
+  text-decoration: none;
+  color: var(--parkRed);
+  font-size: xx-large;
+  position: fixed; right: 10px; bottom: 5px;
+  text-shadow:  0.5px -0.5px 0px var(--parkYellow),
+                -0.5px 0.5px 0px var(--parkYellow),
+                0.5px 0.5px 0px var(--parkYellow),
+                -0.5px -0.5px 0px var(--parkYellow);
+}
+
+.topText {
+  font-size: xx-small;
+  text-align: center;
+  text-shadow: none;
+  color: var(--parkYellow);
+}
+
 /* Happy Eater Egg Hunting! */
 .whte_rbt_obj {
   text-decoration: none;
@@ -474,6 +504,15 @@ popup that shows up in a fixed position in the center of the screen that scales 
 /* -------------------- */
 @media (max-device-width: 780px) {
 
+body, html {
+  max-width: 100%;
+  margin: 0;
+}
+
+footer {
+  margin-bottom: 0;
+}  
+
 h1 {
   font-size: 40px;
   margin-bottom: 0px;
@@ -485,6 +524,10 @@ h1 {
 .headerP {
   margin-top: -10px;
   font-size: 25px;
+}
+
+.headerBox {
+  margin: 0;
 }
 
 .headerLogo {
@@ -536,12 +579,24 @@ nav a:focus {
   outline: none;
 }
 
-table {
+.st-holder {
   font-size: 12px;
+  width: 100%;
 }
 
 td {
   padding: 2px;
+}
+
+.tableButton {
+  margin: 5px 0px 5px 0px;
+}
+
+.returnToTop {
+  font-size: xx-large;
+  position: fixed; 
+    right: 0px; 
+    bottom: 0px;
 }
 
 }

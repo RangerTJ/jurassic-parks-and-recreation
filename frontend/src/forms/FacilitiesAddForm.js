@@ -1,7 +1,13 @@
+// Taylor Jordan and Nick Schmidt (Team 100: Jurassic Parks and Recreation)
+// Basic form functions and HTML layout created by the team, unless otherwise noted in general page or section-specific citation comments, 
+// using standard JS and React syntax and built-in functions.
+
 // Basic CRUD operations and React implementation was heavily based on the CRUD React tutorial series created by PedroTech
 // URLs - Part1: https://www.youtube.com/watch?v=T8mqZZ0r-RA, Part2: https://www.youtube.com/watch?v=3YrOOia3-mo, Part3: https://www.youtube.com/watch?v=_S2GKnFpdtE
+// Link Accessed/Verified on 6/1/2023
 
-import React, { useEffect, useState } from "react";
+
+import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import Axios from 'axios';
 import SelectorParks from "../components/selectorParks";
@@ -49,7 +55,8 @@ function FacilitiesAddForm ({hostURL}) {
                     alert("Please fill out all required fields and try again.")
                 }
         } catch(error) {
-                console.error('Error inserting facility.', error)
+            console.error('Error inserting facility.', error);
+            alert('MYSQL Server Error: ' + error.response.data);
         }
     };
 
@@ -60,6 +67,7 @@ function FacilitiesAddForm ({hostURL}) {
                 <p>
                     To add a new Facility to the database, enter values for its attributes below
                     and click the "Add Facility" button.
+                    A red border around an input field means that it is required and that it still needs a valid input.
                 </p>
                 <form>
                     <fieldset>
@@ -142,7 +150,7 @@ function FacilitiesAddForm ({hostURL}) {
                     </fieldset>
                 </form>
                 <div>
-                    <p><button onClick={submit}>Add Facility</button></p>
+                    <p><button onClick={submit}>Add Facility</button> <button onClick={()=> navTo('/Facilities')}>Cancel</button></p>
                 </div>
             </article>
         </>

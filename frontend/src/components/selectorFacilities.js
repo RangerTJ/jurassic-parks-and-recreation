@@ -1,9 +1,17 @@
+// Taylor Jordan and Nick Schmidt (Team 100: Jurassic Parks and Recreation)
+// Basic selector component functions and HTML layout created by the team, unless otherwise noted in general page or section-specific citation comments, 
+// using standard JS and React syntax and built-in functions.
+
+// Basic CRUD operations and React implementation was heavily based on the CRUD React tutorial series created by PedroTech
+// URLs - Part1: https://www.youtube.com/watch?v=T8mqZZ0r-RA, Part2: https://www.youtube.com/watch?v=3YrOOia3-mo, Part3: https://www.youtube.com/watch?v=_S2GKnFpdtE
+// Link Accessed/Verified on 6/1/2023
+
 import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
 
 
 // If no old value passed, defaults the old value to "null". Also adjusts autoFocus and required rendering aspects as needed.
-const SelectorFacilities = ({preSelected, isRequired, autoFocus, hostURL, facility, setFacility}) => {
+const SelectorFacilities = ({preSelected, isRequired, autoFocus, hostURL, setFacilityName}) => {
 
   // Create useState for the selection and list
   // For update, just update pre-selected image to match an input variable first
@@ -13,7 +21,7 @@ const SelectorFacilities = ({preSelected, isRequired, autoFocus, hostURL, facili
   // Selection event handler to pass on selection data to DB
   const selectionHandler = (event) => {
     setSelected(event.target.value)
-    setFacility(event.target.value)
+    setFacilityName(event.target.value)
   };
 
   // Update pre-selected

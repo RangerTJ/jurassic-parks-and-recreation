@@ -1,7 +1,13 @@
+// Taylor Jordan and Nick Schmidt (Team 100: Jurassic Parks and Recreation)
+// Basic form functions and HTML layout created by the team, unless otherwise noted in general page or section-specific citation comments, 
+// using standard JS and React syntax and built-in functions.
+
 // Basic CRUD operations and React implementation was heavily based on the CRUD React tutorial series created by PedroTech
 // URLs - Part1: https://www.youtube.com/watch?v=T8mqZZ0r-RA, Part2: https://www.youtube.com/watch?v=3YrOOia3-mo, Part3: https://www.youtube.com/watch?v=_S2GKnFpdtE
+// Link Accessed/Verified on 6/1/2023
 
-import React, { useEffect, useState } from "react";
+
+import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import Axios from 'axios';
 import SelectorTasksAssigned from "../components/selectorTasksAssigned";
@@ -27,8 +33,14 @@ function EmployeeTasksAddForm ({hostURL}) {
 
     // CREATE - Insert New Employee Task then return to EmployeeTasks Page
     const submit = async () => {
+        // Convert start/end date strings to date values for comparison
+        const trueStart = new Date(empTaskStart);
+        const trueEnd = new Date(empTaskEnd)
+
         try {
-            if (taskName && employeeUsername && categoryName && taskHoursWorked && empTaskCost && empTaskStart && empTaskEnd) {
+            if (trueStart > trueEnd) {
+                alert("We don't yet use time machines to obtain our prehistoric assets! Fix the start/end dates.");
+            } else if (taskName && employeeUsername && categoryName && taskHoursWorked && empTaskCost && empTaskStart && empTaskEnd) {
                 await Axios.post(createEmployeeTasksURL, {
                     taskName: taskName,
                     employeeUsername: employeeUsername,
@@ -44,7 +56,8 @@ function EmployeeTasksAddForm ({hostURL}) {
                     alert("Please fill out all required fields and try again.")
                 }
         } catch(error) {
-                console.error('Error inserting Employee Task Report.', error)
+            console.error('Error inserting Employee Task Report.', error);
+            alert('MYSQL Server Error: ' + error.response.data);
         }
     };
 
@@ -54,7 +67,8 @@ function EmployeeTasksAddForm ({hostURL}) {
             <article>
                 <p>
                     Please fill out this form to document an employee's work towards an assigned task within our managed park system. 
-                    Click the "Add Report" button below when you are ready to submit.
+                    Click the "Add Report" button below when you are ready to submit. 
+                    A red border around an input field means that it is required and that it still needs a valid input.
                 </p>
                 <p>
                     For the "Category" field, please select the overall most relevant category to the work performed for this report.
@@ -69,16 +83,11 @@ function EmployeeTasksAddForm ({hostURL}) {
                     in the reported work performed for the related assigned task. This is important, as it gives JP&R a way to analyze
                     total costs related to different sectors.
                 </p>
-                <p>
-                    Please be aware that the Tasks select menu will only show tasks that have not yet been "completed" (that is, given an end date).
-                    This is done to avoid cluttering up the interface. To add an Employee Task report entry to the database for a completed Task,
-                    you will need to navigate to the Assigned Tasks page and set the Task's ending date to null. It can then be selected.
-                </p>
                 <form>
                     <fieldset>
                         <legend>Information</legend>
                             <div className="selectorP">
-                                <SelectorTasksAssigned  hostURL={hostURL} taskName={taskName} setTaskName={setTaskName} isRequired={true} autoFocus={true}/>
+                                <SelectorTasksAssigned  hostURL={hostURL} taskName={taskName} setTaskName={setTaskName} isRequired={true} autoFocus={true} getAll={true}/>
                             </div>
                             <div className="selectorP">
                                 <SelectorEmployees  hostURL={hostURL} employeeUsername={employeeUsername} setEmployeeUsername={setEmployeeUsername} isRequired={true} autoFocus={false}/>
@@ -94,6 +103,7 @@ function EmployeeTasksAddForm ({hostURL}) {
                                     name="hoursWorked"
                                     placeholder="Ex. 20" 
                                     required 
+                                    min="0"
                                     onChange={(e) => {setTaskHoursWorked(e.target.value)}
                                     }/>
                             </div>
@@ -105,6 +115,7 @@ function EmployeeTasksAddForm ({hostURL}) {
                                     name="empTaskCost"
                                     placeholder="Ex. 2000.00" 
                                     required 
+                                    min="0"
                                     onChange={(e) => {setEmpTaskCost(e.target.value)}
                                     }/>
                             </div>
@@ -131,7 +142,7 @@ function EmployeeTasksAddForm ({hostURL}) {
                     </fieldset>
                 </form>
                 <div>
-                    <p><button onClick={submit}>Add Report</button></p>
+                    <p><button onClick={submit}>Add Report</button> <button onClick={()=> navTo('/EmployeeTasks')}>Cancel</button></p>
                 </div>
             </article>
         </>

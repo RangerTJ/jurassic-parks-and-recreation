@@ -1,7 +1,13 @@
+// Taylor Jordan and Nick Schmidt (Team 100: Jurassic Parks and Recreation)
+// Basic form functions and HTML layout created by the team, unless otherwise noted in general page or section-specific citation comments, 
+// using standard JS and React syntax and built-in functions.
+
 // Basic CRUD operations and React implementation was heavily based on the CRUD React tutorial series created by PedroTech
 // URLs - Part1: https://www.youtube.com/watch?v=T8mqZZ0r-RA, Part2: https://www.youtube.com/watch?v=3YrOOia3-mo, Part3: https://www.youtube.com/watch?v=_S2GKnFpdtE
+// Link Accessed/Verified on 6/1/2023
 
-import React, { useEffect, useState } from "react";
+
+import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import Axios from 'axios';
 import SelectorJobClassifications from "../components/selectorJobClassifications";
@@ -49,7 +55,8 @@ function EmployeesAddForm ({hostURL}) {
                     alert("Please fill out all required fields and try again.")
                 }
         } catch(error) {
-                console.error('Error inserting employee.', error)
+            console.error('Error inserting employee.', error);
+            alert('MYSQL Server Error: ' + error.response.data);
         }
     };
 
@@ -60,6 +67,7 @@ function EmployeesAddForm ({hostURL}) {
                 <p>
                     To add a new Employee entity to the database, enter values for its attributes below
                     and click the "Add Employee" button.
+                    A red border around an input field means that it is required and that it still needs a valid input.
                 </p>
                 <form>
                     <fieldset>
@@ -109,6 +117,7 @@ function EmployeesAddForm ({hostURL}) {
                                     name="wage"
                                     placeholder="Ex. 26.00" 
                                     required 
+                                    min="0"
                                     onChange={(e) => {setHourlyWage(e.target.value)}
                                     }/>
                             </div>
@@ -161,7 +170,7 @@ function EmployeesAddForm ({hostURL}) {
                     </fieldset>
                 </form>
                 <div>
-                    <p><button onClick={submit}>Add Employee</button></p>
+                    <p><button onClick={submit}>Add Employee</button> <button onClick={()=> navTo('/Employees')}>Cancel</button></p>
                 </div>
             </article>
         </>

@@ -1,9 +1,14 @@
-// Basic CRUD operations and React implementation was heavily based on the CRUD React tutorial series created by PedroTech
+// Taylor Jordan and Nick Schmidt (Team 100: Jurassic Parks and Recreation)
+// Front-end CRUD/filter error-handling implementations and the returned HTML layout for the page were entirely hand-crafted by our own team members, unless otherwise noted.
+
+// Basic CRUD operations, React implementation, and HTML value mapping was heavily based on code from the CRUD React tutorial series created by PedroTech
 // URLs - Part1: https://www.youtube.com/watch?v=T8mqZZ0r-RA, Part2: https://www.youtube.com/watch?v=3YrOOia3-mo, Part3: https://www.youtube.com/watch?v=_S2GKnFpdtE
+// Link Accessed/Verified on 6/1/2023
 
 import React, { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom'; // May not need?
 import Axios from 'axios';
+import SelectorFacilities from "../components/selectorFacilities";
 
 
 // HostURL Passed from App.js
@@ -15,17 +20,59 @@ function TasksAssignedPage ({hostURL}) {
     // TasksAssigned SQL Endpoints
     const getTasksAssignedURL = hostURL + '/api/getTasksAssigned';
     const deleteTasksAssignedURL = hostURL + '/api/deleteTasksAssigned/';
+    const filterTasksAssignedByOpenTaskURL = hostURL + '/api/filterTasksAssignedByOpenTask'
+    const filterTasksAssignedByClosedTaskURL = hostURL + '/api/filterTasksAssignedByClosedTask'
 
     // TasksAssigned Table Functions
     const [tasksAssignedList, setTasksAssignedList] = useState([])
+    const [taskStatus, setTaskStatus] = useState([])
 
     // READ Populate Tasks Assigned Table
     useEffect(()=> {
         getAllTasksAssigned();
     }, [])
-    
 
-    // Update Function
+    // READ Changes to Filters
+    useEffect(() => {
+        taskFilters();
+    }, [taskStatus]);
+
+    // Selection event handler to pass on selection data to DB
+    const selectionHandlerTasks = (event) => {
+        setTaskStatus(event.target.value)
+    };
+
+    // Handle two filters and let them be used concurrently
+    const taskFilters = async () => {
+        // Return only open tasks
+        if(taskStatus === 'open') {
+            try {
+                const response = await Axios.get(filterTasksAssignedByOpenTaskURL)
+                setTasksAssignedList(response.data);
+                console.log(response.data);
+            } catch (error) {
+                console.error('Error applying the filter to the View table.', error);
+            }
+        } else if (taskStatus === 'closed') {
+            // Return only closed tasks
+            try {
+                const response = await Axios.get(filterTasksAssignedByClosedTaskURL)
+                setTasksAssignedList(response.data);
+                console.log(response.data);
+            } catch (error) {
+                console.error('Error applying the filter to the View table.', error);
+            }
+        }
+        // If neither filter selected, return everything
+        else {
+            await getAllTasksAssigned();
+        }
+    }
+
+    // UPDATE Primer: Passes an object containing "current" (old) attributes to the useNavigate() function, navTo(), to the edit page.
+    // Follows general strategy suggested by stackoverflow user Abdulazeez Jimoh on 10/25/2022
+    // URL: https://stackoverflow.com/questions/68911432/how-to-pass-parameters-with-react-router-dom-version-6-usenavigate-and-typescrip
+    // Link Accessed/Verified on 6/1/2023
     const navToUpdate = (updateVal) => {
         const state = {
             oldFacilityName:            updateVal.facilityName,
@@ -46,7 +93,6 @@ function TasksAssignedPage ({hostURL}) {
             setTasksAssignedList(response.data)
         } catch (error) {
             console.error('Error!', error);
-            alert("ERROR: Restricted delete action or server error (most parent entities with dependents may not be deleted).");
         }
     }
 
@@ -65,6 +111,7 @@ function TasksAssignedPage ({hostURL}) {
             }}
         catch (error) {
             console.error('Error deleting Task.', error);
+            alert('MYSQL Server Error: ' + error.response.data);
         }
     };
 
@@ -87,10 +134,10 @@ function TasksAssignedPage ({hostURL}) {
                 <p>
                     To edit or delete any entity within the database, simply click the "Edit" or "<span className="demoRex">*</span>"
                     buttons on the left side of the corresponding row to enter the edit menu or delete
-                    it from the database, respectively.
+                    it from the database, respectively. Be aware that <strong>updates</strong> will <strong>cascade</strong> to Employee Tasks.
+                    If you <strong>delete</strong> an Assigned Task, their record in any Employee Tasks will be set to <strong>null</strong>.
                 </p>
             </article>
-
             <article>
                 <h3>View Assigned Tasks</h3>
                 <p>
@@ -98,6 +145,16 @@ function TasksAssignedPage ({hostURL}) {
                     buttons to update or delete them. Information includes the facility affiliated with the task and affiliated biological asset
                     (if the task has been assigned for one).
                 </p>
+                <p>
+                    You can use the Task Status selector below to filter for open or closed tasks. Select "None" to remove the filter and view the entire 
+                    table of Assigned Tasks. 
+                </p>
+                <div><label htmlFor="statusFilter">Task Status</label></div>
+                <select id="statusFilter" className="selectorP" onChange={selectionHandlerTasks}>
+                    <option value="">None (All Tasks)</option>
+                    <option value="open">Open Tasks</option>
+                    <option value="closed">Completed Tasks</option>
+                </select>
                 <div className="scrollableTable">
                     <table>
                         <tbody>
@@ -109,8 +166,8 @@ function TasksAssignedPage ({hostURL}) {
                             <th>Description</th>
                             <th>Start/End</th>
                         </tr>
+                        {/* Map values from SQL and handle null entries */}
                         {tasksAssignedList.map((val, index) => {
-                            // TODO: Figure out syntax issues with this later
                             const startDateAbridged = val.taskStart ? val.taskStart.substring(0, 10) : 'Issue: Undefined Start Date';
                             const endDateAbridged = val.taskEnd ? val.taskEnd.substring(0, 10) + ' (End)' : 'In-Progress';
                             const nullableAssetID = val.idBiologicalAsset ? '#' + val.idBiologicalAsset : 'N/A'

@@ -1,5 +1,11 @@
+// Taylor Jordan and Nick Schmidt (Team 100: Jurassic Parks and Recreation)
+// Basic form functions and HTML layout created by the team, unless otherwise noted in general page or section-specific citation comments, 
+// using standard JS and React syntax and built-in functions.
+
 // Basic CRUD operations and React implementation was heavily based on the CRUD React tutorial series created by PedroTech
 // URLs - Part1: https://www.youtube.com/watch?v=T8mqZZ0r-RA, Part2: https://www.youtube.com/watch?v=3YrOOia3-mo, Part3: https://www.youtube.com/watch?v=_S2GKnFpdtE
+// Link Accessed/Verified on 6/1/2023
+
 
 import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation } from 'react-router-dom';
@@ -13,6 +19,7 @@ function BiologicalAssetsUpdateForm ({hostURL}) {
 
     // Follows reference strategy to read state object, as suggested by stackoverflow user Abdulazeez Jimoh on 10/25/2022
     // URL: https://stackoverflow.com/questions/68911432/how-to-pass-parameters-with-react-router-dom-version-6-usenavigate-and-typescrip
+    // Link Accessed/Verified on 6/1/2023
     const location = useLocation();
     const { oldName, oldSpecies, oldFacility, id} = location.state;
 
@@ -21,25 +28,25 @@ function BiologicalAssetsUpdateForm ({hostURL}) {
     const navTo = useNavigate();
 
     // Bio Asset States for the Form (2x arrays for select menus + 3x values to submit)
-    const [species, setSpecies] = useState('')
+    const [speciesName, setSpeciesName] = useState('')
     const [name, setName] = useState(oldName)
-    const [facility, setFacility] = useState('')
+    const [facilityName, setFacilityName] = useState('')
 
     // Pre-sets all the old values into the fields
     useEffect(()=> {
-        setSpecies(oldSpecies);
-        setFacility(oldFacility);
+        setSpeciesName(oldSpecies);
+        setFacilityName(oldFacility);
         setName(oldName);
     }, [])
 
     // UPDATE - Submit Changes to a Bio Asset then return to Asset home
     const update = async () => {
         try {
-            if (species && name && facility) {
+            if (speciesName && name && facilityName) {
                 await Axios.put(updateBiologicalAssetsURL, {
-                    speciesName: species,
+                    speciesName: speciesName,
                     bioAssetName: name,
-                    facilityName: facility,
+                    facilityName: facilityName,
                     idBiologicalAsset: id
                 });
                 alert(`${name}'s database entry has been updated!`)
@@ -48,7 +55,8 @@ function BiologicalAssetsUpdateForm ({hostURL}) {
                     alert("Please fill out all required fields and try again.")
                 }
         } catch (error) {
-                console.error('Error updating biological asset.', error)
+            console.error('Error updating biological asset.', error);
+            alert('MYSQL Server Error: ' + error.response.data);
         };
     };
         
@@ -58,12 +66,15 @@ function BiologicalAssetsUpdateForm ({hostURL}) {
             <article>
                 <p>
                     Make changes to this asset and click "Save" to retain them.
+                    This action will <strong>cascade</strong> to <strong>Tasks Assigned</strong>. This will also update the 
+                    asset as a many-to-many relational link between a Species and a Facility.
+                    A red border around an input field means that it is required and that it still needs a valid input.
                 </p>
                 <form>
                     <fieldset>
                         <legend>Update Asset ID# {id}</legend>
                         <div className="selectorP">
-                            <SelectorSpecies  hostURL={hostURL} species={species} setSpecies={setSpecies} preSelected={oldSpecies} isRequired={true} autoFocus={true}/>
+                            <SelectorSpecies  hostURL={hostURL} speciesName={speciesName} setSpeciesName={setSpeciesName} preSelected={oldSpecies} isRequired={true} autoFocus={true}/>
                         <div>Original: {oldSpecies}</div>
                         </div>
                         <div className="selectorP">
@@ -80,13 +91,13 @@ function BiologicalAssetsUpdateForm ({hostURL}) {
                             <div>Original: {oldName}</div>
                         </div>
                         <div className="selectorP">
-                            <SelectorFacilities hostURL={hostURL} facility={facility} setFacility={setFacility} preSelected={oldFacility} isRequired={true}/>
+                            <SelectorFacilities hostURL={hostURL} facilityName={facilityName} setFacilityName={setFacilityName} preSelected={oldFacility} isRequired={true}/>
                             <div>Original: {oldFacility}</div>
                         </div>
                     </fieldset>
                 </form>
                 <div>
-                    <p><button onClick={update}>Save</button></p>
+                    <p><button onClick={update}>Save</button> <button onClick={()=> navTo('/BiologicalAssets')}>Cancel</button></p>
                 </div>
             </article>
         </>

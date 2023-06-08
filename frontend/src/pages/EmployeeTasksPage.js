@@ -1,9 +1,16 @@
-// Basic CRUD operations and React implementation was heavily based on the CRUD React tutorial series created by PedroTech
+// Taylor Jordan and Nick Schmidt (Team 100: Jurassic Parks and Recreation)
+// Front-end CRUD/filter error-handling implementations and the returned HTML layout for the page were entirely hand-crafted by our own team members, unless otherwise noted.
+
+// Basic CRUD operations, React implementation, and HTML value mapping was heavily based on code from the CRUD React tutorial series created by PedroTech
 // URLs - Part1: https://www.youtube.com/watch?v=T8mqZZ0r-RA, Part2: https://www.youtube.com/watch?v=3YrOOia3-mo, Part3: https://www.youtube.com/watch?v=_S2GKnFpdtE
+// Link Accessed/Verified on 6/1/2023
+
 
 import React, { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import Axios from 'axios';
+import SelectorTasksAssigned from "../components/selectorTasksAssigned";
+import SelectorEmployees from "../components/selectorEmployees";
 
 
 // HostURL Passed from App.js
@@ -15,14 +22,60 @@ function EmployeeTasksPage ({hostURL}) {
     // EmployeeTasks SQL Endpoints
     const getEmployeeTasksURL = hostURL + '/api/getEmployeeTasks';
     const deleteEmployeeTasksURL = hostURL + '/api/deleteEmployeeTasks/';
+    const filterEmployeeTasksByTaskNameURL = hostURL + '/api/filterEmployeeTasksByTaskName';
+    const filterEmployeeTasksByEmployeeURL = hostURL + '/api/filterEmployeeTasksByEmployee';
+    const filterEmployeeTasksByTaskNameAndEmployeeURL = hostURL + '/api/filterEmployeeTasksByTaskAndEmployee';
 
     // Employee Task Table Functions
-    const [employeeTaskList, setEmployeeTaskList] = useState([])
+    const [employeeTaskList, setEmployeeTaskList] = useState([]);
+    const [taskName, setTaskName] = useState('');
+    const [employeeUsername, setEmployeeUsername] = useState('');
 
     // READ Populate Employee Task Table
     useEffect(()=> {
         getEmployeeTasks();
     }, [])
+
+    // READ Changes to Employee Tasks Table (Filter Changes)
+    useEffect(() => {
+        EmpTaskFilters();
+    }, [taskName, employeeUsername]);
+
+    // Handle two filters and let them be used concurrently
+    const EmpTaskFilters = async () => {
+        // If both filters selected, apply return of both selections
+        if(taskName && employeeUsername) {
+            try {
+                const response = await Axios.post(filterEmployeeTasksByTaskNameAndEmployeeURL, {taskName: taskName, employeeUsername: employeeUsername})
+                setEmployeeTaskList(response.data);
+                console.log(response.data);
+            } catch (error) {
+                console.error('Error applying the filter to the View table.', error);
+            }
+        } else if (taskName && employeeUsername==='') {
+            // If just Tasks selected, return tasks filter
+            try {
+                const response = await Axios.post(filterEmployeeTasksByTaskNameURL, {taskName: taskName})
+                setEmployeeTaskList(response.data);
+                console.log(response.data);
+            } catch (error) {
+                console.error('Error applying the filter to the View table.', error);
+            }
+        } else if (taskName==='' && employeeUsername) {
+            // If just Employees selected, return employee filter
+            try {
+                const response = await Axios.post(filterEmployeeTasksByEmployeeURL, {employeeUsername: employeeUsername})
+                setEmployeeTaskList(response.data);
+                console.log(response.data);
+            } catch (error) {
+                console.error('Error applying the filter to the View table.', error);
+            }
+        }
+        // If neither filter selected, return everything
+        else {
+            await getEmployeeTasks();
+        }
+    }
 
     // DELETE - Deletes target Employee Task and Refreshes Table
     const delEmployeeTask = async (delID) => {
@@ -36,7 +89,7 @@ function EmployeeTasksPage ({hostURL}) {
             }
         }   catch (error) {
             console.error('Error deleting employee task.', error);
-            alert("ERROR: Restricted delete action or server error (most parent entities with dependents may not be deleted).");
+            alert('MYSQL Server Error: ' + error.response.data);
         }
       };
   
@@ -53,6 +106,7 @@ function EmployeeTasksPage ({hostURL}) {
     // UPDATE Primer: Passes an object containing "current" (old) attributes to the useNavigate() function, navTo(), to the edit page.
     // Follows general strategy suggested by stackoverflow user Abdulazeez Jimoh on 10/25/2022
     // URL: https://stackoverflow.com/questions/68911432/how-to-pass-parameters-with-react-router-dom-version-6-usenavigate-and-typescrip
+    // Link Accessed/Verified on 6/1/2023
     const navToUpdate = (updateVal) => {
         const state = {
         id: updateVal.idEmployeeTask,
@@ -80,6 +134,11 @@ function EmployeeTasksPage ({hostURL}) {
                     to track labor and costs in the process. Each "Employee Task" entity represents 
                     a report with a unique ID that shows work information performed for an existing Task.
                 </p>
+                <p> 
+                    <strong>Deleting</strong> a Task Assigned, Employee, or Task Category that an Employee Task report references will result
+                    in the corresponding Employee Task values being set to <strong>null</strong> to retain a record
+                    of the costs and labor. <strong>Updates</strong> to any of these affiliated parent entities will <strong>cascade</strong>.
+                </p>
                 <p>
                     Click the "Create" button below to add a new Employee Task to the DINO database.
                 </p>
@@ -92,15 +151,26 @@ function EmployeeTasksPage ({hostURL}) {
                 <p>
                     To edit or delete any entity within the database, simply click the "Edit" or "<span className="demoRex">*</span>"
                     buttons on the left side of the corresponding row to enter the edit menu or delete
-                    it from the database, respectively.
+                    it from the database, respectively. Be aware that <strong>deleting an EmployeeTask entry will
+                    sever a link between an Employee and a Task Assigned</strong>.
                 </p>
             </article>
             <article>
                 <h3>View Employee Tasks</h3>
                 <p>
                     The table below shows existing information for Employee Task entities and includes
-                    buttons to update or delete them.
+                    buttons to update or delete them. You can use the Tasks selector below to filter for Employee Task records
+                    that pertain to a specific Task Assigned. Select "None" to remove the filter and view the entire 
+                    table of Employee Tasks. All Assigned Tasks can be filtered for.
                 </p>
+                <p>
+                    You can use the Tasks and Employee selectors below to concurrently filter Employee Tasks by these attributes.
+                    Select "None" to remove the respective filter. 
+                </p>
+                <div>
+                    <div className="selectorP"><SelectorTasksAssigned hostURL={hostURL} setTaskName={setTaskName} taskName={taskName} isRequired={false} getAll={true}/></div>
+                    <div className="selectorP"><SelectorEmployees hostURL={hostURL} setEmployeeUsername={setEmployeeUsername} employeeUsername={employeeUsername} isRequired={false}/></div>
+                </div>
                 <div className="scrollableTable">
                     <table>
                         <tbody>

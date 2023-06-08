@@ -1,5 +1,11 @@
+// Taylor Jordan and Nick Schmidt (Team 100: Jurassic Parks and Recreation)
+// Basic form functions and HTML layout created by the team, unless otherwise noted in general page or section-specific citation comments, 
+// using standard JS and React syntax and built-in functions.
+
 // Basic CRUD operations and React implementation was heavily based on the CRUD React tutorial series created by PedroTech
 // URLs - Part1: https://www.youtube.com/watch?v=T8mqZZ0r-RA, Part2: https://www.youtube.com/watch?v=3YrOOia3-mo, Part3: https://www.youtube.com/watch?v=_S2GKnFpdtE
+// Link Accessed/Verified on 6/1/2023
+
 
 import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation } from 'react-router-dom';
@@ -13,10 +19,11 @@ function TasksAssignedUpdateForm ({hostURL}) {
 
     // Follows reference strategy to read state object, as suggested by stackoverflow user Abdulazeez Jimoh on 10/25/2022
     // URL: https://stackoverflow.com/questions/68911432/how-to-pass-parameters-with-react-router-dom-version-6-usenavigate-and-typescrip
+    // Link Accessed/Verified on 6/1/2023
     const location = useLocation();
     const { oldFacilityName, oldBiologicalAsset, oldTaskName, oldTaskDescription, oldTaskStart, oldTaskEnd, id } = location.state;
 
-    // Clip off time part of dates so they can pre-populate date pickers (some data loss, but probably should have just done dates instead of datetime anyways)
+    // Clip off time part of dates so they can pre-populate date pickers
     const oldStartDateString = oldTaskStart ? oldTaskStart.substring(0, 10) : '';
     const oldEndDateString = oldTaskEnd ? oldTaskEnd.substring(0, 10) : '';
 
@@ -25,7 +32,7 @@ function TasksAssignedUpdateForm ({hostURL}) {
     const navTo = useNavigate();
 
     // Task Assigned States for the Form
-    const [facility, setFacility] = useState('')
+    const [facilityName, setFacilityName] = useState('')
     const [bioAssetName, setBioAssetName] = useState('')
     const [taskName, setTaskName] = useState('')
     const [taskDescription, setTaskDescription] = useState('')
@@ -34,7 +41,7 @@ function TasksAssignedUpdateForm ({hostURL}) {
 
     // Pre-sets all the old values into the fields
     useEffect(()=> {
-        setFacility(oldFacilityName);
+        setFacilityName(oldFacilityName);
         setBioAssetName(oldBiologicalAsset);
         setTaskName(oldTaskName)
         setTaskDescription(oldTaskDescription);
@@ -44,12 +51,15 @@ function TasksAssignedUpdateForm ({hostURL}) {
 
     // UPDATE - Submit Changes to a Task then return to TasksAssigned page
     const updateTaskAssigned = async () => {
+        // Convert start/end date strings to date values for comparison
+        const trueStart = new Date(taskStart);
+        const trueEnd = new Date(taskEnd)
 
-
-
-        if (taskName && facility && taskDescription && taskStart) {
-        
         try {
+            if (trueStart > trueEnd) {
+                alert("We don't yet use time machines to obtain our prehistoric assets! Fix the start/end dates.");
+            } else if  (facilityName && taskName && taskDescription && taskStart) {
+
             // Send Null value to SQL if task is re-opened
             let taskEndVar = taskEnd
             if (taskEnd === '') {
@@ -58,56 +68,44 @@ function TasksAssignedUpdateForm ({hostURL}) {
             
             // The actual update code
             const res = await Axios.put(updateTasksAssignedURL, {
+                facilityName: facilityName,
+                bioAssetName: bioAssetName,
+                taskName: taskName,
+                taskDescription: taskDescription,
+                taskStart: taskStart,
+                taskEnd: taskEndVar,
+                idTaskAssigned: id
+            });
 
-            facilityName: facility,
-            bioAssetName: bioAssetName,
-            taskName: taskName,
-            taskDescription: taskDescription,
-            taskStart: taskStart,
-            taskEnd: taskEndVar,
-            idTaskAssigned: id
-        });
-
-        console.log(res);
-        alert(`${taskName}'s database entry has been updated!`)
-        navTo('/TasksAssigned');
+            console.log(res);
+            alert(`${taskName}'s database entry has been updated!`)
+            navTo('/TasksAssigned');
+            } else {
+                alert("Please fill out all required fields and try again.");
+            };
         
-        } catch(err) {
-            console.error(err);
-            alert("Error occured while updating.");
+        } catch(error) {
+            console.error(error);
+            alert('MYSQL Server Error: ' + error.response.data);
         }}
-
-        else {
-            alert("Please fill out all required fields and try again.")
-        };
-    };
 
     return (
         <>
-            <h2>Add Task</h2>
+            <h2>Update Task Assignment</h2>
             <article>
                 <p>
                     To add a new Task to the database, enter values for its attributes below
                     and click the "Add Task" button.
-                </p>
-                <p>
-                    Only fill out the "Date Ended" field once all work on the task has been fully completed.
-                    This includes administrative aspects such as recording all Employee Task reports and adding
-                    them to this database. Once a "Date Ended" value is added, this Task will no longer be
-                    used to populate the the Tasks Assigned selector on the Employee Tasks forms (to avoid cluttering
-                    up the select UI).
-                </p>
-                <p>
-                    If there is an emergency need to add an Employee Task report after an assigned
-                    Task has been given an end date, you should edit the Task to have a null end date. Once any new
-                    Employee Task reports are logged, and it is confirmed that there are no more to add, the end date
-                    here should be set to the date the last Employee Task report was processed in the database.
+                    This action will <strong>cascade</strong> to the <strong>Employee Tasks</strong> relational entity
+                    that handles the many-to-many relationship between an Assigned Task and Employee by documenting a 
+                    period of labor that the Employee contributed towards the Assigned Task.
+                    A red border around an input field means that it is required and that it still needs a valid input.
                 </p>
                 <form>
                     <fieldset>
                         <legend>Details</legend>
                             <div className="selectorP">
-                                <SelectorFacilities hostURL={hostURL} facility={facility} setFacility={setFacility} isRequired={true} preSelected={oldFacilityName} autoFocus={true}/>
+                                <SelectorFacilities hostURL={hostURL} facilityName={facilityName} setFacilityName={setFacilityName} isRequired={true} preSelected={oldFacilityName} autoFocus={true}/>
                                 <div>Original: {oldFacilityName}</div>
                             </div>
                             <div className="selectorP">
@@ -168,11 +166,11 @@ function TasksAssignedUpdateForm ({hostURL}) {
                     </fieldset>
                 </form>
                 <div>
-                    <p><button onClick={updateTaskAssigned}>Update Task</button></p>
+                    <p><button onClick={updateTaskAssigned}>Update Task</button> <button onClick={()=> navTo('/TasksAssigned')}>Cancel</button></p>
                 </div>
             </article>
         </>
     );
-}
+};
 
 export default TasksAssignedUpdateForm;

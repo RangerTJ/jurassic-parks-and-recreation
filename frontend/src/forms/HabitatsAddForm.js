@@ -1,7 +1,13 @@
+// Taylor Jordan and Nick Schmidt (Team 100: Jurassic Parks and Recreation)
+// Basic form functions and HTML layout created by the team, unless otherwise noted in general page or section-specific citation comments, 
+// using standard JS and React syntax and built-in functions.
+
 // Basic CRUD operations and React implementation was heavily based on the CRUD React tutorial series created by PedroTech
 // URLs - Part1: https://www.youtube.com/watch?v=T8mqZZ0r-RA, Part2: https://www.youtube.com/watch?v=3YrOOia3-mo, Part3: https://www.youtube.com/watch?v=_S2GKnFpdtE
+// Link Accessed/Verified on 6/1/2023
 
-import React, { useEffect, useState } from "react";
+
+import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import Axios from 'axios';
 import ImageSelectorHabitats from "../components/imageSelectorHabitats";
@@ -35,7 +41,8 @@ function HabitatsAddForm ({hostURL}) {
                     alert("Please fill out all required fields and try again.")
                 }
         } catch(error) {
-                console.error('Error inserting employee.', error)
+            console.error('Error inserting employee.', error);
+            alert('MYSQL Server Error: ' + error.response.data);
         }
     };
 
@@ -46,6 +53,7 @@ function HabitatsAddForm ({hostURL}) {
                 <p>
                     To add a new Habitat entity to the database, enter values for its attributes below
                     and click the "Add Habitat" button.
+                    A red border around an input field means that it is required and that it still needs a valid input.
                 </p>
                 <form>
                     <fieldset>
@@ -80,7 +88,7 @@ function HabitatsAddForm ({hostURL}) {
                     </fieldset>
                 </form>
                 <div>
-                    <p><button onClick={submit}>Add Habitat</button></p>
+                    <p><button onClick={submit}>Add Habitat</button> <button onClick={()=> navTo('/Habitats')}>Cancel</button></p>
                 </div>
             </article>
         </>
