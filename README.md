@@ -23,6 +23,10 @@ To set the site up, first clone this repo into a folder. Once this is done, set 
 Once all dependencies are in place, you may start up the back-end server's index.js file (on a forever loop for production), then start up the front-end ('npm start' for dev mode or 'npm run build' for production). At this point (assuming the SQL server is online and connected), the site should be fully operational.  
 
 ## Code Citations ##
+* React Web Deployment Guide (ED Post by Prof. Michael Curry)
+    * Our program was set up and deployed by following the guide posted on ED.
+    * URL
+        * https://edstem.org/us/courses/37897/discussion/3123529
 * CRUD React tutorial series created by PedroTech
     * Tutorial code used as the basis for setting up the React backend and all CRUD operations, and mapping response values into the rendered site HTML elements. 
     * URL
