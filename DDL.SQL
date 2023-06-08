@@ -259,7 +259,7 @@ CREATE TABLE `EmployeeTasks` (
 INSERT INTO `Parks`                 (parkName, parkDescription, parkLocation, parkPhoto)
 VALUES
 ('Jurassic World', 'Premier zoological theme park in the system. 500+ employees and 200+ assets.', 'Isla Nublar, Costa Rica', '/static/media/Jurassic World Gates (Isla Nublar).490bfb608e2de674bc7f.jpg'),
-('Site B', 'Asset research and staging park. Limited facilities and employees.', 'Isla Sorna, Costa Rica', '/static/media/Jurassic World Isla Sorna.7063960e692e69b5b37e.jpg'),
+('Site B', 'Asset research and staging park. Limited facilities and employees.', 'Isla Sorna, Costa Rica', '/static/media/Jurassic World (Isla Sorna).7063960e692e69b5b37e.jpg'),
 ('Jurassic Park: San Diego', 'Urban zoological theme park. 200+ employees and 50+ assets.', 'San Diego, CA', '/static/media/Jurassic Park San Diego (Night).b60a7269ca5dc8d9ca58.jpg');
 
 
