@@ -13,6 +13,8 @@ Digital Information Nexus for Operations (DINO) is a database program used to si
 * Job Classifications  
 * Task Categories  
 
+In the interest of keeping the server code submission file size small, our assignment submission package will omit the media files used by the website (in addition to omitting the libraries used within it). Omitted media includes the background image, "security feed" video, main logo, placeholder images, and all the images used by the image selectors on create/update forms. The site's media can be viewed within the site itself at: http://flip3.engr.oregonstate.edu:1543/
+
 ## Setup Guide ##
 Before you can do anything with this program, you need to make sure that the PC hosting both the backend and frontend have Node.js installed and ready to use (at least version 16.5).  
 
