@@ -186,68 +186,69 @@ function SpeciesPage ({hostURL, deleteButtonSound}) {
                     You can use the Diet or Habitat selectors below to concurrently filter the species Table.
                     Select "None" for either filter to remove it.
                 </p>
-            </article>
-            <div className="inlineDiv">
-                <div className="selectorP"><SelectorDietTypes hostURL={hostURL} setDietName={setDietName} dietName={dietName} isRequired={false}/></div>
-                <div className="selectorP"><SelectorHabitats hostURL={hostURL} setHabitatName={setHabitatName} habitatName={habitatName} isRequired={false}/></div>
-            </div>
-            <div className="scrollableTable">
-                <table>
-                    <tbody>
-                        <tr>
-                            <th>Edit</th>
-                            <th>Species</th>
-                            <th>Description</th>
-                            <th>Diet</th>
-                            <th>Habitat</th>
-                            <th>Threat Level</th>
-                            <th>Species Photo</th>  
-                        </tr>
+            
+                <div className="inlineDiv">
+                    <div className="selectorP"><SelectorDietTypes hostURL={hostURL} setDietName={setDietName} dietName={dietName} isRequired={false}/></div>
+                    <div className="selectorP"><SelectorHabitats hostURL={hostURL} setHabitatName={setHabitatName} habitatName={habitatName} isRequired={false}/></div>
+                </div>
+                <div className="scrollableTable">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <th>Edit</th>
+                                <th>Species</th>
+                                <th>Description</th>
+                                <th>Diet</th>
+                                <th>Habitat</th>
+                                <th>Threat Level</th>
+                                <th>Species Photo</th>  
+                            </tr>
 
-                        {speciesList.map((val, index) => {
-                            // Citation: Used slicing method suggested by user Bumptious Q Bangwhistle on stackoverflow on 1/23/2017 to slice image paths to more useful descriptive text for alt text.
-                            // URL: https://stackoverflow.com/questions/9133102/how-to-grab-substring-before-a-specified-character-in-javascript
-                            // Link Accessed/Verified on 6/1/2023
-                            const altText = val.speciesPhoto ? val.speciesPhoto.substring(14, val.speciesPhoto.indexOf('.')) : "Default"
-                        
-                            return (
-                                <tr key={index}>
-                                    <td className="buttonHolder">
-                                        <div><button className="tableButton" onClick={()=> {navToUpdate(val)}}>Edit</button></div>
-                                        <div><button className="tableButton" onClick={()=> {delSpecies(val)}}>*</button></div>
-                                    </td>
-                                    <td className="tableDescription">
-                                        <div>#{val.idSpecies}</div>
-                                        <div><strong>{val.speciesName}</strong></div>
-                                    </td>
-                                    <td className="tableDescription">
-                                        <div>{val.speciesDescription}</div>
-                                    </td>
-                                    <td className="tableDescription">
-                                        <div>{val.dietName}</div>
-                                    </td>
-                                    <td className="tableDescription">
-                                        <div>{val.habitatName}</div>
-                                    </td>
-                                    <td className="tableDescription">
-                                        <div>{val.threatLevel}</div>
-                                    </td>
-                                    <td className="imageHolder">
-                                        {/* Lightbox tutorial by Alexandra Radevich provided the code for the on-click trigger here
-                                        URL: https://medium.com/swlh/creating-a-simple-lightbox-from-scratch-in-react-caea84f90960
-                                        Accessed 5/22/2023. No modification of code for on-click trigger.*/}
-                                        {val.speciesPhoto ?
-                                        <img src={val.speciesPhoto} alt={altText} width={160} height={90} onClick={() => showImage(val.speciesPhoto)}/>
-                                        :
-                                        <img src={defaultImg} alt="Default" width={160} height={90} />
-                                        }
-                                    </td>                      
-                                </tr>
-                            )
-                        })}
-                    </tbody>
-                </table>
-            </div>
+                            {speciesList.map((val, index) => {
+                                // Citation: Used slicing method suggested by user Bumptious Q Bangwhistle on stackoverflow on 1/23/2017 to slice image paths to more useful descriptive text for alt text.
+                                // URL: https://stackoverflow.com/questions/9133102/how-to-grab-substring-before-a-specified-character-in-javascript
+                                // Link Accessed/Verified on 6/1/2023
+                                const altText = val.speciesPhoto ? val.speciesPhoto.substring(14, val.speciesPhoto.indexOf('.')) : "Default"
+                            
+                                return (
+                                    <tr key={index}>
+                                        <td className="buttonHolder">
+                                            <div><button className="tableButton" onClick={()=> {navToUpdate(val)}}>Edit</button></div>
+                                            <div><button className="tableButton" onClick={()=> {delSpecies(val)}}>*</button></div>
+                                        </td>
+                                        <td className="tableDescription">
+                                            <div>#{val.idSpecies}</div>
+                                            <div><strong>{val.speciesName}</strong></div>
+                                        </td>
+                                        <td className="tableDescription">
+                                            <div>{val.speciesDescription}</div>
+                                        </td>
+                                        <td className="tableDescription">
+                                            <div>{val.dietName}</div>
+                                        </td>
+                                        <td className="tableDescription">
+                                            <div>{val.habitatName}</div>
+                                        </td>
+                                        <td className="tableDescription">
+                                            <div>{val.threatLevel}</div>
+                                        </td>
+                                        <td className="imageHolder">
+                                            {/* Lightbox tutorial by Alexandra Radevich provided the code for the on-click trigger here
+                                            URL: https://medium.com/swlh/creating-a-simple-lightbox-from-scratch-in-react-caea84f90960
+                                            Accessed 5/22/2023. No modification of code for on-click trigger.*/}
+                                            {val.speciesPhoto ?
+                                            <img src={val.speciesPhoto} alt={altText} width={160} height={90} onClick={() => showImage(val.speciesPhoto)}/>
+                                            :
+                                            <img src={defaultImg} alt="Default" width={160} height={90} />
+                                            }
+                                        </td>                      
+                                    </tr>
+                                )
+                            })}
+                        </tbody>
+                    </table>
+                </div>
+            </article>
         </>
     );
 }
