@@ -96,8 +96,7 @@ function SpeciesAddForm ({hostURL, createButtonSound}) {
                             <SelectorDietTypes  hostURL={hostURL} dietName={dietName} setDietName={setDietName} isRequired={true} autoFocus={false}/>
                         </div>
                         <div className="selectorP">
-                            <SelectorHabitats  hostURL={hostURL} habitatName={habitatName} setHabitatName={setHabitatName} isRequired={false} autoFocus={false}/>
-                            <div>(Enclosures Only)</div>
+                            <SelectorHabitats  hostURL={hostURL} habitatName={habitatName} setHabitatName={setHabitatName} isRequired={true} autoFocus={false}/>
                         </div>
                         <div className="selectorP">
                             <div><label htmlFor="threatLevel">Threat Level</label></div>

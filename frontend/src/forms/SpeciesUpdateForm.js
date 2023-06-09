@@ -121,8 +121,7 @@ function SpeciesUpdateForm ({hostURL, updateButtonSound}) {
                             <div>Original: {oldDietName}</div>
                         </div>
                         <div className="selectorP">
-                            <SelectorHabitats  hostURL={hostURL} habitatName={habitatName} setHabitatName={setHabitatName} isRequired={false} autoFocus={false} preSelected={oldHabitatName}/>
-                            <div>(Enclosures Only)</div>
+                            <SelectorHabitats  hostURL={hostURL} habitatName={habitatName} setHabitatName={setHabitatName} isRequired={true} autoFocus={false} preSelected={oldHabitatName}/>
                             <div>Original: {oldHabitatName}</div>
                         </div>
                         <div className="selectorP">
