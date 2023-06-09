@@ -14,7 +14,7 @@ import SelectorEmployees from "../components/selectorEmployees";
 
 
 // HostURL Passed from App.js
-function EmployeeTasksPage ({hostURL}) {
+function EmployeeTasksPage ({hostURL, deleteButtonSound}) {
 
     // Navigation Function
     const navTo = useNavigate();
@@ -85,6 +85,7 @@ function EmployeeTasksPage ({hostURL}) {
                 const response = await Axios.get(getEmployeeTasksURL);
                 setEmployeeTaskList(response.data);
                 console.log(response.data);
+                deleteButtonSound.play();
                 alert(`Employee Task #${delID} has been removed from the database.`);
             }
         }   catch (error) {

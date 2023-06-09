@@ -16,7 +16,7 @@ import SelectorHabitats from "../components/selectorHabitats";
 
 
 // HostURL Passed from App.js
-function SpeciesAddForm ({hostURL}) {
+function SpeciesAddForm ({hostURL, createButtonSound}) {
 
     // Species SQL Endpoints
     const createSpeciesURL = hostURL + '/api/insertSpecies';
@@ -42,6 +42,7 @@ function SpeciesAddForm ({hostURL}) {
                     threatLevel: threatLevel,
                     speciesPhoto: speciesPhoto
                 });
+                createButtonSound.play();
                 alert(`${speciesName} has been added to the database!`);
                 navTo('/Species');
             }

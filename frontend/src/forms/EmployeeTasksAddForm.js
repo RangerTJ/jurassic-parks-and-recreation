@@ -16,7 +16,7 @@ import SelectorTaskCategories from "../components/selectorTaskCategories";
 
 
 // HostURL Passed from App.js
-function EmployeeTasksAddForm ({hostURL}) {
+function EmployeeTasksAddForm ({hostURL, createButtonSound}) {
 
     // EmployeeTasks SQL Endpoints
     const createEmployeeTasksURL = hostURL + '/api/insertEmployeeTasks';
@@ -50,6 +50,7 @@ function EmployeeTasksAddForm ({hostURL}) {
                     empTaskStart: empTaskStart,
                     empTaskEnd: empTaskEnd,
                 });
+                createButtonSound.play();
                 alert(`A task report for ${employeeUsername}'s ${categoryName} work on ${taskName} has been added to the database!`);
                 navTo('/EmployeeTasks');
                 } else {

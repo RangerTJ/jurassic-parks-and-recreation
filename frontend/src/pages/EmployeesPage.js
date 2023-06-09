@@ -14,7 +14,7 @@ import SelectorJobClassifications from "../components/selectorJobClassifications
 
 
 // HostURL Passed from App.js
-function EmployeesPage ({hostURL}) {
+function EmployeesPage ({hostURL, deleteButtonSound}) {
 
     // Navigation Function
     const navTo = useNavigate();
@@ -83,7 +83,8 @@ function EmployeesPage ({hostURL}) {
                 const mainViewResponse = await Axios.get(getEmployeesURL);
                 setEmployeesList(mainViewResponse.data);
                 console.log(mainViewResponse.data);
-        
+                
+                deleteButtonSound.play();
                 alert(`${delVal.firstName} ${delVal.lastName} has been removed from the database.`);
             }} catch (error) {
                 console.error('Error deleting employee.', error);

@@ -13,7 +13,7 @@ import defaultImg from '../images/tableDefaultPreview.png';
 
 
 // HostURL Passed from App.js
-function HabitatsPage ({hostURL}) {
+function HabitatsPage ({hostURL, deleteButtonSound}) {
 
     // Navigation Function
     const navTo = useNavigate();
@@ -59,7 +59,8 @@ function HabitatsPage ({hostURL}) {
                 const mainViewResponse = await Axios.get(getHabitatsURL);
                 setHabitatsList(mainViewResponse.data);
                 console.log(mainViewResponse.data);
-        
+                
+                deleteButtonSound.play();
                 alert(`${delVal.habitatName} has been removed from the database.`);
             }} catch (error) {
                 console.error('Error deleting Habitat.', error);

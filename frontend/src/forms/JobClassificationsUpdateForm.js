@@ -13,7 +13,7 @@ import Axios from 'axios';
 
 
 // HostURL Passed from App.js
-function JobClassificationsUpdateForm ({hostURL}) {
+function JobClassificationsUpdateForm ({hostURL, updateButtonSound}) {
 
     // Follows reference strategy to read state object, as suggested by stackoverflow user Abdulazeez Jimoh on 10/25/2022
     // URL: https://stackoverflow.com/questions/68911432/how-to-pass-parameters-with-react-router-dom-version-6-usenavigate-and-typescrip
@@ -44,6 +44,7 @@ function JobClassificationsUpdateForm ({hostURL}) {
                     jobDescription: jobDescription,
                     idJobClassification: id,
                 });
+                updateButtonSound.play();
                 alert(`${jobTitle}'s database record has been updated!`)
                 navTo('/JobClassifications');
                 } else {

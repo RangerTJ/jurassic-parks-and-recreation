@@ -12,7 +12,7 @@ import Axios from 'axios';
 
 
 // HostURL Passed from App.js
-function JobClassificationsPage ({hostURL}) {
+function JobClassificationsPage ({hostURL, deleteButtonSound}) {
 
    // Navigation Function
    const navTo = useNavigate();
@@ -38,7 +38,8 @@ function JobClassificationsPage ({hostURL}) {
                const mainViewResponse = await Axios.get(getJobClassificationsURL);
                setJobClassificationsList(mainViewResponse.data);
                console.log(mainViewResponse.data);
-       
+
+               deleteButtonSound.play();
                alert(`${delVal.jobTitle} has been removed from the database.`);
            }} catch (error) {
                console.error('Error deleting Job.', error);

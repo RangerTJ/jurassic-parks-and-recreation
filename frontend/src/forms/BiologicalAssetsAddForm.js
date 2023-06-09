@@ -14,7 +14,7 @@ import SelectorFacilities from "../components/selectorFacilities";
 
 
 // HostURL Passed from App.js
-function BiologicalAssetsAddForm ({hostURL}) {
+function BiologicalAssetsAddForm ({hostURL, createButtonSound}) {
 
     // BiologicalAssets SQL Endpoints
     const createBiologicalAssetsURL = hostURL + '/api/insertBiologicalAssets';
@@ -34,6 +34,7 @@ function BiologicalAssetsAddForm ({hostURL}) {
                     bioAssetName: name,
                     facilityName: facilityName,
                 });
+                createButtonSound.play();
                 alert(`${name} has been added to the database!`);
                 navTo('/BiologicalAssets');
                 } else {

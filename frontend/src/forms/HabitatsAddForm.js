@@ -14,7 +14,7 @@ import ImageSelectorHabitats from "../components/imageSelectorHabitats";
 
 
 // HostURL Passed from App.js
-function HabitatsAddForm ({hostURL}) {
+function HabitatsAddForm ({hostURL, createButtonSound}) {
 
     // Habitats SQL Endpoints
     const createHabitatsURL = hostURL + '/api/insertHabitats';
@@ -35,6 +35,7 @@ function HabitatsAddForm ({hostURL}) {
                     habitatDescription: habitatDescription,
                     habitatPhoto: habitatPhoto,
                 });
+                createButtonSound.play();
                 alert(`${habitatName} has been added to the database!`);
                 navTo('/Habitats');
                 } else {

@@ -14,7 +14,7 @@ import ImageSelectorDiets from '../components/imageSelectorDiets';
 
 
 // HostURL Passed from App.js
-function DietsAddForm ({hostURL}) {
+function DietsAddForm ({hostURL, createButtonSound}) {
 
     // Diets SQL Endpoint
     const createDietsURL = hostURL + '/api/insertDiets';
@@ -34,6 +34,7 @@ function DietsAddForm ({hostURL}) {
                     dietDescription: dietDescription,
                     dietIcon: dietIcon
                 });
+                createButtonSound.play();
                 alert(`Diet ${dietName} has been added to the database!`);
                 navTo('/Diets');
                 } else {

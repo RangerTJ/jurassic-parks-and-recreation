@@ -8,11 +8,10 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom'; // May not need?
 import Axios from 'axios';
-import SelectorFacilities from "../components/selectorFacilities";
 
 
 // HostURL Passed from App.js
-function TasksAssignedPage ({hostURL}) {
+function TasksAssignedPage ({hostURL, deleteButtonSound}) {
 
     // Navigation Function
     const navTo = useNavigate();
@@ -107,6 +106,7 @@ function TasksAssignedPage ({hostURL}) {
                 setTasksAssignedList(mainViewResponse.data);
                 console.log(mainViewResponse.data);
 
+                deleteButtonSound.play();
                 alert(`${delVal.taskName} has been removed from the database.`)
             }}
         catch (error) {

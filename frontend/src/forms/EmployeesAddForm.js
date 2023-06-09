@@ -15,7 +15,7 @@ import ImageSelectorStaff from "../components/imageSelectorStaff";
 
 
 // HostURL Passed from App.js
-function EmployeesAddForm ({hostURL}) {
+function EmployeesAddForm ({hostURL, createButtonSound}) {
 
     // Employees SQL Endpoints
     const createEmployeesURL = hostURL + '/api/insertEmployees';
@@ -49,6 +49,7 @@ function EmployeesAddForm ({hostURL}) {
                     employeePhoto: employeePhoto,
                     employeeNote: employeeNote,
                 });
+                createButtonSound.play();
                 alert(`${firstName} ${lastName} has been added to the database!`);
                 navTo('/Employees');
                 } else {

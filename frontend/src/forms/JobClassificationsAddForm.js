@@ -13,7 +13,7 @@ import Axios from 'axios';
 
 
 // HostURL Passed from App.js
-function JobClassificationsAddForm ({hostURL}) {
+function JobClassificationsAddForm ({hostURL, createButtonSound}) {
 
     // Job Classification SQL Endpoint
     const createJobClassificationsURL = hostURL + '/api/insertJobClassifications';
@@ -31,6 +31,7 @@ function JobClassificationsAddForm ({hostURL}) {
                     jobTitle: jobTitle,
                     jobDescription: jobDescription,
                 });
+                createButtonSound.play();
                 alert(`Job Classification ${jobTitle} has been added to the database!`);
                 navTo('/JobClassifications');
                 } else {

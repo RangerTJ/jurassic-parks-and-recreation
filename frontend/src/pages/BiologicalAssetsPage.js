@@ -20,7 +20,7 @@ import SelectorFacilities from "../components/selectorFacilities";
 
 
 // HostURL Passed from App.js
-function BiologicalAssetsPage ({hostURL}) {
+function BiologicalAssetsPage ({hostURL, deleteButtonSound}) {
 
     // Navigation Function
     const navTo = useNavigate();
@@ -122,7 +122,8 @@ function BiologicalAssetsPage ({hostURL}) {
                 const securityMismatchResponse = await Axios.get(checkBiologicalAssetsSecurityURL);
                 setAssetSecMismatchList(securityMismatchResponse.data);
                 console.log(securityMismatchResponse.data);
-        
+
+                deleteButtonSound.play();
                 alert(`${delVal.bioAssetName} has been removed from the database.`);
             }} catch (error) {
                 console.error('Error deleting biological asset.', error);

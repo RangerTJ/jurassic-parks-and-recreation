@@ -14,7 +14,7 @@ import ImageSelectorParks from "../components/imageSelectorParks";
 
 
 // HostURL Passed from App.js
-function ParksAddForm ({hostURL}) {
+function ParksAddForm ({hostURL, createButtonSound}) {
 
     // Park SQL Endpoint
     const createParksURL = hostURL + '/api/insertParks';
@@ -36,6 +36,7 @@ function ParksAddForm ({hostURL}) {
                     parkLocation: parkLocation,
                     parkPhoto: parkPhoto,
                 });
+                createButtonSound.play();
                 alert(`${parkName} has been added to the database!`);
                 navTo('/Parks');
                 } else {

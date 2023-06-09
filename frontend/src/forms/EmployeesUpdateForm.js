@@ -15,7 +15,7 @@ import ImageSelectorStaff from "../components/imageSelectorStaff";
 
 
 // HostURL Passed from App.js
-function EmployeesUpdateForm ({hostURL}) {
+function EmployeesUpdateForm ({hostURL, updateButtonSound}) {
 
     // Follows reference strategy to read state object, as suggested by stackoverflow user Abdulazeez Jimoh on 10/25/2022
     // URL: https://stackoverflow.com/questions/68911432/how-to-pass-parameters-with-react-router-dom-version-6-usenavigate-and-typescrip
@@ -70,6 +70,7 @@ function EmployeesUpdateForm ({hostURL}) {
                     employeeNote: employeeNote,
                     idEmployee: id,
                 });
+                updateButtonSound.play();
                 alert(`${firstName} ${lastName}'s database record has been updated!`)
                 navTo('/Employees');
                 } else {

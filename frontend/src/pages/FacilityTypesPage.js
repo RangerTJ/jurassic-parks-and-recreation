@@ -12,7 +12,7 @@ import Axios from 'axios';
 
 
 // HostURL Passed from App.js
-function FacilityTypesPage ({hostURL}) {
+function FacilityTypesPage ({hostURL, deleteButtonSound}) {
 
     // Navigation Function
     const navTo = useNavigate();
@@ -38,7 +38,8 @@ function FacilityTypesPage ({hostURL}) {
                 const mainViewResponse = await Axios.get(getFacilityTypesURL);
                 setFacilityTypesList(mainViewResponse.data);
                 console.log(mainViewResponse.data);
-        
+                
+                deleteButtonSound.play();
                 alert(`${delVal.facTypeName} has been removed from the database.`);
             }} catch (error) {
                 console.error('Error deleting Facility Type.', error);

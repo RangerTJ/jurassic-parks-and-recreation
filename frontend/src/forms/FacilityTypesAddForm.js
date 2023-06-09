@@ -13,7 +13,7 @@ import Axios from 'axios';
 
 
 // HostURL Passed from App.js
-function FacilityTypesAddForm ({hostURL}) {
+function FacilityTypesAddForm ({hostURL, createButtonSound}) {
 
     // Facility Type SQL Endpoint
     const createFacilityTypesURL = hostURL + '/api/insertFacilityTypes';
@@ -31,6 +31,7 @@ function FacilityTypesAddForm ({hostURL}) {
                     facTypeName: facTypeName,
                     facTypeDescription: facTypeDescription,
                 });
+                createButtonSound.play();
                 alert(`Facility Type ${facTypeName} has been added to the database!`);
                 navTo('/FacilityTypes');
                 } else {

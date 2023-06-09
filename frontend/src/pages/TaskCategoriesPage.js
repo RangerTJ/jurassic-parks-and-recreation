@@ -12,7 +12,7 @@ import Axios from 'axios';
 
 
 // HostURL Passed from App.js
-function TaskCategoryPage({hostURL}) {
+function TaskCategoryPage({hostURL, deleteButtonSound}) {
 
     // Navigation Function
     const navTo = useNavigate();
@@ -38,7 +38,8 @@ function TaskCategoryPage({hostURL}) {
                 const mainViewResponse = await Axios.get(getTaskCategoriesURL);
                 setTaskCategoriesList(mainViewResponse.data);
                 console.log(mainViewResponse.data);
-        
+                
+                deleteButtonSound.play();
                 alert(`${delVal.categoryName} has been removed from the database.`);
             }} catch (error) {
                 console.error('Error deleting Category.', error);

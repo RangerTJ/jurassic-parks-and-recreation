@@ -13,7 +13,7 @@ import Axios from 'axios';
 
 
 // HostURL Passed from App.js
-function TaskCategoriesAddForm ({hostURL}) {
+function TaskCategoriesAddForm ({hostURL, createButtonSound}) {
 
     // Task Categories SQL Endpoint
     const createTaskCategoriesURL = hostURL + '/api/insertTaskCategories';
@@ -29,6 +29,7 @@ function TaskCategoriesAddForm ({hostURL}) {
                 await Axios.post(createTaskCategoriesURL, {
                     categoryName: categoryName,
                 });
+                createButtonSound.play();
                 alert(`${categoryName} has been added to the database!`);
                 navTo('/TaskCategories');
                 } else {

@@ -14,7 +14,7 @@ import ImageSelectorHabitats from "../components/imageSelectorHabitats";
 
 
 // HostURL Passed from App.js
-function HabitatsUpdateForm ({hostURL}) {
+function HabitatsUpdateForm ({hostURL, updateButtonSound}) {
 
     // Follows reference strategy to read state object, as suggested by stackoverflow user Abdulazeez Jimoh on 10/25/2022
     // URL: https://stackoverflow.com/questions/68911432/how-to-pass-parameters-with-react-router-dom-version-6-usenavigate-and-typescrip
@@ -48,6 +48,7 @@ function HabitatsUpdateForm ({hostURL}) {
                     habitatPhoto: habitatPhoto,
                     idHabitat: id,
                 });
+                updateButtonSound.play();
                 alert(`${habitatName}'s database record has been updated!`)
                 navTo('/Habitats');
                 } else {

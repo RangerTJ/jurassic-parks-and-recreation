@@ -15,7 +15,7 @@ import SelectorHabitats from "../components/selectorHabitats";
 
 
 // HostURL Passed from App.js
-function SpeciesPage ({hostURL}) {
+function SpeciesPage ({hostURL, deleteButtonSound}) {
 
     // Navigation Function
     const navTo = useNavigate();
@@ -116,6 +116,7 @@ function SpeciesPage ({hostURL}) {
                 setSpeciesList(mainViewResponse.data);
                 console.log(mainViewResponse.data);
 
+                deleteButtonSound.play();
                 alert(`${delVal.speciesName} has been removed from the database.`);
             }}
         catch (error) {

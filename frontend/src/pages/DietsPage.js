@@ -13,7 +13,7 @@ import defaultImg from '../images/tableDefaultPreview.png';
 
 
 // HostURL Passed from App.js
-function DietsPage ({hostURL}) {
+function DietsPage ({hostURL, deleteButtonSound}) {
 
     // Navigation Function
     const navTo = useNavigate();
@@ -60,7 +60,8 @@ function DietsPage ({hostURL}) {
                 const mainViewResponse = await Axios.get(getDietsURL);
                 setDietsList(mainViewResponse.data);
                 console.log(mainViewResponse.data);
-
+                
+                deleteButtonSound.play();
                 alert(`${delVal.dietName} has been removed from the database.`);
             }} catch (error) {
                 console.error('Error deleting Diet.', error);

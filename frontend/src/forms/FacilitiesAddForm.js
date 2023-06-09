@@ -17,7 +17,7 @@ import SelectorFacilityTypes from "../components/selectorFacilityTypes";
 
 
 // HostURL Passed from App.js
-function FacilitiesAddForm ({hostURL}) {
+function FacilitiesAddForm ({hostURL, createButtonSound}) {
 
     // Facilities SQL Endpoints
     const createFacilitiesURL = hostURL + '/api/insertFacilities';
@@ -49,6 +49,7 @@ function FacilitiesAddForm ({hostURL}) {
                     facilityDescription: facilityDescription,
                     facilityNote: facilityNote,
                 });
+                createButtonSound.play();
                 alert(`${facilityName} has been added to the database!`);
                 navTo('/Facilities');
                 } else {

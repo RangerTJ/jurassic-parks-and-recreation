@@ -15,7 +15,7 @@ import SelectorBiologicalAssets from '../components/selectorBiologicalAssets';
 
 
 // HostURL Passed from App.js
-function TasksAssignedAddForm ({hostURL}) {
+function TasksAssignedAddForm ({hostURL, createButtonSound}) {
 
     // TasksAssigned SQL Endpoints
     const createTasksAssignedURL = hostURL + '/api/insertTasksAssigned';
@@ -50,7 +50,8 @@ function TasksAssignedAddForm ({hostURL}) {
                     taskStart: taskStart,
                     taskEnd: finalTaskEnd
                 });
-    
+                
+                createButtonSound.play();
                 alert(`${taskName} has been added to the database!`);
                 navTo('/TasksAssigned');
     

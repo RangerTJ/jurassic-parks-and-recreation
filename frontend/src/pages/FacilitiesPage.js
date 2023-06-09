@@ -15,7 +15,7 @@ import SelectorFacilityTypes from "../components/selectorFacilityTypes";
 
 
 // HostURL Passed from App.js
-function FacilitiesPage ({hostURL}) {
+function FacilitiesPage ({hostURL, deleteButtonSound}) {
 
     // Navigation Function
     const navTo = useNavigate();
@@ -107,7 +107,8 @@ function FacilitiesPage ({hostURL}) {
                 const mainViewResponse = await Axios.get(getFacilitiesURL);
                 setFacilitiesList(mainViewResponse.data);
                 console.log(mainViewResponse.data);
-        
+                
+                deleteButtonSound.play();
                 alert(`${delVal.facilityName} has been removed from the database.`);
             }} catch (error) {
                 console.error('Error deleting facility.', error);
