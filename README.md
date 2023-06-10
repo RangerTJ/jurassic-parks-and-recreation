@@ -25,75 +25,126 @@ Once all dependencies are in place, you may start up the back-end server's index
 ## Code Citations ##
 * React Web Deployment Guide (ED Post by Prof. Michael Curry)
     * Our program was set up and deployed by following the guide posted on ED.
-    * URL
         * https://edstem.org/us/courses/37897/discussion/3123529
 * CRUD React tutorial series created by PedroTech
     * Tutorial code used as the basis for setting up the React backend and all CRUD operations, and mapping response values into the rendered site HTML elements. 
-    * URL
         * Part1: https://www.youtube.com/watch?v=T8mqZZ0r-RA
         * Part2: https://www.youtube.com/watch?v=3YrOOia3-mo
         * Part3: https://www.youtube.com/watch?v=_S2GKnFpdtE
         * Accessed/Verified on 6/1/2023
 * “Creating a Simple Lightbox From Scratch in React” by Alexandra Radevich
     * Example code used to begin implementation and modified slightly to suit project needs. All of the lightbox-related code in our project was directly adapted from this tutorial.
-    * URL
         * https://medium.com/swlh/creating-a-simple-lightbox-from-scratch-in-react-caea84f90960
         * Accessed/Verified 5/22/2023.
 * "Everything about Stroke Text in CSS" by codingdudecom
     * Used as a reference for CSS text styling.
-    * URL
         * https://dev.to/codingdudecom/everything-about-stroke-text-in-css-561i
         * Accessed/Verified on 6/1/2023
 * "How to use @font-face in CSS" by Chris Coyler
     * Used as reference code style and syntax for font-face styling.
-    * URL
         * https://css-tricks.com/snippets/css/using-font-face-in-css/
         * Accessed/Verified on 6/1/2023
 * "How to Use Node Environment Variables with a DotEnv File for Node.js and npm" by Veronica Stork
     * Code, syntax and style for our .env file implementation was based on this guide.
-    * URL
         * https://www.freecodecamp.org/news/how-to-use-node-environment-variables-with-a-dotenv-file-for-node-js-and-npm/
         * Accessed/Verified on 6/1/2023
 * “Replace animated GIFs with video for faster page loads” by Houssein Djirdeh
     * Used code to embed the “security feed” footage on the home page (adapted for React).
-    * URL
         * https://web.dev/replace-gifs-with-videos/
         * Accessed/Verified on 6/1/2023
 * “Window: scrollTo() method” from mdn web docs
     * Code syntax used to create 'scroll back to top' input for app.js.
-    * URL
         * https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollTo
         * Accessed 6/6/2023
 * Stackoverflow post by user Dhaval Chaudhary on 9/16/2016. 
     * JS code for detecting if a JS object is empty by using keys length (count). Used as part of logic to conditionally render parts of the Biological Assets page, but only when needed.
-    * URL
         * https://stackoverflow.com/questions/2673121/how-to-check-if-object-has-any-properties-in-javascript
         * Accessed/Verified on 6/3/2023.
 * Stackoverflow post by user Abdulazeez Jimoh on 10/25/2022
     * Suggested strategy used as the basis for passing an object containing "current" (old) attributes to the useNavigate() function, navTo(), to the edit page.
-    * URL
         * https://stackoverflow.com/questions/68911432/how-to-pass-parameters-with-react-router-dom-version-6-usenavigate-and-typescrip
         * Accessed/Verified on 6/1/2023
 * Stackoverflow post by user Savior on 9/9/2021.
     * Code to map images in src folders heavily based on example code provided in the post.
-    * URL
         * https://stackoverflow.com/questions/69111477/how-to-iterate-through-public-assets-images-so-i-can-get-all-images-filename-in
         * Accessed/Verified on 6/1/2023
 * Stackoverflow discussion “How to use an array as option for react select component” 
     * Code for mapping select menu heavily inspired by the following discussion, borrowing ideas and concepts from multiple posts from the entire discussion.
-    * URL
         * https://stackoverflow.com/questions/31413053/how-to-use-an-array-as-option-for-react-select-component
         * Accessed/Verified on 6/1/2023
 * Stackoverflow post by Abdullah Ch on 8/15/2021
     * Heavily inspired by provided code for event triggering using onChange event 
-    * URL
         * https://stackoverflow.com/questions/68790381/how-to-use-onchange-in-react-select
-        * Link Accessed/Verified on 6/1/2023
+        * Accessed/Verified on 6/1/2023
 * Stackoverflow post by Bumptious Q Bangwhistle on 1/23/2017
     * Used slicing method suggested by user  to slice image paths to more useful descriptive text for alt text.
-    * URL
         * https://stackoverflow.com/questions/9133102/how-to-grab-substring-before-a-specified-character-in-javascript
+        * Accessed/Verified on 6/1/2023  
+* Stackoverflow "How to drop a table if it exists?" answer by 'Jovan MSFT'
+    * Used to help find concise syntax to drop existing tables that worked with both MariaDB and MYSQL Workbench
+        * https://stackoverflow.com/questions/7887011/how-to-drop-a-table-if-it-exists
         * Accessed/Verified on 6/1/2023
+* Stackoverflow "How can I set the default value for an HTML < select > element?" answer by Borealid
+    * Syntax used to pre-select values for selectors when populating update forms.
+        * https://stackoverflow.com/questions/3518002/how-can-i-set-the-default-value-for-an-html-select-element
+        * Accessed/Verified on 6/1/2023
+
+## Syntax References ##
+  * JavaScript try...catch...finally
+    * https://www.w3schools.com/jsref/jsref_try_catch.asp
+    * Accessed/Verified on 6/9/2023
+* HTML 5 Page Structure
+    * https://www.w3docs.com/snippets/html/html5-page-structure.html
+    * Accessed/Verified on 6/9/2023
+* SQL Syntax
+    * https://www.w3schools.com/sql/sql_syntax.asp
+    * Accessed/Verified on 6/9/2023
+* JavaScript Number toLocaleString()
+    * https://www.w3schools.com/jsref/jsref_tolocalestring_number.asp
+    * Accessed/Verified on 6/9/2023
+* Window alert()
+    * https://www.w3schools.com/jsref/met_win_alert.asp
+    * Accessed/Verified on 6/9/2023
+* Console error()
+    * https://www.w3schools.com/jsref/met_console_error.asp
+    * Accessed/Verified on 6/9/2023
+* React Router
+    * https://www.w3schools.com/react/react_router.asp
+    * Accessed/Verified on 6/9/2023
+* React Router: useNavigate
+    * https://reactrouter.com/en/main/hooks/use-navigate
+    * Accessed/Verified on 6/9/2023
+* HTML < input > Tag
+    * https://www.w3schools.com/tags/tag_input.asp
+    * Accessed/Verified on 6/9/2023
+* HTML < textarea > Tag
+    * https://www.w3schools.com/tags/tag_textarea.asp
+    * Accessed/Verified on 6/9/2023
+* HTML < select > Tag
+    * https://www.w3schools.com/tags/tag_select.asp
+    * Accessed/Verified on 6/9/2023
+* Github Repo/Tutorial: Create React App
+    * https://github.com/facebook/create-react-app
+    * Accessed/Verified on 6/9/2023
+* Favicon.io
+    * Tool to quickly convert an image to a set of site icons
+    * https://favicon.io/favicon-converter/
+    * Accessed/Verified on 6/9/2023
+* React Tutorial
+    * https://www.w3schools.com/REACT/DEFAULT.ASP
+    * Accessed/Verified on 6/9/2023
+* React useEffect Hooks
+    * https://www.w3schools.com/REACT/react_useeffect.asp
+    * Accessed/Verified on 6/9/2023
+* React useState Hook
+    * https://www.w3schools.com/REACT/react_usestate.asp
+    * Accessed/Verified on 6/9/2023
+* React Render HTML
+    * https://www.w3schools.com/REACT/react_render.asp
+    * Accessed/Verified on 6/9/2023
+* HTMLAudioElement
+    * https://developer.mozilla.org/en-US/docs/Web/API/HTMLAudioElement
+    * Accessed/Verified on 6/9/2023
 
 ## Media Citations ##
 * The Jurassic Park font is used non-commercially for educational project purposes under a freeware, non-commercial license. Created by Jens R. Ziehn.
