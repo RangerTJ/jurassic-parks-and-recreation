@@ -90,37 +90,37 @@ Once all dependencies are in place, you may start up the back-end server's index
         * Accessed/Verified on 6/1/2023
 
 ## Syntax References ##
-  * JavaScript try...catch...finally
+  * JavaScript try...catch...finally (W3 Schools)
     * https://www.w3schools.com/jsref/jsref_try_catch.asp
     * Accessed/Verified on 6/9/2023
 * HTML 5 Page Structure
     * https://www.w3docs.com/snippets/html/html5-page-structure.html
     * Accessed/Verified on 6/9/2023
-* SQL Syntax
+* SQL Syntax (W3 Schools)
     * https://www.w3schools.com/sql/sql_syntax.asp
     * Accessed/Verified on 6/9/2023
-* JavaScript Number toLocaleString()
+* JavaScript Number toLocaleString() (W3 Schools)
     * https://www.w3schools.com/jsref/jsref_tolocalestring_number.asp
     * Accessed/Verified on 6/9/2023
-* Window alert()
+* Window alert() (W3 Schools)
     * https://www.w3schools.com/jsref/met_win_alert.asp
     * Accessed/Verified on 6/9/2023
-* Console error()
+* Console error() (W3 Schools)
     * https://www.w3schools.com/jsref/met_console_error.asp
     * Accessed/Verified on 6/9/2023
-* React Router
+* React Router (W3 Schools)
     * https://www.w3schools.com/react/react_router.asp
     * Accessed/Verified on 6/9/2023
 * React Router: useNavigate
     * https://reactrouter.com/en/main/hooks/use-navigate
     * Accessed/Verified on 6/9/2023
-* HTML < input > Tag
+* HTML < input > Tag (W3 Schools)
     * https://www.w3schools.com/tags/tag_input.asp
     * Accessed/Verified on 6/9/2023
-* HTML < textarea > Tag
+* HTML < textarea > Tag (W3 Schools)
     * https://www.w3schools.com/tags/tag_textarea.asp
     * Accessed/Verified on 6/9/2023
-* HTML < select > Tag
+* HTML < select > Tag (W3 Schools)
     * https://www.w3schools.com/tags/tag_select.asp
     * Accessed/Verified on 6/9/2023
 * Github Repo/Tutorial: Create React App
@@ -130,30 +130,33 @@ Once all dependencies are in place, you may start up the back-end server's index
     * Tool to quickly convert an image to a set of site icons
     * https://favicon.io/favicon-converter/
     * Accessed/Verified on 6/9/2023
-* React Tutorial
+* React Tutorial (W3 Schools)
     * https://www.w3schools.com/REACT/DEFAULT.ASP
     * Accessed/Verified on 6/9/2023
 * React useEffect Hooks
     * https://www.w3schools.com/REACT/react_useeffect.asp
     * Accessed/Verified on 6/9/2023
-* React useState Hook
+* React useState Hook (W3 Schools)
     * https://www.w3schools.com/REACT/react_usestate.asp
     * Accessed/Verified on 6/9/2023
-* React Render HTML
+* React Render HTML (W3 Schools)
     * https://www.w3schools.com/REACT/react_render.asp
     * Accessed/Verified on 6/9/2023
-* HTMLAudioElement
+* HTMLAudioElement (MDN)
     * https://developer.mozilla.org/en-US/docs/Web/API/HTMLAudioElement
     * Accessed/Verified on 6/9/2023
 
-## Media Citations ##
+## Media and Content Citations ##
 * The Jurassic Park font is used non-commercially for educational project purposes under a freeware, non-commercial license. Created by Jens R. Ziehn.
     * https://www.fontspace.com/jurassic-park-font-f3555  
 * Park "photos" and "Security Feed" were in-game screenshots and footage taken by the site authors from Jurassic World Evolution 2, by Frontier Studios.
     * https://www.jurassicworldevolution2.com/
 * Special thanks to Mark Hjorth for putting together the beautiful easter egg that we've linked to in a hidden spot on the website.
     * https://github.com/MarkHjorth/nedry.  
-* Snippets of the track "Opening Titles" from the album "Jurassic Park - 20th Anniversary" (John Williams) were used to create the CRUD confirmation sound effects. Adobe Audition 2023 was used to generated the edited clips. This was done under fair-use for purposes of this non-profit educational project.
+* Snippets of the track "Opening Titles" from the album "Jurassic Park - 20th Anniversary" (John Williams) were used to create the CRUD confirmation sound effects. Adobe Audition 2023 was used to generate the edited clips. This was done under fair-use for purposes of this non-profit educational project.
+* ChatGPT by OpenAI was used to generate data used in populating some of our example table entries, as mentioned in comments in our DDL code file. ChatGPT-generated content was used or adapted to populate the following tables’ sample data:  
+    * Species, Habitat, Employees, Facilities, JobClassifications, Diets
+    * https://chat.openai.com/
 
 ### Additional Image Credits ###
 * Hesperornis (Nobu Tamura)  
