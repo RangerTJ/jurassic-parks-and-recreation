@@ -153,6 +153,7 @@ Once all dependencies are in place, you may start up the back-end server's index
     * https://www.jurassicworldevolution2.com/
 * Special thanks to Mark Hjorth for putting together the beautiful easter egg that we've linked to in a hidden spot on the website.
     * https://github.com/MarkHjorth/nedry.  
+* Snippets of the track "Opening Titles" from the album "Jurassic Park - 20th Anniversary" (John Williams) were used to create the CRUD confirmation sound effects. Adobe Audition 2023 was used to generated the edited clips. This was done under fair-use for purposes of this non-profit educational project.
 
 ### Additional Image Credits ###
 * Hesperornis (Nobu Tamura)  
