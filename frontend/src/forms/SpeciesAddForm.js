@@ -102,7 +102,6 @@ function SpeciesAddForm ({hostURL, createButtonSound}) {
                             <div><label htmlFor="threatLevel">Threat Level</label></div>
                             <select name="threatLevel" id="threatLevel" onChange={(e) => {setThreatLevel(e.target.value)}} required>
                                 <option value="" hidden>Select Threat Level</option>
-                                <option value="0">0</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>

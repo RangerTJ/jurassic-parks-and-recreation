@@ -138,7 +138,6 @@ function FacilitiesUpdateForm ({hostURL, updateButtonSound}) {
                             <div><label htmlFor="securityRating">Security Rating</label></div>
                             <select name="securityRating" id="securityRating" value={securityRating} onChange={(e) => {setSecurityRating(e.target.value)}} required>
                                 <option value="" hidden>Select Rating</option>
-                                <option value="0">0</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
