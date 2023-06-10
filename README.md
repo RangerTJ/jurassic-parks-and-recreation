@@ -56,35 +56,35 @@ Once all dependencies are in place, you may start up the back-end server's index
     * Code syntax used to create 'scroll back to top' input for app.js.
         * https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollTo
         * Accessed 6/6/2023
-* Stackoverflow post by user Dhaval Chaudhary on 9/16/2016. 
+* “How to check if object has any properties in JavaScript”: Stackoverflow answer by user Dhaval Chaudhary on 9/16/2016
     * JS code for detecting if a JS object is empty by using keys length (count). Used as part of logic to conditionally render parts of the Biological Assets page, but only when needed.
         * https://stackoverflow.com/questions/2673121/how-to-check-if-object-has-any-properties-in-javascript
         * Accessed/Verified on 6/3/2023.
-* Stackoverflow post by user Abdulazeez Jimoh on 10/25/2022
+* “How to pass parameters with React-router-dom version 6 useNavigate and typescript”: Stackoverflow answer by Abdulazeez Jimoh on 10/25/2022
     * Suggested strategy used as the basis for passing an object containing "current" (old) attributes to the useNavigate() function, navTo(), to the edit page.
         * https://stackoverflow.com/questions/68911432/how-to-pass-parameters-with-react-router-dom-version-6-usenavigate-and-typescrip
         * Accessed/Verified on 6/1/2023
-* Stackoverflow post by user Savior on 9/9/2021.
+* “How to iterate through public/assets/images so i can get all images filename in an array? [duplicate]”: Stackoverflow answer by Savior on 9/9/2021
     * Code to map images in src folders heavily based on example code provided in the post.
         * https://stackoverflow.com/questions/69111477/how-to-iterate-through-public-assets-images-so-i-can-get-all-images-filename-in
         * Accessed/Verified on 6/1/2023
-* Stackoverflow discussion “How to use an array as option for react select component” 
+* “How to use an array as option for react select component”: Stackoverflow answer by John Haugeland on 7/14/2015
     * Code for mapping select menu heavily inspired by the following discussion, borrowing ideas and concepts from multiple posts from the entire discussion.
         * https://stackoverflow.com/questions/31413053/how-to-use-an-array-as-option-for-react-select-component
         * Accessed/Verified on 6/1/2023
-* Stackoverflow post by Abdullah Ch on 8/15/2021
+*  “How to use onChange in react-select”: Stackoverflow answer by Abdullah Ch on 8/15/2021
     * Heavily inspired by provided code for event triggering using onChange event 
         * https://stackoverflow.com/questions/68790381/how-to-use-onchange-in-react-select
         * Accessed/Verified on 6/1/2023
-* Stackoverflow post by Bumptious Q Bangwhistle on 1/23/2017
+* “How to grab substring before a specified character in JavaScript?”: Stackoverflow answer by Bumptious Q Bangwhistle on 1/23/2017
     * Used slicing method suggested by user  to slice image paths to more useful descriptive text for alt text.
         * https://stackoverflow.com/questions/9133102/how-to-grab-substring-before-a-specified-character-in-javascript
         * Accessed/Verified on 6/1/2023  
-* Stackoverflow "How to drop a table if it exists?" answer by 'Jovan MSFT'
+* "How to drop a table if it exists?": Stackoverflow answer by 'Jovan MSFT' on 11/3/2015
     * Used to help find concise syntax to drop existing tables that worked with both MariaDB and MYSQL Workbench
         * https://stackoverflow.com/questions/7887011/how-to-drop-a-table-if-it-exists
         * Accessed/Verified on 6/1/2023
-* Stackoverflow "How can I set the default value for an HTML < select > element?" answer by Borealid
+* "How can I set the default value for an HTML < select > element?": Stackoverflow answer by Borealid on 8/19/2010
     * Syntax used to pre-select values for selectors when populating update forms.
         * https://stackoverflow.com/questions/3518002/how-can-i-set-the-default-value-for-an-html-select-element
         * Accessed/Verified on 6/1/2023

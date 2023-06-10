@@ -396,7 +396,7 @@ VALUES
 
 INSERT INTO `Species`               (idDiet, idHabitat, speciesName, speciesDescription, threatLevel, speciesPhoto)
 VALUES
-(1, 1, 'Tyrannosaurus Rex', 'A large carnivorous dinosaur with powerful jaws and sharp teeth.', 10, '/static/media/Tyranosaurus Rex (Jungle).903bfc34a4fb353bac2c.jpg'),
+(1, 1, 'Tyrannosaurus Rex', 'A large carnivorous dinosaur with powerful jaws and sharp teeth.', 10, '/static/media/Tyrannosaurus Rex (Jungle).903bfc34a4fb353bac2c.jpg'),
 (1, 4, 'Velociraptor', 'A small, agile carnivorous dinosaur with sharp claws.', 9, '/static/media/Velociraptor (Blue).23c111b4e227b1f0eb3d.jpg'),
 (2, 3, 'Triceratops', 'A large herbivorous dinosaur with three horns and a bony frill.', 4, '/static/media/Triceratops.4828d7955f574072c103.jpg'),
 (2, 1, 'Brachiosaurus', 'A massive herbivorous dinosaur with a long neck and small head.', 3, '/static/media/Brachiosaurus.6358ef4569f0db90c182.jpg'),
