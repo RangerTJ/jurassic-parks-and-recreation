@@ -189,6 +189,10 @@ function EmployeeTasksPage ({hostURL, deleteButtonSound}) {
                             const taskCost = val.empTaskCost ? val.empTaskCost.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) : '$0.00';
                             const startDateAbridged = val.empTaskStart ? val.empTaskStart.substring(0, 10) : 'Issue: NULL Start';
                             const endDateAbridged = val.empTaskEnd ? val.empTaskEnd.substring(0, 10) : 'Issue: NULL End';
+                            const nullableTaskName = val.taskName ? val.taskName : 'NULL'
+                            const nullableEmployee = val.contributingEmployee ? val.contributingEmployee : 'NULL'
+                            const nullableEmployeeUsername = val.employeeUsername ? val.employeeUsername : 'NULL'
+                            const nullableType = val.categoryName ? val.categoryName : 'NULL'
                             return (
                                 <tr key={index}>
                                     <td className="buttonHolder">
@@ -197,13 +201,13 @@ function EmployeeTasksPage ({hostURL, deleteButtonSound}) {
                                     </td>
                                     <td className="tableDescription">
                                         <div><strong>Report #{val.idEmployeeTask}</strong></div>
-                                        <div>For '{val.taskName}'</div>
+                                        <div>For '{nullableTaskName}'</div>
                                     </td>
                                     <td>
-                                        <div>{val.contributingEmployee}</div>
-                                        <div></div>({val.employeeUsername})
+                                        <div>{nullableEmployee}</div>
+                                        <div>({nullableEmployeeUsername})</div>
                                     </td>
-                                    <td>{val.categoryName}</td>
+                                    <td>{nullableType}</td>
                                     <td>{val.taskHoursWorked}</td>
                                     <td className="tableDescription">{taskCost}</td>
                                     <td className="tableDescription">
