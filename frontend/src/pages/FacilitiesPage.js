@@ -17,6 +17,15 @@ import SelectorFacilityTypes from "../components/selectorFacilityTypes";
 // HostURL Passed from App.js
 function FacilitiesPage ({hostURL, deleteButtonSound}) {
 
+    // Safe Delete Sound (error handling to prevent SFX fail from messing up CRUD operation)
+    const delSound = () => {
+        try {
+            deleteButtonSound.play();
+        } catch (error) {
+            console.error("")
+        }
+    }
+
     // Navigation Function
     const navTo = useNavigate();
 
@@ -102,7 +111,7 @@ function FacilitiesPage ({hostURL, deleteButtonSound}) {
     const delFacility = async (delVal) => {
         try {
             if (window.confirm(`Are you sure you want to remove ${delVal.facilityName}?`)) {
-                deleteButtonSound.play();
+                delSound();
                 await Axios.delete(deleteFacilitiesURL + delVal.idFacility);
                 
                 const mainViewResponse = await Axios.get(getFacilitiesURL);
