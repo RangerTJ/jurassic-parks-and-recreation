@@ -80,16 +80,16 @@ function SpeciesAddForm ({hostURL, createButtonSound}) {
                                 }/>
                         </div>
                         <div className="selectorP">
-                                <div><label htmlFor="speciesDescription">Description</label></div>
-                                <textarea
-                                
-                                    id ="speciesDescription"
-                                    name="speciesDescription"
-                                    cols="40" rows="5" 
-                                    min="5" max="255"
-                                    placeholder="Ex. A large carnivorous dinosaur with powerful jaws and sharp teeth."
-                                    onChange={(e) => {setSpeciesDescription(e.target.value)}
-                                    }/>
+                            <div><label htmlFor="speciesDescription">Description</label></div>
+                            <textarea
+                                id ="speciesDescription"
+                                name="speciesDescription"
+                                cols="40" rows="5" 
+                                min="5" max="255"
+                                placeholder="Ex. A large carnivorous dinosaur with powerful jaws and sharp teeth."
+                                required
+                                onChange={(e) => {setSpeciesDescription(e.target.value)}
+                                }/>
                         </div>
                         <div className="selectorP">
                             <SelectorDietTypes  hostURL={hostURL} dietName={dietName} setDietName={setDietName} isRequired={true} autoFocus={false}/>

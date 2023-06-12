@@ -122,7 +122,7 @@ function App() {
                 <Route path="/JobClassificationsUpdate" element={<JobClassificationsUpdateForm hostURL={hostURL} updateButtonSound={updateButtonSound}/>} />
                 <Route path="/HabitatsAdd" element={<HabitatsAddForm hostURL={hostURL} createButtonSound={createButtonSound}/>} />
                 <Route path="/HabitatsUpdate" element={<HabitatsUpdateForm hostURL={hostURL} updateButtonSound={updateButtonSound}/>} />
-                <Route path="/DietsAdd" element={<DietsAddForm hostURL={hostURL} />} createButtonSound={createButtonSound}/>
+                <Route path="/DietsAdd" element={<DietsAddForm hostURL={hostURL} createButtonSound={createButtonSound}/>} />
                 <Route path="/DietsUpdate" element={<DietsUpdateForm hostURL={hostURL} updateButtonSound={updateButtonSound}/>} />
                 <Route path="/SpeciesAdd" element={<SpeciesAddForm hostURL={hostURL} createButtonSound={createButtonSound}/>} />
                 <Route path="/SpeciesUpdate" element={<SpeciesUpdateForm hostURL={hostURL} updateButtonSound={updateButtonSound}/>} />

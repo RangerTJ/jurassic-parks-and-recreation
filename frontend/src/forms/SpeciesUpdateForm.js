@@ -102,18 +102,18 @@ function SpeciesUpdateForm ({hostURL, updateButtonSound}) {
                             <div>Original: {oldSpeciesName}</div>
                         </div>
                         <div className="selectorP">
-                                <div><label htmlFor="speciesDescription">Description</label></div>
-                                <textarea
-                                
-                                    id ="speciesDescription"
-                                    name="speciesDescription"
-                                    cols="40" rows="5" 
-                                    min="5" max="255"
-                                    placeholder="Ex. A large carnivorous dinosaur with powerful jaws and sharp teeth."
-                                    value={speciesDescription}
-                                    onChange={(e) => {setSpeciesDescription(e.target.value)}
-                                    }/>
-                                    <div>Original: {oldSpeciesDescription}</div>
+                            <div><label htmlFor="speciesDescription">Description</label></div>
+                            <textarea
+                                id ="speciesDescription"
+                                name="speciesDescription"
+                                cols="40" rows="5" 
+                                min="5" max="255"
+                                placeholder="Ex. A large carnivorous dinosaur with powerful jaws and sharp teeth."
+                                required
+                                value={speciesDescription}
+                                onChange={(e) => {setSpeciesDescription(e.target.value)}
+                                }/>
+                                <div>Original: {oldSpeciesDescription}</div>
                         </div>
                         <div className="selectorP">
                             <SelectorDietTypes  hostURL={hostURL} dietName={dietName} setDietName={setDietName} isRequired={true} autoFocus={false} preSelected={oldDietName}/>
