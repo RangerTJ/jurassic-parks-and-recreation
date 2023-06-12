@@ -1191,11 +1191,12 @@ app.put('/api/updateBiologicalAssets', (req, res) =>{
 app.post('/api/filterBioAssetsBySpecies', (req, res) =>{
     const speciesName = req.body.speciesName
     const sqlRead = `
-    SELECT BiologicalAssets.idBiologicalAsset, BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName, Species.speciesPhoto, Diets.dietName
+    SELECT BiologicalAssets.idBiologicalAsset, BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName, Species.speciesPhoto, Diets.dietName, Parks.parkName
     FROM BiologicalAssets
     JOIN Species ON BiologicalAssets.idSpecies = Species.idSpecies
     JOIN Diets ON Species.idDiet = Diets.idDiet
     JOIN Facilities ON BiologicalAssets.idFacility = Facilities.idFacility
+    JOIN Parks ON Facilities.idPark = Parks.idPark
     WHERE Species.speciesName = ?
     ORDER BY idBiologicalAsset ASC;
     `;
@@ -1214,11 +1215,12 @@ app.post('/api/filterBioAssetsBySpecies', (req, res) =>{
 app.post('/api/filterBioAssetsByFacility', (req, res) =>{
     const facilityName = req.body.facilityName
     const sqlRead = `
-    SELECT BiologicalAssets.idBiologicalAsset, BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName, Species.speciesPhoto, Diets.dietName
+    SELECT BiologicalAssets.idBiologicalAsset, BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName, Species.speciesPhoto, Diets.dietName, Parks.parkName
     FROM BiologicalAssets
     JOIN Species ON BiologicalAssets.idSpecies = Species.idSpecies
     JOIN Diets ON Species.idDiet = Diets.idDiet
     JOIN Facilities ON BiologicalAssets.idFacility = Facilities.idFacility
+    JOIN Parks ON Facilities.idPark = Parks.idPark
     WHERE Facilities.facilityName = ?
     ORDER BY idBiologicalAsset ASC;
     `;
@@ -1238,11 +1240,12 @@ app.post('/api/filterBioAssetsBySpeciesAndFacility', (req, res) =>{
     const speciesName = req.body.speciesName
     const facilityName = req.body.facilityName
     const sqlRead = `
-    SELECT BiologicalAssets.idBiologicalAsset, BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName, Species.speciesPhoto, Diets.dietName
+    SELECT BiologicalAssets.idBiologicalAsset, BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName, Species.speciesPhoto, Diets.dietName, Parks.parkName
     FROM BiologicalAssets
     JOIN Species ON BiologicalAssets.idSpecies = Species.idSpecies
     JOIN Diets ON Species.idDiet = Diets.idDiet
     JOIN Facilities ON BiologicalAssets.idFacility = Facilities.idFacility
+    JOIN Parks ON Facilities.idPark = Parks.idPark
     WHERE Species.speciesName = ? AND Facilities.facilityName = ?
     ORDER BY idBiologicalAsset ASC;
     `;
