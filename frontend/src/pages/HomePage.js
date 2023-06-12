@@ -118,6 +118,12 @@ function HomePage({hostURL}) {
                     'Most Expensive Employees' refers to costs-affiliated the employee was involved in, not necessarily their overhead cost
                     (since things like supplies, etc. are factored into the Employee Task Report's cost figure).
                 </p>
+                <p>
+                    NULL entries reflect Employee Tasks
+                    that maintain a record of costs after the associated Employee or Task Assigned were deleted from the database (and thus connections
+                    to any values references by the Employee or Task Assigned as well). These can either be considered collectively as 'orphaned' elements,
+                    or the EmployeeTask can be re-assigned to a new employee or task if it is appropriate to do so.
+                </p>
                 <h4 className="st-header">Cost Summary by Sector</h4>
                 <div className="scrollableST">
                     <div className="st-holder">
@@ -132,10 +138,11 @@ function HomePage({hostURL}) {
                                 // Convert cost to USD or set to 0 USD if there is a null entry
                                 const usdCategoryCost = val.taskTypeCost ? val.taskTypeCost.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) : '$0.00';
                                 const rank = index + 1
+                                const nullableCategory = val.categoryName ? val.categoryName : 'NULL'
                                 return (
                                     <tr key={index}>
                                         <td>{rank}</td>
-                                        <td className="st-left">{val.categoryName}</td>
+                                        <td className="st-left">{nullableCategory}</td>
                                         <td className="st-left">{usdCategoryCost}</td>
                                     </tr>
                                 )
@@ -158,10 +165,11 @@ function HomePage({hostURL}) {
                                 // Convert cost to USD or set to 0 USD if there is a null entry
                                 const usdParkCost = val.parkCost ? val.parkCost.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) : '$0.00';
                                 const rank = index + 1
+                                const nullablePark = val.parkName ? val.parkName : 'NULL'
                                 return (
                                     <tr key={index}>
                                         <td>{rank}</td>
-                                        <td className="st-left">{val.parkName}</td>
+                                        <td className="st-left">{nullablePark}</td>
                                         <td className="st-left">{usdParkCost}</td>
                                     </tr>
                                 )
@@ -184,10 +192,11 @@ function HomePage({hostURL}) {
                                 // Convert cost to USD or set to 0 USD if there is a null entry
                                 const usdEmployeeCost = val.employeeCost ? val.employeeCost.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) : '$0.00';
                                 const rank = index + 1
+                                const nullableEmployee = val.employeeUsername ? `${val.lastName}, ${val.firstName}` : 'NULL'
                                 return (
                                     <tr key={index}>
                                         <td>{rank}</td>
-                                        <td className="st-left">{val.lastName}, {val.firstName}</td>
+                                        <td className="st-left">{nullableEmployee}</td>
                                         <td className="st-left">{usdEmployeeCost}</td>
                                     </tr>
                                 )
@@ -210,10 +219,11 @@ function HomePage({hostURL}) {
                                 // Convert cost to USD or set to 0 USD if there is a null entry
                                 const usdTaskCost = val.taskCost ? val.taskCost.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) : '$0.00';
                                 const rank = index + 1
+                                const nullableTaskName = val.taskName ? val.taskName : 'NULL'
                                 return (
                                     <tr key={index}>
                                         <td>{rank}</td>
-                                        <td className="st-left">{val.taskName}</td>
+                                        <td className="st-left">{nullableTaskName}</td>
                                         <td className="st-left">{usdTaskCost}</td>
                                     </tr>
                                 )
@@ -237,11 +247,15 @@ function HomePage({hostURL}) {
                                 // Convert cost to USD or set to 0 USD if there is a null entry
                                 const usdFacilityCost = val.facilityCost ? val.facilityCost.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) : '$0.00';
                                 const rank = index + 1
+
+                                // While Park and Facility are not *directly* nullable, their values cannot be referenced if the task associated with them is deleted.
+                                const nullableFacility = val.facilityName ? val.facilityName : 'NULL'
+                                const nullablePark = val.parkName ? val.parkName : 'NULL'
                                 return (
                                     <tr key={index}>
                                         <td>{rank}</td>
-                                        <td className="st-left">{val.facilityName}</td>
-                                        <td className="st-left">{val.parkName}</td>
+                                        <td className="st-left">{nullableFacility}</td>
+                                        <td className="st-left">{nullablePark}</td>
                                         <td className="st-left">{usdFacilityCost}</td>
                                     </tr>
                                 )
@@ -267,12 +281,15 @@ function HomePage({hostURL}) {
                                 // Convert cost to USD or set to 0 USD if there is a null entry
                                 const usdBioAssetCost = val.assetCost ? val.assetCost.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) : '$0.00';
                                 const rank = index + 1
+                                const nullableAsset = val.bioAssetName ? val.bioAssetName : 'NULL'
+                                const nullableSpecies = val.speciesName ? val.speciesName : 'NULL'
+                                const nullablePark = val.parkName ? val.parkName : 'NULL'
                                 return (
                                     <tr key={index}>
                                         <td>{rank}</td>
-                                        <td className="st-left">{val.bioAssetName}</td>
-                                        <td className="st-left">{val.speciesName}</td>
-                                        <td className="st-left">{val.parkName}</td>
+                                        <td className="st-left">{nullableAsset}</td>
+                                        <td className="st-left">{nullableSpecies}</td>
+                                        <td className="st-left">{nullablePark}</td>
                                         <td className="st-left">{usdBioAssetCost}</td>
                                     </tr>
                                 )

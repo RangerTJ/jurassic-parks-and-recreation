@@ -14,7 +14,7 @@ import ImageSelectorHabitats from "../components/imageSelectorHabitats";
 
 
 // HostURL Passed from App.js
-function HabitatsUpdateForm ({hostURL}) {
+function HabitatsUpdateForm ({hostURL, updateButtonSound}) {
 
     // Follows reference strategy to read state object, as suggested by stackoverflow user Abdulazeez Jimoh on 10/25/2022
     // URL: https://stackoverflow.com/questions/68911432/how-to-pass-parameters-with-react-router-dom-version-6-usenavigate-and-typescrip
@@ -42,6 +42,7 @@ function HabitatsUpdateForm ({hostURL}) {
     const update = async () => {
         try {
             if (habitatName && habitatDescription) {
+                updateButtonSound.play();
                 await Axios.put(updateHabitatsURL, {
                     habitatName: habitatName,
                     habitatDescription: habitatDescription,
@@ -50,9 +51,9 @@ function HabitatsUpdateForm ({hostURL}) {
                 });
                 alert(`${habitatName}'s database record has been updated!`)
                 navTo('/Habitats');
-                } else {
-                    alert("Please fill out all required fields and try again.")
-                }
+            } else {
+                alert("Please fill out all required fields and try again.")
+            }
         } catch (error) {
             console.error('Error updating employee.', error);
             alert('MYSQL Server Error: ' + error.response.data);

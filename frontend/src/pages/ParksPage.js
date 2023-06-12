@@ -13,7 +13,7 @@ import defaultImg from '../images/tableDefaultPreview.png';
 
 
 // HostURL Passed from App.js
-function ParksPage ({hostURL}) {
+function ParksPage ({hostURL, deleteButtonSound}) {
 
     // Navigation Function
     const navTo = useNavigate();
@@ -57,15 +57,18 @@ function ParksPage ({hostURL}) {
     const delParks = async (delVal) => {
         try {
             if (window.confirm(`Are you sure you want to remove ${delVal.parkName}?`)) {
+                deleteButtonSound.play();
                 await Axios.delete(deleteParksURL + delVal.idPark);
+
                 const mainViewResponse = await Axios.get(getParksURL);
                 setParksList(mainViewResponse.data);
                 console.log(mainViewResponse.data);
+                
                 alert(`${delVal.parkName} has been removed from the database.`);
-           }} catch (error) {
-                console.error('Error deleting Park.', error);
-                alert('MYSQL Server Error: ' + error.response.data);
-            }
+        }} catch (error) {
+            console.error('Error deleting Park.', error);
+            alert('MYSQL Server Error: ' + error.response.data);
+        }
     };
 
     // Get table info
@@ -103,7 +106,7 @@ function ParksPage ({hostURL}) {
                 Click the "Create" button below to add a new Park to the DINO database.
                 </p>
                 <div>
-                    <p><button onClick={() => navTo("/ParksAdd")}>Create</button></p>
+                    <p><button onClick={() => {navTo("/ParksAdd")}}>Create</button></p>
                 </div>
             </article>
             <article>

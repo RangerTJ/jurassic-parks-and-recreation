@@ -14,7 +14,7 @@ import ImageSelectorHabitats from "../components/imageSelectorHabitats";
 
 
 // HostURL Passed from App.js
-function HabitatsAddForm ({hostURL}) {
+function HabitatsAddForm ({hostURL, createButtonSound}) {
 
     // Habitats SQL Endpoints
     const createHabitatsURL = hostURL + '/api/insertHabitats';
@@ -30,6 +30,7 @@ function HabitatsAddForm ({hostURL}) {
     const submit = async () => {
         try {
             if (habitatName && habitatDescription) {
+                createButtonSound.play();
                 await Axios.post(createHabitatsURL, {
                     habitatName: habitatName,
                     habitatDescription: habitatDescription,
@@ -37,9 +38,9 @@ function HabitatsAddForm ({hostURL}) {
                 });
                 alert(`${habitatName} has been added to the database!`);
                 navTo('/Habitats');
-                } else {
-                    alert("Please fill out all required fields and try again.")
-                }
+            } else {
+                alert("Please fill out all required fields and try again.")
+            }
         } catch(error) {
             console.error('Error inserting employee.', error);
             alert('MYSQL Server Error: ' + error.response.data);

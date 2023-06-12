@@ -16,7 +16,7 @@ import SelectorHabitats from "../components/selectorHabitats";
 
 
 // Host URL Passed from App.js
-function SpeciesUpdateForm ({hostURL}) {
+function SpeciesUpdateForm ({hostURL, updateButtonSound}) {
 
     // Follows reference strategy to read state object, as suggested by stackoverflow user Abdulazeez Jimoh on 10/25/2022
     // URL: https://stackoverflow.com/questions/68911432/how-to-pass-parameters-with-react-router-dom-version-6-usenavigate-and-typescrip
@@ -52,6 +52,7 @@ function SpeciesUpdateForm ({hostURL}) {
     const update = async () => {
         try {
             if (dietName && habitatName && speciesName && speciesDescription && threatLevel) {
+                updateButtonSound.play();
                 await Axios.put(updateSpeciesURL, {
                     dietName: dietName,
                     habitatName: habitatName,
@@ -63,8 +64,7 @@ function SpeciesUpdateForm ({hostURL}) {
                 });
                 alert(`${speciesName}'s database record has been updated!`);
                 navTo('/Species');
-            }
-            else {
+            } else {
                 alert("Please fill out all required fields and try again.");
             }
         }
@@ -102,33 +102,31 @@ function SpeciesUpdateForm ({hostURL}) {
                             <div>Original: {oldSpeciesName}</div>
                         </div>
                         <div className="selectorP">
-                                <div><label htmlFor="speciesDescription">Description</label></div>
-                                <textarea
-                                
-                                    id ="speciesDescription"
-                                    name="speciesDescription"
-                                    cols="40" rows="5" 
-                                    min="5" max="255"
-                                    placeholder="Ex. A large carnivorous dinosaur with powerful jaws and sharp teeth."
-                                    value={speciesDescription}
-                                    onChange={(e) => {setSpeciesDescription(e.target.value)}
-                                    }/>
-                                    <div>Original: {oldSpeciesDescription}</div>
+                            <div><label htmlFor="speciesDescription">Description</label></div>
+                            <textarea
+                                id ="speciesDescription"
+                                name="speciesDescription"
+                                cols="40" rows="5" 
+                                min="5" max="255"
+                                placeholder="Ex. A large carnivorous dinosaur with powerful jaws and sharp teeth."
+                                required
+                                value={speciesDescription}
+                                onChange={(e) => {setSpeciesDescription(e.target.value)}
+                                }/>
+                                <div>Original: {oldSpeciesDescription}</div>
                         </div>
                         <div className="selectorP">
                             <SelectorDietTypes  hostURL={hostURL} dietName={dietName} setDietName={setDietName} isRequired={true} autoFocus={false} preSelected={oldDietName}/>
                             <div>Original: {oldDietName}</div>
                         </div>
                         <div className="selectorP">
-                            <SelectorHabitats  hostURL={hostURL} habitatName={habitatName} setHabitatName={setHabitatName} isRequired={false} autoFocus={false} preSelected={oldHabitatName}/>
-                            <div>(Enclosures Only)</div>
+                            <SelectorHabitats  hostURL={hostURL} habitatName={habitatName} setHabitatName={setHabitatName} isRequired={true} autoFocus={false} preSelected={oldHabitatName}/>
                             <div>Original: {oldHabitatName}</div>
                         </div>
                         <div className="selectorP">
                             <div><label htmlFor="threatLevel">Threat Level</label></div>
                             <select name="threatLevel" id="threatLevel" value={threatLevel} onChange={(e) => {setThreatLevel(e.target.value)}} required>
                                 <option value="" hidden>Select Threat Level</option>
-                                <option value="0">0</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>

@@ -16,7 +16,7 @@ import SelectorTaskCategories from "../components/selectorTaskCategories";
 
 
 // HostURL Passed from App.js
-function EmployeeTasksUpdateForm ({hostURL}) {
+function EmployeeTasksUpdateForm ({hostURL, updateButtonSound}) {
 
     // Follows reference strategy to read state object, as suggested by stackoverflow user Abdulazeez Jimoh on 10/25/2022
     // URL: https://stackoverflow.com/questions/68911432/how-to-pass-parameters-with-react-router-dom-version-6-usenavigate-and-typescrip
@@ -62,6 +62,7 @@ function EmployeeTasksUpdateForm ({hostURL}) {
             if (trueStart > trueEnd) {
                 alert("We don't yet use time machines to obtain our prehistoric assets! Fix the start/end dates.");
             } else if (taskName && employeeUsername && categoryName && taskHoursWorked && empTaskCost && empTaskStart && empTaskEnd) {
+                updateButtonSound.play();
                 await Axios.put(updateEmployeeTasksURL, {
                     taskName: taskName,
                     employeeUsername: employeeUsername,
@@ -74,9 +75,9 @@ function EmployeeTasksUpdateForm ({hostURL}) {
                 });
                 alert(`A task report for ${employeeUsername}'s ${categoryName} work on ${taskName} has been updated!`)
                 navTo('/EmployeeTasks');
-                } else {
-                    alert("Please fill out all required fields and try again.")
-                }
+            } else {
+                alert("Please fill out all required fields and try again.")
+            }
         } catch (error) {
             console.error('Error updating Employee Task Report.', error);
             alert('MYSQL Server Error: ' + error.response.data);

@@ -16,7 +16,7 @@ import SelectorTaskCategories from "../components/selectorTaskCategories";
 
 
 // HostURL Passed from App.js
-function EmployeeTasksAddForm ({hostURL}) {
+function EmployeeTasksAddForm ({hostURL, createButtonSound}) {
 
     // EmployeeTasks SQL Endpoints
     const createEmployeeTasksURL = hostURL + '/api/insertEmployeeTasks';
@@ -41,6 +41,7 @@ function EmployeeTasksAddForm ({hostURL}) {
             if (trueStart > trueEnd) {
                 alert("We don't yet use time machines to obtain our prehistoric assets! Fix the start/end dates.");
             } else if (taskName && employeeUsername && categoryName && taskHoursWorked && empTaskCost && empTaskStart && empTaskEnd) {
+                createButtonSound.play();
                 await Axios.post(createEmployeeTasksURL, {
                     taskName: taskName,
                     employeeUsername: employeeUsername,
@@ -52,9 +53,9 @@ function EmployeeTasksAddForm ({hostURL}) {
                 });
                 alert(`A task report for ${employeeUsername}'s ${categoryName} work on ${taskName} has been added to the database!`);
                 navTo('/EmployeeTasks');
-                } else {
-                    alert("Please fill out all required fields and try again.")
-                }
+            } else {
+                alert("Please fill out all required fields and try again.")
+            }
         } catch(error) {
             console.error('Error inserting Employee Task Report.', error);
             alert('MYSQL Server Error: ' + error.response.data);

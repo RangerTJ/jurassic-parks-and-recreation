@@ -15,7 +15,7 @@ import ImageSelectorStaff from "../components/imageSelectorStaff";
 
 
 // HostURL Passed from App.js
-function EmployeesUpdateForm ({hostURL}) {
+function EmployeesUpdateForm ({hostURL, updateButtonSound}) {
 
     // Follows reference strategy to read state object, as suggested by stackoverflow user Abdulazeez Jimoh on 10/25/2022
     // URL: https://stackoverflow.com/questions/68911432/how-to-pass-parameters-with-react-router-dom-version-6-usenavigate-and-typescrip
@@ -57,6 +57,7 @@ function EmployeesUpdateForm ({hostURL}) {
     const update = async () => {
         try {
             if (jobTitle && lastName && firstName && employeeUsername && employeePhone && employeeEmail) {
+                updateButtonSound.play();
                 await Axios.put(updateEmployeesURL, {
                     jobTitle: jobTitle,
                     lastName: lastName,
@@ -72,9 +73,9 @@ function EmployeesUpdateForm ({hostURL}) {
                 });
                 alert(`${firstName} ${lastName}'s database record has been updated!`)
                 navTo('/Employees');
-                } else {
-                    alert("Please fill out all required fields and try again.")
-                }
+            } else {
+                alert("Please fill out all required fields and try again.")
+            }
         } catch (error) {
             console.error('Error updating employee.', error);
             alert('MYSQL Server Error: ' + error.response.data);

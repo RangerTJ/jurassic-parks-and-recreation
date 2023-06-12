@@ -13,7 +13,7 @@ import Axios from 'axios';
 
 
 // HostURL Passed from App.js
-function FacilityTypesAddForm ({hostURL}) {
+function FacilityTypesAddForm ({hostURL, createButtonSound}) {
 
     // Facility Type SQL Endpoint
     const createFacilityTypesURL = hostURL + '/api/insertFacilityTypes';
@@ -27,15 +27,16 @@ function FacilityTypesAddForm ({hostURL}) {
     const submit = async () => {
         try {
             if (facTypeName && facTypeDescription) {
+                createButtonSound.play();
                 await Axios.post(createFacilityTypesURL, {
                     facTypeName: facTypeName,
                     facTypeDescription: facTypeDescription,
                 });
                 alert(`Facility Type ${facTypeName} has been added to the database!`);
                 navTo('/FacilityTypes');
-                } else {
-                    alert("Please fill out all required fields and try again.")
-                }
+            } else {
+                alert("Please fill out all required fields and try again.")
+            }
         } catch(error) {
             console.error('Error inserting Facility Type.', error);
             alert('MYSQL Server Error: ' + error.response.data);

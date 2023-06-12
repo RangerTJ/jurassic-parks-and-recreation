@@ -17,7 +17,7 @@ import SelectorFacilityTypes from "../components/selectorFacilityTypes";
 
 
 // HostURL Passed from App.js
-function FacilitiesAddForm ({hostURL}) {
+function FacilitiesAddForm ({hostURL, createButtonSound}) {
 
     // Facilities SQL Endpoints
     const createFacilitiesURL = hostURL + '/api/insertFacilities';
@@ -37,7 +37,8 @@ function FacilitiesAddForm ({hostURL}) {
     // CREATE - Insert New Facility then return to Facilities page (only if all required state variables are not null)
     const submit = async () => {
         try {
-            if (parkName && facTypeName && facilityLocation && securityRating) {
+            if (parkName && facTypeName && facilityLocation && securityRating && facilityDescription) {
+                createButtonSound.play();
                 await Axios.post(createFacilitiesURL, {
                     parkName: parkName,
                     facilityName: facilityName,
@@ -51,9 +52,9 @@ function FacilitiesAddForm ({hostURL}) {
                 });
                 alert(`${facilityName} has been added to the database!`);
                 navTo('/Facilities');
-                } else {
-                    alert("Please fill out all required fields and try again.")
-                }
+            } else {
+                alert("Please fill out all required fields and try again.")
+            }
         } catch(error) {
             console.error('Error inserting facility.', error);
             alert('MYSQL Server Error: ' + error.response.data);
@@ -109,7 +110,6 @@ function FacilitiesAddForm ({hostURL}) {
                             <div><label htmlFor="securityRating">Security Rating</label></div>
                             <select name="securityRating" id="securityRating" onChange={(e) => {setSecurityRating(e.target.value)}} required>
                                 <option value="" hidden>Select Rating</option>
-                                <option value="0">0</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
@@ -133,6 +133,7 @@ function FacilitiesAddForm ({hostURL}) {
                                     cols="40" rows="5" 
                                     min="5" max="255"
                                     placeholder="Ex. Houses sauropods."
+                                    required
                                     onChange={(e) => {setFacilityDescription(e.target.value)}
                                     }/>
                         </div>

@@ -403,18 +403,18 @@ WHERE idSpecies = :idSpecies_input
 
 -- SELECT - Cost Analysis Report by Task Category
 SELECT  TaskCategories.categoryName, SUM(EmployeeTasks.empTaskCost) AS taskTypeCost
-FROM TaskCategories
+FROM EmployeeTasks
 -- Need to JOIN TaskCategories -> EmployeeTasks
-LEFT JOIN EmployeeTasks ON TaskCategories.idTaskCategory = EmployeeTasks.idTaskCategory
+LEFT JOIN TaskCategories ON EmployeeTasks.idTaskCategory = TaskCategories.idTaskCategory
 GROUP BY TaskCategories.categoryName
 ORDER BY TaskTypeCost DESC;
 
 -- SELECT - Cost Analysis Report by Park
 SELECT  Parks.parkName, SUM(EmployeeTasks.empTaskCost) AS parkCost
-FROM Parks
--- Need to JOIN TaskCategories -> EmployeeTasks -> TasksAssigned -> Facilities -> Parks
-LEFT JOIN Facilities ON Parks.idPark = Facilities.idPark
-LEFT JOIN TasksAssigned ON Facilities.idFacility = TasksAssigned.idFacility
+FROM EmployeeTasks
+LEFT JOIN TasksAssigned ON EmployeeTasks.idTaskAssigned = TasksAssigned.idTaskAssigned
+LEFT JOIN Facilities ON TasksAssigned.idFacility = Facilities.idFacility
+LEFT JOIN Parks ON Facilities.idPark = Parks.idPark
 GROUP BY Parks.parkName
 ORDER BY ParkCost DESC;
 
@@ -701,7 +701,7 @@ ORDER BY facilityCost DESC;
 SELECT  BiologicalAssets.bioAssetName, Species.speciesName, Parks.parkName, SUM(EmployeeTasks.empTaskCost) AS assetCost
 FROM EmployeeTasks
 LEFT JOIN TasksAssigned ON EmployeeTasks.idTaskAssigned = TasksAssigned.idTaskAssigned
-JOIN BiologicalAssets ON TasksAssigned.idBiologicalAsset = BiologicalAssets.idBiologicalAsset
+LEFT JOIN BiologicalAssets ON TasksAssigned.idBiologicalAsset = BiologicalAssets.idBiologicalAsset
 LEFT JOIN Species ON BiologicalAssets.idSpecies = Species.idSpecies
 LEFT JOIN Facilities ON BiologicalAssets.idFacility = Facilities.idFacility
 LEFT JOIN Parks ON Facilities.idPark = Parks.idPark

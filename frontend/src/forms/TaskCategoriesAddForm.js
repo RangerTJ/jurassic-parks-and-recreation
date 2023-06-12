@@ -13,7 +13,7 @@ import Axios from 'axios';
 
 
 // HostURL Passed from App.js
-function TaskCategoriesAddForm ({hostURL}) {
+function TaskCategoriesAddForm ({hostURL, createButtonSound}) {
 
     // Task Categories SQL Endpoint
     const createTaskCategoriesURL = hostURL + '/api/insertTaskCategories';
@@ -26,14 +26,15 @@ function TaskCategoriesAddForm ({hostURL}) {
     const submit = async () => {
         try {
             if (categoryName) {
+                createButtonSound.play();
                 await Axios.post(createTaskCategoriesURL, {
                     categoryName: categoryName,
                 });
                 alert(`${categoryName} has been added to the database!`);
                 navTo('/TaskCategories');
-                } else {
-                    alert("Please fill out all required fields and try again.")
-                }
+            } else {
+                alert("Please fill out all required fields and try again.")
+            }
         } catch(error) {
             console.error('Error inserting Category.', error);
             alert('MYSQL Server Error: ' + error.response.data);

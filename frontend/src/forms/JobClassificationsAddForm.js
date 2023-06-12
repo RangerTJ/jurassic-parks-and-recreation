@@ -13,7 +13,7 @@ import Axios from 'axios';
 
 
 // HostURL Passed from App.js
-function JobClassificationsAddForm ({hostURL}) {
+function JobClassificationsAddForm ({hostURL, createButtonSound}) {
 
     // Job Classification SQL Endpoint
     const createJobClassificationsURL = hostURL + '/api/insertJobClassifications';
@@ -27,15 +27,16 @@ function JobClassificationsAddForm ({hostURL}) {
     const submit = async () => {
         try {
             if (jobTitle && jobDescription) {
+                createButtonSound.play();
                 await Axios.post(createJobClassificationsURL, {
                     jobTitle: jobTitle,
                     jobDescription: jobDescription,
                 });
                 alert(`Job Classification ${jobTitle} has been added to the database!`);
                 navTo('/JobClassifications');
-                } else {
-                    alert("Please fill out all required fields and try again.")
-                }
+            } else {
+                alert("Please fill out all required fields and try again.")
+            }
         } catch(error) {
             console.error('Error inserting Job Classifications Type.', error);
             alert('MYSQL Server Error: ' + error.response.data);

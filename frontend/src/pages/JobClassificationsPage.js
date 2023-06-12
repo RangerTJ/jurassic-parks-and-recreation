@@ -12,7 +12,7 @@ import Axios from 'axios';
 
 
 // HostURL Passed from App.js
-function JobClassificationsPage ({hostURL}) {
+function JobClassificationsPage ({hostURL, deleteButtonSound}) {
 
    // Navigation Function
    const navTo = useNavigate();
@@ -33,17 +33,18 @@ function JobClassificationsPage ({hostURL}) {
    const delJobClassifications = async (delVal) => {
        try {
            if (window.confirm(`Are you sure you want to delete ${delVal.jobTitle}?`)) {
-               await Axios.delete(deleteJobClassificationsURL + delVal.idJobClassification);
+                deleteButtonSound.play();
+                await Axios.delete(deleteJobClassificationsURL + delVal.idJobClassification);
+                
+                const mainViewResponse = await Axios.get(getJobClassificationsURL);
+                setJobClassificationsList(mainViewResponse.data);
+                console.log(mainViewResponse.data);
                
-               const mainViewResponse = await Axios.get(getJobClassificationsURL);
-               setJobClassificationsList(mainViewResponse.data);
-               console.log(mainViewResponse.data);
-       
-               alert(`${delVal.jobTitle} has been removed from the database.`);
-           }} catch (error) {
-               console.error('Error deleting Job.', error);
-               alert('MYSQL Server Error: ' + error.response.data);
-            }
+                alert(`${delVal.jobTitle} has been removed from the database.`);
+        }} catch (error) {
+            console.error('Error deleting Job.', error);
+            alert('MYSQL Server Error: ' + error.response.data);
+        }
    };
 
    // Get table info

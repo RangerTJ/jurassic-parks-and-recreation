@@ -14,7 +14,7 @@ import ImageSelectorDiets from '../components/imageSelectorDiets';
 
 
 // HostURL Passed from App.js
-function DietsAddForm ({hostURL}) {
+function DietsAddForm ({hostURL, createButtonSound}) {
 
     // Diets SQL Endpoint
     const createDietsURL = hostURL + '/api/insertDiets';
@@ -29,6 +29,7 @@ function DietsAddForm ({hostURL}) {
     const submit = async () => {
         try {
             if (dietName && dietDescription) {
+                createButtonSound.play();
                 await Axios.post(createDietsURL, {
                     dietName: dietName,
                     dietDescription: dietDescription,
@@ -36,9 +37,9 @@ function DietsAddForm ({hostURL}) {
                 });
                 alert(`Diet ${dietName} has been added to the database!`);
                 navTo('/Diets');
-                } else {
-                    alert("Please fill out all required fields and try again.")
-                }
+            } else {
+                alert("Please fill out all required fields and try again.")
+            }
         } catch(error) {
             console.error('Error inserting Diet.', error);
             alert('MYSQL Server Error: ' + error.response.data);

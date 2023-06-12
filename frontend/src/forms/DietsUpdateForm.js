@@ -14,7 +14,7 @@ import ImageSelectorDiets from "../components/imageSelectorDiets";
 
 
 // HostURL Passed from App.js
-function DietsUpdateForm ({hostURL}) {
+function DietsUpdateForm ({hostURL, updateButtonSound}) {
 
     // Follows reference strategy to read state object, as suggested by stackoverflow user Abdulazeez Jimoh on 10/25/2022
     // URL: https://stackoverflow.com/questions/68911432/how-to-pass-parameters-with-react-router-dom-version-6-usenavigate-and-typescrip
@@ -42,6 +42,7 @@ function DietsUpdateForm ({hostURL}) {
     const update = async () => {
         try {
             if (dietName && dietDescription) {
+                updateButtonSound.play();
                 await Axios.put(updateDietsURL, {
                     dietName: dietName,
                     dietDescription: dietDescription,
@@ -50,9 +51,9 @@ function DietsUpdateForm ({hostURL}) {
                 });
                 alert(`${dietName}'s database record has been updated!`)
                 navTo('/Diets');
-                } else {
-                    alert("Please fill out all required fields and try again.")
-                }
+            } else {
+                alert("Please fill out all required fields and try again.")
+            }
         } catch (error) {
             console.error('Error updating Diet.', error);
             alert('MYSQL Server Error: ' + error.response.data);

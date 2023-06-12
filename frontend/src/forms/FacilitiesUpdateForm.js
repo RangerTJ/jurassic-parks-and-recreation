@@ -17,7 +17,7 @@ import ImageSelectorFacilities from "../components/imageSelectorFacilities";
 
 
 // HostURL Passed from App.js
-function FacilitiesUpdateForm ({hostURL}) {
+function FacilitiesUpdateForm ({hostURL, updateButtonSound}) {
 
     // Follows reference strategy to read state object, as suggested by stackoverflow user Abdulazeez Jimoh on 10/25/2022
     // URL: https://stackoverflow.com/questions/68911432/how-to-pass-parameters-with-react-router-dom-version-6-usenavigate-and-typescrip
@@ -56,7 +56,8 @@ function FacilitiesUpdateForm ({hostURL}) {
     // UPDATE - Submit Changes to a Facility then return to Facilities page
     const update = async () => {
         try {
-            if (parkName && facTypeName && facilityLocation && securityRating) {
+            if (parkName && facTypeName && facilityLocation && securityRating && facilityDescription) {
+                updateButtonSound.play();
                 await Axios.put(updateFacilitiesURL, {
                     parkName: parkName,
                     facilityName: facilityName,
@@ -71,9 +72,9 @@ function FacilitiesUpdateForm ({hostURL}) {
                 });
                 alert(`${facilityName}'s database record has been updated!`)
                 navTo('/Facilities');
-                } else {
-                    alert("Please fill out all required fields and try again.")
-                }
+            } else {
+                alert("Please fill out all required fields and try again.")
+            }
         } catch (error) {
             console.error('Error updating facility.', error);
             alert('MYSQL Server Error: ' + error.response.data);
@@ -137,7 +138,6 @@ function FacilitiesUpdateForm ({hostURL}) {
                             <div><label htmlFor="securityRating">Security Rating</label></div>
                             <select name="securityRating" id="securityRating" value={securityRating} onChange={(e) => {setSecurityRating(e.target.value)}} required>
                                 <option value="" hidden>Select Rating</option>
-                                <option value="0">0</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
@@ -171,6 +171,7 @@ function FacilitiesUpdateForm ({hostURL}) {
                                 cols="40" rows="5" 
                                 min="5" max="255"
                                 placeholder="Ex. Houses sauropods."
+                                required
                                 value={facilityDescription}
                                 onChange={(e) => {setFacilityDescription(e.target.value)}
                                 }/>

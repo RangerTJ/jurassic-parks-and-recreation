@@ -20,7 +20,7 @@ import SelectorFacilities from "../components/selectorFacilities";
 
 
 // HostURL Passed from App.js
-function BiologicalAssetsPage ({hostURL}) {
+function BiologicalAssetsPage ({hostURL, deleteButtonSound}) {
 
     // Navigation Function
     const navTo = useNavigate();
@@ -109,6 +109,7 @@ function BiologicalAssetsPage ({hostURL}) {
     const delBiologicalAsset = async (delVal) => {
         try {
             if (window.confirm(`Are you sure you want to remove ${delVal.bioAssetName}?`)) {
+                deleteButtonSound.play();
                 await Axios.delete(deleteBiologicalAssetsURL + delVal.idBiologicalAsset);
                 
                 const mainViewResponse = await Axios.get(getBiologicalAssetsURL);
@@ -122,12 +123,12 @@ function BiologicalAssetsPage ({hostURL}) {
                 const securityMismatchResponse = await Axios.get(checkBiologicalAssetsSecurityURL);
                 setAssetSecMismatchList(securityMismatchResponse.data);
                 console.log(securityMismatchResponse.data);
-        
+
                 alert(`${delVal.bioAssetName} has been removed from the database.`);
-            }} catch (error) {
-                console.error('Error deleting biological asset.', error);
-                alert('MYSQL Server Error: ' + error.response.data);
-            }
+        }} catch (error) {
+            console.error('Error deleting biological asset.', error);
+            alert('MYSQL Server Error: ' + error.response.data);
+        }
     };
     
     // Fully Populate the Bio Asset List (without filters)

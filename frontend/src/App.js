@@ -8,6 +8,9 @@ import React from "react";
 import './App.css';
 import logo from './images/logo.png'
 import { Link } from 'react-router-dom';
+import createSound from '../src/audio/jpCreate.mp3'
+import updateSound from '../src/audio/jpUpdate.mp3'
+import deleteSound from '../src/audio/jpDelete.mp3'
 
 // Main Page Imports
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
@@ -55,6 +58,9 @@ import SpeciesUpdateForm from "./forms/SpeciesUpdateForm";
 // React Application
 function App() {
   const hostURL = process.env.REACT_APP_FRONTEND_URL + process.env.REACT_APP_BACKEND_PORT;
+  const createButtonSound = new Audio(createSound);
+  const updateButtonSound = new Audio(updateSound);
+  const deleteButtonSound = new Audio(deleteSound);
 
   // Citation: 'Window: scrollTo() method' from mdn web docs
   // URL: https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollTo
@@ -82,44 +88,44 @@ function App() {
 
                 {/* Primary Page Routes */}
                 <Route path="/" element={<HomePage hostURL={hostURL} />} />
-                <Route path="/Parks" element={<ParksPage hostURL={hostURL} />} />
-                <Route path="/Facilities" element={<FacilitiesPage hostURL={hostURL} />} />
-                <Route path="/FacilityTypes" element={<FacilityTypesPage hostURL={hostURL} />} />
-                <Route path="/Employees" element={<EmployeesPage hostURL={hostURL} />} />
-                <Route path="/JobClassifications" element={<JobClassificationsPage hostURL={hostURL} />} />
-                <Route path="/TasksAssigned" element={<TasksAssignedPage hostURL={hostURL} />} />
-                <Route path="/EmployeeTasks" element={<EmployeeTasksPage hostURL={hostURL} />} />
-                <Route path="/TaskCategories" element={<TaskCategoriesPage hostURL={hostURL} />} />
-                <Route path="/BiologicalAssets" element={<BiologicalAssetsPage hostURL={hostURL} />} />
-                <Route path="/Species" element={<SpeciesPage hostURL={hostURL} />} />
-                <Route path="/Diets" element={<DietsPage hostURL={hostURL} />} />
-                <Route path="/Habitats" element={<HabitatsPage hostURL={hostURL} />} />
+                <Route path="/Parks" element={<ParksPage hostURL={hostURL} deleteButtonSound={deleteButtonSound}/>} />
+                <Route path="/Facilities" element={<FacilitiesPage hostURL={hostURL} deleteButtonSound={deleteButtonSound}/>} />
+                <Route path="/FacilityTypes" element={<FacilityTypesPage hostURL={hostURL} deleteButtonSound={deleteButtonSound}/>} />
+                <Route path="/Employees" element={<EmployeesPage hostURL={hostURL} deleteButtonSound={deleteButtonSound}/>} />
+                <Route path="/JobClassifications" element={<JobClassificationsPage hostURL={hostURL} deleteButtonSound={deleteButtonSound}/>} />
+                <Route path="/TasksAssigned" element={<TasksAssignedPage hostURL={hostURL} deleteButtonSound={deleteButtonSound}/>} />
+                <Route path="/EmployeeTasks" element={<EmployeeTasksPage hostURL={hostURL} deleteButtonSound={deleteButtonSound}/>} />
+                <Route path="/TaskCategories" element={<TaskCategoriesPage hostURL={hostURL} deleteButtonSound={deleteButtonSound}/>} />
+                <Route path="/BiologicalAssets" element={<BiologicalAssetsPage hostURL={hostURL} deleteButtonSound={deleteButtonSound}/>} />
+                <Route path="/Species" element={<SpeciesPage hostURL={hostURL} deleteButtonSound={deleteButtonSound}/>} />
+                <Route path="/Diets" element={<DietsPage hostURL={hostURL} deleteButtonSound={deleteButtonSound}/>} />
+                <Route path="/Habitats" element={<HabitatsPage hostURL={hostURL} deleteButtonSound={deleteButtonSound}/>} />
                 
                 {/* Form Page Routes */}
-                <Route path="/BiologicalAssetsAdd" element={<BiologicalAssetsAddForm hostURL={hostURL} />} />
-                <Route path="/BiologicalAssetsUpdate" element={<BiologicalAssetsUpdateForm hostURL={hostURL} />} />
-                <Route path="/EmployeeTasksAdd" element={<EmployeeTasksAddForm hostURL={hostURL} />} />
-                <Route path="/EmployeeTasksUpdate" element={<EmployeeTasksUpdateForm hostURL={hostURL} />} />
-                <Route path="/EmployeesAdd" element={<EmployeesAddForm hostURL={hostURL} />} />
-                <Route path="/EmployeesUpdate" element={<EmployeesUpdateForm hostURL={hostURL} />} />
-                <Route path="/FacilitiesAdd" element={<FacilitiesAddForm hostURL={hostURL} />} />
-                <Route path="/FacilitiesUpdate" element={<FacilitiesUpdateForm hostURL={hostURL} />} />
-                <Route path="/FacilityTypesAdd" element={<FacilityTypesAddForm hostURL={hostURL} />} />
-                <Route path="/FacilityTypesUpdate" element={<FacilityTypesUpdateForm hostURL={hostURL} />} />
-                <Route path="/TasksAssignedAdd" element={<TasksAssignedAddForm hostURL={hostURL} />} />
-                <Route path="/TasksAssignedUpdate" element={<TasksAssignedUpdateForm hostURL={hostURL} />} />
-                <Route path="/TaskCategoriesAdd" element={<TaskCategoriesAddForm hostURL={hostURL} />} />
-                <Route path="/TaskCategoriesUpdate" element={<TaskCategoriesUpdateForm hostURL={hostURL} />} />
-                <Route path="/ParksAdd" element={<ParksAddForm hostURL={hostURL} />} />
-                <Route path="/ParksUpdate" element={<ParksUpdateForm hostURL={hostURL} />} />
-                <Route path="/JobClassificationsAdd" element={<JobClassificationsAddForm hostURL={hostURL} />} />
-                <Route path="/JobClassificationsUpdate" element={<JobClassificationsUpdateForm hostURL={hostURL} />} />
-                <Route path="/HabitatsAdd" element={<HabitatsAddForm hostURL={hostURL} />} />
-                <Route path="/HabitatsUpdate" element={<HabitatsUpdateForm hostURL={hostURL} />} />
-                <Route path="/DietsAdd" element={<DietsAddForm hostURL={hostURL} />} />
-                <Route path="/DietsUpdate" element={<DietsUpdateForm hostURL={hostURL} />} />
-                <Route path="/SpeciesAdd" element={<SpeciesAddForm hostURL={hostURL} />} />
-                <Route path="/SpeciesUpdate" element={<SpeciesUpdateForm hostURL={hostURL} />} />
+                <Route path="/BiologicalAssetsAdd" element={<BiologicalAssetsAddForm hostURL={hostURL} createButtonSound={createButtonSound}/>} />
+                <Route path="/BiologicalAssetsUpdate" element={<BiologicalAssetsUpdateForm hostURL={hostURL} updateButtonSound={updateButtonSound}/>} />
+                <Route path="/EmployeeTasksAdd" element={<EmployeeTasksAddForm hostURL={hostURL} createButtonSound={createButtonSound}/>} />
+                <Route path="/EmployeeTasksUpdate" element={<EmployeeTasksUpdateForm hostURL={hostURL} updateButtonSound={updateButtonSound}/>} />
+                <Route path="/EmployeesAdd" element={<EmployeesAddForm hostURL={hostURL} createButtonSound={createButtonSound}/>} />
+                <Route path="/EmployeesUpdate" element={<EmployeesUpdateForm hostURL={hostURL} updateButtonSound={updateButtonSound}/>} />
+                <Route path="/FacilitiesAdd" element={<FacilitiesAddForm hostURL={hostURL} createButtonSound={createButtonSound}/>} />
+                <Route path="/FacilitiesUpdate" element={<FacilitiesUpdateForm hostURL={hostURL} updateButtonSound={updateButtonSound}/>} />
+                <Route path="/FacilityTypesAdd" element={<FacilityTypesAddForm hostURL={hostURL} createButtonSound={createButtonSound}/>} />
+                <Route path="/FacilityTypesUpdate" element={<FacilityTypesUpdateForm hostURL={hostURL} updateButtonSound={updateButtonSound}/>} />
+                <Route path="/TasksAssignedAdd" element={<TasksAssignedAddForm hostURL={hostURL} createButtonSound={createButtonSound}/>} />
+                <Route path="/TasksAssignedUpdate" element={<TasksAssignedUpdateForm hostURL={hostURL} updateButtonSound={updateButtonSound}/>} />
+                <Route path="/TaskCategoriesAdd" element={<TaskCategoriesAddForm hostURL={hostURL} createButtonSound={createButtonSound}/>} />
+                <Route path="/TaskCategoriesUpdate" element={<TaskCategoriesUpdateForm hostURL={hostURL} updateButtonSound={updateButtonSound}/>} />
+                <Route path="/ParksAdd" element={<ParksAddForm hostURL={hostURL} createButtonSound={createButtonSound}/>} />
+                <Route path="/ParksUpdate" element={<ParksUpdateForm hostURL={hostURL} updateButtonSound={updateButtonSound}/>} />
+                <Route path="/JobClassificationsAdd" element={<JobClassificationsAddForm hostURL={hostURL} createButtonSound={createButtonSound}/>} />
+                <Route path="/JobClassificationsUpdate" element={<JobClassificationsUpdateForm hostURL={hostURL} updateButtonSound={updateButtonSound}/>} />
+                <Route path="/HabitatsAdd" element={<HabitatsAddForm hostURL={hostURL} createButtonSound={createButtonSound}/>} />
+                <Route path="/HabitatsUpdate" element={<HabitatsUpdateForm hostURL={hostURL} updateButtonSound={updateButtonSound}/>} />
+                <Route path="/DietsAdd" element={<DietsAddForm hostURL={hostURL} createButtonSound={createButtonSound}/>} />
+                <Route path="/DietsUpdate" element={<DietsUpdateForm hostURL={hostURL} updateButtonSound={updateButtonSound}/>} />
+                <Route path="/SpeciesAdd" element={<SpeciesAddForm hostURL={hostURL} createButtonSound={createButtonSound}/>} />
+                <Route path="/SpeciesUpdate" element={<SpeciesUpdateForm hostURL={hostURL} updateButtonSound={updateButtonSound}/>} />
 
             </Routes>
         </section>

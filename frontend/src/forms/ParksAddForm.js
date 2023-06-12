@@ -14,7 +14,7 @@ import ImageSelectorParks from "../components/imageSelectorParks";
 
 
 // HostURL Passed from App.js
-function ParksAddForm ({hostURL}) {
+function ParksAddForm ({hostURL, createButtonSound}) {
 
     // Park SQL Endpoint
     const createParksURL = hostURL + '/api/insertParks';
@@ -30,6 +30,7 @@ function ParksAddForm ({hostURL}) {
     const submit = async () => {
         try {
             if (parkName && parkDescription && parkLocation) {
+                createButtonSound.play();
                 await Axios.post(createParksURL, {
                     parkName: parkName,
                     parkDescription: parkDescription,
@@ -38,9 +39,9 @@ function ParksAddForm ({hostURL}) {
                 });
                 alert(`${parkName} has been added to the database!`);
                 navTo('/Parks');
-                } else {
-                    alert("Please fill out all required fields and try again.")
-                }
+            } else {
+                alert("Please fill out all required fields and try again.")
+            }
         } catch(error) {
             console.error('Error inserting Park.', error);
             alert('MYSQL Server Error: ' + error.response.data);

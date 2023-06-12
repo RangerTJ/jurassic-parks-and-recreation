@@ -13,7 +13,7 @@ import Axios from 'axios';
 
 
 // HostURL Passed from App.js
-function TaskCategoriesUpdateForm ({hostURL}) {
+function TaskCategoriesUpdateForm ({hostURL, updateButtonSound}) {
 
     // Follows reference strategy to read state object, as suggested by stackoverflow user Abdulazeez Jimoh on 10/25/2022
     // URL: https://stackoverflow.com/questions/68911432/how-to-pass-parameters-with-react-router-dom-version-6-usenavigate-and-typescrip
@@ -37,15 +37,16 @@ function TaskCategoriesUpdateForm ({hostURL}) {
     const update = async () => {
         try {
             if (categoryName) {
+                updateButtonSound.play();
                 await Axios.put(updateTaskCategoriesURL, {
                     categoryName: categoryName,
                     idTaskCategory: id,
                 });
                 alert(`${categoryName}'s database record has been updated!`)
                 navTo('/TaskCategories');
-                } else {
-                    alert("Please fill out all required fields and try again.")
-                }
+            } else {
+                alert("Please fill out all required fields and try again.")
+            }
         } catch (error) {
             console.error('Error updating Category.', error);
             alert('MYSQL Server Error: ' + error.response.data);

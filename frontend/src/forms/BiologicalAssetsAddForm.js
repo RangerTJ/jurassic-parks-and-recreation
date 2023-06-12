@@ -14,7 +14,7 @@ import SelectorFacilities from "../components/selectorFacilities";
 
 
 // HostURL Passed from App.js
-function BiologicalAssetsAddForm ({hostURL}) {
+function BiologicalAssetsAddForm ({hostURL, createButtonSound}) {
 
     // BiologicalAssets SQL Endpoints
     const createBiologicalAssetsURL = hostURL + '/api/insertBiologicalAssets';
@@ -29,6 +29,7 @@ function BiologicalAssetsAddForm ({hostURL}) {
     const submit = async () => {
         try {
             if (speciesName && name && facilityName) {
+                createButtonSound.play();
                 await Axios.post(createBiologicalAssetsURL, {
                     speciesName: speciesName,
                     bioAssetName: name,
@@ -36,9 +37,9 @@ function BiologicalAssetsAddForm ({hostURL}) {
                 });
                 alert(`${name} has been added to the database!`);
                 navTo('/BiologicalAssets');
-                } else {
-                    alert("Please fill out all required fields and try again.")
-                }
+            } else {
+                alert("Please fill out all required fields and try again.")
+            }
         } catch(error) {
             console.error('Error inserting biological asset.', error);
             alert('MYSQL Server Error: ' + error.response.data);

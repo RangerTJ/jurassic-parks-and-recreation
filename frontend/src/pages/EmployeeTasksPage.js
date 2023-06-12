@@ -14,7 +14,7 @@ import SelectorEmployees from "../components/selectorEmployees";
 
 
 // HostURL Passed from App.js
-function EmployeeTasksPage ({hostURL}) {
+function EmployeeTasksPage ({hostURL, deleteButtonSound}) {
 
     // Navigation Function
     const navTo = useNavigate();
@@ -81,10 +81,13 @@ function EmployeeTasksPage ({hostURL}) {
     const delEmployeeTask = async (delID) => {
         try {
             if (window.confirm(`Are you sure you want to remove Task #${delID}?`)) {
+                deleteButtonSound.play();
                 await Axios.delete(deleteEmployeeTasksURL + delID);
+
                 const response = await Axios.get(getEmployeeTasksURL);
                 setEmployeeTaskList(response.data);
                 console.log(response.data);
+                
                 alert(`Employee Task #${delID} has been removed from the database.`);
             }
         }   catch (error) {
@@ -188,6 +191,10 @@ function EmployeeTasksPage ({hostURL}) {
                             const taskCost = val.empTaskCost ? val.empTaskCost.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) : '$0.00';
                             const startDateAbridged = val.empTaskStart ? val.empTaskStart.substring(0, 10) : 'Issue: NULL Start';
                             const endDateAbridged = val.empTaskEnd ? val.empTaskEnd.substring(0, 10) : 'Issue: NULL End';
+                            const nullableTaskName = val.taskName ? val.taskName : 'NULL'
+                            const nullableEmployee = val.contributingEmployee ? val.contributingEmployee : 'NULL'
+                            const nullableEmployeeUsername = val.employeeUsername ? val.employeeUsername : 'NULL'
+                            const nullableType = val.categoryName ? val.categoryName : 'NULL'
                             return (
                                 <tr key={index}>
                                     <td className="buttonHolder">
@@ -196,13 +203,13 @@ function EmployeeTasksPage ({hostURL}) {
                                     </td>
                                     <td className="tableDescription">
                                         <div><strong>Report #{val.idEmployeeTask}</strong></div>
-                                        <div>For '{val.taskName}'</div>
+                                        <div>For '{nullableTaskName}'</div>
                                     </td>
                                     <td>
-                                        <div>{val.contributingEmployee}</div>
-                                        <div></div>({val.employeeUsername})
+                                        <div>{nullableEmployee}</div>
+                                        <div>({nullableEmployeeUsername})</div>
                                     </td>
-                                    <td>{val.categoryName}</td>
+                                    <td>{nullableType}</td>
                                     <td>{val.taskHoursWorked}</td>
                                     <td className="tableDescription">{taskCost}</td>
                                     <td className="tableDescription">

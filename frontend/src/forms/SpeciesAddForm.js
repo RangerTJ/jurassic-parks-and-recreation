@@ -16,7 +16,7 @@ import SelectorHabitats from "../components/selectorHabitats";
 
 
 // HostURL Passed from App.js
-function SpeciesAddForm ({hostURL}) {
+function SpeciesAddForm ({hostURL, createButtonSound}) {
 
     // Species SQL Endpoints
     const createSpeciesURL = hostURL + '/api/insertSpecies';
@@ -34,6 +34,7 @@ function SpeciesAddForm ({hostURL}) {
     const submit = async () => {
         try {
             if (dietName && habitatName && speciesName && speciesDescription && threatLevel) {
+                createButtonSound.play();
                 await Axios.post(createSpeciesURL, {
                     dietName: dietName,
                     habitatName: habitatName,
@@ -44,8 +45,7 @@ function SpeciesAddForm ({hostURL}) {
                 });
                 alert(`${speciesName} has been added to the database!`);
                 navTo('/Species');
-            }
-            else {
+            } else {
                 alert("Please fill out all required fields and try again.")
             }
         }
@@ -80,29 +80,27 @@ function SpeciesAddForm ({hostURL}) {
                                 }/>
                         </div>
                         <div className="selectorP">
-                                <div><label htmlFor="speciesDescription">Description</label></div>
-                                <textarea
-                                
-                                    id ="speciesDescription"
-                                    name="speciesDescription"
-                                    cols="40" rows="5" 
-                                    min="5" max="255"
-                                    placeholder="Ex. A large carnivorous dinosaur with powerful jaws and sharp teeth."
-                                    onChange={(e) => {setSpeciesDescription(e.target.value)}
-                                    }/>
+                            <div><label htmlFor="speciesDescription">Description</label></div>
+                            <textarea
+                                id ="speciesDescription"
+                                name="speciesDescription"
+                                cols="40" rows="5" 
+                                min="5" max="255"
+                                placeholder="Ex. A large carnivorous dinosaur with powerful jaws and sharp teeth."
+                                required
+                                onChange={(e) => {setSpeciesDescription(e.target.value)}
+                                }/>
                         </div>
                         <div className="selectorP">
                             <SelectorDietTypes  hostURL={hostURL} dietName={dietName} setDietName={setDietName} isRequired={true} autoFocus={false}/>
                         </div>
                         <div className="selectorP">
-                            <SelectorHabitats  hostURL={hostURL} habitatName={habitatName} setHabitatName={setHabitatName} isRequired={false} autoFocus={false}/>
-                            <div>(Enclosures Only)</div>
+                            <SelectorHabitats  hostURL={hostURL} habitatName={habitatName} setHabitatName={setHabitatName} isRequired={true} autoFocus={false}/>
                         </div>
                         <div className="selectorP">
                             <div><label htmlFor="threatLevel">Threat Level</label></div>
                             <select name="threatLevel" id="threatLevel" onChange={(e) => {setThreatLevel(e.target.value)}} required>
                                 <option value="" hidden>Select Threat Level</option>
-                                <option value="0">0</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>

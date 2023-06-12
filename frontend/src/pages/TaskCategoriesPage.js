@@ -12,7 +12,7 @@ import Axios from 'axios';
 
 
 // HostURL Passed from App.js
-function TaskCategoryPage({hostURL}) {
+function TaskCategoryPage({hostURL, deleteButtonSound}) {
 
     // Navigation Function
     const navTo = useNavigate();
@@ -33,17 +33,18 @@ function TaskCategoryPage({hostURL}) {
     const delTaskCategories = async (delVal) => {
         try {
             if (window.confirm(`Are you sure you want to delete ${delVal.categoryName}?`)) {
+                deleteButtonSound.play();
                 await Axios.delete(deleteTaskCategoriesURL + delVal.idTaskCategory);
                 
                 const mainViewResponse = await Axios.get(getTaskCategoriesURL);
                 setTaskCategoriesList(mainViewResponse.data);
                 console.log(mainViewResponse.data);
-        
+                                
                 alert(`${delVal.categoryName} has been removed from the database.`);
-            }} catch (error) {
-                console.error('Error deleting Category.', error);
-                alert('MYSQL Server Error: ' + error.response.data);
-            }
+        }} catch (error) {
+            console.error('Error deleting Category.', error);
+            alert('MYSQL Server Error: ' + error.response.data);
+        }
     };
 
     // Get table info

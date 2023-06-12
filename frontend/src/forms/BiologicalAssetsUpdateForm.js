@@ -15,7 +15,7 @@ import SelectorFacilities from "../components/selectorFacilities";
 
 
 // HostURL Passed from App.js
-function BiologicalAssetsUpdateForm ({hostURL}) {
+function BiologicalAssetsUpdateForm ({hostURL, updateButtonSound}) {
 
     // Follows reference strategy to read state object, as suggested by stackoverflow user Abdulazeez Jimoh on 10/25/2022
     // URL: https://stackoverflow.com/questions/68911432/how-to-pass-parameters-with-react-router-dom-version-6-usenavigate-and-typescrip
@@ -43,6 +43,7 @@ function BiologicalAssetsUpdateForm ({hostURL}) {
     const update = async () => {
         try {
             if (speciesName && name && facilityName) {
+                updateButtonSound.play();
                 await Axios.put(updateBiologicalAssetsURL, {
                     speciesName: speciesName,
                     bioAssetName: name,
@@ -51,9 +52,9 @@ function BiologicalAssetsUpdateForm ({hostURL}) {
                 });
                 alert(`${name}'s database entry has been updated!`)
                 navTo('/BiologicalAssets');
-                } else {
-                    alert("Please fill out all required fields and try again.")
-                }
+            } else {
+                alert("Please fill out all required fields and try again.")
+            }
         } catch (error) {
             console.error('Error updating biological asset.', error);
             alert('MYSQL Server Error: ' + error.response.data);

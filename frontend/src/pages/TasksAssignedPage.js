@@ -8,11 +8,10 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom'; // May not need?
 import Axios from 'axios';
-import SelectorFacilities from "../components/selectorFacilities";
 
 
 // HostURL Passed from App.js
-function TasksAssignedPage ({hostURL}) {
+function TasksAssignedPage ({hostURL, deleteButtonSound}) {
 
     // Navigation Function
     const navTo = useNavigate();
@@ -100,16 +99,15 @@ function TasksAssignedPage ({hostURL}) {
     const delTaskAssigned = async (delVal) => {
         try {
             if (window.confirm(`Are you sure you want to remove ${delVal.taskName}?`)) {
-                
+                deleteButtonSound.play();
                 await Axios.delete(deleteTasksAssignedURL + delVal.idTaskAssigned)
 
                 const mainViewResponse = await Axios.get(getTasksAssignedURL);
                 setTasksAssignedList(mainViewResponse.data);
                 console.log(mainViewResponse.data);
-
+                
                 alert(`${delVal.taskName} has been removed from the database.`)
-            }}
-        catch (error) {
+        }} catch (error) {
             console.error('Error deleting Task.', error);
             alert('MYSQL Server Error: ' + error.response.data);
         }
