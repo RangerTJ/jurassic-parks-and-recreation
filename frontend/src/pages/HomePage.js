@@ -132,10 +132,11 @@ function HomePage({hostURL}) {
                                 // Convert cost to USD or set to 0 USD if there is a null entry
                                 const usdCategoryCost = val.taskTypeCost ? val.taskTypeCost.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) : '$0.00';
                                 const rank = index + 1
+                                const nullableCategory = val.categoryName ? val.categoryName : 'NULL'
                                 return (
                                     <tr key={index}>
                                         <td>{rank}</td>
-                                        <td className="st-left">{val.categoryName}</td>
+                                        <td className="st-left">{nullableCategory}</td>
                                         <td className="st-left">{usdCategoryCost}</td>
                                     </tr>
                                 )
@@ -184,10 +185,11 @@ function HomePage({hostURL}) {
                                 // Convert cost to USD or set to 0 USD if there is a null entry
                                 const usdEmployeeCost = val.employeeCost ? val.employeeCost.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) : '$0.00';
                                 const rank = index + 1
+                                const nullableEmployee = val.employeeUsername ? `${val.lastName}, ${val.firstName}` : 'NULL'
                                 return (
                                     <tr key={index}>
                                         <td>{rank}</td>
-                                        <td className="st-left">{val.lastName}, {val.firstName}</td>
+                                        <td className="st-left">{nullableEmployee}</td>
                                         <td className="st-left">{usdEmployeeCost}</td>
                                     </tr>
                                 )
@@ -210,10 +212,11 @@ function HomePage({hostURL}) {
                                 // Convert cost to USD or set to 0 USD if there is a null entry
                                 const usdTaskCost = val.taskCost ? val.taskCost.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) : '$0.00';
                                 const rank = index + 1
+                                const nullableTaskName = val.taskName ? val.taskName : 'NULL'
                                 return (
                                     <tr key={index}>
                                         <td>{rank}</td>
-                                        <td className="st-left">{val.taskName}</td>
+                                        <td className="st-left">{nullableTaskName}</td>
                                         <td className="st-left">{usdTaskCost}</td>
                                     </tr>
                                 )
@@ -237,11 +240,15 @@ function HomePage({hostURL}) {
                                 // Convert cost to USD or set to 0 USD if there is a null entry
                                 const usdFacilityCost = val.facilityCost ? val.facilityCost.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) : '$0.00';
                                 const rank = index + 1
+
+                                // While Park and Facility are not *directly* nullable, their values cannot be referenced if the task associated with them is deleted.
+                                const nullableFacility = val.facilityName ? val.facilityName : 'NULL'
+                                const nullablePark = val.parkName ? val.parkName : 'NULL'
                                 return (
                                     <tr key={index}>
                                         <td>{rank}</td>
-                                        <td className="st-left">{val.facilityName}</td>
-                                        <td className="st-left">{val.parkName}</td>
+                                        <td className="st-left">{nullableFacility}</td>
+                                        <td className="st-left">{nullablePark}</td>
                                         <td className="st-left">{usdFacilityCost}</td>
                                     </tr>
                                 )
