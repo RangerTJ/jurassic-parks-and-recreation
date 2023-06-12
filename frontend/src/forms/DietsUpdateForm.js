@@ -16,6 +16,15 @@ import ImageSelectorDiets from "../components/imageSelectorDiets";
 // HostURL Passed from App.js
 function DietsUpdateForm ({hostURL, updateButtonSound}) {
 
+    // Safe Update Sound (error handling to prevent SFX fail from messing up CRUD operation)
+    const updateSound = () => {
+        try {
+            updateButtonSound.play();
+        } catch (error) {
+            console.error("SFX Error")
+        }
+    }
+
     // Follows reference strategy to read state object, as suggested by stackoverflow user Abdulazeez Jimoh on 10/25/2022
     // URL: https://stackoverflow.com/questions/68911432/how-to-pass-parameters-with-react-router-dom-version-6-usenavigate-and-typescrip
     // Link Accessed/Verified on 6/1/2023
@@ -42,7 +51,7 @@ function DietsUpdateForm ({hostURL, updateButtonSound}) {
     const update = async () => {
         try {
             if (dietName && dietDescription) {
-                updateButtonSound.play();
+                updateSound();
                 await Axios.put(updateDietsURL, {
                     dietName: dietName,
                     dietDescription: dietDescription,

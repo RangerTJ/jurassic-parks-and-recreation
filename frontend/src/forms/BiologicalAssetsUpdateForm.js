@@ -52,7 +52,7 @@ function BiologicalAssetsUpdateForm ({hostURL, updateButtonSound}) {
     const update = async () => {
         try {
             if (speciesName && name && facilityName) {
-                updateButtonSound.play();
+                updateSound();
                 await Axios.put(updateBiologicalAssetsURL, {
                     speciesName: speciesName,
                     bioAssetName: name,

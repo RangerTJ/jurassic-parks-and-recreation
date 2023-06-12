@@ -18,6 +18,15 @@ import SelectorTaskCategories from "../components/selectorTaskCategories";
 // HostURL Passed from App.js
 function EmployeeTasksUpdateForm ({hostURL, updateButtonSound}) {
 
+    // Safe Update Sound (error handling to prevent SFX fail from messing up CRUD operation)
+    const updateSound = () => {
+        try {
+            updateButtonSound.play();
+        } catch (error) {
+            console.error("SFX Error")
+        }
+    }
+
     // Follows reference strategy to read state object, as suggested by stackoverflow user Abdulazeez Jimoh on 10/25/2022
     // URL: https://stackoverflow.com/questions/68911432/how-to-pass-parameters-with-react-router-dom-version-6-usenavigate-and-typescrip
     // Link Accessed/Verified on 6/1/2023
@@ -62,7 +71,7 @@ function EmployeeTasksUpdateForm ({hostURL, updateButtonSound}) {
             if (trueStart > trueEnd) {
                 alert("We don't yet use time machines to obtain our prehistoric assets! Fix the start/end dates.");
             } else if (taskName && employeeUsername && categoryName && taskHoursWorked && empTaskCost && empTaskStart && empTaskEnd) {
-                updateButtonSound.play();
+                updateSound();
                 await Axios.put(updateEmployeeTasksURL, {
                     taskName: taskName,
                     employeeUsername: employeeUsername,
