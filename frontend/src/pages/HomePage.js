@@ -116,7 +116,10 @@ function HomePage({hostURL}) {
                     are fewer than 10 related entities with EmployeeTasks relating to them, the tables will
                     have fewer than 10 elements displayed. Note, the tables are independent, so there's overlap in the cost reported between tables.
                     'Most Expensive Employees' refers to costs-affiliated the employee was involved in, not necessarily their overhead cost
-                    (since things like supplies, etc. are factored into the Employee Task Report's cost figure).
+                    (since things like supplies, etc. are factored into the Employee Task Report's cost figure). NULL entries reflect Employee Tasks
+                    that maintain a record of costs after the associated Employee or Task Assigned were deleted from the database (and thus connections
+                    to any values references by the Employee or Task Assigned as well). These can either be considered collectively as 'orphaned' elements,
+                    or the EmployeeTask can be re-assigned to a new employee or task if it is appropriate to do so.
                 </p>
                 <h4 className="st-header">Cost Summary by Sector</h4>
                 <div className="scrollableST">
@@ -159,10 +162,11 @@ function HomePage({hostURL}) {
                                 // Convert cost to USD or set to 0 USD if there is a null entry
                                 const usdParkCost = val.parkCost ? val.parkCost.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) : '$0.00';
                                 const rank = index + 1
+                                const nullablePark = val.parkName ? val.parkName : 'NULL'
                                 return (
                                     <tr key={index}>
                                         <td>{rank}</td>
-                                        <td className="st-left">{val.parkName}</td>
+                                        <td className="st-left">{nullablePark}</td>
                                         <td className="st-left">{usdParkCost}</td>
                                     </tr>
                                 )
@@ -274,13 +278,16 @@ function HomePage({hostURL}) {
                                 // Convert cost to USD or set to 0 USD if there is a null entry
                                 const usdBioAssetCost = val.assetCost ? val.assetCost.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) : '$0.00';
                                 const rank = index + 1
+                                const nullableAsset = val.bioAssetName ? val.bioAssetName : 'NULL'
+                                const nullableSpecies = val.speciesName ? val.speciesName : 'NULL'
+                                const nullablePark = val.parkName ? val.parkName : 'NULL'
                                 return (
                                     <tr key={index}>
                                         <td>{rank}</td>
-                                        <td className="st-left">{val.bioAssetName}</td>
-                                        <td className="st-left">{val.speciesName}</td>
-                                        <td className="st-left">{val.parkName}</td>
-                                        <td className="st-left">{usdBioAssetCost}</td>
+                                        <td className="st-left">{nullableAsset}</td>
+                                        <td className="st-left">{nullableSpecies}</td>
+                                        <td className="st-left">{nullablePark}</td>
+                                        <td className="st-left">{val.assetCost}</td>
                                     </tr>
                                 )
                             })}
