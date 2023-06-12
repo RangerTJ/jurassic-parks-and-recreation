@@ -29,12 +29,12 @@ function BiologicalAssetsAddForm ({hostURL, createButtonSound}) {
     const submit = async () => {
         try {
             if (speciesName && name && facilityName) {
+                createButtonSound.play();
                 await Axios.post(createBiologicalAssetsURL, {
                     speciesName: speciesName,
                     bioAssetName: name,
                     facilityName: facilityName,
                 });
-                createButtonSound.play();
                 alert(`${name} has been added to the database!`);
                 navTo('/BiologicalAssets');
                 } else {

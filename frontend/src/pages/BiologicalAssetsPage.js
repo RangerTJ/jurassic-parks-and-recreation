@@ -109,6 +109,7 @@ function BiologicalAssetsPage ({hostURL, deleteButtonSound}) {
     const delBiologicalAsset = async (delVal) => {
         try {
             if (window.confirm(`Are you sure you want to remove ${delVal.bioAssetName}?`)) {
+                deleteButtonSound.play();
                 await Axios.delete(deleteBiologicalAssetsURL + delVal.idBiologicalAsset);
                 
                 const mainViewResponse = await Axios.get(getBiologicalAssetsURL);
@@ -123,7 +124,6 @@ function BiologicalAssetsPage ({hostURL, deleteButtonSound}) {
                 setAssetSecMismatchList(securityMismatchResponse.data);
                 console.log(securityMismatchResponse.data);
 
-                deleteButtonSound.play();
                 alert(`${delVal.bioAssetName} has been removed from the database.`);
             }} catch (error) {
                 console.error('Error deleting biological asset.', error);

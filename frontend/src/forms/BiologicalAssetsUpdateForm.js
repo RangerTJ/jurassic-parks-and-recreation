@@ -43,18 +43,18 @@ function BiologicalAssetsUpdateForm ({hostURL, updateButtonSound}) {
     const update = async () => {
         try {
             if (speciesName && name && facilityName) {
+                updateButtonSound.play();
                 await Axios.put(updateBiologicalAssetsURL, {
                     speciesName: speciesName,
                     bioAssetName: name,
                     facilityName: facilityName,
                     idBiologicalAsset: id
                 });
-                updateButtonSound.play();
                 alert(`${name}'s database entry has been updated!`)
                 navTo('/BiologicalAssets');
-                } else {
-                    alert("Please fill out all required fields and try again.")
-                }
+            } else {
+                alert("Please fill out all required fields and try again.")
+            }
         } catch (error) {
             console.error('Error updating biological asset.', error);
             alert('MYSQL Server Error: ' + error.response.data);
