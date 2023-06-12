@@ -403,9 +403,9 @@ WHERE idSpecies = :idSpecies_input
 
 -- SELECT - Cost Analysis Report by Task Category
 SELECT  TaskCategories.categoryName, SUM(EmployeeTasks.empTaskCost) AS taskTypeCost
-FROM TaskCategories
+FROM EmployeeTasks
 -- Need to JOIN TaskCategories -> EmployeeTasks
-LEFT JOIN EmployeeTasks ON TaskCategories.idTaskCategory = EmployeeTasks.idTaskCategory
+LEFT JOIN TaskCategories ON EmployeeTasks.idTaskCategory = TaskCategories.idTaskCategory
 GROUP BY TaskCategories.categoryName
 ORDER BY TaskTypeCost DESC;
 
