@@ -18,7 +18,7 @@ function TasksAssignedPage ({hostURL, deleteButtonSound}) {
         try {
             deleteButtonSound.play();
         } catch (error) {
-            console.error("")
+            console.error("SFX Error")
         }
     }
 

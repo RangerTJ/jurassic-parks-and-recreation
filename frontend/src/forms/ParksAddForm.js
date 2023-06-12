@@ -16,6 +16,15 @@ import ImageSelectorParks from "../components/imageSelectorParks";
 // HostURL Passed from App.js
 function ParksAddForm ({hostURL, createButtonSound}) {
 
+    // Safe Create Sound (error handling to prevent SFX fail from messing up CRUD operation)
+    const createSound = () => {
+        try {
+            createButtonSound.play();
+        } catch (error) {
+            console.error("SFX Error")
+        }
+    }
+
     // Park SQL Endpoint
     const createParksURL = hostURL + '/api/insertParks';
     const navTo = useNavigate();
@@ -30,7 +39,7 @@ function ParksAddForm ({hostURL, createButtonSound}) {
     const submit = async () => {
         try {
             if (parkName && parkDescription && parkLocation) {
-                createButtonSound.play();
+                createSound();
                 await Axios.post(createParksURL, {
                     parkName: parkName,
                     parkDescription: parkDescription,

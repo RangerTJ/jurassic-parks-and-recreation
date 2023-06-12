@@ -19,6 +19,15 @@ import SelectorFacilityTypes from "../components/selectorFacilityTypes";
 // HostURL Passed from App.js
 function FacilitiesAddForm ({hostURL, createButtonSound}) {
 
+    // Safe Create Sound (error handling to prevent SFX fail from messing up CRUD operation)
+    const createSound = () => {
+        try {
+            createButtonSound.play();
+        } catch (error) {
+            console.error("SFX Error")
+        }
+    }
+
     // Facilities SQL Endpoints
     const createFacilitiesURL = hostURL + '/api/insertFacilities';
     const navTo = useNavigate();
@@ -38,7 +47,7 @@ function FacilitiesAddForm ({hostURL, createButtonSound}) {
     const submit = async () => {
         try {
             if (parkName && facTypeName && facilityLocation && securityRating && facilityDescription) {
-                createButtonSound.play();
+                createSound();
                 await Axios.post(createFacilitiesURL, {
                     parkName: parkName,
                     facilityName: facilityName,

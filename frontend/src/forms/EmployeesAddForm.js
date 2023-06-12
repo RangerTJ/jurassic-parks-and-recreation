@@ -17,6 +17,15 @@ import ImageSelectorStaff from "../components/imageSelectorStaff";
 // HostURL Passed from App.js
 function EmployeesAddForm ({hostURL, createButtonSound}) {
 
+    // Safe Create Sound (error handling to prevent SFX fail from messing up CRUD operation)
+    const createSound = () => {
+        try {
+            createButtonSound.play();
+        } catch (error) {
+            console.error("SFX Error")
+        }
+    }
+
     // Employees SQL Endpoints
     const createEmployeesURL = hostURL + '/api/insertEmployees';
     const navTo = useNavigate();
@@ -37,7 +46,7 @@ function EmployeesAddForm ({hostURL, createButtonSound}) {
     const submit = async () => {
         try {
             if (jobTitle && lastName && firstName && employeeUsername && hourlyWage && employeePhone && employeeEmail) {
-                createButtonSound.play();
+                createSound();
                 await Axios.post(createEmployeesURL, {
                     jobTitle: jobTitle,
                     lastName: lastName,

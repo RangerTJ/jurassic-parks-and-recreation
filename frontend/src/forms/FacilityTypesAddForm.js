@@ -15,6 +15,15 @@ import Axios from 'axios';
 // HostURL Passed from App.js
 function FacilityTypesAddForm ({hostURL, createButtonSound}) {
 
+    // Safe Create Sound (error handling to prevent SFX fail from messing up CRUD operation)
+    const createSound = () => {
+        try {
+            createButtonSound.play();
+        } catch (error) {
+            console.error("SFX Error")
+        }
+    }
+
     // Facility Type SQL Endpoint
     const createFacilityTypesURL = hostURL + '/api/insertFacilityTypes';
     const navTo = useNavigate();
@@ -27,7 +36,7 @@ function FacilityTypesAddForm ({hostURL, createButtonSound}) {
     const submit = async () => {
         try {
             if (facTypeName && facTypeDescription) {
-                createButtonSound.play();
+                createSound();
                 await Axios.post(createFacilityTypesURL, {
                     facTypeName: facTypeName,
                     facTypeDescription: facTypeDescription,

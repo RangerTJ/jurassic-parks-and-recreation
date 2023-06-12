@@ -18,6 +18,15 @@ import SelectorHabitats from "../components/selectorHabitats";
 // HostURL Passed from App.js
 function SpeciesAddForm ({hostURL, createButtonSound}) {
 
+    // Safe Create Sound (error handling to prevent SFX fail from messing up CRUD operation)
+    const createSound = () => {
+        try {
+            createButtonSound.play();
+        } catch (error) {
+            console.error("SFX Error")
+        }
+    }
+
     // Species SQL Endpoints
     const createSpeciesURL = hostURL + '/api/insertSpecies';
     const navTo = useNavigate();
@@ -34,7 +43,7 @@ function SpeciesAddForm ({hostURL, createButtonSound}) {
     const submit = async () => {
         try {
             if (dietName && habitatName && speciesName && speciesDescription && threatLevel) {
-                createButtonSound.play();
+                createSound();
                 await Axios.post(createSpeciesURL, {
                     dietName: dietName,
                     habitatName: habitatName,

@@ -16,6 +16,15 @@ import ImageSelectorDiets from '../components/imageSelectorDiets';
 // HostURL Passed from App.js
 function DietsAddForm ({hostURL, createButtonSound}) {
 
+    // Safe Create Sound (error handling to prevent SFX fail from messing up CRUD operation)
+    const createSound = () => {
+        try {
+            createButtonSound.play();
+        } catch (error) {
+            console.error("SFX Error")
+        }
+    }
+
     // Diets SQL Endpoint
     const createDietsURL = hostURL + '/api/insertDiets';
     const navTo = useNavigate();
@@ -29,7 +38,7 @@ function DietsAddForm ({hostURL, createButtonSound}) {
     const submit = async () => {
         try {
             if (dietName && dietDescription) {
-                createButtonSound.play();
+                createSound();
                 await Axios.post(createDietsURL, {
                     dietName: dietName,
                     dietDescription: dietDescription,
