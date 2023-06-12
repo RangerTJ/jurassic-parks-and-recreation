@@ -144,7 +144,7 @@ app.get('/api/getBioAssetCost', (req, res) =>{
     SELECT  BiologicalAssets.bioAssetName, Species.speciesName, Parks.parkName, SUM(EmployeeTasks.empTaskCost) AS assetCost
     FROM EmployeeTasks
     LEFT JOIN TasksAssigned ON EmployeeTasks.idTaskAssigned = TasksAssigned.idTaskAssigned
-    LEFT JOIN BiologicalAssets ON TasksAssigned.idBiologicalAsset = BiologicalAssets.idBiologicalAsset
+    JOIN BiologicalAssets ON TasksAssigned.idBiologicalAsset = BiologicalAssets.idBiologicalAsset
     LEFT JOIN Species ON BiologicalAssets.idSpecies = Species.idSpecies
     LEFT JOIN Facilities ON BiologicalAssets.idFacility = Facilities.idFacility
     LEFT JOIN Parks ON Facilities.idPark = Parks.idPark
