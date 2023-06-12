@@ -116,7 +116,10 @@ function HomePage({hostURL}) {
                     are fewer than 10 related entities with EmployeeTasks relating to them, the tables will
                     have fewer than 10 elements displayed. Note, the tables are independent, so there's overlap in the cost reported between tables.
                     'Most Expensive Employees' refers to costs-affiliated the employee was involved in, not necessarily their overhead cost
-                    (since things like supplies, etc. are factored into the Employee Task Report's cost figure). NULL entries reflect Employee Tasks
+                    (since things like supplies, etc. are factored into the Employee Task Report's cost figure).
+                </p>
+                <p>
+                    NULL entries reflect Employee Tasks
                     that maintain a record of costs after the associated Employee or Task Assigned were deleted from the database (and thus connections
                     to any values references by the Employee or Task Assigned as well). These can either be considered collectively as 'orphaned' elements,
                     or the EmployeeTask can be re-assigned to a new employee or task if it is appropriate to do so.
@@ -287,7 +290,7 @@ function HomePage({hostURL}) {
                                         <td className="st-left">{nullableAsset}</td>
                                         <td className="st-left">{nullableSpecies}</td>
                                         <td className="st-left">{nullablePark}</td>
-                                        <td className="st-left">{val.assetCost}</td>
+                                        <td className="st-left">{usdBioAssetCost}</td>
                                     </tr>
                                 )
                             })}
