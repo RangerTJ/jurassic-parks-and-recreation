@@ -276,7 +276,10 @@ function BiologicalAssetsPage ({hostURL, deleteButtonSound}) {
                                             <div><strong>{val.bioAssetName}</strong></div>
                                         </td>
                                         <td>{val.speciesName}</td>
-                                        <td>{val.facilityName}</td>
+                                        <td>
+                                            <div><strong>{val.facilityName}</strong></div>
+                                            <div>{val.parkName}</div>
+                                        </td>
                                         <td>{val.securityRating}</td>
                                         <td>{val.threatLevel}</td>
                                         <td>{val.severity}</td>
@@ -332,7 +335,10 @@ function BiologicalAssetsPage ({hostURL, deleteButtonSound}) {
                                             <div><strong>{val.bioAssetName}</strong></div>
                                         </td>
                                         <td>{val.speciesName}</td>
-                                        <td>{val.facilityName}</td>
+                                        <td>
+                                            <div><strong>{val.facilityName}</strong></div>
+                                            <div>{val.parkName}</div>
+                                        </td>
                                         <td className="tableDescription">
                                             <ul>
                                                 <li>Current: {filteredHab}</li>
@@ -398,7 +404,10 @@ function BiologicalAssetsPage ({hostURL, deleteButtonSound}) {
                                         <div><strong>{val.speciesName}</strong></div>
                                         <div>{val.dietName}</div>
                                     </td>
-                                    <td>{val.facilityName}</td>
+                                    <td>
+                                        <div><strong>{val.facilityName}</strong></div>
+                                        <div>{val.parkName}</div>
+                                    </td>
                                 </tr>
                             )}
                         )}

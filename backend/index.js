@@ -1074,10 +1074,11 @@ app.delete('/api/deleteFacilityTypes/:idFacilityType', (req, res) =>{
 // READ List All Assets
 app.get('/api/getBiologicalAssets', (req, res) =>{
     const sqlRead = `
-    SELECT BiologicalAssets.idBiologicalAsset, BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName, Species.threatLevel, Species.speciesPhoto, Diets.dietName  
+    SELECT BiologicalAssets.idBiologicalAsset, BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName, Species.threatLevel, Species.speciesPhoto, Diets.dietName, Parks.parkName
     FROM BiologicalAssets
     JOIN Species ON BiologicalAssets.idSpecies = Species.idSpecies
     JOIN Facilities ON BiologicalAssets.idFacility = Facilities.idFacility
+    JOIN Parks ON Facilities.idPark = Parks.idPark
     JOIN Diets ON Species.idDiet = Diets.idDiet
     ORDER BY idBiologicalAsset ASC;
     `;
@@ -1095,12 +1096,13 @@ app.get('/api/getBiologicalAssets', (req, res) =>{
 // READ Habitat Alert
 app.get('/api/checkBiologicalAssetsHabitats', (req, res) =>{
     const sqlRead = `
-    SELECT BiologicalAssets.idBiologicalAsset, BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName, currentHab.habitatName AS currentHabitat, speciesHab.habitatName AS needsHabitat, Species.speciesPhoto
+    SELECT BiologicalAssets.idBiologicalAsset, BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName, currentHab.habitatName AS currentHabitat, speciesHab.habitatName AS needsHabitat, Species.speciesPhoto, Parks.parkName
     FROM BiologicalAssets
     JOIN Species ON BiologicalAssets.idSpecies = Species.idSpecies
     JOIN Facilities ON BiologicalAssets.idFacility = Facilities.idFacility
     LEFT JOIN Habitats currentHab ON Facilities.idHabitat = currentHab.idHabitat
     JOIN Habitats speciesHab ON Species.idHabitat = speciesHab.idHabitat
+    JOIN Parks on Facilities.idPark = Parks.idPark
     WHERE Species.idHabitat != Facilities.idHabitat OR Facilities.idHabitat IS NULL
     ORDER BY facilityName, speciesName, bioAssetName;
     `;
@@ -1118,10 +1120,11 @@ app.get('/api/checkBiologicalAssetsHabitats', (req, res) =>{
 // READ Security Alert
 app.get('/api/checkBiologicalAssetsSecurity', (req, res) =>{
     const sqlRead = `
-    SELECT BiologicalAssets.idBiologicalAsset, BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName, Facilities.securityRating, Species.threatLevel, Species.threatLevel - Facilities.securityRating AS severity, Species.speciesPhoto
+    SELECT BiologicalAssets.idBiologicalAsset, BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName, Facilities.securityRating, Species.threatLevel, Species.threatLevel - Facilities.securityRating AS severity, Species.speciesPhoto, Parks.parkName
     FROM BiologicalAssets
     JOIN Species on BiologicalAssets.idSpecies = Species.idSpecies
     JOIN Facilities on BiologicalAssets.idFacility = Facilities.idFacility
+    JOIN Parks on Facilities.idPark = Parks.idPark
     WHERE Facilities.securityRating < Species.threatLevel
     ORDER BY severity, Facilities.facilityName, BiologicalAssets.bioAssetName;
     `;
@@ -1188,11 +1191,12 @@ app.put('/api/updateBiologicalAssets', (req, res) =>{
 app.post('/api/filterBioAssetsBySpecies', (req, res) =>{
     const speciesName = req.body.speciesName
     const sqlRead = `
-    SELECT BiologicalAssets.idBiologicalAsset, BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName, Species.speciesPhoto, Diets.dietName
+    SELECT BiologicalAssets.idBiologicalAsset, BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName, Species.speciesPhoto, Diets.dietName, Parks.parkName
     FROM BiologicalAssets
     JOIN Species ON BiologicalAssets.idSpecies = Species.idSpecies
     JOIN Diets ON Species.idDiet = Diets.idDiet
     JOIN Facilities ON BiologicalAssets.idFacility = Facilities.idFacility
+    JOIN Parks ON Facilities.idPark = Parks.idPark
     WHERE Species.speciesName = ?
     ORDER BY idBiologicalAsset ASC;
     `;
@@ -1211,11 +1215,12 @@ app.post('/api/filterBioAssetsBySpecies', (req, res) =>{
 app.post('/api/filterBioAssetsByFacility', (req, res) =>{
     const facilityName = req.body.facilityName
     const sqlRead = `
-    SELECT BiologicalAssets.idBiologicalAsset, BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName, Species.speciesPhoto, Diets.dietName
+    SELECT BiologicalAssets.idBiologicalAsset, BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName, Species.speciesPhoto, Diets.dietName, Parks.parkName
     FROM BiologicalAssets
     JOIN Species ON BiologicalAssets.idSpecies = Species.idSpecies
     JOIN Diets ON Species.idDiet = Diets.idDiet
     JOIN Facilities ON BiologicalAssets.idFacility = Facilities.idFacility
+    JOIN Parks ON Facilities.idPark = Parks.idPark
     WHERE Facilities.facilityName = ?
     ORDER BY idBiologicalAsset ASC;
     `;
@@ -1235,11 +1240,12 @@ app.post('/api/filterBioAssetsBySpeciesAndFacility', (req, res) =>{
     const speciesName = req.body.speciesName
     const facilityName = req.body.facilityName
     const sqlRead = `
-    SELECT BiologicalAssets.idBiologicalAsset, BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName, Species.speciesPhoto, Diets.dietName
+    SELECT BiologicalAssets.idBiologicalAsset, BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName, Species.speciesPhoto, Diets.dietName, Parks.parkName
     FROM BiologicalAssets
     JOIN Species ON BiologicalAssets.idSpecies = Species.idSpecies
     JOIN Diets ON Species.idDiet = Diets.idDiet
     JOIN Facilities ON BiologicalAssets.idFacility = Facilities.idFacility
+    JOIN Parks ON Facilities.idPark = Parks.idPark
     WHERE Species.speciesName = ? AND Facilities.facilityName = ?
     ORDER BY idBiologicalAsset ASC;
     `;

@@ -419,31 +419,32 @@ GROUP BY Parks.parkName
 ORDER BY ParkCost DESC;
 
 -- SELECT biological assets in a non-ideal habitat (for use in summary report to quickly flag down inappropriate assignments)
-SELECT BiologicalAssets.idBiologicalAsset, BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName, currentHab.habitatName AS currentHabitat, speciesHab.habitatName AS needsHabitat, Species.speciesPhoto
+SELECT BiologicalAssets.idBiologicalAsset, BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName, currentHab.habitatName AS currentHabitat, speciesHab.habitatName AS needsHabitat, Species.speciesPhoto, Parks.parkName
 FROM BiologicalAssets
--- Need to JOIN BioAssets -> Species -> Facilities
 JOIN Species ON BiologicalAssets.idSpecies = Species.idSpecies
 JOIN Facilities ON BiologicalAssets.idFacility = Facilities.idFacility
 LEFT JOIN Habitats currentHab ON Facilities.idHabitat = currentHab.idHabitat
 JOIN Habitats speciesHab ON Species.idHabitat = speciesHab.idHabitat
+JOIN Parks on Facilities.idPark = Parks.idPark
 WHERE Species.idHabitat != Facilities.idHabitat OR Facilities.idHabitat IS NULL
 ORDER BY facilityName, speciesName, bioAssetName;
 
 -- SELECT biological assets that are not adequately secured (and indicates how bad it is with a severity rating from 1-9)
-SELECT BiologicalAssets.idBiologicalAsset, BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName, Facilities.securityRating, Species.threatLevel, Species.threatLevel - Facilities.securityRating AS severity, Species.speciesPhoto
+SELECT BiologicalAssets.idBiologicalAsset, BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName, Facilities.securityRating, Species.threatLevel, Species.threatLevel - Facilities.securityRating AS severity, Species.speciesPhoto, Parks.parkName
 FROM BiologicalAssets
--- Need to JOIN BioAssets -> Species -> Facilities
 JOIN Species on BiologicalAssets.idSpecies = Species.idSpecies
 JOIN Facilities on BiologicalAssets.idFacility = Facilities.idFacility
+JOIN Parks on Facilities.idPark = Parks.idPark
 WHERE Facilities.securityRating < Species.threatLevel
-ORDER BY severity, facilities.facilityName, BiologicalAssets.bioAssetName;
+ORDER BY severity, Facilities.facilityName, BiologicalAssets.bioAssetName;
 
 -- FILTER BiologicalAssets by Species
-SELECT BiologicalAssets.idBiologicalAsset, BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName, Species.speciesPhoto
+SELECT BiologicalAssets.idBiologicalAsset, BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName, Species.speciesPhoto, Diets.dietName, Parks.parkName
 FROM BiologicalAssets
--- Need to join Species -> BiologicalAssets -> Facilities
 JOIN Species ON BiologicalAssets.idSpecies = Species.idSpecies
+JOIN Diets ON Species.idDiet = Diets.idDiet
 JOIN Facilities ON BiologicalAssets.idFacility = Facilities.idFacility
+JOIN Parks ON Facilities.idPark = Parks.idPark
 WHERE Species.speciesName = :speciesName_input
 ORDER BY idBiologicalAsset ASC;
 
@@ -645,20 +646,23 @@ WHERE Habitats.habitatName = :habitatName_input AND Diets.dietName = :dietName_i
 ORDER BY idSpecies ASC;
 
 -- FILTER Biological Assets by Facility (SELECT)
-SELECT BiologicalAssets.idBiologicalAsset, BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName
-FROM BiologicalAssets
-LEFT JOIN Species ON BiologicalAssets.idSpecies = Species.idSpecies
-LEFT JOIN Facilities ON BiologicalAssets.idFacility = Facilities.idFacility
-WHERE Facilities.facilityName = :facilityName_input AND Facilities.idHabitat IS NULL
-ORDER BY idBiologicalAsset ASC;
-
--- FILTER Biological Asset by Species AND Facility
-SELECT BiologicalAssets.idBiologicalAsset, BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName, Species.speciesPhoto, Diets.dietName
+SELECT BiologicalAssets.idBiologicalAsset, BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName, Species.speciesPhoto, Diets.dietName, Parks.parkName
 FROM BiologicalAssets
 JOIN Species ON BiologicalAssets.idSpecies = Species.idSpecies
 JOIN Diets ON Species.idDiet = Diets.idDiet
 JOIN Facilities ON BiologicalAssets.idFacility = Facilities.idFacility
-WHERE Species.speciesName = ? AND Facilities.facilityName = ?
+JOIN Parks ON Facilities.idPark = Parks.idPark
+WHERE Facilities.facilityName = :facilityName_input
+ORDER BY idBiologicalAsset ASC;
+
+-- FILTER Biological Asset by Species AND Facility
+SELECT BiologicalAssets.idBiologicalAsset, BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName, Species.speciesPhoto, Diets.dietName, Parks.parkName
+FROM BiologicalAssets
+JOIN Species ON BiologicalAssets.idSpecies = Species.idSpecies
+JOIN Diets ON Species.idDiet = Diets.idDiet
+JOIN Facilities ON BiologicalAssets.idFacility = Facilities.idFacility
+JOIN Parks ON Facilities.idPark = Parks.idPark
+WHERE Species.speciesName = :speciesName_input AND Facilities.facilityName = :facilityName_input
 ORDER BY idBiologicalAsset ASC;
 
 -- (Optional) POPULATE SELECT MENU FOR FACILITIES WITH ENCLOSURES (Habitats) - Designed to work with the above (Optional)
