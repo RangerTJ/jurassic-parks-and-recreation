@@ -16,6 +16,15 @@ import SelectorJobClassifications from "../components/selectorJobClassifications
 // HostURL Passed from App.js
 function EmployeesPage ({hostURL, deleteButtonSound}) {
 
+    // Safe Delete Sound (error handling to prevent SFX fail from messing up CRUD operation)
+    const delSound = () => {
+        try {
+            deleteButtonSound.play();
+        } catch (error) {
+            console.error("SFX Error")
+        }
+    }
+
     // Navigation Function
     const navTo = useNavigate();
 
@@ -78,7 +87,7 @@ function EmployeesPage ({hostURL, deleteButtonSound}) {
     const delEmployee = async (delVal) => {
         try {
             if (window.confirm(`Are you sure you want to remove ${delVal.firstName} ${delVal.lastName}?`)) {
-                deleteButtonSound.play();
+                delSound();
                 await Axios.delete(deleteEmployeesURL + delVal.idEmployee);
                 
                 const mainViewResponse = await Axios.get(getEmployeesURL);

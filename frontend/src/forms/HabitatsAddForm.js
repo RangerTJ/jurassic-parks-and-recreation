@@ -16,6 +16,15 @@ import ImageSelectorHabitats from "../components/imageSelectorHabitats";
 // HostURL Passed from App.js
 function HabitatsAddForm ({hostURL, createButtonSound}) {
 
+    // Safe Create Sound (error handling to prevent SFX fail from messing up CRUD operation)
+    const createSound = () => {
+        try {
+            createButtonSound.play();
+        } catch (error) {
+            console.error("SFX Error")
+        }
+    }
+
     // Habitats SQL Endpoints
     const createHabitatsURL = hostURL + '/api/insertHabitats';
     const navTo = useNavigate();
@@ -30,7 +39,7 @@ function HabitatsAddForm ({hostURL, createButtonSound}) {
     const submit = async () => {
         try {
             if (habitatName && habitatDescription) {
-                createButtonSound.play();
+                createSound();
                 await Axios.post(createHabitatsURL, {
                     habitatName: habitatName,
                     habitatDescription: habitatDescription,

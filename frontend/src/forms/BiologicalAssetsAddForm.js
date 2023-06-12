@@ -16,6 +16,15 @@ import SelectorFacilities from "../components/selectorFacilities";
 // HostURL Passed from App.js
 function BiologicalAssetsAddForm ({hostURL, createButtonSound}) {
 
+    // Safe Create Sound (error handling to prevent SFX fail from messing up CRUD operation)
+    const createSound = () => {
+        try {
+            createButtonSound.play();
+        } catch (error) {
+            console.error("SFX Error")
+        }
+    }
+
     // BiologicalAssets SQL Endpoints
     const createBiologicalAssetsURL = hostURL + '/api/insertBiologicalAssets';
     const navTo = useNavigate();
@@ -29,7 +38,7 @@ function BiologicalAssetsAddForm ({hostURL, createButtonSound}) {
     const submit = async () => {
         try {
             if (speciesName && name && facilityName) {
-                createButtonSound.play();
+                createSound();
                 await Axios.post(createBiologicalAssetsURL, {
                     speciesName: speciesName,
                     bioAssetName: name,

@@ -15,6 +15,15 @@ import Axios from 'axios';
 // HostURL Passed from App.js
 function TaskCategoriesAddForm ({hostURL, createButtonSound}) {
 
+    // Safe Create Sound (error handling to prevent SFX fail from messing up CRUD operation)
+    const createSound = () => {
+        try {
+            createButtonSound.play();
+        } catch (error) {
+            console.error("SFX Error")
+        }
+    }
+
     // Task Categories SQL Endpoint
     const createTaskCategoriesURL = hostURL + '/api/insertTaskCategories';
     const navTo = useNavigate();
@@ -26,7 +35,7 @@ function TaskCategoriesAddForm ({hostURL, createButtonSound}) {
     const submit = async () => {
         try {
             if (categoryName) {
-                createButtonSound.play();
+                createSound();
                 await Axios.post(createTaskCategoriesURL, {
                     categoryName: categoryName,
                 });

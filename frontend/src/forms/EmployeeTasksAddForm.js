@@ -18,6 +18,15 @@ import SelectorTaskCategories from "../components/selectorTaskCategories";
 // HostURL Passed from App.js
 function EmployeeTasksAddForm ({hostURL, createButtonSound}) {
 
+    // Safe Create Sound (error handling to prevent SFX fail from messing up CRUD operation)
+    const createSound = () => {
+        try {
+            createButtonSound.play();
+        } catch (error) {
+            console.error("SFX Error")
+        }
+    }
+
     // EmployeeTasks SQL Endpoints
     const createEmployeeTasksURL = hostURL + '/api/insertEmployeeTasks';
     const navTo = useNavigate();
@@ -41,7 +50,7 @@ function EmployeeTasksAddForm ({hostURL, createButtonSound}) {
             if (trueStart > trueEnd) {
                 alert("We don't yet use time machines to obtain our prehistoric assets! Fix the start/end dates.");
             } else if (taskName && employeeUsername && categoryName && taskHoursWorked && empTaskCost && empTaskStart && empTaskEnd) {
-                createButtonSound.play();
+                createSound();
                 await Axios.post(createEmployeeTasksURL, {
                     taskName: taskName,
                     employeeUsername: employeeUsername,

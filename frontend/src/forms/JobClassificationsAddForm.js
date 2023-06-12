@@ -15,6 +15,15 @@ import Axios from 'axios';
 // HostURL Passed from App.js
 function JobClassificationsAddForm ({hostURL, createButtonSound}) {
 
+    // Safe Create Sound (error handling to prevent SFX fail from messing up CRUD operation)
+    const createSound = () => {
+        try {
+            createButtonSound.play();
+        } catch (error) {
+            console.error("SFX Error")
+        }
+    }
+
     // Job Classification SQL Endpoint
     const createJobClassificationsURL = hostURL + '/api/insertJobClassifications';
     const navTo = useNavigate();
@@ -27,7 +36,7 @@ function JobClassificationsAddForm ({hostURL, createButtonSound}) {
     const submit = async () => {
         try {
             if (jobTitle && jobDescription) {
-                createButtonSound.play();
+                createSound();
                 await Axios.post(createJobClassificationsURL, {
                     jobTitle: jobTitle,
                     jobDescription: jobDescription,

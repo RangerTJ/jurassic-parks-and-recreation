@@ -17,6 +17,15 @@ import SelectorBiologicalAssets from '../components/selectorBiologicalAssets';
 // HostURL Passed from App.js
 function TasksAssignedAddForm ({hostURL, createButtonSound}) {
 
+    // Safe Create Sound (error handling to prevent SFX fail from messing up CRUD operation)
+    const createSound = () => {
+        try {
+            createButtonSound.play();
+        } catch (error) {
+            console.error("SFX Error")
+        }
+    }
+
     // TasksAssigned SQL Endpoints
     const createTasksAssignedURL = hostURL + '/api/insertTasksAssigned';
     const navTo = useNavigate();
@@ -40,7 +49,7 @@ function TasksAssignedAddForm ({hostURL, createButtonSound}) {
             if (trueStart > trueEnd) {
                 alert("We don't yet use time machines to obtain our prehistoric assets! Fix the start/end dates.");
             } else if  (facilityName && taskName && taskDescription && taskStart) {
-                createButtonSound.play();
+                createSound();
                 let finalTaskEnd = taskEnd === '' ? null : taskEnd;
                 Axios.post(createTasksAssignedURL, {
                     facilityName: facilityName,

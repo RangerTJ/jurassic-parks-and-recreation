@@ -22,6 +22,15 @@ import SelectorFacilities from "../components/selectorFacilities";
 // HostURL Passed from App.js
 function BiologicalAssetsPage ({hostURL, deleteButtonSound}) {
 
+    // Safe Delete Sound (error handling to prevent SFX fail from messing up CRUD operation)
+    const delSound = () => {
+        try {
+            deleteButtonSound.play();
+        } catch (error) {
+            console.error("SFX Error")
+        }
+    }
+
     // Navigation Function
     const navTo = useNavigate();
 
@@ -109,7 +118,7 @@ function BiologicalAssetsPage ({hostURL, deleteButtonSound}) {
     const delBiologicalAsset = async (delVal) => {
         try {
             if (window.confirm(`Are you sure you want to remove ${delVal.bioAssetName}?`)) {
-                deleteButtonSound.play();
+                delSound()
                 await Axios.delete(deleteBiologicalAssetsURL + delVal.idBiologicalAsset);
                 
                 const mainViewResponse = await Axios.get(getBiologicalAssetsURL);
