@@ -60,8 +60,8 @@ app.get('/api/getParkCost', (req, res) =>{
 app.get('/api/getCategoryCost', (req, res) =>{
     const sqlRead = `
     SELECT  TaskCategories.categoryName, SUM(EmployeeTasks.empTaskCost) AS taskTypeCost
-    FROM TaskCategories
-    LEFT JOIN EmployeeTasks ON TaskCategories.idTaskCategory = EmployeeTasks.idTaskCategory
+    FROM EmployeeTasks
+    LEFT JOIN TaskCategories ON EmployeeTasks.idTaskCategory = TaskCategories.idTaskCategory
     GROUP BY TaskCategories.categoryName
     ORDER BY TaskTypeCost DESC;
     `;
