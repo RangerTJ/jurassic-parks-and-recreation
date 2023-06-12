@@ -419,24 +419,24 @@ GROUP BY Parks.parkName
 ORDER BY ParkCost DESC;
 
 -- SELECT biological assets in a non-ideal habitat (for use in summary report to quickly flag down inappropriate assignments)
-SELECT BiologicalAssets.idBiologicalAsset, BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName, currentHab.habitatName AS currentHabitat, speciesHab.habitatName AS needsHabitat, Species.speciesPhoto
+SELECT BiologicalAssets.idBiologicalAsset, BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName, currentHab.habitatName AS currentHabitat, speciesHab.habitatName AS needsHabitat, Species.speciesPhoto, Parks.parkName
 FROM BiologicalAssets
--- Need to JOIN BioAssets -> Species -> Facilities
 JOIN Species ON BiologicalAssets.idSpecies = Species.idSpecies
 JOIN Facilities ON BiologicalAssets.idFacility = Facilities.idFacility
 LEFT JOIN Habitats currentHab ON Facilities.idHabitat = currentHab.idHabitat
 JOIN Habitats speciesHab ON Species.idHabitat = speciesHab.idHabitat
+JOIN Parks on Facilities.idPark = Parks.idPark
 WHERE Species.idHabitat != Facilities.idHabitat OR Facilities.idHabitat IS NULL
 ORDER BY facilityName, speciesName, bioAssetName;
 
 -- SELECT biological assets that are not adequately secured (and indicates how bad it is with a severity rating from 1-9)
-SELECT BiologicalAssets.idBiologicalAsset, BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName, Facilities.securityRating, Species.threatLevel, Species.threatLevel - Facilities.securityRating AS severity, Species.speciesPhoto
+SELECT BiologicalAssets.idBiologicalAsset, BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName, Facilities.securityRating, Species.threatLevel, Species.threatLevel - Facilities.securityRating AS severity, Species.speciesPhoto, Parks.parkName
 FROM BiologicalAssets
--- Need to JOIN BioAssets -> Species -> Facilities
 JOIN Species on BiologicalAssets.idSpecies = Species.idSpecies
 JOIN Facilities on BiologicalAssets.idFacility = Facilities.idFacility
+JOIN Parks on Facilities.idPark = Parks.idPark
 WHERE Facilities.securityRating < Species.threatLevel
-ORDER BY severity, facilities.facilityName, BiologicalAssets.bioAssetName;
+ORDER BY severity, Facilities.facilityName, BiologicalAssets.bioAssetName;
 
 -- FILTER BiologicalAssets by Species
 SELECT BiologicalAssets.idBiologicalAsset, BiologicalAssets.bioAssetName, Species.speciesName, Facilities.facilityName, Species.speciesPhoto
