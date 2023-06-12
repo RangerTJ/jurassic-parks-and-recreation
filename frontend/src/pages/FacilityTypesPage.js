@@ -33,18 +33,18 @@ function FacilityTypesPage ({hostURL, deleteButtonSound}) {
     const delFacilityTypes = async (delVal) => {
         try {
             if (window.confirm(`Are you sure you want to remove ${delVal.facTypeName}?`)) {
+                deleteButtonSound.play();
                 await Axios.delete(deleteFacilityTypesURL + delVal.idFacilityType);
                 
                 const mainViewResponse = await Axios.get(getFacilityTypesURL);
                 setFacilityTypesList(mainViewResponse.data);
                 console.log(mainViewResponse.data);
-                
-                deleteButtonSound.play();
+                                
                 alert(`${delVal.facTypeName} has been removed from the database.`);
-            }} catch (error) {
-                console.error('Error deleting Facility Type.', error);
-                alert('MYSQL Server Error: ' + error.response.data);
-            }
+        }} catch (error) {
+            console.error('Error deleting Facility Type.', error);
+            alert('MYSQL Server Error: ' + error.response.data);
+        }
     };
 
     // Populate Facility Types List

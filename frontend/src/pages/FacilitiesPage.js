@@ -102,17 +102,17 @@ function FacilitiesPage ({hostURL, deleteButtonSound}) {
     const delFacility = async (delVal) => {
         try {
             if (window.confirm(`Are you sure you want to remove ${delVal.facilityName}?`)) {
+                deleteButtonSound.play();
                 await Axios.delete(deleteFacilitiesURL + delVal.idFacility);
                 
                 const mainViewResponse = await Axios.get(getFacilitiesURL);
                 setFacilitiesList(mainViewResponse.data);
                 console.log(mainViewResponse.data);
-                
-                deleteButtonSound.play();
+                                
                 alert(`${delVal.facilityName} has been removed from the database.`);
-            }} catch (error) {
-                console.error('Error deleting facility.', error);
-                alert('MYSQL Server Error: ' + error.response.data);
+        }} catch (error) {
+            console.error('Error deleting facility.', error);
+            alert('MYSQL Server Error: ' + error.response.data);
         }
     };
     

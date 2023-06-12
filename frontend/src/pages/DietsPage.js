@@ -55,17 +55,17 @@ function DietsPage ({hostURL, deleteButtonSound}) {
     const delDiets = async (delVal) => {
         try {
             if (window.confirm(`Are you sure you want to remove ${delVal.dietName}?`)) {
+                deleteButtonSound.play();
                 await Axios.delete(deleteDietsURL + delVal.idDiet);
 
                 const mainViewResponse = await Axios.get(getDietsURL);
                 setDietsList(mainViewResponse.data);
                 console.log(mainViewResponse.data);
                 
-                deleteButtonSound.play();
                 alert(`${delVal.dietName} has been removed from the database.`);
-            }} catch (error) {
-                console.error('Error deleting Diet.', error);
-                alert('MYSQL Server Error: ' + error.response.data);
+        }} catch (error) {
+            console.error('Error deleting Diet.', error);
+            alert('MYSQL Server Error: ' + error.response.data);
         }
     };
 

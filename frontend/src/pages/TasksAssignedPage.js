@@ -99,17 +99,15 @@ function TasksAssignedPage ({hostURL, deleteButtonSound}) {
     const delTaskAssigned = async (delVal) => {
         try {
             if (window.confirm(`Are you sure you want to remove ${delVal.taskName}?`)) {
-                
+                deleteButtonSound.play();
                 await Axios.delete(deleteTasksAssignedURL + delVal.idTaskAssigned)
 
                 const mainViewResponse = await Axios.get(getTasksAssignedURL);
                 setTasksAssignedList(mainViewResponse.data);
                 console.log(mainViewResponse.data);
-
-                deleteButtonSound.play();
+                
                 alert(`${delVal.taskName} has been removed from the database.`)
-            }}
-        catch (error) {
+        }} catch (error) {
             console.error('Error deleting Task.', error);
             alert('MYSQL Server Error: ' + error.response.data);
         }

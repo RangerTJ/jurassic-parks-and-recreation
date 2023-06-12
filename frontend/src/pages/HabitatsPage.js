@@ -54,18 +54,18 @@ function HabitatsPage ({hostURL, deleteButtonSound}) {
     const delHabitats = async (delVal) => {
         try {
             if (window.confirm(`Are you sure you want to remove ${delVal.habitatName}?`)) {
+                deleteButtonSound.play();
                 await Axios.delete(deleteHabitatsURL + delVal.idHabitat);
                 
                 const mainViewResponse = await Axios.get(getHabitatsURL);
                 setHabitatsList(mainViewResponse.data);
                 console.log(mainViewResponse.data);
-                
-                deleteButtonSound.play();
+                                
                 alert(`${delVal.habitatName} has been removed from the database.`);
-            }} catch (error) {
-                console.error('Error deleting Habitat.', error);
-                alert('MYSQL Server Error: ' + error.response.data);
-            }
+        }} catch (error) {
+            console.error('Error deleting Habitat.', error);
+            alert('MYSQL Server Error: ' + error.response.data);
+        }
     };
 
     // Get Habitats List

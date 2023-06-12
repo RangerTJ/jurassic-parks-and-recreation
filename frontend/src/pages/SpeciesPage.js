@@ -110,16 +110,15 @@ function SpeciesPage ({hostURL, deleteButtonSound}) {
     const delSpecies = async (delVal) => {
         try {
             if (window.confirm(`Are you sure you want to remove ${delVal.speciesName}?`)) {
+                deleteButtonSound.play();
                 await Axios.delete(deleteSpeciesURL + delVal.idSpecies);
 
                 const mainViewResponse = await Axios.get(getSpeciesURL);
                 setSpeciesList(mainViewResponse.data);
                 console.log(mainViewResponse.data);
-
-                deleteButtonSound.play();
+                
                 alert(`${delVal.speciesName} has been removed from the database.`);
-            }}
-        catch (error) {
+        }} catch (error) {
             console.error('Error deleting Species.', error);
             alert('MYSQL Server Error: ' + error.response.data);
         }

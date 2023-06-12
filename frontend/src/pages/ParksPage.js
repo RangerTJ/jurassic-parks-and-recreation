@@ -57,16 +57,18 @@ function ParksPage ({hostURL, deleteButtonSound}) {
     const delParks = async (delVal) => {
         try {
             if (window.confirm(`Are you sure you want to remove ${delVal.parkName}?`)) {
+                deleteButtonSound.play();
                 await Axios.delete(deleteParksURL + delVal.idPark);
+
                 const mainViewResponse = await Axios.get(getParksURL);
                 setParksList(mainViewResponse.data);
                 console.log(mainViewResponse.data);
-                deleteButtonSound.play();
+                
                 alert(`${delVal.parkName} has been removed from the database.`);
-           }} catch (error) {
-                console.error('Error deleting Park.', error);
-                alert('MYSQL Server Error: ' + error.response.data);
-            }
+        }} catch (error) {
+            console.error('Error deleting Park.', error);
+            alert('MYSQL Server Error: ' + error.response.data);
+        }
     };
 
     // Get table info

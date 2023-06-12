@@ -81,11 +81,13 @@ function EmployeeTasksPage ({hostURL, deleteButtonSound}) {
     const delEmployeeTask = async (delID) => {
         try {
             if (window.confirm(`Are you sure you want to remove Task #${delID}?`)) {
+                deleteButtonSound.play();
                 await Axios.delete(deleteEmployeeTasksURL + delID);
+
                 const response = await Axios.get(getEmployeeTasksURL);
                 setEmployeeTaskList(response.data);
                 console.log(response.data);
-                deleteButtonSound.play();
+                
                 alert(`Employee Task #${delID} has been removed from the database.`);
             }
         }   catch (error) {

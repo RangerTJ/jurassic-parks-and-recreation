@@ -33,18 +33,18 @@ function TaskCategoryPage({hostURL, deleteButtonSound}) {
     const delTaskCategories = async (delVal) => {
         try {
             if (window.confirm(`Are you sure you want to delete ${delVal.categoryName}?`)) {
+                deleteButtonSound.play();
                 await Axios.delete(deleteTaskCategoriesURL + delVal.idTaskCategory);
                 
                 const mainViewResponse = await Axios.get(getTaskCategoriesURL);
                 setTaskCategoriesList(mainViewResponse.data);
                 console.log(mainViewResponse.data);
-                
-                deleteButtonSound.play();
+                                
                 alert(`${delVal.categoryName} has been removed from the database.`);
-            }} catch (error) {
-                console.error('Error deleting Category.', error);
-                alert('MYSQL Server Error: ' + error.response.data);
-            }
+        }} catch (error) {
+            console.error('Error deleting Category.', error);
+            alert('MYSQL Server Error: ' + error.response.data);
+        }
     };
 
     // Get table info

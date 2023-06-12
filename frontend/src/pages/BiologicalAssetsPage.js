@@ -125,10 +125,10 @@ function BiologicalAssetsPage ({hostURL, deleteButtonSound}) {
                 console.log(securityMismatchResponse.data);
 
                 alert(`${delVal.bioAssetName} has been removed from the database.`);
-            }} catch (error) {
-                console.error('Error deleting biological asset.', error);
-                alert('MYSQL Server Error: ' + error.response.data);
-            }
+        }} catch (error) {
+            console.error('Error deleting biological asset.', error);
+            alert('MYSQL Server Error: ' + error.response.data);
+        }
     };
     
     // Fully Populate the Bio Asset List (without filters)
