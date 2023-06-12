@@ -56,7 +56,7 @@ function FacilitiesUpdateForm ({hostURL, updateButtonSound}) {
     // UPDATE - Submit Changes to a Facility then return to Facilities page
     const update = async () => {
         try {
-            if (parkName && facTypeName && facilityLocation && securityRating) {
+            if (parkName && facTypeName && facilityLocation && securityRating && facilityDescription) {
                 updateButtonSound.play();
                 await Axios.put(updateFacilitiesURL, {
                     parkName: parkName,
@@ -171,6 +171,7 @@ function FacilitiesUpdateForm ({hostURL, updateButtonSound}) {
                                 cols="40" rows="5" 
                                 min="5" max="255"
                                 placeholder="Ex. Houses sauropods."
+                                required
                                 value={facilityDescription}
                                 onChange={(e) => {setFacilityDescription(e.target.value)}
                                 }/>

@@ -37,7 +37,7 @@ function FacilitiesAddForm ({hostURL, createButtonSound}) {
     // CREATE - Insert New Facility then return to Facilities page (only if all required state variables are not null)
     const submit = async () => {
         try {
-            if (parkName && facTypeName && facilityLocation && securityRating) {
+            if (parkName && facTypeName && facilityLocation && securityRating && facilityDescription) {
                 createButtonSound.play();
                 await Axios.post(createFacilitiesURL, {
                     parkName: parkName,
@@ -133,6 +133,7 @@ function FacilitiesAddForm ({hostURL, createButtonSound}) {
                                     cols="40" rows="5" 
                                     min="5" max="255"
                                     placeholder="Ex. Houses sauropods."
+                                    required
                                     onChange={(e) => {setFacilityDescription(e.target.value)}
                                     }/>
                         </div>
