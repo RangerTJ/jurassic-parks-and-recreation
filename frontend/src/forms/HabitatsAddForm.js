@@ -30,17 +30,17 @@ function HabitatsAddForm ({hostURL, createButtonSound}) {
     const submit = async () => {
         try {
             if (habitatName && habitatDescription) {
+                createButtonSound.play();
                 await Axios.post(createHabitatsURL, {
                     habitatName: habitatName,
                     habitatDescription: habitatDescription,
                     habitatPhoto: habitatPhoto,
                 });
-                createButtonSound.play();
                 alert(`${habitatName} has been added to the database!`);
                 navTo('/Habitats');
-                } else {
-                    alert("Please fill out all required fields and try again.")
-                }
+            } else {
+                alert("Please fill out all required fields and try again.")
+            }
         } catch(error) {
             console.error('Error inserting employee.', error);
             alert('MYSQL Server Error: ' + error.response.data);

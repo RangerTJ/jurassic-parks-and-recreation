@@ -44,6 +44,7 @@ function ParksUpdateForm ({hostURL, updateButtonSound}) {
     const update = async () => {
         try {
             if (parkName && parkDescription && parkLocation) {
+                updateButtonSound.play();
                 await Axios.put(updateParksURL, {
                     parkName: parkName,
                     parkDescription: parkDescription,
@@ -51,12 +52,11 @@ function ParksUpdateForm ({hostURL, updateButtonSound}) {
                     parkPhoto: parkPhoto,
                     idPark: id,
                 });
-                updateButtonSound.play();
                 alert(`${parkName}'s database record has been updated!`)
                 navTo('/Parks');
-                } else {
-                    alert("Please fill out all required fields and try again.")
-                }
+            } else {
+                alert("Please fill out all required fields and try again.")
+            }
         } catch (error) {
             console.error('Error updating Park.', error);
             alert('MYSQL Server Error: ' + error.response.data);

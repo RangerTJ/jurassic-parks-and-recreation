@@ -37,6 +37,7 @@ function EmployeesAddForm ({hostURL, createButtonSound}) {
     const submit = async () => {
         try {
             if (jobTitle && lastName && firstName && employeeUsername && hourlyWage && employeePhone && employeeEmail) {
+                createButtonSound.play();
                 await Axios.post(createEmployeesURL, {
                     jobTitle: jobTitle,
                     lastName: lastName,
@@ -49,12 +50,11 @@ function EmployeesAddForm ({hostURL, createButtonSound}) {
                     employeePhoto: employeePhoto,
                     employeeNote: employeeNote,
                 });
-                createButtonSound.play();
                 alert(`${firstName} ${lastName} has been added to the database!`);
                 navTo('/Employees');
-                } else {
-                    alert("Please fill out all required fields and try again.")
-                }
+            } else {
+                alert("Please fill out all required fields and try again.")
+            }
         } catch(error) {
             console.error('Error inserting employee.', error);
             alert('MYSQL Server Error: ' + error.response.data);

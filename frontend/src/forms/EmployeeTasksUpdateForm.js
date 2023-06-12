@@ -62,6 +62,7 @@ function EmployeeTasksUpdateForm ({hostURL, updateButtonSound}) {
             if (trueStart > trueEnd) {
                 alert("We don't yet use time machines to obtain our prehistoric assets! Fix the start/end dates.");
             } else if (taskName && employeeUsername && categoryName && taskHoursWorked && empTaskCost && empTaskStart && empTaskEnd) {
+                updateButtonSound.play();
                 await Axios.put(updateEmployeeTasksURL, {
                     taskName: taskName,
                     employeeUsername: employeeUsername,
@@ -72,12 +73,11 @@ function EmployeeTasksUpdateForm ({hostURL, updateButtonSound}) {
                     empTaskEnd: empTaskEnd,
                     idEmployeeTask: id,
                 });
-                updateButtonSound.play();
                 alert(`A task report for ${employeeUsername}'s ${categoryName} work on ${taskName} has been updated!`)
                 navTo('/EmployeeTasks');
-                } else {
-                    alert("Please fill out all required fields and try again.")
-                }
+            } else {
+                alert("Please fill out all required fields and try again.")
+            }
         } catch (error) {
             console.error('Error updating Employee Task Report.', error);
             alert('MYSQL Server Error: ' + error.response.data);

@@ -37,9 +37,9 @@ function BiologicalAssetsAddForm ({hostURL, createButtonSound}) {
                 });
                 alert(`${name} has been added to the database!`);
                 navTo('/BiologicalAssets');
-                } else {
-                    alert("Please fill out all required fields and try again.")
-                }
+            } else {
+                alert("Please fill out all required fields and try again.")
+            }
         } catch(error) {
             console.error('Error inserting biological asset.', error);
             alert('MYSQL Server Error: ' + error.response.data);

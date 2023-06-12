@@ -42,18 +42,18 @@ function DietsUpdateForm ({hostURL, updateButtonSound}) {
     const update = async () => {
         try {
             if (dietName && dietDescription) {
+                updateButtonSound.play();
                 await Axios.put(updateDietsURL, {
                     dietName: dietName,
                     dietDescription: dietDescription,
                     dietIcon: dietIcon,
                     idDiet: id,
                 });
-                updateButtonSound.play();
                 alert(`${dietName}'s database record has been updated!`)
                 navTo('/Diets');
-                } else {
-                    alert("Please fill out all required fields and try again.")
-                }
+            } else {
+                alert("Please fill out all required fields and try again.")
+            }
         } catch (error) {
             console.error('Error updating Diet.', error);
             alert('MYSQL Server Error: ' + error.response.data);

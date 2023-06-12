@@ -52,6 +52,7 @@ function SpeciesUpdateForm ({hostURL, updateButtonSound}) {
     const update = async () => {
         try {
             if (dietName && habitatName && speciesName && speciesDescription && threatLevel) {
+                updateButtonSound.play();
                 await Axios.put(updateSpeciesURL, {
                     dietName: dietName,
                     habitatName: habitatName,
@@ -61,11 +62,9 @@ function SpeciesUpdateForm ({hostURL, updateButtonSound}) {
                     speciesPhoto: speciesPhoto,
                     idSpecies: id
                 });
-                updateButtonSound.play();
                 alert(`${speciesName}'s database record has been updated!`);
                 navTo('/Species');
-            }
-            else {
+            } else {
                 alert("Please fill out all required fields and try again.");
             }
         }

@@ -37,16 +37,16 @@ function TaskCategoriesUpdateForm ({hostURL, updateButtonSound}) {
     const update = async () => {
         try {
             if (categoryName) {
+                updateButtonSound.play();
                 await Axios.put(updateTaskCategoriesURL, {
                     categoryName: categoryName,
                     idTaskCategory: id,
                 });
-                updateButtonSound.play();
                 alert(`${categoryName}'s database record has been updated!`)
                 navTo('/TaskCategories');
-                } else {
-                    alert("Please fill out all required fields and try again.")
-                }
+            } else {
+                alert("Please fill out all required fields and try again.")
+            }
         } catch (error) {
             console.error('Error updating Category.', error);
             alert('MYSQL Server Error: ' + error.response.data);

@@ -38,6 +38,7 @@ function FacilitiesAddForm ({hostURL, createButtonSound}) {
     const submit = async () => {
         try {
             if (parkName && facTypeName && facilityLocation && securityRating) {
+                createButtonSound.play();
                 await Axios.post(createFacilitiesURL, {
                     parkName: parkName,
                     facilityName: facilityName,
@@ -49,12 +50,11 @@ function FacilitiesAddForm ({hostURL, createButtonSound}) {
                     facilityDescription: facilityDescription,
                     facilityNote: facilityNote,
                 });
-                createButtonSound.play();
                 alert(`${facilityName} has been added to the database!`);
                 navTo('/Facilities');
-                } else {
-                    alert("Please fill out all required fields and try again.")
-                }
+            } else {
+                alert("Please fill out all required fields and try again.")
+            }
         } catch(error) {
             console.error('Error inserting facility.', error);
             alert('MYSQL Server Error: ' + error.response.data);

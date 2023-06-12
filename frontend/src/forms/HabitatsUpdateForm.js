@@ -42,18 +42,18 @@ function HabitatsUpdateForm ({hostURL, updateButtonSound}) {
     const update = async () => {
         try {
             if (habitatName && habitatDescription) {
+                updateButtonSound.play();
                 await Axios.put(updateHabitatsURL, {
                     habitatName: habitatName,
                     habitatDescription: habitatDescription,
                     habitatPhoto: habitatPhoto,
                     idHabitat: id,
                 });
-                updateButtonSound.play();
                 alert(`${habitatName}'s database record has been updated!`)
                 navTo('/Habitats');
-                } else {
-                    alert("Please fill out all required fields and try again.")
-                }
+            } else {
+                alert("Please fill out all required fields and try again.")
+            }
         } catch (error) {
             console.error('Error updating employee.', error);
             alert('MYSQL Server Error: ' + error.response.data);

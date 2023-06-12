@@ -59,28 +59,28 @@ function TasksAssignedUpdateForm ({hostURL, updateButtonSound}) {
             if (trueStart > trueEnd) {
                 alert("We don't yet use time machines to obtain our prehistoric assets! Fix the start/end dates.");
             } else if  (facilityName && taskName && taskDescription && taskStart) {
+                updateButtonSound.play();
 
-            // Send Null value to SQL if task is re-opened
-            let taskEndVar = taskEnd
-            if (taskEnd === '') {
-                taskEndVar = null
-            }
-            
-            // The actual update code
-            const res = await Axios.put(updateTasksAssignedURL, {
-                facilityName: facilityName,
-                bioAssetName: bioAssetName,
-                taskName: taskName,
-                taskDescription: taskDescription,
-                taskStart: taskStart,
-                taskEnd: taskEndVar,
-                idTaskAssigned: id
-            });
-
-            console.log(res);
-            updateButtonSound.play();
-            alert(`${taskName}'s database entry has been updated!`)
-            navTo('/TasksAssigned');
+                // Send Null value to SQL if task is re-opened
+                let taskEndVar = taskEnd
+                if (taskEnd === '') {
+                    taskEndVar = null
+                }
+                
+                // The actual update code
+                const res = await Axios.put(updateTasksAssignedURL, {
+                    facilityName: facilityName,
+                    bioAssetName: bioAssetName,
+                    taskName: taskName,
+                    taskDescription: taskDescription,
+                    taskStart: taskStart,
+                    taskEnd: taskEndVar,
+                    idTaskAssigned: id
+                });
+                console.log(res);
+                
+                alert(`${taskName}'s database entry has been updated!`)
+                navTo('/TasksAssigned');
             } else {
                 alert("Please fill out all required fields and try again.");
             };

@@ -57,6 +57,7 @@ function EmployeesUpdateForm ({hostURL, updateButtonSound}) {
     const update = async () => {
         try {
             if (jobTitle && lastName && firstName && employeeUsername && employeePhone && employeeEmail) {
+                updateButtonSound.play();
                 await Axios.put(updateEmployeesURL, {
                     jobTitle: jobTitle,
                     lastName: lastName,
@@ -70,12 +71,11 @@ function EmployeesUpdateForm ({hostURL, updateButtonSound}) {
                     employeeNote: employeeNote,
                     idEmployee: id,
                 });
-                updateButtonSound.play();
                 alert(`${firstName} ${lastName}'s database record has been updated!`)
                 navTo('/Employees');
-                } else {
-                    alert("Please fill out all required fields and try again.")
-                }
+            } else {
+                alert("Please fill out all required fields and try again.")
+            }
         } catch (error) {
             console.error('Error updating employee.', error);
             alert('MYSQL Server Error: ' + error.response.data);

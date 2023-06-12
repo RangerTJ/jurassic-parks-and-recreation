@@ -41,6 +41,7 @@ function EmployeeTasksAddForm ({hostURL, createButtonSound}) {
             if (trueStart > trueEnd) {
                 alert("We don't yet use time machines to obtain our prehistoric assets! Fix the start/end dates.");
             } else if (taskName && employeeUsername && categoryName && taskHoursWorked && empTaskCost && empTaskStart && empTaskEnd) {
+                createButtonSound.play();
                 await Axios.post(createEmployeeTasksURL, {
                     taskName: taskName,
                     employeeUsername: employeeUsername,
@@ -50,12 +51,11 @@ function EmployeeTasksAddForm ({hostURL, createButtonSound}) {
                     empTaskStart: empTaskStart,
                     empTaskEnd: empTaskEnd,
                 });
-                createButtonSound.play();
                 alert(`A task report for ${employeeUsername}'s ${categoryName} work on ${taskName} has been added to the database!`);
                 navTo('/EmployeeTasks');
-                } else {
-                    alert("Please fill out all required fields and try again.")
-                }
+            } else {
+                alert("Please fill out all required fields and try again.")
+            }
         } catch(error) {
             console.error('Error inserting Employee Task Report.', error);
             alert('MYSQL Server Error: ' + error.response.data);

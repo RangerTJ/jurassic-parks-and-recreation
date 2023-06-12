@@ -39,17 +39,17 @@ function JobClassificationsUpdateForm ({hostURL, updateButtonSound}) {
     const update = async () => {
         try {
             if (jobTitle && jobDescription) {
+                updateButtonSound.play();
                 await Axios.put(updateJobClassificationsURL, {
                     jobTitle: jobTitle,
                     jobDescription: jobDescription,
                     idJobClassification: id,
                 });
-                updateButtonSound.play();
                 alert(`${jobTitle}'s database record has been updated!`)
                 navTo('/JobClassifications');
-                } else {
-                    alert("Please fill out all required fields and try again.")
-                }
+            } else {
+                alert("Please fill out all required fields and try again.")
+            }
         } catch (error) {
             console.error('Error updating Facility Type.', error);
             alert('MYSQL Server Error: ' + error.response.data);

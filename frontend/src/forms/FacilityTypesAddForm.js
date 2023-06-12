@@ -27,16 +27,16 @@ function FacilityTypesAddForm ({hostURL, createButtonSound}) {
     const submit = async () => {
         try {
             if (facTypeName && facTypeDescription) {
+                createButtonSound.play();
                 await Axios.post(createFacilityTypesURL, {
                     facTypeName: facTypeName,
                     facTypeDescription: facTypeDescription,
                 });
-                createButtonSound.play();
                 alert(`Facility Type ${facTypeName} has been added to the database!`);
                 navTo('/FacilityTypes');
-                } else {
-                    alert("Please fill out all required fields and try again.")
-                }
+            } else {
+                alert("Please fill out all required fields and try again.")
+            }
         } catch(error) {
             console.error('Error inserting Facility Type.', error);
             alert('MYSQL Server Error: ' + error.response.data);

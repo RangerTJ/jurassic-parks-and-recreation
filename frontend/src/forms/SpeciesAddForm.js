@@ -34,6 +34,7 @@ function SpeciesAddForm ({hostURL, createButtonSound}) {
     const submit = async () => {
         try {
             if (dietName && habitatName && speciesName && speciesDescription && threatLevel) {
+                createButtonSound.play();
                 await Axios.post(createSpeciesURL, {
                     dietName: dietName,
                     habitatName: habitatName,
@@ -42,11 +43,9 @@ function SpeciesAddForm ({hostURL, createButtonSound}) {
                     threatLevel: threatLevel,
                     speciesPhoto: speciesPhoto
                 });
-                createButtonSound.play();
                 alert(`${speciesName} has been added to the database!`);
                 navTo('/Species');
-            }
-            else {
+            } else {
                 alert("Please fill out all required fields and try again.")
             }
         }

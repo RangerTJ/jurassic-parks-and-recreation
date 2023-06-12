@@ -27,16 +27,16 @@ function JobClassificationsAddForm ({hostURL, createButtonSound}) {
     const submit = async () => {
         try {
             if (jobTitle && jobDescription) {
+                createButtonSound.play();
                 await Axios.post(createJobClassificationsURL, {
                     jobTitle: jobTitle,
                     jobDescription: jobDescription,
                 });
-                createButtonSound.play();
                 alert(`Job Classification ${jobTitle} has been added to the database!`);
                 navTo('/JobClassifications');
-                } else {
-                    alert("Please fill out all required fields and try again.")
-                }
+            } else {
+                alert("Please fill out all required fields and try again.")
+            }
         } catch(error) {
             console.error('Error inserting Job Classifications Type.', error);
             alert('MYSQL Server Error: ' + error.response.data);

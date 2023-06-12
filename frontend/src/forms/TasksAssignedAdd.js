@@ -40,8 +40,8 @@ function TasksAssignedAddForm ({hostURL, createButtonSound}) {
             if (trueStart > trueEnd) {
                 alert("We don't yet use time machines to obtain our prehistoric assets! Fix the start/end dates.");
             } else if  (facilityName && taskName && taskDescription && taskStart) {
+                createButtonSound.play();
                 let finalTaskEnd = taskEnd === '' ? null : taskEnd;
-    
                 Axios.post(createTasksAssignedURL, {
                     facilityName: facilityName,
                     bioAssetName: bioAssetName,
@@ -50,11 +50,8 @@ function TasksAssignedAddForm ({hostURL, createButtonSound}) {
                     taskStart: taskStart,
                     taskEnd: finalTaskEnd
                 });
-                
-                createButtonSound.play();
                 alert(`${taskName} has been added to the database!`);
                 navTo('/TasksAssigned');
-    
             } else {
                 alert("Please fill out all required fields and try again.");
             };
