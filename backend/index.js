@@ -43,7 +43,14 @@ app.get('/api/getParkCost', (req, res) =>{
     LEFT JOIN Facilities ON TasksAssigned.idFacility = Facilities.idFacility
     LEFT JOIN Parks ON Facilities.idPark = Parks.idPark
     GROUP BY Parks.parkName
-    ORDER BY ParkCost DESC;
+    UNION
+    SELECT  Parks.parkName, SUM(EmployeeTasks.empTaskCost) AS parkCost
+    FROM EmployeeTasks
+    JOIN TasksAssigned ON EmployeeTasks.idTaskAssigned = TasksAssigned.idTaskAssigned
+    JOIN Facilities ON TasksAssigned.idFacility = Facilities.idFacility
+    RIGHT JOIN Parks ON Facilities.idPark = Parks.idPark
+    GROUP BY Parks.parkName
+    ORDER BY ParkCost DESC;  
     `;
     db.query(sqlRead, (err, result)=> {
         if (err) {
@@ -60,8 +67,13 @@ app.get('/api/getParkCost', (req, res) =>{
 app.get('/api/getCategoryCost', (req, res) =>{
     const sqlRead = `
     SELECT  TaskCategories.categoryName, SUM(EmployeeTasks.empTaskCost) AS taskTypeCost
-    FROM EmployeeTasks
-    LEFT JOIN TaskCategories ON EmployeeTasks.idTaskCategory = TaskCategories.idTaskCategory
+    FROM TaskCategories
+    LEFT JOIN EmployeeTasks ON TaskCategories.idTaskCategory = EmployeeTasks.idTaskCategory
+    GROUP BY TaskCategories.categoryName
+    UNION
+	SELECT  TaskCategories.categoryName, SUM(EmployeeTasks.empTaskCost) AS taskTypeCost
+    FROM TaskCategories
+    RIGHT JOIN EmployeeTasks ON TaskCategories.idTaskCategory = EmployeeTasks.idTaskCategory
     GROUP BY TaskCategories.categoryName
     ORDER BY TaskTypeCost DESC;
     `;

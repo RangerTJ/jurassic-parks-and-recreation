@@ -401,11 +401,15 @@ WHERE idSpecies = :idSpecies_input
 -- CUSTOM Reports
 -- ----------------
 
--- SELECT - Cost Analysis Report by Task Category
+-- SELECT - Cost Analysis Report by Task Category (Full join/union needed)
 SELECT  TaskCategories.categoryName, SUM(EmployeeTasks.empTaskCost) AS taskTypeCost
-FROM EmployeeTasks
--- Need to JOIN TaskCategories -> EmployeeTasks
-LEFT JOIN TaskCategories ON EmployeeTasks.idTaskCategory = TaskCategories.idTaskCategory
+FROM TaskCategories
+LEFT JOIN EmployeeTasks ON TaskCategories.idTaskCategory = EmployeeTasks.idTaskCategory
+GROUP BY TaskCategories.categoryName
+UNION
+SELECT  TaskCategories.categoryName, SUM(EmployeeTasks.empTaskCost) AS taskTypeCost
+FROM TaskCategories
+RIGHT JOIN EmployeeTasks ON TaskCategories.idTaskCategory = EmployeeTasks.idTaskCategory
 GROUP BY TaskCategories.categoryName
 ORDER BY TaskTypeCost DESC;
 
@@ -415,6 +419,13 @@ FROM EmployeeTasks
 LEFT JOIN TasksAssigned ON EmployeeTasks.idTaskAssigned = TasksAssigned.idTaskAssigned
 LEFT JOIN Facilities ON TasksAssigned.idFacility = Facilities.idFacility
 LEFT JOIN Parks ON Facilities.idPark = Parks.idPark
+GROUP BY Parks.parkName
+UNION
+SELECT  Parks.parkName, SUM(EmployeeTasks.empTaskCost) AS parkCost
+FROM EmployeeTasks
+JOIN TasksAssigned ON EmployeeTasks.idTaskAssigned = TasksAssigned.idTaskAssigned
+JOIN Facilities ON TasksAssigned.idFacility = Facilities.idFacility
+RIGHT JOIN Parks ON Facilities.idPark = Parks.idPark
 GROUP BY Parks.parkName
 ORDER BY ParkCost DESC;
 
