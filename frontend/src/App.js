@@ -130,7 +130,13 @@ function App() {
             </Routes>
         </section>
       </main>
-      <footer>&copy;2023 Taylor Jordan and Nicholas Schmidt (Team: Jurassic Parks and Recreation)</footer>
+      <footer>
+        <div>&copy;2023 Taylor Jordan and Nicholas Schmidt</div>
+        <p>
+            This site was made as part of the Intro to Databases Course at Oregon State University 
+            by 'Team: Jurassic Parks and Recreation Team' and is not affiliated with Jurassic Park, Jurassic World, or Universal Studios in any way. <a href="https://github.com/Raptor2k1/jurassic-parks-and-recreation" target="_blank" rel="noopener noreferrer">Check out the Project on Github!</a>
+        </p>
+      </footer>
       </BrowserRouter>
     </div>
   )

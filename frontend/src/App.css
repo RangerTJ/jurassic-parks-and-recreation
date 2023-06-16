@@ -333,6 +333,21 @@ video {
   width: 100%;
 }
 
+a {
+  color: var(--parkYellow);
+  text-shadow: 0px 1px 1px var(--feralGreen);
+  max-width: 200px;
+}
+
+a:hover {
+  color: white;
+  text-shadow: 0.25px -0.25px 0px red, -0.25px 0.25px 0px red, 0.25px 0.25px 0px red, -0.25px -0.25px 0px red;
+}
+
+a:focus {
+  color: white;
+}
+
 
 /* Custom Elements */
 
