@@ -1,5 +1,7 @@
 # DINO: CS340 Project for Jurassic Parks and Recreation #
-Digital Information Nexus for Operations (DINO) is a database program used to simulate managing day to day operations at the various parks (canon or otherwise) from the Jurassic Park franchise. It is capable of handling basic CRUD operations for the following park entities:  
+Visit the live website here: http://raptor2k1.ddns.net:1543/
+
+Digital Information Nexus for Operations (DINO) is a database program used to simulate managing day to day operations at the various parks (canon or otherwise) from the Jurassic Park franchise. Also, to be clear, this is a project created purely for educational purposes, and is not affiliated with the Jurassic franchise or Universal Studios in any way, shape or form. The site is capable of handling basic CRUD operations for the following park-related entities:  
 * Parks
 * Facilities
 * Biological Assets
@@ -13,10 +15,8 @@ Digital Information Nexus for Operations (DINO) is a database program used to si
 * Job Classifications  
 * Task Categories  
 
-In the interest of keeping the server code submission file size small, our assignment submission package will omit the media files used by the website (in addition to omitting the libraries used within it). Omitted media includes the background image, "security feed" video, main logo, placeholder images, and all the images used by the image selectors on create/update forms. The site's media can be viewed within the site itself at: http://flip3.engr.oregonstate.edu:1543/
-
 ## Setup Guide ##
-Before you can do anything with this program, you need to make sure that the PC hosting both the backend and frontend have Node.js installed and ready to use (at least version 16.5).  
+Before you can do anything to host this site, you need to make sure that the PC hosting both the backend and frontend have Node.js installed and ready to use (at least version 16.5).  
 
 To set the site up, first clone this repo into a folder. Once this is done, set up the front-end and back-end .env files with proper credentials, ports, and host URLs so that the backend can connect to the MYSQL server hosting the site database (which can be generated from DDL.sql on the SQL server) and so the the front-end can connect to the back-end and use it to process UI requests through the SQL server. Make sure to run 'npm install' in both frontend and backend folders so that all dependencies are in place before attempting to run any part of this program. 
 
