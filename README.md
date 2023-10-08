@@ -18,7 +18,26 @@ Digital Information Nexus for Operations (DINO) is a database program used to si
 
 Also, to be clear, this is a project created purely for educational purposes, and is not affiliated with the Jurassic franchise or Universal Studios in any way, shape or form.  
 
-![Main welcome page for the Jurassic Parks and Recreation demo website.](https://github.com/Raptor2k1/jurassic-parks-and-recreation/demo-images/blob/main/JPRHome.png?raw=true)
+## Site Preview ##  
+
+Welcome to Jurassic Parks and Recreation's home page! Complete with simulated security feed!  
+![Main welcome page for the Jurassic Parks and Recreation demo website.](https://github.com/Raptor2k1/jurassic-parks-and-recreation/blob/main/demo-images/JPRHome.png?raw=true)  
+  
+SQL queries of the relational database produce reports on high-level operational statistics.  
+![Main welcome page for the Jurassic Parks and Recreation demo website.](https://github.com/Raptor2k1/jurassic-parks-and-recreation/blob/main/demo-images/JPRSummaries.png?raw=true)  
+  
+SQL queries are also used to populate quick Top-10 lists, further allowing the home page to offer a high-level view of subjects of interest.  
+![Main welcome page for the Jurassic Parks and Recreation demo website.](https://github.com/Raptor2k1/jurassic-parks-and-recreation/blob/main/demo-images/JPRTopRanks.png?raw=true)  
+  
+View of the Biological Assets page.  
+![Main welcome page for the Jurassic Parks and Recreation demo website.](https://github.com/Raptor2k1/jurassic-parks-and-recreation/blob/main/demo-images/JPRAssetExample.png?raw=true)  
+  
+Example of the site interface for creating a new entry (for a Biological Asset, in this case).  
+![Main welcome page for the Jurassic Parks and Recreation demo website.](https://github.com/Raptor2k1/jurassic-parks-and-recreation/blob/main/demo-images/JPRAdd.png?raw=true)  
+  
+Example of the site interface for editing an existing entry (for a Biological Asset, in this case).  
+![Main welcome page for the Jurassic Parks and Recreation demo website.](https://github.com/Raptor2k1/jurassic-parks-and-recreation/blob/main/demo-images/JPREdit.png?raw=true)  
+  
   
 ## Setup Guide ##
 Before you can do anything to host this site, you need to make sure that the PC hosting both the backend and frontend have Node.js installed and ready to use (at least version 16.5).  
