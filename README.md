@@ -1,5 +1,6 @@
 # DINO: CS340 Project for Jurassic Parks and Recreation #
-Visit the live website here: http://raptor2k1.ddns.net:1543/
+Visit the live website here: http://raptor2k1.ddns.net:1543/  
+(Note: Website may periodically experience outages for ~1-2 hours due to some ongoing issues with the free-tier Oracle server hosting)
 
 Digital Information Nexus for Operations (DINO) is a database program used to simulate managing day to day operations at the various parks (canon or otherwise) from the Jurassic Park franchise. The site is capable of handling basic CRUD operations for the following park-related entities:  
 * Parks
