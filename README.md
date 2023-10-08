@@ -24,19 +24,19 @@ Welcome to Jurassic Parks and Recreation's home page! Complete with simulated se
 ![Main welcome page for the Jurassic Parks and Recreation demo website.](https://github.com/Raptor2k1/jurassic-parks-and-recreation/blob/main/demo-images/JPRHome.png?raw=true)  
   
 SQL queries of the relational database produce reports on high-level operational statistics.  
-![Main welcome page for the Jurassic Parks and Recreation demo website.](https://github.com/Raptor2k1/jurassic-parks-and-recreation/blob/main/demo-images/JPRSummaries.png?raw=true)  
+![Homepage reports of high-level park statistics.](https://github.com/Raptor2k1/jurassic-parks-and-recreation/blob/main/demo-images/JPRSummaries.png?raw=true)  
   
 SQL queries are also used to populate quick Top-10 lists, further allowing the home page to offer a high-level view of subjects of interest.  
-![Main welcome page for the Jurassic Parks and Recreation demo website.](https://github.com/Raptor2k1/jurassic-parks-and-recreation/blob/main/demo-images/JPRTopRanks.png?raw=true)  
+![Homepage reports of Top 10 lists for entities within the database.](https://github.com/Raptor2k1/jurassic-parks-and-recreation/blob/main/demo-images/JPRTopRanks.png?raw=true)  
   
 View of the Biological Assets page.  
-![Main welcome page for the Jurassic Parks and Recreation demo website.](https://github.com/Raptor2k1/jurassic-parks-and-recreation/blob/main/demo-images/JPRAssetExample.png?raw=true)  
+![Three tables of example Biological Assets. The first two show misaligments and the third shows all entities (based on selected filters).](https://github.com/Raptor2k1/jurassic-parks-and-recreation/blob/main/demo-images/JPRAssetExample.png?raw=true)  
   
 Example of the site interface for creating a new entry (for a Biological Asset, in this case).  
-![Main welcome page for the Jurassic Parks and Recreation demo website.](https://github.com/Raptor2k1/jurassic-parks-and-recreation/blob/main/demo-images/JPRAdd.png?raw=true)  
+![Add New Bilogical Asset form.](https://github.com/Raptor2k1/jurassic-parks-and-recreation/blob/main/demo-images/JPRAdd.png?raw=true)  
   
 Example of the site interface for editing an existing entry (for a Biological Asset, in this case).  
-![Main welcome page for the Jurassic Parks and Recreation demo website.](https://github.com/Raptor2k1/jurassic-parks-and-recreation/blob/main/demo-images/JPREdit.png?raw=true)  
+![Edit Bilogical Asset form.](https://github.com/Raptor2k1/jurassic-parks-and-recreation/blob/main/demo-images/JPREdit.png?raw=true)  
   
   
 ## Setup Guide ##
