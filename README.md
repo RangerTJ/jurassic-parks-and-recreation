@@ -16,8 +16,10 @@ Digital Information Nexus for Operations (DINO) is a database program used to si
 * Job Classifications  
 * Task Categories
 
-Also, to be clear, this is a project created purely for educational purposes, and is not affiliated with the Jurassic franchise or Universal Studios in any way, shape or form. 
+Also, to be clear, this is a project created purely for educational purposes, and is not affiliated with the Jurassic franchise or Universal Studios in any way, shape or form.  
 
+![Main welcome page for the Jurassic Parks and Recreation demo website.](https://github.com/Raptor2k1/jurassic-parks-and-recreation/demo-images/blob/main/JPRHome.png?raw=true)
+  
 ## Setup Guide ##
 Before you can do anything to host this site, you need to make sure that the PC hosting both the backend and frontend have Node.js installed and ready to use (at least version 16.5).  
 
